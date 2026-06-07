@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -12,13 +7,386 @@ datasource db {
   provider = "postgresql"
 }
 
-model Villa {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  thumbnail   String
-  bedrooms    Int
-  Wifi        Boolean
+model Product {
+  id            String      @id @default(cuid())
+  uniqueCode    String      @unique
+  type          ProductType
+  priceEuro     Float?
+  order         Int?
+  thumbnail     String
+  titleFR       String?
+  titleEN       String?
+  titleDE       String?
+  titleIT       String?
+  titlePT       String?
+  titleES       String?
+  subtitleFR    String?
+  subtitleEN    String?
+  subtitleDE    String?
+  subtitleIT    String?
+  subtitlePT    String?
+  subtitleES    String?
+  priceTitleFR  String?
+  priceTitleEN  String?
+  priceTitleDE  String?
+  priceTitleIT  String?
+  priceTitlePT  String?
+  priceTitleES  String?
+  descriptionFR String?
+  descriptionEN String?
+  descriptionDE String?
+  descriptionIT String?
+  descriptionPT String?
+  descriptionES String?
+  addressFR     String?
+  addressEN     String?
+  addressDE     String?
+  addressIT     String?
+  addressPT     String?
+  addressES     String?
+  tagsFR        Json?
+  tagsEN        Json?
+  tagsDE        Json?
+  tagsIT        Json?
+  tagsPT        Json?
+  tagsES        Json?
+  detailsFR     Json?
+  detailsEN     Json?
+  detailsDE     Json?
+  detailsIT     Json?
+  detailsPT     Json?
+  detailsES     Json?
+  image1        String?
+  image2        String?
+  image3        String?
+  image4        String?
+  image5        String?
+  image6        String?
+  image7        String?
+  image8        String?
+  image9        String?
+  image10       String?
+  image11       String?
+  image12       String?
+  image13       String?
+  image14       String?
+  image15       String?
+  image16       String?
+  image17       String?
+  image18       String?
+  image19       String?
+  image20       String?
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  image21       String?
+}
+
+model WhatsAppConversation {
+  id             String            @id @default(cuid())
+  whatsappPhone  String?
+  whatsappUserId String?
+  displayName    String?
+  managedBy      WhatsAppManagedBy @default(AI)
+  createdDate    DateTime          @default(now())
+  updatedDate    DateTime          @updatedAt
+  messages       WhatsAppMessage[]
+}
+
+model WhatsAppMessage {
+  id                String                @id @default(cuid())
+  conversationId    String
+  sender            WhatsAppMessageSender
+  message           String
+  sentAt            DateTime              @default(now())
+  externalMessageId String?
+  conversation      WhatsAppConversation  @relation(fields: [conversationId], references: [id])
+}
+
+model Individual {
+  id              String           @id @default(cuid())
+  firstName       String
+  lastName        String
+  email           String?
+  mobilePhone     String?
+  address         String?
+  birthdate       DateTime?
+  country         String?
+  language        String
+  source          String
+  createdDate     DateTime         @default(now())
+  createdBy       String?
+  updatedDate     DateTime         @updatedAt
+  updatedBy       String?
+  password        String?
+  accounts        Account[]
+  chats           Chat[]
+  consents        Consent[]
+  contactRequests ContactRequest[]
+  leads           Lead[]
+  pageVisits      PageVisit[]
+  prospects       Prospect[]
+}
+
+model Lead {
+  id                String           @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String?
+  mobilePhone       String?
+  address           String?
+  birthdate         DateTime?
+  country           String?
+  language          String
+  source            String
+  statusDescription String
+  createdDate       DateTime         @default(now())
+  createdBy         String?
+  updatedDate       DateTime         @updatedAt
+  updatedBy         String?
+  individualId      String
+  chats             Chat[]
+  contactRequests   ContactRequest[]
+  individual        Individual       @relation(fields: [individualId], references: [id])
+  pageVisits        PageVisit[]
+}
+
+model Prospect {
+  id                String           @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String?
+  mobilePhone       String?
+  address           String?
+  birthdate         DateTime?
+  country           String?
+  language          String
+  source            String
+  statusDescription String
+  createdDate       DateTime         @default(now())
+  createdBy         String?
+  updatedDate       DateTime         @updatedAt
+  updatedBy         String?
+  individualId      String
+  chats             Chat[]
+  contactRequests   ContactRequest[]
+  pageVisits        PageVisit[]
+  individual        Individual       @relation(fields: [individualId], references: [id])
+}
+
+model Account {
+  id                String           @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String?
+  mobilePhone       String?
+  address           String?
+  birthdate         DateTime?
+  country           String?
+  language          String
+  source            String
+  statusDescription String
+  createdDate       DateTime         @default(now())
+  createdBy         String?
+  updatedDate       DateTime         @updatedAt
+  updatedBy         String?
+  individualId      String
+  individual        Individual       @relation(fields: [individualId], references: [id])
+  chats             Chat[]
+  contactRequests   ContactRequest[]
+  pageVisits        PageVisit[]
+}
+
+model Consent {
+  id            String         @id @default(cuid())
+  individualId  String
+  channel       ConsentChannel
+  channelStatus ChannelStatus  @default(UNKNOWN)
+  createdDate   DateTime       @default(now())
+  createdBy     String?
+  updatedDate   DateTime       @updatedAt
+  updatedBy     String?
+  individual    Individual     @relation(fields: [individualId], references: [id])
+}
+
+model PageVisit {
+  id           String       @id @default(cuid())
+  pageUrl      String
+  pageName     String?
+  visitorStage VisitorStage
+  leadId       String?
+  prospectId   String?
+  accountId    String?
+  individualId String?
+  visitDate    DateTime     @default(now())
+  referrer     String?
+  userAgent    String?
+  ipAddress    String?
+  sessionId    String?
+  account      Account?     @relation(fields: [accountId], references: [id])
+  individual   Individual?  @relation(fields: [individualId], references: [id])
+  lead         Lead?        @relation(fields: [leadId], references: [id])
+  prospect     Prospect?    @relation(fields: [prospectId], references: [id])
+}
+
+model ContactRequest {
+  id             String                @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String
+  mobilePhone    String?
+  requestType    RequestType
+  subject        String?
+  comment        String
+  requesterStage ContactRequesterStage @default(VISITOR)
+  individualId   String?
+  leadId         String?
+  prospectId     String?
+  accountId      String?
+  createdDate    DateTime              @default(now())
+  createdBy      String?
+  updatedDate    DateTime              @updatedAt
+  updatedBy      String?
+  account        Account?              @relation(fields: [accountId], references: [id])
+  individual     Individual?           @relation(fields: [individualId], references: [id])
+  lead           Lead?                 @relation(fields: [leadId], references: [id])
+  prospect       Prospect?             @relation(fields: [prospectId], references: [id])
+}
+
+model Chat {
+  id               String               @id @default(cuid())
+  visitorId        String?
+  sessionId        String?
+  leadId           String?
+  prospectId       String?
+  accountId        String?
+  individualId     String?
+  advisorId        String?
+  participantStage ChatParticipantStage @default(VISITOR)
+  managedBy        ChatManagedBy        @default(AI)
+  status           ChatStatus           @default(OPEN)
+  createdDate      DateTime             @default(now())
+  createdBy        String?
+  updatedDate      DateTime             @updatedAt
+  updatedBy        String?
+  account          Account?             @relation(fields: [accountId], references: [id])
+  advisor          User?                @relation(fields: [advisorId], references: [id])
+  individual       Individual?          @relation(fields: [individualId], references: [id])
+  lead             Lead?                @relation(fields: [leadId], references: [id])
+  prospect         Prospect?            @relation(fields: [prospectId], references: [id])
+  messages         ChatMessage[]
+}
+
+model ChatMessage {
+  id         String         @id @default(cuid())
+  chatId     String
+  senderType ChatSenderType
+  senderId   String?
+  message    String
+  sendTime   DateTime       @default(now())
+  isRead     Boolean        @default(false)
+  chat       Chat           @relation(fields: [chatId], references: [id])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  firstName     String
+  lastName      String
+  email         String    @unique
+  passwordHash  String
+  mobilePhone   String?
+  role          String
+  lastLoginDate DateTime?
+  createdDate   DateTime  @default(now())
+  createdBy     String?
+  updatedDate   DateTime  @updatedAt
+  updatedBy     String?
+  assignedChats Chat[]
+}
+
+enum ChannelStatus {
+  OPTIN
+  UNKNOWN
+  OPTOUT
+}
+
+enum ConsentChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+  PHONE
+}
+
+enum VisitorStage {
+  LEAD
+  PROSPECT
+  ACCOUNT
+  ANONYMOUS
+}
+
+enum RequestType {
+  GENERAL
+  VILLA
+  APARTMENT
+  ACTIVITY
+  TRANSPORTATION
+  SPA
+  RESTAURANT
+  RESERVATION
+  OTHER
+}
+
+enum ContactRequesterStage {
+  VISITOR
+  LEAD
+  PROSPECT
+  ACCOUNT
+}
+
+enum ChatManagedBy {
+  AI
+  MANUAL
+}
+
+enum ChatStatus {
+  OPEN
+  CLOSED
+  WAITING_FOR_VISITOR
+  WAITING_FOR_ADVISOR
+}
+
+enum ChatParticipantStage {
+  VISITOR
+  LEAD
+  PROSPECT
+  ACCOUNT
+}
+
+enum ChatSenderType {
+  VISITOR
+  LEAD
+  PROSPECT
+  ACCOUNT
+  ADVISOR
+  AI
+}
+
+enum WhatsAppManagedBy {
+  AI
+  MANUAL
+}
+
+enum WhatsAppMessageSender {
+  CUSTOMER
+  ADVISOR
+  AI
+}
+
+enum ProductType {
+  VILLA
+  APARTMENT
+  SPA
+  RESTAURANT
+  ACTIVITY
+  TRANSPORTATION
 }

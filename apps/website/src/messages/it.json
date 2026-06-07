@@ -1,0 +1,14 @@
+{
+  "header": {
+    "home": "Acceuil",
+    "services": "Services",
+    "villas": "Villas",
+    "apartments": "Apartments",
+    "activities": "Activities",
+    "transportation": "Transportation",
+    "about": "A propos",
+    "contact": "Contact",
+    "login": "Se connecter / S'inscrire"
+  }
+
+}

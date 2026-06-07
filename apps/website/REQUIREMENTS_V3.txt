@@ -1,0 +1,34 @@
+V3 Requested Changes Included For Next Iteration
+
+1. Language switcher:
+EN, FR, ES, PT, IT, DE with flags.
+URL structure:
+/
+/fr
+/es
+/pt
+/it
+/de
+
+2. Auth:
+- Google icon
+- OR separator
+- Forgot password
+- Forgot password page
+- Recover by email
+- Recover by phone/contact support
+
+3. Contact:
+- Request type
+- Subject (255 chars)
+
+4. Account center:
+- Profile
+- Preferences
+- Logout
+
+5. Chat:
+- Full-screen
+- No site header/footer
+- Fixed bottom input
+- Messenger-style UX
