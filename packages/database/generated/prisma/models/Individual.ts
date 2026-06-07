@@ -30,16 +30,20 @@ export type IndividualMinAggregateOutputType = {
   lastName: string | null
   email: string | null
   mobilePhone: string | null
+  passwordHash: string | null
   address: string | null
   birthdate: Date | null
   country: string | null
   language: string | null
   source: string | null
+  isActive: boolean | null
+  emailVerified: boolean | null
+  emailVerificationToken: string | null
+  emailVerificationTokenExpiresAt: Date | null
   createdDate: Date | null
   createdBy: string | null
   updatedDate: Date | null
   updatedBy: string | null
-  password: string | null
 }
 
 export type IndividualMaxAggregateOutputType = {
@@ -48,16 +52,20 @@ export type IndividualMaxAggregateOutputType = {
   lastName: string | null
   email: string | null
   mobilePhone: string | null
+  passwordHash: string | null
   address: string | null
   birthdate: Date | null
   country: string | null
   language: string | null
   source: string | null
+  isActive: boolean | null
+  emailVerified: boolean | null
+  emailVerificationToken: string | null
+  emailVerificationTokenExpiresAt: Date | null
   createdDate: Date | null
   createdBy: string | null
   updatedDate: Date | null
   updatedBy: string | null
-  password: string | null
 }
 
 export type IndividualCountAggregateOutputType = {
@@ -66,16 +74,20 @@ export type IndividualCountAggregateOutputType = {
   lastName: number
   email: number
   mobilePhone: number
+  passwordHash: number
   address: number
   birthdate: number
   country: number
   language: number
   source: number
+  isActive: number
+  emailVerified: number
+  emailVerificationToken: number
+  emailVerificationTokenExpiresAt: number
   createdDate: number
   createdBy: number
   updatedDate: number
   updatedBy: number
-  password: number
   _all: number
 }
 
@@ -86,16 +98,20 @@ export type IndividualMinAggregateInputType = {
   lastName?: true
   email?: true
   mobilePhone?: true
+  passwordHash?: true
   address?: true
   birthdate?: true
   country?: true
   language?: true
   source?: true
+  isActive?: true
+  emailVerified?: true
+  emailVerificationToken?: true
+  emailVerificationTokenExpiresAt?: true
   createdDate?: true
   createdBy?: true
   updatedDate?: true
   updatedBy?: true
-  password?: true
 }
 
 export type IndividualMaxAggregateInputType = {
@@ -104,16 +120,20 @@ export type IndividualMaxAggregateInputType = {
   lastName?: true
   email?: true
   mobilePhone?: true
+  passwordHash?: true
   address?: true
   birthdate?: true
   country?: true
   language?: true
   source?: true
+  isActive?: true
+  emailVerified?: true
+  emailVerificationToken?: true
+  emailVerificationTokenExpiresAt?: true
   createdDate?: true
   createdBy?: true
   updatedDate?: true
   updatedBy?: true
-  password?: true
 }
 
 export type IndividualCountAggregateInputType = {
@@ -122,16 +142,20 @@ export type IndividualCountAggregateInputType = {
   lastName?: true
   email?: true
   mobilePhone?: true
+  passwordHash?: true
   address?: true
   birthdate?: true
   country?: true
   language?: true
   source?: true
+  isActive?: true
+  emailVerified?: true
+  emailVerificationToken?: true
+  emailVerificationTokenExpiresAt?: true
   createdDate?: true
   createdBy?: true
   updatedDate?: true
   updatedBy?: true
-  password?: true
   _all?: true
 }
 
@@ -213,16 +237,20 @@ export type IndividualGroupByOutputType = {
   lastName: string
   email: string | null
   mobilePhone: string | null
+  passwordHash: string | null
   address: string | null
   birthdate: Date | null
   country: string | null
   language: string
   source: string
+  isActive: boolean
+  emailVerified: boolean
+  emailVerificationToken: string | null
+  emailVerificationTokenExpiresAt: Date | null
   createdDate: Date
   createdBy: string | null
   updatedDate: Date
   updatedBy: string | null
-  password: string | null
   _count: IndividualCountAggregateOutputType | null
   _min: IndividualMinAggregateOutputType | null
   _max: IndividualMaxAggregateOutputType | null
@@ -252,23 +280,27 @@ export type IndividualWhereInput = {
   lastName?: Prisma.StringFilter<"Individual"> | string
   email?: Prisma.StringNullableFilter<"Individual"> | string | null
   mobilePhone?: Prisma.StringNullableFilter<"Individual"> | string | null
+  passwordHash?: Prisma.StringNullableFilter<"Individual"> | string | null
   address?: Prisma.StringNullableFilter<"Individual"> | string | null
   birthdate?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
   country?: Prisma.StringNullableFilter<"Individual"> | string | null
   language?: Prisma.StringFilter<"Individual"> | string
   source?: Prisma.StringFilter<"Individual"> | string
+  isActive?: Prisma.BoolFilter<"Individual"> | boolean
+  emailVerified?: Prisma.BoolFilter<"Individual"> | boolean
+  emailVerificationToken?: Prisma.StringNullableFilter<"Individual"> | string | null
+  emailVerificationTokenExpiresAt?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
   createdDate?: Prisma.DateTimeFilter<"Individual"> | Date | string
   createdBy?: Prisma.StringNullableFilter<"Individual"> | string | null
   updatedDate?: Prisma.DateTimeFilter<"Individual"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"Individual"> | string | null
-  password?: Prisma.StringNullableFilter<"Individual"> | string | null
-  accounts?: Prisma.AccountListRelationFilter
-  chats?: Prisma.ChatListRelationFilter
-  consents?: Prisma.ConsentListRelationFilter
-  contactRequests?: Prisma.ContactRequestListRelationFilter
   leads?: Prisma.LeadListRelationFilter
-  pageVisits?: Prisma.PageVisitListRelationFilter
   prospects?: Prisma.ProspectListRelationFilter
+  accounts?: Prisma.AccountListRelationFilter
+  consents?: Prisma.ConsentListRelationFilter
+  pageVisits?: Prisma.PageVisitListRelationFilter
+  contactRequests?: Prisma.ContactRequestListRelationFilter
+  chats?: Prisma.ChatListRelationFilter
 }
 
 export type IndividualOrderByWithRelationInput = {
@@ -277,52 +309,60 @@ export type IndividualOrderByWithRelationInput = {
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   mobilePhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   birthdate?: Prisma.SortOrderInput | Prisma.SortOrder
   country?: Prisma.SortOrderInput | Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  emailVerificationToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailVerificationTokenExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
-  password?: Prisma.SortOrderInput | Prisma.SortOrder
-  accounts?: Prisma.AccountOrderByRelationAggregateInput
-  chats?: Prisma.ChatOrderByRelationAggregateInput
-  consents?: Prisma.ConsentOrderByRelationAggregateInput
-  contactRequests?: Prisma.ContactRequestOrderByRelationAggregateInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
-  pageVisits?: Prisma.PageVisitOrderByRelationAggregateInput
   prospects?: Prisma.ProspectOrderByRelationAggregateInput
+  accounts?: Prisma.AccountOrderByRelationAggregateInput
+  consents?: Prisma.ConsentOrderByRelationAggregateInput
+  pageVisits?: Prisma.PageVisitOrderByRelationAggregateInput
+  contactRequests?: Prisma.ContactRequestOrderByRelationAggregateInput
+  chats?: Prisma.ChatOrderByRelationAggregateInput
 }
 
 export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  email?: string
   AND?: Prisma.IndividualWhereInput | Prisma.IndividualWhereInput[]
   OR?: Prisma.IndividualWhereInput[]
   NOT?: Prisma.IndividualWhereInput | Prisma.IndividualWhereInput[]
   firstName?: Prisma.StringFilter<"Individual"> | string
   lastName?: Prisma.StringFilter<"Individual"> | string
-  email?: Prisma.StringNullableFilter<"Individual"> | string | null
   mobilePhone?: Prisma.StringNullableFilter<"Individual"> | string | null
+  passwordHash?: Prisma.StringNullableFilter<"Individual"> | string | null
   address?: Prisma.StringNullableFilter<"Individual"> | string | null
   birthdate?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
   country?: Prisma.StringNullableFilter<"Individual"> | string | null
   language?: Prisma.StringFilter<"Individual"> | string
   source?: Prisma.StringFilter<"Individual"> | string
+  isActive?: Prisma.BoolFilter<"Individual"> | boolean
+  emailVerified?: Prisma.BoolFilter<"Individual"> | boolean
+  emailVerificationToken?: Prisma.StringNullableFilter<"Individual"> | string | null
+  emailVerificationTokenExpiresAt?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
   createdDate?: Prisma.DateTimeFilter<"Individual"> | Date | string
   createdBy?: Prisma.StringNullableFilter<"Individual"> | string | null
   updatedDate?: Prisma.DateTimeFilter<"Individual"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"Individual"> | string | null
-  password?: Prisma.StringNullableFilter<"Individual"> | string | null
-  accounts?: Prisma.AccountListRelationFilter
-  chats?: Prisma.ChatListRelationFilter
-  consents?: Prisma.ConsentListRelationFilter
-  contactRequests?: Prisma.ContactRequestListRelationFilter
   leads?: Prisma.LeadListRelationFilter
-  pageVisits?: Prisma.PageVisitListRelationFilter
   prospects?: Prisma.ProspectListRelationFilter
-}, "id">
+  accounts?: Prisma.AccountListRelationFilter
+  consents?: Prisma.ConsentListRelationFilter
+  pageVisits?: Prisma.PageVisitListRelationFilter
+  contactRequests?: Prisma.ContactRequestListRelationFilter
+  chats?: Prisma.ChatListRelationFilter
+}, "id" | "email">
 
 export type IndividualOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -330,16 +370,20 @@ export type IndividualOrderByWithAggregationInput = {
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   mobilePhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   birthdate?: Prisma.SortOrderInput | Prisma.SortOrder
   country?: Prisma.SortOrderInput | Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  emailVerificationToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailVerificationTokenExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
-  password?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.IndividualCountOrderByAggregateInput
   _max?: Prisma.IndividualMaxOrderByAggregateInput
   _min?: Prisma.IndividualMinOrderByAggregateInput
@@ -354,66 +398,78 @@ export type IndividualScalarWhereWithAggregatesInput = {
   lastName?: Prisma.StringWithAggregatesFilter<"Individual"> | string
   email?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   mobilePhone?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
+  passwordHash?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   birthdate?: Prisma.DateTimeNullableWithAggregatesFilter<"Individual"> | Date | string | null
   country?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   language?: Prisma.StringWithAggregatesFilter<"Individual"> | string
   source?: Prisma.StringWithAggregatesFilter<"Individual"> | string
+  isActive?: Prisma.BoolWithAggregatesFilter<"Individual"> | boolean
+  emailVerified?: Prisma.BoolWithAggregatesFilter<"Individual"> | boolean
+  emailVerificationToken?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
+  emailVerificationTokenExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Individual"> | Date | string | null
   createdDate?: Prisma.DateTimeWithAggregatesFilter<"Individual"> | Date | string
   createdBy?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   updatedDate?: Prisma.DateTimeWithAggregatesFilter<"Individual"> | Date | string
   updatedBy?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
-  password?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
 }
 
 export type IndividualCreateInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUpdateInput = {
@@ -422,23 +478,27 @@ export type IndividualUpdateInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateInput = {
@@ -447,41 +507,49 @@ export type IndividualUncheckedUpdateInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateManyInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
 }
 
 export type IndividualUpdateManyMutationInput = {
@@ -490,16 +558,20 @@ export type IndividualUpdateManyMutationInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type IndividualUncheckedUpdateManyInput = {
@@ -508,16 +580,20 @@ export type IndividualUncheckedUpdateManyInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type IndividualCountOrderByAggregateInput = {
@@ -526,16 +602,20 @@ export type IndividualCountOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   address?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
   country?: Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  emailVerificationToken?: Prisma.SortOrder
+  emailVerificationTokenExpiresAt?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
-  password?: Prisma.SortOrder
 }
 
 export type IndividualMaxOrderByAggregateInput = {
@@ -544,16 +624,20 @@ export type IndividualMaxOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   address?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
   country?: Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  emailVerificationToken?: Prisma.SortOrder
+  emailVerificationTokenExpiresAt?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
-  password?: Prisma.SortOrder
 }
 
 export type IndividualMinOrderByAggregateInput = {
@@ -562,16 +646,20 @@ export type IndividualMinOrderByAggregateInput = {
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrder
   address?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
   country?: Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  emailVerificationToken?: Prisma.SortOrder
+  emailVerificationTokenExpiresAt?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrder
-  password?: Prisma.SortOrder
 }
 
 export type IndividualScalarRelationFilter = {
@@ -693,51 +781,59 @@ export type IndividualUpdateOneWithoutChatsNestedInput = {
 }
 
 export type IndividualCreateWithoutLeadsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutLeadsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutLeadsInput = {
@@ -762,22 +858,26 @@ export type IndividualUpdateWithoutLeadsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutLeadsInput = {
@@ -786,70 +886,82 @@ export type IndividualUncheckedUpdateWithoutLeadsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutProspectsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutProspectsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutProspectsInput = {
@@ -874,22 +986,26 @@ export type IndividualUpdateWithoutProspectsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutProspectsInput = {
@@ -898,70 +1014,82 @@ export type IndividualUncheckedUpdateWithoutProspectsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutAccountsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutAccountsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutAccountsInput = {
@@ -986,22 +1114,26 @@ export type IndividualUpdateWithoutAccountsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutAccountsInput = {
@@ -1010,70 +1142,82 @@ export type IndividualUncheckedUpdateWithoutAccountsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutConsentsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutConsentsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutConsentsInput = {
@@ -1098,22 +1242,26 @@ export type IndividualUpdateWithoutConsentsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutConsentsInput = {
@@ -1122,70 +1270,82 @@ export type IndividualUncheckedUpdateWithoutConsentsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutPageVisitsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutPageVisitsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutPageVisitsInput = {
@@ -1210,22 +1370,26 @@ export type IndividualUpdateWithoutPageVisitsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
@@ -1234,70 +1398,82 @@ export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutContactRequestsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutContactRequestsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
-  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
-  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
-  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutContactRequestsInput = {
@@ -1322,22 +1498,26 @@ export type IndividualUpdateWithoutContactRequestsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
@@ -1346,70 +1526,82 @@ export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
-  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
-  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
-  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutChatsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
+  leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
-  leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
-  prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutChatsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
   mobilePhone?: string | null
+  passwordHash?: string | null
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
   language: string
   source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
-  password?: string | null
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
-  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
-  prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutChatsInput = {
@@ -1434,22 +1626,26 @@ export type IndividualUpdateWithoutChatsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
-  prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutChatsInput = {
@@ -1458,22 +1654,26 @@ export type IndividualUncheckedUpdateWithoutChatsInput = {
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
-  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
-  prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 
@@ -1482,23 +1682,23 @@ export type IndividualUncheckedUpdateWithoutChatsInput = {
  */
 
 export type IndividualCountOutputType = {
-  accounts: number
-  chats: number
-  consents: number
-  contactRequests: number
   leads: number
-  pageVisits: number
   prospects: number
+  accounts: number
+  consents: number
+  pageVisits: number
+  contactRequests: number
+  chats: number
 }
 
 export type IndividualCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accounts?: boolean | IndividualCountOutputTypeCountAccountsArgs
-  chats?: boolean | IndividualCountOutputTypeCountChatsArgs
-  consents?: boolean | IndividualCountOutputTypeCountConsentsArgs
-  contactRequests?: boolean | IndividualCountOutputTypeCountContactRequestsArgs
   leads?: boolean | IndividualCountOutputTypeCountLeadsArgs
-  pageVisits?: boolean | IndividualCountOutputTypeCountPageVisitsArgs
   prospects?: boolean | IndividualCountOutputTypeCountProspectsArgs
+  accounts?: boolean | IndividualCountOutputTypeCountAccountsArgs
+  consents?: boolean | IndividualCountOutputTypeCountConsentsArgs
+  pageVisits?: boolean | IndividualCountOutputTypeCountPageVisitsArgs
+  contactRequests?: boolean | IndividualCountOutputTypeCountContactRequestsArgs
+  chats?: boolean | IndividualCountOutputTypeCountChatsArgs
 }
 
 /**
@@ -1514,15 +1714,22 @@ export type IndividualCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
 /**
  * IndividualCountOutputType without action
  */
-export type IndividualCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AccountWhereInput
+export type IndividualCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadWhereInput
 }
 
 /**
  * IndividualCountOutputType without action
  */
-export type IndividualCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ChatWhereInput
+export type IndividualCountOutputTypeCountProspectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProspectWhereInput
+}
+
+/**
+ * IndividualCountOutputType without action
+ */
+export type IndividualCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountWhereInput
 }
 
 /**
@@ -1535,20 +1742,6 @@ export type IndividualCountOutputTypeCountConsentsArgs<ExtArgs extends runtime.T
 /**
  * IndividualCountOutputType without action
  */
-export type IndividualCountOutputTypeCountContactRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ContactRequestWhereInput
-}
-
-/**
- * IndividualCountOutputType without action
- */
-export type IndividualCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadWhereInput
-}
-
-/**
- * IndividualCountOutputType without action
- */
 export type IndividualCountOutputTypeCountPageVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PageVisitWhereInput
 }
@@ -1556,8 +1749,15 @@ export type IndividualCountOutputTypeCountPageVisitsArgs<ExtArgs extends runtime
 /**
  * IndividualCountOutputType without action
  */
-export type IndividualCountOutputTypeCountProspectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProspectWhereInput
+export type IndividualCountOutputTypeCountContactRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactRequestWhereInput
+}
+
+/**
+ * IndividualCountOutputType without action
+ */
+export type IndividualCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatWhereInput
 }
 
 
@@ -1567,23 +1767,27 @@ export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   lastName?: boolean
   email?: boolean
   mobilePhone?: boolean
+  passwordHash?: boolean
   address?: boolean
   birthdate?: boolean
   country?: boolean
   language?: boolean
   source?: boolean
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: boolean
+  emailVerificationTokenExpiresAt?: boolean
   createdDate?: boolean
   createdBy?: boolean
   updatedDate?: boolean
   updatedBy?: boolean
-  password?: boolean
-  accounts?: boolean | Prisma.Individual$accountsArgs<ExtArgs>
-  chats?: boolean | Prisma.Individual$chatsArgs<ExtArgs>
-  consents?: boolean | Prisma.Individual$consentsArgs<ExtArgs>
-  contactRequests?: boolean | Prisma.Individual$contactRequestsArgs<ExtArgs>
   leads?: boolean | Prisma.Individual$leadsArgs<ExtArgs>
-  pageVisits?: boolean | Prisma.Individual$pageVisitsArgs<ExtArgs>
   prospects?: boolean | Prisma.Individual$prospectsArgs<ExtArgs>
+  accounts?: boolean | Prisma.Individual$accountsArgs<ExtArgs>
+  consents?: boolean | Prisma.Individual$consentsArgs<ExtArgs>
+  pageVisits?: boolean | Prisma.Individual$pageVisitsArgs<ExtArgs>
+  contactRequests?: boolean | Prisma.Individual$contactRequestsArgs<ExtArgs>
+  chats?: boolean | Prisma.Individual$chatsArgs<ExtArgs>
   _count?: boolean | Prisma.IndividualCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["individual"]>
 
@@ -1593,16 +1797,20 @@ export type IndividualSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   lastName?: boolean
   email?: boolean
   mobilePhone?: boolean
+  passwordHash?: boolean
   address?: boolean
   birthdate?: boolean
   country?: boolean
   language?: boolean
   source?: boolean
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: boolean
+  emailVerificationTokenExpiresAt?: boolean
   createdDate?: boolean
   createdBy?: boolean
   updatedDate?: boolean
   updatedBy?: boolean
-  password?: boolean
 }, ExtArgs["result"]["individual"]>
 
 export type IndividualSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1611,16 +1819,20 @@ export type IndividualSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   lastName?: boolean
   email?: boolean
   mobilePhone?: boolean
+  passwordHash?: boolean
   address?: boolean
   birthdate?: boolean
   country?: boolean
   language?: boolean
   source?: boolean
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: boolean
+  emailVerificationTokenExpiresAt?: boolean
   createdDate?: boolean
   createdBy?: boolean
   updatedDate?: boolean
   updatedBy?: boolean
-  password?: boolean
 }, ExtArgs["result"]["individual"]>
 
 export type IndividualSelectScalar = {
@@ -1629,27 +1841,31 @@ export type IndividualSelectScalar = {
   lastName?: boolean
   email?: boolean
   mobilePhone?: boolean
+  passwordHash?: boolean
   address?: boolean
   birthdate?: boolean
   country?: boolean
   language?: boolean
   source?: boolean
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: boolean
+  emailVerificationTokenExpiresAt?: boolean
   createdDate?: boolean
   createdBy?: boolean
   updatedDate?: boolean
   updatedBy?: boolean
-  password?: boolean
 }
 
-export type IndividualOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "mobilePhone" | "address" | "birthdate" | "country" | "language" | "source" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy" | "password", ExtArgs["result"]["individual"]>
+export type IndividualOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "mobilePhone" | "passwordHash" | "address" | "birthdate" | "country" | "language" | "source" | "isActive" | "emailVerified" | "emailVerificationToken" | "emailVerificationTokenExpiresAt" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["individual"]>
 export type IndividualInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accounts?: boolean | Prisma.Individual$accountsArgs<ExtArgs>
-  chats?: boolean | Prisma.Individual$chatsArgs<ExtArgs>
-  consents?: boolean | Prisma.Individual$consentsArgs<ExtArgs>
-  contactRequests?: boolean | Prisma.Individual$contactRequestsArgs<ExtArgs>
   leads?: boolean | Prisma.Individual$leadsArgs<ExtArgs>
-  pageVisits?: boolean | Prisma.Individual$pageVisitsArgs<ExtArgs>
   prospects?: boolean | Prisma.Individual$prospectsArgs<ExtArgs>
+  accounts?: boolean | Prisma.Individual$accountsArgs<ExtArgs>
+  consents?: boolean | Prisma.Individual$consentsArgs<ExtArgs>
+  pageVisits?: boolean | Prisma.Individual$pageVisitsArgs<ExtArgs>
+  contactRequests?: boolean | Prisma.Individual$contactRequestsArgs<ExtArgs>
+  chats?: boolean | Prisma.Individual$chatsArgs<ExtArgs>
   _count?: boolean | Prisma.IndividualCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IndividualIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1658,13 +1874,13 @@ export type IndividualIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Individual"
   objects: {
-    accounts: Prisma.$AccountPayload<ExtArgs>[]
-    chats: Prisma.$ChatPayload<ExtArgs>[]
-    consents: Prisma.$ConsentPayload<ExtArgs>[]
-    contactRequests: Prisma.$ContactRequestPayload<ExtArgs>[]
     leads: Prisma.$LeadPayload<ExtArgs>[]
-    pageVisits: Prisma.$PageVisitPayload<ExtArgs>[]
     prospects: Prisma.$ProspectPayload<ExtArgs>[]
+    accounts: Prisma.$AccountPayload<ExtArgs>[]
+    consents: Prisma.$ConsentPayload<ExtArgs>[]
+    pageVisits: Prisma.$PageVisitPayload<ExtArgs>[]
+    contactRequests: Prisma.$ContactRequestPayload<ExtArgs>[]
+    chats: Prisma.$ChatPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1672,16 +1888,20 @@ export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.Internal
     lastName: string
     email: string | null
     mobilePhone: string | null
+    passwordHash: string | null
     address: string | null
     birthdate: Date | null
     country: string | null
     language: string
     source: string
+    isActive: boolean
+    emailVerified: boolean
+    emailVerificationToken: string | null
+    emailVerificationTokenExpiresAt: Date | null
     createdDate: Date
     createdBy: string | null
     updatedDate: Date
     updatedBy: string | null
-    password: string | null
   }, ExtArgs["result"]["individual"]>
   composites: {}
 }
@@ -2076,13 +2296,13 @@ readonly fields: IndividualFieldRefs;
  */
 export interface Prisma__IndividualClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  accounts<T extends Prisma.Individual$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  chats<T extends Prisma.Individual$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  consents<T extends Prisma.Individual$consentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$consentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  contactRequests<T extends Prisma.Individual$contactRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$contactRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.Individual$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  pageVisits<T extends Prisma.Individual$pageVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$pageVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   prospects<T extends Prisma.Individual$prospectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$prospectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProspectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accounts<T extends Prisma.Individual$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  consents<T extends Prisma.Individual$consentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$consentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pageVisits<T extends Prisma.Individual$pageVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$pageVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contactRequests<T extends Prisma.Individual$contactRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$contactRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chats<T extends Prisma.Individual$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2117,16 +2337,20 @@ export interface IndividualFieldRefs {
   readonly lastName: Prisma.FieldRef<"Individual", 'String'>
   readonly email: Prisma.FieldRef<"Individual", 'String'>
   readonly mobilePhone: Prisma.FieldRef<"Individual", 'String'>
+  readonly passwordHash: Prisma.FieldRef<"Individual", 'String'>
   readonly address: Prisma.FieldRef<"Individual", 'String'>
   readonly birthdate: Prisma.FieldRef<"Individual", 'DateTime'>
   readonly country: Prisma.FieldRef<"Individual", 'String'>
   readonly language: Prisma.FieldRef<"Individual", 'String'>
   readonly source: Prisma.FieldRef<"Individual", 'String'>
+  readonly isActive: Prisma.FieldRef<"Individual", 'Boolean'>
+  readonly emailVerified: Prisma.FieldRef<"Individual", 'Boolean'>
+  readonly emailVerificationToken: Prisma.FieldRef<"Individual", 'String'>
+  readonly emailVerificationTokenExpiresAt: Prisma.FieldRef<"Individual", 'DateTime'>
   readonly createdDate: Prisma.FieldRef<"Individual", 'DateTime'>
   readonly createdBy: Prisma.FieldRef<"Individual", 'String'>
   readonly updatedDate: Prisma.FieldRef<"Individual", 'DateTime'>
   readonly updatedBy: Prisma.FieldRef<"Individual", 'String'>
-  readonly password: Prisma.FieldRef<"Individual", 'String'>
 }
     
 
@@ -2520,6 +2744,54 @@ export type IndividualDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
+ * Individual.leads
+ */
+export type Individual$leadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Lead
+   */
+  select?: Prisma.LeadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Lead
+   */
+  omit?: Prisma.LeadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadInclude<ExtArgs> | null
+  where?: Prisma.LeadWhereInput
+  orderBy?: Prisma.LeadOrderByWithRelationInput | Prisma.LeadOrderByWithRelationInput[]
+  cursor?: Prisma.LeadWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadScalarFieldEnum | Prisma.LeadScalarFieldEnum[]
+}
+
+/**
+ * Individual.prospects
+ */
+export type Individual$prospectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Prospect
+   */
+  select?: Prisma.ProspectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Prospect
+   */
+  omit?: Prisma.ProspectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProspectInclude<ExtArgs> | null
+  where?: Prisma.ProspectWhereInput
+  orderBy?: Prisma.ProspectOrderByWithRelationInput | Prisma.ProspectOrderByWithRelationInput[]
+  cursor?: Prisma.ProspectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProspectScalarFieldEnum | Prisma.ProspectScalarFieldEnum[]
+}
+
+/**
  * Individual.accounts
  */
 export type Individual$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2541,30 +2813,6 @@ export type Individual$accountsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
-}
-
-/**
- * Individual.chats
- */
-export type Individual$chatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Chat
-   */
-  select?: Prisma.ChatSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Chat
-   */
-  omit?: Prisma.ChatOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ChatInclude<ExtArgs> | null
-  where?: Prisma.ChatWhereInput
-  orderBy?: Prisma.ChatOrderByWithRelationInput | Prisma.ChatOrderByWithRelationInput[]
-  cursor?: Prisma.ChatWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
 }
 
 /**
@@ -2592,54 +2840,6 @@ export type Individual$consentsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Individual.contactRequests
- */
-export type Individual$contactRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ContactRequest
-   */
-  select?: Prisma.ContactRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ContactRequest
-   */
-  omit?: Prisma.ContactRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContactRequestInclude<ExtArgs> | null
-  where?: Prisma.ContactRequestWhereInput
-  orderBy?: Prisma.ContactRequestOrderByWithRelationInput | Prisma.ContactRequestOrderByWithRelationInput[]
-  cursor?: Prisma.ContactRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ContactRequestScalarFieldEnum | Prisma.ContactRequestScalarFieldEnum[]
-}
-
-/**
- * Individual.leads
- */
-export type Individual$leadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Lead
-   */
-  select?: Prisma.LeadSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Lead
-   */
-  omit?: Prisma.LeadOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadInclude<ExtArgs> | null
-  where?: Prisma.LeadWhereInput
-  orderBy?: Prisma.LeadOrderByWithRelationInput | Prisma.LeadOrderByWithRelationInput[]
-  cursor?: Prisma.LeadWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadScalarFieldEnum | Prisma.LeadScalarFieldEnum[]
-}
-
-/**
  * Individual.pageVisits
  */
 export type Individual$pageVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2664,27 +2864,51 @@ export type Individual$pageVisitsArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * Individual.prospects
+ * Individual.contactRequests
  */
-export type Individual$prospectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Individual$contactRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Prospect
+   * Select specific fields to fetch from the ContactRequest
    */
-  select?: Prisma.ProspectSelect<ExtArgs> | null
+  select?: Prisma.ContactRequestSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Prospect
+   * Omit specific fields from the ContactRequest
    */
-  omit?: Prisma.ProspectOmit<ExtArgs> | null
+  omit?: Prisma.ContactRequestOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProspectInclude<ExtArgs> | null
-  where?: Prisma.ProspectWhereInput
-  orderBy?: Prisma.ProspectOrderByWithRelationInput | Prisma.ProspectOrderByWithRelationInput[]
-  cursor?: Prisma.ProspectWhereUniqueInput
+  include?: Prisma.ContactRequestInclude<ExtArgs> | null
+  where?: Prisma.ContactRequestWhereInput
+  orderBy?: Prisma.ContactRequestOrderByWithRelationInput | Prisma.ContactRequestOrderByWithRelationInput[]
+  cursor?: Prisma.ContactRequestWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ProspectScalarFieldEnum | Prisma.ProspectScalarFieldEnum[]
+  distinct?: Prisma.ContactRequestScalarFieldEnum | Prisma.ContactRequestScalarFieldEnum[]
+}
+
+/**
+ * Individual.chats
+ */
+export type Individual$chatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Chat
+   */
+  select?: Prisma.ChatSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Chat
+   */
+  omit?: Prisma.ChatOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatInclude<ExtArgs> | null
+  where?: Prisma.ChatWhereInput
+  orderBy?: Prisma.ChatOrderByWithRelationInput | Prisma.ChatOrderByWithRelationInput[]
+  cursor?: Prisma.ChatWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
 }
 
 /**

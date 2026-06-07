@@ -384,6 +384,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  EmailVerificationToken: 'EmailVerificationToken',
   Product: 'Product',
   WhatsAppConversation: 'WhatsAppConversation',
   WhatsAppMessage: 'WhatsAppMessage',
@@ -412,10 +413,84 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "chatMessage" | "user"
+    modelProps: "emailVerificationToken" | "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "chatMessage" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    EmailVerificationToken: {
+      payload: Prisma.$EmailVerificationTokenPayload<ExtArgs>
+      fields: Prisma.EmailVerificationTokenFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmailVerificationTokenFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmailVerificationTokenFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>
+        }
+        findFirst: {
+          args: Prisma.EmailVerificationTokenFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmailVerificationTokenFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>
+        }
+        findMany: {
+          args: Prisma.EmailVerificationTokenFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>[]
+        }
+        create: {
+          args: Prisma.EmailVerificationTokenCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>
+        }
+        createMany: {
+          args: Prisma.EmailVerificationTokenCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmailVerificationTokenCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>[]
+        }
+        delete: {
+          args: Prisma.EmailVerificationTokenDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>
+        }
+        update: {
+          args: Prisma.EmailVerificationTokenUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>
+        }
+        deleteMany: {
+          args: Prisma.EmailVerificationTokenDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmailVerificationTokenUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmailVerificationTokenUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>[]
+        }
+        upsert: {
+          args: Prisma.EmailVerificationTokenUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailVerificationTokenPayload>
+        }
+        aggregate: {
+          args: Prisma.EmailVerificationTokenAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmailVerificationToken>
+        }
+        groupBy: {
+          args: Prisma.EmailVerificationTokenGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailVerificationTokenGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmailVerificationTokenCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailVerificationTokenCountAggregateOutputType> | number
+        }
+      }
+    }
     Product: {
       payload: Prisma.$ProductPayload<ExtArgs>
       fields: Prisma.ProductFieldRefs
@@ -1417,6 +1492,20 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const EmailVerificationTokenScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  token: 'token',
+  payload: 'payload',
+  expiresAt: 'expiresAt',
+  used: 'used',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+
+
 export const ProductScalarFieldEnum = {
   id: 'id',
   uniqueCode: 'uniqueCode',
@@ -1526,16 +1615,20 @@ export const IndividualScalarFieldEnum = {
   lastName: 'lastName',
   email: 'email',
   mobilePhone: 'mobilePhone',
+  passwordHash: 'passwordHash',
   address: 'address',
   birthdate: 'birthdate',
   country: 'country',
   language: 'language',
   source: 'source',
+  isActive: 'isActive',
+  emailVerified: 'emailVerified',
+  emailVerificationToken: 'emailVerificationToken',
+  emailVerificationTokenExpiresAt: 'emailVerificationTokenExpiresAt',
   createdDate: 'createdDate',
   createdBy: 'createdBy',
   updatedDate: 'updatedDate',
-  updatedBy: 'updatedBy',
-  password: 'password'
+  updatedBy: 'updatedBy'
 } as const
 
 export type IndividualScalarFieldEnum = (typeof IndividualScalarFieldEnum)[keyof typeof IndividualScalarFieldEnum]
@@ -1723,6 +1816,13 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull
@@ -1777,6 +1877,41 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'ProductType'
  */
 export type EnumProductTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductType'>
@@ -1815,41 +1950,6 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-/**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-/**
- * Reference to a field of type 'DateTime'
- */
-export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-/**
- * Reference to a field of type 'DateTime[]'
- */
-export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -2116,6 +2216,7 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
+  emailVerificationToken?: Prisma.EmailVerificationTokenOmit
   product?: Prisma.ProductOmit
   whatsAppConversation?: Prisma.WhatsAppConversationOmit
   whatsAppMessage?: Prisma.WhatsAppMessageOmit

@@ -8,6 +8,7 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/EmailVerificationToken.ts'
 export type * from './models/Product.ts'
 export type * from './models/WhatsAppConversation.ts'
 export type * from './models/WhatsAppMessage.ts'

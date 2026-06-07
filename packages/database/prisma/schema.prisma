@@ -7,6 +7,20 @@ datasource db {
   provider = "postgresql"
 }
 
+model EmailVerificationToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  payload   Json
+  expiresAt DateTime
+  used      Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
 model Product {
   id            String      @id @default(cuid())
   uniqueCode    String      @unique
@@ -104,32 +118,42 @@ model WhatsAppMessage {
 }
 
 model Individual {
-  id              String           @id @default(cuid())
-  firstName       String
-  lastName        String
-  email           String?
-  mobilePhone     String?
-  address         String?
-  birthdate       DateTime?
-  country         String?
-  language        String
-  source          String
-  createdDate     DateTime         @default(now())
-  createdBy       String?
-  updatedDate     DateTime         @updatedAt
-  updatedBy       String?
-  password        String?
-  accounts        Account[]
-  chats           Chat[]
-  consents        Consent[]
+  id String @id
+
+  firstName   String
+  lastName    String
+  email       String? @unique
+  mobilePhone String?
+  passwordHash String?
+
+  address   String?
+  birthdate DateTime?
+  country   String?
+  language  String
+  source    String
+
+  isActive      Boolean @default(false)
+  emailVerified Boolean @default(false)
+
+  emailVerificationToken          String?
+  emailVerificationTokenExpiresAt DateTime?
+
+  createdDate DateTime @default(now())
+  createdBy   String?
+  updatedDate DateTime @updatedAt
+  updatedBy   String?
+
+  leads     Lead[]
+  prospects Prospect[]
+  accounts  Account[]
+  consents  Consent[]
+  pageVisits PageVisit[]
   contactRequests ContactRequest[]
-  leads           Lead[]
-  pageVisits      PageVisit[]
-  prospects       Prospect[]
+  chats Chat[]
 }
 
 model Lead {
-  id                String           @id @default(cuid())
+  id                String           @id
   firstName         String
   lastName          String
   email             String?
