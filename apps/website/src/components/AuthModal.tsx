@@ -2,17 +2,55 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { X, Mail, Lock, Loader2, User, Phone, CheckCircle2 } from "lucide-react";
+import {
+  X,
+  Mail,
+  Lock,
+  Loader2,
+  User,
+  Phone,
+  CheckCircle2,
+  ChevronDown,
+} from "lucide-react";
 
 type Props = { open: boolean; onClose: () => void };
+
+type CountryOption = {
+  name: string;
+  flag: string;
+  code: string;
+};
+
+const countryOptions: CountryOption[] = [
+  { name: "Morocco", flag: "🇲🇦", code: "+212" },
+  { name: "France", flag: "🇫🇷", code: "+33" },
+  { name: "Spain", flag: "🇪🇸", code: "+34" },
+  { name: "Portugal", flag: "🇵🇹", code: "+351" },
+  { name: "Italy", flag: "🇮🇹", code: "+39" },
+  { name: "Germany", flag: "🇩🇪", code: "+49" },
+  { name: "United Kingdom", flag: "🇬🇧", code: "+44" },
+  { name: "United States", flag: "🇺🇸", code: "+1" },
+];
 
 function GoogleIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5">
-      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-      <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z" />
-      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" />
+      <path
+        fill="#4285F4"
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"
+      />
     </svg>
   );
 }
@@ -23,12 +61,18 @@ export default function AuthModal({ open, onClose }: Props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [mobilePhone, setMobilePhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState<CountryOption>(
+    countryOptions[0]
+  );
+  const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
 
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
   const [verificationEmailSent, setVerificationEmailSent] = useState(false);
 
@@ -37,9 +81,13 @@ export default function AuthModal({ open, onClose }: Props) {
   function validateForm() {
     if (mode === "signup" && !firstName.trim()) return "First name is required.";
     if (mode === "signup" && !lastName.trim()) return "Last name is required.";
+    if (mode === "signup" && !mobilePhone.trim()) return "Phone number is required.";
     if (!email.includes("@")) return "Please enter a valid email address.";
     if (password.length < 6) return "Password must contain at least 6 characters.";
-    if (mode === "signup" && password !== confirmPassword) return "Passwords do not match.";
+    if (mode === "signup" && password !== confirmPassword) {
+      return "Passwords do not match.";
+    }
+
     return "";
   }
 
@@ -67,7 +115,9 @@ export default function AuthModal({ open, onClose }: Props) {
         firstName: "Taoufiq",
         lastName: "Benallah",
         email,
+        countryCode: selectedCountry.code,
         mobilePhone,
+        fullPhoneNumber: `${selectedCountry.code}${mobilePhone}`,
       };
 
       localStorage.setItem("kech_user", JSON.stringify(user));
@@ -97,12 +147,14 @@ export default function AuthModal({ open, onClose }: Props) {
     setPassword("");
     setConfirmPassword("");
     setVerificationEmailSent(false);
+    setCountryDropdownOpen(false);
   }
 
   function closeAndReset() {
     setStatus("idle");
     setMessage("");
     setVerificationEmailSent(false);
+    setCountryDropdownOpen(false);
     onClose();
   }
 
@@ -158,8 +210,12 @@ export default function AuthModal({ open, onClose }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/60 px-4">
+    <div
+      className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/60 px-4"
+      onClick={() => setCountryDropdownOpen(false)}
+    >
       <div
+        onClick={(event) => event.stopPropagation()}
         className={`relative w-full rounded-3xl bg-white p-6 card-shadow transition-all ${
           mode === "signup" ? "max-w-2xl" : "max-w-md"
         }`}
@@ -225,6 +281,55 @@ export default function AuthModal({ open, onClose }: Props) {
                 />
               </label>
 
+              <div className="relative flex min-w-0 items-center gap-2 rounded-2xl border border-zinc-200 px-4 py-3">
+                <Phone size={18} className="shrink-0 text-orange-700" />
+
+                <button
+                  type="button"
+                  onClick={() => setCountryDropdownOpen((value) => !value)}
+                  className="flex shrink-0 items-center gap-1 rounded-xl bg-orange-50 px-2 py-1 text-sm font-bold text-zinc-800"
+                >
+                  <span className="text-base leading-none">
+                    {selectedCountry.flag}
+                  </span>
+                  <span>{selectedCountry.code}</span>
+                  <ChevronDown size={14} className="text-orange-700" />
+                </button>
+
+                <div className="h-5 w-px shrink-0 bg-zinc-200" />
+
+                <input
+                  value={mobilePhone}
+                  onChange={(e) => setMobilePhone(e.target.value)}
+                  placeholder="Phone number"
+                  className="min-w-0 flex-1 outline-none"
+                />
+
+                {countryDropdownOpen && (
+                  <div className="absolute left-0 top-[calc(100%+8px)] z-50 max-h-56 w-full overflow-y-auto rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl">
+                    {countryOptions.map((country) => (
+                      <button
+                        key={`${country.name}-${country.code}`}
+                        type="button"
+                        onClick={() => {
+                          setSelectedCountry(country);
+                          setCountryDropdownOpen(false);
+                        }}
+                        className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm transition hover:bg-orange-50 ${
+                          selectedCountry.code === country.code
+                            ? "bg-orange-50 font-bold text-orange-800"
+                            : "text-zinc-700"
+                        }`}
+                      >
+                        <span className="text-lg">{country.flag}</span>
+                        <span className="shrink-0 font-bold">{country.code}</span>
+                        <span className="truncate">{country.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <label className="flex items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
                 <Mail size={18} className="text-orange-700" />
                 <input
@@ -234,17 +339,6 @@ export default function AuthModal({ open, onClose }: Props) {
                   className="w-full outline-none"
                 />
               </label>
-              
-              <label className="flex items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
-                <Phone size={18} className="text-orange-700" />
-                <input
-                  value={mobilePhone}
-                  onChange={(e) => setMobilePhone(e.target.value)}
-                  placeholder="Phone number"
-                  className="w-full outline-none"
-                />
-              </label>
-
 
               <label className="flex items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
                 <Lock size={18} className="text-orange-700" />
@@ -308,7 +402,9 @@ export default function AuthModal({ open, onClose }: Props) {
             disabled={status === "loading"}
             className="flex w-full items-center justify-center gap-2 rounded-2xl bg-orange-600 px-5 py-3 font-black text-white transition hover:bg-orange-700 disabled:opacity-70"
           >
-            {status === "loading" && <Loader2 size={18} className="animate-spin" />}
+            {status === "loading" && (
+              <Loader2 size={18} className="animate-spin" />
+            )}
             {mode === "login" ? "Login" : "Send verification email"}
           </button>
         </div>
