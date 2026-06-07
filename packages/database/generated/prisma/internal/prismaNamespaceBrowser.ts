@@ -51,6 +51,7 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  EmailVerificationToken: 'EmailVerificationToken',
   Product: 'Product',
   WhatsAppConversation: 'WhatsAppConversation',
   WhatsAppMessage: 'WhatsAppMessage',
@@ -80,6 +81,20 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const EmailVerificationTokenScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  token: 'token',
+  payload: 'payload',
+  expiresAt: 'expiresAt',
+  used: 'used',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {
@@ -191,16 +206,20 @@ export const IndividualScalarFieldEnum = {
   lastName: 'lastName',
   email: 'email',
   mobilePhone: 'mobilePhone',
+  passwordHash: 'passwordHash',
   address: 'address',
   birthdate: 'birthdate',
   country: 'country',
   language: 'language',
   source: 'source',
+  isActive: 'isActive',
+  emailVerified: 'emailVerified',
+  emailVerificationToken: 'emailVerificationToken',
+  emailVerificationTokenExpiresAt: 'emailVerificationTokenExpiresAt',
   createdDate: 'createdDate',
   createdBy: 'createdBy',
   updatedDate: 'updatedDate',
-  updatedBy: 'updatedBy',
-  password: 'password'
+  updatedBy: 'updatedBy'
 } as const
 
 export type IndividualScalarFieldEnum = (typeof IndividualScalarFieldEnum)[keyof typeof IndividualScalarFieldEnum]
@@ -386,6 +405,13 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const NullableJsonNullValueInput = {

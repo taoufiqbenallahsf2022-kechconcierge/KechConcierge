@@ -370,7 +370,7 @@ export type LeadScalarWhereWithAggregatesInput = {
 }
 
 export type LeadCreateInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -392,7 +392,7 @@ export type LeadCreateInput = {
 }
 
 export type LeadUncheckedCreateInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -458,7 +458,7 @@ export type LeadUncheckedUpdateInput = {
 }
 
 export type LeadCreateManyInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -676,7 +676,7 @@ export type LeadUpdateOneWithoutChatsNestedInput = {
 }
 
 export type LeadCreateWithoutIndividualInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -697,7 +697,7 @@ export type LeadCreateWithoutIndividualInput = {
 }
 
 export type LeadUncheckedCreateWithoutIndividualInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -766,7 +766,7 @@ export type LeadScalarWhereInput = {
 }
 
 export type LeadCreateWithoutPageVisitsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -787,7 +787,7 @@ export type LeadCreateWithoutPageVisitsInput = {
 }
 
 export type LeadUncheckedCreateWithoutPageVisitsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -866,7 +866,7 @@ export type LeadUncheckedUpdateWithoutPageVisitsInput = {
 }
 
 export type LeadCreateWithoutContactRequestsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -887,7 +887,7 @@ export type LeadCreateWithoutContactRequestsInput = {
 }
 
 export type LeadUncheckedCreateWithoutContactRequestsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -966,7 +966,7 @@ export type LeadUncheckedUpdateWithoutContactRequestsInput = {
 }
 
 export type LeadCreateWithoutChatsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -987,7 +987,7 @@ export type LeadCreateWithoutChatsInput = {
 }
 
 export type LeadUncheckedCreateWithoutChatsInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
@@ -1066,7 +1066,7 @@ export type LeadUncheckedUpdateWithoutChatsInput = {
 }
 
 export type LeadCreateManyIndividualInput = {
-  id?: string
+  id: string
   firstName: string
   lastName: string
   email?: string | null
