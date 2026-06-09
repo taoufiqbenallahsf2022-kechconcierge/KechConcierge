@@ -17,7 +17,7 @@ export default function ChatPage() {
     {
       id: 1,
       sender: "assistant",
-      text: "Hello 👋 Welcome to Kech Concierge. How can we help you today?",
+      text: "Hello 👋 Welcome to Moorly. How can we help you today?",
       createdAt: "10:00",
     },
   ]);
@@ -72,7 +72,7 @@ export default function ChatPage() {
         <aside className="hidden w-[320px] border-r border-orange-100 bg-white lg:flex lg:flex-col">
           <div className="border-b border-orange-100 p-5">
             <h2 className="text-xl font-black text-zinc-900">
-              Kech Concierge
+              Moorly
             </h2>
 
             <p className="mt-1 text-sm text-zinc-500">
@@ -89,7 +89,7 @@ export default function ChatPage() {
 
                 <div>
                   <p className="font-bold text-zinc-900">
-                    Kech Concierge
+                    Moorly
                   </p>
 
                   <p className="text-sm text-zinc-500">
@@ -118,7 +118,7 @@ export default function ChatPage() {
 
               <div>
                 <h1 className="font-black text-zinc-900">
-                  Kech Concierge
+                  Moorly
                 </h1>
 
                 <p className="text-sm text-zinc-500">

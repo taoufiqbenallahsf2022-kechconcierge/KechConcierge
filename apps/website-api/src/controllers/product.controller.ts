@@ -16,7 +16,7 @@ export async function productsByType(req: Request, res: Response) {
   const lang = req.query.lang as string | undefined;
   const page = Number(req.query.page || 1);
 
-  const products = await getProductsByType(type, page, lang);
+  const products = await getProductsByType(type as string, page, lang);
   res.json(products);
 }
 
@@ -24,7 +24,8 @@ export async function productDetails(req: Request, res: Response) {
   const uniqueCode = req.params.uniqueCode;
   const lang = req.query.lang as string | undefined;
 
-  const product = await getProductDetails(uniqueCode, lang);
+  //
+  const product = await getProductDetails(uniqueCode as string, lang);
 
   if (!product) {
     return res.status(404).json({

@@ -31,6 +31,8 @@ export type IndividualMinAggregateOutputType = {
   email: string | null
   mobilePhone: string | null
   passwordHash: string | null
+  googleId: string | null
+  authProvider: string | null
   address: string | null
   birthdate: Date | null
   country: string | null
@@ -53,6 +55,8 @@ export type IndividualMaxAggregateOutputType = {
   email: string | null
   mobilePhone: string | null
   passwordHash: string | null
+  googleId: string | null
+  authProvider: string | null
   address: string | null
   birthdate: Date | null
   country: string | null
@@ -75,6 +79,8 @@ export type IndividualCountAggregateOutputType = {
   email: number
   mobilePhone: number
   passwordHash: number
+  googleId: number
+  authProvider: number
   address: number
   birthdate: number
   country: number
@@ -99,6 +105,8 @@ export type IndividualMinAggregateInputType = {
   email?: true
   mobilePhone?: true
   passwordHash?: true
+  googleId?: true
+  authProvider?: true
   address?: true
   birthdate?: true
   country?: true
@@ -121,6 +129,8 @@ export type IndividualMaxAggregateInputType = {
   email?: true
   mobilePhone?: true
   passwordHash?: true
+  googleId?: true
+  authProvider?: true
   address?: true
   birthdate?: true
   country?: true
@@ -143,6 +153,8 @@ export type IndividualCountAggregateInputType = {
   email?: true
   mobilePhone?: true
   passwordHash?: true
+  googleId?: true
+  authProvider?: true
   address?: true
   birthdate?: true
   country?: true
@@ -238,6 +250,8 @@ export type IndividualGroupByOutputType = {
   email: string | null
   mobilePhone: string | null
   passwordHash: string | null
+  googleId: string | null
+  authProvider: string
   address: string | null
   birthdate: Date | null
   country: string | null
@@ -281,6 +295,8 @@ export type IndividualWhereInput = {
   email?: Prisma.StringNullableFilter<"Individual"> | string | null
   mobilePhone?: Prisma.StringNullableFilter<"Individual"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"Individual"> | string | null
+  googleId?: Prisma.StringNullableFilter<"Individual"> | string | null
+  authProvider?: Prisma.StringFilter<"Individual"> | string
   address?: Prisma.StringNullableFilter<"Individual"> | string | null
   birthdate?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
   country?: Prisma.StringNullableFilter<"Individual"> | string | null
@@ -310,6 +326,8 @@ export type IndividualOrderByWithRelationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   mobilePhone?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   birthdate?: Prisma.SortOrderInput | Prisma.SortOrder
   country?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -335,6 +353,7 @@ export type IndividualOrderByWithRelationInput = {
 export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  googleId?: string
   AND?: Prisma.IndividualWhereInput | Prisma.IndividualWhereInput[]
   OR?: Prisma.IndividualWhereInput[]
   NOT?: Prisma.IndividualWhereInput | Prisma.IndividualWhereInput[]
@@ -342,6 +361,7 @@ export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   lastName?: Prisma.StringFilter<"Individual"> | string
   mobilePhone?: Prisma.StringNullableFilter<"Individual"> | string | null
   passwordHash?: Prisma.StringNullableFilter<"Individual"> | string | null
+  authProvider?: Prisma.StringFilter<"Individual"> | string
   address?: Prisma.StringNullableFilter<"Individual"> | string | null
   birthdate?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
   country?: Prisma.StringNullableFilter<"Individual"> | string | null
@@ -362,7 +382,7 @@ export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   pageVisits?: Prisma.PageVisitListRelationFilter
   contactRequests?: Prisma.ContactRequestListRelationFilter
   chats?: Prisma.ChatListRelationFilter
-}, "id" | "email">
+}, "id" | "email" | "googleId">
 
 export type IndividualOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -371,6 +391,8 @@ export type IndividualOrderByWithAggregationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   mobilePhone?: Prisma.SortOrderInput | Prisma.SortOrder
   passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleId?: Prisma.SortOrderInput | Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   birthdate?: Prisma.SortOrderInput | Prisma.SortOrder
   country?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -399,6 +421,8 @@ export type IndividualScalarWhereWithAggregatesInput = {
   email?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   mobilePhone?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   passwordHash?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
+  googleId?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
+  authProvider?: Prisma.StringWithAggregatesFilter<"Individual"> | string
   address?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   birthdate?: Prisma.DateTimeNullableWithAggregatesFilter<"Individual"> | Date | string | null
   country?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
@@ -421,6 +445,8 @@ export type IndividualCreateInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -450,6 +476,8 @@ export type IndividualUncheckedCreateInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -479,6 +507,8 @@ export type IndividualUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -508,6 +538,8 @@ export type IndividualUncheckedUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -537,6 +569,8 @@ export type IndividualCreateManyInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -559,6 +593,8 @@ export type IndividualUpdateManyMutationInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -581,6 +617,8 @@ export type IndividualUncheckedUpdateManyInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -603,6 +641,8 @@ export type IndividualCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  googleId?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
   address?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
   country?: Prisma.SortOrder
@@ -625,6 +665,8 @@ export type IndividualMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  googleId?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
   address?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
   country?: Prisma.SortOrder
@@ -647,6 +689,8 @@ export type IndividualMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  googleId?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
   address?: Prisma.SortOrder
   birthdate?: Prisma.SortOrder
   country?: Prisma.SortOrder
@@ -787,6 +831,8 @@ export type IndividualCreateWithoutLeadsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -815,6 +861,8 @@ export type IndividualUncheckedCreateWithoutLeadsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -859,6 +907,8 @@ export type IndividualUpdateWithoutLeadsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -887,6 +937,8 @@ export type IndividualUncheckedUpdateWithoutLeadsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -915,6 +967,8 @@ export type IndividualCreateWithoutProspectsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -943,6 +997,8 @@ export type IndividualUncheckedCreateWithoutProspectsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -987,6 +1043,8 @@ export type IndividualUpdateWithoutProspectsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1015,6 +1073,8 @@ export type IndividualUncheckedUpdateWithoutProspectsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1043,6 +1103,8 @@ export type IndividualCreateWithoutAccountsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1071,6 +1133,8 @@ export type IndividualUncheckedCreateWithoutAccountsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1115,6 +1179,8 @@ export type IndividualUpdateWithoutAccountsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1143,6 +1209,8 @@ export type IndividualUncheckedUpdateWithoutAccountsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1171,6 +1239,8 @@ export type IndividualCreateWithoutConsentsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1199,6 +1269,8 @@ export type IndividualUncheckedCreateWithoutConsentsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1243,6 +1315,8 @@ export type IndividualUpdateWithoutConsentsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1271,6 +1345,8 @@ export type IndividualUncheckedUpdateWithoutConsentsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1299,6 +1375,8 @@ export type IndividualCreateWithoutPageVisitsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1327,6 +1405,8 @@ export type IndividualUncheckedCreateWithoutPageVisitsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1371,6 +1451,8 @@ export type IndividualUpdateWithoutPageVisitsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1399,6 +1481,8 @@ export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1427,6 +1511,8 @@ export type IndividualCreateWithoutContactRequestsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1455,6 +1541,8 @@ export type IndividualUncheckedCreateWithoutContactRequestsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1499,6 +1587,8 @@ export type IndividualUpdateWithoutContactRequestsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1527,6 +1617,8 @@ export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1555,6 +1647,8 @@ export type IndividualCreateWithoutChatsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1583,6 +1677,8 @@ export type IndividualUncheckedCreateWithoutChatsInput = {
   email?: string | null
   mobilePhone?: string | null
   passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
   address?: string | null
   birthdate?: Date | string | null
   country?: string | null
@@ -1627,6 +1723,8 @@ export type IndividualUpdateWithoutChatsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1655,6 +1753,8 @@ export type IndividualUncheckedUpdateWithoutChatsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1768,6 +1868,8 @@ export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   email?: boolean
   mobilePhone?: boolean
   passwordHash?: boolean
+  googleId?: boolean
+  authProvider?: boolean
   address?: boolean
   birthdate?: boolean
   country?: boolean
@@ -1798,6 +1900,8 @@ export type IndividualSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   email?: boolean
   mobilePhone?: boolean
   passwordHash?: boolean
+  googleId?: boolean
+  authProvider?: boolean
   address?: boolean
   birthdate?: boolean
   country?: boolean
@@ -1820,6 +1924,8 @@ export type IndividualSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   email?: boolean
   mobilePhone?: boolean
   passwordHash?: boolean
+  googleId?: boolean
+  authProvider?: boolean
   address?: boolean
   birthdate?: boolean
   country?: boolean
@@ -1842,6 +1948,8 @@ export type IndividualSelectScalar = {
   email?: boolean
   mobilePhone?: boolean
   passwordHash?: boolean
+  googleId?: boolean
+  authProvider?: boolean
   address?: boolean
   birthdate?: boolean
   country?: boolean
@@ -1857,7 +1965,7 @@ export type IndividualSelectScalar = {
   updatedBy?: boolean
 }
 
-export type IndividualOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "mobilePhone" | "passwordHash" | "address" | "birthdate" | "country" | "language" | "source" | "isActive" | "emailVerified" | "emailVerificationToken" | "emailVerificationTokenExpiresAt" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["individual"]>
+export type IndividualOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "mobilePhone" | "passwordHash" | "googleId" | "authProvider" | "address" | "birthdate" | "country" | "language" | "source" | "isActive" | "emailVerified" | "emailVerificationToken" | "emailVerificationTokenExpiresAt" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["individual"]>
 export type IndividualInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leads?: boolean | Prisma.Individual$leadsArgs<ExtArgs>
   prospects?: boolean | Prisma.Individual$prospectsArgs<ExtArgs>
@@ -1889,6 +1997,8 @@ export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.Internal
     email: string | null
     mobilePhone: string | null
     passwordHash: string | null
+    googleId: string | null
+    authProvider: string
     address: string | null
     birthdate: Date | null
     country: string | null
@@ -2338,6 +2448,8 @@ export interface IndividualFieldRefs {
   readonly email: Prisma.FieldRef<"Individual", 'String'>
   readonly mobilePhone: Prisma.FieldRef<"Individual", 'String'>
   readonly passwordHash: Prisma.FieldRef<"Individual", 'String'>
+  readonly googleId: Prisma.FieldRef<"Individual", 'String'>
+  readonly authProvider: Prisma.FieldRef<"Individual", 'String'>
   readonly address: Prisma.FieldRef<"Individual", 'String'>
   readonly birthdate: Prisma.FieldRef<"Individual", 'DateTime'>
   readonly country: Prisma.FieldRef<"Individual", 'String'>

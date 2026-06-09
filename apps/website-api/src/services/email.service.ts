@@ -8,18 +8,18 @@ export async function sendAccountVerificationEmail(params: {
 }) {
   const websiteUrl = process.env.WEBSITE_URL || "http://localhost:3000";
   const fromEmail =
-    process.env.RESEND_FROM_EMAIL || "Kech Concierge <onboarding@resend.dev>";
+    process.env.RESEND_FROM_EMAIL || "Moorly <onboarding@resend.dev>";
 
   const verificationUrl = `${websiteUrl}/verify-email?token=${params.token}`;
 
   const { data, error } = await resend.emails.send({
     from: fromEmail,
     to: [params.email],
-    subject: "Verify your Kech Concierge account",
+    subject: "Verify your Moorly account",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px;">
         <p style="font-size: 13px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #c2410c;">
-          Kech Concierge
+          Moorly
         </p>
 
         <h1 style="color: #18181b; margin-top: 8px;">
@@ -27,7 +27,7 @@ export async function sendAccountVerificationEmail(params: {
         </h1>
 
         <p style="color: #52525b; font-size: 15px; line-height: 24px;">
-          Thank you for creating your Kech Concierge account.
+          Thank you for creating your Moorly account.
         </p>
 
         <p style="color: #52525b; font-size: 15px; line-height: 24px;">

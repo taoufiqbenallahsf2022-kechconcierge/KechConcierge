@@ -1,21 +1,22 @@
 import crypto from "crypto";
 import bcrypt from "bcrypt";
+import { OAuth2Client } from "google-auth-library";
 import { prisma } from "../config/prisma";
 import { sendAccountVerificationEmail } from "./email.service";
-import {
-  generateIndividualId,
-  generateLeadId,
-} from "../utils/id-generator";
+import { generateIndividualId, generateLeadId } from "../utils/id-generator";
 
 type SignupInput = {
   firstName: string;
   lastName: string;
   email: string;
+  country: string;
   countryCode?: string;
   mobilePhone?: string;
   password: string;
-  language?: string;
+  language: string;
 };
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 function normalizeEmail(email: string) {
   return email.trim().toLowerCase();
@@ -59,8 +60,6 @@ export async function signupIndividual(input: SignupInput) {
     },
     select: {
       id: true,
-      isActive: true,
-      emailVerified: true,
     },
   });
 
@@ -85,17 +84,22 @@ export async function signupIndividual(input: SignupInput) {
     const individual = await tx.individual.create({
       data: {
         id: generateIndividualId(),
+
         firstName: input.firstName.trim(),
         lastName: input.lastName.trim(),
         email,
         mobilePhone: fullPhoneNumber,
         passwordHash,
+        country: input.country,
+
+        authProvider: "EMAIL",
 
         language: input.language || "EN",
         source: "WEBSITE_SIGNUP",
 
         isActive: false,
         emailVerified: false,
+
         emailVerificationToken: token,
         emailVerificationTokenExpiresAt: tokenExpiresAt,
 
@@ -107,6 +111,7 @@ export async function signupIndividual(input: SignupInput) {
     const lead = await tx.lead.create({
       data: {
         id: generateLeadId(),
+
         firstName: input.firstName.trim(),
         lastName: input.lastName.trim(),
         email,
@@ -193,5 +198,117 @@ export async function verifyIndividualEmail(token: string) {
   return {
     success: true,
     message: "Email verified successfully.",
+  };
+}
+
+export async function googleSignup(idToken: string, language?: string) {
+  const ticket = await googleClient.verifyIdToken({
+    idToken,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  });
+
+  const payload = ticket.getPayload();
+
+  if (!payload || !payload.email || !payload.sub) {
+    return {
+      success: false,
+      statusCode: 400,
+      code: "INVALID_GOOGLE_TOKEN",
+      message: "Invalid Google token.",
+    };
+  }
+
+  const email = normalizeEmail(payload.email);
+  const googleId = payload.sub;
+
+  const existingIndividual = await prisma.individual.findFirst({
+    where: {
+      OR: [{ email }, { googleId }],
+    },
+    select: {
+      id: true,
+      email: true,
+      firstName: true,
+      lastName: true,
+      isActive: true,
+      emailVerified: true,
+    },
+  });
+
+  if (existingIndividual) {
+    return {
+      success: true,
+      message: "Google account already exists.",
+      individual: existingIndividual,
+      created: false,
+    };
+  }
+
+  const firstName = payload.given_name || "Google";
+  const lastName = payload.family_name || "User";
+
+  const result = await prisma.$transaction(async (tx) => {
+    const individual = await tx.individual.create({
+      data: {
+        id: generateIndividualId(),
+
+        firstName,
+        lastName,
+        email,
+
+        googleId,
+        authProvider: "GOOGLE",
+
+        passwordHash: null,
+
+        language: language || "EN",
+        source: "GOOGLE_SIGNUP",
+
+        isActive: true,
+        emailVerified: true,
+
+        createdBy: "SYSTEM",
+        updatedBy: "SYSTEM",
+      },
+    });
+
+    const lead = await tx.lead.create({
+      data: {
+        id: generateLeadId(),
+
+        firstName,
+        lastName,
+        email,
+
+        language: language || "EN",
+        source: "GOOGLE_SIGNUP",
+        statusDescription: "Lead created from Google signup.",
+
+        individualId: individual.id,
+
+        createdBy: "SYSTEM",
+        updatedBy: "SYSTEM",
+      },
+    });
+
+    return {
+      individual,
+      lead,
+    };
+  });
+
+  return {
+    success: true,
+    message: "Google signup completed.",
+    individual: {
+      id: result.individual.id,
+      email: result.individual.email,
+      firstName: result.individual.firstName,
+      lastName: result.individual.lastName,
+      isActive: result.individual.isActive,
+      emailVerified: result.individual.emailVerified,
+    },
+    leadId: result.lead.id,
+    created: true,
   };
 }
