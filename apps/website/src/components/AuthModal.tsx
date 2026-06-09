@@ -98,8 +98,6 @@ function getAllCountryOptions(): CountryOption[] {
 
 export default function AuthModal({ open, onClose }: Props) {
 
-  const login = useAuthStore((state) => state.login);
-
   const countryOptions = useMemo(() => getAllCountryOptions(), []);
 
   const defaultCountry =
@@ -147,6 +145,8 @@ export default function AuthModal({ open, onClose }: Props) {
         country.alpha3.toLowerCase().includes(search)
     );
   }, [countryOptions, countrySearch]);
+
+  const login = useAuthStore((state) => state.login);
 
   if (!open) return null;
 
@@ -231,9 +231,34 @@ export default function AuthModal({ open, onClose }: Props) {
     setStatus("loading");
     setMessage("");
 
+    console.log(mode);
+
     try {
       if (mode === "signup") {
-        await handleClassicSignup();
+        const response = await fetch(`${API_URL}/api/auth/signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: firstName.trim(),
+            lastName: lastName.trim(),
+            email: email.trim().toLowerCase(),
+            countryCode: selectedPhoneCountry.code,
+            mobilePhone: mobilePhone.trim(),
+            country: selectedCountry.alpha3,
+            language: selectedLanguage.code,
+            password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setStatus("error");
+          setMessage(data.message || data.code || "Unable to create account.");
+          return;
+        }
 
         setStatus("success");
         setMessage("");
@@ -241,14 +266,43 @@ export default function AuthModal({ open, onClose }: Props) {
         return;
       }
 
-      setStatus("error");
-      setMessage("Classic login endpoint is not connected yet.");
+      // 
+      if (mode === "login") {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email.trim().toLowerCase(),
+            password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setStatus("error");
+          setMessage(data.code || data.message || "Unable to login.");
+          return;
+        }
+
+        login(data.individual, data.accessToken);
+
+        setStatus("success");
+        setMessage("Logged in successfully.");
+
+        setTimeout(() => {
+          onClose();
+        }, 700);
+      }
     } catch (error) {
       setStatus("error");
       setMessage(
         error instanceof Error ? error.message : "Unable to connect to the API."
       );
     }
+
   }
 
   async function handleGoogleAuth(idToken: string) {
@@ -263,8 +317,8 @@ export default function AuthModal({ open, onClose }: Props) {
         },
         body: JSON.stringify({
           idToken,
-          language: selectedLanguage.code,
           country: selectedCountry.alpha3,
+          language: selectedLanguage.code,
         }),
       });
 
@@ -274,7 +328,7 @@ export default function AuthModal({ open, onClose }: Props) {
         throw new Error(data.message || "Unable to complete Google authentication.");
       }
 
-      if (data.individual) login(data.individual, data.accessToken || "temporary-google-token");
+      if (data.individual) login(data.individual, data.accessToken);
 
       setStatus("success");
       setMessage("Google authentication completed successfully.");
@@ -687,7 +741,7 @@ export default function AuthModal({ open, onClose }: Props) {
             {status === "loading" && (
               <Loader2 size={18} className="animate-spin" />
             )}
-            {mode === "login" ? "Login" : "Send verification email"}
+            {mode === "login" ? "Login" : "Sign up"}
           </button>
         </div>
 
