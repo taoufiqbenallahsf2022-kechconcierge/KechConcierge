@@ -18,6 +18,8 @@ import {
   Languages,
 } from "lucide-react";
 
+import { useAuthStore } from "../store/auth.store";
+
 countries.registerLocale(enCountries);
 
 type Props = {
@@ -44,6 +46,7 @@ type LanguageOption = {
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 
 const phoneCountryOptions: PhoneCountryOption[] = [
   { name: "Morocco", flag: "🇲🇦", code: "+212" },
@@ -94,6 +97,9 @@ function getAllCountryOptions(): CountryOption[] {
 }
 
 export default function AuthModal({ open, onClose }: Props) {
+
+  const login = useAuthStore((state) => state.login);
+
   const countryOptions = useMemo(() => getAllCountryOptions(), []);
 
   const defaultCountry =
@@ -268,10 +274,7 @@ export default function AuthModal({ open, onClose }: Props) {
         throw new Error(data.message || "Unable to complete Google authentication.");
       }
 
-      if (data.individual) {
-        localStorage.setItem("kech_user", JSON.stringify(data.individual));
-        window.dispatchEvent(new Event("kech-auth-change"));
-      }
+      if (data.individual) login(data.individual, data.accessToken || "temporary-google-token");
 
       setStatus("success");
       setMessage("Google authentication completed successfully.");
