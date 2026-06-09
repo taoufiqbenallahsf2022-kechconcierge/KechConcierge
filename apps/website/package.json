@@ -1,5 +1,5 @@
 {
-  "name": "kech-concierge-website",
+  "name": "moorlytravels-website",
   "version": "0.2.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.13.5",
+    "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "lucide-react": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",

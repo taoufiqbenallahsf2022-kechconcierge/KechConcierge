@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import {
   X,
   Mail,
@@ -13,7 +14,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 
-type Props = { open: boolean; onClose: () => void };
+type Props = {
+  open: boolean;
+  onClose: () => void;
+};
 
 type CountryOption = {
   name: string;
@@ -32,28 +36,7 @@ const countryOptions: CountryOption[] = [
   { name: "United States", flag: "🇺🇸", code: "+1" },
 ];
 
-function GoogleIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5">
-      <path
-        fill="#4285F4"
-        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-      />
-      <path
-        fill="#34A853"
-        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-      />
-      <path
-        fill="#FBBC05"
-        d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"
-      />
-      <path
-        fill="#EA4335"
-        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"
-      />
-    </svg>
-  );
-}
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 export default function AuthModal({ open, onClose }: Props) {
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -79,16 +62,57 @@ export default function AuthModal({ open, onClose }: Props) {
   if (!open) return null;
 
   function validateForm() {
-    if (mode === "signup" && !firstName.trim()) return "First name is required.";
-    if (mode === "signup" && !lastName.trim()) return "Last name is required.";
-    if (mode === "signup" && !mobilePhone.trim()) return "Phone number is required.";
-    if (!email.includes("@")) return "Please enter a valid email address.";
-    if (password.length < 6) return "Password must contain at least 6 characters.";
+    if (mode === "signup" && !firstName.trim()) {
+      return "First name is required.";
+    }
+
+    if (mode === "signup" && !lastName.trim()) {
+      return "Last name is required.";
+    }
+
+    if (mode === "signup" && !mobilePhone.trim()) {
+      return "Phone number is required.";
+    }
+
+    if (!email.trim() || !email.includes("@")) {
+      return "Please enter a valid email address.";
+    }
+
+    if (!password || password.length < 6) {
+      return "Password must contain at least 6 characters.";
+    }
+
     if (mode === "signup" && password !== confirmPassword) {
       return "Passwords do not match.";
     }
 
     return "";
+  }
+
+  async function handleClassicSignup() {
+    const response = await fetch(`${API_URL}/api/auth/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        email: email.trim().toLowerCase(),
+        countryCode: selectedCountry.code,
+        mobilePhone: mobilePhone.trim(),
+        password,
+        language: "EN",
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Unable to create account.");
+    }
+
+    return data;
   }
 
   async function handleSubmit() {
@@ -103,41 +127,67 @@ export default function AuthModal({ open, onClose }: Props) {
     setStatus("loading");
     setMessage("");
 
-    setTimeout(() => {
+    try {
       if (mode === "signup") {
+        await handleClassicSignup();
+
         setStatus("success");
         setMessage("");
         setVerificationEmailSent(true);
         return;
       }
 
-      const user = {
-        firstName: "Taoufiq",
-        lastName: "Benallah",
-        email,
-        countryCode: selectedCountry.code,
-        mobilePhone,
-        fullPhoneNumber: `${selectedCountry.code}${mobilePhone}`,
-      };
-
-      localStorage.setItem("kech_user", JSON.stringify(user));
-      window.dispatchEvent(new Event("kech-auth-change"));
-
-      setStatus("success");
-      setMessage("Logged in successfully.");
-
-      setTimeout(onClose, 700);
-    }, 700);
+      setStatus("error");
+      setMessage("Classic login endpoint is not connected yet.");
+    } catch (error) {
+      setStatus("error");
+      setMessage(
+        error instanceof Error ? error.message : "Unable to connect to the API."
+      );
+    }
   }
 
-  function handleGoogleAuth() {
+  async function handleGoogleSignup(idToken: string) {
     setStatus("loading");
     setMessage("");
 
-    setTimeout(() => {
+    try {
+      const response = await fetch(`${API_URL}/api/auth/google-auth`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idToken,
+          language: "EN",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to complete Google signup.");
+      }
+
+      if (data.individual) {
+        localStorage.setItem("kech_user", JSON.stringify(data.individual));
+        window.dispatchEvent(new Event("kech-auth-change"));
+      }
+
       setStatus("success");
-      setMessage("Google authentication will be connected later.");
-    }, 700);
+      setMessage("Google signup completed successfully.");
+
+      setTimeout(() => {
+        onClose();
+      }, 700);
+    } catch (error) {
+      setStatus("error");
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to connect to Google signup endpoint."
+      );
+    }
   }
 
   function switchMode() {
@@ -241,14 +291,26 @@ export default function AuthModal({ open, onClose }: Props) {
             : "Create an account. We will send you an email to verify your account before activation."}
         </p>
 
-        <button
-          onClick={handleGoogleAuth}
-          disabled={status === "loading"}
-          className="mb-5 mt-6 flex w-full items-center justify-center gap-3 rounded-2xl border border-zinc-200 bg-white px-4 py-3 font-bold text-zinc-800 transition hover:bg-orange-50 disabled:opacity-70"
-        >
-          <GoogleIcon />
-          {mode === "login" ? "Continue with Google" : "Sign up with Google"}
-        </button>
+        <div className="mb-5 mt-6 flex w-full justify-center overflow-hidden rounded-2xl border border-zinc-200 bg-white px-4 py-3 transition hover:bg-orange-50">
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              if (!credentialResponse.credential) {
+                setStatus("error");
+                setMessage("Google did not return an ID token.");
+                return;
+              }
+
+              handleGoogleSignup(credentialResponse.credential);
+            }}
+            onError={() => {
+              setStatus("error");
+              setMessage("Google authentication failed.");
+            }}
+            text={mode === "login" ? "continue_with" : "signup_with"}
+            shape="pill"
+            width="320"
+          />
+        </div>
 
         <div className="mb-5 flex items-center gap-3">
           <div className="h-px flex-1 bg-zinc-200" />
@@ -265,7 +327,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <User size={18} className="text-orange-700" />
                 <input
                   value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  onChange={(event) => setFirstName(event.target.value)}
                   placeholder="First name"
                   className="w-full outline-none"
                 />
@@ -275,7 +337,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <User size={18} className="text-orange-700" />
                 <input
                   value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  onChange={(event) => setLastName(event.target.value)}
                   placeholder="Last name"
                   className="w-full outline-none"
                 />
@@ -300,7 +362,7 @@ export default function AuthModal({ open, onClose }: Props) {
 
                 <input
                   value={mobilePhone}
-                  onChange={(e) => setMobilePhone(e.target.value)}
+                  onChange={(event) => setMobilePhone(event.target.value)}
                   placeholder="Phone number"
                   className="min-w-0 flex-1 outline-none"
                 />
@@ -322,7 +384,9 @@ export default function AuthModal({ open, onClose }: Props) {
                         }`}
                       >
                         <span className="text-lg">{country.flag}</span>
-                        <span className="shrink-0 font-bold">{country.code}</span>
+                        <span className="shrink-0 font-bold">
+                          {country.code}
+                        </span>
                         <span className="truncate">{country.name}</span>
                       </button>
                     ))}
@@ -334,7 +398,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <Mail size={18} className="text-orange-700" />
                 <input
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder="Email address"
                   className="w-full outline-none"
                 />
@@ -344,7 +408,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <Lock size={18} className="text-orange-700" />
                 <input
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(event) => setPassword(event.target.value)}
                   placeholder="Password"
                   type="password"
                   className="w-full outline-none"
@@ -355,7 +419,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <Lock size={18} className="text-orange-700" />
                 <input
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
                   placeholder="Confirm password"
                   type="password"
                   className="w-full outline-none"
@@ -368,7 +432,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <Mail size={18} className="text-orange-700" />
                 <input
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder="Email address"
                   className="w-full outline-none"
                 />
@@ -378,7 +442,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <Lock size={18} className="text-orange-700" />
                 <input
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(event) => setPassword(event.target.value)}
                   placeholder="Password"
                   type="password"
                   className="w-full outline-none"

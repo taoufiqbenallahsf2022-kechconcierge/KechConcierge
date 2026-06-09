@@ -1,6 +1,6 @@
-# Kech Concierge Website
+# moorlytravels Website
 
-Updated frontend version for the Kech Concierge tourism website.
+Updated frontend version for the moorlytravels tourism website.
 
 ## Install
 
@@ -22,7 +22,7 @@ http://localhost:3000
 
 ## Included
 
-- Correct brand: Kech Concierge
+- Correct brand: moorlytravels
 - Home page
 - About page
 - Services page
