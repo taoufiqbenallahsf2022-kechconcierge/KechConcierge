@@ -191,7 +191,7 @@ export default function Header() {
 
             <div>
               <p className="text-lg font-black tracking-tight text-zinc-950">
-                Kech Concierge
+                Moorly
               </p>
               <p className="-mt-1 text-xs font-medium text-orange-700">
                 Marrakech concierge services

@@ -126,6 +126,9 @@ model Individual {
   mobilePhone String?
   passwordHash String?
 
+  googleId     String? @unique
+  authProvider String  @default("EMAIL")
+
   address   String?
   birthdate DateTime?
   country   String?

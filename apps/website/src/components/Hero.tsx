@@ -15,7 +15,7 @@ export default function Hero() {
             Your Marrakech stay, experiences, transport, and comfort in one place.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-700">
-            Kech Concierge helps guests find villas, apartments, excursions, transportation, SPA experiences, restaurants, and local support in the Red City.
+            Moorly helps guests find villas, apartments, excursions, transportation, SPA experiences, restaurants, and local support in the Red City.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/villas" className="inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-7 py-4 font-black text-white transition hover:bg-orange-700">

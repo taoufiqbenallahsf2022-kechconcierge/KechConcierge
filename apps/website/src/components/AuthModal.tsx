@@ -323,7 +323,7 @@ export default function AuthModal({ open, onClose }: Props) {
           </div>
 
           <p className="mt-5 text-sm font-bold uppercase tracking-[0.2em] text-orange-700">
-            Kech Concierge
+            Moorly
           </p>
 
           <h2 className="mt-3 text-2xl font-black text-zinc-950">
@@ -377,7 +377,7 @@ export default function AuthModal({ open, onClose }: Props) {
         </button>
 
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-700">
-          Kech Concierge
+          Moorly
         </p>
 
         <h2 className="mt-2 text-2xl font-black text-zinc-950">
