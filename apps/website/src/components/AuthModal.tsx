@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
+import countries from "i18n-iso-countries";
+import enCountries from "i18n-iso-countries/langs/en.json";
 import {
   X,
   Mail,
@@ -12,7 +14,11 @@ import {
   Phone,
   CheckCircle2,
   ChevronDown,
+  Globe2,
+  Languages,
 } from "lucide-react";
+
+countries.registerLocale(enCountries);
 
 type Props = {
   open: boolean;
@@ -21,11 +27,25 @@ type Props = {
 
 type CountryOption = {
   name: string;
+  alpha2: string;
+  alpha3: string;
+  flag: string;
+};
+
+type PhoneCountryOption = {
+  name: string;
   flag: string;
   code: string;
 };
 
-const countryOptions: CountryOption[] = [
+type LanguageOption = {
+  label: string;
+  code: string;
+};
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
+const phoneCountryOptions: PhoneCountryOption[] = [
   { name: "Morocco", flag: "🇲🇦", code: "+212" },
   { name: "France", flag: "🇫🇷", code: "+33" },
   { name: "Spain", flag: "🇪🇸", code: "+34" },
@@ -36,18 +56,69 @@ const countryOptions: CountryOption[] = [
   { name: "United States", flag: "🇺🇸", code: "+1" },
 ];
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const languageOptions: LanguageOption[] = [
+  { label: "English", code: "en" },
+  { label: "French", code: "fr" },
+  { label: "Spanish", code: "es" },
+  { label: "German", code: "de" },
+  { label: "Portuguese", code: "pt" },
+  { label: "Italian", code: "it" },
+];
+
+function getFlagEmoji(alpha2: string) {
+  return alpha2
+    .toUpperCase()
+    .replace(/./g, (char) =>
+      String.fromCodePoint(127397 + char.charCodeAt(0))
+    );
+}
+
+function getAllCountryOptions(): CountryOption[] {
+  const names = countries.getNames("en", { select: "official" });
+
+  return Object.entries(names)
+    .map(([alpha2, name]) => {
+      const alpha3 = countries.alpha2ToAlpha3(alpha2);
+
+      if (!alpha3) return null;
+
+      return {
+        name,
+        alpha2,
+        alpha3,
+        flag: getFlagEmoji(alpha2),
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a!.name.localeCompare(b!.name)) as CountryOption[];
+}
 
 export default function AuthModal({ open, onClose }: Props) {
+  const countryOptions = useMemo(() => getAllCountryOptions(), []);
+
+  const defaultCountry =
+    countryOptions.find((country) => country.alpha3 === "MAR") ||
+    countryOptions[0];
+
   const [mode, setMode] = useState<"login" | "signup">("login");
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  const [selectedPhoneCountry, setSelectedPhoneCountry] =
+    useState<PhoneCountryOption>(phoneCountryOptions[0]);
+  const [phoneDropdownOpen, setPhoneDropdownOpen] = useState(false);
   const [mobilePhone, setMobilePhone] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState<CountryOption>(
-    countryOptions[0]
-  );
+
+  const [selectedCountry, setSelectedCountry] =
+    useState<CountryOption>(defaultCountry);
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
+  const [countrySearch, setCountrySearch] = useState("");
+
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageOption>(
+    languageOptions[0]
+  );
+  const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,7 +130,25 @@ export default function AuthModal({ open, onClose }: Props) {
   const [message, setMessage] = useState("");
   const [verificationEmailSent, setVerificationEmailSent] = useState(false);
 
+  const filteredCountries = useMemo(() => {
+    const search = countrySearch.trim().toLowerCase();
+
+    if (!search) return countryOptions;
+
+    return countryOptions.filter(
+      (country) =>
+        country.name.toLowerCase().includes(search) ||
+        country.alpha3.toLowerCase().includes(search)
+    );
+  }, [countryOptions, countrySearch]);
+
   if (!open) return null;
+
+  function closeDropdowns() {
+    setPhoneDropdownOpen(false);
+    setCountryDropdownOpen(false);
+    setLanguageDropdownOpen(false);
+  }
 
   function validateForm() {
     if (mode === "signup" && !firstName.trim()) {
@@ -72,6 +161,14 @@ export default function AuthModal({ open, onClose }: Props) {
 
     if (mode === "signup" && !mobilePhone.trim()) {
       return "Phone number is required.";
+    }
+
+    if (mode === "signup" && !selectedCountry?.alpha3) {
+      return "Country is required.";
+    }
+
+    if (mode === "signup" && !selectedLanguage?.code) {
+      return "Preferred language is required.";
     }
 
     if (!email.trim() || !email.includes("@")) {
@@ -99,10 +196,11 @@ export default function AuthModal({ open, onClose }: Props) {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
         email: email.trim().toLowerCase(),
-        countryCode: selectedCountry.code,
+        countryCode: selectedPhoneCountry.code,
         mobilePhone: mobilePhone.trim(),
+        country: selectedCountry.alpha3,
+        language: selectedLanguage.code,
         password,
-        language: "EN",
       }),
     });
 
@@ -147,7 +245,7 @@ export default function AuthModal({ open, onClose }: Props) {
     }
   }
 
-  async function handleGoogleSignup(idToken: string) {
+  async function handleGoogleAuth(idToken: string) {
     setStatus("loading");
     setMessage("");
 
@@ -159,14 +257,15 @@ export default function AuthModal({ open, onClose }: Props) {
         },
         body: JSON.stringify({
           idToken,
-          language: "EN",
+          language: selectedLanguage.code,
+          country: selectedCountry.alpha3,
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Unable to complete Google signup.");
+        throw new Error(data.message || "Unable to complete Google authentication.");
       }
 
       if (data.individual) {
@@ -175,7 +274,7 @@ export default function AuthModal({ open, onClose }: Props) {
       }
 
       setStatus("success");
-      setMessage("Google signup completed successfully.");
+      setMessage("Google authentication completed successfully.");
 
       setTimeout(() => {
         onClose();
@@ -185,7 +284,7 @@ export default function AuthModal({ open, onClose }: Props) {
       setMessage(
         error instanceof Error
           ? error.message
-          : "Unable to connect to Google signup endpoint."
+          : "Unable to connect to Google authentication endpoint."
       );
     }
   }
@@ -197,14 +296,14 @@ export default function AuthModal({ open, onClose }: Props) {
     setPassword("");
     setConfirmPassword("");
     setVerificationEmailSent(false);
-    setCountryDropdownOpen(false);
+    closeDropdowns();
   }
 
   function closeAndReset() {
     setStatus("idle");
     setMessage("");
     setVerificationEmailSent(false);
-    setCountryDropdownOpen(false);
+    closeDropdowns();
     onClose();
   }
 
@@ -262,12 +361,12 @@ export default function AuthModal({ open, onClose }: Props) {
   return (
     <div
       className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/60 px-4"
-      onClick={() => setCountryDropdownOpen(false)}
+      onClick={closeDropdowns}
     >
       <div
         onClick={(event) => event.stopPropagation()}
         className={`relative w-full rounded-3xl bg-white p-6 card-shadow transition-all ${
-          mode === "signup" ? "max-w-2xl" : "max-w-md"
+          mode === "signup" ? "max-w-3xl" : "max-w-md"
         }`}
       >
         <button
@@ -300,7 +399,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 return;
               }
 
-              handleGoogleSignup(credentialResponse.credential);
+              handleGoogleAuth(credentialResponse.credential);
             }}
             onError={() => {
               setStatus("error");
@@ -348,13 +447,17 @@ export default function AuthModal({ open, onClose }: Props) {
 
                 <button
                   type="button"
-                  onClick={() => setCountryDropdownOpen((value) => !value)}
+                  onClick={() => {
+                    setPhoneDropdownOpen((value) => !value);
+                    setCountryDropdownOpen(false);
+                    setLanguageDropdownOpen(false);
+                  }}
                   className="flex shrink-0 items-center gap-1 rounded-xl bg-orange-50 px-2 py-1 text-sm font-bold text-zinc-800"
                 >
                   <span className="text-base leading-none">
-                    {selectedCountry.flag}
+                    {selectedPhoneCountry.flag}
                   </span>
-                  <span>{selectedCountry.code}</span>
+                  <span>{selectedPhoneCountry.code}</span>
                   <ChevronDown size={14} className="text-orange-700" />
                 </button>
 
@@ -367,18 +470,18 @@ export default function AuthModal({ open, onClose }: Props) {
                   className="min-w-0 flex-1 outline-none"
                 />
 
-                {countryDropdownOpen && (
+                {phoneDropdownOpen && (
                   <div className="absolute left-0 top-[calc(100%+8px)] z-50 max-h-56 w-full overflow-y-auto rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl">
-                    {countryOptions.map((country) => (
+                    {phoneCountryOptions.map((country) => (
                       <button
                         key={`${country.name}-${country.code}`}
                         type="button"
                         onClick={() => {
-                          setSelectedCountry(country);
-                          setCountryDropdownOpen(false);
+                          setSelectedPhoneCountry(country);
+                          setPhoneDropdownOpen(false);
                         }}
                         className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm transition hover:bg-orange-50 ${
-                          selectedCountry.code === country.code
+                          selectedPhoneCountry.code === country.code
                             ? "bg-orange-50 font-bold text-orange-800"
                             : "text-zinc-700"
                         }`}
@@ -403,6 +506,118 @@ export default function AuthModal({ open, onClose }: Props) {
                   className="w-full outline-none"
                 />
               </label>
+
+              <div className="relative flex min-w-0 items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
+                <Globe2 size={18} className="shrink-0 text-orange-700" />
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCountryDropdownOpen((value) => !value);
+                    setPhoneDropdownOpen(false);
+                    setLanguageDropdownOpen(false);
+                  }}
+                  className="flex min-w-0 flex-1 items-center justify-between gap-2 text-left"
+                >
+                  <span className="min-w-0 truncate">
+                    <span className="mr-2">{selectedCountry.flag}</span>
+                    <span className="font-semibold text-zinc-800">
+                      {selectedCountry.name}
+                    </span>
+                    <span className="ml-2 text-xs font-bold text-zinc-400">
+                      {selectedCountry.alpha3}
+                    </span>
+                  </span>
+                  <ChevronDown size={16} className="shrink-0 text-orange-700" />
+                </button>
+
+                {countryDropdownOpen && (
+                  <div className="absolute left-0 top-[calc(100%+8px)] z-50 max-h-72 w-full overflow-hidden rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl">
+                    <input
+                      value={countrySearch}
+                      onChange={(event) => setCountrySearch(event.target.value)}
+                      placeholder="Search country..."
+                      className="mb-2 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm outline-none"
+                    />
+
+                    <div className="max-h-56 overflow-y-auto">
+                      {filteredCountries.map((country) => (
+                        <button
+                          key={country.alpha3}
+                          type="button"
+                          onClick={() => {
+                            setSelectedCountry(country);
+                            setCountryDropdownOpen(false);
+                            setCountrySearch("");
+                          }}
+                          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm transition hover:bg-orange-50 ${
+                            selectedCountry.alpha3 === country.alpha3
+                              ? "bg-orange-50 font-bold text-orange-800"
+                              : "text-zinc-700"
+                          }`}
+                        >
+                          <span className="text-lg">{country.flag}</span>
+                          <span className="min-w-0 flex-1 truncate">
+                            {country.name}
+                          </span>
+                          <span className="shrink-0 text-xs font-bold text-zinc-400">
+                            {country.alpha3}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="relative flex min-w-0 items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
+                <Languages size={18} className="shrink-0 text-orange-700" />
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLanguageDropdownOpen((value) => !value);
+                    setPhoneDropdownOpen(false);
+                    setCountryDropdownOpen(false);
+                  }}
+                  className="flex min-w-0 flex-1 items-center justify-between gap-2 text-left"
+                >
+                  <span className="min-w-0 truncate">
+                    <span className="font-semibold text-zinc-800">
+                      {selectedLanguage.label}
+                    </span>
+                    <span className="ml-2 text-xs font-bold uppercase text-zinc-400">
+                      {selectedLanguage.code}
+                    </span>
+                  </span>
+                  <ChevronDown size={16} className="shrink-0 text-orange-700" />
+                </button>
+
+                {languageDropdownOpen && (
+                  <div className="absolute left-0 top-[calc(100%+8px)] z-50 w-full rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl">
+                    {languageOptions.map((language) => (
+                      <button
+                        key={language.code}
+                        type="button"
+                        onClick={() => {
+                          setSelectedLanguage(language);
+                          setLanguageDropdownOpen(false);
+                        }}
+                        className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm transition hover:bg-orange-50 ${
+                          selectedLanguage.code === language.code
+                            ? "bg-orange-50 font-bold text-orange-800"
+                            : "text-zinc-700"
+                        }`}
+                      >
+                        <span>{language.label}</span>
+                        <span className="text-xs font-bold uppercase text-zinc-400">
+                          {language.code}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               <label className="flex items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
                 <Lock size={18} className="text-orange-700" />
