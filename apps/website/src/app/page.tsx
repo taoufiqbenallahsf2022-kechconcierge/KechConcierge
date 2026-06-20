@@ -23,7 +23,7 @@ export default function Home() {
       </section>
 
       <HorizontalSection category="villas" />
-      <HorizontalSection category="apartments" />
+      <HorizontalSection category="swimmingpools" />
       <HorizontalSection category="activities" />
       <HorizontalSection category="transportation" />
       <HorizontalSection category="spa" />

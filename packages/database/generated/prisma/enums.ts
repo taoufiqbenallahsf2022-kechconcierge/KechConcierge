@@ -41,7 +41,7 @@ export type VisitorStage = (typeof VisitorStage)[keyof typeof VisitorStage]
 export const RequestType = {
   GENERAL: 'GENERAL',
   VILLA: 'VILLA',
-  APARTMENT: 'APARTMENT',
+  SWIMMINGPOOL: 'SWIMMINGPOOL',
   ACTIVITY: 'ACTIVITY',
   TRANSPORTATION: 'TRANSPORTATION',
   SPA: 'SPA',
@@ -122,7 +122,7 @@ export type WhatsAppMessageSender = (typeof WhatsAppMessageSender)[keyof typeof 
 
 export const ProductType = {
   VILLA: 'VILLA',
-  APARTMENT: 'APARTMENT',
+  SWIMMINGPOOL: 'SWIMMINGPOOL',
   SPA: 'SPA',
   RESTAURANT: 'RESTAURANT',
   ACTIVITY: 'ACTIVITY',

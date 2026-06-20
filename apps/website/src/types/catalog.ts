@@ -1,10 +1,10 @@
 export type Category =
   | "villas"
-  | "apartments"
   | "activities"
   | "transportation"
   | "spa"
-  | "restaurants";
+  | "restaurants"
+  | "swimmingpools";
 
 export type CatalogItem = {
   id: string;
