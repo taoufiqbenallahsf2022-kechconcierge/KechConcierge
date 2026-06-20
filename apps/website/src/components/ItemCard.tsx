@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
+import { getDictionary } from "@/lib/i18n";
 
 type ItemCardProps = {
   item: {
@@ -16,7 +17,9 @@ type ItemCardProps = {
     address?: string;
     priceEuro?: number;
     priceTitle?: string;
-  };
+  },
+  locale: string
+
 };
 
 const typeToCategory: Record<string, string> = {
@@ -28,7 +31,7 @@ const typeToCategory: Record<string, string> = {
   RESTAURANT: "restaurants",
 };
 
-export default function ItemCard({ item }: ItemCardProps) {
+export default function ItemCard({ item, locale }: ItemCardProps) {
   const category =
     item.category || (item.type ? typeToCategory[item.type] : "products");
 
@@ -37,9 +40,14 @@ export default function ItemCard({ item }: ItemCardProps) {
   const imageUrl =
     item.thumbnail || item.images?.[0] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c";
 
+  function localizePath(path: string) {
+    if (locale === "en") return path;
+    return `/${locale}${path}`;
+  }
+
   return (
     <Link
-      href={`/${category}/${slug}`}
+      href={localizePath(`/${category}/${slug}`)}
       className="group block min-w-[300px] max-w-[300px] overflow-hidden rounded-3xl bg-white card-shadow"
     >
       <div className="relative h-56 overflow-hidden">

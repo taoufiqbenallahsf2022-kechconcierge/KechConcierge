@@ -1,26 +1,15 @@
 import Hero from "@/components/Hero";
 import HorizontalSection from "@/components/HorizontalSection";
 import Link from "next/link";
+import Highlights from "@/components/Highlights";
 
 export default function Home() {
+
   return (
     <>
       <Hero />
 
-      <section className="mx-auto max-w-7xl px-4 py-16">
-        <div className="grid gap-5 md:grid-cols-3">
-          {[
-            ["Curated stays", "Villas and apartments selected for comfort, location, and guest experience."],
-            ["Local experiences", "Activities, transport, SPA, restaurants, and custom services around Marrakech."],
-            ["Easy contact", "WhatsApp, contact form, or a dedicated chat page ready to connect later."]
-          ].map(([title, text]) => (
-            <div key={title} className="rounded-3xl bg-white p-7 card-shadow">
-              <p className="text-xl font-black text-zinc-950">{title}</p>
-              <p className="mt-3 leading-7 text-zinc-600">{text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Highlights />
 
       <HorizontalSection category="villas" />
       <HorizontalSection category="swimmingpools" />

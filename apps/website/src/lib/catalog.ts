@@ -131,7 +131,7 @@ export const catalogItems: CatalogItem[] = [
 
   {
     id: "a1",
-    category: "swimmingpool",
+    category: "swimmingpools",
     slug: "gueliz-modern-swimmingpool",
     title: "Gueliz Modern Apartment",
     location: "Gueliz, Marrakech",
@@ -144,7 +144,7 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     id: "a2",
-    category: "swimmingpool",
+    category: "swimmingpools",
     slug: "hivernage-studio",
     title: "Hivernage Studio",
     location: "Hivernage, Marrakech",
@@ -157,7 +157,7 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     id: "a3",
-    category: "swimmingpool",
+    category: "swimmingpools",
     slug: "majorelle-one-bedroom",
     title: "Majorelle One Bedroom",
     location: "Majorelle, Marrakech",
@@ -170,7 +170,7 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     id: "a4",
-    category: "swimmingpool",
+    category: "swimmingpools",
     slug: "family-swimmingpool-agdal",
     title: "Family Apartment Agdal",
     location: "Agdal, Marrakech",
@@ -183,7 +183,7 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     id: "a5",
-    category: "swimmingpool",
+    category: "swimmingpools",
     slug: "premium-hivernage-flat",
     title: "Premium Hivernage Flat",
     location: "Hivernage, Marrakech",
