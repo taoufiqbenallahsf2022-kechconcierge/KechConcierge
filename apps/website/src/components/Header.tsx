@@ -156,10 +156,13 @@ export default function Header() {
   }, []);
 
   function changeLanguage(locale: string) {
-    router.push(buildLocalizedPath(pathname, locale));
+    const targetPath = buildLocalizedPath(pathname, locale);
+    
     setLanguageOpen(false);
     setMenuOpen(false);
     setUserMenuOpen(false);
+
+    window.location.href = targetPath;
   }
 
   function logout() {
