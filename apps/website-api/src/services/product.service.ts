@@ -5,7 +5,7 @@ type Language = (typeof languages)[number];
 
 const productTypes = [
   "VILLA",
-  "APARTMENT",
+  "SWIMMINGPOOL",
   "ACTIVITY",
   "SPA",
   "TRANSPORTATION",

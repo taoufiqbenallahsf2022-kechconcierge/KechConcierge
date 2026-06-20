@@ -146,6 +146,8 @@ model Individual {
   updatedDate DateTime @updatedAt
   updatedBy   String?
 
+  lastSuccessfulLoginDate DateTime?
+
   leads     Lead[]
   prospects Prospect[]
   accounts  Account[]
@@ -354,7 +356,7 @@ enum VisitorStage {
 enum RequestType {
   GENERAL
   VILLA
-  APARTMENT
+  SWIMMINGPOOL
   ACTIVITY
   TRANSPORTATION
   SPA
@@ -411,7 +413,7 @@ enum WhatsAppMessageSender {
 
 enum ProductType {
   VILLA
-  APARTMENT
+  SWIMMINGPOOL
   SPA
   RESTAURANT
   ACTIVITY

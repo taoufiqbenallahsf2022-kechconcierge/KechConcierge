@@ -10,7 +10,7 @@ const prisma = new PrismaClient({ adapter });
 
 const productTypes = [
   ProductType.VILLA,
-  ProductType.APARTMENT,
+  ProductType.SWIMMINGPOOL,
   ProductType.ACTIVITY,
   ProductType.SPA,
   ProductType.TRANSPORTATION,
@@ -24,7 +24,7 @@ const imageByType: Record<ProductType, string> = {
   TRANSPORTATION:
     "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8",
 
-  APARTMENT:
+  SWIMMINGPOOL:
     "https://plus.unsplash.com/premium_photo-1684175656320-5c3f701c082c",
 
   ACTIVITY:

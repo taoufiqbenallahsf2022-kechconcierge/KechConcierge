@@ -1630,7 +1630,8 @@ export const IndividualScalarFieldEnum = {
   createdDate: 'createdDate',
   createdBy: 'createdBy',
   updatedDate: 'updatedDate',
-  updatedBy: 'updatedBy'
+  updatedBy: 'updatedBy',
+  lastSuccessfulLoginDate: 'lastSuccessfulLoginDate'
 } as const
 
 export type IndividualScalarFieldEnum = (typeof IndividualScalarFieldEnum)[keyof typeof IndividualScalarFieldEnum]

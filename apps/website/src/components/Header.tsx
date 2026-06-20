@@ -115,7 +115,7 @@ export default function Header() {
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
     { href: "/villas", label: "Villas" },
-    { href: "/apartments", label: "Apartments" },
+    { href: "/swimmingpools", label: "Swimming Pools" },
     { href: "/activities", label: "Activities" },
     { href: "/transportation", label: "Transportation" },
     { href: "/about", label: t.header.about },
