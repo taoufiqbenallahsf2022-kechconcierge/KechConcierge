@@ -8,6 +8,8 @@ import ItemCard from "./ItemCard";
 import { Category } from "@/types/catalog";
 import { categoryDescriptions, categoryLabels } from "@/lib/catalog";
 import { useHomeProductsStore } from "@/store/home-products.store";
+import { getCategoryTranslations } from "@/lib/category-translations";
+import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
 const categoryToApiKey: Record<string, string> = {
   villas: "villa",
@@ -57,6 +59,10 @@ export default function HorizontalSection({ category }: { category: Category }) 
     return langMap[firstSegment] || 'EN'
   }, [pathname])
 
+  const locale = getLocaleFromPath(pathname);
+  const t = getDictionary(locale);
+  const { labels, descriptions } = getCategoryTranslations(t);
+
   const products = useHomeProductsStore((state) => state.products);
   const loading = useHomeProductsStore((state) => state.loading);
   const error = useHomeProductsStore((state) => state.error);
@@ -82,6 +88,11 @@ export default function HorizontalSection({ category }: { category: Category }) 
     });
   }
 
+  function localizePath(path: string) {
+    if (locale === "en") return path;
+    return `/${locale}${path}`;
+  }
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-12">
       <div className="mb-6 flex items-end justify-between gap-4">
@@ -90,10 +101,10 @@ export default function HorizontalSection({ category }: { category: Category }) 
             Explore
           </p>
           <h2 className="mt-2 text-3xl font-black text-zinc-950">
-            {categoryLabels[category]}
+            {labels[category]}
           </h2>
           <p className="mt-2 max-w-2xl text-zinc-600">
-            {categoryDescriptions[category]}
+            {descriptions[category]}
           </p>
         </div>
 
@@ -113,10 +124,10 @@ export default function HorizontalSection({ category }: { category: Category }) 
           </button>
 
           <Link
-            href={`/${category}`}
+            href={localizePath(`/${category}`)}
             className="rounded-full bg-zinc-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-orange-700"
           >
-            View all
+            {t.categories.viewAll}
           </Link>
         </div>
       </div>
@@ -136,7 +147,7 @@ export default function HorizontalSection({ category }: { category: Category }) 
         >
           {items.map((item) => (
             <div key={item.id} className="snap-start">
-              <ItemCard item={item as any} />
+              <ItemCard item={item as any}  locale={locale}/>
             </div>
           ))}
         </div>
@@ -158,10 +169,10 @@ export default function HorizontalSection({ category }: { category: Category }) 
         </button>
 
         <Link
-          href={`/${category}`}
+          href={localizePath(`/${category}`)}
           className="rounded-full bg-zinc-950 px-5 py-3 text-sm font-bold text-white"
         >
-          View all
+          {t.categories.viewAll}
         </Link>
       </div>
     </section>

@@ -112,14 +112,14 @@ export default function Header() {
   const t = getDictionary(locale);
 
   const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/services", label: "Services" },
-    { href: "/villas", label: "Villas" },
-    { href: "/swimmingpools", label: "Swimming Pools" },
-    { href: "/activities", label: "Activities" },
-    { href: "/transportation", label: "Transportation" },
+    { href: "/", label: t.header.home },
+    { href: "/services", label: t.header.services },
+    { href: "/villas", label: t.header.villas },
+    { href: "/swimmingpools", label: t.header.swimmingpool },
+    { href: "/activities", label: t.header.activities },
+    { href: "/transportation", label: t.header.transportation },
     { href: "/about", label: t.header.about },
-    { href: "/contact", label: "Contact" },
+    { href: "/contact", label: t.header.contact },
   ];
 
   const currentLocale = getCurrentLocale(pathname);
@@ -301,7 +301,7 @@ export default function Header() {
                       onClick={() => goToAccount("profile")}
                       className="mt-2 flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold text-zinc-700 transition hover:bg-orange-50 hover:text-orange-800"
                     >
-                      Edit profile
+                      {t.header.profile}
                     </button>
 
                     <button
@@ -309,7 +309,7 @@ export default function Header() {
                       onClick={() => goToAccount("preferences")}
                       className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold text-zinc-700 transition hover:bg-orange-50 hover:text-orange-800"
                     >
-                      Edit preferences
+                      {t.header.preferences}
                     </button>
 
                     <button
@@ -317,7 +317,7 @@ export default function Header() {
                       onClick={logout}
                       className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold text-red-600 transition hover:bg-red-50"
                     >
-                      Logout
+                      {t.header.logout}
                     </button>
                   </div>
                 )}
@@ -328,7 +328,7 @@ export default function Header() {
                 className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-orange-700"
               >
                 <UserRound size={16} />
-                Login / Sign up
+                {t.header.login}
               </button>
             )}
           </div>
@@ -430,7 +430,7 @@ export default function Header() {
                   }}
                   className="rounded-full bg-zinc-950 px-5 py-3 font-bold text-white"
                 >
-                  Login / Sign up
+                  {t.header.login}
                 </button>
               )}
             </div>

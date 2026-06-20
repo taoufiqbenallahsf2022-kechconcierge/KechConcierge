@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import { GoogleLogin } from "@react-oauth/google";
 import countries from "i18n-iso-countries";
 import enCountries from "i18n-iso-countries/langs/en.json";
@@ -19,6 +20,7 @@ import {
 } from "lucide-react";
 
 import { useAuthStore } from "../store/auth.store";
+import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
 countries.registerLocale(enCountries);
 
@@ -47,7 +49,6 @@ type LanguageOption = {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-
 const phoneCountryOptions: PhoneCountryOption[] = [
   { name: "Morocco", flag: "🇲🇦", code: "+212" },
   { name: "France", flag: "🇫🇷", code: "+33" },
@@ -71,9 +72,7 @@ const languageOptions: LanguageOption[] = [
 function getFlagEmoji(alpha2: string) {
   return alpha2
     .toUpperCase()
-    .replace(/./g, (char) =>
-      String.fromCodePoint(127397 + char.charCodeAt(0))
-    );
+    .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
 }
 
 function getAllCountryOptions(): CountryOption[] {
@@ -97,6 +96,9 @@ function getAllCountryOptions(): CountryOption[] {
 }
 
 export default function AuthModal({ open, onClose }: Props) {
+  const pathname = usePathname();
+  const locale = getLocaleFromPath(pathname);
+  const t = getDictionary(locale);
 
   const countryOptions = useMemo(() => getAllCountryOptions(), []);
 
@@ -120,7 +122,8 @@ export default function AuthModal({ open, onClose }: Props) {
   const [countrySearch, setCountrySearch] = useState("");
 
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageOption>(
-    languageOptions[0]
+    languageOptions.find((language) => language.code === locale) ||
+      languageOptions[0]
   );
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
 
@@ -134,6 +137,8 @@ export default function AuthModal({ open, onClose }: Props) {
   const [message, setMessage] = useState("");
   const [verificationEmailSent, setVerificationEmailSent] = useState(false);
 
+  const login = useAuthStore((state) => state.login);
+
   const filteredCountries = useMemo(() => {
     const search = countrySearch.trim().toLowerCase();
 
@@ -146,8 +151,6 @@ export default function AuthModal({ open, onClose }: Props) {
     );
   }, [countryOptions, countrySearch]);
 
-  const login = useAuthStore((state) => state.login);
-
   if (!open) return null;
 
   function closeDropdowns() {
@@ -158,23 +161,23 @@ export default function AuthModal({ open, onClose }: Props) {
 
   function validateForm() {
     if (mode === "signup" && !firstName.trim()) {
-      return "First name is required.";
+      return t.authModal.firstName + " is required.";
     }
 
     if (mode === "signup" && !lastName.trim()) {
-      return "Last name is required.";
+      return t.authModal.lastName + " is required.";
     }
 
     if (mode === "signup" && !mobilePhone.trim()) {
-      return "Phone number is required.";
+      return t.authModal.phoneNumber + " is required.";
     }
 
     if (mode === "signup" && !selectedCountry?.alpha3) {
-      return "Country is required.";
+      return t.authModal.country + " is required.";
     }
 
     if (mode === "signup" && !selectedLanguage?.code) {
-      return "Preferred language is required.";
+      return t.authModal.preferredLanguage + " is required.";
     }
 
     if (!email.trim() || !email.includes("@")) {
@@ -192,33 +195,6 @@ export default function AuthModal({ open, onClose }: Props) {
     return "";
   }
 
-  async function handleClassicSignup() {
-    const response = await fetch(`${API_URL}/api/auth/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        email: email.trim().toLowerCase(),
-        countryCode: selectedPhoneCountry.code,
-        mobilePhone: mobilePhone.trim(),
-        country: selectedCountry.alpha3,
-        language: selectedLanguage.code,
-        password,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Unable to create account.");
-    }
-
-    return data;
-  }
-
   async function handleSubmit() {
     const error = validateForm();
 
@@ -230,8 +206,6 @@ export default function AuthModal({ open, onClose }: Props) {
 
     setStatus("loading");
     setMessage("");
-
-    console.log(mode);
 
     try {
       if (mode === "signup") {
@@ -266,7 +240,6 @@ export default function AuthModal({ open, onClose }: Props) {
         return;
       }
 
-      // 
       if (mode === "login") {
         const response = await fetch(`${API_URL}/api/auth/login`, {
           method: "POST",
@@ -290,7 +263,7 @@ export default function AuthModal({ open, onClose }: Props) {
         login(data.individual, data.accessToken);
 
         setStatus("success");
-        setMessage("Logged in successfully.");
+        setMessage(t.authModal.loggedInSuccessfully);
 
         setTimeout(() => {
           onClose();
@@ -302,7 +275,6 @@ export default function AuthModal({ open, onClose }: Props) {
         error instanceof Error ? error.message : "Unable to connect to the API."
       );
     }
-
   }
 
   async function handleGoogleAuth(idToken: string) {
@@ -325,13 +297,15 @@ export default function AuthModal({ open, onClose }: Props) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Unable to complete Google authentication.");
+        throw new Error(
+          data.message || "Unable to complete Google authentication."
+        );
       }
 
       if (data.individual) login(data.individual, data.accessToken);
 
       setStatus("success");
-      setMessage("Google authentication completed successfully.");
+      setMessage(t.authModal.googleAuthSuccess);
 
       setTimeout(() => {
         onClose();
@@ -380,21 +354,21 @@ export default function AuthModal({ open, onClose }: Props) {
           </div>
 
           <p className="mt-5 text-sm font-bold uppercase tracking-[0.2em] text-orange-700">
-            Moorly
+            {t.authModal.brand}
           </p>
 
           <h2 className="mt-3 text-2xl font-black text-zinc-950">
-            Check your email
+            {t.authModal.checkEmail}
           </h2>
 
           <p className="mt-3 text-sm leading-6 text-zinc-600">
-            We sent a verification link to{" "}
-            <span className="font-bold text-zinc-900">{email}</span>. Please
-            open your inbox and verify your account before logging in.
+            {t.authModal.verificationSentPrefix}{" "}
+            <span className="font-bold text-zinc-900">{email}</span>.{" "}
+            {t.authModal.verificationSentSuffix}
           </p>
 
           <p className="mt-3 text-xs leading-5 text-zinc-500">
-            If you do not see the email, check your spam or promotions folder.
+            {t.authModal.spamMessage}
           </p>
 
           <button
@@ -408,7 +382,7 @@ export default function AuthModal({ open, onClose }: Props) {
             }}
             className="mt-6 w-full rounded-2xl bg-orange-600 px-5 py-3 font-black text-white transition hover:bg-orange-700"
           >
-            Back to login
+            {t.authModal.backToLogin}
           </button>
         </div>
       </div>
@@ -434,17 +408,19 @@ export default function AuthModal({ open, onClose }: Props) {
         </button>
 
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-orange-700">
-          Moorly
+          {t.authModal.brand}
         </p>
 
         <h2 className="mt-2 text-2xl font-black text-zinc-950">
-          {mode === "login" ? "Welcome back" : "Create your account"}
+          {mode === "login"
+            ? t.authModal.welcomeBack
+            : t.authModal.createAccount}
         </h2>
 
         <p className="mt-2 text-sm text-zinc-600">
           {mode === "login"
-            ? "Login to manage your requests and conversations."
-            : "Create an account. We will send you an email to verify your account before activation."}
+            ? t.authModal.loginDescription
+            : t.authModal.signupDescription}
         </p>
 
         <div className="mb-5 mt-6 flex w-full justify-center overflow-hidden rounded-2xl border border-zinc-200 bg-white px-4 py-3 transition hover:bg-orange-50">
@@ -452,7 +428,7 @@ export default function AuthModal({ open, onClose }: Props) {
             onSuccess={(credentialResponse) => {
               if (!credentialResponse.credential) {
                 setStatus("error");
-                setMessage("Google did not return an ID token.");
+                setMessage(t.authModal.googleNoToken);
                 return;
               }
 
@@ -460,7 +436,7 @@ export default function AuthModal({ open, onClose }: Props) {
             }}
             onError={() => {
               setStatus("error");
-              setMessage("Google authentication failed.");
+              setMessage(t.authModal.googleFailed);
             }}
             text={mode === "login" ? "continue_with" : "signup_with"}
             shape="pill"
@@ -471,7 +447,7 @@ export default function AuthModal({ open, onClose }: Props) {
         <div className="mb-5 flex items-center gap-3">
           <div className="h-px flex-1 bg-zinc-200" />
           <span className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400">
-            OR
+            {t.authModal.or}
           </span>
           <div className="h-px flex-1 bg-zinc-200" />
         </div>
@@ -484,7 +460,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <input
                   value={firstName}
                   onChange={(event) => setFirstName(event.target.value)}
-                  placeholder="First name"
+                  placeholder={t.authModal.firstName}
                   className="w-full outline-none"
                 />
               </label>
@@ -494,7 +470,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <input
                   value={lastName}
                   onChange={(event) => setLastName(event.target.value)}
-                  placeholder="Last name"
+                  placeholder={t.authModal.lastName}
                   className="w-full outline-none"
                 />
               </label>
@@ -523,7 +499,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <input
                   value={mobilePhone}
                   onChange={(event) => setMobilePhone(event.target.value)}
-                  placeholder="Phone number"
+                  placeholder={t.authModal.phoneNumber}
                   className="min-w-0 flex-1 outline-none"
                 />
 
@@ -559,7 +535,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <input
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  placeholder="Email address"
+                  placeholder={t.authModal.emailAddress}
                   className="w-full outline-none"
                 />
               </label>
@@ -593,7 +569,7 @@ export default function AuthModal({ open, onClose }: Props) {
                     <input
                       value={countrySearch}
                       onChange={(event) => setCountrySearch(event.target.value)}
-                      placeholder="Search country..."
+                      placeholder={t.authModal.searchCountry}
                       className="mb-2 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm outline-none"
                     />
 
@@ -681,7 +657,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <input
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
-                  placeholder="Password"
+                  placeholder={t.authModal.password}
                   type="password"
                   className="w-full outline-none"
                 />
@@ -692,7 +668,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <input
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}
-                  placeholder="Confirm password"
+                  placeholder={t.authModal.confirmPassword}
                   type="password"
                   className="w-full outline-none"
                 />
@@ -705,7 +681,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <input
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  placeholder="Email address"
+                  placeholder={t.authModal.emailAddress}
                   className="w-full outline-none"
                 />
               </label>
@@ -715,7 +691,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <input
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
-                  placeholder="Password"
+                  placeholder={t.authModal.password}
                   type="password"
                   className="w-full outline-none"
                 />
@@ -723,11 +699,11 @@ export default function AuthModal({ open, onClose }: Props) {
 
               <div className="text-right">
                 <Link
-                  href="/forgot-password"
+                  href={locale === "en" ? "/forgot-password" : `/${locale}/forgot-password`}
                   onClick={closeAndReset}
                   className="text-sm font-black text-orange-700 hover:text-orange-800"
                 >
-                  Forgot password?
+                  {t.authModal.forgotPassword}
                 </Link>
               </div>
             </>
@@ -741,7 +717,7 @@ export default function AuthModal({ open, onClose }: Props) {
             {status === "loading" && (
               <Loader2 size={18} className="animate-spin" />
             )}
-            {mode === "login" ? "Login" : "Sign up"}
+            {mode === "login" ? t.authModal.login : t.authModal.signup}
           </button>
         </div>
 
@@ -758,9 +734,11 @@ export default function AuthModal({ open, onClose }: Props) {
         )}
 
         <p className="mt-5 text-center text-sm text-zinc-600">
-          {mode === "login" ? "No account yet?" : "Already have an account?"}{" "}
+          {mode === "login"
+            ? t.authModal.noAccountYet
+            : t.authModal.alreadyHaveAccount}{" "}
           <button onClick={switchMode} className="font-black text-orange-700">
-            {mode === "login" ? "Create one" : "Login"}
+            {mode === "login" ? t.authModal.createOne : t.authModal.login}
           </button>
         </p>
       </div>
