@@ -6,7 +6,6 @@ import { useEffect, useRef, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import ItemCard from "./ItemCard";
 import { Category } from "@/types/catalog";
-import { categoryDescriptions, categoryLabels } from "@/lib/catalog";
 import { useHomeProductsStore } from "@/store/home-products.store";
 import { getCategoryTranslations } from "@/lib/category-translations";
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
@@ -98,7 +97,7 @@ export default function HorizontalSection({ category }: { category: Category }) 
       <div className="mb-6 flex items-end justify-between gap-4">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
-            Explore
+            {t.categories.explore}
           </p>
           <h2 className="mt-2 text-3xl font-black text-zinc-950">
             {labels[category]}

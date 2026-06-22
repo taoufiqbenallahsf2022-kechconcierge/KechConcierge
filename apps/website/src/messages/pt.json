@@ -98,6 +98,26 @@
     "spaDescription": "Hammam, massagens, beleza e experiências de bem-estar.",
     "restaurantsLabel": "Restaurantes",
     "restaurantsDescription": "Restaurantes marroquinos e internacionais selecionados para noites memoráveis.",
-    "viewAll": "Ver tudo"
+    "viewAll": "Ver tudo",
+    "explore":"Explorar"
+  },
+  "contactSection": {
+    "eyebrow": "Precisa de uma estadia personalizada?",
+    "title": "Diga-nos as suas datas, o tamanho do grupo e a experiência desejada.",
+    "description": "Esta primeira versão é apenas frontend. Mais tarde, as mensagens e reservas serão ligadas à sua API e sistema de administração.",
+    "contactForm": "Formulário de contacto",
+    "openChat": "Abrir chat"
+  },
+  "footer": {
+    "description": "Primeira versão do site para villas, apartamentos, atividades, transporte, SPA, restaurantes e serviços de concierge em Marraquexe.",
+    "menu": "Menu",
+    "services": "Serviços",
+    "villas": "Villas",
+    "swimmingPools": "Piscinas",
+    "chat": "Chat",
+    "contact": "Contacto",
+    "contactTitle": "Contacto",
+    "location": "Marraquexe, Marrocos",
+    "copyright": "Versão frontend de demonstração."
   }
 }
