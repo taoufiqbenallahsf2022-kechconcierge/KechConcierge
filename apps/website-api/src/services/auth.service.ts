@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import crypto, { randomUUID } from "crypto";
 import bcrypt from "bcrypt";
 import { OAuth2Client } from "google-auth-library";
 import { prisma } from "../config/prisma";
@@ -139,6 +139,8 @@ export async function signupIndividual(input: SignupInput) {
   const passwordHash = await bcrypt.hash(input.password, 10);
   const fullPhoneNumber = normalizePhone(input.countryCode, input.mobilePhone);
 
+  console.log('Token while creating Individual' + token);
+
   const result = await prisma.$transaction(async (tx) => {
     const individual = await tx.individual.create({
       data: {
@@ -194,9 +196,12 @@ export async function signupIndividual(input: SignupInput) {
     };
   });
 
+  console.log(input.language);
+
   await sendAccountVerificationEmail({
     email,
     token,
+    language: input.language || "en"
   });
 
   return {
@@ -286,13 +291,23 @@ export async function loginIndividual(input: LoginInput) {
 }
 
 export async function verifyIndividualEmail(token: string) {
+
+  console.log('Token : '+ token);
+
   const individual = await prisma.individual.findFirst({
     where: {
       emailVerificationToken: token,
     },
   });
 
+  console.log(individual);
+
+  var uid = randomUUID();
+
   if (!individual) {
+    
+    console.log("I'm returning this inside Individual Verification "+uid);
+
     return {
       success: false,
       statusCode: 404,
@@ -300,6 +315,8 @@ export async function verifyIndividualEmail(token: string) {
       message: "Invalid verification token.",
     };
   }
+
+  console.log("I'm returning this outside after the return "+uid);
 
   if (individual.emailVerified && individual.isActive) {
     return {
@@ -327,14 +344,14 @@ export async function verifyIndividualEmail(token: string) {
     data: {
       isActive: true,
       emailVerified: true,
-      emailVerificationToken: null,
+      emailVerificationToken: 'Taoufiq',
       emailVerificationTokenExpiresAt: null,
       updatedBy: "SYSTEM",
     },
   });
 
   return {
-    success: true,
+    code: 'EMAIL_VERIFIED_SUCCESSFULLY',
     message: "Email verified successfully.",
   };
 }

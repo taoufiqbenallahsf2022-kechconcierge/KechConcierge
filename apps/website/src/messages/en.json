@@ -119,6 +119,19 @@
     "contactTitle": "Contact",
     "location": "Marrakech, Morocco",
     "copyright": "Demo frontend version."
+  },
+  "accountVerify": {
+    "eyebrow": "Account verification",
+    "loadingTitle": "Your account is being verified",
+    "loadingDescription": "Please wait while we activate your account.",
+    "successTitle": "Account verified",
+    "successMessage": "Email verified successfully.",
+    "backToLogin": "Back to login",
+    "errorTitle": "Account could not be verified",
+    "errorMessage": "We could not verify your account. Please contact our support team.",
+    "missingToken": "Verification token is missing.",
+    "contactSupport": "Contact support",
+    "backToWebsite": "Back to website"
   }
 
 }

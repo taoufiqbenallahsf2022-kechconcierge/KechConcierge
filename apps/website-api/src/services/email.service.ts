@@ -2,15 +2,28 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function normalizeWebsiteUrl() {
+  return (process.env.WEBSITE_URL || "http://localhost:3000").replace(/\/$/, "");
+}
+
+function buildVerificationUrl(token: string, language?: string) {
+  const websiteUrl = normalizeWebsiteUrl();
+  const lang = (language || "en").toLowerCase();
+
+  const localePrefix = lang === "en" ? "" : `/${lang}`;
+
+  return `${websiteUrl}${localePrefix}/account/verify?token=${token}`;
+}
+
 export async function sendAccountVerificationEmail(params: {
   email: string;
   token: string;
+  language?: string;
 }) {
-  const websiteUrl = process.env.WEBSITE_URL || "http://localhost:3000";
   const fromEmail =
     process.env.RESEND_FROM_EMAIL || "Moorly <onboarding@resend.dev>";
 
-  const verificationUrl = `${websiteUrl}/verify-email?token=${params.token}`;
+  const verificationUrl = buildVerificationUrl(params.token, params.language);
 
   const { data, error } = await resend.emails.send({
     from: fromEmail,

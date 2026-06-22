@@ -119,5 +119,18 @@
     "contactTitle": "Contact",
     "location": "Marrakech, Maroc",
     "copyright": "Version frontend de démonstration."
-  } 
+  },
+  "accountVerify": {
+    "eyebrow": "Vérification du compte",
+    "loadingTitle": "Votre compte est en cours de vérification",
+    "loadingDescription": "Veuillez patienter pendant l’activation de votre compte.",
+    "successTitle": "Compte vérifié",
+    "successMessage": "Email vérifié avec succès.",
+    "backToLogin": "Retour à la connexion",
+    "errorTitle": "Le compte n’a pas pu être vérifié",
+    "errorMessage": "Nous n’avons pas pu vérifier votre compte. Veuillez contacter notre support.",
+    "missingToken": "Le jeton de vérification est manquant.",
+    "contactSupport": "Contacter le support",
+    "backToWebsite": "Retour au site"
+  }
 }

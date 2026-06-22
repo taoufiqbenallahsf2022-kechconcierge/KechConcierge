@@ -119,5 +119,18 @@
     "contactTitle": "Contacto",
     "location": "Marraquexe, Marrocos",
     "copyright": "Versão frontend de demonstração."
+  },
+  "accountVerify": {
+    "eyebrow": "Verificação da conta",
+    "loadingTitle": "A sua conta está a ser verificada",
+    "loadingDescription": "Aguarde enquanto ativamos a sua conta.",
+    "successTitle": "Conta verificada",
+    "successMessage": "Email verificado com sucesso.",
+    "backToLogin": "Voltar ao login",
+    "errorTitle": "Não foi possível verificar a conta",
+    "errorMessage": "Não foi possível verificar a sua conta. Contacte a nossa equipa de suporte.",
+    "missingToken": "O token de verificação está em falta.",
+    "contactSupport": "Contactar suporte",
+    "backToWebsite": "Voltar ao site"
   }
 }

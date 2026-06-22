@@ -119,5 +119,18 @@
     "contactTitle": "Kontakt",
     "location": "Marrakesch, Marokko",
     "copyright": "Demo-Frontend-Version."
+  },
+  "accountVerify": {
+    "eyebrow": "Kontoverifizierung",
+    "loadingTitle": "Ihr Konto wird verifiziert",
+    "loadingDescription": "Bitte warten Sie, während wir Ihr Konto aktivieren.",
+    "successTitle": "Konto verifiziert",
+    "successMessage": "E-Mail erfolgreich verifiziert.",
+    "backToLogin": "Zurück zur Anmeldung",
+    "errorTitle": "Konto konnte nicht verifiziert werden",
+    "errorMessage": "Wir konnten Ihr Konto nicht verifizieren. Bitte kontaktieren Sie unser Support-Team.",
+    "missingToken": "Verifizierungstoken fehlt.",
+    "contactSupport": "Support kontaktieren",
+    "backToWebsite": "Zurück zur Website"
   }
 }

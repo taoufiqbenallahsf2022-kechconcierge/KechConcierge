@@ -119,5 +119,18 @@
     "contactTitle": "Contacto",
     "location": "Marrakech, Marruecos",
     "copyright": "Versión frontend de demostración."
+  },
+  "accountVerify": {
+    "eyebrow": "Verificación de cuenta",
+    "loadingTitle": "Tu cuenta se está verificando",
+    "loadingDescription": "Espera mientras activamos tu cuenta.",
+    "successTitle": "Cuenta verificada",
+    "successMessage": "Email verificado correctamente.",
+    "backToLogin": "Volver al inicio de sesión",
+    "errorTitle": "No se pudo verificar la cuenta",
+    "errorMessage": "No pudimos verificar tu cuenta. Contacta con nuestro equipo de soporte.",
+    "missingToken": "Falta el token de verificación.",
+    "contactSupport": "Contactar soporte",
+    "backToWebsite": "Volver al sitio"
   }
 }
