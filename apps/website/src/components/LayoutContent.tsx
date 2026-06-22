@@ -12,7 +12,10 @@ export default function LayoutContent({
 }) {
   const pathname = usePathname();
 
-  const isChatPage = pathname.startsWith("/chat");
+  const isChatPage = pathname
+  .split("/")
+  .filter(Boolean)
+  .includes("chat");
 
   return (
     <>

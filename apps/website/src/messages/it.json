@@ -98,6 +98,26 @@
     "spaDescription": "Hammam, massaggi, bellezza e benessere.",
     "restaurantsLabel": "Ristoranti",
     "restaurantsDescription": "Ristoranti marocchini e internazionali selezionati per serate memorabili.",
-    "viewAll": "Vedi tutto"
+    "viewAll": "Vedi tutto",
+    "explore":"Esplora"
+  },
+  "contactSection": {
+    "eyebrow": "Hai bisogno di un soggiorno personalizzato?",
+    "title": "Indicaci le tue date, la dimensione del gruppo e l’esperienza desiderata.",
+    "description": "Questa prima versione è solo frontend. In seguito, messaggi e prenotazioni saranno collegati alla tua API e al sistema di amministrazione.",
+    "contactForm": "Modulo di contatto",
+    "openChat": "Apri chat"
+  },
+  "footer": {
+    "description": "Prima versione del sito per ville, appartamenti, attività, trasporti, SPA, ristoranti e servizi di concierge a Marrakech.",
+    "menu": "Menu",
+    "services": "Servizi",
+    "villas": "Ville",
+    "swimmingPools": "Piscine",
+    "chat": "Chat",
+    "contact": "Contatto",
+    "contactTitle": "Contatto",
+    "location": "Marrakech, Marocco",
+    "copyright": "Versione frontend dimostrativa."
   }
 }
