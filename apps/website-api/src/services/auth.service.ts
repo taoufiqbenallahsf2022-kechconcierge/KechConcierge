@@ -126,8 +126,7 @@ export async function signupIndividual(input: SignupInput) {
     return {
       success: false,
       statusCode: 409,
-      code: "ERROR_EMAIL_ALREADY_USED",
-      message: "This email is already used.",
+      code: "ERROR_EMAIL_ALREADY_USED"
     };
   }
 
@@ -140,6 +139,8 @@ export async function signupIndividual(input: SignupInput) {
   const fullPhoneNumber = normalizePhone(input.countryCode, input.mobilePhone);
 
   console.log('Token while creating Individual' + token);
+
+  console.log('signup meth 1');
 
   const result = await prisma.$transaction(async (tx) => {
     const individual = await tx.individual.create({
@@ -196,20 +197,24 @@ export async function signupIndividual(input: SignupInput) {
     };
   });
 
-  console.log(input.language);
+  console.log('signup meth 2');
+  
+  try {
+    await sendAccountVerificationEmail({
+      email,
+      token,
+      language: input.language || "en"
+    });
 
-  await sendAccountVerificationEmail({
-    email,
-    token,
-    language: input.language || "en"
-  });
-
-  return {
-    success: true,
-    message: "Verification email sent.",
-    individualId: result.individual.id,
-    leadId: result.lead.id,
-  };
+    return {
+      success: true,
+      message: "Verification email sent.",
+      individualId: result.individual.id,
+      leadId: result.lead.id,
+    };
+  } catch(e) {
+    console.log(e.message)
+  }
 }
 
 export async function loginIndividual(input: LoginInput) {
@@ -351,6 +356,7 @@ export async function verifyIndividualEmail(token: string) {
   });
 
   return {
+    success: true,
     code: 'EMAIL_VERIFIED_SUCCESSFULLY',
     message: "Email verified successfully.",
   };

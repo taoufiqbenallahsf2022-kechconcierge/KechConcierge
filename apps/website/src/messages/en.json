@@ -14,6 +14,15 @@
     "logout": "Logout"
   },
   "authModal": {
+    "invalidCredentials": "Invalid email or password.",
+    "inactiveAccount": "Your account is inactive. Please contact our support team.",
+    "emailNotVerified": "Please verify your email address before signing in.",
+    "emailAlreadyExists": "An account already exists with this email address.",
+    "unexpectedError": "Something went wrong. Please try again later.",
+    "requiredField": "{{field}} is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "passwordTooShort": "Password must contain at least 6 characters.",
+    "passwordsDoNotMatch": "Passwords do not match.",
     "brand": "Moorly",
     "welcomeBack": "Welcome back",
     "createAccount": "Create your account",

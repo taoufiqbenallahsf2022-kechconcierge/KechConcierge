@@ -42,12 +42,17 @@ export async function signup(req: Request, res: Response) {
       language,
     } = req.body;
 
+    console.log('Signup 1');
+
     if (!firstName || !lastName || !email || !password) {
       return res.status(400).json({
         code: "ERROR_SIGNUP_REQUIRED_FIELDS",
         message: "First name, last name, email and password are required.",
       });
     }
+
+    
+    console.log('Signup 2');
 
     if (!email.includes("@")) {
       return res.status(400).json({
@@ -56,12 +61,18 @@ export async function signup(req: Request, res: Response) {
       });
     }
 
+    
+    console.log('Signup 3');
+
     if (password.length < 6) {
       return res.status(400).json({
         code: "ERROR_PASSWORD_TOO_SHORT",
         message: "Password must contain at least 6 characters.",
       });
     }
+
+    
+    console.log('Signup 4');
     
     const result = await signupIndividual({
       firstName,
@@ -73,6 +84,9 @@ export async function signup(req: Request, res: Response) {
       password,
       language,
     });
+
+    console.log('Signup 5');
+    
 
     if (!result.success) {
       return res.status(result.statusCode || 400).json({
@@ -88,6 +102,9 @@ export async function signup(req: Request, res: Response) {
     });
 
   } catch (error) {
+
+    console.log(error.message);
+    
     return res.status(500).json({
       code: "ERROR_SIGNUP_FAILED",
       message: "Unable to create account.",
@@ -163,6 +180,7 @@ export async function verifyEmail(req: Request, res: Response) {
     return res.status(200).json({
       message: result.message,
     });
+
   } catch (error) {
     return res.status(500).json({
       code: "ERROR_VERIFY_EMAIL_FAILED",

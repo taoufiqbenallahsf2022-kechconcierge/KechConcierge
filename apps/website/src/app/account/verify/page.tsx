@@ -47,12 +47,12 @@ function VerifyAccountContent() {
 
         if (!response.ok) {
           setStatus("error");
-          setMessage(data.message || data.code || t.accountVerify.errorMessage);
+          setMessage(t.accountVerify.errorMessage);
           return;
         }
 
         setStatus("success");
-        setMessage(data.message || t.accountVerify.successMessage);
+        setMessage(t.accountVerify.successMessage);
       } catch {
         setStatus("error");
         setMessage(t.accountVerify.errorMessage);
@@ -98,7 +98,7 @@ function VerifyAccountContent() {
             <p className="mt-3 text-zinc-600">{message}</p>
 
             <Link
-              href={localizePath("/", locale)}
+              href={localizePath("/?auth=login", locale)}
               className="mt-7 inline-flex rounded-full bg-orange-600 px-7 py-4 font-black text-white transition hover:bg-orange-700"
             >
               {t.accountVerify.backToLogin}

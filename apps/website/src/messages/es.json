@@ -14,6 +14,15 @@
     "logout": "Cerrar sesión"
   },
   "authModal": {
+    "invalidCredentials": "Correo electrónico o contraseña incorrectos.",
+    "inactiveAccount": "Tu cuenta está inactiva. Ponte en contacto con nuestro equipo de soporte.",
+    "emailNotVerified": "Verifica tu dirección de correo electrónico antes de iniciar sesión.",
+    "emailAlreadyExists": "Ya existe una cuenta con esta dirección de correo electrónico.",
+    "unexpectedError": "Ha ocurrido un error. Inténtalo de nuevo más tarde.",
+    "requiredField": "{{field}} es obligatorio.",
+    "invalidEmail": "Introduce una dirección de correo electrónico válida.",
+    "passwordTooShort": "La contraseña debe contener al menos 6 caracteres.",
+    "passwordsDoNotMatch": "Las contraseñas no coinciden.",
     "brand": "Moorly",
     "welcomeBack": "Bienvenido de nuevo",
     "createAccount": "Crea tu cuenta",
