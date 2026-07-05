@@ -38,7 +38,6 @@ function VerifyAccountContent() {
 
       try {
 
-        console.log('Attempts');
         const response = await fetch(
           `${API_URL}/api/auth/verify-email?token=${encodeURIComponent(token)}`
         );

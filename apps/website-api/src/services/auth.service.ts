@@ -57,8 +57,7 @@ function getIndividualStage(individual: any) {
   }
 
   const individualLead = individual.leads?.[0];
-  console.log(individual);
-  console.log(individualLead);
+  
   if (individualLead) {
     return {
       stage: "LEAD",
@@ -138,10 +137,6 @@ export async function signupIndividual(input: SignupInput) {
   const passwordHash = await bcrypt.hash(input.password, 10);
   const fullPhoneNumber = normalizePhone(input.countryCode, input.mobilePhone);
 
-  console.log('Token while creating Individual' + token);
-
-  console.log('signup meth 1');
-
   const result = await prisma.$transaction(async (tx) => {
     const individual = await tx.individual.create({
       data: {
@@ -196,8 +191,6 @@ export async function signupIndividual(input: SignupInput) {
       lead,
     };
   });
-
-  console.log('signup meth 2');
   
   try {
     await sendAccountVerificationEmail({
@@ -213,7 +206,9 @@ export async function signupIndividual(input: SignupInput) {
       leadId: result.lead.id,
     };
   } catch(e) {
-    console.log(e.message)
+    return {
+      success: false
+    };
   }
 }
 
@@ -297,22 +292,15 @@ export async function loginIndividual(input: LoginInput) {
 
 export async function verifyIndividualEmail(token: string) {
 
-  console.log('Token : '+ token);
-
   const individual = await prisma.individual.findFirst({
     where: {
       emailVerificationToken: token,
     },
   });
 
-  console.log(individual);
-
   var uid = randomUUID();
 
   if (!individual) {
-    
-    console.log("I'm returning this inside Individual Verification "+uid);
-
     return {
       success: false,
       statusCode: 404,
@@ -320,8 +308,6 @@ export async function verifyIndividualEmail(token: string) {
       message: "Invalid verification token.",
     };
   }
-
-  console.log("I'm returning this outside after the return "+uid);
 
   if (individual.emailVerified && individual.isActive) {
     return {

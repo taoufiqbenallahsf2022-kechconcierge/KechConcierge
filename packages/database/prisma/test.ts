@@ -9,11 +9,7 @@ const adapter = new PrismaPg({
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("Seed connected to database");
-
   const productsCount = await prisma.product.count();
-
-  console.log("Products count:", productsCount);
 }
 
 main()
