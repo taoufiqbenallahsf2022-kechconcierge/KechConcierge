@@ -125,7 +125,6 @@ async function main() {
   }
 
   const count = await prisma.product.count();
-  console.log("Products inserted:", count);
 }
 
 main()

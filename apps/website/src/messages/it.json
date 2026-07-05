@@ -14,6 +14,15 @@
     "logout": "Disconnetti"
   },
   "authModal": {
+    "invalidCredentials": "Email o password non validi.",
+    "inactiveAccount": "Il tuo account è inattivo. Contatta il nostro team di supporto.",
+    "emailNotVerified": "Verifica il tuo indirizzo email prima di accedere.",
+    "emailAlreadyExists": "Esiste già un account associato a questo indirizzo email.",
+    "unexpectedError": "Si è verificato un errore. Riprova più tardi.",
+    "requiredField": "{{field}} è obbligatorio.",
+    "invalidEmail": "Inserisci un indirizzo email valido.",
+    "passwordTooShort": "La password deve contenere almeno 6 caratteri.",
+    "passwordsDoNotMatch": "Le password non corrispondono.",
     "brand": "Moorly",
     "welcomeBack": "Bentornato",
     "createAccount": "Crea il tuo account",
@@ -119,5 +128,18 @@
     "contactTitle": "Contatto",
     "location": "Marrakech, Marocco",
     "copyright": "Versione frontend dimostrativa."
+  },
+  "accountVerify": {
+    "eyebrow": "Verifica account",
+    "loadingTitle": "Il tuo account è in fase di verifica",
+    "loadingDescription": "Attendi mentre attiviamo il tuo account.",
+    "successTitle": "Account verificato",
+    "successMessage": "Email verificata con successo.",
+    "backToLogin": "Torna al login",
+    "errorTitle": "Impossibile verificare l’account",
+    "errorMessage": "Non siamo riusciti a verificare il tuo account. Contatta il nostro supporto.",
+    "missingToken": "Token di verifica mancante.",
+    "contactSupport": "Contatta il supporto",
+    "backToWebsite": "Torna al sito"
   }
 }

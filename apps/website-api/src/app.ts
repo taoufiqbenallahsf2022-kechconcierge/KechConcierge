@@ -16,8 +16,6 @@ const allowedOrigins: Record<string, string[] | string> = {
 
 const currentEnv = process.env.NODE_ENV || "local";
 
-console.log(currentEnv);
-
 app.use(
   cors({
     origin: (origin, callback) => {

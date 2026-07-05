@@ -159,37 +159,41 @@ export default function AuthModal({ open, onClose }: Props) {
     setLanguageDropdownOpen(false);
   }
 
+  function requiredMessage(field: string) {
+    return t.authModal.requiredField.replace("{{field}}", field);
+  }
+
   function validateForm() {
     if (mode === "signup" && !firstName.trim()) {
-      return t.authModal.firstName + " is required.";
+      return requiredMessage(t.authModal.firstName);
     }
 
     if (mode === "signup" && !lastName.trim()) {
-      return t.authModal.lastName + " is required.";
+      return requiredMessage(t.authModal.lastName);
     }
 
     if (mode === "signup" && !mobilePhone.trim()) {
-      return t.authModal.phoneNumber + " is required.";
+      return requiredMessage(t.authModal.phoneNumber);
     }
 
     if (mode === "signup" && !selectedCountry?.alpha3) {
-      return t.authModal.country + " is required.";
+      return requiredMessage(t.authModal.country);
     }
 
     if (mode === "signup" && !selectedLanguage?.code) {
-      return t.authModal.preferredLanguage + " is required.";
+      return requiredMessage(t.authModal.preferredLanguage);
     }
 
     if (!email.trim() || !email.includes("@")) {
-      return "Please enter a valid email address.";
+      return t.authModal.invalidEmail;
     }
 
     if (!password || password.length < 6) {
-      return "Password must contain at least 6 characters.";
+      return t.authModal.passwordTooShort;
     }
 
     if (mode === "signup" && password !== confirmPassword) {
-      return "Passwords do not match.";
+      return t.authModal.passwordsDoNotMatch;
     }
 
     return "";
@@ -230,7 +234,25 @@ export default function AuthModal({ open, onClose }: Props) {
 
         if (!response.ok) {
           setStatus("error");
-          setMessage(data.message || data.code || "Unable to create account.");
+
+          switch (data.code) {
+            case "ERROR_EMAIL_ALREADY_USED":
+              setMessage(t.authModal.emailAlreadyExists);
+              break;
+
+            case "ERROR_EMAIL_NOT_VERIFIED":
+              setMessage(t.authModal.emailNotVerified);
+              break;
+
+            case "ERROR_INDIVIDUAL_INACTIVE":
+              setMessage(t.authModal.inactiveAccount);
+              break;
+
+            default:
+              setMessage(t.authModal.unexpectedError);
+              break;
+          }
+
           return;
         }
 
@@ -256,7 +278,23 @@ export default function AuthModal({ open, onClose }: Props) {
 
         if (!response.ok) {
           setStatus("error");
-          setMessage(data.code || data.message || "Unable to login.");
+          switch (data.code) {
+            case "ERROR_INVALID_CREDENTIALS":
+              setMessage(t.authModal.invalidCredentials);
+              break;
+
+            case "ERROR_INDIVIDUAL_INACTIVE":
+              setMessage(t.authModal.inactiveAccount);
+              break;
+
+            case "ERROR_EMAIL_NOT_VERIFIED":
+              setMessage(t.authModal.emailNotVerified);
+              break;
+
+            default:
+              setMessage(t.authModal.unexpectedError);
+          }
+
           return;
         }
 

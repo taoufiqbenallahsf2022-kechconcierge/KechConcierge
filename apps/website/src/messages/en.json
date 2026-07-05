@@ -14,6 +14,15 @@
     "logout": "Logout"
   },
   "authModal": {
+    "invalidCredentials": "Invalid email or password.",
+    "inactiveAccount": "Your account is inactive. Please contact our support team.",
+    "emailNotVerified": "Please verify your email address before signing in.",
+    "emailAlreadyExists": "An account already exists with this email address.",
+    "unexpectedError": "Something went wrong. Please try again later.",
+    "requiredField": "{{field}} is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "passwordTooShort": "Password must contain at least 6 characters.",
+    "passwordsDoNotMatch": "Passwords do not match.",
     "brand": "Moorly",
     "welcomeBack": "Welcome back",
     "createAccount": "Create your account",
@@ -119,6 +128,19 @@
     "contactTitle": "Contact",
     "location": "Marrakech, Morocco",
     "copyright": "Demo frontend version."
+  },
+  "accountVerify": {
+    "eyebrow": "Account verification",
+    "loadingTitle": "Your account is being verified",
+    "loadingDescription": "Please wait while we activate your account.",
+    "successTitle": "Account verified",
+    "successMessage": "Email verified successfully.",
+    "backToLogin": "Back to login",
+    "errorTitle": "Account could not be verified",
+    "errorMessage": "We could not verify your account. Please contact our support team.",
+    "missingToken": "Verification token is missing.",
+    "contactSupport": "Contact support",
+    "backToWebsite": "Back to website"
   }
 
 }

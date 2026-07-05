@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import crypto, { randomUUID } from "crypto";
 import bcrypt from "bcrypt";
 import { OAuth2Client } from "google-auth-library";
 import { prisma } from "../config/prisma";
@@ -57,8 +57,7 @@ function getIndividualStage(individual: any) {
   }
 
   const individualLead = individual.leads?.[0];
-  console.log(individual);
-  console.log(individualLead);
+  
   if (individualLead) {
     return {
       stage: "LEAD",
@@ -126,8 +125,7 @@ export async function signupIndividual(input: SignupInput) {
     return {
       success: false,
       statusCode: 409,
-      code: "ERROR_EMAIL_ALREADY_USED",
-      message: "This email is already used.",
+      code: "ERROR_EMAIL_ALREADY_USED"
     };
   }
 
@@ -193,18 +191,25 @@ export async function signupIndividual(input: SignupInput) {
       lead,
     };
   });
+  
+  try {
+    await sendAccountVerificationEmail({
+      email,
+      token,
+      language: input.language || "en"
+    });
 
-  await sendAccountVerificationEmail({
-    email,
-    token,
-  });
-
-  return {
-    success: true,
-    message: "Verification email sent.",
-    individualId: result.individual.id,
-    leadId: result.lead.id,
-  };
+    return {
+      success: true,
+      message: "Verification email sent.",
+      individualId: result.individual.id,
+      leadId: result.lead.id,
+    };
+  } catch(e) {
+    return {
+      success: false
+    };
+  }
 }
 
 export async function loginIndividual(input: LoginInput) {
@@ -286,11 +291,14 @@ export async function loginIndividual(input: LoginInput) {
 }
 
 export async function verifyIndividualEmail(token: string) {
+
   const individual = await prisma.individual.findFirst({
     where: {
       emailVerificationToken: token,
     },
   });
+
+  var uid = randomUUID();
 
   if (!individual) {
     return {
@@ -327,7 +335,7 @@ export async function verifyIndividualEmail(token: string) {
     data: {
       isActive: true,
       emailVerified: true,
-      emailVerificationToken: null,
+      emailVerificationToken: 'Taoufiq',
       emailVerificationTokenExpiresAt: null,
       updatedBy: "SYSTEM",
     },
@@ -335,6 +343,7 @@ export async function verifyIndividualEmail(token: string) {
 
   return {
     success: true,
+    code: 'EMAIL_VERIFIED_SUCCESSFULLY',
     message: "Email verified successfully.",
   };
 }

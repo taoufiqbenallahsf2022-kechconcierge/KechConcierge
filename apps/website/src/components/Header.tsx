@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, UserRound, X } from "lucide-react";
 import AuthModal from "./AuthModal";
@@ -104,6 +104,8 @@ export default function Header() {
   const [languageOpen, setLanguageOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [user, setUser] = useState<SimulatedUser | null>(null);
+  
+  const searchParams = useSearchParams();
 
   const pathname = usePathname();
   const router = useRouter();
@@ -154,6 +156,12 @@ export default function Header() {
       window.removeEventListener("storage", loadUser);
     };
   }, []);
+
+  useEffect(() => {
+    if (searchParams.get("auth") === "login") {
+      setAuthOpen(true);
+    }
+  }, [searchParams]);
 
   function changeLanguage(locale: string) {
     const targetPath = buildLocalizedPath(pathname, locale);
