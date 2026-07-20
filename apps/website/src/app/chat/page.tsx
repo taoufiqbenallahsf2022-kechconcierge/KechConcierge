@@ -1,21 +1,56 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Bot, Send, UserRound } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Bot, Loader2, Send } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useAuthStore } from "@/store/auth.store";
+import { getLocaleFromPath } from "@/lib/i18n";
+import ReactMarkdown from "react-markdown";
 
 type Message = {
-  id: number;
+  id: string;
   sender: "user" | "assistant";
   text: string;
   createdAt: string;
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
+function getOrCreateSessionId() {
+  if (typeof window === "undefined") {
+    return "";
+  }
+
+  const existing = window.localStorage.getItem("moorly_chat_session_id");
+
+  if (existing) {
+    return existing;
+  }
+
+  const created = `visitor_${crypto.randomUUID()}`;
+
+  window.localStorage.setItem("moorly_chat_session_id", created);
+
+  return created;
+}
+
 export default function ChatPage() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPath(pathname);
+
+  const authUser = useAuthStore((state) => state.user);
+
+  console.log('authUser',authUser);
+
+  const sessionId = useMemo(() => getOrCreateSessionId(), []);
+
+  const [chatId, setChatId] = useState<string | null>(null);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: 1,
+      id: "welcome",
       sender: "assistant",
       text: "Hello 👋 Welcome to Moorly. How can we help you today?",
       createdAt: "10:00",
@@ -28,15 +63,17 @@ export default function ChatPage() {
     messagesEndRef.current?.scrollIntoView({
       behavior: "smooth",
     });
-  }, [messages]);
+  }, [messages, loading]);
 
-  const sendMessage = () => {
-    if (!message.trim()) return;
+  async function sendMessage() {
+    if (!message.trim() || loading) return;
+
+    const currentMessage = message.trim();
 
     const userMessage: Message = {
-      id: Date.now(),
+      id: `user-${Date.now()}`,
       sender: "user",
-      text: message,
+      text: currentMessage,
       createdAt: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -44,16 +81,41 @@ export default function ChatPage() {
     };
 
     setMessages((current) => [...current, userMessage]);
-
-    const currentMessage = message;
-
     setMessage("");
+    setLoading(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch(`${API_URL}/api/chat/message`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chatId,
+          sessionId,
+          language: locale,
+          message: currentMessage,
+          individualId: authUser?.id,
+          /*leadId: authUser?.leadId,
+          prospectId: authUser?.prospectId,
+          accountId: authUser?.accountId,*/
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to send message.");
+      }
+
+      if (data.chat?.id) {
+        setChatId(data.chat.id);
+      }
+
       const assistantMessage: Message = {
-        id: Date.now() + 1,
+        id: data.aiMessage?.id || `assistant-${Date.now()}`,
         sender: "assistant",
-        text: `Simulation reply: We received your request regarding "${currentMessage}". Later this message will come from AI or a real advisor.`,
+        text: data.reply || data.aiMessage?.message || "I received your message.",
         createdAt: new Date().toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -61,23 +123,31 @@ export default function ChatPage() {
       };
 
       setMessages((current) => [...current, assistantMessage]);
-    }, 1200);
-  };
+    } catch {
+      const errorMessage: Message = {
+        id: `error-${Date.now()}`,
+        sender: "assistant",
+        text: "Sorry, I could not send your message. Please try again.",
+        createdAt: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+
+      setMessages((current) => [...current, errorMessage]);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="h-screen overflow-hidden bg-[#fffaf7]">
       <div className="flex h-full">
-        {/* LEFT SIDEBAR */}
-
         <aside className="hidden w-[320px] border-r border-orange-100 bg-white lg:flex lg:flex-col">
           <div className="border-b border-orange-100 p-5">
-            <h2 className="text-xl font-black text-zinc-900">
-              Moorly
-            </h2>
+            <h2 className="text-xl font-black text-zinc-900">Moorly</h2>
 
-            <p className="mt-1 text-sm text-zinc-500">
-              Your conversations
-            </p>
+            <p className="mt-1 text-sm text-zinc-500">Your conversations</p>
           </div>
 
           <div className="p-4">
@@ -88,13 +158,9 @@ export default function ChatPage() {
                 </div>
 
                 <div>
-                  <p className="font-bold text-zinc-900">
-                    Moorly
-                  </p>
+                  <p className="font-bold text-zinc-900">Moorly</p>
 
-                  <p className="text-sm text-zinc-500">
-                    Concierge Assistant
-                  </p>
+                  <p className="text-sm text-zinc-500">Concierge Assistant</p>
                 </div>
               </div>
             </div>
@@ -105,11 +171,7 @@ export default function ChatPage() {
           </div>
         </aside>
 
-        {/* CHAT AREA */}
-
         <section className="flex flex-1 flex-col">
-          {/* CHAT HEADER */}
-
           <div className="border-b border-orange-100 bg-white px-5 py-4">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-600 text-white">
@@ -117,18 +179,12 @@ export default function ChatPage() {
               </div>
 
               <div>
-                <h1 className="font-black text-zinc-900">
-                  Moorly
-                </h1>
+                <h1 className="font-black text-zinc-900">Moorly</h1>
 
-                <p className="text-sm text-zinc-500">
-                  Online Assistant
-                </p>
+                <p className="text-sm text-zinc-500">Online Assistant</p>
               </div>
             </div>
           </div>
-
-          {/* MESSAGES */}
 
           <div className="flex-1 overflow-y-auto px-4 py-6">
             <div className="mx-auto flex max-w-4xl flex-col gap-4">
@@ -136,9 +192,7 @@ export default function ChatPage() {
                 <div
                   key={msg.id}
                   className={`flex ${
-                    msg.sender === "user"
-                      ? "justify-end"
-                      : "justify-start"
+                    msg.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
                   <div
@@ -148,9 +202,32 @@ export default function ChatPage() {
                         : "bg-white text-zinc-900"
                     }`}
                   >
-                    <p className="whitespace-pre-wrap">
-                      {msg.text}
-                    </p>
+                    {msg.sender === "assistant" ? (
+                      <div
+                        className="
+                          prose
+                          prose-sm
+                          max-w-none
+
+                          prose-p:my-2
+                          prose-ul:my-2
+
+                          prose-a:text-orange-600
+                          prose-a:font-bold
+                          prose-a:underline
+                          prose-a:underline-offset-4
+                          prose-a:decoration-2
+                          prose-a:transition-colors
+                          hover:prose-a:text-orange-700
+                        "
+                      >
+                        <ReactMarkdown>{msg.text}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      <p className="whitespace-pre-wrap">
+                        {msg.text}
+                      </p>
+                    )}
 
                     <div
                       className={`mt-2 text-xs ${
@@ -165,11 +242,18 @@ export default function ChatPage() {
                 </div>
               ))}
 
+              {loading && (
+                <div className="flex justify-start">
+                  <div className="flex max-w-[85%] items-center gap-2 rounded-3xl bg-white px-5 py-3 text-zinc-500 shadow-sm">
+                    <Loader2 size={16} className="animate-spin text-orange-600" />
+                    <span>Moorly is typing...</span>
+                  </div>
+                </div>
+              )}
+
               <div ref={messagesEndRef} />
             </div>
           </div>
-
-          {/* INPUT BAR FIXED */}
 
           <div className="border-t border-orange-100 bg-white p-4">
             <div className="mx-auto flex max-w-4xl items-end gap-3">
@@ -180,10 +264,7 @@ export default function ChatPage() {
                 rows={1}
                 className="max-h-40 min-h-[52px] flex-1 resize-none rounded-2xl border border-zinc-200 px-4 py-3 outline-none focus:border-orange-500"
                 onKeyDown={(e) => {
-                  if (
-                    e.key === "Enter" &&
-                    !e.shiftKey
-                  ) {
+                  if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
                     sendMessage();
                   }
@@ -192,9 +273,14 @@ export default function ChatPage() {
 
               <button
                 onClick={sendMessage}
-                className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-orange-600 text-white transition hover:bg-orange-700"
+                disabled={loading || !message.trim()}
+                className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-orange-600 text-white transition hover:bg-orange-700 disabled:opacity-60"
               >
-                <Send size={18} />
+                {loading ? (
+                  <Loader2 size={18} className="animate-spin" />
+                ) : (
+                  <Send size={18} />
+                )}
               </button>
             </div>
           </div>
