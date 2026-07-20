@@ -53,6 +53,18 @@ type ChatIntent = "GREETING" | "NEEDS_MORE_INFO" | "TOURISM_RECOMMENDATION" | "R
 type BudgetScope = "GROUP" | "PER_PERSON";
 type BudgetPeriod = "TOTAL_STAY" | "PER_DAY";
 type RoomOccupancy = "ONE_PER_PERSON" | "TWO_PER_ROOM";
+type TransportationServicePeriod = "HALF_DAY" | "FULL_DAY";
+
+type CategoryNeed = {
+  people?: number;
+  durationDays?: number;
+  budgetEuro?: number;
+  budgetPeriod?: BudgetPeriod;
+  budgetScope?: BudgetScope;
+  roomOccupancy?: RoomOccupancy;
+  transportationServicePeriod?: TransportationServicePeriod;
+  preferences?: string[];
+};
 
 type ChatHistoryMessage = {
   role: "user" | "assistant";
@@ -63,6 +75,10 @@ type ExtractedChatNeed = {
   intent: ChatIntent;
   reason: string;
   category?: ProductType;
+  interests: ProductType[];
+  categoryNeeds: Partial<Record<ProductType, CategoryNeed>>;
+
+  // Legacy active-category fields kept for compatibility with the existing engine.
   people?: number;
   budgetEuro?: number;
   budgetPeriod?: BudgetPeriod;
@@ -70,6 +86,7 @@ type ExtractedChatNeed = {
   preferences: string[];
   budgetScope?: BudgetScope;
   roomOccupancy?: RoomOccupancy;
+  transportationServicePeriod?: TransportationServicePeriod;
 };
 
 type MissingInformation =
@@ -79,35 +96,56 @@ type MissingInformation =
   | "BUDGET"
   | "BUDGET_SCOPE"
   | "BUDGET_PERIOD"
-  | "ROOM_OCCUPANCY";
+  | "ROOM_OCCUPANCY"
+  | "TRANSPORTATION_DAYS"
+  | "TRANSPORTATION_SERVICE_PERIOD";
 
 function getRequestedProductTypes(
   need: ExtractedChatNeed
 ): ProductType[] {
   const requestedTypes: ProductType[] = [];
 
-  if (need.category) {
-    requestedTypes.push(need.category);
+  const addType = (type?: ProductType) => {
+    if (type && !requestedTypes.includes(type)) {
+      requestedTypes.push(type);
+    }
+  };
+
+  addType(need.category);
+
+  for (const type of need.interests || []) {
+    addType(type);
   }
 
   for (const preference of need.preferences || []) {
-    const normalized = preference.trim().toUpperCase();
-
-    if (
-      normalized === ProductType.VILLA ||
-      normalized === ProductType.TRANSPORTATION ||
-      normalized === ProductType.SWIMMINGPOOL ||
-      normalized === ProductType.ACTIVITY ||
-      normalized === ProductType.RESTAURANT ||
-      normalized === ProductType.SPA
-    ) {
-      if (!requestedTypes.includes(normalized as ProductType)) {
-        requestedTypes.push(normalized as ProductType);
-      }
-    }
+    addType(normalizeCategory(preference));
   }
 
   return requestedTypes;
+}
+
+function getCategoryNeed(
+  need: ExtractedChatNeed,
+  type: ProductType
+): CategoryNeed {
+  const categoryNeed = need.categoryNeeds?.[type] || {};
+
+  if (need.category !== type) {
+    return categoryNeed;
+  }
+
+  return {
+    people: categoryNeed.people ?? need.people,
+    durationDays: categoryNeed.durationDays ?? need.durationDays,
+    budgetEuro: categoryNeed.budgetEuro ?? need.budgetEuro,
+    budgetScope: categoryNeed.budgetScope ?? need.budgetScope,
+    budgetPeriod: categoryNeed.budgetPeriod ?? need.budgetPeriod,
+    roomOccupancy: categoryNeed.roomOccupancy ?? need.roomOccupancy,
+    transportationServicePeriod:
+      categoryNeed.transportationServicePeriod ??
+      need.transportationServicePeriod,
+    preferences: categoryNeed.preferences ?? need.preferences,
+  };
 }
 
 function getMissingInformation(
@@ -121,61 +159,45 @@ function getMissingInformation(
     return missing;
   }
 
-  const wantsVilla = requestedTypes.includes(ProductType.VILLA);
-  const wantsTransportation = requestedTypes.includes(
-    ProductType.TRANSPORTATION
-  );
-  const wantsSwimmingPool = requestedTypes.includes(
-    ProductType.SWIMMINGPOOL
-  );
-  const wantsActivity = requestedTypes.includes(ProductType.ACTIVITY);
-  const wantsRestaurant = requestedTypes.includes(
-    ProductType.RESTAURANT
-  );
-  const wantsSpa = requestedTypes.includes(ProductType.SPA);
+  // Ask only for the category currently being discussed. Previous categories
+  // remain stored in categoryNeeds and are not erased.
+  const activeType = need.category || requestedTypes[0];
+  const activeNeed = getCategoryNeed(need, activeType);
 
-  const needsPeople =
-    wantsVilla ||
-    wantsTransportation ||
-    wantsSwimmingPool ||
-    wantsActivity ||
-    wantsRestaurant ||
-    wantsSpa;
-
-  const needsDuration =
-    wantsVilla ||
-    wantsTransportation;
-
-  const needsBudget =
-    wantsVilla ||
-    wantsTransportation ||
-    wantsSwimmingPool ||
-    wantsActivity ||
-    wantsRestaurant ||
-    wantsSpa;
-
-  if (needsPeople && !need.people) {
+  if (!activeNeed.people) {
     missing.push("PEOPLE");
   }
 
-  if (needsDuration && !need.durationDays) {
-    missing.push("DURATION");
+  if (activeType === ProductType.VILLA) {
+    if (!activeNeed.durationDays) {
+      missing.push("DURATION");
+    }
+
+    if (!activeNeed.roomOccupancy) {
+      missing.push("ROOM_OCCUPANCY");
+    }
   }
 
-  if (needsBudget && !need.budgetEuro) {
+  if (activeType === ProductType.TRANSPORTATION) {
+    if (!activeNeed.durationDays) {
+      missing.push("TRANSPORTATION_DAYS");
+    }
+
+    if (!activeNeed.transportationServicePeriod) {
+      missing.push("TRANSPORTATION_SERVICE_PERIOD");
+    }
+  }
+
+  if (!activeNeed.budgetEuro) {
     missing.push("BUDGET");
   }
 
-  if (need.budgetEuro && !need.budgetScope) {
+  if (activeNeed.budgetEuro && !activeNeed.budgetScope) {
     missing.push("BUDGET_SCOPE");
   }
 
-  if (need.budgetEuro && !need.budgetPeriod) {
+  if (activeNeed.budgetEuro && !activeNeed.budgetPeriod) {
     missing.push("BUDGET_PERIOD");
-  }
-
-  if (wantsVilla && !need.roomOccupancy) {
-    missing.push("ROOM_OCCUPANCY");
   }
 
   return missing;
@@ -361,6 +383,10 @@ function getMoreInfoMessage(
         "Is this budget per day or for the entire stay?",
       ROOM_OCCUPANCY:
         "For the bedrooms, would you prefer one room per person or a maximum of two people per room?",
+      TRANSPORTATION_DAYS:
+        "For how many days will you need the vehicle or driver?",
+      TRANSPORTATION_SERVICE_PERIOD:
+        "Will you need the vehicle and driver for a full day or only half a day?",
     },
 
     fr: {
@@ -375,6 +401,10 @@ function getMoreInfoMessage(
         "Ce budget est-il prévu par jour ou pour l’ensemble du séjour ?",
       ROOM_OCCUPANCY:
         "Pour les chambres, souhaitez-vous une chambre par personne ou acceptez-vous au maximum deux personnes par chambre ?",
+      TRANSPORTATION_DAYS:
+        "Pendant combien de jours aurez-vous besoin du véhicule ou du chauffeur ?",
+      TRANSPORTATION_SERVICE_PERIOD:
+        "Aurez-vous besoin du véhicule et du chauffeur pour une journée complète ou seulement une demi-journée ?",
     },
 
     es: {
@@ -389,6 +419,10 @@ function getMoreInfoMessage(
         "¿Este presupuesto es por día o para toda la estancia?",
       ROOM_OCCUPANCY:
         "Para las habitaciones, ¿prefieren una habitación por persona o un máximo de dos personas por habitación?",
+      TRANSPORTATION_DAYS:
+        "¿Durante cuántos días necesitarán el vehículo o conductor?",
+      TRANSPORTATION_SERVICE_PERIOD:
+        "¿Necesitarán el vehículo y conductor durante todo el día o solo medio día?",
     },
 
     pt: {
@@ -403,6 +437,10 @@ function getMoreInfoMessage(
         "Este orçamento é por dia ou para toda a estadia?",
       ROOM_OCCUPANCY:
         "Para os quartos, prefere um quarto por pessoa ou no máximo duas pessoas por quarto?",
+      TRANSPORTATION_DAYS:
+        "Durante quantos dias precisarão do veículo ou motorista?",
+      TRANSPORTATION_SERVICE_PERIOD:
+        "Precisarão do veículo e motorista durante o dia inteiro ou apenas meio dia?",
     },
 
     it: {
@@ -417,6 +455,10 @@ function getMoreInfoMessage(
         "Questo budget è giornaliero o per l’intero soggiorno?",
       ROOM_OCCUPANCY:
         "Per le camere, preferite una camera per persona o un massimo di due persone per camera?",
+      TRANSPORTATION_DAYS:
+        "Per quanti giorni avrete bisogno del veicolo o dell’autista?",
+      TRANSPORTATION_SERVICE_PERIOD:
+        "Avrete bisogno del veicolo e dell’autista per l’intera giornata o solo mezza giornata?",
     },
 
     de: {
@@ -431,6 +473,10 @@ function getMoreInfoMessage(
         "Gilt dieses Budget pro Tag oder für den gesamten Aufenthalt?",
       ROOM_OCCUPANCY:
         "Möchten Sie ein Zimmer pro Person oder maximal zwei Personen pro Zimmer?",
+      TRANSPORTATION_DAYS:
+        "Für wie viele Tage benötigen Sie das Fahrzeug oder den Fahrer?",
+      TRANSPORTATION_SERVICE_PERIOD:
+        "Benötigen Sie das Fahrzeug und den Fahrer für einen ganzen oder nur einen halben Tag?",
     },
   };
 
@@ -962,6 +1008,44 @@ Return:
   "preferences": []
 }
 
+CATEGORY-SPECIFIC NEEDS
+
+Maintain a separate need object for every requested product category.
+A customer can have different people counts, durations and budgets by category.
+
+Examples:
+- 12 travellers stay in a villa, but only 6 need transportation.
+- The villa is required for 10 days, while transportation is required for only 7 days.
+- A customer may have one budget for accommodation and another for activities.
+
+Store these values inside categoryNeeds. Never overwrite another category's values.
+The top-level fields represent the currently active category only and are kept for compatibility.
+
+For transportation:
+- durationDays means the number of days the vehicle is needed, not the total trip duration.
+- transportationServicePeriod is HALF_DAY or FULL_DAY.
+- HALF_DAY means the vehicle price is later calculated as 50% of the daily price.
+
+Expected categoryNeeds example:
+{
+  "VILLA": {
+    "people": 12,
+    "durationDays": 10,
+    "budgetEuro": 300,
+    "budgetScope": "PER_PERSON",
+    "budgetPeriod": "PER_DAY",
+    "roomOccupancy": "TWO_PER_ROOM"
+  },
+  "TRANSPORTATION": {
+    "people": 6,
+    "durationDays": 7,
+    "budgetEuro": 1200,
+    "budgetScope": "GROUP",
+    "budgetPeriod": "TOTAL_STAY",
+    "transportationServicePeriod": "FULL_DAY"
+  }
+}
+
 PEOPLE RULES
 
 Extract the number of travellers or guests.
@@ -1108,6 +1192,30 @@ Set TWO_PER_ROOM when the user accepts:
 Do not assume a room-occupancy preference if it was never stated.
 Preserve it from history unless the latest message changes it.
 
+TRANSPORTATION SERVICE PERIOD RULES
+
+Set transportationServicePeriod to HALF_DAY when the user says:
+- half day
+- morning only
+- afternoon only
+- demi-journée
+- media jornada
+- meio dia
+- mezza giornata
+- halber Tag
+
+Set transportationServicePeriod to FULL_DAY when the user says:
+- full day
+- entire day
+- all day
+- journée complète
+- día completo
+- dia inteiro
+- giornata intera
+- ganzer Tag
+
+Preserve the transportation service period in categoryNeeds.TRANSPORTATION unless the latest message changes it.
+
 PREFERENCES
 
 Use preferences for:
@@ -1138,12 +1246,22 @@ Required JSON shape:
   "intent": "GREETING" | "NEEDS_MORE_INFO" | "TOURISM_RECOMMENDATION" | "REDIRECT_CONTACT",
   "reason": "short explanation",
   "category": "VILLA" | "SWIMMINGPOOL" | "ACTIVITY" | "SPA" | "TRANSPORTATION" | "RESTAURANT" | null,
+  "interests": ("VILLA" | "SWIMMINGPOOL" | "ACTIVITY" | "SPA" | "TRANSPORTATION" | "RESTAURANT")[],
+  "categoryNeeds": {
+    "VILLA"?: CategoryNeed,
+    "SWIMMINGPOOL"?: CategoryNeed,
+    "ACTIVITY"?: CategoryNeed,
+    "SPA"?: CategoryNeed,
+    "TRANSPORTATION"?: CategoryNeed,
+    "RESTAURANT"?: CategoryNeed
+  },
   "people": number | null,
   "budgetEuro": number | null,
   "budgetScope": "GROUP" | "PER_PERSON" | null,
   "budgetPeriod": "TOTAL_STAY" | "PER_DAY" | null,
   "durationDays": number | null,
   "roomOccupancy": "ONE_PER_PERSON" | "TWO_PER_ROOM" | null,
+  "transportationServicePeriod": "HALF_DAY" | "FULL_DAY" | null,
   "preferences": string[]
 }
         `,
@@ -1163,12 +1281,15 @@ Required JSON shape:
     intent: "NEEDS_MORE_INFO",
     reason: "The request could not be extracted reliably.",
     category: null,
+    interests: [],
+    categoryNeeds: {},
     people: null,
     budgetEuro: null,
     budgetScope: null,
     budgetPeriod: null,
     durationDays: null,
     roomOccupancy: null,
+    transportationServicePeriod: null,
     preferences: [],
   });
 
@@ -1220,6 +1341,101 @@ Required JSON shape:
       ? parsed.roomOccupancy
       : undefined;
 
+  const transportationServicePeriod =
+    parsed.transportationServicePeriod === "HALF_DAY" ||
+    parsed.transportationServicePeriod === "FULL_DAY"
+      ? parsed.transportationServicePeriod
+      : undefined;
+
+  const parsedInterests: ProductType[] = Array.isArray(parsed.interests)
+    ? parsed.interests
+        .map((interest: unknown) =>
+          typeof interest === "string" ? normalizeCategory(interest) : undefined
+        )
+        .filter((interest: ProductType | undefined): interest is ProductType =>
+          Boolean(interest)
+        )
+    : [];
+
+  const category = normalizeCategory(parsed.category);
+  const interests: ProductType[] = Array.from(
+    new Set([...(category ? [category] : []), ...parsedInterests])
+  );
+
+  const categoryNeeds: Partial<Record<ProductType, CategoryNeed>> = {};
+
+  if (parsed.categoryNeeds && typeof parsed.categoryNeeds === "object") {
+    for (const [rawType, rawNeed] of Object.entries(parsed.categoryNeeds)) {
+      const type = normalizeCategory(rawType);
+
+      if (!type || !rawNeed || typeof rawNeed !== "object") {
+        continue;
+      }
+
+      const value = rawNeed as Record<string, unknown>;
+      const categoryPreferences = Array.isArray(value.preferences)
+        ? value.preferences.filter(
+            (preference: unknown): preference is string =>
+              typeof preference === "string"
+          )
+        : [];
+
+      categoryNeeds[type] = {
+        people:
+          typeof value.people === "number" && value.people > 0
+            ? Math.floor(value.people)
+            : undefined,
+        durationDays:
+          typeof value.durationDays === "number" && value.durationDays > 0
+            ? Math.ceil(value.durationDays)
+            : undefined,
+        budgetEuro:
+          typeof value.budgetEuro === "number" && value.budgetEuro > 0
+            ? value.budgetEuro
+            : undefined,
+        budgetScope:
+          value.budgetScope === "GROUP" || value.budgetScope === "PER_PERSON"
+            ? value.budgetScope
+            : undefined,
+        budgetPeriod:
+          value.budgetPeriod === "PER_DAY" ||
+          value.budgetPeriod === "TOTAL_STAY"
+            ? value.budgetPeriod
+            : undefined,
+        roomOccupancy:
+          value.roomOccupancy === "ONE_PER_PERSON" ||
+          value.roomOccupancy === "TWO_PER_ROOM"
+            ? value.roomOccupancy
+            : undefined,
+        transportationServicePeriod:
+          value.transportationServicePeriod === "HALF_DAY" ||
+          value.transportationServicePeriod === "FULL_DAY"
+            ? value.transportationServicePeriod
+            : undefined,
+        preferences: categoryPreferences,
+      };
+
+      if (!interests.includes(type)) {
+        interests.push(type);
+      }
+    }
+  }
+
+  if (category) {
+    categoryNeeds[category] = {
+      ...categoryNeeds[category],
+      people: people ?? categoryNeeds[category]?.people,
+      durationDays: durationDays ?? categoryNeeds[category]?.durationDays,
+      budgetEuro: budgetEuro ?? categoryNeeds[category]?.budgetEuro,
+      budgetScope: budgetScope ?? categoryNeeds[category]?.budgetScope,
+      budgetPeriod: budgetPeriod ?? categoryNeeds[category]?.budgetPeriod,
+      roomOccupancy: roomOccupancy ?? categoryNeeds[category]?.roomOccupancy,
+      transportationServicePeriod:
+        transportationServicePeriod ??
+        categoryNeeds[category]?.transportationServicePeriod,
+    };
+  }
+
   const preferences : string[] = Array.isArray(parsed.preferences)
     ? Array.from(
         new Set(
@@ -1242,7 +1458,11 @@ Required JSON shape:
         ? parsed.reason.trim()
         : "",
 
-    category: normalizeCategory(parsed.category),
+    category,
+
+    interests,
+
+    categoryNeeds,
 
     people,
 
@@ -1255,6 +1475,8 @@ Required JSON shape:
     durationDays,
 
     roomOccupancy,
+
+    transportationServicePeriod,
 
     preferences,
   };
@@ -1291,101 +1513,154 @@ function getTechSeats(product: any, language?: string) {
   return tech?.techSeats || null;
 }
 
-function getTotalBudget(need: ExtractedChatNeed) {
-  if (!need.budgetEuro || !need.people || !need.durationDays) return null;
+function getEffectiveNeedForType(
+  need: ExtractedChatNeed,
+  type: ProductType
+): ExtractedChatNeed {
+  const categoryNeed = getCategoryNeed(need, type);
 
-  if (need.budgetPeriod === "PER_DAY") {
-    if (need.budgetScope === "PER_PERSON") {
-      return need.budgetEuro * need.people * need.durationDays;
+  return {
+    ...need,
+    category: type,
+    people: categoryNeed.people,
+    durationDays: categoryNeed.durationDays,
+    budgetEuro: categoryNeed.budgetEuro,
+    budgetScope: categoryNeed.budgetScope,
+    budgetPeriod: categoryNeed.budgetPeriod,
+    roomOccupancy: categoryNeed.roomOccupancy,
+    transportationServicePeriod:
+      categoryNeed.transportationServicePeriod,
+    preferences: categoryNeed.preferences ?? need.preferences,
+  };
+}
+
+function getTotalBudget(
+  need: ExtractedChatNeed,
+  type: ProductType = need.category || ProductType.VILLA
+) {
+  const effectiveNeed = getEffectiveNeedForType(need, type);
+
+  if (
+    !effectiveNeed.budgetEuro ||
+    !effectiveNeed.people ||
+    !effectiveNeed.durationDays
+  ) {
+    return null;
+  }
+
+  if (effectiveNeed.budgetPeriod === "PER_DAY") {
+    if (effectiveNeed.budgetScope === "PER_PERSON") {
+      return (
+        effectiveNeed.budgetEuro *
+        effectiveNeed.people *
+        effectiveNeed.durationDays
+      );
     }
 
-    return need.budgetEuro * need.durationDays;
+    return effectiveNeed.budgetEuro * effectiveNeed.durationDays;
   }
 
-  if (need.budgetScope === "PER_PERSON") {
-    return need.budgetEuro * need.people;
+  if (effectiveNeed.budgetScope === "PER_PERSON") {
+    return effectiveNeed.budgetEuro * effectiveNeed.people;
   }
 
-  return need.budgetEuro;
+  return effectiveNeed.budgetEuro;
 }
 
-function getBudgetPerPersonPerDay(need: ExtractedChatNeed) {
+function getBudgetPerPersonPerDay(
+  need: ExtractedChatNeed,
+  type: ProductType = need.category || ProductType.VILLA
+) {
+  const effectiveNeed = getEffectiveNeedForType(need, type);
+
   if (
-    !need.budgetEuro ||
-    !need.people ||
-    !need.durationDays ||
-    !need.budgetScope ||
-    !need.budgetPeriod
+    !effectiveNeed.budgetEuro ||
+    !effectiveNeed.people ||
+    !effectiveNeed.durationDays ||
+    !effectiveNeed.budgetScope ||
+    !effectiveNeed.budgetPeriod
   ) {
     return null;
   }
 
   if (
-    need.budgetScope === "PER_PERSON" &&
-    need.budgetPeriod === "PER_DAY"
+    effectiveNeed.budgetScope === "PER_PERSON" &&
+    effectiveNeed.budgetPeriod === "PER_DAY"
   ) {
-    return need.budgetEuro;
+    return effectiveNeed.budgetEuro;
   }
 
   if (
-    need.budgetScope === "GROUP" &&
-    need.budgetPeriod === "PER_DAY"
+    effectiveNeed.budgetScope === "GROUP" &&
+    effectiveNeed.budgetPeriod === "PER_DAY"
   ) {
-    return need.budgetEuro / need.people;
+    return effectiveNeed.budgetEuro / effectiveNeed.people;
   }
 
   if (
-    need.budgetScope === "PER_PERSON" &&
-    need.budgetPeriod === "TOTAL_STAY"
+    effectiveNeed.budgetScope === "PER_PERSON" &&
+    effectiveNeed.budgetPeriod === "TOTAL_STAY"
   ) {
-    return need.budgetEuro / need.durationDays;
+    return effectiveNeed.budgetEuro / effectiveNeed.durationDays;
   }
 
-  if (
-    need.budgetScope === "GROUP" &&
-    need.budgetPeriod === "TOTAL_STAY"
-  ) {
-    return need.budgetEuro / need.people / need.durationDays;
-  }
-
-  return null;
+  return (
+    effectiveNeed.budgetEuro /
+    effectiveNeed.people /
+    effectiveNeed.durationDays
+  );
 }
 
-function getTotalDailyBudgetForGroup(need: ExtractedChatNeed) {
-  const budgetPerPersonPerDay = getBudgetPerPersonPerDay(need);
+function getTotalDailyBudgetForGroup(
+  need: ExtractedChatNeed,
+  type: ProductType
+) {
+  const effectiveNeed = getEffectiveNeedForType(need, type);
+  const budgetPerPersonPerDay = getBudgetPerPersonPerDay(need, type);
 
-  if (!budgetPerPersonPerDay || !need.people) {
+  if (!budgetPerPersonPerDay || !effectiveNeed.people) {
     return null;
   }
 
-  return budgetPerPersonPerDay * need.people;
+  return budgetPerPersonPerDay * effectiveNeed.people;
 }
 
 function getRequiredRooms(need: ExtractedChatNeed) {
-  if (!need.people || !need.roomOccupancy) {
+  const effectiveNeed = getEffectiveNeedForType(need, ProductType.VILLA);
+
+  if (!effectiveNeed.people || !effectiveNeed.roomOccupancy) {
     return null;
   }
 
-  if (need.roomOccupancy === "ONE_PER_PERSON") {
-    return need.people;
+  if (effectiveNeed.roomOccupancy === "ONE_PER_PERSON") {
+    return effectiveNeed.people;
   }
 
-  return Math.ceil(need.people / 2);
+  return Math.ceil(effectiveNeed.people / 2);
 }
 
 function getProductCostPerPersonPerDay(
   product: any,
   need: ExtractedChatNeed
 ) {
-  if (!need.people) {
+  const type = product.type as ProductType;
+  const effectiveNeed = getEffectiveNeedForType(need, type);
+
+  if (!effectiveNeed.people) {
     return null;
   }
 
-  if (
-    product.type === ProductType.VILLA ||
-    product.type === ProductType.TRANSPORTATION
-  ) {
-    return product.priceEuro / need.people;
+  if (type === ProductType.VILLA) {
+    return product.priceEuro / effectiveNeed.people;
+  }
+
+  if (type === ProductType.TRANSPORTATION) {
+    const dailyPrice =
+      effectiveNeed.transportationServicePeriod === "HALF_DAY"
+        ? product.priceEuro / 2
+        : product.priceEuro;
+
+    return dailyPrice / effectiveNeed.people;
   }
 
   return product.priceEuro;
@@ -1395,7 +1670,10 @@ function isAffordable(
   product: any,
   need: ExtractedChatNeed
 ) {
-  const budgetPerPersonPerDay = getBudgetPerPersonPerDay(need);
+  const budgetPerPersonPerDay = getBudgetPerPersonPerDay(
+    need,
+    product.type as ProductType
+  );
   const costPerPersonPerDay = getProductCostPerPersonPerDay(product, need);
 
   if (
@@ -1414,7 +1692,9 @@ function isAffordable(
 
 
 function isVillaCapacityValid(product: any, need: ExtractedChatNeed, language?: string) {
-  if (!need.people) return true;
+  const villaNeed = getEffectiveNeedForType(need, ProductType.VILLA);
+
+  if (!villaNeed.people) return true;
 
   const techRooms = getTechRooms(product, language);
   const requiredRooms = getRequiredRooms(need);
@@ -1425,8 +1705,8 @@ function isVillaCapacityValid(product: any, need: ExtractedChatNeed, language?: 
 
   if (techRooms < requiredRooms) return false;
 
-  if (need.people <= 2 && techRooms > 4) return false;
-  if (need.people <= 4 && techRooms > 6) return false;
+  if (villaNeed.people <= 2 && techRooms > 4) return false;
+  if (villaNeed.people <= 4 && techRooms > 6) return false;
 
   return true;
 }
@@ -1436,14 +1716,19 @@ function isTransportationCapacityValid(
   need: ExtractedChatNeed,
   language?: string
 ) {
-  if (!need.people) return true;
+  const transportationNeed = getEffectiveNeedForType(
+    need,
+    ProductType.TRANSPORTATION
+  );
+
+  if (!transportationNeed.people) return true;
 
   const techSeats = getTechSeats(product, language);
 
   if (!techSeats) return true;
 
   // techSeats includes the driver, so passengers must be <= techSeats - 1
-  return techSeats >= need.people + 1;
+  return techSeats >= transportationNeed.people + 1;
 }
 
 function isProductCapacityValid(product: any, need: ExtractedChatNeed, language?: string) {
@@ -1459,8 +1744,10 @@ function isProductCapacityValid(product: any, need: ExtractedChatNeed, language?
 }
 
 function getInterestedTypes(need: ExtractedChatNeed) {
-  if (need.category) {
-    return [need.category];
+  const requestedTypes = getRequestedProductTypes(need);
+
+  if (requestedTypes.length > 0) {
+    return requestedTypes;
   }
 
   return [
@@ -1478,7 +1765,10 @@ function scoreProduct(product: any, need: ExtractedChatNeed, language?: string) 
 
   score += PRODUCT_PRIORITY[product.type as ProductType] * 1000;
 
-  const budgetPerPersonPerDay = getBudgetPerPersonPerDay(need);
+  const budgetPerPersonPerDay = getBudgetPerPersonPerDay(
+    need,
+    product.type as ProductType
+  );
   const costPerPersonPerDay = getProductCostPerPersonPerDay(product, need);
 
   if (budgetPerPersonPerDay) {
@@ -1491,7 +1781,12 @@ function scoreProduct(product: any, need: ExtractedChatNeed, language?: string) 
     }
   }
 
-  if (product.type === ProductType.VILLA && need.people) {
+  const effectiveNeed = getEffectiveNeedForType(
+    need,
+    product.type as ProductType
+  );
+
+  if (product.type === ProductType.VILLA && effectiveNeed.people) {
     const techRooms = getTechRooms(product, language);
     const requiredRooms = getRequiredRooms(need);
 
@@ -1540,8 +1835,9 @@ function buildProductRecommendation(
   need: ExtractedChatNeed,
   language?: string
 ): ProductRecommendation | null {
-  const budgetPerPersonPerDay = getBudgetPerPersonPerDay(need);
-  const totalDailyBudgetForGroup = getTotalDailyBudgetForGroup(need);
+  const type = product.type as ProductType;
+  const budgetPerPersonPerDay = getBudgetPerPersonPerDay(need, type);
+  const totalDailyBudgetForGroup = getTotalDailyBudgetForGroup(need, type);
   const costPerPersonPerDay = getProductCostPerPersonPerDay(product, need);
 
   if (
