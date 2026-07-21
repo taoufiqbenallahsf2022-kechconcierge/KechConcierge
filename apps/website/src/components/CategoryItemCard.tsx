@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { usePathname } from "next/navigation";
-
-import { getLocaleFromPath } from "@/lib/i18n";
+import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 import {
   CatalogItem,
   ProductType,
@@ -42,6 +41,7 @@ export default function CategoryItemCard({
 }: CategoryItemCardProps) {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
+  const t = getDictionary(locale);
 
   const productPath = buildProductPath(
     locale,
@@ -95,7 +95,7 @@ export default function CategoryItemCard({
           </div>
 
           <div className="mt-5 inline-flex items-center gap-2 font-black text-orange-700">
-            <span>Explore</span>
+            <span>{t.categories.explore}</span>
             <ArrowRight size={17} />
           </div>
         </div>
