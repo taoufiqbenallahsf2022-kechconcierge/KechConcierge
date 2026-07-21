@@ -39,14 +39,10 @@ export type VisitorStage = (typeof VisitorStage)[keyof typeof VisitorStage]
 
 
 export const RequestType = {
-  GENERAL: 'GENERAL',
-  VILLA: 'VILLA',
-  SWIMMINGPOOL: 'SWIMMINGPOOL',
-  ACTIVITY: 'ACTIVITY',
-  TRANSPORTATION: 'TRANSPORTATION',
-  SPA: 'SPA',
-  RESTAURANT: 'RESTAURANT',
-  RESERVATION: 'RESERVATION',
+  ADVISOR_GUIDE: 'ADVISOR_GUIDE',
+  COMPLAINT: 'COMPLAINT',
+  SUPPORT: 'SUPPORT',
+  PARTNERSHIP: 'PARTNERSHIP',
   OTHER: 'OTHER'
 } as const
 
@@ -55,6 +51,7 @@ export type RequestType = (typeof RequestType)[keyof typeof RequestType]
 
 export const ContactRequesterStage = {
   VISITOR: 'VISITOR',
+  INDIVIDUAL: 'INDIVIDUAL',
   LEAD: 'LEAD',
   PROSPECT: 'PROSPECT',
   ACCOUNT: 'ACCOUNT'

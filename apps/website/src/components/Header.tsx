@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ChevronDown, Menu, UserRound, X } from "lucide-react";
 import AuthModal from "./AuthModal";
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
+import { useAuthStore } from "@/store/auth.store";
 
 type SimulatedUser = {
   firstName: string;
@@ -175,11 +176,24 @@ export default function Header() {
 
   function logout() {
     localStorage.removeItem("kech_user");
-    window.dispatchEvent(new Event("kech-auth-change"));
+    localStorage.removeItem("kech_access_token");
+
+    useAuthStore.getState().logout();
+
     setUser(null);
     setUserMenuOpen(false);
     setMenuOpen(false);
-    router.push(buildStaticLocalizedPath("/", currentLocale));
+
+    window.dispatchEvent(
+      new Event("kech-auth-change")
+    );
+
+    router.push(
+      buildStaticLocalizedPath(
+        "/",
+        currentLocale
+      )
+    );
   }
 
   function goToAccount(section: "profile" | "preferences") {

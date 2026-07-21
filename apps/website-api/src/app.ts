@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import cors from "cors";
 import productRoutes from "./routes/product.routes";
 import authRoutes from "./routes/auth.routes";
+import contactRequestRoutes from "./routes/contact-request.routes";
 
 const app: Express = express();
 
@@ -40,5 +41,6 @@ app.use(express.json());
 
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/contact-requests", contactRequestRoutes);
 
 export default app;

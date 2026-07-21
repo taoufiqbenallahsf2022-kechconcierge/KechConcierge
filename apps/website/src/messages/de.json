@@ -154,5 +154,42 @@
     "displayImage": "Bild anzeigen",
     "invalidCategory": "Ungültige Produktkategorie.",
     "loadingError": "Dieses Produkt konnte nicht geladen werden."
+  },
+  "contactPage": {
+    "eyebrow": "Kontakt",
+    "title": "Sagen Sie uns, was Sie benötigen.",
+    "description": "Fragen Sie nach einer Villa, Aktivität, einem Transfer, SPA, Restaurant oder einem vollständigen Marrakesch-Plan.",
+    "otherOptions": "Weitere Kontaktmöglichkeiten",
+    "whatsapp": "WhatsApp",
+    "emailLabel": "E-Mail",
+    "firstName": "Vorname *",
+    "lastName": "Nachname *",
+    "email": "E-Mail *",
+    "countryCode": "Ländervorwahl",
+    "mobilePhone": "Mobiltelefon",
+    "requestType": "Art der Anfrage *",
+    "subject": "Betreff",
+    "comment": "Kommentar / Anfrage *",
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet...",
+    "success": "Ihre Nachricht wurde erfolgreich gesendet.",
+    "genericError": "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+    "validation": {
+      "firstName": "Bitte geben Sie Ihren Vornamen ein.",
+      "lastName": "Bitte geben Sie Ihren Nachnamen ein.",
+      "email": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "countryCode": "Bitte wählen Sie die Ländervorwahl.",
+      "phone": "Bitte geben Sie Ihre Nummer ein oder entfernen Sie die Vorwahl.",
+      "requestType": "Bitte wählen Sie die Art der Anfrage.",
+      "comment": "Bitte schreiben Sie Ihre Nachricht."
+    },
+    "requestTypes": {
+      "ADVISOR_GUIDE": "Berater oder Reiseführer gesucht",
+      "COMPLAINT": "Beschwerde",
+      "SUPPORT": "Support",
+      "PARTNERSHIP": "Partnerschaft",
+      "OTHER": "Sonstiges"
+    }
   }
 }

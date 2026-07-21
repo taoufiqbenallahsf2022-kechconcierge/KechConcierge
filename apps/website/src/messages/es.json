@@ -154,5 +154,42 @@
     "displayImage": "Mostrar imagen",
     "invalidCategory": "Categoría de producto no válida.",
     "loadingError": "No se puede cargar este producto."
+  },
+  "contactPage": {
+    "eyebrow": "Contacto",
+    "title": "Cuéntanos qué necesitas.",
+    "description": "Solicita una villa, actividad, traslado, SPA, restaurante o un plan completo en Marrakech.",
+    "otherOptions": "Otras opciones de contacto",
+    "whatsapp": "WhatsApp",
+    "emailLabel": "Correo electrónico",
+    "firstName": "Nombre *",
+    "lastName": "Apellido *",
+    "email": "Correo electrónico *",
+    "countryCode": "Código de país",
+    "mobilePhone": "Teléfono móvil",
+    "requestType": "Tipo de solicitud *",
+    "subject": "Asunto",
+    "comment": "Comentario / solicitud *",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "Tu mensaje se ha enviado correctamente.",
+    "genericError": "No se pudo enviar el mensaje. Inténtalo de nuevo.",
+    "validation": {
+      "firstName": "Introduce tu nombre.",
+      "lastName": "Introduce tu apellido.",
+      "email": "Introduce tu correo electrónico.",
+      "invalidEmail": "Introduce una dirección de correo válida.",
+      "countryCode": "Selecciona el código de país.",
+      "phone": "Introduce tu teléfono o elimina el código de país.",
+      "requestType": "Selecciona el tipo de solicitud.",
+      "comment": "Escribe tu mensaje."
+    },
+    "requestTypes": {
+      "ADVISOR_GUIDE": "Busco asesor o guía",
+      "COMPLAINT": "Reclamación",
+      "SUPPORT": "Soporte",
+      "PARTNERSHIP": "Colaboración",
+      "OTHER": "Otro"
+    }
   }
 }
