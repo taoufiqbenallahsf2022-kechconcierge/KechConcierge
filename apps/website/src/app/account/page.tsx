@@ -211,7 +211,7 @@ export default function AccountPage() {
                   Communication preferences
                 </h2>
                 <p className="text-sm text-zinc-500">
-                  Choose how Moorly can contact you.
+                  Choose how Moorish Concierge can contact you.
                 </p>
               </div>
             </div>

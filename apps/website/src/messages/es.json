@@ -23,7 +23,7 @@
     "invalidEmail": "Introduce una dirección de correo electrónico válida.",
     "passwordTooShort": "La contraseña debe contener al menos 6 caracteres.",
     "passwordsDoNotMatch": "Las contraseñas no coinciden.",
-    "brand": "Moorly",
+    "brand": "Moorish Concierge",
     "welcomeBack": "Bienvenido de nuevo",
     "createAccount": "Crea tu cuenta",
     "loginDescription": "Inicia sesión para gestionar tus solicitudes y conversaciones.",
@@ -78,7 +78,7 @@
   "hero": {
     "eyebrow": "Servicios de conserjería en Marrakech",
     "title": "Tu estancia en Marrakech, experiencias, transporte y comodidad en un solo lugar.",
-    "description": "Moorly ayuda a los viajeros a encontrar villas, apartamentos, excursiones, transporte, experiencias de SPA, restaurantes y asistencia local en la Ciudad Roja.",
+    "description": "Moorish Concierge ayuda a los viajeros a encontrar villas, apartamentos, excursiones, transporte, experiencias de SPA, restaurantes y asistencia local en la Ciudad Roja.",
     "exploreVillas": "Explorar villas",
     "viewServices": "Ver servicios",
     "startingFrom": "Desde",
@@ -141,5 +141,18 @@
     "missingToken": "Falta el token de verificación.",
     "contactSupport": "Contactar soporte",
     "backToWebsite": "Volver al sitio"
+  },
+  "productDetails": {
+    "backTo": "Volver a",
+    "highlights": "Puntos destacados",
+    "details": "Detalles",
+    "contactUs": "Contáctanos",
+    "openChat": "Abrir el chat",
+    "whatsapp": "Contáctanos por WhatsApp",
+    "previousImage": "Imagen anterior",
+    "nextImage": "Imagen siguiente",
+    "displayImage": "Mostrar imagen",
+    "invalidCategory": "Categoría de producto no válida.",
+    "loadingError": "No se puede cargar este producto."
   }
 }

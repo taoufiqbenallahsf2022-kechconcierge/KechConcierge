@@ -13,7 +13,7 @@ export default function FloatingContact() {
         <div className="mb-4 w-[min(340px,calc(100vw-2rem))] overflow-hidden rounded-3xl bg-white card-shadow">
           <div className="flex items-center justify-between bg-zinc-950 px-5 py-4 text-white">
             <div>
-              <p className="font-black">Contact Moorly</p>
+              <p className="font-black">Contact Moorish Concierge</p>
               <p className="text-xs text-zinc-300">Choose how you want to contact us</p>
             </div>
             <button onClick={() => setOpen(false)}>
