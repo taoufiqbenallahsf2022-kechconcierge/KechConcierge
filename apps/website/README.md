@@ -1,6 +1,6 @@
-# moorlytravels Website
+# MoorishConcierge Website
 
-Updated frontend version for the moorlytravels tourism website.
+Updated frontend version for the MoorishConcierge tourism website.
 
 ## Install
 
@@ -22,7 +22,7 @@ http://localhost:3000
 
 ## Included
 
-- Correct brand: moorlytravels
+- Correct brand: MoorishConcierge
 - Home page
 - About page
 - Services page

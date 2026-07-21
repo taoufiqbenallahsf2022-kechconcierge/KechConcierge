@@ -19,7 +19,7 @@ export default function Footer() {
     <footer className="mt-16 bg-zinc-950 text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-4">
         <div className="md:col-span-2">
-          <p className="text-2xl font-black">Moorly</p>
+          <p className="text-2xl font-black">Moorish Concierge</p>
 
           <p className="mt-4 max-w-md text-zinc-400">
             {t.footer.description}
@@ -64,7 +64,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10 px-4 py-5 text-center text-sm text-zinc-500">
-        © {new Date().getFullYear()} Moorly. {t.footer.copyright}
+        © {new Date().getFullYear()} Moorish Concierge. {t.footer.copyright}
       </div>
     </footer>
   );

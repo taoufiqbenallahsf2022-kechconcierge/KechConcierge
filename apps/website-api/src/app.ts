@@ -7,10 +7,10 @@ const app: Express = express();
 
 const allowedOrigins: Record<string, string[] | string> = {
   local: "*",
-  test: ["https://staging.moorlytravels.com"],
+  test: ["https://staging.moorishconcierge.com", "https://www.staging.moorishconcierge.com"],
   production: [
-    "https://moorlytravels.com",
-    "https://www.moorlytravels.com",
+    "https://moorishconcierge.com",
+    "https://www.moorishconcierge.com"
   ],
 };
 

@@ -23,7 +23,7 @@
     "invalidEmail": "Introduza um endereço de email válido.",
     "passwordTooShort": "A palavra-passe deve conter pelo menos 6 caracteres.",
     "passwordsDoNotMatch": "As palavras-passe não coincidem.",
-    "brand": "Moorly",
+    "brand": "Moorish Concierge",
     "welcomeBack": "Bem-vindo de volta",
     "createAccount": "Crie a sua conta",
     "loginDescription": "Entre para gerir os seus pedidos e conversas.",
@@ -78,7 +78,7 @@
   "hero": {
     "eyebrow": "Serviços de concierge em Marraquexe",
     "title": "A sua estadia em Marraquexe, experiências, transporte e conforto num só lugar.",
-    "description": "A Moorly ajuda os viajantes a encontrar villas, apartamentos, excursões, transporte, experiências de SPA, restaurantes e apoio local na Cidade Vermelha.",
+    "description": "A Moorish Concierge ajuda os viajantes a encontrar villas, apartamentos, excursões, transporte, experiências de SPA, restaurantes e apoio local na Cidade Vermelha.",
     "exploreVillas": "Explorar villas",
     "viewServices": "Ver serviços",
     "startingFrom": "A partir de",
@@ -141,5 +141,18 @@
     "missingToken": "O token de verificação está em falta.",
     "contactSupport": "Contactar suporte",
     "backToWebsite": "Voltar ao site"
+  },
+  "productDetails": {
+    "backTo": "Voltar para",
+    "highlights": "Destaques",
+    "details": "Detalhes",
+    "contactUs": "Contacte-nos",
+    "openChat": "Abrir o chat",
+    "whatsapp": "Contacte-nos pelo WhatsApp",
+    "previousImage": "Imagem anterior",
+    "nextImage": "Imagem seguinte",
+    "displayImage": "Mostrar imagem",
+    "invalidCategory": "Categoria de produto inválida.",
+    "loadingError": "Não foi possível carregar este produto."
   }
 }

@@ -21,7 +21,7 @@ export async function sendAccountVerificationEmail(params: {
   language?: string;
 }) {
   const fromEmail =
-    process.env.RESEND_FROM_EMAIL || "Moorly <onboarding@resend.dev>";
+    process.env.RESEND_FROM_EMAIL || "Moorish Concierge <onboarding@resend.dev>";
 
   const t = getVerificationEmailTranslation(params.language);
   const verificationUrl = buildVerificationUrl(params.token, params.language);

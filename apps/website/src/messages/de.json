@@ -23,7 +23,7 @@
     "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
     "passwordTooShort": "Das Passwort muss mindestens 6 Zeichen enthalten.",
     "passwordsDoNotMatch": "Die Passwörter stimmen nicht überein.",
-    "brand": "Moorly",
+    "brand": "Moorish Concierge",
     "welcomeBack": "Willkommen zurück",
     "createAccount": "Konto erstellen",
     "loginDescription": "Melden Sie sich an, um Ihre Anfragen und Gespräche zu verwalten.",
@@ -78,7 +78,7 @@
   "hero": {
     "eyebrow": "Concierge-Services in Marrakesch",
     "title": "Ihr Aufenthalt in Marrakesch, Erlebnisse, Transport und Komfort an einem Ort.",
-    "description": "Moorly hilft Gästen, Villen, Apartments, Ausflüge, Transport, SPA-Erlebnisse, Restaurants und lokale Unterstützung in der Roten Stadt zu finden.",
+    "description": "Moorish Concierge hilft Gästen, Villen, Apartments, Ausflüge, Transport, SPA-Erlebnisse, Restaurants und lokale Unterstützung in der Roten Stadt zu finden.",
     "exploreVillas": "Villen entdecken",
     "viewServices": "Services ansehen",
     "startingFrom": "Ab",
@@ -141,5 +141,18 @@
     "missingToken": "Verifizierungstoken fehlt.",
     "contactSupport": "Support kontaktieren",
     "backToWebsite": "Zurück zur Website"
+  },
+  "productDetails": {
+    "backTo": "Zurück zu",
+    "highlights": "Highlights",
+    "details": "Details",
+    "contactUs": "Kontakt aufnehmen",
+    "openChat": "Chat öffnen",
+    "whatsapp": "Über WhatsApp kontaktieren",
+    "previousImage": "Vorheriges Bild",
+    "nextImage": "Nächstes Bild",
+    "displayImage": "Bild anzeigen",
+    "invalidCategory": "Ungültige Produktkategorie.",
+    "loadingError": "Dieses Produkt konnte nicht geladen werden."
   }
 }
