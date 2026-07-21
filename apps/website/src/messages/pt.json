@@ -154,5 +154,42 @@
     "displayImage": "Mostrar imagem",
     "invalidCategory": "Categoria de produto inválida.",
     "loadingError": "Não foi possível carregar este produto."
+  },
+  "contactPage": {
+    "eyebrow": "Contacto",
+    "title": "Diga-nos do que precisa.",
+    "description": "Peça uma villa, atividade, transfer, SPA, restaurante ou um plano completo em Marraquexe.",
+    "otherOptions": "Outras opções de contacto",
+    "whatsapp": "WhatsApp",
+    "emailLabel": "E-mail",
+    "firstName": "Nome *",
+    "lastName": "Apelido *",
+    "email": "E-mail *",
+    "countryCode": "Indicativo do país",
+    "mobilePhone": "Telemóvel",
+    "requestType": "Tipo de pedido *",
+    "subject": "Assunto",
+    "comment": "Comentário / pedido *",
+    "send": "Enviar mensagem",
+    "sending": "A enviar...",
+    "success": "A sua mensagem foi enviada com sucesso.",
+    "genericError": "Não foi possível enviar a mensagem. Tente novamente.",
+    "validation": {
+      "firstName": "Preencha o seu nome.",
+      "lastName": "Preencha o seu apelido.",
+      "email": "Preencha o seu e-mail.",
+      "invalidEmail": "Introduza um endereço de e-mail válido.",
+      "countryCode": "Selecione o indicativo do país.",
+      "phone": "Introduza o número ou remova o indicativo.",
+      "requestType": "Selecione o tipo de pedido.",
+      "comment": "Escreva a sua mensagem."
+    },
+    "requestTypes": {
+      "ADVISOR_GUIDE": "Procuro consultor ou guia",
+      "COMPLAINT": "Reclamação",
+      "SUPPORT": "Suporte",
+      "PARTNERSHIP": "Parceria",
+      "OTHER": "Outro"
+    }
   }
 }

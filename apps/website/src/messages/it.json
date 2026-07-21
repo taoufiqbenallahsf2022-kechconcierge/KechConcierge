@@ -154,5 +154,42 @@
     "displayImage": "Mostra immagine",
     "invalidCategory": "Categoria di prodotto non valida.",
     "loadingError": "Impossibile caricare questo prodotto."
+  },
+  "contactPage": {
+    "eyebrow": "Contatti",
+    "title": "Dicci di cosa hai bisogno.",
+    "description": "Richiedi una villa, attività, transfer, SPA, ristorante o un programma completo a Marrakech.",
+    "otherOptions": "Altre opzioni di contatto",
+    "whatsapp": "WhatsApp",
+    "emailLabel": "E-mail",
+    "firstName": "Nome *",
+    "lastName": "Cognome *",
+    "email": "E-mail *",
+    "countryCode": "Prefisso internazionale",
+    "mobilePhone": "Telefono cellulare",
+    "requestType": "Tipo di richiesta *",
+    "subject": "Oggetto",
+    "comment": "Commento / richiesta *",
+    "send": "Invia messaggio",
+    "sending": "Invio...",
+    "success": "Il messaggio è stato inviato correttamente.",
+    "genericError": "Impossibile inviare il messaggio. Riprova.",
+    "validation": {
+      "firstName": "Inserisci il nome.",
+      "lastName": "Inserisci il cognome.",
+      "email": "Inserisci l’indirizzo e-mail.",
+      "invalidEmail": "Inserisci un indirizzo e-mail valido.",
+      "countryCode": "Seleziona il prefisso internazionale.",
+      "phone": "Inserisci il numero o rimuovi il prefisso.",
+      "requestType": "Seleziona il tipo di richiesta.",
+      "comment": "Scrivi il tuo messaggio."
+    },
+    "requestTypes": {
+      "ADVISOR_GUIDE": "Cerco consulente o guida",
+      "COMPLAINT": "Reclamo",
+      "SUPPORT": "Assistenza",
+      "PARTNERSHIP": "Partnership",
+      "OTHER": "Altro"
+    }
   }
 }
