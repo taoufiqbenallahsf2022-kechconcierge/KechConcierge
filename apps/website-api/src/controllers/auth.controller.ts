@@ -83,8 +83,7 @@ export async function signup(req: Request, res: Response) {
 
     return res.status(201).json({
       message: result.message,
-      individualId: result.individualId,
-      leadId: result.leadId,
+      individualId: result.individualId
     });
 
   } catch (error) {

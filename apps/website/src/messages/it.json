@@ -211,5 +211,48 @@
       "PARTNERSHIP": "Partnership",
       "OTHER": "Altro"
     }
+  },
+  "accountPage": {
+    "eyebrow": "Account",
+    "profileTitle": "Il mio profilo",
+    "preferencesTitle": "Centro preferenze",
+    "description": "Gestisci le tue informazioni personali e le preferenze di comunicazione.",
+    "profileInformation": "Informazioni del profilo",
+    "profileInformationDescription": "Aggiorna i tuoi dati personali.",
+    "communicationPreferences": "Preferenze di comunicazione",
+    "communicationPreferencesDescription": "Scegli come Moorish Concierge può contattarti.",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Indirizzo e-mail",
+    "mobilePhone": "Telefono cellulare",
+    "notProvided": "Non indicato",
+    "protectedFieldsNote": "L’indirizzo e-mail e il numero di telefono non possono essere modificati direttamente. Invia una richiesta se desideri aggiornarli.",
+    "contactSupport": "Contattaci",
+    "saveProfile": "Salva profilo",
+    "savePreferences": "Salva preferenze",
+    "saving": "Salvataggio...",
+    "profileSaved": "Il profilo è stato aggiornato correttamente.",
+    "preferencesSaved": "Le preferenze di comunicazione sono state aggiornate correttamente.",
+    "loadError": "Impossibile caricare le informazioni del tuo account.",
+    "profileSaveError": "Impossibile aggiornare il profilo.",
+    "preferencesSaveError": "Impossibile aggiornare le preferenze di comunicazione.",
+    "country": "Paese",
+    "language": "Lingua preferita",
+    "selectCountry": "Seleziona un Paese",
+    "validation": {
+      "firstName": "Inserisci il nome.",
+      "lastName": "Inserisci il cognome.",
+      "language": "Seleziona la lingua preferita."
+    },
+    "channels": {
+      "emailTitle": "Comunicazioni e-mail",
+      "emailDescription": "Ricevi offerte, aggiornamenti e suggerimenti di viaggio via e-mail.",
+      "smsTitle": "Comunicazioni SMS",
+      "smsDescription": "Ricevi offerte e aggiornamenti importanti tramite SMS.",
+      "whatsappTitle": "Comunicazioni WhatsApp",
+      "whatsappDescription": "Ricevi offerte e aggiornamenti concierge tramite WhatsApp.",
+      "phoneTitle": "Comunicazioni telefoniche",
+      "phoneDescription": "Consenti al nostro team concierge di contattarti telefonicamente."
+    }
   }
 }

@@ -211,5 +211,48 @@
       "PARTNERSHIP": "Partenariat",
       "OTHER": "Autre"
     }
+  },
+  "accountPage": {
+    "eyebrow": "Compte",
+    "profileTitle": "Mon profil",
+    "preferencesTitle": "Centre de préférences",
+    "description": "Gérez vos informations personnelles et vos préférences de communication.",
+    "profileInformation": "Informations du profil",
+    "profileInformationDescription": "Mettez à jour vos informations personnelles.",
+    "communicationPreferences": "Préférences de communication",
+    "communicationPreferencesDescription": "Choisissez comment Moorish Concierge peut vous contacter.",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Adresse e-mail",
+    "mobilePhone": "Téléphone mobile",
+    "notProvided": "Non renseigné",
+    "protectedFieldsNote": "Votre adresse e-mail et votre numéro de téléphone ne peuvent pas être modifiés directement. Veuillez envoyer une demande pour les mettre à jour.",
+    "contactSupport": "Nous contacter",
+    "saveProfile": "Enregistrer le profil",
+    "savePreferences": "Enregistrer les préférences",
+    "saving": "Enregistrement...",
+    "profileSaved": "Votre profil a été mis à jour avec succès.",
+    "preferencesSaved": "Vos préférences de communication ont été mises à jour avec succès.",
+    "loadError": "Impossible de charger les informations de votre compte.",
+    "profileSaveError": "Impossible de mettre à jour votre profil.",
+    "preferencesSaveError": "Impossible de mettre à jour vos préférences de communication.",
+    "country": "Pays",
+    "language": "Langue préférée",
+    "selectCountry": "Sélectionnez un pays",
+    "validation": {
+      "firstName": "Veuillez saisir votre prénom.",
+      "lastName": "Veuillez saisir votre nom.",
+      "language": "Veuillez sélectionner votre langue préférée."
+    },
+    "channels": {
+      "emailTitle": "Communications par e-mail",
+      "emailDescription": "Recevez des offres, actualités et suggestions de voyage par e-mail.",
+      "smsTitle": "Communications par SMS",
+      "smsDescription": "Recevez des offres et informations importantes par SMS.",
+      "whatsappTitle": "Communications WhatsApp",
+      "whatsappDescription": "Recevez des offres et informations de conciergerie sur WhatsApp.",
+      "phoneTitle": "Communications téléphoniques",
+      "phoneDescription": "Autorisez notre équipe de conciergerie à vous contacter par téléphone."
+    }
   }
 }

@@ -211,5 +211,48 @@
       "PARTNERSHIP": "Colaboración",
       "OTHER": "Otro"
     }
+  },
+  "accountPage": {
+    "eyebrow": "Cuenta",
+    "profileTitle": "Mi perfil",
+    "preferencesTitle": "Centro de preferencias",
+    "description": "Gestiona tu información personal y tus preferencias de comunicación.",
+    "profileInformation": "Información del perfil",
+    "profileInformationDescription": "Actualiza tus datos personales.",
+    "communicationPreferences": "Preferencias de comunicación",
+    "communicationPreferencesDescription": "Elige cómo puede contactarte Moorish Concierge.",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electrónico",
+    "mobilePhone": "Teléfono móvil",
+    "notProvided": "No proporcionado",
+    "protectedFieldsNote": "Tu correo electrónico y número de teléfono no pueden modificarse directamente. Envía una solicitud si necesitas actualizarlos.",
+    "contactSupport": "Contáctanos",
+    "saveProfile": "Guardar perfil",
+    "savePreferences": "Guardar preferencias",
+    "saving": "Guardando...",
+    "profileSaved": "Tu perfil se ha actualizado correctamente.",
+    "preferencesSaved": "Tus preferencias de comunicación se han actualizado correctamente.",
+    "loadError": "No se pudo cargar la información de tu cuenta.",
+    "profileSaveError": "No se pudo actualizar tu perfil.",
+    "preferencesSaveError": "No se pudieron actualizar tus preferencias de comunicación.",
+    "country": "País",
+    "language": "Idioma preferido",
+    "selectCountry": "Selecciona un país",
+    "validation": {
+      "firstName": "Introduce tu nombre.",
+      "lastName": "Introduce tu apellido.",
+      "language": "Selecciona tu idioma preferido."
+    },
+    "channels": {
+      "emailTitle": "Comunicaciones por correo",
+      "emailDescription": "Recibe ofertas, novedades y sugerencias de viaje por correo.",
+      "smsTitle": "Comunicaciones por SMS",
+      "smsDescription": "Recibe ofertas y novedades importantes por SMS.",
+      "whatsappTitle": "Comunicaciones por WhatsApp",
+      "whatsappDescription": "Recibe ofertas y novedades de conserjería por WhatsApp.",
+      "phoneTitle": "Comunicaciones telefónicas",
+      "phoneDescription": "Permite que nuestro equipo de conserjería te contacte por teléfono."
+    }
   }
 }
