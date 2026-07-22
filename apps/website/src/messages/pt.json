@@ -286,5 +286,80 @@
         "description": "Hammams, massagens e tratamentos de bem-estar em Marraquexe."
       }
     }
+  },
+  "aboutPage": {
+    "eyebrow": "Sobre a Moorish Concierge",
+    "title": "Marraquexe, vivida através de um olhar local.",
+    "heroDescription": "A Moorish Concierge é um serviço de concierge privado criado para ajudar os visitantes a aproveitar Marraquexe com mais conforto, confiança e simplicidade. Desde o alojamento aos transportes, restaurantes, bem-estar e atividades, cada recomendação baseia-se no conhecimento local e adapta-se aos seus planos.",
+    "exploreServices": "Explorar os nossos serviços",
+    "contactUs": "Contacte-nos",
+    "highlights": {
+      "location": "Um serviço de concierge dedicado a Marraquexe.",
+      "availability": "Apoio durante toda a estadia, todos os dias da semana.",
+      "localKnowledge": "Recomendações selecionadas com conhecimento local e experiência prática."
+    },
+    "storyEyebrow": "Quem somos",
+    "storyTitle": "Mais do que uma lista de locais. Uma forma segura de entrar em Marraquexe.",
+    "storyParagraph1": "Marraquexe oferece uma variedade extraordinária de locais, pessoas e experiências. Também pode ser difícil perceber quais opções são realmente adequadas, fiáveis ou merecem o seu tempo. A Moorish Concierge foi criada para simplificar essas escolhas.",
+    "storyParagraph2": "O serviço reúne estadias privadas, transportes, restaurantes, piscinas, atividades, excursões, bem-estar e vida noturna numa experiência cuidadosamente organizada. Os hóspedes podem pedir apenas um serviço ou receber apoio no planeamento de várias partes da estadia.",
+    "storyParagraph3": "O objetivo não é oferecer o maior catálogo possível. É fornecer recomendações claras, apoio fiável e opções que correspondam verdadeiramente ao tamanho do grupo, orçamento, interesses e estilo de cada hóspede.",
+    "servicesEyebrow": "O que organizamos",
+    "servicesTitle": "As partes essenciais de uma estadia em Marraquexe, geridas com cuidado.",
+    "servicesDescription": "Cada serviço pode ser solicitado individualmente ou combinado numa estadia mais completa.",
+    "services": {
+      "stays": {
+        "title": "Estadias privadas",
+        "description": "Villas e alojamentos selecionados para casais, famílias e grupos."
+      },
+      "transportation": {
+        "title": "Transporte",
+        "description": "Motoristas privados, chegadas e partidas do aeroporto e transfers em Marraquexe."
+      },
+      "experiences": {
+        "title": "Atividades e excursões",
+        "description": "Deserto, visitas culturais, atividades ao ar livre e experiências perto de Marraquexe."
+      },
+      "pools": {
+        "title": "Piscinas",
+        "description": "Locais selecionados para dias de descanso, almoços e momentos tranquilos."
+      },
+      "dining": {
+        "title": "Restaurantes",
+        "description": "Restaurantes, rooftops e opções gastronómicas para diferentes gostos e orçamentos."
+      },
+      "nightlife": {
+        "title": "Vida noturna",
+        "description": "Lounges, clubes e recomendações para a noite, com apoio nas reservas."
+      },
+      "wellness": {
+        "title": "Bem-estar",
+        "description": "Spas, hammams, massagens e tratamentos relaxantes em locais de confiança."
+      },
+      "concierge": {
+        "title": "Apoio de concierge",
+        "description": "Orientação personalizada antes e durante a estadia para coordenar cada pedido."
+      }
+    },
+    "principlesEyebrow": "A nossa abordagem",
+    "principlesTitle": "Conhecimento local, opções fiáveis e atenção pessoal.",
+    "principles": {
+      "local": {
+        "title": "Através de um olhar marroquino",
+        "description": "As recomendações baseiam-se numa compreensão local de Marraquexe, das suas zonas, ritmo e padrões."
+      },
+      "trusted": {
+        "title": "Selecionado com cuidado",
+        "description": "A prioridade são opções fiáveis, informação clara e serviços adequados às necessidades reais."
+      },
+      "personal": {
+        "title": "Pensado para cada hóspede",
+        "description": "O tamanho do grupo, orçamento, duração, preferências e prioridades são considerados antes de qualquer recomendação."
+      }
+    },
+    "ctaEyebrow": "Planeie a sua estadia",
+    "ctaTitle": "Diga-nos do que precisa e comece a preparar a sua estadia em Marraquexe.",
+    "ctaDescription": "Peça uma villa, transporte, uma atividade, um restaurante ou apoio com várias partes da viagem.",
+    "openConcierge": "Abrir chat de concierge",
+    "sendRequest": "Enviar pedido"
   }
 }
