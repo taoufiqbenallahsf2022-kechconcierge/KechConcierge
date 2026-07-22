@@ -254,6 +254,38 @@
       "phoneTitle": "Phone communications",
       "phoneDescription": "Allow our concierge team to contact you by phone."
     }
+  },
+  "servicesPage": {
+    "eyebrow": "Services",
+    "title": "Everything you need for your stay in Marrakech.",
+    "description": "Explore stays, transportation, activities, swimming pools, restaurants and wellness options.",
+    "viewOptions": "View options",
+    "categories": {
+      "villa": {
+        "label": "Villas",
+        "description": "Private villas in Marrakech for couples, families and groups."
+      },
+      "transportation": {
+        "label": "Transportation",
+        "description": "Private drivers, airport arrivals, departures and transfers."
+      },
+      "swimmingpool": {
+        "label": "Swimming pools",
+        "description": "Pool access and relaxing days at selected locations in Marrakech."
+      },
+      "activity": {
+        "label": "Activities",
+        "description": "Activities, excursions and memorable things to do around Marrakech."
+      },
+      "restaurant": {
+        "label": "Restaurants",
+        "description": "Restaurants, rooftops and dining options for different moments and preferences."
+      },
+      "spa": {
+        "label": "Spa",
+        "description": "Hammams, massages and wellness treatments in Marrakech."
+      }
+    }
   }
 
 }
