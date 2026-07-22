@@ -276,7 +276,7 @@ export default function DetailsPage() {
 
   const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
-  "212600000000";
+  "212613859834";
 
   const [selectedImage, setSelectedImage] =
     useState(0);

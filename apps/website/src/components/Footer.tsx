@@ -11,6 +11,10 @@ function localizePath(path: string, locale: string) {
 }
 
 export default function Footer() {
+  const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
+  "+212 6 13 85 98 34";
+
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const t = getDictionary(locale);
@@ -58,7 +62,7 @@ export default function Footer() {
           <div className="mt-4 text-zinc-400">
             <p>{t.footer.location}</p>
             <p>contact@kechconcierge.local</p>
-            <p>+212 600 000 000</p>
+            <p>{WHATSAPP_NUMBER}</p>
           </div>
         </div>
       </div>

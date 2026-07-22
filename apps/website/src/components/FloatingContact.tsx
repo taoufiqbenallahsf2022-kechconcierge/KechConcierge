@@ -5,6 +5,10 @@ import { useState } from "react";
 import { MessageCircle, X, Send, Phone } from "lucide-react";
 
 export default function FloatingContact() {
+  const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
+  "+212 6 13 85 98 34";
+
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,7 +27,7 @@ export default function FloatingContact() {
 
           <div className="grid gap-3 p-4">
             <a
-              href="https://wa.me/212600000000"
+              href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\s+/g, "")}`}
               target="_blank"
               className="flex items-center gap-3 rounded-2xl bg-green-50 px-4 py-4 font-black text-green-700 transition hover:bg-green-100"
             >
