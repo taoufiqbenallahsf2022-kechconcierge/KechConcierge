@@ -286,5 +286,80 @@
         "description": "Hammam, massaggi e trattamenti benessere a Marrakech."
       }
     }
+  },
+  "aboutPage": {
+    "eyebrow": "Chi è Moorish Concierge",
+    "title": "Marrakech, vissuta attraverso uno sguardo locale.",
+    "heroDescription": "Moorish Concierge è un servizio di concierge privato creato per aiutare i visitatori a vivere Marrakech con maggiore comfort, fiducia e semplicità. Dal soggiorno ai trasporti, dalla ristorazione al benessere e alle attività, ogni consiglio nasce dalla conoscenza locale e si adatta ai tuoi programmi.",
+    "exploreServices": "Scopri i nostri servizi",
+    "contactUs": "Contattaci",
+    "highlights": {
+      "location": "Un servizio concierge dedicato a Marrakech.",
+      "availability": "Assistenza durante tutto il soggiorno, ogni giorno della settimana.",
+      "localKnowledge": "Consigli selezionati grazie alla conoscenza locale e all’esperienza pratica."
+    },
+    "storyEyebrow": "Chi siamo",
+    "storyTitle": "Più di una lista di luoghi. Un modo affidabile per entrare a Marrakech.",
+    "storyParagraph1": "Marrakech offre una straordinaria varietà di luoghi, persone ed esperienze. Può però essere difficile capire quali opzioni siano davvero adatte, affidabili o meritevoli. Moorish Concierge nasce per rendere queste scelte più semplici.",
+    "storyParagraph2": "Il servizio riunisce soggiorni privati, trasporti, ristoranti, piscine, attività, escursioni, benessere e vita notturna in un’esperienza organizzata con attenzione. Gli ospiti possono richiedere un singolo servizio oppure ricevere assistenza per pianificare più parti del soggiorno.",
+    "storyParagraph3": "L’obiettivo non è offrire il catalogo più grande possibile. È fornire consigli chiari, assistenza affidabile e opzioni realmente adatte al numero di persone, al budget, agli interessi e allo stile di ogni ospite.",
+    "servicesEyebrow": "Cosa organizziamo",
+    "servicesTitle": "Gli elementi essenziali di un soggiorno a Marrakech, gestiti con cura.",
+    "servicesDescription": "Ogni servizio può essere richiesto singolarmente o combinato in un soggiorno più completo.",
+    "services": {
+      "stays": {
+        "title": "Soggiorni privati",
+        "description": "Ville e alloggi selezionati per coppie, famiglie e gruppi."
+      },
+      "transportation": {
+        "title": "Trasporti",
+        "description": "Autisti privati, arrivi e partenze aeroportuali e trasferimenti a Marrakech."
+      },
+      "experiences": {
+        "title": "Attività ed escursioni",
+        "description": "Deserto, visite culturali, attività all’aperto ed esperienze nei dintorni di Marrakech."
+      },
+      "pools": {
+        "title": "Piscine",
+        "description": "Luoghi selezionati per giornate di relax, pranzi e momenti tranquilli."
+      },
+      "dining": {
+        "title": "Ristorazione",
+        "description": "Ristoranti, rooftop e proposte gastronomiche per gusti e budget diversi."
+      },
+      "nightlife": {
+        "title": "Vita notturna",
+        "description": "Lounge, club e consigli per la sera, con assistenza per le prenotazioni."
+      },
+      "wellness": {
+        "title": "Benessere",
+        "description": "Spa, hammam, massaggi e trattamenti rilassanti in strutture affidabili."
+      },
+      "concierge": {
+        "title": "Assistenza concierge",
+        "description": "Supporto personalizzato prima e durante il soggiorno per coordinare ogni richiesta."
+      }
+    },
+    "principlesEyebrow": "Il nostro approccio",
+    "principlesTitle": "Conoscenza locale, opzioni affidabili e attenzione personale.",
+    "principles": {
+      "local": {
+        "title": "Attraverso uno sguardo marocchino",
+        "description": "I consigli si basano sulla conoscenza locale di Marrakech, delle sue zone, dei suoi ritmi e dei suoi standard."
+      },
+      "trusted": {
+        "title": "Selezionato con attenzione",
+        "description": "La priorità è data a opzioni affidabili, informazioni chiare e servizi adatti alle esigenze reali."
+      },
+      "personal": {
+        "title": "Pensato per ogni ospite",
+        "description": "Numero di persone, budget, durata, preferenze e priorità vengono considerati prima di ogni consiglio."
+      }
+    },
+    "ctaEyebrow": "Organizza il tuo soggiorno",
+    "ctaTitle": "Dicci di cosa hai bisogno e inizia a costruire il tuo soggiorno a Marrakech.",
+    "ctaDescription": "Richiedi una villa, un trasporto, un’attività, un ristorante o assistenza per più parti del viaggio.",
+    "openConcierge": "Apri la chat concierge",
+    "sendRequest": "Invia una richiesta"
   }
 }
