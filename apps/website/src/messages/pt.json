@@ -254,5 +254,37 @@
       "phoneTitle": "Comunicações telefónicas",
       "phoneDescription": "Permita que a nossa equipa de concierge o contacte por telefone."
     }
+  },
+  "servicesPage": {
+    "eyebrow": "Serviços",
+    "title": "Tudo o que precisa para a sua estadia em Marraquexe.",
+    "description": "Descubra villas, transporte, atividades, piscinas, restaurantes e opções de bem-estar.",
+    "viewOptions": "Ver opções",
+    "categories": {
+      "villa": {
+        "label": "Villas",
+        "description": "Villas privadas em Marraquexe para casais, famílias e grupos."
+      },
+      "transportation": {
+        "label": "Transporte",
+        "description": "Motoristas privados, chegadas e partidas do aeroporto e transfers."
+      },
+      "swimmingpool": {
+        "label": "Piscinas",
+        "description": "Acesso a piscinas e dias de descanso em locais selecionados de Marraquexe."
+      },
+      "activity": {
+        "label": "Atividades",
+        "description": "Atividades, excursões e experiências para viver perto de Marraquexe."
+      },
+      "restaurant": {
+        "label": "Restaurantes",
+        "description": "Restaurantes, rooftops e opções gastronómicas para diferentes momentos e preferências."
+      },
+      "spa": {
+        "label": "Spa",
+        "description": "Hammams, massagens e tratamentos de bem-estar em Marraquexe."
+      }
+    }
   }
 }

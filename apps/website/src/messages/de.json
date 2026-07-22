@@ -254,5 +254,37 @@
       "phoneTitle": "Telefonische Kommunikation",
       "phoneDescription": "Erlauben Sie unserem Concierge-Team, Sie telefonisch zu kontaktieren."
     }
+  },
+  "servicesPage": {
+    "eyebrow": "Services",
+    "title": "Alles, was Sie für Ihren Aufenthalt in Marrakesch benötigen.",
+    "description": "Entdecken Sie Villen, Transport, Aktivitäten, Pools, Restaurants und Wellness-Angebote.",
+    "viewOptions": "Optionen ansehen",
+    "categories": {
+      "villa": {
+        "label": "Villen",
+        "description": "Private Villen in Marrakesch für Paare, Familien und Gruppen."
+      },
+      "transportation": {
+        "label": "Transport",
+        "description": "Private Fahrer, Flughafentransfers sowie Abholungen und Rückfahrten."
+      },
+      "swimmingpool": {
+        "label": "Pools",
+        "description": "Poolzugang und entspannte Tage an ausgewählten Orten in Marrakesch."
+      },
+      "activity": {
+        "label": "Aktivitäten",
+        "description": "Aktivitäten, Ausflüge und besondere Erlebnisse rund um Marrakesch."
+      },
+      "restaurant": {
+        "label": "Restaurants",
+        "description": "Restaurants, Rooftops und gastronomische Angebote für unterschiedliche Momente und Vorlieben."
+      },
+      "spa": {
+        "label": "Spa",
+        "description": "Hammams, Massagen und Wellnessbehandlungen in Marrakesch."
+      }
+    }
   }
 }

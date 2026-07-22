@@ -83,8 +83,7 @@ type ConsentResponse = {
   message?: string;
   consents?: Array<{
     channel: ConsentChannel;
-    channelStatus:
-      ChannelStatus;
+    channelStatus: ChannelStatus;
   }>;
 };
 
@@ -93,6 +92,11 @@ type RequestStatus =
   | "loading"
   | "success"
   | "error";
+
+type CountryOption = {
+  code3: string;
+  code2: string;
+};
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
@@ -135,29 +139,95 @@ const LANGUAGE_OPTIONS: Array<{
   },
 ];
 
-const COUNTRY_OPTIONS = [
-  "MA",
-  "FR",
-  "ES",
-  "GB",
-  "PT",
-  "IT",
-  "DE",
-  "US",
-  "CA",
-  "BE",
-  "CH",
-  "NL",
-  "DZ",
-  "TN",
-  "EG",
-  "AE",
-  "SA",
-  "QA",
-  "TR",
-  "BR",
-  "CN",
-  "IN",
+const COUNTRY_OPTIONS: CountryOption[] = [
+  {
+    code3: "MAR",
+    code2: "MA",
+  },
+  {
+    code3: "FRA",
+    code2: "FR",
+  },
+  {
+    code3: "ESP",
+    code2: "ES",
+  },
+  {
+    code3: "GBR",
+    code2: "GB",
+  },
+  {
+    code3: "PRT",
+    code2: "PT",
+  },
+  {
+    code3: "ITA",
+    code2: "IT",
+  },
+  {
+    code3: "DEU",
+    code2: "DE",
+  },
+  {
+    code3: "USA",
+    code2: "US",
+  },
+  {
+    code3: "CAN",
+    code2: "CA",
+  },
+  {
+    code3: "BEL",
+    code2: "BE",
+  },
+  {
+    code3: "CHE",
+    code2: "CH",
+  },
+  {
+    code3: "NLD",
+    code2: "NL",
+  },
+  {
+    code3: "DZA",
+    code2: "DZ",
+  },
+  {
+    code3: "TUN",
+    code2: "TN",
+  },
+  {
+    code3: "EGY",
+    code2: "EG",
+  },
+  {
+    code3: "ARE",
+    code2: "AE",
+  },
+  {
+    code3: "SAU",
+    code2: "SA",
+  },
+  {
+    code3: "QAT",
+    code2: "QA",
+  },
+  {
+    code3: "TUR",
+    code2: "TR",
+  },
+  {
+    code3: "BRA",
+    code2: "BR",
+  },
+  {
+    code3: "CHN",
+    code2: "CN",
+  },
+  {
+    code3: "IND",
+    code2: "IN",
+  },
 ];
 
 function buildLocalizedPath(
@@ -173,6 +243,38 @@ function isUnauthorized(
   status: number
 ) {
   return status === 401;
+}
+
+/**
+ * Converts old two-letter country values to the
+ * corresponding three-letter value.
+ *
+ * This prevents existing profiles containing values
+ * such as "MA" or "FR" from appearing empty.
+ */
+function normalizeCountryCode(
+  country?: string | null
+): string {
+  if (!country) {
+    return "";
+  }
+
+  const normalizedCountry =
+    country.trim().toUpperCase();
+
+  const matchingCountry =
+    COUNTRY_OPTIONS.find(
+      (option) =>
+        option.code3 ===
+          normalizedCountry ||
+        option.code2 ===
+          normalizedCountry
+    );
+
+  return (
+    matchingCountry?.code3 ||
+    normalizedCountry
+  );
 }
 
 export default function AccountPage() {
@@ -403,9 +505,15 @@ export default function AccountPage() {
             "OPTIN";
         }
 
-        setProfile(
-          profileData.profile
-        );
+        setProfile({
+          ...profileData.profile,
+
+          country:
+            normalizeCountryCode(
+              profileData.profile
+                .country
+            ),
+        });
 
         setPreferences(
           mappedPreferences
@@ -604,8 +712,9 @@ export default function AccountPage() {
                 profile.lastName.trim(),
 
               country:
-                profile.country ||
-                null,
+                normalizeCountryCode(
+                  profile.country
+                ) || null,
 
               language:
                 profile.language,
@@ -643,25 +752,36 @@ export default function AccountPage() {
         );
       }
 
+      const normalizedProfile: Profile =
+        {
+          ...data.profile,
+
+          country:
+            normalizeCountryCode(
+              data.profile.country
+            ),
+        };
+
       setProfile(
-        data.profile
+        normalizedProfile
       );
 
       updateUser({
         firstName:
-          data.profile.firstName,
+          normalizedProfile.firstName,
 
         lastName:
-          data.profile.lastName,
+          normalizedProfile.lastName,
 
         email:
-          data.profile.email || "",
+          normalizedProfile.email ||
+          "",
 
         isActive:
-          data.profile.isActive,
+          normalizedProfile.isActive,
 
         emailVerified:
-          data.profile
+          normalizedProfile
             .emailVerified,
       });
 
@@ -1148,8 +1268,9 @@ export default function AccountPage() {
 
                       <select
                         value={
-                          profile.country ||
-                          ""
+                          normalizeCountryCode(
+                            profile.country
+                          )
                         }
                         onChange={(
                           event
@@ -1177,16 +1298,16 @@ export default function AccountPage() {
                           (country) => (
                             <option
                               key={
-                                country
+                                country.code3
                               }
                               value={
-                                country
+                                country.code3
                               }
                             >
                               {countryNames.of(
-                                country
+                                country.code2
                               ) ||
-                                country}
+                                country.code3}
                             </option>
                           )
                         )}
