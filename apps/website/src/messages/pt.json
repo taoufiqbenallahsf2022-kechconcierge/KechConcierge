@@ -211,5 +211,48 @@
       "PARTNERSHIP": "Parceria",
       "OTHER": "Outro"
     }
+  },
+  "accountPage": {
+    "eyebrow": "Conta",
+    "profileTitle": "O meu perfil",
+    "preferencesTitle": "Centro de preferências",
+    "description": "Gira as suas informações pessoais e preferências de comunicação.",
+    "profileInformation": "Informações do perfil",
+    "profileInformationDescription": "Atualize os seus dados pessoais.",
+    "communicationPreferences": "Preferências de comunicação",
+    "communicationPreferencesDescription": "Escolha como a Moorish Concierge pode contactá-lo.",
+    "firstName": "Nome",
+    "lastName": "Apelido",
+    "email": "Endereço de e-mail",
+    "mobilePhone": "Telemóvel",
+    "notProvided": "Não indicado",
+    "protectedFieldsNote": "O seu endereço de e-mail e número de telefone não podem ser alterados diretamente. Envie um pedido se precisar de os atualizar.",
+    "contactSupport": "Contacte-nos",
+    "saveProfile": "Guardar perfil",
+    "savePreferences": "Guardar preferências",
+    "saving": "A guardar...",
+    "profileSaved": "O seu perfil foi atualizado com sucesso.",
+    "preferencesSaved": "As suas preferências de comunicação foram atualizadas com sucesso.",
+    "loadError": "Não foi possível carregar as informações da sua conta.",
+    "profileSaveError": "Não foi possível atualizar o seu perfil.",
+    "preferencesSaveError": "Não foi possível atualizar as suas preferências de comunicação.",
+    "country": "País",
+    "language": "Idioma preferido",
+    "selectCountry": "Selecione um país",
+    "validation": {
+      "firstName": "Introduza o seu nome.",
+      "lastName": "Introduza o seu apelido.",
+      "language": "Selecione o seu idioma preferido."
+    },
+    "channels": {
+      "emailTitle": "Comunicações por e-mail",
+      "emailDescription": "Receba ofertas, novidades e sugestões de viagem por e-mail.",
+      "smsTitle": "Comunicações por SMS",
+      "smsDescription": "Receba ofertas e informações importantes por SMS.",
+      "whatsappTitle": "Comunicações pelo WhatsApp",
+      "whatsappDescription": "Receba ofertas e novidades de concierge pelo WhatsApp.",
+      "phoneTitle": "Comunicações telefónicas",
+      "phoneDescription": "Permita que a nossa equipa de concierge o contacte por telefone."
+    }
   }
 }

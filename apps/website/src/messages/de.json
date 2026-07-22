@@ -211,5 +211,48 @@
       "PARTNERSHIP": "Partnerschaft",
       "OTHER": "Sonstiges"
     }
+  },
+  "accountPage": {
+    "eyebrow": "Konto",
+    "profileTitle": "Mein Profil",
+    "preferencesTitle": "Präferenzcenter",
+    "description": "Verwalten Sie Ihre persönlichen Daten und Kommunikationseinstellungen.",
+    "profileInformation": "Profilinformationen",
+    "profileInformationDescription": "Aktualisieren Sie Ihre persönlichen Angaben.",
+    "communicationPreferences": "Kommunikationseinstellungen",
+    "communicationPreferencesDescription": "Wählen Sie, wie Moorish Concierge Sie kontaktieren darf.",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail-Adresse",
+    "mobilePhone": "Mobiltelefon",
+    "notProvided": "Nicht angegeben",
+    "protectedFieldsNote": "Ihre E-Mail-Adresse und Telefonnummer können nicht direkt geändert werden. Senden Sie bitte eine Anfrage, wenn Sie diese aktualisieren möchten.",
+    "contactSupport": "Kontakt aufnehmen",
+    "saveProfile": "Profil speichern",
+    "savePreferences": "Einstellungen speichern",
+    "saving": "Wird gespeichert...",
+    "profileSaved": "Ihr Profil wurde erfolgreich aktualisiert.",
+    "preferencesSaved": "Ihre Kommunikationseinstellungen wurden erfolgreich aktualisiert.",
+    "loadError": "Ihre Kontoinformationen konnten nicht geladen werden.",
+    "profileSaveError": "Ihr Profil konnte nicht aktualisiert werden.",
+    "preferencesSaveError": "Ihre Kommunikationseinstellungen konnten nicht aktualisiert werden.",
+    "country": "Land",
+    "language": "Bevorzugte Sprache",
+    "selectCountry": "Land auswählen",
+    "validation": {
+      "firstName": "Bitte geben Sie Ihren Vornamen ein.",
+      "lastName": "Bitte geben Sie Ihren Nachnamen ein.",
+      "language": "Bitte wählen Sie Ihre bevorzugte Sprache."
+    },
+    "channels": {
+      "emailTitle": "E-Mail-Kommunikation",
+      "emailDescription": "Erhalten Sie Angebote, Neuigkeiten und Reisevorschläge per E-Mail.",
+      "smsTitle": "SMS-Kommunikation",
+      "smsDescription": "Erhalten Sie wichtige Angebote und Aktualisierungen per SMS.",
+      "whatsappTitle": "WhatsApp-Kommunikation",
+      "whatsappDescription": "Erhalten Sie Angebote und Concierge-Updates über WhatsApp.",
+      "phoneTitle": "Telefonische Kommunikation",
+      "phoneDescription": "Erlauben Sie unserem Concierge-Team, Sie telefonisch zu kontaktieren."
+    }
   }
 }

@@ -233,15 +233,24 @@ model Account {
 }
 
 model Consent {
-  id            String         @id @default(cuid())
-  individualId  String
-  channel       ConsentChannel
-  channelStatus ChannelStatus  @default(UNKNOWN)
-  createdDate   DateTime       @default(now())
-  createdBy     String?
-  updatedDate   DateTime       @updatedAt
-  updatedBy     String?
-  individual    Individual     @relation(fields: [individualId], references: [id])
+  id           String         @id @default(cuid())
+  individualId String
+  channel      ConsentChannel
+  channelStatus ChannelStatus @default(UNKNOWN)
+
+  createdDate DateTime @default(now())
+  createdBy   String?
+  updatedDate DateTime @updatedAt
+  updatedBy   String?
+
+  individual Individual @relation(
+    fields: [individualId],
+    references: [id],
+    onDelete: Cascade
+  )
+
+  @@unique([individualId, channel])
+  @@index([individualId])
 }
 
 model PageVisit {

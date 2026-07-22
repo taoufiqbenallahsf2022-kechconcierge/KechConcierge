@@ -211,6 +211,49 @@
       "PARTNERSHIP": "Partnership",
       "OTHER": "Other"
     }
+  },
+  "accountPage": {
+    "eyebrow": "Account",
+    "profileTitle": "My profile",
+    "preferencesTitle": "Preferences center",
+    "description": "Manage your personal information and communication preferences.",
+    "profileInformation": "Profile information",
+    "profileInformationDescription": "Update your personal details.",
+    "communicationPreferences": "Communication preferences",
+    "communicationPreferencesDescription": "Choose how Moorish Concierge can contact you.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "mobilePhone": "Mobile phone",
+    "notProvided": "Not provided",
+    "protectedFieldsNote": "Your email address and phone number cannot be changed directly. Please submit a request if you need to update them.",
+    "contactSupport": "Contact us",
+    "saveProfile": "Save profile",
+    "savePreferences": "Save preferences",
+    "saving": "Saving...",
+    "profileSaved": "Your profile has been updated successfully.",
+    "preferencesSaved": "Your communication preferences have been updated successfully.",
+    "loadError": "Unable to load your account information.",
+    "profileSaveError": "Unable to update your profile.",
+    "preferencesSaveError": "Unable to update your communication preferences.",
+    "country": "Country",
+    "language": "Preferred language",
+    "selectCountry": "Select a country",
+    "validation": {
+      "firstName": "Please enter your first name.",
+      "lastName": "Please enter your last name.",
+      "language": "Please select your preferred language."
+    },
+    "channels": {
+      "emailTitle": "Email communications",
+      "emailDescription": "Receive offers, updates and travel suggestions by email.",
+      "smsTitle": "SMS communications",
+      "smsDescription": "Receive important offers and updates by SMS.",
+      "whatsappTitle": "WhatsApp communications",
+      "whatsappDescription": "Receive offers and concierge updates through WhatsApp.",
+      "phoneTitle": "Phone communications",
+      "phoneDescription": "Allow our concierge team to contact you by phone."
+    }
   }
 
 }

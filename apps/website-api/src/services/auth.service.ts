@@ -5,6 +5,10 @@ import { prisma } from "../config/prisma";
 import { sendAccountVerificationEmail } from "./email.service";
 import { generateIndividualId, generateLeadId } from "../utils/id-generator";
 import { generateAccessToken } from "../utils/jwt";
+import {
+  ConsentChannel,
+  ChannelStatus,
+} from "../../../../packages/database/generated/prisma/client";
 
 type SignupInput = {
   firstName: string;
@@ -125,17 +129,26 @@ export async function signupIndividual(input: SignupInput) {
     return {
       success: false,
       statusCode: 409,
-      code: "ERROR_EMAIL_ALREADY_USED"
+      code: "ERROR_EMAIL_ALREADY_USED",
     };
   }
 
   const token = crypto.randomBytes(32).toString("hex");
 
   const tokenExpiresAt = new Date();
-  tokenExpiresAt.setMinutes(tokenExpiresAt.getMinutes() + 30);
+  tokenExpiresAt.setMinutes(
+    tokenExpiresAt.getMinutes() + 30
+  );
 
-  const passwordHash = await bcrypt.hash(input.password, 10);
-  const fullPhoneNumber = normalizePhone(input.countryCode, input.mobilePhone);
+  const passwordHash = await bcrypt.hash(
+    input.password,
+    10
+  );
+
+  const fullPhoneNumber = normalizePhone(
+    input.countryCode,
+    input.mobilePhone
+  );
 
   const result = await prisma.$transaction(async (tx) => {
     const individual = await tx.individual.create({
@@ -158,56 +171,74 @@ export async function signupIndividual(input: SignupInput) {
         emailVerified: false,
 
         emailVerificationToken: token,
-        emailVerificationTokenExpiresAt: tokenExpiresAt,
+        emailVerificationTokenExpiresAt:
+          tokenExpiresAt,
 
         createdBy: "SYSTEM",
         updatedBy: "SYSTEM",
       },
     });
 
-    const lead = await tx.lead.create({
-      data: {
-        id: generateLeadId(),
-
-        firstName: input.firstName.trim(),
-        lastName: input.lastName.trim(),
-        email,
-        mobilePhone: fullPhoneNumber,
-
-        country: input.country || null,
-        language: input.language || "en",
-        source: "WEBSITE_SIGNUP",
-        statusDescription: "Account created. Waiting for email verification.",
-
-        individualId: individual.id,
-
-        createdBy: "SYSTEM",
-        updatedBy: "SYSTEM",
-      },
+    await tx.consent.createMany({
+      data: [
+        {
+          individualId: individual.id,
+          channel: ConsentChannel.EMAIL,
+          channelStatus: ChannelStatus.OPTIN,
+          createdBy: "WEBSITE_SIGNUP",
+          updatedBy: "WEBSITE_SIGNUP",
+        },
+        {
+          individualId: individual.id,
+          channel: ConsentChannel.SMS,
+          channelStatus: ChannelStatus.OPTIN,
+          createdBy: "WEBSITE_SIGNUP",
+          updatedBy: "WEBSITE_SIGNUP",
+        },
+        {
+          individualId: individual.id,
+          channel: ConsentChannel.WHATSAPP,
+          channelStatus: ChannelStatus.OPTIN,
+          createdBy: "WEBSITE_SIGNUP",
+          updatedBy: "WEBSITE_SIGNUP",
+        },
+        {
+          individualId: individual.id,
+          channel: ConsentChannel.PHONE,
+          channelStatus: ChannelStatus.OPTIN,
+          createdBy: "WEBSITE_SIGNUP",
+          updatedBy: "WEBSITE_SIGNUP",
+        },
+      ],
     });
 
     return {
       individual,
-      lead,
     };
   });
-  
+
   try {
     await sendAccountVerificationEmail({
       email,
       token,
-      language: input.language || "en"
+      language: input.language || "en",
     });
 
     return {
       success: true,
       message: "Verification email sent.",
       individualId: result.individual.id,
-      leadId: result.lead.id,
     };
-  } catch(e) {
+  } catch (error) {
+    console.error(
+      "Unable to send verification email:",
+      error
+    );
+
     return {
-      success: false
+      success: false,
+      statusCode: 500,
+      code: "ERROR_VERIFICATION_EMAIL_FAILED",
     };
   }
 }
@@ -348,7 +379,11 @@ export async function verifyIndividualEmail(token: string) {
   };
 }
 
-export async function googleAuth(idToken: string, language?: string, country?: string) {
+export async function googleAuth(
+  idToken: string,
+  language?: string,
+  country?: string
+) {
   const ticket = await googleClient.verifyIdToken({
     idToken,
     audience: process.env.GOOGLE_CLIENT_ID,
@@ -356,7 +391,11 @@ export async function googleAuth(idToken: string, language?: string, country?: s
 
   const payload = ticket.getPayload();
 
-  if (!payload || !payload.email || !payload.sub) {
+  if (
+    !payload ||
+    !payload.email ||
+    !payload.sub
+  ) {
     return {
       success: false,
       statusCode: 400,
@@ -365,14 +404,32 @@ export async function googleAuth(idToken: string, language?: string, country?: s
     };
   }
 
-  const email = normalizeEmail(payload.email);
+  const email = normalizeEmail(
+    payload.email
+  );
+
   const googleId = payload.sub;
 
-  const existingIndividual = await prisma.individual.findFirst({
-    where: {
-      OR: [{ email }, { googleId }],
-    },
-  });
+  const normalizedLanguage =
+    language?.trim().toLowerCase() ||
+    "en";
+
+  const normalizedCountry =
+    country?.trim() || null;
+
+  const existingIndividual =
+    await prisma.individual.findFirst({
+      where: {
+        OR: [
+          {
+            email,
+          },
+          {
+            googleId,
+          },
+        ],
+      },
+    });
 
   if (existingIndividual) {
     if (!existingIndividual.isActive) {
@@ -380,108 +437,180 @@ export async function googleAuth(idToken: string, language?: string, country?: s
         success: false,
         statusCode: 403,
         code: "ERROR_INDIVIDUAL_INACTIVE",
-        message: "This account is not active.",
+        message:
+          "This account is not active.",
       };
     }
 
-    const updatedIndividual = await prisma.individual.update({
-      where: {
-        id: existingIndividual.id,
-      },
-      data: {
-        googleId: existingIndividual.googleId || googleId,
-        emailVerified: true,
-        lastSuccessfulLoginDate: new Date(),
-        updatedBy: "SYSTEM",
-      },
-      include: {
-        leads: true,
-        prospects: true,
-        accounts: true,
-      }
-    });
+    const updatedIndividual =
+      await prisma.individual.update({
+        where: {
+          id: existingIndividual.id,
+        },
 
-    const accessToken = generateAccessToken({
-      individualId: updatedIndividual.id,
-      email: updatedIndividual.email || email,
-    });
+        data: {
+          googleId:
+            existingIndividual.googleId ||
+            googleId,
+
+          emailVerified: true,
+
+          lastSuccessfulLoginDate:
+            new Date(),
+
+          updatedBy: "SYSTEM",
+        },
+      });
+
+    const accessToken =
+      generateAccessToken({
+        individualId:
+          updatedIndividual.id,
+
+        email:
+          updatedIndividual.email ||
+          email,
+      });
 
     return {
       success: true,
-      message: "Google authentication successful.",
+      message:
+        "Google authentication successful.",
       accessToken,
-      individual: mapAuthIndividual(updatedIndividual),
+      individual:
+        mapAuthIndividual(
+          updatedIndividual
+        ),
       created: false,
     };
   }
 
-  const firstName = payload.given_name || "Google";
-  const lastName = payload.family_name || "User";
+  const firstName =
+    payload.given_name?.trim() ||
+    "Google";
 
-  const result = await prisma.$transaction(async (tx) => {
-    const individual = await tx.individual.create({
-      data: {
-        id: generateIndividualId(),
+  const lastName =
+    payload.family_name?.trim() ||
+    "User";
 
-        firstName,
-        lastName,
+  const result =
+    await prisma.$transaction(
+      async (tx) => {
+        const individual =
+          await tx.individual.create({
+            data: {
+              id: generateIndividualId(),
+
+              firstName,
+              lastName,
+              email,
+
+              googleId,
+              authProvider: "GOOGLE",
+
+              passwordHash: null,
+
+              country:
+                normalizedCountry,
+
+              language:
+                normalizedLanguage,
+
+              source: "GOOGLE_AUTH",
+
+              isActive: true,
+              emailVerified: true,
+
+              lastSuccessfulLoginDate:
+                new Date(),
+
+              createdBy: "SYSTEM",
+              updatedBy: "SYSTEM",
+            },
+          });
+
+        await tx.consent.createMany({
+          data: [
+            {
+              individualId:
+                individual.id,
+
+              channel: "EMAIL",
+              channelStatus: "OPTIN",
+
+              createdBy:
+                "GOOGLE_AUTH",
+
+              updatedBy:
+                "GOOGLE_AUTH",
+            },
+            {
+              individualId:
+                individual.id,
+
+              channel: "SMS",
+              channelStatus: "OPTIN",
+
+              createdBy:
+                "GOOGLE_AUTH",
+
+              updatedBy:
+                "GOOGLE_AUTH",
+            },
+            {
+              individualId:
+                individual.id,
+
+              channel: "WHATSAPP",
+              channelStatus: "OPTIN",
+
+              createdBy:
+                "GOOGLE_AUTH",
+
+              updatedBy:
+                "GOOGLE_AUTH",
+            },
+            {
+              individualId:
+                individual.id,
+
+              channel: "PHONE",
+              channelStatus: "OPTIN",
+
+              createdBy:
+                "GOOGLE_AUTH",
+
+              updatedBy:
+                "GOOGLE_AUTH",
+            },
+          ],
+        });
+
+        return {
+          individual,
+        };
+      }
+    );
+
+  const accessToken =
+    generateAccessToken({
+      individualId:
+        result.individual.id,
+
+      email:
+        result.individual.email ||
         email,
-
-        googleId,
-        authProvider: "GOOGLE",
-
-        passwordHash: null,
-
-        country: country || null,
-        language: language || "en",
-        source: "GOOGLE_AUTH",
-
-        isActive: true,
-        emailVerified: true,
-        lastSuccessfulLoginDate: new Date(),
-
-        createdBy: "SYSTEM",
-        updatedBy: "SYSTEM",
-      },
     });
-
-    const lead = await tx.lead.create({
-      data: {
-        id: generateLeadId(),
-
-        firstName,
-        lastName,
-        email,
-
-        country: country || null,
-        language: language || "en",
-        source: "GOOGLE_AUTH",
-        statusDescription: "Lead created from Google authentication.",
-
-        individualId: individual.id,
-
-        createdBy: "SYSTEM",
-        updatedBy: "SYSTEM",
-      },
-    });
-
-    return {
-      individual: individual,
-      lead,
-    };
-  });
-
-  const accessToken = generateAccessToken({
-    individualId: result.individual.id,
-    email: result.individual.email || email,
-  });
 
   return {
     success: true,
-    message: "Google authentication completed.",
+    message:
+      "Google authentication completed.",
     accessToken,
-    individual: mapAuthIndividual(result.individual),
-    leadId: result.lead.id,
+    individual:
+      mapAuthIndividual(
+        result.individual
+      ),
     created: true,
   };
 }
