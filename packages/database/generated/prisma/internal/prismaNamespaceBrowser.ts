@@ -218,6 +218,8 @@ export const IndividualScalarFieldEnum = {
   emailVerified: 'emailVerified',
   emailVerificationToken: 'emailVerificationToken',
   emailVerificationTokenExpiresAt: 'emailVerificationTokenExpiresAt',
+  passwordResetToken: 'passwordResetToken',
+  passwordResetTokenExpiresAt: 'passwordResetTokenExpiresAt',
   createdDate: 'createdDate',
   createdBy: 'createdBy',
   updatedDate: 'updatedDate',

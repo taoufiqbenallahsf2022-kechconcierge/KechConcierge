@@ -120,10 +120,10 @@ model WhatsAppMessage {
 model Individual {
   id String @id
 
-  firstName   String
-  lastName    String
-  email       String? @unique
-  mobilePhone String?
+  firstName    String
+  lastName     String
+  email        String? @unique
+  mobilePhone  String?
   passwordHash String?
 
   googleId     String? @unique
@@ -141,6 +141,9 @@ model Individual {
   emailVerificationToken          String?
   emailVerificationTokenExpiresAt DateTime?
 
+  passwordResetToken          String?   @unique
+  passwordResetTokenExpiresAt DateTime?
+
   createdDate DateTime @default(now())
   createdBy   String?
   updatedDate DateTime @updatedAt
@@ -148,13 +151,16 @@ model Individual {
 
   lastSuccessfulLoginDate DateTime?
 
-  leads     Lead[]
-  prospects Prospect[]
-  accounts  Account[]
-  consents  Consent[]
-  pageVisits PageVisit[]
+  leads           Lead[]
+  prospects       Prospect[]
+  accounts        Account[]
+  consents        Consent[]
+  pageVisits      PageVisit[]
   contactRequests ContactRequest[]
-  chats Chat[]
+  chats           Chat[]
+
+  @@index([email])
+  @@index([passwordResetToken])
 }
 
 model Lead {

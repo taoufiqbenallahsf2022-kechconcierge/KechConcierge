@@ -87,8 +87,16 @@ const initialForm: ContactForm = {
 
 export default function ContactPage() {
 
+  const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
+  "+212 6 13 85 98 34";
+
   const accessToken = useAuthStore(
     (state) => state.accessToken
+  );
+
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated
   );
 
   const pathname = usePathname();
@@ -225,7 +233,7 @@ export default function ContactPage() {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            ...(accessToken
+            ...(isAuthenticated && accessToken
             ? {
                 Authorization: `Bearer ${accessToken}`,
               }
@@ -299,7 +307,7 @@ export default function ContactPage() {
           </p>
 
           <p className="mt-3 text-zinc-300">
-            {t.contactPage.whatsapp}: +212 600 000 000
+            {t.contactPage.whatsapp}: {WHATSAPP_NUMBER}
           </p>
 
           <p className="text-zinc-300">
