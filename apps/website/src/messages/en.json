@@ -138,16 +138,24 @@
     "openChat": "Open chat"
   },
   "footer": {
-    "description": "First version website for Marrakech villas, apartments, activities, transport, SPA, restaurants, and concierge support.",
-    "menu": "Menu",
+    "description": "Private concierge services for stays, transportation, dining, activities, wellness and nightlife in Marrakech.",
+    "slogan": "Marrakech, through Moroccan eyes.",
+    "menu": "Explore",
     "services": "Services",
     "villas": "Villas",
-    "swimmingPools": "Swimming Pools",
-    "chat": "Chat",
+    "swimmingPools": "Swimming pools",
+    "chat": "Concierge chat",
     "contact": "Contact",
+    "legalTitle": "Legal",
+    "terms": "Terms of Use & Service",
+    "privacy": "Privacy and personal data",
+    "consentPreferences": "Consent preferences",
+    "guestResponsibilities": "Guest responsibilities",
     "contactTitle": "Contact",
     "location": "Marrakech, Morocco",
-    "copyright": "Demo frontend version."
+    "copyright": "All rights reserved.",
+    "termsShort": "Terms",
+    "privacyShort": "Privacy"
   },
   "accountVerify": {
     "eyebrow": "Account verification",
@@ -361,6 +369,121 @@
     "ctaDescription": "Request a villa, transportation, an activity, a restaurant or support with several parts of your trip.",
     "openConcierge": "Open concierge chat",
     "sendRequest": "Send a request"
+  },
+  "termsPage": {
+    "eyebrow": "Legal information",
+    "title": "Terms of Use & Service",
+    "introduction": "These terms explain the rules that apply when you access Moorish Concierge, create an account, request recommendations or use concierge services arranged through the platform.",
+    "importantNotice": "Moorish Concierge may coordinate services offered by independent property owners, drivers, restaurants, activity operators and other third parties. The final conditions of a booking may also include the provider’s own rules.",
+    "lastUpdated": "Last updated: July 2026",
+    "contents": "Contents",
+    "managePreferences": "Manage my preferences",
+    "contactTitle": "Questions about these terms?",
+    "contactDescription": "Contact Moorish Concierge if you need clarification about a booking, your personal data, your communication preferences or these conditions.",
+    "contactButton": "Contact us",
+    "sections": {
+      "service": {
+        "title": "1. Nature of the service",
+        "paragraphs": [
+          "Moorish Concierge provides tourism information, recommendations, assistance and coordination services in Marrakech. Depending on the request, we may help guests identify and contact accommodation providers, drivers, restaurants, spas, activity operators and other partners.",
+          "Unless expressly stated otherwise in writing, Moorish Concierge does not own or directly operate the properties, vehicles, restaurants or activities displayed on the platform."
+        ]
+      },
+      "account": {
+        "title": "2. Accounts and information",
+        "paragraphs": [
+          "Users must provide accurate, complete and current information when creating an account or submitting a request.",
+          "Users are responsible for protecting their passwords and must inform us if they believe their account has been accessed without authorization.",
+          "Moorish Concierge may suspend an account used fraudulently, illegally or in a manner that creates a risk for guests, providers or the platform."
+        ]
+      },
+      "consent": {
+        "title": "3. Communication consent",
+        "paragraphs": [
+          "When an account is created, communication preferences are initially registered as OPTIN for email, SMS, WhatsApp and telephone communications, in accordance with the information presented during registration and these conditions.",
+          "Communications may include concierge assistance, booking updates, service information, offers and travel recommendations.",
+          "Users can withdraw or change their communication preferences at any time from the account Preferences Center or by contacting us. Withdrawal applies to future communications and does not affect communications that are necessary to complete an existing request or booking."
+        ]
+      },
+      "bookings": {
+        "title": "4. Requests, availability and bookings",
+        "paragraphs": [
+          "Product descriptions, prices and availability displayed on the website are indicative until the relevant provider confirms the request.",
+          "A recommendation or concierge message does not guarantee availability. A booking becomes confirmed only when the applicable confirmation, payment or provider approval requirements have been completed.",
+          "Guests must verify dates, number of participants, included services, meeting points and any special requirements before confirming."
+        ]
+      },
+      "payments": {
+        "title": "5. Prices, payments and cancellations",
+        "paragraphs": [
+          "Prices may change because of availability, season, group size, provider conditions, additional services, taxes or other disclosed charges.",
+          "Payment, deposit, cancellation and refund conditions may vary by provider and will be communicated before confirmation whenever applicable.",
+          "Guests remain responsible for reviewing and accepting the final price and cancellation conditions before payment."
+        ]
+      },
+      "providers": {
+        "title": "6. Independent service providers",
+        "paragraphs": [
+          "Some services are delivered by independent third-party providers. These providers remain responsible for delivering their services, maintaining required licenses and insurance, and complying with applicable safety and legal obligations.",
+          "Moorish Concierge selects and coordinates providers with care but cannot guarantee that every third-party service will be free from delay, interruption, modification or unforeseen events."
+        ]
+      },
+      "conduct": {
+        "title": "7. Guest conduct and property responsibility",
+        "paragraphs": [
+          "Guests must respect properties, vehicles, staff, neighbors, local customs and all reasonable rules communicated by Moorish Concierge or the service provider.",
+          "Guests are responsible for damage, loss, excessive cleaning, unauthorized parties, prohibited events, disturbance or misuse caused by them or members of their group.",
+          "The responsible provider or property owner may request reimbursement, retain an authorized deposit or take appropriate legal action when damage or serious misconduct occurs.",
+          "Moorish Concierge is not responsible for unlawful, reckless, abusive or damaging conduct committed by a guest."
+        ]
+      },
+      "prohibited": {
+        "title": "8. Prohibited behavior",
+        "paragraphs": [
+          "Users must not use the platform or services for fraud, harassment, violence, illegal substances, exploitation, unauthorized commercial activity, property damage or any activity prohibited by Moroccan law.",
+          "Moorish Concierge may refuse or stop assistance where a request appears unsafe, illegal, abusive or harmful to a provider, employee, guest or third party."
+        ]
+      },
+      "liability": {
+        "title": "9. Liability and unforeseen events",
+        "paragraphs": [
+          "Nothing in these terms excludes liability that cannot legally be excluded.",
+          "To the extent permitted by applicable law, Moorish Concierge is not responsible for indirect losses or for events outside its reasonable control, including weather, traffic, strikes, government restrictions, provider cancellations, natural events or failures of third-party systems.",
+          "Guests remain responsible for personal travel documents, visas, health decisions, insurance, personal belongings and compliance with local laws."
+        ]
+      },
+      "privacy": {
+        "title": "10. Personal data and privacy",
+        "paragraphs": [
+          "We may process identity, contact, account, preference, request, booking and website-usage information to provide services, manage accounts, communicate with users, improve the platform and comply with legal obligations.",
+          "Personal data should be collected for identified and legitimate purposes, limited to what is reasonably necessary, kept accurate and retained only for an appropriate period.",
+          "Information may be shared with service providers when necessary to respond to a request or complete a booking, and with technical suppliers that support hosting, email, authentication or platform operations.",
+          "Users may contact us to request access, correction or other rights available under applicable personal-data laws."
+        ]
+      },
+      "security": {
+        "title": "11. Data security",
+        "paragraphs": [
+          "Moorish Concierge uses reasonable technical and organizational measures intended to protect personal information from unauthorized access, loss, alteration or disclosure.",
+          "Account passwords are stored using secure password hashing rather than as readable passwords. Secure HTTPS connections should be used in production for data transmitted between the browser and the platform.",
+          "No online system can guarantee absolute security. Users should use a strong, unique password and should not share their access credentials."
+        ]
+      },
+      "rights": {
+        "title": "12. Applicable law and user rights",
+        "paragraphs": [
+          "These terms are intended to operate in accordance with applicable Moroccan law. Mandatory consumer and data-protection rights remain unaffected.",
+          "Where a disagreement occurs, users are encouraged to contact Moorish Concierge first so that the issue can be reviewed and an appropriate solution can be sought."
+        ]
+      },
+      "changes": {
+        "title": "13. Changes to these terms",
+        "paragraphs": [
+          "Moorish Concierge may update these terms to reflect changes to services, operational practices or legal obligations.",
+          "The updated version will be published on this page with a revised update date. Material changes may also be communicated through the website, account or registered contact details."
+        ]
+      }
+    }
   }
 
 }

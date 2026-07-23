@@ -138,16 +138,24 @@
     "openChat": "Apri chat"
   },
   "footer": {
-    "description": "Prima versione del sito per ville, appartamenti, attività, trasporti, SPA, ristoranti e servizi di concierge a Marrakech.",
-    "menu": "Menu",
+    "description": "Servizi concierge privati per soggiorni, trasporti, ristorazione, attività, benessere e vita notturna a Marrakech.",
+    "slogan": "Marrakech, attraverso uno sguardo marocchino.",
+    "menu": "Esplora",
     "services": "Servizi",
     "villas": "Ville",
     "swimmingPools": "Piscine",
-    "chat": "Chat",
-    "contact": "Contatto",
-    "contactTitle": "Contatto",
+    "chat": "Chat concierge",
+    "contact": "Contatti",
+    "legalTitle": "Informazioni legali",
+    "terms": "Termini di utilizzo e servizio",
+    "privacy": "Privacy e dati personali",
+    "consentPreferences": "Preferenze di consenso",
+    "guestResponsibilities": "Responsabilità degli ospiti",
+    "contactTitle": "Contatti",
     "location": "Marrakech, Marocco",
-    "copyright": "Versione frontend dimostrativa."
+    "copyright": "Tutti i diritti riservati.",
+    "termsShort": "Termini",
+    "privacyShort": "Privacy"
   },
   "accountVerify": {
     "eyebrow": "Verifica account",
@@ -361,5 +369,121 @@
     "ctaDescription": "Richiedi una villa, un trasporto, un’attività, un ristorante o assistenza per più parti del viaggio.",
     "openConcierge": "Apri la chat concierge",
     "sendRequest": "Invia una richiesta"
+  },
+    "termsPage": {
+    "eyebrow": "Informazioni legali",
+    "title": "Termini di utilizzo e servizio",
+    "introduction": "Questi termini definiscono le regole applicabili quando accedi a Moorish Concierge, crei un account, richiedi consigli o utilizzi i servizi concierge organizzati tramite la piattaforma.",
+    "importantNotice": "Moorish Concierge può coordinare servizi offerti da proprietari, autisti, ristoranti, organizzatori di attività e altri fornitori indipendenti. Le condizioni definitive di una prenotazione possono includere anche le regole specifiche del fornitore.",
+    "lastUpdated": "Ultimo aggiornamento: luglio 2026",
+    "contents": "Indice",
+    "managePreferences": "Gestisci le mie preferenze",
+    "contactTitle": "Hai domande su questi termini?",
+    "contactDescription": "Contatta Moorish Concierge per qualsiasi domanda relativa a una prenotazione, ai tuoi dati personali, alle preferenze di comunicazione o a questi termini.",
+    "contactButton": "Contattaci",
+    "sections": {
+      "service": {
+        "title": "1. Natura del servizio",
+        "paragraphs": [
+          "Moorish Concierge fornisce informazioni turistiche, consigli, assistenza e servizi di coordinamento a Marrakech. In base alla richiesta, possiamo aiutare i viaggiatori a individuare e contattare strutture ricettive, autisti, ristoranti, spa, organizzatori di attività e altri partner.",
+          "Salvo diversa indicazione espressa per iscritto, Moorish Concierge non possiede né gestisce direttamente le proprietà, i veicoli, i ristoranti o le attività presentati sulla piattaforma."
+        ]
+      },
+      "account": {
+        "title": "2. Account e informazioni",
+        "paragraphs": [
+          "Gli utenti devono fornire informazioni accurate, complete e aggiornate durante la creazione di un account o l’invio di una richiesta.",
+          "Gli utenti sono responsabili della protezione della propria password e devono informarci qualora ritengano che il proprio account sia stato utilizzato senza autorizzazione.",
+          "Moorish Concierge può sospendere un account utilizzato in modo fraudolento, illegale o tale da creare un rischio per i viaggiatori, i fornitori o la piattaforma."
+        ]
+      },
+      "consent": {
+        "title": "3. Consenso alle comunicazioni",
+        "paragraphs": [
+          "Al momento della creazione di un account, le preferenze di comunicazione vengono inizialmente registrate come OPTIN per comunicazioni tramite e-mail, SMS, WhatsApp e telefono, in conformità con le informazioni presentate durante la registrazione e con questi termini.",
+          "Queste comunicazioni possono riguardare assistenza concierge, aggiornamenti sulle prenotazioni, informazioni sui servizi, offerte e consigli di viaggio.",
+          "Gli utenti possono revocare o modificare le proprie preferenze in qualsiasi momento dal Centro preferenze dell’account o contattandoci. La revoca riguarda le comunicazioni future e non impedisce le comunicazioni necessarie all’esecuzione di una richiesta o prenotazione in corso."
+        ]
+      },
+      "bookings": {
+        "title": "4. Richieste, disponibilità e prenotazioni",
+        "paragraphs": [
+          "Le descrizioni, i prezzi e le disponibilità presentati sul sito sono indicativi fino alla conferma da parte del fornitore interessato.",
+          "Un consiglio o un messaggio concierge non garantisce la disponibilità. Una prenotazione è confermata solo dopo il completamento delle condizioni di conferma, pagamento o approvazione del fornitore.",
+          "I viaggiatori devono verificare le date, il numero di partecipanti, i servizi inclusi, i punti di incontro e le eventuali richieste particolari prima di confermare."
+        ]
+      },
+      "payments": {
+        "title": "5. Prezzi, pagamenti e cancellazioni",
+        "paragraphs": [
+          "I prezzi possono variare in base alla disponibilità, alla stagione, al numero di partecipanti, alle condizioni del fornitore, ai servizi aggiuntivi, alle imposte o ad altri costi comunicati.",
+          "Le condizioni di pagamento, deposito, cancellazione e rimborso possono variare in base al fornitore e saranno comunicate prima della conferma, quando applicabile.",
+          "Il viaggiatore deve verificare e accettare il prezzo finale e le condizioni di cancellazione prima di effettuare qualsiasi pagamento."
+        ]
+      },
+      "providers": {
+        "title": "6. Fornitori indipendenti",
+        "paragraphs": [
+          "Alcuni servizi sono forniti da soggetti terzi indipendenti. Tali fornitori restano responsabili della corretta esecuzione dei servizi, delle licenze e assicurazioni richieste e del rispetto degli obblighi legali e di sicurezza.",
+          "Moorish Concierge seleziona e coordina i fornitori con attenzione, ma non può garantire che un servizio di terzi sia privo di ritardi, interruzioni, modifiche o eventi imprevisti."
+        ]
+      },
+      "conduct": {
+        "title": "7. Comportamento e responsabilità nelle proprietà",
+        "paragraphs": [
+          "I viaggiatori devono rispettare le proprietà, i veicoli, il personale, i vicini, le usanze locali e tutte le regole ragionevoli comunicate da Moorish Concierge o dal fornitore.",
+          "I viaggiatori sono responsabili di danni, perdite, costi di pulizia eccessivi, ospiti non autorizzati, eventi vietati, disturbi o usi impropri causati da loro o dai membri del loro gruppo.",
+          "Il fornitore o proprietario interessato può richiedere il rimborso dei danni, trattenere un deposito autorizzato o intraprendere le opportune azioni legali in caso di danni o comportamenti gravi.",
+          "Moorish Concierge non è responsabile di atti illegali, pericolosi, abusivi o dannosi commessi da un viaggiatore."
+        ]
+      },
+      "prohibited": {
+        "title": "8. Comportamenti vietati",
+        "paragraphs": [
+          "Gli utenti non devono utilizzare la piattaforma o i servizi per frode, molestie, violenza, sostanze illegali, sfruttamento, attività commerciale non autorizzata, danni alla proprietà o qualsiasi attività vietata dalla legge marocchina.",
+          "Moorish Concierge può rifiutare o interrompere l’assistenza quando una richiesta appare pericolosa, illegale, abusiva o dannosa per un fornitore, dipendente, viaggiatore o terzo."
+        ]
+      },
+      "liability": {
+        "title": "9. Responsabilità ed eventi imprevisti",
+        "paragraphs": [
+          "Nessuna disposizione di questi termini esclude una responsabilità che non può essere legalmente esclusa.",
+          "Nei limiti consentiti dalla legge, Moorish Concierge non è responsabile di perdite indirette o di eventi ragionevolmente fuori dal proprio controllo, comprese condizioni meteorologiche, traffico, scioperi, restrizioni pubbliche, cancellazioni dei fornitori, eventi naturali o malfunzionamenti di sistemi di terzi.",
+          "I viaggiatori restano responsabili dei propri documenti di viaggio, visti, decisioni sanitarie, assicurazioni, effetti personali e del rispetto delle leggi locali."
+        ]
+      },
+      "privacy": {
+        "title": "10. Dati personali e privacy",
+        "paragraphs": [
+          "Possiamo trattare informazioni relative all’identità, ai contatti, all’account, alle preferenze, alle richieste, alle prenotazioni e all’utilizzo del sito per fornire i servizi, gestire gli account, comunicare, migliorare la piattaforma e rispettare gli obblighi legali.",
+          "I dati personali devono essere raccolti per finalità identificate e legittime, limitati a quanto ragionevolmente necessario, mantenuti aggiornati e conservati per un periodo adeguato.",
+          "Le informazioni possono essere condivise con i fornitori quando necessario per rispondere a una richiesta o completare una prenotazione, nonché con fornitori tecnici responsabili di hosting, e-mail, autenticazione o funzionamento della piattaforma.",
+          "Gli utenti possono contattarci per esercitare i diritti di accesso, rettifica o altri diritti riconosciuti dalla normativa applicabile."
+        ]
+      },
+      "security": {
+        "title": "11. Sicurezza dei dati",
+        "paragraphs": [
+          "Moorish Concierge adotta misure tecniche e organizzative ragionevoli volte a proteggere le informazioni personali da accessi non autorizzati, perdite, alterazioni o divulgazioni.",
+          "Le password vengono conservate tramite hash sicuro e non in formato leggibile. In produzione devono essere utilizzate connessioni HTTPS sicure per i dati trasmessi tra il browser e la piattaforma.",
+          "Nessun sistema online può garantire una sicurezza assoluta. Gli utenti devono utilizzare una password forte e unica e non condividere le proprie credenziali."
+        ]
+      },
+      "rights": {
+        "title": "12. Legge applicabile e diritti degli utenti",
+        "paragraphs": [
+          "Questi termini sono destinati ad applicarsi in conformità con la legge marocchina vigente. I diritti obbligatori dei consumatori e i diritti relativi alla protezione dei dati restano applicabili.",
+          "In caso di disaccordo, gli utenti sono invitati a contattare prima Moorish Concierge affinché la situazione possa essere esaminata e si possa cercare una soluzione adeguata."
+        ]
+      },
+      "changes": {
+        "title": "13. Modifica dei termini",
+        "paragraphs": [
+          "Moorish Concierge può aggiornare questi termini per riflettere modifiche ai servizi, alle pratiche operative o agli obblighi legali.",
+          "La versione aggiornata sarà pubblicata su questa pagina con una nuova data di aggiornamento. Le modifiche importanti potranno inoltre essere comunicate tramite il sito, l’account o i dati di contatto registrati."
+        ]
+      }
+    }
   }
+
 }
