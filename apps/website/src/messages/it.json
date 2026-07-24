@@ -484,6 +484,13 @@
         ]
       }
     }
+  },
+  "languagePrompt": {
+    "title": "Passare alla lingua preferita?",
+    "description": "La lingua impostata nel tuo account è",
+    "stayButton": "Resta in italiano",
+    "switchButton": "Cambia lingua",
+    "close": "Chiudi il suggerimento della lingua"
   }
 
 }

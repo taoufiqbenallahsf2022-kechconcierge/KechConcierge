@@ -233,21 +233,17 @@ model Account {
 }
 
 model Consent {
-  id           String         @id @default(cuid())
-  individualId String
-  channel      ConsentChannel
-  channelStatus ChannelStatus @default(UNKNOWN)
+  id            String         @id @default(cuid())
+  individualId  String
+  channel       ConsentChannel
+  channelStatus ChannelStatus  @default(UNKNOWN)
 
   createdDate DateTime @default(now())
   createdBy   String?
   updatedDate DateTime @updatedAt
   updatedBy   String?
 
-  individual Individual @relation(
-    fields: [individualId],
-    references: [id],
-    onDelete: Cascade
-  )
+  individual Individual @relation(fields: [individualId], references: [id], onDelete: Cascade)
 
   @@unique([individualId, channel])
   @@index([individualId])
@@ -333,18 +329,23 @@ model ChatMessage {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  firstName     String
-  lastName      String
-  email         String    @unique
-  passwordHash  String
-  mobilePhone   String?
-  role          String
+  id           String  @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String  @unique
+  passwordHash String
+  mobilePhone  String?
+
+  role     String
+  isActive Boolean @default(true)
+
   lastLoginDate DateTime?
-  createdDate   DateTime  @default(now())
-  createdBy     String?
-  updatedDate   DateTime  @updatedAt
-  updatedBy     String?
+
+  createdDate DateTime @default(now())
+  createdBy   String?
+  updatedDate DateTime @updatedAt
+  updatedBy   String?
+
   assignedChats Chat[]
 }
 

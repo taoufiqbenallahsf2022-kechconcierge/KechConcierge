@@ -249,6 +249,7 @@ export default function ContactPage() {
             subject:
               form.subject.trim() || null,
             comment: form.message.trim(),
+            language: locale
           }),
         }
       );

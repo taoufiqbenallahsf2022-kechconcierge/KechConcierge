@@ -1803,6 +1803,7 @@ export const UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   mobilePhone: 'mobilePhone',
   role: 'role',
+  isActive: 'isActive',
   lastLoginDate: 'lastLoginDate',
   createdDate: 'createdDate',
   createdBy: 'createdBy',

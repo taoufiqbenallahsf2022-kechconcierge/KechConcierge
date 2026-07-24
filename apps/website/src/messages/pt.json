@@ -484,6 +484,13 @@
         ]
       }
     }
+  },
+  "languagePrompt": {
+    "title": "Mudar para o seu idioma preferido?",
+    "description": "O idioma definido na sua conta é",
+    "stayButton": "Continuar em português",
+    "switchButton": "Mudar idioma",
+    "close": "Fechar a sugestão de idioma"
   }
 
 }
