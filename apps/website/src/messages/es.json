@@ -484,5 +484,12 @@
           ]
         }
     }
+  },
+  "languagePrompt": {
+    "title": "¿Cambiar a tu idioma preferido?",
+    "description": "El idioma configurado en tu cuenta es",
+    "stayButton": "Continuar en español",
+    "switchButton": "Cambiar idioma",
+    "close": "Cerrar la sugerencia de idioma"
   }
 }

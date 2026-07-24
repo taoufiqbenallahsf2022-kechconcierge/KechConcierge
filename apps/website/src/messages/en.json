@@ -484,6 +484,13 @@
         ]
       }
     }
+  },
+  "languagePrompt": {
+    "title": "Switch to your preferred language?",
+    "description": "Your account language is set to",
+    "stayButton": "Stay in English",
+    "switchButton": "Switch language",
+    "close": "Close language suggestion"
   }
 
 }

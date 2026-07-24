@@ -1,11 +1,25 @@
-import { Router, type Request, type Response } from "express";
-import jwt, { type JwtPayload } from "jsonwebtoken";
+import {
+  Router,
+  type Request,
+  type Response,
+} from "express";
+
+import jwt, {
+  type JwtPayload,
+} from "jsonwebtoken";
 
 import {
   RequestType,
 } from "../../../../packages/database/generated/prisma/client";
 
-import { prisma } from "../config/prisma";
+import {
+  prisma,
+} from "../config/prisma";
+
+import {
+  sendContactRequestConfirmationEmail,
+  sendContactRequestInternalEmail,
+} from "../services/email.service";
 
 const router = Router();
 
@@ -17,21 +31,31 @@ type CreateContactRequestBody = {
   requestType?: unknown;
   subject?: unknown;
   comment?: unknown;
+
+  /*
+   * This must contain the language of
+   * the contact-form page currently shown.
+   */
+  language?: unknown;
 };
 
-type AccessTokenPayload = JwtPayload & {
-  id?: string;
-  individualId?: string;
-};
+type AccessTokenPayload =
+  JwtPayload & {
+    id?: string;
+    individualId?: string;
+  };
 
 function requiredString(
   value: unknown
 ): string | null {
-  if (typeof value !== "string") {
+  if (
+    typeof value !== "string"
+  ) {
     return null;
   }
 
-  const cleanedValue = value.trim();
+  const cleanedValue =
+    value.trim();
 
   return cleanedValue.length > 0
     ? cleanedValue
@@ -41,18 +65,51 @@ function requiredString(
 function optionalString(
   value: unknown
 ): string | null {
-  if (typeof value !== "string") {
+  if (
+    typeof value !== "string"
+  ) {
     return null;
   }
 
-  const cleanedValue = value.trim();
+  const cleanedValue =
+    value.trim();
 
   return cleanedValue.length > 0
     ? cleanedValue
     : null;
 }
 
-function isValidEmail(email: string) {
+function normalizeLanguage(
+  value: unknown
+) {
+  if (
+    typeof value !== "string"
+  ) {
+    return "en";
+  }
+
+  const language =
+    value
+      .trim()
+      .toLowerCase();
+
+  if (
+    language === "en" ||
+    language === "fr" ||
+    language === "es" ||
+    language === "pt" ||
+    language === "it" ||
+    language === "de"
+  ) {
+    return language;
+  }
+
+  return "en";
+}
+
+function isValidEmail(
+  email: string
+) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
     email
   );
@@ -63,7 +120,9 @@ function isRequestType(
 ): value is RequestType {
   return (
     typeof value === "string" &&
-    Object.values(RequestType).includes(
+    Object.values(
+      RequestType
+    ).includes(
       value as RequestType
     )
   );
@@ -72,15 +131,20 @@ function isRequestType(
 function getBearerToken(
   authorizationHeader?: string
 ): string | null {
-  if (!authorizationHeader) {
+  if (
+    !authorizationHeader
+  ) {
     return null;
   }
 
   const [scheme, token] =
-    authorizationHeader.split(" ");
+    authorizationHeader.split(
+      " "
+    );
 
   if (
-    scheme?.toLowerCase() !== "bearer" ||
+    scheme?.toLowerCase() !==
+      "bearer" ||
     !token
   ) {
     return null;
@@ -89,25 +153,14 @@ function getBearerToken(
   return token.trim();
 }
 
-/**
- * Returns:
- *
- * - null when no token is provided;
- * - the connected Individual ID when the token is valid;
- * - throws when a token is provided but invalid.
- */
 async function getIndividualIdFromRequest(
   req: Request
 ): Promise<string | null> {
-  const token = getBearerToken(
-    req.headers.authorization
-  );
+  const token =
+    getBearerToken(
+      req.headers.authorization
+    );
 
-  /*
-   * Public visitor:
-   * no token means the contact request remains
-   * unrelated to an Individual.
-   */
   if (!token) {
     return null;
   }
@@ -121,32 +174,21 @@ async function getIndividualIdFromRequest(
     );
   }
 
-  const decoded = jwt.verify(
-    token,
-    jwtSecret
-  ) as AccessTokenPayload;
+  const decoded =
+    jwt.verify(
+      token,
+      jwtSecret
+    ) as AccessTokenPayload;
 
-  /*
-   * Supports the common payload formats:
-   *
-   * {
-   *   individualId: "..."
-   * }
-   *
-   * {
-   *   id: "..."
-   * }
-   *
-   * {
-   *   sub: "..."
-   * }
-   */
   const individualId =
-    typeof decoded.individualId === "string"
+    typeof decoded.individualId ===
+      "string"
       ? decoded.individualId
-      : typeof decoded.id === "string"
+      : typeof decoded.id ===
+          "string"
         ? decoded.id
-        : typeof decoded.sub === "string"
+        : typeof decoded.sub ===
+            "string"
           ? decoded.sub
           : null;
 
@@ -184,31 +226,50 @@ router.post(
   ) => {
     try {
       const body =
-        req.body as CreateContactRequestBody;
+        req.body as
+          CreateContactRequestBody;
 
-      const firstName = requiredString(
-        body.firstName
-      );
+      const firstName =
+        requiredString(
+          body.firstName
+        );
 
-      const lastName = requiredString(
-        body.lastName
-      );
+      const lastName =
+        requiredString(
+          body.lastName
+        );
 
-      const email = requiredString(
-        body.email
-      );
+      const email =
+        requiredString(
+          body.email
+        );
 
-      const mobilePhone = optionalString(
-        body.mobilePhone
-      );
+      const mobilePhone =
+        optionalString(
+          body.mobilePhone
+        );
 
-      const subject = optionalString(
-        body.subject
-      );
+      const subject =
+        optionalString(
+          body.subject
+        );
 
-      const comment = requiredString(
-        body.comment
-      );
+      const comment =
+        requiredString(
+          body.comment
+        );
+
+      /*
+       * Always use the language of the page
+       * where the form was submitted.
+       *
+       * Do not replace this value with the
+       * Individual preferred language.
+       */
+      const language =
+        normalizeLanguage(
+          body.language
+        );
 
       if (!firstName) {
         return res.status(400).json({
@@ -240,7 +301,9 @@ router.post(
         });
       }
 
-      if (!isValidEmail(email)) {
+      if (
+        !isValidEmail(email)
+      ) {
         return res.status(400).json({
           code:
             "ERROR_INVALID_EMAIL",
@@ -274,13 +337,6 @@ router.post(
         });
       }
 
-      /*
-       * Authenticated request:
-       * Individual ID comes from the verified JWT.
-       *
-       * Public request:
-       * individualId remains null.
-       */
       const individualId =
         await getIndividualIdFromRequest(
           req
@@ -290,6 +346,9 @@ router.post(
         individualId ||
         "PUBLIC_CONTACT_FORM";
 
+      const normalizedEmail =
+        email.toLowerCase();
+
       const contactRequest =
         await prisma.contactRequest.create({
           data: {
@@ -297,7 +356,7 @@ router.post(
             lastName,
 
             email:
-              email.toLowerCase(),
+              normalizedEmail,
 
             mobilePhone,
 
@@ -331,12 +390,120 @@ router.post(
           },
         });
 
+      const emailResults =
+        await Promise.allSettled([
+          sendContactRequestConfirmationEmail({
+            email:
+              contactRequest.email,
+
+            firstName:
+              contactRequest.firstName,
+
+            requestId:
+              contactRequest.id,
+
+            requestType:
+              contactRequest.requestType,
+
+            subject:
+              contactRequest.subject,
+
+            comment:
+              contactRequest.comment,
+
+            /*
+             * Confirmation email uses the
+             * contact-form page language.
+             */
+            language,
+          }),
+
+          sendContactRequestInternalEmail({
+            requestId:
+              contactRequest.id,
+
+            firstName:
+              contactRequest.firstName,
+
+            lastName:
+              contactRequest.lastName,
+
+            email:
+              contactRequest.email,
+
+            mobilePhone:
+              contactRequest.mobilePhone,
+
+            requestType:
+              contactRequest.requestType,
+
+            subject:
+              contactRequest.subject,
+
+            comment:
+              contactRequest.comment,
+
+            individualId:
+              contactRequest.individualId,
+
+            language,
+
+            createdDate:
+              contactRequest.createdDate,
+          }),
+        ]);
+
+      const [
+        clientEmailResult,
+        internalEmailResult,
+      ] = emailResults;
+
+      if (
+        clientEmailResult.status ===
+        "rejected"
+      ) {
+        console.error(
+          "Unable to send contact confirmation email:",
+          clientEmailResult.reason
+        );
+      }
+
+      if (
+        internalEmailResult.status ===
+        "rejected"
+      ) {
+        console.error(
+          "Unable to send internal contact notification:",
+          internalEmailResult.reason
+        );
+      }
+
+      const allEmailsSent =
+        clientEmailResult.status ===
+          "fulfilled" &&
+        internalEmailResult.status ===
+          "fulfilled";
+
       return res.status(201).json({
         code:
-          "CONTACT_REQUEST_CREATED",
+          allEmailsSent
+            ? "CONTACT_REQUEST_CREATED"
+            : "CONTACT_REQUEST_CREATED_EMAIL_WARNING",
 
         message:
-          "Contact request created successfully.",
+          allEmailsSent
+            ? "Contact request created successfully."
+            : "Contact request created successfully, but one or more email notifications could not be sent.",
+
+        emailNotifications: {
+          client:
+            clientEmailResult.status ===
+            "fulfilled",
+
+          internal:
+            internalEmailResult.status ===
+            "fulfilled",
+        },
 
         contactRequest,
       });
@@ -347,19 +514,8 @@ router.post(
       );
 
       if (
-        error instanceof jwt.JsonWebTokenError
-      ) {
-        return res.status(401).json({
-          code:
-            "ERROR_INVALID_ACCESS_TOKEN",
-
-          message:
-            "The access token is invalid.",
-        });
-      }
-
-      if (
-        error instanceof jwt.TokenExpiredError
+        error instanceof
+          jwt.TokenExpiredError
       ) {
         return res.status(401).json({
           code:
@@ -367,6 +523,19 @@ router.post(
 
           message:
             "The access token has expired.",
+        });
+      }
+
+      if (
+        error instanceof
+          jwt.JsonWebTokenError
+      ) {
+        return res.status(401).json({
+          code:
+            "ERROR_INVALID_ACCESS_TOKEN",
+
+          message:
+            "The access token is invalid.",
         });
       }
 

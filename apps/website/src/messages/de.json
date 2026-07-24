@@ -484,5 +484,12 @@
         ]
       }
     }
+  },
+  "languagePrompt": {
+    "title": "Zur bevorzugten Sprache wechseln?",
+    "description": "Die in Ihrem Konto eingestellte Sprache ist",
+    "stayButton": "Auf Deutsch bleiben",
+    "switchButton": "Sprache wechseln",
+    "close": "Sprachvorschlag schließen"
   }
 }

@@ -223,6 +223,7 @@ export type ConsentOrderByWithRelationInput = {
 
 export type ConsentWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  individualId_channel?: Prisma.ConsentIndividualIdChannelCompoundUniqueInput
   AND?: Prisma.ConsentWhereInput | Prisma.ConsentWhereInput[]
   OR?: Prisma.ConsentWhereInput[]
   NOT?: Prisma.ConsentWhereInput | Prisma.ConsentWhereInput[]
@@ -234,7 +235,7 @@ export type ConsentWhereUniqueInput = Prisma.AtLeast<{
   updatedDate?: Prisma.DateTimeFilter<"Consent"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"Consent"> | string | null
   individual?: Prisma.XOR<Prisma.IndividualScalarRelationFilter, Prisma.IndividualWhereInput>
-}, "id">
+}, "id" | "individualId_channel">
 
 export type ConsentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -348,6 +349,11 @@ export type ConsentListRelationFilter = {
 
 export type ConsentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ConsentIndividualIdChannelCompoundUniqueInput = {
+  individualId: string
+  channel: $Enums.ConsentChannel
 }
 
 export type ConsentCountOrderByAggregateInput = {

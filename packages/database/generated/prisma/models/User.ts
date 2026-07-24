@@ -32,6 +32,7 @@ export type UserMinAggregateOutputType = {
   passwordHash: string | null
   mobilePhone: string | null
   role: string | null
+  isActive: boolean | null
   lastLoginDate: Date | null
   createdDate: Date | null
   createdBy: string | null
@@ -47,6 +48,7 @@ export type UserMaxAggregateOutputType = {
   passwordHash: string | null
   mobilePhone: string | null
   role: string | null
+  isActive: boolean | null
   lastLoginDate: Date | null
   createdDate: Date | null
   createdBy: string | null
@@ -62,6 +64,7 @@ export type UserCountAggregateOutputType = {
   passwordHash: number
   mobilePhone: number
   role: number
+  isActive: number
   lastLoginDate: number
   createdDate: number
   createdBy: number
@@ -79,6 +82,7 @@ export type UserMinAggregateInputType = {
   passwordHash?: true
   mobilePhone?: true
   role?: true
+  isActive?: true
   lastLoginDate?: true
   createdDate?: true
   createdBy?: true
@@ -94,6 +98,7 @@ export type UserMaxAggregateInputType = {
   passwordHash?: true
   mobilePhone?: true
   role?: true
+  isActive?: true
   lastLoginDate?: true
   createdDate?: true
   createdBy?: true
@@ -109,6 +114,7 @@ export type UserCountAggregateInputType = {
   passwordHash?: true
   mobilePhone?: true
   role?: true
+  isActive?: true
   lastLoginDate?: true
   createdDate?: true
   createdBy?: true
@@ -197,6 +203,7 @@ export type UserGroupByOutputType = {
   passwordHash: string
   mobilePhone: string | null
   role: string
+  isActive: boolean
   lastLoginDate: Date | null
   createdDate: Date
   createdBy: string | null
@@ -233,6 +240,7 @@ export type UserWhereInput = {
   passwordHash?: Prisma.StringFilter<"User"> | string
   mobilePhone?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
+  isActive?: Prisma.BoolFilter<"User"> | boolean
   lastLoginDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdDate?: Prisma.DateTimeFilter<"User"> | Date | string
   createdBy?: Prisma.StringNullableFilter<"User"> | string | null
@@ -249,6 +257,7 @@ export type UserOrderByWithRelationInput = {
   passwordHash?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   lastLoginDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -268,6 +277,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passwordHash?: Prisma.StringFilter<"User"> | string
   mobilePhone?: Prisma.StringNullableFilter<"User"> | string | null
   role?: Prisma.StringFilter<"User"> | string
+  isActive?: Prisma.BoolFilter<"User"> | boolean
   lastLoginDate?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdDate?: Prisma.DateTimeFilter<"User"> | Date | string
   createdBy?: Prisma.StringNullableFilter<"User"> | string | null
@@ -284,6 +294,7 @@ export type UserOrderByWithAggregationInput = {
   passwordHash?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   lastLoginDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -305,6 +316,7 @@ export type UserScalarWhereWithAggregatesInput = {
   passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
   mobilePhone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"User"> | string
+  isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   lastLoginDate?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdDate?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   createdBy?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -320,6 +332,7 @@ export type UserCreateInput = {
   passwordHash: string
   mobilePhone?: string | null
   role: string
+  isActive?: boolean
   lastLoginDate?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
@@ -336,6 +349,7 @@ export type UserUncheckedCreateInput = {
   passwordHash: string
   mobilePhone?: string | null
   role: string
+  isActive?: boolean
   lastLoginDate?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
@@ -352,6 +366,7 @@ export type UserUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -368,6 +383,7 @@ export type UserUncheckedUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -384,6 +400,7 @@ export type UserCreateManyInput = {
   passwordHash: string
   mobilePhone?: string | null
   role: string
+  isActive?: boolean
   lastLoginDate?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
@@ -399,6 +416,7 @@ export type UserUpdateManyMutationInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -414,6 +432,7 @@ export type UserUncheckedUpdateManyInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -434,6 +453,7 @@ export type UserCountOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   lastLoginDate?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
@@ -449,6 +469,7 @@ export type UserMaxOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   lastLoginDate?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
@@ -464,6 +485,7 @@ export type UserMinOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   mobilePhone?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   lastLoginDate?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
@@ -495,6 +517,7 @@ export type UserCreateWithoutAssignedChatsInput = {
   passwordHash: string
   mobilePhone?: string | null
   role: string
+  isActive?: boolean
   lastLoginDate?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
@@ -510,6 +533,7 @@ export type UserUncheckedCreateWithoutAssignedChatsInput = {
   passwordHash: string
   mobilePhone?: string | null
   role: string
+  isActive?: boolean
   lastLoginDate?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
@@ -541,6 +565,7 @@ export type UserUpdateWithoutAssignedChatsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -556,6 +581,7 @@ export type UserUncheckedUpdateWithoutAssignedChatsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -602,6 +628,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passwordHash?: boolean
   mobilePhone?: boolean
   role?: boolean
+  isActive?: boolean
   lastLoginDate?: boolean
   createdDate?: boolean
   createdBy?: boolean
@@ -619,6 +646,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   passwordHash?: boolean
   mobilePhone?: boolean
   role?: boolean
+  isActive?: boolean
   lastLoginDate?: boolean
   createdDate?: boolean
   createdBy?: boolean
@@ -634,6 +662,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   passwordHash?: boolean
   mobilePhone?: boolean
   role?: boolean
+  isActive?: boolean
   lastLoginDate?: boolean
   createdDate?: boolean
   createdBy?: boolean
@@ -649,6 +678,7 @@ export type UserSelectScalar = {
   passwordHash?: boolean
   mobilePhone?: boolean
   role?: boolean
+  isActive?: boolean
   lastLoginDate?: boolean
   createdDate?: boolean
   createdBy?: boolean
@@ -656,7 +686,7 @@ export type UserSelectScalar = {
   updatedBy?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "passwordHash" | "mobilePhone" | "role" | "lastLoginDate" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "passwordHash" | "mobilePhone" | "role" | "isActive" | "lastLoginDate" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignedChats?: boolean | Prisma.User$assignedChatsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -677,6 +707,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     passwordHash: string
     mobilePhone: string | null
     role: string
+    isActive: boolean
     lastLoginDate: Date | null
     createdDate: Date
     createdBy: string | null
@@ -1113,6 +1144,7 @@ export interface UserFieldRefs {
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly mobilePhone: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'String'>
+  readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly lastLoginDate: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdDate: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdBy: Prisma.FieldRef<"User", 'String'>
