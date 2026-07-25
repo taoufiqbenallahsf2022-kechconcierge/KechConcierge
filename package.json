@@ -5,20 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:web": "cd apps/website && npm run dev",
-    "dev:api": "cd apps/website-api && npm run dev",
-    "dev": "concurrently \"npm run dev:web\" \"npm run dev:api\""
 
+    "dev:web": "npm --prefix apps/website run dev",
+    "dev:web-api": "npm --prefix apps/website-api run dev",
+    "dev:admin": "npm --prefix apps/admin run dev",
+    "dev:admin-api": "npm --prefix apps/admin-api run dev",
+
+    "dev:website": "concurrently \"npm run dev:web\" \"npm run dev:web-api\"",
+    "dev:backoffice": "concurrently \"npm run dev:admin\" \"npm run dev:admin-api\"",
+
+    "dev": "concurrently --kill-others-on-fail --names \"WEB,WEB-API,ADMIN,ADMIN-API\" \"npm run dev:web\" \"npm run dev:web-api\" \"npm run dev:admin\" \"npm run dev:admin-api\"",
+
+    "db:generate": "npm --prefix packages/database run generate",
+    "db:migrate": "npm --prefix packages/database run migrate",
+    "db:seed": "npm --prefix packages/database run seed",
+    "db:test": "npm --prefix packages/database run test:db"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "concurrently": "^10.0.3",
-    "prisma": "^7.8.0"
-  },
-  "dependencies": {
-    "@prisma/client": "^7.8.0"
+    "concurrently": "^10.0.3"
   }
 }
