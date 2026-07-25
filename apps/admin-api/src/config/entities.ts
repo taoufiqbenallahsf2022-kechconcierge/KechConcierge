@@ -1,0 +1,16 @@
+export type EntityRule={delegate:string;readOnly?:boolean;searchFields:string[];filterFields:string[];dateFields:string[];hiddenFields?:string[]};
+export const rules:Record<string,EntityRule>={
+'individuals':{delegate:'individual',searchFields:['firstName','lastName','email','mobilePhone','country','language','source'],filterFields:['id','firstName','lastName','email','mobilePhone','country','language','source','isActive','emailVerified'],dateFields:['createdDate','updatedDate'],hiddenFields:['passwordHash','emailVerificationToken','passwordResetToken']},
+'leads':{delegate:'lead',searchFields:['firstName','lastName','email','mobilePhone','statusDescription','source'],filterFields:['id','firstName','lastName','email','source','statusDescription','individualId'],dateFields:['createdDate','updatedDate']},
+'prospects':{delegate:'prospect',searchFields:['firstName','lastName','email','mobilePhone','statusDescription','source'],filterFields:['id','firstName','lastName','email','source','statusDescription','individualId'],dateFields:['createdDate','updatedDate']},
+'accounts':{delegate:'account',searchFields:['firstName','lastName','email','mobilePhone','statusDescription','source'],filterFields:['id','firstName','lastName','email','source','statusDescription','individualId'],dateFields:['createdDate','updatedDate']},
+'products':{delegate:'product',searchFields:['uniqueCode','titleEN','titleFR','addressEN','addressFR'],filterFields:['id','uniqueCode','type','isActive','titleEN','titleFR'],dateFields:['createdAt','updatedAt']},
+'consents':{delegate:'consent',searchFields:[],filterFields:['id','individualId','channel','channelStatus'],dateFields:['createdDate','updatedDate']},
+'users':{delegate:'user',searchFields:['firstName','lastName','email','mobilePhone','role'],filterFields:['id','firstName','lastName','email','role','isActive'],dateFields:['createdDate','updatedDate'],hiddenFields:['passwordHash']},
+'page-visits':{delegate:'pageVisit',readOnly:true,searchFields:['pageUrl','pageName','referrer','sessionId'],filterFields:['id','pageUrl','pageName','visitorStage','leadId','prospectId','accountId','individualId','sessionId'],dateFields:['visitDate']},
+'contact-requests':{delegate:'contactRequest',readOnly:true,searchFields:['firstName','lastName','email','subject','comment'],filterFields:['id','email','requestType','requesterStage','individualId','leadId','prospectId','accountId'],dateFields:['createdDate','updatedDate']},
+'chats':{delegate:'chat',readOnly:true,searchFields:['visitorId','sessionId'],filterFields:['id','visitorId','sessionId','leadId','prospectId','accountId','individualId','advisorId','participantStage','managedBy','status'],dateFields:['createdDate','updatedDate']},
+'chat-messages':{delegate:'chatMessage',readOnly:true,searchFields:['message','senderId'],filterFields:['id','chatId','senderType','senderId','isRead'],dateFields:['sendTime']},
+'whatsapp-conversations':{delegate:'whatsAppConversation',readOnly:true,searchFields:['whatsappPhone','whatsappUserId','displayName'],filterFields:['id','whatsappPhone','whatsappUserId','managedBy'],dateFields:['createdDate','updatedDate']},
+'whatsapp-messages':{delegate:'whatsAppMessage',readOnly:true,searchFields:['message','externalMessageId'],filterFields:['id','conversationId','sender','externalMessageId'],dateFields:['sentAt']}
+};
