@@ -36,6 +36,9 @@ export type ChatMinAggregateOutputType = {
   participantStage: $Enums.ChatParticipantStage | null
   managedBy: $Enums.ChatManagedBy | null
   status: $Enums.ChatStatus | null
+  language: string | null
+  endUserTypingUntil: Date | null
+  advisorTypingUntil: Date | null
   createdDate: Date | null
   createdBy: string | null
   updatedDate: Date | null
@@ -54,6 +57,9 @@ export type ChatMaxAggregateOutputType = {
   participantStage: $Enums.ChatParticipantStage | null
   managedBy: $Enums.ChatManagedBy | null
   status: $Enums.ChatStatus | null
+  language: string | null
+  endUserTypingUntil: Date | null
+  advisorTypingUntil: Date | null
   createdDate: Date | null
   createdBy: string | null
   updatedDate: Date | null
@@ -72,6 +78,9 @@ export type ChatCountAggregateOutputType = {
   participantStage: number
   managedBy: number
   status: number
+  language: number
+  endUserTypingUntil: number
+  advisorTypingUntil: number
   createdDate: number
   createdBy: number
   updatedDate: number
@@ -92,6 +101,9 @@ export type ChatMinAggregateInputType = {
   participantStage?: true
   managedBy?: true
   status?: true
+  language?: true
+  endUserTypingUntil?: true
+  advisorTypingUntil?: true
   createdDate?: true
   createdBy?: true
   updatedDate?: true
@@ -110,6 +122,9 @@ export type ChatMaxAggregateInputType = {
   participantStage?: true
   managedBy?: true
   status?: true
+  language?: true
+  endUserTypingUntil?: true
+  advisorTypingUntil?: true
   createdDate?: true
   createdBy?: true
   updatedDate?: true
@@ -128,6 +143,9 @@ export type ChatCountAggregateInputType = {
   participantStage?: true
   managedBy?: true
   status?: true
+  language?: true
+  endUserTypingUntil?: true
+  advisorTypingUntil?: true
   createdDate?: true
   createdBy?: true
   updatedDate?: true
@@ -219,6 +237,9 @@ export type ChatGroupByOutputType = {
   participantStage: $Enums.ChatParticipantStage
   managedBy: $Enums.ChatManagedBy
   status: $Enums.ChatStatus
+  language: string
+  endUserTypingUntil: Date | null
+  advisorTypingUntil: Date | null
   createdDate: Date
   createdBy: string | null
   updatedDate: Date
@@ -258,6 +279,9 @@ export type ChatWhereInput = {
   participantStage?: Prisma.EnumChatParticipantStageFilter<"Chat"> | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFilter<"Chat"> | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFilter<"Chat"> | $Enums.ChatStatus
+  language?: Prisma.StringFilter<"Chat"> | string
+  endUserTypingUntil?: Prisma.DateTimeNullableFilter<"Chat"> | Date | string | null
+  advisorTypingUntil?: Prisma.DateTimeNullableFilter<"Chat"> | Date | string | null
   createdDate?: Prisma.DateTimeFilter<"Chat"> | Date | string
   createdBy?: Prisma.StringNullableFilter<"Chat"> | string | null
   updatedDate?: Prisma.DateTimeFilter<"Chat"> | Date | string
@@ -282,6 +306,9 @@ export type ChatOrderByWithRelationInput = {
   participantStage?: Prisma.SortOrder
   managedBy?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  endUserTypingUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  advisorTypingUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
@@ -309,6 +336,9 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
   participantStage?: Prisma.EnumChatParticipantStageFilter<"Chat"> | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFilter<"Chat"> | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFilter<"Chat"> | $Enums.ChatStatus
+  language?: Prisma.StringFilter<"Chat"> | string
+  endUserTypingUntil?: Prisma.DateTimeNullableFilter<"Chat"> | Date | string | null
+  advisorTypingUntil?: Prisma.DateTimeNullableFilter<"Chat"> | Date | string | null
   createdDate?: Prisma.DateTimeFilter<"Chat"> | Date | string
   createdBy?: Prisma.StringNullableFilter<"Chat"> | string | null
   updatedDate?: Prisma.DateTimeFilter<"Chat"> | Date | string
@@ -333,6 +363,9 @@ export type ChatOrderByWithAggregationInput = {
   participantStage?: Prisma.SortOrder
   managedBy?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  endUserTypingUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  advisorTypingUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
@@ -357,6 +390,9 @@ export type ChatScalarWhereWithAggregatesInput = {
   participantStage?: Prisma.EnumChatParticipantStageWithAggregatesFilter<"Chat"> | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByWithAggregatesFilter<"Chat"> | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusWithAggregatesFilter<"Chat"> | $Enums.ChatStatus
+  language?: Prisma.StringWithAggregatesFilter<"Chat"> | string
+  endUserTypingUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"Chat"> | Date | string | null
+  advisorTypingUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"Chat"> | Date | string | null
   createdDate?: Prisma.DateTimeWithAggregatesFilter<"Chat"> | Date | string
   createdBy?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
   updatedDate?: Prisma.DateTimeWithAggregatesFilter<"Chat"> | Date | string
@@ -370,6 +406,9 @@ export type ChatCreateInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -394,6 +433,9 @@ export type ChatUncheckedCreateInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -408,6 +450,9 @@ export type ChatUpdateInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -432,6 +477,9 @@ export type ChatUncheckedUpdateInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -451,6 +499,9 @@ export type ChatCreateManyInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -464,6 +515,9 @@ export type ChatUpdateManyMutationInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -482,6 +536,9 @@ export type ChatUncheckedUpdateManyInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -510,6 +567,9 @@ export type ChatCountOrderByAggregateInput = {
   participantStage?: Prisma.SortOrder
   managedBy?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  endUserTypingUntil?: Prisma.SortOrder
+  advisorTypingUntil?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
@@ -528,6 +588,9 @@ export type ChatMaxOrderByAggregateInput = {
   participantStage?: Prisma.SortOrder
   managedBy?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  endUserTypingUntil?: Prisma.SortOrder
+  advisorTypingUntil?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
@@ -546,6 +609,9 @@ export type ChatMinOrderByAggregateInput = {
   participantStage?: Prisma.SortOrder
   managedBy?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  endUserTypingUntil?: Prisma.SortOrder
+  advisorTypingUntil?: Prisma.SortOrder
   createdDate?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedDate?: Prisma.SortOrder
@@ -800,6 +866,9 @@ export type ChatCreateWithoutIndividualInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -822,6 +891,9 @@ export type ChatUncheckedCreateWithoutIndividualInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -870,6 +942,9 @@ export type ChatScalarWhereInput = {
   participantStage?: Prisma.EnumChatParticipantStageFilter<"Chat"> | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFilter<"Chat"> | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFilter<"Chat"> | $Enums.ChatStatus
+  language?: Prisma.StringFilter<"Chat"> | string
+  endUserTypingUntil?: Prisma.DateTimeNullableFilter<"Chat"> | Date | string | null
+  advisorTypingUntil?: Prisma.DateTimeNullableFilter<"Chat"> | Date | string | null
   createdDate?: Prisma.DateTimeFilter<"Chat"> | Date | string
   createdBy?: Prisma.StringNullableFilter<"Chat"> | string | null
   updatedDate?: Prisma.DateTimeFilter<"Chat"> | Date | string
@@ -883,6 +958,9 @@ export type ChatCreateWithoutLeadInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -905,6 +983,9 @@ export type ChatUncheckedCreateWithoutLeadInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -945,6 +1026,9 @@ export type ChatCreateWithoutProspectInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -967,6 +1051,9 @@ export type ChatUncheckedCreateWithoutProspectInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1007,6 +1094,9 @@ export type ChatCreateWithoutAccountInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1029,6 +1119,9 @@ export type ChatUncheckedCreateWithoutAccountInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1069,6 +1162,9 @@ export type ChatCreateWithoutMessagesInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1092,6 +1188,9 @@ export type ChatUncheckedCreateWithoutMessagesInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1121,6 +1220,9 @@ export type ChatUpdateWithoutMessagesInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1144,6 +1246,9 @@ export type ChatUncheckedUpdateWithoutMessagesInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1157,6 +1262,9 @@ export type ChatCreateWithoutAdvisorInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1179,6 +1287,9 @@ export type ChatUncheckedCreateWithoutAdvisorInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1223,6 +1334,9 @@ export type ChatCreateManyIndividualInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1236,6 +1350,9 @@ export type ChatUpdateWithoutIndividualInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1258,6 +1375,9 @@ export type ChatUncheckedUpdateWithoutIndividualInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1276,6 +1396,9 @@ export type ChatUncheckedUpdateManyWithoutIndividualInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1293,6 +1416,9 @@ export type ChatCreateManyLeadInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1306,6 +1432,9 @@ export type ChatUpdateWithoutLeadInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1328,6 +1457,9 @@ export type ChatUncheckedUpdateWithoutLeadInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1346,6 +1478,9 @@ export type ChatUncheckedUpdateManyWithoutLeadInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1363,6 +1498,9 @@ export type ChatCreateManyProspectInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1376,6 +1514,9 @@ export type ChatUpdateWithoutProspectInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1398,6 +1539,9 @@ export type ChatUncheckedUpdateWithoutProspectInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1416,6 +1560,9 @@ export type ChatUncheckedUpdateManyWithoutProspectInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1433,6 +1580,9 @@ export type ChatCreateManyAccountInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1446,6 +1596,9 @@ export type ChatUpdateWithoutAccountInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1468,6 +1621,9 @@ export type ChatUncheckedUpdateWithoutAccountInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1486,6 +1642,9 @@ export type ChatUncheckedUpdateManyWithoutAccountInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1503,6 +1662,9 @@ export type ChatCreateManyAdvisorInput = {
   participantStage?: $Enums.ChatParticipantStage
   managedBy?: $Enums.ChatManagedBy
   status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1516,6 +1678,9 @@ export type ChatUpdateWithoutAdvisorInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1538,6 +1703,9 @@ export type ChatUncheckedUpdateWithoutAdvisorInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1556,6 +1724,9 @@ export type ChatUncheckedUpdateManyWithoutAdvisorInput = {
   participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
   managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
   status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1605,6 +1776,9 @@ export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   participantStage?: boolean
   managedBy?: boolean
   status?: boolean
+  language?: boolean
+  endUserTypingUntil?: boolean
+  advisorTypingUntil?: boolean
   createdDate?: boolean
   createdBy?: boolean
   updatedDate?: boolean
@@ -1630,6 +1804,9 @@ export type ChatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   participantStage?: boolean
   managedBy?: boolean
   status?: boolean
+  language?: boolean
+  endUserTypingUntil?: boolean
+  advisorTypingUntil?: boolean
   createdDate?: boolean
   createdBy?: boolean
   updatedDate?: boolean
@@ -1653,6 +1830,9 @@ export type ChatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   participantStage?: boolean
   managedBy?: boolean
   status?: boolean
+  language?: boolean
+  endUserTypingUntil?: boolean
+  advisorTypingUntil?: boolean
   createdDate?: boolean
   createdBy?: boolean
   updatedDate?: boolean
@@ -1676,13 +1856,16 @@ export type ChatSelectScalar = {
   participantStage?: boolean
   managedBy?: boolean
   status?: boolean
+  language?: boolean
+  endUserTypingUntil?: boolean
+  advisorTypingUntil?: boolean
   createdDate?: boolean
   createdBy?: boolean
   updatedDate?: boolean
   updatedBy?: boolean
 }
 
-export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitorId" | "sessionId" | "leadId" | "prospectId" | "accountId" | "individualId" | "advisorId" | "participantStage" | "managedBy" | "status" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["chat"]>
+export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitorId" | "sessionId" | "leadId" | "prospectId" | "accountId" | "individualId" | "advisorId" | "participantStage" | "managedBy" | "status" | "language" | "endUserTypingUntil" | "advisorTypingUntil" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["chat"]>
 export type ChatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.Chat$accountArgs<ExtArgs>
   advisor?: boolean | Prisma.Chat$advisorArgs<ExtArgs>
@@ -1729,6 +1912,9 @@ export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     participantStage: $Enums.ChatParticipantStage
     managedBy: $Enums.ChatManagedBy
     status: $Enums.ChatStatus
+    language: string
+    endUserTypingUntil: Date | null
+    advisorTypingUntil: Date | null
     createdDate: Date
     createdBy: string | null
     updatedDate: Date
@@ -2173,6 +2359,9 @@ export interface ChatFieldRefs {
   readonly participantStage: Prisma.FieldRef<"Chat", 'ChatParticipantStage'>
   readonly managedBy: Prisma.FieldRef<"Chat", 'ChatManagedBy'>
   readonly status: Prisma.FieldRef<"Chat", 'ChatStatus'>
+  readonly language: Prisma.FieldRef<"Chat", 'String'>
+  readonly endUserTypingUntil: Prisma.FieldRef<"Chat", 'DateTime'>
+  readonly advisorTypingUntil: Prisma.FieldRef<"Chat", 'DateTime'>
   readonly createdDate: Prisma.FieldRef<"Chat", 'DateTime'>
   readonly createdBy: Prisma.FieldRef<"Chat", 'String'>
   readonly updatedDate: Prisma.FieldRef<"Chat", 'DateTime'>

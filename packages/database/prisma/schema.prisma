@@ -305,6 +305,9 @@ model Chat {
   participantStage ChatParticipantStage @default(VISITOR)
   managedBy        ChatManagedBy        @default(AI)
   status           ChatStatus           @default(OPEN)
+  language         String               @default("en")
+  endUserTypingUntil DateTime?
+  advisorTypingUntil DateTime?
   createdDate      DateTime             @default(now())
   createdBy        String?
   updatedDate      DateTime             @updatedAt
@@ -315,6 +318,11 @@ model Chat {
   lead             Lead?                @relation(fields: [leadId], references: [id])
   prospect         Prospect?            @relation(fields: [prospectId], references: [id])
   messages         ChatMessage[]
+
+  @@index([visitorId])
+  @@index([individualId])
+  @@index([advisorId])
+  @@index([updatedDate])
 }
 
 model ChatMessage {
@@ -325,7 +333,10 @@ model ChatMessage {
   message    String
   sendTime   DateTime       @default(now())
   isRead     Boolean        @default(false)
-  chat       Chat           @relation(fields: [chatId], references: [id])
+  chat       Chat           @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  @@index([chatId, sendTime])
+  @@index([chatId, isRead])
 }
 
 model User {
@@ -399,6 +410,7 @@ enum ChatStatus {
 
 enum ChatParticipantStage {
   VISITOR
+  INDIVIDUAL
   LEAD
   PROSPECT
   ACCOUNT
@@ -406,6 +418,7 @@ enum ChatParticipantStage {
 
 enum ChatSenderType {
   VISITOR
+  INDIVIDUAL
   LEAD
   PROSPECT
   ACCOUNT

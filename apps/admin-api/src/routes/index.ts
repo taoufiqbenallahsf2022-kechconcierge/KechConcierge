@@ -40,11 +40,31 @@ api.post("/chats/:id/messages", async (req, res, next) => {
         managedBy: "MANUAL",
         status: "WAITING_FOR_VISITOR",
         advisorId: req.adminUser!.id,
+        advisorTypingUntil: null,
       },
     });
     res.status(201).json(row);
   } catch (e) {
     next(e);
+  }
+});
+api.post("/chats/:id/typing", async (req, res, next) => {
+  try {
+    const chat = await prisma.chat.findUnique({
+      where: { id: req.params.id },
+      select: { id: true },
+    });
+    if (!chat) return res.status(404).json({ message: "Chat not found" });
+    await prisma.chat.update({
+      where: { id: chat.id },
+      data: {
+        advisorTypingUntil:
+          req.body?.typing === true ? new Date(Date.now() + 5000) : null,
+      },
+    });
+    res.status(204).end();
+  } catch (error) {
+    next(error);
   }
 });
 api.use("/individuals", individualsRouter);
