@@ -1,6 +1,7 @@
 import { Router, type Request } from "express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { prisma } from "../config/prisma";
+import { claimVisitorJourney, ensureVisitorJourney } from "../services/visitor-journey.service";
 
 const router = Router();
 
@@ -35,7 +36,11 @@ router.post("/", async (req, res, next) => {
     const visitorId = text(req.header("x-visitor-id"), "Visitor ID", 100, true)!;
     if (visitorId.length < 16)
       throw Object.assign(new Error("Visitor ID is invalid"), { status: 400 });
+    const journeyId = text(req.header("x-journey-id") ?? req.body?.journeyId, "Journey ID", 100, true)!;
+    const journey = await ensureVisitorJourney(visitorId, journeyId);
     const individualId = optionalIndividualId(req);
+    if (journey.individualId && journey.individualId !== individualId)
+      throw Object.assign(new Error("Journey belongs to another Individual"), { status: 409 });
     const individual = individualId
       ? await prisma.individual.findUnique({
           where: { id: individualId },
@@ -49,6 +54,8 @@ router.post("/", async (req, res, next) => {
       : null;
     if (individualId && !individual)
       throw Object.assign(new Error("Individual not found"), { status: 401 });
+    if (individualId && !journey.individualId)
+      await claimVisitorJourney(visitorId, journeyId, individualId);
     const accountId = individual?.accounts[0]?.id ?? null;
     const prospectId = accountId ? null : (individual?.prospects[0]?.id ?? null);
     const leadId = accountId || prospectId ? null : (individual?.leads[0]?.id ?? null);
@@ -58,6 +65,7 @@ router.post("/", async (req, res, next) => {
         pageUrl: text(req.body?.pageUrl, "Page URL", 2000, true)!,
         pageName: text(req.body?.pageName, "Page name", 500),
         visitorId,
+        journeyId,
         visitorStage,
         individualId: individual?.id ?? null,
         accountId,

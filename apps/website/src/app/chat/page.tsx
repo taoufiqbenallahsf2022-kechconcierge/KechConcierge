@@ -5,7 +5,7 @@ import { Bot, MessageSquarePlus, Send } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { getLocaleFromPath, type Locale } from "@/lib/i18n";
 import { useAuthStore } from "@/store/auth.store";
-import { getVisitorId } from "@/lib/visitor";
+import { getVisitorId, getVisitorJourneyId } from "@/lib/visitor";
 
 type ChatMessage = {
   id: string;
@@ -63,12 +63,15 @@ export default function ChatPage() {
   }, [hasRestoredAuth, restoreAuth]);
 
   const headers = useCallback(
-    () => ({
-      "Content-Type": "application/json",
-      ...(accessToken
-        ? { Authorization: `Bearer ${accessToken}` }
-        : { "x-visitor-id": getVisitorId() }),
-    }),
+    () => {
+      const currentToken = useAuthStore.getState().accessToken;
+      return {
+        "Content-Type": "application/json",
+        "x-visitor-id": getVisitorId(),
+        "x-journey-id": getVisitorJourneyId(),
+        ...(currentToken ? { Authorization: `Bearer ${currentToken}` } : {}),
+      };
+    },
     [accessToken],
   );
 

@@ -349,6 +349,7 @@ export type IndividualWhereInput = {
   pageVisits?: Prisma.PageVisitListRelationFilter
   contactRequests?: Prisma.ContactRequestListRelationFilter
   chats?: Prisma.ChatListRelationFilter
+  visitorJourneys?: Prisma.VisitorJourneyListRelationFilter
 }
 
 export type IndividualOrderByWithRelationInput = {
@@ -384,6 +385,7 @@ export type IndividualOrderByWithRelationInput = {
   pageVisits?: Prisma.PageVisitOrderByRelationAggregateInput
   contactRequests?: Prisma.ContactRequestOrderByRelationAggregateInput
   chats?: Prisma.ChatOrderByRelationAggregateInput
+  visitorJourneys?: Prisma.VisitorJourneyOrderByRelationAggregateInput
 }
 
 export type IndividualWhereUniqueInput = Prisma.AtLeast<{
@@ -422,6 +424,7 @@ export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   pageVisits?: Prisma.PageVisitListRelationFilter
   contactRequests?: Prisma.ContactRequestListRelationFilter
   chats?: Prisma.ChatListRelationFilter
+  visitorJourneys?: Prisma.VisitorJourneyListRelationFilter
 }, "id" | "email" | "manualEmail" | "googleId" | "passwordResetToken">
 
 export type IndividualOrderByWithAggregationInput = {
@@ -519,6 +522,7 @@ export type IndividualCreateInput = {
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateInput = {
@@ -554,6 +558,7 @@ export type IndividualUncheckedCreateInput = {
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUpdateInput = {
@@ -589,6 +594,7 @@ export type IndividualUpdateInput = {
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateInput = {
@@ -624,6 +630,7 @@ export type IndividualUncheckedUpdateInput = {
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateManyInput = {
@@ -908,6 +915,22 @@ export type IndividualUpdateOneWithoutChatsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutChatsInput, Prisma.IndividualUpdateWithoutChatsInput>, Prisma.IndividualUncheckedUpdateWithoutChatsInput>
 }
 
+export type IndividualCreateNestedOneWithoutVisitorJourneysInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutVisitorJourneysInput, Prisma.IndividualUncheckedCreateWithoutVisitorJourneysInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutVisitorJourneysInput
+  connect?: Prisma.IndividualWhereUniqueInput
+}
+
+export type IndividualUpdateOneWithoutVisitorJourneysNestedInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutVisitorJourneysInput, Prisma.IndividualUncheckedCreateWithoutVisitorJourneysInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutVisitorJourneysInput
+  upsert?: Prisma.IndividualUpsertWithoutVisitorJourneysInput
+  disconnect?: Prisma.IndividualWhereInput | boolean
+  delete?: Prisma.IndividualWhereInput | boolean
+  connect?: Prisma.IndividualWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutVisitorJourneysInput, Prisma.IndividualUpdateWithoutVisitorJourneysInput>, Prisma.IndividualUncheckedUpdateWithoutVisitorJourneysInput>
+}
+
 export type IndividualCreateWithoutLeadsInput = {
   id: string
   firstName: string
@@ -940,6 +963,7 @@ export type IndividualCreateWithoutLeadsInput = {
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutLeadsInput = {
@@ -974,6 +998,7 @@ export type IndividualUncheckedCreateWithoutLeadsInput = {
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutLeadsInput = {
@@ -1024,6 +1049,7 @@ export type IndividualUpdateWithoutLeadsInput = {
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutLeadsInput = {
@@ -1058,6 +1084,7 @@ export type IndividualUncheckedUpdateWithoutLeadsInput = {
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutProspectsInput = {
@@ -1092,6 +1119,7 @@ export type IndividualCreateWithoutProspectsInput = {
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutProspectsInput = {
@@ -1126,6 +1154,7 @@ export type IndividualUncheckedCreateWithoutProspectsInput = {
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutProspectsInput = {
@@ -1176,6 +1205,7 @@ export type IndividualUpdateWithoutProspectsInput = {
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutProspectsInput = {
@@ -1210,6 +1240,7 @@ export type IndividualUncheckedUpdateWithoutProspectsInput = {
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutAccountsInput = {
@@ -1244,6 +1275,7 @@ export type IndividualCreateWithoutAccountsInput = {
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutAccountsInput = {
@@ -1278,6 +1310,7 @@ export type IndividualUncheckedCreateWithoutAccountsInput = {
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutAccountsInput = {
@@ -1328,6 +1361,7 @@ export type IndividualUpdateWithoutAccountsInput = {
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutAccountsInput = {
@@ -1362,6 +1396,7 @@ export type IndividualUncheckedUpdateWithoutAccountsInput = {
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutConsentsInput = {
@@ -1396,6 +1431,7 @@ export type IndividualCreateWithoutConsentsInput = {
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutConsentsInput = {
@@ -1430,6 +1466,7 @@ export type IndividualUncheckedCreateWithoutConsentsInput = {
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutConsentsInput = {
@@ -1480,6 +1517,7 @@ export type IndividualUpdateWithoutConsentsInput = {
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutConsentsInput = {
@@ -1514,6 +1552,7 @@ export type IndividualUncheckedUpdateWithoutConsentsInput = {
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutPageVisitsInput = {
@@ -1548,6 +1587,7 @@ export type IndividualCreateWithoutPageVisitsInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutPageVisitsInput = {
@@ -1582,6 +1622,7 @@ export type IndividualUncheckedCreateWithoutPageVisitsInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutPageVisitsInput = {
@@ -1632,6 +1673,7 @@ export type IndividualUpdateWithoutPageVisitsInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
@@ -1666,6 +1708,7 @@ export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutContactRequestsInput = {
@@ -1700,6 +1743,7 @@ export type IndividualCreateWithoutContactRequestsInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutContactRequestsInput = {
@@ -1734,6 +1778,7 @@ export type IndividualUncheckedCreateWithoutContactRequestsInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutContactRequestsInput = {
@@ -1784,6 +1829,7 @@ export type IndividualUpdateWithoutContactRequestsInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
@@ -1818,6 +1864,7 @@ export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateWithoutChatsInput = {
@@ -1852,6 +1899,7 @@ export type IndividualCreateWithoutChatsInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutChatsInput = {
@@ -1886,6 +1934,7 @@ export type IndividualUncheckedCreateWithoutChatsInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutChatsInput = {
@@ -1936,6 +1985,7 @@ export type IndividualUpdateWithoutChatsInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutChatsInput = {
@@ -1970,6 +2020,163 @@ export type IndividualUncheckedUpdateWithoutChatsInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
+}
+
+export type IndividualCreateWithoutVisitorJourneysInput = {
+  id: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  manualEmail?: string | null
+  mobilePhone?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
+  address?: string | null
+  birthdate?: Date | string | null
+  country?: string | null
+  language: string
+  source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
+  passwordResetToken?: string | null
+  passwordResetTokenExpiresAt?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  lastSuccessfulLoginDate?: Date | string | null
+  leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+}
+
+export type IndividualUncheckedCreateWithoutVisitorJourneysInput = {
+  id: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  manualEmail?: string | null
+  mobilePhone?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
+  address?: string | null
+  birthdate?: Date | string | null
+  country?: string | null
+  language: string
+  source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
+  passwordResetToken?: string | null
+  passwordResetTokenExpiresAt?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  lastSuccessfulLoginDate?: Date | string | null
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+}
+
+export type IndividualCreateOrConnectWithoutVisitorJourneysInput = {
+  where: Prisma.IndividualWhereUniqueInput
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutVisitorJourneysInput, Prisma.IndividualUncheckedCreateWithoutVisitorJourneysInput>
+}
+
+export type IndividualUpsertWithoutVisitorJourneysInput = {
+  update: Prisma.XOR<Prisma.IndividualUpdateWithoutVisitorJourneysInput, Prisma.IndividualUncheckedUpdateWithoutVisitorJourneysInput>
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutVisitorJourneysInput, Prisma.IndividualUncheckedCreateWithoutVisitorJourneysInput>
+  where?: Prisma.IndividualWhereInput
+}
+
+export type IndividualUpdateToOneWithWhereWithoutVisitorJourneysInput = {
+  where?: Prisma.IndividualWhereInput
+  data: Prisma.XOR<Prisma.IndividualUpdateWithoutVisitorJourneysInput, Prisma.IndividualUncheckedUpdateWithoutVisitorJourneysInput>
+}
+
+export type IndividualUpdateWithoutVisitorJourneysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manualEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+}
+
+export type IndividualUncheckedUpdateWithoutVisitorJourneysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manualEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 
@@ -1985,6 +2192,7 @@ export type IndividualCountOutputType = {
   pageVisits: number
   contactRequests: number
   chats: number
+  visitorJourneys: number
 }
 
 export type IndividualCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1995,6 +2203,7 @@ export type IndividualCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   pageVisits?: boolean | IndividualCountOutputTypeCountPageVisitsArgs
   contactRequests?: boolean | IndividualCountOutputTypeCountContactRequestsArgs
   chats?: boolean | IndividualCountOutputTypeCountChatsArgs
+  visitorJourneys?: boolean | IndividualCountOutputTypeCountVisitorJourneysArgs
 }
 
 /**
@@ -2056,6 +2265,13 @@ export type IndividualCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Type
   where?: Prisma.ChatWhereInput
 }
 
+/**
+ * IndividualCountOutputType without action
+ */
+export type IndividualCountOutputTypeCountVisitorJourneysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VisitorJourneyWhereInput
+}
+
 
 export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2090,6 +2306,7 @@ export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   pageVisits?: boolean | Prisma.Individual$pageVisitsArgs<ExtArgs>
   contactRequests?: boolean | Prisma.Individual$contactRequestsArgs<ExtArgs>
   chats?: boolean | Prisma.Individual$chatsArgs<ExtArgs>
+  visitorJourneys?: boolean | Prisma.Individual$visitorJourneysArgs<ExtArgs>
   _count?: boolean | Prisma.IndividualCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["individual"]>
 
@@ -2186,6 +2403,7 @@ export type IndividualInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   pageVisits?: boolean | Prisma.Individual$pageVisitsArgs<ExtArgs>
   contactRequests?: boolean | Prisma.Individual$contactRequestsArgs<ExtArgs>
   chats?: boolean | Prisma.Individual$chatsArgs<ExtArgs>
+  visitorJourneys?: boolean | Prisma.Individual$visitorJourneysArgs<ExtArgs>
   _count?: boolean | Prisma.IndividualCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IndividualIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2201,6 +2419,7 @@ export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.Internal
     pageVisits: Prisma.$PageVisitPayload<ExtArgs>[]
     contactRequests: Prisma.$ContactRequestPayload<ExtArgs>[]
     chats: Prisma.$ChatPayload<ExtArgs>[]
+    visitorJourneys: Prisma.$VisitorJourneyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2629,6 +2848,7 @@ export interface Prisma__IndividualClient<T, Null = never, ExtArgs extends runti
   pageVisits<T extends Prisma.Individual$pageVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$pageVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contactRequests<T extends Prisma.Individual$contactRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$contactRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chats<T extends Prisma.Individual$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  visitorJourneys<T extends Prisma.Individual$visitorJourneysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$visitorJourneysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitorJourneyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3241,6 +3461,30 @@ export type Individual$chatsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
+}
+
+/**
+ * Individual.visitorJourneys
+ */
+export type Individual$visitorJourneysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VisitorJourney
+   */
+  select?: Prisma.VisitorJourneySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VisitorJourney
+   */
+  omit?: Prisma.VisitorJourneyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VisitorJourneyInclude<ExtArgs> | null
+  where?: Prisma.VisitorJourneyWhereInput
+  orderBy?: Prisma.VisitorJourneyOrderByWithRelationInput | Prisma.VisitorJourneyOrderByWithRelationInput[]
+  cursor?: Prisma.VisitorJourneyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VisitorJourneyScalarFieldEnum | Prisma.VisitorJourneyScalarFieldEnum[]
 }
 
 /**

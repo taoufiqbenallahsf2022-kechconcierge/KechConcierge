@@ -6,6 +6,7 @@ import {
   verifyIndividualEmail,
   googleAuth,
 } from "../services/auth.service";
+import { claimVisitorJourney } from "../services/visitor-journey.service";
 
 export async function checkEmail(req: Request, res: Response) {
   try {
@@ -124,10 +125,17 @@ export async function login(req: Request, res: Response) {
       });
     }
 
+    const journey = await claimVisitorJourney(
+      req.header("x-visitor-id"),
+      req.header("x-journey-id"),
+      result.individual!.id,
+    );
+
     return res.status(200).json({
       message: result.message,
       accessToken: result.accessToken,
       individual: result.individual,
+      journey,
     });
   } catch (error) {
     return res.status(500).json({
@@ -189,7 +197,13 @@ export async function googleAuthController(req: Request, res: Response) {
       });
     }
 
-    return res.status(200).json(result);
+    const journey = await claimVisitorJourney(
+      req.header("x-visitor-id"),
+      req.header("x-journey-id"),
+      result.individual!.id,
+    );
+
+    return res.status(200).json({ ...result, journey });
   } catch (error) {
     return res.status(500).json({
       code: "ERROR_GOOGLE_AUTH_FAILED",

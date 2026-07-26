@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { rotateVisitorJourney } from "@/lib/visitor";
 
 export type AuthUser = {
   id: string;
@@ -110,6 +111,8 @@ export const useAuthStore =
         isAuthenticated: false,
         hasRestoredAuth: true,
       });
+
+      rotateVisitorJourney();
 
       window.dispatchEvent(
         new Event(

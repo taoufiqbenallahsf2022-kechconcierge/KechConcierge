@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 
 import { useAuthStore } from "../store/auth.store";
+import { getVisitorId, getVisitorJourneyId, rotateVisitorJourney } from "@/lib/visitor";
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
 countries.registerLocale(enCountries);
@@ -217,6 +218,8 @@ export default function AuthModal({ open, onClose }: Props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "x-visitor-id": getVisitorId(),
+            "x-journey-id": getVisitorJourneyId(),
           },
           body: JSON.stringify({
             firstName: firstName.trim(),
@@ -267,6 +270,8 @@ export default function AuthModal({ open, onClose }: Props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "x-visitor-id": getVisitorId(),
+            "x-journey-id": getVisitorJourneyId(),
           },
           body: JSON.stringify({
             email: email.trim().toLowerCase(),
@@ -298,6 +303,7 @@ export default function AuthModal({ open, onClose }: Props) {
           return;
         }
 
+        if (data.journey?.conflict) rotateVisitorJourney();
         login(data.individual, data.accessToken);
 
         setStatus("success");
@@ -324,6 +330,8 @@ export default function AuthModal({ open, onClose }: Props) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-visitor-id": getVisitorId(),
+          "x-journey-id": getVisitorJourneyId(),
         },
         body: JSON.stringify({
           idToken,
@@ -340,6 +348,7 @@ export default function AuthModal({ open, onClose }: Props) {
         );
       }
 
+      if (data.journey?.conflict) rotateVisitorJourney();
       if (data.individual) login(data.individual, data.accessToken);
 
       setStatus("success");

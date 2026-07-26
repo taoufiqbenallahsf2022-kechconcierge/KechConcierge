@@ -68,6 +68,7 @@ export const ModelName = {
   PageVisit: 'PageVisit',
   ContactRequest: 'ContactRequest',
   Chat: 'Chat',
+  VisitorJourney: 'VisitorJourney',
   ChatMessage: 'ChatMessage',
   User: 'User'
 } as const
@@ -412,6 +413,7 @@ export const PageVisitScalarFieldEnum = {
   pageUrl: 'pageUrl',
   pageName: 'pageName',
   visitorId: 'visitorId',
+  journeyId: 'journeyId',
   visitorStage: 'visitorStage',
   leadId: 'leadId',
   prospectId: 'prospectId',
@@ -453,6 +455,7 @@ export type ContactRequestScalarFieldEnum = (typeof ContactRequestScalarFieldEnu
 export const ChatScalarFieldEnum = {
   id: 'id',
   visitorId: 'visitorId',
+  journeyId: 'journeyId',
   sessionId: 'sessionId',
   leadId: 'leadId',
   prospectId: 'prospectId',
@@ -472,6 +475,19 @@ export const ChatScalarFieldEnum = {
 } as const
 
 export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]
+
+
+export const VisitorJourneyScalarFieldEnum = {
+  id: 'id',
+  visitorId: 'visitorId',
+  individualId: 'individualId',
+  startedAt: 'startedAt',
+  claimedAt: 'claimedAt',
+  endedAt: 'endedAt',
+  lastSeenAt: 'lastSeenAt'
+} as const
+
+export type VisitorJourneyScalarFieldEnum = (typeof VisitorJourneyScalarFieldEnum)[keyof typeof VisitorJourneyScalarFieldEnum]
 
 
 export const ChatMessageScalarFieldEnum = {

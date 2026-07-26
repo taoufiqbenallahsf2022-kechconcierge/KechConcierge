@@ -27,6 +27,7 @@ export type AggregateChat = {
 export type ChatMinAggregateOutputType = {
   id: string | null
   visitorId: string | null
+  journeyId: string | null
   sessionId: string | null
   leadId: string | null
   prospectId: string | null
@@ -48,6 +49,7 @@ export type ChatMinAggregateOutputType = {
 export type ChatMaxAggregateOutputType = {
   id: string | null
   visitorId: string | null
+  journeyId: string | null
   sessionId: string | null
   leadId: string | null
   prospectId: string | null
@@ -69,6 +71,7 @@ export type ChatMaxAggregateOutputType = {
 export type ChatCountAggregateOutputType = {
   id: number
   visitorId: number
+  journeyId: number
   sessionId: number
   leadId: number
   prospectId: number
@@ -92,6 +95,7 @@ export type ChatCountAggregateOutputType = {
 export type ChatMinAggregateInputType = {
   id?: true
   visitorId?: true
+  journeyId?: true
   sessionId?: true
   leadId?: true
   prospectId?: true
@@ -113,6 +117,7 @@ export type ChatMinAggregateInputType = {
 export type ChatMaxAggregateInputType = {
   id?: true
   visitorId?: true
+  journeyId?: true
   sessionId?: true
   leadId?: true
   prospectId?: true
@@ -134,6 +139,7 @@ export type ChatMaxAggregateInputType = {
 export type ChatCountAggregateInputType = {
   id?: true
   visitorId?: true
+  journeyId?: true
   sessionId?: true
   leadId?: true
   prospectId?: true
@@ -228,6 +234,7 @@ export type ChatGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type ChatGroupByOutputType = {
   id: string
   visitorId: string | null
+  journeyId: string | null
   sessionId: string | null
   leadId: string | null
   prospectId: string | null
@@ -270,6 +277,7 @@ export type ChatWhereInput = {
   NOT?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
   id?: Prisma.StringFilter<"Chat"> | string
   visitorId?: Prisma.StringNullableFilter<"Chat"> | string | null
+  journeyId?: Prisma.StringNullableFilter<"Chat"> | string | null
   sessionId?: Prisma.StringNullableFilter<"Chat"> | string | null
   leadId?: Prisma.StringNullableFilter<"Chat"> | string | null
   prospectId?: Prisma.StringNullableFilter<"Chat"> | string | null
@@ -292,11 +300,13 @@ export type ChatWhereInput = {
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   prospect?: Prisma.XOR<Prisma.ProspectNullableScalarRelationFilter, Prisma.ProspectWhereInput> | null
   messages?: Prisma.ChatMessageListRelationFilter
+  journey?: Prisma.XOR<Prisma.VisitorJourneyNullableScalarRelationFilter, Prisma.VisitorJourneyWhereInput> | null
 }
 
 export type ChatOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   visitorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  journeyId?: Prisma.SortOrderInput | Prisma.SortOrder
   sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -319,6 +329,7 @@ export type ChatOrderByWithRelationInput = {
   lead?: Prisma.LeadOrderByWithRelationInput
   prospect?: Prisma.ProspectOrderByWithRelationInput
   messages?: Prisma.ChatMessageOrderByRelationAggregateInput
+  journey?: Prisma.VisitorJourneyOrderByWithRelationInput
 }
 
 export type ChatWhereUniqueInput = Prisma.AtLeast<{
@@ -327,6 +338,7 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ChatWhereInput[]
   NOT?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
   visitorId?: Prisma.StringNullableFilter<"Chat"> | string | null
+  journeyId?: Prisma.StringNullableFilter<"Chat"> | string | null
   sessionId?: Prisma.StringNullableFilter<"Chat"> | string | null
   leadId?: Prisma.StringNullableFilter<"Chat"> | string | null
   prospectId?: Prisma.StringNullableFilter<"Chat"> | string | null
@@ -349,11 +361,13 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   prospect?: Prisma.XOR<Prisma.ProspectNullableScalarRelationFilter, Prisma.ProspectWhereInput> | null
   messages?: Prisma.ChatMessageListRelationFilter
+  journey?: Prisma.XOR<Prisma.VisitorJourneyNullableScalarRelationFilter, Prisma.VisitorJourneyWhereInput> | null
 }, "id">
 
 export type ChatOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   visitorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  journeyId?: Prisma.SortOrderInput | Prisma.SortOrder
   sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -381,6 +395,7 @@ export type ChatScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ChatScalarWhereWithAggregatesInput | Prisma.ChatScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Chat"> | string
   visitorId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
+  journeyId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
   sessionId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
   leadId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
   prospectId?: Prisma.StringNullableWithAggregatesFilter<"Chat"> | string | null
@@ -419,11 +434,13 @@ export type ChatCreateInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutChatsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutChatsInput
   messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+  journey?: Prisma.VisitorJourneyCreateNestedOneWithoutChatsInput
 }
 
 export type ChatUncheckedCreateInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -463,11 +480,13 @@ export type ChatUpdateInput = {
   lead?: Prisma.LeadUpdateOneWithoutChatsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutChatsNestedInput
   messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+  journey?: Prisma.VisitorJourneyUpdateOneWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -490,6 +509,7 @@ export type ChatUncheckedUpdateInput = {
 export type ChatCreateManyInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -527,6 +547,7 @@ export type ChatUpdateManyMutationInput = {
 export type ChatUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -558,6 +579,7 @@ export type ChatOrderByRelationAggregateInput = {
 export type ChatCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   visitorId?: Prisma.SortOrder
+  journeyId?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -579,6 +601,7 @@ export type ChatCountOrderByAggregateInput = {
 export type ChatMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   visitorId?: Prisma.SortOrder
+  journeyId?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -600,6 +623,7 @@ export type ChatMaxOrderByAggregateInput = {
 export type ChatMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   visitorId?: Prisma.SortOrder
+  journeyId?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -803,6 +827,48 @@ export type EnumChatStatusFieldUpdateOperationsInput = {
   set?: $Enums.ChatStatus
 }
 
+export type ChatCreateNestedManyWithoutJourneyInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutJourneyInput, Prisma.ChatUncheckedCreateWithoutJourneyInput> | Prisma.ChatCreateWithoutJourneyInput[] | Prisma.ChatUncheckedCreateWithoutJourneyInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutJourneyInput | Prisma.ChatCreateOrConnectWithoutJourneyInput[]
+  createMany?: Prisma.ChatCreateManyJourneyInputEnvelope
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+}
+
+export type ChatUncheckedCreateNestedManyWithoutJourneyInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutJourneyInput, Prisma.ChatUncheckedCreateWithoutJourneyInput> | Prisma.ChatCreateWithoutJourneyInput[] | Prisma.ChatUncheckedCreateWithoutJourneyInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutJourneyInput | Prisma.ChatCreateOrConnectWithoutJourneyInput[]
+  createMany?: Prisma.ChatCreateManyJourneyInputEnvelope
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+}
+
+export type ChatUpdateManyWithoutJourneyNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutJourneyInput, Prisma.ChatUncheckedCreateWithoutJourneyInput> | Prisma.ChatCreateWithoutJourneyInput[] | Prisma.ChatUncheckedCreateWithoutJourneyInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutJourneyInput | Prisma.ChatCreateOrConnectWithoutJourneyInput[]
+  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutJourneyInput | Prisma.ChatUpsertWithWhereUniqueWithoutJourneyInput[]
+  createMany?: Prisma.ChatCreateManyJourneyInputEnvelope
+  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  update?: Prisma.ChatUpdateWithWhereUniqueWithoutJourneyInput | Prisma.ChatUpdateWithWhereUniqueWithoutJourneyInput[]
+  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutJourneyInput | Prisma.ChatUpdateManyWithWhereWithoutJourneyInput[]
+  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
+}
+
+export type ChatUncheckedUpdateManyWithoutJourneyNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutJourneyInput, Prisma.ChatUncheckedCreateWithoutJourneyInput> | Prisma.ChatCreateWithoutJourneyInput[] | Prisma.ChatUncheckedCreateWithoutJourneyInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutJourneyInput | Prisma.ChatCreateOrConnectWithoutJourneyInput[]
+  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutJourneyInput | Prisma.ChatUpsertWithWhereUniqueWithoutJourneyInput[]
+  createMany?: Prisma.ChatCreateManyJourneyInputEnvelope
+  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  update?: Prisma.ChatUpdateWithWhereUniqueWithoutJourneyInput | Prisma.ChatUpdateWithWhereUniqueWithoutJourneyInput[]
+  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutJourneyInput | Prisma.ChatUpdateManyWithWhereWithoutJourneyInput[]
+  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
+}
+
 export type ChatCreateNestedOneWithoutMessagesInput = {
   create?: Prisma.XOR<Prisma.ChatCreateWithoutMessagesInput, Prisma.ChatUncheckedCreateWithoutMessagesInput>
   connectOrCreate?: Prisma.ChatCreateOrConnectWithoutMessagesInput
@@ -878,11 +944,13 @@ export type ChatCreateWithoutIndividualInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutChatsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutChatsInput
   messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+  journey?: Prisma.VisitorJourneyCreateNestedOneWithoutChatsInput
 }
 
 export type ChatUncheckedCreateWithoutIndividualInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -933,6 +1001,7 @@ export type ChatScalarWhereInput = {
   NOT?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
   id?: Prisma.StringFilter<"Chat"> | string
   visitorId?: Prisma.StringNullableFilter<"Chat"> | string | null
+  journeyId?: Prisma.StringNullableFilter<"Chat"> | string | null
   sessionId?: Prisma.StringNullableFilter<"Chat"> | string | null
   leadId?: Prisma.StringNullableFilter<"Chat"> | string | null
   prospectId?: Prisma.StringNullableFilter<"Chat"> | string | null
@@ -970,11 +1039,13 @@ export type ChatCreateWithoutLeadInput = {
   individual?: Prisma.IndividualCreateNestedOneWithoutChatsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutChatsInput
   messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+  journey?: Prisma.VisitorJourneyCreateNestedOneWithoutChatsInput
 }
 
 export type ChatUncheckedCreateWithoutLeadInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   prospectId?: string | null
   accountId?: string | null
@@ -1038,11 +1109,13 @@ export type ChatCreateWithoutProspectInput = {
   individual?: Prisma.IndividualCreateNestedOneWithoutChatsInput
   lead?: Prisma.LeadCreateNestedOneWithoutChatsInput
   messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+  journey?: Prisma.VisitorJourneyCreateNestedOneWithoutChatsInput
 }
 
 export type ChatUncheckedCreateWithoutProspectInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   accountId?: string | null
@@ -1106,11 +1179,13 @@ export type ChatCreateWithoutAccountInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutChatsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutChatsInput
   messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+  journey?: Prisma.VisitorJourneyCreateNestedOneWithoutChatsInput
 }
 
 export type ChatUncheckedCreateWithoutAccountInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -1155,6 +1230,76 @@ export type ChatUpdateManyWithWhereWithoutAccountInput = {
   data: Prisma.XOR<Prisma.ChatUpdateManyMutationInput, Prisma.ChatUncheckedUpdateManyWithoutAccountInput>
 }
 
+export type ChatCreateWithoutJourneyInput = {
+  id?: string
+  visitorId?: string | null
+  sessionId?: string | null
+  participantStage?: $Enums.ChatParticipantStage
+  managedBy?: $Enums.ChatManagedBy
+  status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  account?: Prisma.AccountCreateNestedOneWithoutChatsInput
+  advisor?: Prisma.UserCreateNestedOneWithoutAssignedChatsInput
+  individual?: Prisma.IndividualCreateNestedOneWithoutChatsInput
+  lead?: Prisma.LeadCreateNestedOneWithoutChatsInput
+  prospect?: Prisma.ProspectCreateNestedOneWithoutChatsInput
+  messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+}
+
+export type ChatUncheckedCreateWithoutJourneyInput = {
+  id?: string
+  visitorId?: string | null
+  sessionId?: string | null
+  leadId?: string | null
+  prospectId?: string | null
+  accountId?: string | null
+  individualId?: string | null
+  advisorId?: string | null
+  participantStage?: $Enums.ChatParticipantStage
+  managedBy?: $Enums.ChatManagedBy
+  status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  messages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutChatInput
+}
+
+export type ChatCreateOrConnectWithoutJourneyInput = {
+  where: Prisma.ChatWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChatCreateWithoutJourneyInput, Prisma.ChatUncheckedCreateWithoutJourneyInput>
+}
+
+export type ChatCreateManyJourneyInputEnvelope = {
+  data: Prisma.ChatCreateManyJourneyInput | Prisma.ChatCreateManyJourneyInput[]
+  skipDuplicates?: boolean
+}
+
+export type ChatUpsertWithWhereUniqueWithoutJourneyInput = {
+  where: Prisma.ChatWhereUniqueInput
+  update: Prisma.XOR<Prisma.ChatUpdateWithoutJourneyInput, Prisma.ChatUncheckedUpdateWithoutJourneyInput>
+  create: Prisma.XOR<Prisma.ChatCreateWithoutJourneyInput, Prisma.ChatUncheckedCreateWithoutJourneyInput>
+}
+
+export type ChatUpdateWithWhereUniqueWithoutJourneyInput = {
+  where: Prisma.ChatWhereUniqueInput
+  data: Prisma.XOR<Prisma.ChatUpdateWithoutJourneyInput, Prisma.ChatUncheckedUpdateWithoutJourneyInput>
+}
+
+export type ChatUpdateManyWithWhereWithoutJourneyInput = {
+  where: Prisma.ChatScalarWhereInput
+  data: Prisma.XOR<Prisma.ChatUpdateManyMutationInput, Prisma.ChatUncheckedUpdateManyWithoutJourneyInput>
+}
+
 export type ChatCreateWithoutMessagesInput = {
   id?: string
   visitorId?: string | null
@@ -1174,11 +1319,13 @@ export type ChatCreateWithoutMessagesInput = {
   individual?: Prisma.IndividualCreateNestedOneWithoutChatsInput
   lead?: Prisma.LeadCreateNestedOneWithoutChatsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutChatsInput
+  journey?: Prisma.VisitorJourneyCreateNestedOneWithoutChatsInput
 }
 
 export type ChatUncheckedCreateWithoutMessagesInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -1232,11 +1379,13 @@ export type ChatUpdateWithoutMessagesInput = {
   individual?: Prisma.IndividualUpdateOneWithoutChatsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutChatsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutChatsNestedInput
+  journey?: Prisma.VisitorJourneyUpdateOneWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1274,11 +1423,13 @@ export type ChatCreateWithoutAdvisorInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutChatsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutChatsInput
   messages?: Prisma.ChatMessageCreateNestedManyWithoutChatInput
+  journey?: Prisma.VisitorJourneyCreateNestedOneWithoutChatsInput
 }
 
 export type ChatUncheckedCreateWithoutAdvisorInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -1326,6 +1477,7 @@ export type ChatUpdateManyWithWhereWithoutAdvisorInput = {
 export type ChatCreateManyIndividualInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -1362,11 +1514,13 @@ export type ChatUpdateWithoutIndividualInput = {
   lead?: Prisma.LeadUpdateOneWithoutChatsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutChatsNestedInput
   messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+  journey?: Prisma.VisitorJourneyUpdateOneWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutIndividualInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1388,6 +1542,7 @@ export type ChatUncheckedUpdateWithoutIndividualInput = {
 export type ChatUncheckedUpdateManyWithoutIndividualInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1408,6 +1563,7 @@ export type ChatUncheckedUpdateManyWithoutIndividualInput = {
 export type ChatCreateManyLeadInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   prospectId?: string | null
   accountId?: string | null
@@ -1444,11 +1600,13 @@ export type ChatUpdateWithoutLeadInput = {
   individual?: Prisma.IndividualUpdateOneWithoutChatsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutChatsNestedInput
   messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+  journey?: Prisma.VisitorJourneyUpdateOneWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1470,6 +1628,7 @@ export type ChatUncheckedUpdateWithoutLeadInput = {
 export type ChatUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1490,6 +1649,7 @@ export type ChatUncheckedUpdateManyWithoutLeadInput = {
 export type ChatCreateManyProspectInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   accountId?: string | null
@@ -1526,11 +1686,13 @@ export type ChatUpdateWithoutProspectInput = {
   individual?: Prisma.IndividualUpdateOneWithoutChatsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutChatsNestedInput
   messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+  journey?: Prisma.VisitorJourneyUpdateOneWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutProspectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1552,6 +1714,7 @@ export type ChatUncheckedUpdateWithoutProspectInput = {
 export type ChatUncheckedUpdateManyWithoutProspectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1572,6 +1735,7 @@ export type ChatUncheckedUpdateManyWithoutProspectInput = {
 export type ChatCreateManyAccountInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -1608,11 +1772,13 @@ export type ChatUpdateWithoutAccountInput = {
   lead?: Prisma.LeadUpdateOneWithoutChatsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutChatsNestedInput
   messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+  journey?: Prisma.VisitorJourneyUpdateOneWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1634,6 +1800,7 @@ export type ChatUncheckedUpdateWithoutAccountInput = {
 export type ChatUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1651,9 +1818,96 @@ export type ChatUncheckedUpdateManyWithoutAccountInput = {
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
+export type ChatCreateManyJourneyInput = {
+  id?: string
+  visitorId?: string | null
+  sessionId?: string | null
+  leadId?: string | null
+  prospectId?: string | null
+  accountId?: string | null
+  individualId?: string | null
+  advisorId?: string | null
+  participantStage?: $Enums.ChatParticipantStage
+  managedBy?: $Enums.ChatManagedBy
+  status?: $Enums.ChatStatus
+  language?: string
+  endUserTypingUntil?: Date | string | null
+  advisorTypingUntil?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+}
+
+export type ChatUpdateWithoutJourneyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
+  managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  account?: Prisma.AccountUpdateOneWithoutChatsNestedInput
+  advisor?: Prisma.UserUpdateOneWithoutAssignedChatsNestedInput
+  individual?: Prisma.IndividualUpdateOneWithoutChatsNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutChatsNestedInput
+  prospect?: Prisma.ProspectUpdateOneWithoutChatsNestedInput
+  messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+}
+
+export type ChatUncheckedUpdateWithoutJourneyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advisorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
+  managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  messages?: Prisma.ChatMessageUncheckedUpdateManyWithoutChatNestedInput
+}
+
+export type ChatUncheckedUpdateManyWithoutJourneyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advisorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  participantStage?: Prisma.EnumChatParticipantStageFieldUpdateOperationsInput | $Enums.ChatParticipantStage
+  managedBy?: Prisma.EnumChatManagedByFieldUpdateOperationsInput | $Enums.ChatManagedBy
+  status?: Prisma.EnumChatStatusFieldUpdateOperationsInput | $Enums.ChatStatus
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  endUserTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  advisorTypingUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
 export type ChatCreateManyAdvisorInput = {
   id?: string
   visitorId?: string | null
+  journeyId?: string | null
   sessionId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -1690,11 +1944,13 @@ export type ChatUpdateWithoutAdvisorInput = {
   lead?: Prisma.LeadUpdateOneWithoutChatsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutChatsNestedInput
   messages?: Prisma.ChatMessageUpdateManyWithoutChatNestedInput
+  journey?: Prisma.VisitorJourneyUpdateOneWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutAdvisorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1716,6 +1972,7 @@ export type ChatUncheckedUpdateWithoutAdvisorInput = {
 export type ChatUncheckedUpdateManyWithoutAdvisorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1767,6 +2024,7 @@ export type ChatCountOutputTypeCountMessagesArgs<ExtArgs extends runtime.Types.E
 export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   visitorId?: boolean
+  journeyId?: boolean
   sessionId?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1789,12 +2047,14 @@ export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   lead?: boolean | Prisma.Chat$leadArgs<ExtArgs>
   prospect?: boolean | Prisma.Chat$prospectArgs<ExtArgs>
   messages?: boolean | Prisma.Chat$messagesArgs<ExtArgs>
+  journey?: boolean | Prisma.Chat$journeyArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   visitorId?: boolean
+  journeyId?: boolean
   sessionId?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1816,11 +2076,13 @@ export type ChatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   individual?: boolean | Prisma.Chat$individualArgs<ExtArgs>
   lead?: boolean | Prisma.Chat$leadArgs<ExtArgs>
   prospect?: boolean | Prisma.Chat$prospectArgs<ExtArgs>
+  journey?: boolean | Prisma.Chat$journeyArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   visitorId?: boolean
+  journeyId?: boolean
   sessionId?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1842,11 +2104,13 @@ export type ChatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   individual?: boolean | Prisma.Chat$individualArgs<ExtArgs>
   lead?: boolean | Prisma.Chat$leadArgs<ExtArgs>
   prospect?: boolean | Prisma.Chat$prospectArgs<ExtArgs>
+  journey?: boolean | Prisma.Chat$journeyArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectScalar = {
   id?: boolean
   visitorId?: boolean
+  journeyId?: boolean
   sessionId?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1865,7 +2129,7 @@ export type ChatSelectScalar = {
   updatedBy?: boolean
 }
 
-export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitorId" | "sessionId" | "leadId" | "prospectId" | "accountId" | "individualId" | "advisorId" | "participantStage" | "managedBy" | "status" | "language" | "endUserTypingUntil" | "advisorTypingUntil" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["chat"]>
+export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "visitorId" | "journeyId" | "sessionId" | "leadId" | "prospectId" | "accountId" | "individualId" | "advisorId" | "participantStage" | "managedBy" | "status" | "language" | "endUserTypingUntil" | "advisorTypingUntil" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["chat"]>
 export type ChatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.Chat$accountArgs<ExtArgs>
   advisor?: boolean | Prisma.Chat$advisorArgs<ExtArgs>
@@ -1873,6 +2137,7 @@ export type ChatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   lead?: boolean | Prisma.Chat$leadArgs<ExtArgs>
   prospect?: boolean | Prisma.Chat$prospectArgs<ExtArgs>
   messages?: boolean | Prisma.Chat$messagesArgs<ExtArgs>
+  journey?: boolean | Prisma.Chat$journeyArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ChatIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1881,6 +2146,7 @@ export type ChatIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   individual?: boolean | Prisma.Chat$individualArgs<ExtArgs>
   lead?: boolean | Prisma.Chat$leadArgs<ExtArgs>
   prospect?: boolean | Prisma.Chat$prospectArgs<ExtArgs>
+  journey?: boolean | Prisma.Chat$journeyArgs<ExtArgs>
 }
 export type ChatIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.Chat$accountArgs<ExtArgs>
@@ -1888,6 +2154,7 @@ export type ChatIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   individual?: boolean | Prisma.Chat$individualArgs<ExtArgs>
   lead?: boolean | Prisma.Chat$leadArgs<ExtArgs>
   prospect?: boolean | Prisma.Chat$prospectArgs<ExtArgs>
+  journey?: boolean | Prisma.Chat$journeyArgs<ExtArgs>
 }
 
 export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1899,10 +2166,12 @@ export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lead: Prisma.$LeadPayload<ExtArgs> | null
     prospect: Prisma.$ProspectPayload<ExtArgs> | null
     messages: Prisma.$ChatMessagePayload<ExtArgs>[]
+    journey: Prisma.$VisitorJourneyPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     visitorId: string | null
+    journeyId: string | null
     sessionId: string | null
     leadId: string | null
     prospectId: string | null
@@ -2319,6 +2588,7 @@ export interface Prisma__ChatClient<T, Null = never, ExtArgs extends runtime.Typ
   lead<T extends Prisma.Chat$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$leadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   prospect<T extends Prisma.Chat$prospectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$prospectArgs<ExtArgs>>): Prisma.Prisma__ProspectClient<runtime.Types.Result.GetResult<Prisma.$ProspectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   messages<T extends Prisma.Chat$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  journey<T extends Prisma.Chat$journeyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$journeyArgs<ExtArgs>>): Prisma.Prisma__VisitorJourneyClient<runtime.Types.Result.GetResult<Prisma.$VisitorJourneyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2350,6 +2620,7 @@ export interface Prisma__ChatClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface ChatFieldRefs {
   readonly id: Prisma.FieldRef<"Chat", 'String'>
   readonly visitorId: Prisma.FieldRef<"Chat", 'String'>
+  readonly journeyId: Prisma.FieldRef<"Chat", 'String'>
   readonly sessionId: Prisma.FieldRef<"Chat", 'String'>
   readonly leadId: Prisma.FieldRef<"Chat", 'String'>
   readonly prospectId: Prisma.FieldRef<"Chat", 'String'>
@@ -2883,6 +3154,25 @@ export type Chat$messagesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ChatMessageScalarFieldEnum | Prisma.ChatMessageScalarFieldEnum[]
+}
+
+/**
+ * Chat.journey
+ */
+export type Chat$journeyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VisitorJourney
+   */
+  select?: Prisma.VisitorJourneySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VisitorJourney
+   */
+  omit?: Prisma.VisitorJourneyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VisitorJourneyInclude<ExtArgs> | null
+  where?: Prisma.VisitorJourneyWhereInput
 }
 
 /**

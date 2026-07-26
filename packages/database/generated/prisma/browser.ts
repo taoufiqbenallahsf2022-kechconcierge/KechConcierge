@@ -103,6 +103,11 @@ export type ContactRequest = Prisma.ContactRequestModel
  */
 export type Chat = Prisma.ChatModel
 /**
+ * Model VisitorJourney
+ * 
+ */
+export type VisitorJourney = Prisma.VisitorJourneyModel
+/**
  * Model ChatMessage
  * 
  */
