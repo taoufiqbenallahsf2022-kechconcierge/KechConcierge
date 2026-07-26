@@ -41,6 +41,11 @@ function normalizePhone(countryCode?: string, mobilePhone?: string) {
   return `${cleanCountryCode}${cleanMobilePhone}`;
 }
 
+function normalizeCountry(country?: string) {
+  const value = country?.trim().toUpperCase() || null;
+  return value && /^[A-Z]{3}$/.test(value) ? value : null;
+}
+
 function getIndividualStage(individual: any) {
 
   const individualAccount = individual.accounts?.[0];
@@ -133,6 +138,11 @@ export async function signupIndividual(input: SignupInput) {
     };
   }
 
+  const manuallyCreatedIndividual = await prisma.individual.findUnique({
+    where: { manualEmail: email },
+    select: { id: true },
+  });
+
   const token = crypto.randomBytes(32).toString("hex");
 
   const tokenExpiresAt = new Date();
@@ -151,10 +161,8 @@ export async function signupIndividual(input: SignupInput) {
   );
 
   const result = await prisma.$transaction(async (tx) => {
-    const individual = await tx.individual.create({
-      data: {
+    const signupData = {
         id: generateIndividualId(),
-
         firstName: input.firstName.trim(),
         lastName: input.lastName.trim(),
         email,
@@ -163,8 +171,8 @@ export async function signupIndividual(input: SignupInput) {
 
         authProvider: "EMAIL",
 
-        country: input.country || null,
-        language: input.language || "en",
+        country: normalizeCountry(input.country),
+        language: input.language?.trim().toLowerCase() || "en",
         source: "WEBSITE_SIGNUP",
 
         isActive: false,
@@ -176,8 +184,27 @@ export async function signupIndividual(input: SignupInput) {
 
         createdBy: "SYSTEM",
         updatedBy: "SYSTEM",
-      },
-    });
+    };
+    const individual = manuallyCreatedIndividual
+      ? await tx.individual.update({
+          where: { id: manuallyCreatedIndividual.id },
+          data: {
+            firstName: signupData.firstName,
+            lastName: signupData.lastName,
+            email,
+            mobilePhone: fullPhoneNumber,
+            passwordHash,
+            authProvider: "EMAIL",
+            country: signupData.country,
+            language: signupData.language,
+            isActive: false,
+            emailVerified: false,
+            emailVerificationToken: token,
+            emailVerificationTokenExpiresAt: tokenExpiresAt,
+            updatedBy: "SYSTEM",
+          },
+        })
+      : await tx.individual.create({ data: signupData });
 
     await tx.consent.createMany({
       data: [
@@ -210,6 +237,7 @@ export async function signupIndividual(input: SignupInput) {
           updatedBy: "WEBSITE_SIGNUP",
         },
       ],
+      skipDuplicates: true,
     });
 
     return {
@@ -221,7 +249,7 @@ export async function signupIndividual(input: SignupInput) {
     await sendAccountVerificationEmail({
       email,
       token,
-      language: input.language || "en",
+      language: input.language?.trim().toLowerCase() || "en",
     });
 
     return {
@@ -415,7 +443,7 @@ export async function googleAuth(
     "en";
 
   const normalizedCountry =
-    country?.trim() || null;
+    normalizeCountry(country);
 
   const existingIndividual =
     await prisma.individual.findFirst({
@@ -427,12 +455,19 @@ export async function googleAuth(
           {
             googleId,
           },
+          {
+            manualEmail: email,
+          },
         ],
       },
     });
 
   if (existingIndividual) {
-    if (!existingIndividual.isActive) {
+    const isManualClaim =
+      existingIndividual.manualEmail === email &&
+      !existingIndividual.email &&
+      !existingIndividual.googleId;
+    if (!isManualClaim && !existingIndividual.isActive) {
       return {
         success: false,
         statusCode: 403,
@@ -449,6 +484,17 @@ export async function googleAuth(
         },
 
         data: {
+          ...(isManualClaim
+            ? {
+                firstName: payload.given_name?.trim() || existingIndividual.firstName,
+                lastName: payload.family_name?.trim() || existingIndividual.lastName,
+                email,
+                country: normalizedCountry,
+                language: normalizedLanguage,
+                authProvider: "GOOGLE",
+                isActive: true,
+              }
+            : {}),
           googleId:
             existingIndividual.googleId ||
             googleId,

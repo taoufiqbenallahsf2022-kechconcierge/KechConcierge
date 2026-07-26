@@ -137,8 +137,8 @@ function FieldInput({
         <select {...common} defaultValue={value}>
           <option value="">Select…</option>
           {field.options?.map((o) => (
-            <option key={o} value={o}>
-              {o.replaceAll("_", " ")}
+            <option key={typeof o === "string" ? o : o.value} value={typeof o === "string" ? o : o.value}>
+              {typeof o === "string" ? o.replaceAll("_", " ") : o.label}
             </option>
           ))}
         </select>
