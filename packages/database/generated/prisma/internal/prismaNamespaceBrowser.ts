@@ -301,6 +301,7 @@ export const IndividualScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email',
+  manualEmail: 'manualEmail',
   mobilePhone: 'mobilePhone',
   passwordHash: 'passwordHash',
   googleId: 'googleId',

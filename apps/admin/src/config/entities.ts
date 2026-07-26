@@ -1,5 +1,9 @@
+import countries from 'i18n-iso-countries';
+import enCountries from 'i18n-iso-countries/langs/en.json';
+countries.registerLocale(enCountries);
 export type FieldKind='text'|'email'|'phone'|'textarea'|'number'|'boolean'|'date'|'datetime'|'password'|'enum'|'image'|'tags'|'keyValue';
-export type Field={name:string;label:string;kind:FieldKind;required?:boolean;options?:string[];readOnly?:boolean;hiddenInForm?:boolean;section?:string;placeholder?:string};
+export type FieldOption=string|{value:string;label:string};
+export type Field={name:string;label:string;kind:FieldKind;required?:boolean;options?:FieldOption[];readOnly?:boolean;hiddenInForm?:boolean;section?:string;placeholder?:string};
 export type EntityConfig={key:string;label:string;plural:string;readOnly?:boolean;dateFields?:string[];titleFields:string[];subtitleFields?:string[];listFields:string[];fields:Field[]};
 const person:Field[]=[
 {name:'firstName',label:'First name',kind:'text',required:true,section:'Personal information'},
@@ -8,8 +12,8 @@ const person:Field[]=[
 {name:'mobilePhone',label:'Mobile phone',kind:'phone',section:'Contact information'},
 {name:'address',label:'Address',kind:'textarea',section:'Contact information'},
 {name:'birthdate',label:'Birthdate',kind:'date',section:'Personal information'},
-{name:'country',label:'Country',kind:'text',section:'Personal information'},
-{name:'language',label:'Language',kind:'enum',required:true,options:['EN','FR','DE','IT','PT','ES','AR'],section:'Personal information'},
+{name:'country',label:'Country',kind:'enum',options:Object.entries(countries.getNames('en',{select:'official'})).map(([alpha2,label])=>({value:countries.alpha2ToAlpha3(alpha2)??'',label:`${label} (${countries.alpha2ToAlpha3(alpha2)})`})).filter(option=>option.value).sort((a,b)=>a.label.localeCompare(b.label)),section:'Personal information'},
+{name:'language',label:'Language',kind:'enum',required:true,options:['en','fr','de','it','pt','es','ar'],section:'Personal information'},
 {name:'source',label:'Source',kind:'text',readOnly:true,hiddenInForm:true,section:'System information'}
 ];
 const audit:Field[]=[
@@ -30,7 +34,7 @@ const productLocalized:Field[]=productLanguages.flatMap(lang=>[
 ]);
 const imageFields:Field[]=Array.from({length:21},(_,i)=>({name:`image${i+1}`,label:`Image ${i+1}`,kind:'image',section:'Gallery'}));
 export const entities:EntityConfig[]=[
-{key:'individuals',label:'Individual',plural:'Individuals',titleFields:['firstName','lastName'],subtitleFields:['email','mobilePhone'],listFields:['firstName','lastName','email','mobilePhone','source','isActive','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person,{name:'authProvider',label:'Authentication provider',kind:'text',readOnly:true,section:'Authentication'},{name:'isActive',label:'Active',kind:'boolean',section:'Status'},{name:'emailVerified',label:'Email verified',kind:'boolean',section:'Status'},{name:'lastSuccessfulLoginDate',label:'Last successful login',kind:'datetime',readOnly:true,section:'Authentication'},...audit]},
+{key:'individuals',label:'Individual',plural:'Individuals',titleFields:['firstName','lastName'],subtitleFields:['manualEmail','email','mobilePhone'],listFields:['firstName','lastName','manualEmail','email','mobilePhone','source','isActive','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person.map(field=>field.name==='email'?{...field,name:'manualEmail',label:'Manual email'}:field),{name:'email',label:'Account email',kind:'email',readOnly:true,hiddenInForm:true,section:'Authentication'},{name:'authProvider',label:'Authentication provider',kind:'text',readOnly:true,section:'Authentication'},{name:'isActive',label:'Active',kind:'boolean',section:'Status'},{name:'emailVerified',label:'Email verified',kind:'boolean',section:'Status'},{name:'lastSuccessfulLoginDate',label:'Last successful login',kind:'datetime',readOnly:true,section:'Authentication'},...audit]},
 {key:'leads',label:'Lead',plural:'Leads',titleFields:['firstName','lastName'],subtitleFields:['email'],listFields:['firstName','lastName','email','mobilePhone','statusDescription','source','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person,{name:'statusDescription',label:'Status',kind:'text',required:true,section:'Status'},{name:'individualId',label:'Individual ID',kind:'text',required:true,section:'Relationships'},...audit]},
 {key:'prospects',label:'Prospect',plural:'Prospects',titleFields:['firstName','lastName'],subtitleFields:['email'],listFields:['firstName','lastName','email','mobilePhone','statusDescription','source','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person,{name:'statusDescription',label:'Status',kind:'text',required:true,section:'Status'},{name:'individualId',label:'Individual ID',kind:'text',required:true,section:'Relationships'},...audit]},
 {key:'accounts',label:'Account',plural:'Accounts',titleFields:['firstName','lastName'],subtitleFields:['email'],listFields:['firstName','lastName','email','mobilePhone','statusDescription','source','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person,{name:'statusDescription',label:'Status',kind:'text',required:true,section:'Status'},{name:'individualId',label:'Individual ID',kind:'text',required:true,section:'Relationships'},...audit]},

@@ -217,6 +217,7 @@ model Individual {
   firstName    String
   lastName     String
   email        String? @unique
+  manualEmail  String? @unique
   mobilePhone  String?
   passwordHash String?
 
@@ -254,6 +255,7 @@ model Individual {
   chats           Chat[]
 
   @@index([email])
+  @@index([manualEmail])
   @@index([passwordResetToken])
 }
 
