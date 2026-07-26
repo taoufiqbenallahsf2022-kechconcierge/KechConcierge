@@ -14,6 +14,7 @@ export async function audience(sql: string, limit: number) {
   return rows.map(serialize);
 }
 const escapeHtml = (value: unknown) => String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+const EMAIL_LOGO = '<div style="text-align:center;margin:0 auto 24px"><img src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public" alt="Moorish Concierge" width="110" style="display:inline-block;width:110px;max-width:55%;height:auto;border:0" /></div>';
 const render = (template: string, row: Record<string, unknown>, html = false) => template.replace(/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g, (_, field) => html ? escapeHtml(row[field]) : String(row[field] ?? ""));
 async function deliver(input: { from: string; replyTo?: string | null; to: string; subject: string; html: string }) {
   const key = process.env.RESEND_API_KEY;
@@ -39,7 +40,7 @@ export async function executeAutomation(id: string, startedBy: string) {
       const language = automation.languageField ? String(row[automation.languageField] ?? "").toLowerCase() : "";
       const localized = blocks?.[language];
       try {
-        await deliver({ from: `${automation.senderEmail.name} <${automation.senderEmail.email}>`, replyTo: automation.senderEmail.replyTo, to: email, subject: render(localized?.subject ?? automation.emailTemplate.defaultSubject, row), html: render(localized?.html ?? automation.emailTemplate.defaultHtml, row, true) });
+        await deliver({ from: `${automation.senderEmail.name} <${automation.senderEmail.email}>`, replyTo: automation.senderEmail.replyTo, to: email, subject: render(localized?.subject ?? automation.emailTemplate.defaultSubject, row), html: EMAIL_LOGO + render(localized?.html ?? automation.emailTemplate.defaultHtml, row, true) });
         deliveredCount++;
       } catch { failedCount++; }
     }
