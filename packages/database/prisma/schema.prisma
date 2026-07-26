@@ -253,6 +253,7 @@ model Individual {
   pageVisits      PageVisit[]
   contactRequests ContactRequest[]
   chats           Chat[]
+  visitorJourneys VisitorJourney[]
 
   @@index([email])
   @@index([manualEmail])
@@ -350,6 +351,7 @@ model PageVisit {
   pageUrl      String
   pageName     String?
   visitorId    String?
+  journeyId    String?
   visitorStage VisitorStage
   leadId       String?
   prospectId   String?
@@ -364,8 +366,10 @@ model PageVisit {
   individual   Individual?  @relation(fields: [individualId], references: [id])
   lead         Lead?        @relation(fields: [leadId], references: [id])
   prospect     Prospect?    @relation(fields: [prospectId], references: [id])
+  journey      VisitorJourney? @relation(fields: [journeyId], references: [id], onDelete: SetNull)
 
   @@index([visitorId])
+  @@index([journeyId])
   @@index([individualId, visitDate])
 }
 
@@ -396,6 +400,7 @@ model ContactRequest {
 model Chat {
   id               String               @id @default(cuid())
   visitorId        String?
+  journeyId        String?
   sessionId        String?
   leadId           String?
   prospectId       String?
@@ -418,11 +423,30 @@ model Chat {
   lead             Lead?                @relation(fields: [leadId], references: [id])
   prospect         Prospect?            @relation(fields: [prospectId], references: [id])
   messages         ChatMessage[]
+  journey          VisitorJourney? @relation(fields: [journeyId], references: [id], onDelete: SetNull)
 
   @@index([visitorId])
+  @@index([journeyId])
   @@index([individualId])
   @@index([advisorId])
   @@index([updatedDate])
+}
+
+model VisitorJourney {
+  id           String   @id
+  visitorId    String
+  individualId String?
+  startedAt    DateTime @default(now())
+  claimedAt    DateTime?
+  endedAt      DateTime?
+  lastSeenAt   DateTime @updatedAt
+
+  individual Individual? @relation(fields: [individualId], references: [id], onDelete: SetNull)
+  pageVisits PageVisit[]
+  chats      Chat[]
+
+  @@index([visitorId])
+  @@index([individualId])
 }
 
 model ChatMessage {

@@ -1,16 +1,35 @@
 import { Router, type Request } from "express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { prisma } from "../config/prisma";
+import {
+  claimVisitorJourney,
+  ensureVisitorJourney,
+} from "../services/visitor-journey.service";
 
 const router = Router();
-const ADVISOR_EMAIL = "taoufiq.benallah.sf2022@gmail.com";
+const ADVISOR_EMAIL = "mounadi0711@gmail.com";
 const LANGUAGES = new Set(["en", "fr", "es", "pt", "it", "de"]);
 
 type Identity =
-  | { kind: "individual"; individualId: string }
-  | { kind: "visitor"; visitorId: string };
+  | {
+      kind: "individual";
+      individualId: string;
+      visitorId: string;
+      journeyId: string;
+    }
+  | { kind: "visitor"; visitorId: string; journeyId: string };
 
 function identity(req: Request): Identity {
+  const visitorId = req.header("x-visitor-id")?.trim();
+  const journeyId = req.header("x-journey-id")?.trim();
+  if (!visitorId || visitorId.length < 16 || visitorId.length > 100)
+    throw Object.assign(new Error("A valid visitor ID is required"), {
+      status: 400,
+    });
+  if (!journeyId || journeyId.length < 16 || journeyId.length > 100)
+    throw Object.assign(new Error("A valid journey ID is required"), {
+      status: 400,
+    });
   const authorization = req.headers.authorization;
   if (authorization) {
     const [scheme, token] = authorization.split(" ");
@@ -31,7 +50,7 @@ function identity(req: Request): Identity {
         decoded.id ??
         (typeof decoded.sub === "string" ? decoded.sub : undefined);
       if (!individualId) throw new Error("Missing Individual ID");
-      return { kind: "individual", individualId };
+      return { kind: "individual", individualId, visitorId, journeyId };
     } catch {
       throw Object.assign(new Error("Invalid or expired access token"), {
         status: 401,
@@ -39,19 +58,13 @@ function identity(req: Request): Identity {
     }
   }
 
-  const visitorId = req.header("x-visitor-id")?.trim();
-  if (!visitorId || visitorId.length < 16 || visitorId.length > 100) {
-    throw Object.assign(new Error("A valid visitor ID is required"), {
-      status: 400,
-    });
-  }
-  return { kind: "visitor", visitorId };
+  return { kind: "visitor", visitorId, journeyId };
 }
 
 function ownerWhere(owner: Identity) {
   return owner.kind === "individual"
     ? { individualId: owner.individualId }
-    : { visitorId: owner.visitorId, individualId: null };
+    : { journeyId: owner.journeyId, individualId: null };
 }
 
 async function ownedChat(id: string, owner: Identity) {
@@ -76,11 +89,12 @@ function publicChat(chat: any) {
       typeof chat._count?.messages === "number"
         ? chat._count.messages > 0
         : Array.isArray(chat.messages)
-      ? chat.messages.some(
-          (message: any) =>
-            ["ADVISOR", "AI"].includes(message.senderType) && !message.isRead,
-        )
-      : false,
+          ? chat.messages.some(
+              (message: any) =>
+                ["ADVISOR", "AI"].includes(message.senderType) &&
+                !message.isRead,
+            )
+          : false,
     advisorTyping:
       !!chat.advisorTypingUntil &&
       new Date(chat.advisorTypingUntil).getTime() > Date.now(),
@@ -139,6 +153,25 @@ router.post("/", async (req, res, next) => {
     if (message.length > 5000)
       return res.status(400).json({ message: "Message is too long" });
 
+    const journey = await ensureVisitorJourney(
+      owner.visitorId,
+      owner.journeyId,
+    );
+    if (
+      journey.individualId &&
+      (owner.kind !== "individual" ||
+        journey.individualId !== owner.individualId)
+    )
+      throw Object.assign(new Error("Journey belongs to another Individual"), {
+        status: 409,
+      });
+    if (owner.kind === "individual" && !journey.individualId)
+      await claimVisitorJourney(
+        owner.visitorId,
+        owner.journeyId,
+        owner.individualId,
+      );
+
     const advisor = await prisma.user.findFirst({
       where: {
         email: { equals: ADVISOR_EMAIL, mode: "insensitive" },
@@ -162,11 +195,11 @@ router.post("/", async (req, res, next) => {
           owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
         individualId:
           owner.kind === "individual" ? owner.individualId : undefined,
-        visitorId: owner.kind === "visitor" ? owner.visitorId : undefined,
+        visitorId: owner.visitorId,
+        journeyId: owner.journeyId,
         messages: {
           create: {
-            senderType:
-              owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
+            senderType: owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
             senderId:
               owner.kind === "individual"
                 ? owner.individualId
@@ -228,12 +261,9 @@ router.post("/:id/messages", async (req, res, next) => {
       prisma.chatMessage.create({
         data: {
           chatId: req.params.id,
-          senderType:
-            owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
+          senderType: owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
           senderId:
-            owner.kind === "individual"
-              ? owner.individualId
-              : owner.visitorId,
+            owner.kind === "individual" ? owner.individualId : owner.visitorId,
           message,
         } as any,
       }),
@@ -259,9 +289,7 @@ router.post("/:id/typing", async (req, res, next) => {
       where: { id: req.params.id },
       data: {
         endUserTypingUntil:
-          req.body?.typing === true
-            ? new Date(Date.now() + 5000)
-            : null,
+          req.body?.typing === true ? new Date(Date.now() + 5000) : null,
       } as any,
     });
     res.status(204).end();

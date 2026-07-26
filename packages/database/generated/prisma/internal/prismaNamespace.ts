@@ -401,6 +401,7 @@ export const ModelName = {
   PageVisit: 'PageVisit',
   ContactRequest: 'ContactRequest',
   Chat: 'Chat',
+  VisitorJourney: 'VisitorJourney',
   ChatMessage: 'ChatMessage',
   User: 'User'
 } as const
@@ -418,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "emailVerificationToken" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "chatMessage" | "user"
+    modelProps: "emailVerificationToken" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1680,6 +1681,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VisitorJourney: {
+      payload: Prisma.$VisitorJourneyPayload<ExtArgs>
+      fields: Prisma.VisitorJourneyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VisitorJourneyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VisitorJourneyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>
+        }
+        findFirst: {
+          args: Prisma.VisitorJourneyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VisitorJourneyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>
+        }
+        findMany: {
+          args: Prisma.VisitorJourneyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>[]
+        }
+        create: {
+          args: Prisma.VisitorJourneyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>
+        }
+        createMany: {
+          args: Prisma.VisitorJourneyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VisitorJourneyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>[]
+        }
+        delete: {
+          args: Prisma.VisitorJourneyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>
+        }
+        update: {
+          args: Prisma.VisitorJourneyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>
+        }
+        deleteMany: {
+          args: Prisma.VisitorJourneyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VisitorJourneyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VisitorJourneyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>[]
+        }
+        upsert: {
+          args: Prisma.VisitorJourneyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorJourneyPayload>
+        }
+        aggregate: {
+          args: Prisma.VisitorJourneyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVisitorJourney>
+        }
+        groupBy: {
+          args: Prisma.VisitorJourneyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VisitorJourneyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VisitorJourneyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VisitorJourneyCountAggregateOutputType> | number
+        }
+      }
+    }
     ChatMessage: {
       payload: Prisma.$ChatMessagePayload<ExtArgs>
       fields: Prisma.ChatMessageFieldRefs
@@ -2191,6 +2266,7 @@ export const PageVisitScalarFieldEnum = {
   pageUrl: 'pageUrl',
   pageName: 'pageName',
   visitorId: 'visitorId',
+  journeyId: 'journeyId',
   visitorStage: 'visitorStage',
   leadId: 'leadId',
   prospectId: 'prospectId',
@@ -2232,6 +2308,7 @@ export type ContactRequestScalarFieldEnum = (typeof ContactRequestScalarFieldEnu
 export const ChatScalarFieldEnum = {
   id: 'id',
   visitorId: 'visitorId',
+  journeyId: 'journeyId',
   sessionId: 'sessionId',
   leadId: 'leadId',
   prospectId: 'prospectId',
@@ -2251,6 +2328,19 @@ export const ChatScalarFieldEnum = {
 } as const
 
 export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]
+
+
+export const VisitorJourneyScalarFieldEnum = {
+  id: 'id',
+  visitorId: 'visitorId',
+  individualId: 'individualId',
+  startedAt: 'startedAt',
+  claimedAt: 'claimedAt',
+  endedAt: 'endedAt',
+  lastSeenAt: 'lastSeenAt'
+} as const
+
+export type VisitorJourneyScalarFieldEnum = (typeof VisitorJourneyScalarFieldEnum)[keyof typeof VisitorJourneyScalarFieldEnum]
 
 
 export const ChatMessageScalarFieldEnum = {
@@ -2752,6 +2842,7 @@ export type GlobalOmitConfig = {
   pageVisit?: Prisma.PageVisitOmit
   contactRequest?: Prisma.ContactRequestOmit
   chat?: Prisma.ChatOmit
+  visitorJourney?: Prisma.VisitorJourneyOmit
   chatMessage?: Prisma.ChatMessageOmit
   user?: Prisma.UserOmit
 }

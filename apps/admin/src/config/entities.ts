@@ -55,4 +55,13 @@ export const entities:EntityConfig[]=[
 {key:'chats',label:'Website Chat',plural:'Website Chats',readOnly:true,titleFields:['id'],subtitleFields:['status','managedBy'],listFields:['participantStage','visitorId','individualId','status','managedBy','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[{name:'participantStage',label:'Participant',kind:'text',section:'Conversation'},{name:'managedBy',label:'Managed by',kind:'text',section:'Conversation'},{name:'status',label:'Status',kind:'text',section:'Conversation'},{name:'language',label:'Language',kind:'text',section:'Conversation'},{name:'visitorId',label:'Visitor ID',kind:'text',section:'Relationships'},{name:'sessionId',label:'Session ID',kind:'text',section:'Relationships'},{name:'individualId',label:'Individual ID',kind:'text',section:'Relationships'},{name:'leadId',label:'Lead ID',kind:'text',section:'Relationships'},{name:'prospectId',label:'Prospect ID',kind:'text',section:'Relationships'},{name:'accountId',label:'Account ID',kind:'text',section:'Relationships'},{name:'advisorId',label:'Advisor ID',kind:'text',section:'Assignment'},{name:'createdDate',label:'Started',kind:'datetime',section:'System information'},{name:'updatedDate',label:'Last activity',kind:'datetime',section:'System information'}]},
 {key:'whatsapp-conversations',label:'WhatsApp Conversation',plural:'WhatsApp Conversations',readOnly:true,titleFields:['displayName','whatsappPhone'],subtitleFields:['managedBy'],listFields:['displayName','whatsappPhone','managedBy','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[{name:'displayName',label:'Customer name',kind:'text',section:'Customer'},{name:'whatsappPhone',label:'Phone',kind:'phone',section:'Customer'},{name:'whatsappUserId',label:'WhatsApp user ID',kind:'text',section:'Technical information'},{name:'managedBy',label:'Managed by',kind:'text',section:'Conversation'},{name:'createdDate',label:'Started',kind:'datetime',section:'System information'},{name:'updatedDate',label:'Last activity',kind:'datetime',section:'System information'}]}
 ];
+for(const key of ['page-visits','chats']){
+ const config=entities.find(entity=>entity.key===key);
+ if(config&&!config.fields.some(field=>field.name==='journeyId')){
+  const visitorIndex=config.fields.findIndex(field=>field.name==='visitorId');
+  config.fields.splice(visitorIndex+1,0,{name:'journeyId',label:'Journey ID',kind:'text',section:'Relationships'});
+  const listIndex=config.listFields.indexOf('visitorId');
+  config.listFields.splice(listIndex+1,0,'journeyId');
+ }
+}
 export const entityMap=Object.fromEntries(entities.map(e=>[e.key,e]));
