@@ -58,6 +58,7 @@ export function createCrudService(
   rule: EntityRule | undefined,
   options: {
     includeOne?: any;
+    includeList?: any;
     beforeCreate?: (b: any) => Promise<any> | any;
     beforeUpdate?: (b: any) => Promise<any> | any;
     sanitize?: string[];
@@ -96,6 +97,7 @@ export function createCrudService(
       const [items, total] = await Promise.all([
         delegate.findMany({
           where: w,
+          include: options.includeList,
           skip: (page - 1) * pageSize,
           take: pageSize,
           orderBy: { [sortField]: q.sortOrder === "asc" ? "asc" : "desc" },

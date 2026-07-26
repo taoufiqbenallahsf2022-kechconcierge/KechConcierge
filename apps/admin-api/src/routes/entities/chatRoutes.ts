@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { service } from "../../services/entities/chatService.js";
+import { prisma } from "../../lib/prisma.js";
 export const router = Router();
 router.get("/", async (req, res, next) => {
   try {
@@ -10,6 +11,16 @@ router.get("/", async (req, res, next) => {
 });
 router.get("/:id", async (req, res, next) => {
   try {
+    await prisma.chatMessage.updateMany({
+      where: {
+        chatId: req.params.id,
+        isRead: false,
+        senderType: {
+          in: ["VISITOR", "INDIVIDUAL", "LEAD", "PROSPECT", "ACCOUNT"],
+        },
+      },
+      data: { isRead: true },
+    });
     res.json(await service.one(req.params.id));
   } catch (e) {
     next(e);

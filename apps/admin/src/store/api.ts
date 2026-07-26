@@ -14,5 +14,6 @@ createOne:b.mutation<Record<string,unknown>,{entity:string;body:Record<string,un
 updateOne:b.mutation<Record<string,unknown>,{entity:string;id:string;body:Record<string,unknown>}>({query:({entity,id,body})=>({url:`/${entity}/${id}`,method:'PATCH',body}),invalidatesTags:(_r,_e,a)=>[{type:'Entity',id:a.entity},{type:'Entity',id:`${a.entity}:${a.id}`}] }),
 deleteOne:b.mutation<void,{entity:string;id:string}>({query:({entity,id})=>({url:`/${entity}/${id}`,method:'DELETE'}),invalidatesTags:(_r,_e,a)=>[{type:'Entity',id:a.entity}]}),
 sendChat:b.mutation({query:({id,message,advisorId}:{id:string;message:string;advisorId?:string})=>({url:`/chats/${id}/messages`,method:'POST',body:{message,advisorId}}),invalidatesTags:(_r,_e,a)=>[{type:'Entity',id:`chats:${a.id}`}]}),
+setChatTyping:b.mutation<void,{id:string;typing:boolean}>({query:({id,typing})=>({url:`/chats/${id}/typing`,method:'POST',body:{typing}})}),
 })});
-export const {useListQuery,useGetOneQuery,useCreateOneMutation,useUpdateOneMutation,useDeleteOneMutation,useSendChatMutation}=adminApi;
+export const {useListQuery,useGetOneQuery,useCreateOneMutation,useUpdateOneMutation,useDeleteOneMutation,useSendChatMutation,useSetChatTypingMutation}=adminApi;

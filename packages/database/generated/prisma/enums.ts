@@ -80,6 +80,7 @@ export type ChatStatus = (typeof ChatStatus)[keyof typeof ChatStatus]
 
 export const ChatParticipantStage = {
   VISITOR: 'VISITOR',
+  INDIVIDUAL: 'INDIVIDUAL',
   LEAD: 'LEAD',
   PROSPECT: 'PROSPECT',
   ACCOUNT: 'ACCOUNT'
@@ -90,6 +91,7 @@ export type ChatParticipantStage = (typeof ChatParticipantStage)[keyof typeof Ch
 
 export const ChatSenderType = {
   VISITOR: 'VISITOR',
+  INDIVIDUAL: 'INDIVIDUAL',
   LEAD: 'LEAD',
   PROSPECT: 'PROSPECT',
   ACCOUNT: 'ACCOUNT',
