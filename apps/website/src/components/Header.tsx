@@ -466,8 +466,18 @@ export default function Header() {
         currentLocale
       );
 
+    /*
+     * When logout happens on the localized home page,
+     * navigating to targetPath is a no-op. In that case
+     * there will be no pathname change to clear pendingPath.
+     */
+    if (targetPath === pathname) {
+      setPendingPath(null);
+      return;
+    }
+
     setPendingPath(targetPath);
-    router.push(targetPath);
+    router.replace(targetPath);
   }
 
   function goToAccount(
