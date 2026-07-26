@@ -21,6 +21,100 @@ model EmailVerificationToken {
   @@index([email])
 }
 
+model SenderEmail {
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @unique
+  replyTo     String?
+  isActive    Boolean  @default(true)
+  createdDate DateTime @default(now())
+  updatedDate DateTime @updatedAt
+
+  automations AudienceAutomation[]
+}
+
+model EmailTemplate {
+  id             String   @id @default(cuid())
+  name           String
+  description    String?
+  defaultSubject String
+  defaultHtml    String
+  languageBlocks Json     @default("{}")
+  isActive       Boolean  @default(true)
+  createdDate    DateTime @default(now())
+  updatedDate    DateTime @updatedAt
+
+  automations AudienceAutomation[]
+}
+
+model AudienceAutomation {
+  id                 String   @id @default(cuid())
+  name               String
+  description        String?
+  sqlQuery           String
+  subscriberKeyField String
+  emailField         String
+  languageField      String?
+  senderEmailId      String
+  emailTemplateId    String
+  isActive           Boolean  @default(false)
+  scheduleType       AutomationScheduleType @default(MANUAL)
+  scheduleMinute     Int      @default(0)
+  scheduleHour       Int?
+  scheduleDayOfWeek  Int?
+  scheduleDayOfMonth Int?
+  scheduleTimezone   String   @default("Africa/Casablanca")
+  scheduleStartAt    DateTime?
+  scheduleEndAt      DateTime?
+  nextRunAt          DateTime?
+  lastRunAt          DateTime?
+  createdDate        DateTime @default(now())
+  updatedDate        DateTime @updatedAt
+
+  senderEmail   SenderEmail    @relation(fields: [senderEmailId], references: [id])
+  emailTemplate EmailTemplate  @relation(fields: [emailTemplateId], references: [id])
+  runs          AutomationRun[]
+
+  @@index([senderEmailId])
+  @@index([emailTemplateId])
+  @@index([isActive, nextRunAt])
+}
+
+model AutomationRun {
+  id             String              @id @default(cuid())
+  automationId   String
+  status         AutomationRunStatus @default(RUNNING)
+  audienceCount  Int                 @default(0)
+  deliveredCount Int                 @default(0)
+  failedCount    Int                 @default(0)
+  dryRun         Boolean             @default(false)
+  error          String?
+  startedDate    DateTime            @default(now())
+  completedDate  DateTime?
+  startedBy      String?
+
+  automation AudienceAutomation @relation(fields: [automationId], references: [id], onDelete: Cascade)
+
+  @@index([automationId, startedDate])
+}
+
+model RecordFlow {
+  id             String      @id @default(cuid())
+  name           String
+  description    String?
+  sourceEntity   String
+  trigger        FlowTrigger
+  condition      Json?
+  actions        Json
+  isActive       Boolean     @default(false)
+  lastRunDate    DateTime?
+  lastError      String?
+  createdDate    DateTime    @default(now())
+  updatedDate    DateTime    @updatedAt
+
+  @@index([sourceEntity, trigger, isActive])
+}
+
 model Product {
   id            String      @id @default(cuid())
   uniqueCode    String      @unique
@@ -364,6 +458,25 @@ enum ChannelStatus {
   OPTIN
   UNKNOWN
   OPTOUT
+}
+
+enum AutomationRunStatus {
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+enum AutomationScheduleType {
+  MANUAL
+  HOURLY
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum FlowTrigger {
+  CREATED
+  UPDATED
 }
 
 enum ConsentChannel {

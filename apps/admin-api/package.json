@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "predev": "npm --prefix ../../packages/database run generate",
     "dev": "tsx watch src/server.ts",
+    "prebuild": "npm --prefix ../../packages/database run generate",
     "build": "tsc",
     "start": "node dist/apps/admin-api/src/server.js"
   },

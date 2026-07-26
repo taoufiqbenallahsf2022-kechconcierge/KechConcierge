@@ -47,6 +47,31 @@ export { Prisma }
  */
 export type EmailVerificationToken = Prisma.EmailVerificationTokenModel
 /**
+ * Model SenderEmail
+ * 
+ */
+export type SenderEmail = Prisma.SenderEmailModel
+/**
+ * Model EmailTemplate
+ * 
+ */
+export type EmailTemplate = Prisma.EmailTemplateModel
+/**
+ * Model AudienceAutomation
+ * 
+ */
+export type AudienceAutomation = Prisma.AudienceAutomationModel
+/**
+ * Model AutomationRun
+ * 
+ */
+export type AutomationRun = Prisma.AutomationRunModel
+/**
+ * Model RecordFlow
+ * 
+ */
+export type RecordFlow = Prisma.RecordFlowModel
+/**
  * Model Product
  * 
  */
