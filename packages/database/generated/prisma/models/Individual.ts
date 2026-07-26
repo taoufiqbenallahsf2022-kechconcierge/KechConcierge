@@ -782,10 +782,6 @@ export type IndividualNullableScalarRelationFilter = {
   isNot?: Prisma.IndividualWhereInput | null
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type IndividualCreateNestedOneWithoutLeadsInput = {
   create?: Prisma.XOR<Prisma.IndividualCreateWithoutLeadsInput, Prisma.IndividualUncheckedCreateWithoutLeadsInput>
   connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutLeadsInput

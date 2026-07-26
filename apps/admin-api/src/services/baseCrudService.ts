@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import bcrypt from "bcrypt";
 import { prisma } from "../lib/prisma.js";
 import type { EntityRule } from "../config/entities.js";
+import { runRecordFlows } from "../automation/flowEngine.js";
 type Q = Record<string, string | undefined>;
 type Delegate = {
   findMany: (a: any) => Promise<any[]>;
@@ -125,14 +126,18 @@ export function createCrudService(
         throw Object.assign(new Error("Read-only entity"), { status: 405 });
       let data = sanitize(body);
       if (options.beforeCreate) data = await options.beforeCreate(data);
-      return clean(rule, await delegate.create({ data }));
+      const row = await delegate.create({ data });
+      await runRecordFlows(rule.delegate, "CREATED", row);
+      return clean(rule, row);
     },
     async update(id: string, body: any) {
       if (rule.readOnly)
         throw Object.assign(new Error("Read-only entity"), { status: 405 });
       let data = sanitize(body);
       if (options.beforeUpdate) data = await options.beforeUpdate(data);
-      return clean(rule, await delegate.update({ where: { id }, data }));
+      const row = await delegate.update({ where: { id }, data });
+      await runRecordFlows(rule.delegate, "UPDATED", row);
+      return clean(rule, row);
     },
     async remove(id: string) {
       if (rule.readOnly)

@@ -15,12 +15,14 @@ import { router as chatsRouter } from "./entities/chatRoutes.js";
 import { router as chat_messagesRouter } from "./entities/chatMessageRoutes.js";
 import { router as whatsapp_conversationsRouter } from "./entities/whatsAppConversationRoutes.js";
 import { router as whatsapp_messagesRouter } from "./entities/whatsAppMessageRoutes.js";
+import { router as studioRouter } from "./studioRoutes.js";
 export const api = Router();
 api.get("/health", (_q, r) =>
   r.json({ status: "ok", service: "moorish-admin-api" }),
 );
 api.use("/auth", authRouter);
 api.use(requireAdminAuth);
+api.use("/studio", studioRouter);
 api.post("/chats/:id/messages", async (req, res, next) => {
   try {
     const { message } = req.body;

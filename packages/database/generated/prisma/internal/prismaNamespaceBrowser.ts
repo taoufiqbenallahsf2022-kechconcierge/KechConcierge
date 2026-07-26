@@ -52,6 +52,11 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   EmailVerificationToken: 'EmailVerificationToken',
+  SenderEmail: 'SenderEmail',
+  EmailTemplate: 'EmailTemplate',
+  AudienceAutomation: 'AudienceAutomation',
+  AutomationRun: 'AutomationRun',
+  RecordFlow: 'RecordFlow',
   Product: 'Product',
   WhatsAppConversation: 'WhatsAppConversation',
   WhatsAppMessage: 'WhatsAppMessage',
@@ -95,6 +100,97 @@ export const EmailVerificationTokenScalarFieldEnum = {
 } as const
 
 export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+
+
+export const SenderEmailScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  replyTo: 'replyTo',
+  isActive: 'isActive',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type SenderEmailScalarFieldEnum = (typeof SenderEmailScalarFieldEnum)[keyof typeof SenderEmailScalarFieldEnum]
+
+
+export const EmailTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  defaultSubject: 'defaultSubject',
+  defaultHtml: 'defaultHtml',
+  languageBlocks: 'languageBlocks',
+  isActive: 'isActive',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type EmailTemplateScalarFieldEnum = (typeof EmailTemplateScalarFieldEnum)[keyof typeof EmailTemplateScalarFieldEnum]
+
+
+export const AudienceAutomationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  sqlQuery: 'sqlQuery',
+  subscriberKeyField: 'subscriberKeyField',
+  emailField: 'emailField',
+  languageField: 'languageField',
+  senderEmailId: 'senderEmailId',
+  emailTemplateId: 'emailTemplateId',
+  isActive: 'isActive',
+  scheduleType: 'scheduleType',
+  scheduleMinute: 'scheduleMinute',
+  scheduleHour: 'scheduleHour',
+  scheduleDayOfWeek: 'scheduleDayOfWeek',
+  scheduleDayOfMonth: 'scheduleDayOfMonth',
+  scheduleTimezone: 'scheduleTimezone',
+  scheduleStartAt: 'scheduleStartAt',
+  scheduleEndAt: 'scheduleEndAt',
+  nextRunAt: 'nextRunAt',
+  lastRunAt: 'lastRunAt',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type AudienceAutomationScalarFieldEnum = (typeof AudienceAutomationScalarFieldEnum)[keyof typeof AudienceAutomationScalarFieldEnum]
+
+
+export const AutomationRunScalarFieldEnum = {
+  id: 'id',
+  automationId: 'automationId',
+  status: 'status',
+  audienceCount: 'audienceCount',
+  deliveredCount: 'deliveredCount',
+  failedCount: 'failedCount',
+  dryRun: 'dryRun',
+  error: 'error',
+  startedDate: 'startedDate',
+  completedDate: 'completedDate',
+  startedBy: 'startedBy'
+} as const
+
+export type AutomationRunScalarFieldEnum = (typeof AutomationRunScalarFieldEnum)[keyof typeof AutomationRunScalarFieldEnum]
+
+
+export const RecordFlowScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  sourceEntity: 'sourceEntity',
+  trigger: 'trigger',
+  condition: 'condition',
+  actions: 'actions',
+  isActive: 'isActive',
+  lastRunDate: 'lastRunDate',
+  lastError: 'lastError',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type RecordFlowScalarFieldEnum = (typeof RecordFlowScalarFieldEnum)[keyof typeof RecordFlowScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {

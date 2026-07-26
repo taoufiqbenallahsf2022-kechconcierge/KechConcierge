@@ -18,6 +18,34 @@ export const ChannelStatus = {
 export type ChannelStatus = (typeof ChannelStatus)[keyof typeof ChannelStatus]
 
 
+export const AutomationRunStatus = {
+  RUNNING: 'RUNNING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type AutomationRunStatus = (typeof AutomationRunStatus)[keyof typeof AutomationRunStatus]
+
+
+export const AutomationScheduleType = {
+  MANUAL: 'MANUAL',
+  HOURLY: 'HOURLY',
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY'
+} as const
+
+export type AutomationScheduleType = (typeof AutomationScheduleType)[keyof typeof AutomationScheduleType]
+
+
+export const FlowTrigger = {
+  CREATED: 'CREATED',
+  UPDATED: 'UPDATED'
+} as const
+
+export type FlowTrigger = (typeof FlowTrigger)[keyof typeof FlowTrigger]
+
+
 export const ConsentChannel = {
   EMAIL: 'EMAIL',
   SMS: 'SMS',
