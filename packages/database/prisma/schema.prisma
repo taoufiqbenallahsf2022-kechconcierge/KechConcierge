@@ -349,6 +349,7 @@ model PageVisit {
   id           String       @id @default(cuid())
   pageUrl      String
   pageName     String?
+  visitorId    String?
   visitorStage VisitorStage
   leadId       String?
   prospectId   String?
@@ -363,6 +364,9 @@ model PageVisit {
   individual   Individual?  @relation(fields: [individualId], references: [id])
   lead         Lead?        @relation(fields: [leadId], references: [id])
   prospect     Prospect?    @relation(fields: [prospectId], references: [id])
+
+  @@index([visitorId])
+  @@index([individualId, visitDate])
 }
 
 model ContactRequest {

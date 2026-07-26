@@ -5,6 +5,7 @@ import { Bot, MessageSquarePlus, Send } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { getLocaleFromPath, type Locale } from "@/lib/i18n";
 import { useAuthStore } from "@/store/auth.store";
+import { getVisitorId } from "@/lib/visitor";
 
 type ChatMessage = {
   id: string;
@@ -35,21 +36,11 @@ const copy: Record<Locale, Record<string, string>> = {
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
-const VISITOR_KEY = "moorish_visitor_id";
 
 function chatIdFromPath(pathname: string) {
   const segments = pathname.split("/").filter(Boolean);
   const chatIndex = segments.indexOf("chat");
   return chatIndex >= 0 ? segments[chatIndex + 1] ?? null : null;
-}
-
-function visitorId() {
-  let id = localStorage.getItem(VISITOR_KEY);
-  if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem(VISITOR_KEY, id);
-  }
-  return id;
 }
 
 export default function ChatPage() {
@@ -76,7 +67,7 @@ export default function ChatPage() {
       "Content-Type": "application/json",
       ...(accessToken
         ? { Authorization: `Bearer ${accessToken}` }
-        : { "x-visitor-id": visitorId() }),
+        : { "x-visitor-id": getVisitorId() }),
     }),
     [accessToken],
   );

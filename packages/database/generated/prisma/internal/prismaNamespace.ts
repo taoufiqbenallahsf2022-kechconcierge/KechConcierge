@@ -2190,6 +2190,7 @@ export const PageVisitScalarFieldEnum = {
   id: 'id',
   pageUrl: 'pageUrl',
   pageName: 'pageName',
+  visitorId: 'visitorId',
   visitorStage: 'visitorStage',
   leadId: 'leadId',
   prospectId: 'prospectId',
