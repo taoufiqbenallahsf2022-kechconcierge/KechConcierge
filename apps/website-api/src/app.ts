@@ -6,8 +6,10 @@ import contactRequestRoutes from "./routes/contact-request.routes";
 import passwordResetRoutes from "./routes/password-reset.routes";
 import accountRoutes from "./routes/account.routes";
 import chatRoutes from "./routes/chat.routes";
+import pageVisitRoutes from "./routes/page-visit.routes";
 
 const app: Express = express();
+app.set("trust proxy", 1);
 
 const allowedOrigins: Record<string, string[] | string> = {
   local: "*",
@@ -48,6 +50,7 @@ app.use("/api/password", passwordResetRoutes);
 app.use("/api/contact-requests", contactRequestRoutes);
 app.use("/api/account", accountRoutes);
 app.use("/api/chats", chatRoutes);
+app.use("/api/page-visits", pageVisitRoutes);
 
 app.use(
   (

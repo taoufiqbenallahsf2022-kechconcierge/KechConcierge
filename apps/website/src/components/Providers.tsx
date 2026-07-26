@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { useAuthStore } from "@/store/auth.store";
+import { PageVisitTracker } from "./PageVisitTracker";
 
 export default function Providers({
   children,
@@ -25,6 +26,9 @@ export default function Providers({
         process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!
       }
     >
+      <Suspense fallback={null}>
+        <PageVisitTracker />
+      </Suspense>
       {children}
     </GoogleOAuthProvider>
   );

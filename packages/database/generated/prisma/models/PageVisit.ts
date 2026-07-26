@@ -28,6 +28,7 @@ export type PageVisitMinAggregateOutputType = {
   id: string | null
   pageUrl: string | null
   pageName: string | null
+  visitorId: string | null
   visitorStage: $Enums.VisitorStage | null
   leadId: string | null
   prospectId: string | null
@@ -44,6 +45,7 @@ export type PageVisitMaxAggregateOutputType = {
   id: string | null
   pageUrl: string | null
   pageName: string | null
+  visitorId: string | null
   visitorStage: $Enums.VisitorStage | null
   leadId: string | null
   prospectId: string | null
@@ -60,6 +62,7 @@ export type PageVisitCountAggregateOutputType = {
   id: number
   pageUrl: number
   pageName: number
+  visitorId: number
   visitorStage: number
   leadId: number
   prospectId: number
@@ -78,6 +81,7 @@ export type PageVisitMinAggregateInputType = {
   id?: true
   pageUrl?: true
   pageName?: true
+  visitorId?: true
   visitorStage?: true
   leadId?: true
   prospectId?: true
@@ -94,6 +98,7 @@ export type PageVisitMaxAggregateInputType = {
   id?: true
   pageUrl?: true
   pageName?: true
+  visitorId?: true
   visitorStage?: true
   leadId?: true
   prospectId?: true
@@ -110,6 +115,7 @@ export type PageVisitCountAggregateInputType = {
   id?: true
   pageUrl?: true
   pageName?: true
+  visitorId?: true
   visitorStage?: true
   leadId?: true
   prospectId?: true
@@ -199,6 +205,7 @@ export type PageVisitGroupByOutputType = {
   id: string
   pageUrl: string
   pageName: string | null
+  visitorId: string | null
   visitorStage: $Enums.VisitorStage
   leadId: string | null
   prospectId: string | null
@@ -236,6 +243,7 @@ export type PageVisitWhereInput = {
   id?: Prisma.StringFilter<"PageVisit"> | string
   pageUrl?: Prisma.StringFilter<"PageVisit"> | string
   pageName?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  visitorId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   visitorStage?: Prisma.EnumVisitorStageFilter<"PageVisit"> | $Enums.VisitorStage
   leadId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   prospectId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
@@ -256,6 +264,7 @@ export type PageVisitOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
   pageName?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitorId?: Prisma.SortOrderInput | Prisma.SortOrder
   visitorStage?: Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -279,6 +288,7 @@ export type PageVisitWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PageVisitWhereInput | Prisma.PageVisitWhereInput[]
   pageUrl?: Prisma.StringFilter<"PageVisit"> | string
   pageName?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  visitorId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   visitorStage?: Prisma.EnumVisitorStageFilter<"PageVisit"> | $Enums.VisitorStage
   leadId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   prospectId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
@@ -299,6 +309,7 @@ export type PageVisitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
   pageName?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitorId?: Prisma.SortOrderInput | Prisma.SortOrder
   visitorStage?: Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -321,6 +332,7 @@ export type PageVisitScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"PageVisit"> | string
   pageUrl?: Prisma.StringWithAggregatesFilter<"PageVisit"> | string
   pageName?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  visitorId?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
   visitorStage?: Prisma.EnumVisitorStageWithAggregatesFilter<"PageVisit"> | $Enums.VisitorStage
   leadId?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
   prospectId?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
@@ -337,6 +349,7 @@ export type PageVisitCreateInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   visitDate?: Date | string
   referrer?: string | null
@@ -353,6 +366,7 @@ export type PageVisitUncheckedCreateInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   leadId?: string | null
   prospectId?: string | null
@@ -369,6 +383,7 @@ export type PageVisitUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   visitDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -385,6 +400,7 @@ export type PageVisitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -401,6 +417,7 @@ export type PageVisitCreateManyInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   leadId?: string | null
   prospectId?: string | null
@@ -417,6 +434,7 @@ export type PageVisitUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   visitDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -429,6 +447,7 @@ export type PageVisitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -455,6 +474,7 @@ export type PageVisitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
   pageName?: Prisma.SortOrder
+  visitorId?: Prisma.SortOrder
   visitorStage?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -471,6 +491,7 @@ export type PageVisitMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
   pageName?: Prisma.SortOrder
+  visitorId?: Prisma.SortOrder
   visitorStage?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -487,6 +508,7 @@ export type PageVisitMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
   pageName?: Prisma.SortOrder
+  visitorId?: Prisma.SortOrder
   visitorStage?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -675,6 +697,7 @@ export type PageVisitCreateWithoutIndividualInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   visitDate?: Date | string
   referrer?: string | null
@@ -690,6 +713,7 @@ export type PageVisitUncheckedCreateWithoutIndividualInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   leadId?: string | null
   prospectId?: string | null
@@ -734,6 +758,7 @@ export type PageVisitScalarWhereInput = {
   id?: Prisma.StringFilter<"PageVisit"> | string
   pageUrl?: Prisma.StringFilter<"PageVisit"> | string
   pageName?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  visitorId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   visitorStage?: Prisma.EnumVisitorStageFilter<"PageVisit"> | $Enums.VisitorStage
   leadId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   prospectId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
@@ -750,6 +775,7 @@ export type PageVisitCreateWithoutLeadInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   visitDate?: Date | string
   referrer?: string | null
@@ -765,6 +791,7 @@ export type PageVisitUncheckedCreateWithoutLeadInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   prospectId?: string | null
   accountId?: string | null
@@ -806,6 +833,7 @@ export type PageVisitCreateWithoutProspectInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   visitDate?: Date | string
   referrer?: string | null
@@ -821,6 +849,7 @@ export type PageVisitUncheckedCreateWithoutProspectInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   leadId?: string | null
   accountId?: string | null
@@ -862,6 +891,7 @@ export type PageVisitCreateWithoutAccountInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   visitDate?: Date | string
   referrer?: string | null
@@ -877,6 +907,7 @@ export type PageVisitUncheckedCreateWithoutAccountInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   leadId?: string | null
   prospectId?: string | null
@@ -918,6 +949,7 @@ export type PageVisitCreateManyIndividualInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   leadId?: string | null
   prospectId?: string | null
@@ -933,6 +965,7 @@ export type PageVisitUpdateWithoutIndividualInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   visitDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -948,6 +981,7 @@ export type PageVisitUncheckedUpdateWithoutIndividualInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -963,6 +997,7 @@ export type PageVisitUncheckedUpdateManyWithoutIndividualInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -978,6 +1013,7 @@ export type PageVisitCreateManyLeadInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   prospectId?: string | null
   accountId?: string | null
@@ -993,6 +1029,7 @@ export type PageVisitUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   visitDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1008,6 +1045,7 @@ export type PageVisitUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1023,6 +1061,7 @@ export type PageVisitUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1038,6 +1077,7 @@ export type PageVisitCreateManyProspectInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   leadId?: string | null
   accountId?: string | null
@@ -1053,6 +1093,7 @@ export type PageVisitUpdateWithoutProspectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   visitDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1068,6 +1109,7 @@ export type PageVisitUncheckedUpdateWithoutProspectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1083,6 +1125,7 @@ export type PageVisitUncheckedUpdateManyWithoutProspectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1098,6 +1141,7 @@ export type PageVisitCreateManyAccountInput = {
   id?: string
   pageUrl: string
   pageName?: string | null
+  visitorId?: string | null
   visitorStage: $Enums.VisitorStage
   leadId?: string | null
   prospectId?: string | null
@@ -1113,6 +1157,7 @@ export type PageVisitUpdateWithoutAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   visitDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1128,6 +1173,7 @@ export type PageVisitUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1143,6 +1189,7 @@ export type PageVisitUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1160,6 +1207,7 @@ export type PageVisitSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   pageUrl?: boolean
   pageName?: boolean
+  visitorId?: boolean
   visitorStage?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1180,6 +1228,7 @@ export type PageVisitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   pageUrl?: boolean
   pageName?: boolean
+  visitorId?: boolean
   visitorStage?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1200,6 +1249,7 @@ export type PageVisitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   pageUrl?: boolean
   pageName?: boolean
+  visitorId?: boolean
   visitorStage?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1220,6 +1270,7 @@ export type PageVisitSelectScalar = {
   id?: boolean
   pageUrl?: boolean
   pageName?: boolean
+  visitorId?: boolean
   visitorStage?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1232,7 +1283,7 @@ export type PageVisitSelectScalar = {
   sessionId?: boolean
 }
 
-export type PageVisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pageUrl" | "pageName" | "visitorStage" | "leadId" | "prospectId" | "accountId" | "individualId" | "visitDate" | "referrer" | "userAgent" | "ipAddress" | "sessionId", ExtArgs["result"]["pageVisit"]>
+export type PageVisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pageUrl" | "pageName" | "visitorId" | "visitorStage" | "leadId" | "prospectId" | "accountId" | "individualId" | "visitDate" | "referrer" | "userAgent" | "ipAddress" | "sessionId", ExtArgs["result"]["pageVisit"]>
 export type PageVisitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.PageVisit$accountArgs<ExtArgs>
   individual?: boolean | Prisma.PageVisit$individualArgs<ExtArgs>
@@ -1264,6 +1315,7 @@ export type $PageVisitPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: string
     pageUrl: string
     pageName: string | null
+    visitorId: string | null
     visitorStage: $Enums.VisitorStage
     leadId: string | null
     prospectId: string | null
@@ -1704,6 +1756,7 @@ export interface PageVisitFieldRefs {
   readonly id: Prisma.FieldRef<"PageVisit", 'String'>
   readonly pageUrl: Prisma.FieldRef<"PageVisit", 'String'>
   readonly pageName: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly visitorId: Prisma.FieldRef<"PageVisit", 'String'>
   readonly visitorStage: Prisma.FieldRef<"PageVisit", 'VisitorStage'>
   readonly leadId: Prisma.FieldRef<"PageVisit", 'String'>
   readonly prospectId: Prisma.FieldRef<"PageVisit", 'String'>
