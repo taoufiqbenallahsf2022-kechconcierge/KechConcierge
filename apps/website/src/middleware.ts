@@ -4,6 +4,13 @@ const locales = ["fr", "es", "pt", "it", "de"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const requestHeaders =
+    new Headers(request.headers);
+
+  requestHeaders.set(
+    "x-moorish-public-pathname",
+    pathname
+  );
 
   const segments = pathname.split("/").filter(Boolean);
   const firstSegment = segments[0];
@@ -11,7 +18,11 @@ export function middleware(request: NextRequest) {
   const isLocalizedRoute = locales.includes(firstSegment);
 
   if (!isLocalizedRoute) {
-    return NextResponse.next();
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   const pathnameWithoutLocale = "/" + segments.slice(1).join("/");
@@ -20,7 +31,14 @@ export function middleware(request: NextRequest) {
   rewriteUrl.pathname =
     pathnameWithoutLocale === "/" ? "/" : pathnameWithoutLocale;
 
-  return NextResponse.rewrite(rewriteUrl);
+  return NextResponse.rewrite(
+    rewriteUrl,
+    {
+      request: {
+        headers: requestHeaders,
+      },
+    }
+  );
 }
 
 export const config = {
