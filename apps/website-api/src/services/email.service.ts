@@ -1,33 +1,31 @@
 import { Resend } from "resend";
 
-import {
-  getVerificationEmailTranslation,
-} from "../i18n/verification-email-translations";
+import { getVerificationEmailTranslation } from "../i18n/verification-email-translations";
 
-import {
-  getPasswordResetEmailTranslation,
-} from "../i18n/password-reset-email-translations";
+import { getPasswordResetEmailTranslation } from "../i18n/password-reset-email-translations";
 import { getContactRequestEmailTranslation } from "../i18n/contact-request-email-translations";
 
-
-const resend = new Resend(
-  process.env.RESEND_API_KEY
-);
+const resend = new Resend(process.env.RESEND_API_KEY);
+const EMAIL_LOGO_HTML = `
+  <div style="text-align: center; margin: 0 auto 28px;">
+    <img
+      src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public"
+      alt="Moorish Concierge"
+      width="80"
+      style="display: inline-block; width: 80px; max-width: 55%; height: auto; border: 0;"
+    />
+  </div>
+`;
 
 function normalizeWebsiteUrl() {
-  return (
-    process.env.WEBSITE_URL ||
-    "http://localhost:3000"
-  ).replace(/\/$/, "");
+  return (process.env.WEBSITE_URL || "http://localhost:3000").replace(
+    /\/$/,
+    "",
+  );
 }
 
-function normalizeLanguage(
-  language?: string
-) {
-  const value =
-    (language || "en")
-      .trim()
-      .toLowerCase();
+function normalizeLanguage(language?: string) {
+  const value = (language || "en").trim().toLowerCase();
 
   if (
     value === "fr" ||
@@ -42,63 +40,41 @@ function normalizeLanguage(
   return "en";
 }
 
-function buildVerificationUrl(
-  token: string,
-  language?: string
-) {
-  const websiteUrl =
-    normalizeWebsiteUrl();
+function buildVerificationUrl(token: string, language?: string) {
+  const websiteUrl = normalizeWebsiteUrl();
 
-  const lang =
-    normalizeLanguage(language);
+  const lang = normalizeLanguage(language);
 
-  const localePrefix =
-    lang === "en"
-      ? ""
-      : `/${lang}`;
+  const localePrefix = lang === "en" ? "" : `/${lang}`;
 
   return `${websiteUrl}${localePrefix}/account/verify?token=${encodeURIComponent(
-    token
+    token,
   )}`;
 }
 
-function buildPasswordResetUrl(
-  token: string,
-  language?: string
-) {
-  const websiteUrl =
-    normalizeWebsiteUrl();
+function buildPasswordResetUrl(token: string, language?: string) {
+  const websiteUrl = normalizeWebsiteUrl();
 
-  const lang =
-    normalizeLanguage(language);
+  const lang = normalizeLanguage(language);
 
-  const localePrefix =
-    lang === "en"
-      ? ""
-      : `/${lang}`;
+  const localePrefix = lang === "en" ? "" : `/${lang}`;
 
   return `${websiteUrl}${localePrefix}/reset-password?token=${encodeURIComponent(
-    token
+    token,
   )}`;
 }
 
 function getFromEmail() {
   return (
-    process.env.RESEND_FROM_EMAIL ||
-    "Moorish Concierge <onboarding@resend.dev>"
+    process.env.RESEND_FROM_EMAIL || "Moorish Concierge <onboarding@resend.dev>"
   );
 }
 
 function getContactEmail() {
-  return (
-    process.env.CONTACT_EMAIL ||
-    "contact@moorishconcierge.com"
-  );
+  return process.env.CONTACT_EMAIL || "contact@moorishconcierge.com";
 }
 
-function escapeHtml(
-  value?: string | null
-) {
+function escapeHtml(value?: string | null) {
   if (!value) {
     return "";
   }
@@ -111,39 +87,27 @@ function escapeHtml(
     .replaceAll("'", "&#039;");
 }
 
-function formatMultilineText(
-  value?: string | null
-) {
-  return escapeHtml(value)
-    .replace(/\r?\n/g, "<br />");
+function formatMultilineText(value?: string | null) {
+  return escapeHtml(value).replace(/\r?\n/g, "<br />");
 }
 
-export async function sendAccountVerificationEmail(
-  params: {
-    email: string;
-    token: string;
-    language?: string;
-  }
-) {
-  const t =
-    getVerificationEmailTranslation(
-      params.language
-    );
+export async function sendAccountVerificationEmail(params: {
+  email: string;
+  token: string;
+  language?: string;
+}) {
+  const t = getVerificationEmailTranslation(params.language);
 
-  const verificationUrl =
-    buildVerificationUrl(
-      params.token,
-      params.language
-    );
+  const verificationUrl = buildVerificationUrl(params.token, params.language);
 
-  const { data, error } =
-    await resend.emails.send({
-      from: getFromEmail(),
-      to: [params.email],
-      subject: t.verifySubject,
+  const { data, error } = await resend.emails.send({
+    from: getFromEmail(),
+    to: [params.email],
+    subject: t.verifySubject,
 
-      html: `
+    html: `
         <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px;">
+          ${EMAIL_LOGO_HTML}
           <p style="font-size: 13px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #c2410c;">
             ${t.eyebrow}
           </p>
@@ -176,7 +140,7 @@ export async function sendAccountVerificationEmail(
           </p>
         </div>
       `,
-    });
+  });
 
   if (error) {
     throw new Error(error.message);
@@ -185,32 +149,23 @@ export async function sendAccountVerificationEmail(
   return data;
 }
 
-export async function sendPasswordResetEmail(
-  params: {
-    email: string;
-    token: string;
-    language?: string;
-  }
-) {
-  const t =
-    getPasswordResetEmailTranslation(
-      params.language
-    );
+export async function sendPasswordResetEmail(params: {
+  email: string;
+  token: string;
+  language?: string;
+}) {
+  const t = getPasswordResetEmailTranslation(params.language);
 
-  const resetUrl =
-    buildPasswordResetUrl(
-      params.token,
-      params.language
-    );
+  const resetUrl = buildPasswordResetUrl(params.token, params.language);
 
-  const { data, error } =
-    await resend.emails.send({
-      from: getFromEmail(),
-      to: [params.email],
-      subject: t.subject,
+  const { data, error } = await resend.emails.send({
+    from: getFromEmail(),
+    to: [params.email],
+    subject: t.subject,
 
-      html: `
+    html: `
         <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px;">
+          ${EMAIL_LOGO_HTML}
           <p style="font-size: 13px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #c2410c;">
             ${t.eyebrow}
           </p>
@@ -251,7 +206,7 @@ export async function sendPasswordResetEmail(
           </p>
         </div>
       `,
-    });
+  });
 
   if (error) {
     throw new Error(error.message);
@@ -260,35 +215,28 @@ export async function sendPasswordResetEmail(
   return data;
 }
 
-export async function sendContactRequestConfirmationEmail(
-  params: {
-    email: string;
-    firstName: string;
-    requestId: string;
-    requestType: string;
-    subject?: string | null;
-    comment: string;
-    language?: string;
-  }
-) {
+export async function sendContactRequestConfirmationEmail(params: {
+  email: string;
+  firstName: string;
+  requestId: string;
+  requestType: string;
+  subject?: string | null;
+  comment: string;
+  language?: string;
+}) {
+  const t = getContactRequestEmailTranslation(params.language);
 
-  const t =
-    getContactRequestEmailTranslation(
-      params.language
-    );
+  const contactEmail = getContactEmail();
 
-  const contactEmail =
-    getContactEmail();
+  const { data, error } = await resend.emails.send({
+    from: getFromEmail(),
+    to: [params.email],
+    replyTo: contactEmail,
+    subject: t.subject,
 
-  const { data, error } =
-    await resend.emails.send({
-      from: getFromEmail(),
-      to: [params.email],
-      replyTo: contactEmail,
-      subject: t.subject,
-
-      html: `
+    html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
+          ${EMAIL_LOGO_HTML}
           <p style="font-size: 13px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #c2410c;">
             ${t.eyebrow}
           </p>
@@ -346,7 +294,7 @@ export async function sendContactRequestConfirmationEmail(
           </p>
         </div>
       `,
-    });
+  });
 
   if (error) {
     throw new Error(error.message);
@@ -355,40 +303,34 @@ export async function sendContactRequestConfirmationEmail(
   return data;
 }
 
-export async function sendContactRequestInternalEmail(
-  params: {
-    requestId: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    mobilePhone?: string | null;
-    requestType: string;
-    subject?: string | null;
-    comment: string;
-    individualId?: string | null;
-    language?: string;
-    createdDate: Date;
-  }
-) {
-  const contactEmail =
-    getContactEmail();
+export async function sendContactRequestInternalEmail(params: {
+  requestId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobilePhone?: string | null;
+  requestType: string;
+  subject?: string | null;
+  comment: string;
+  individualId?: string | null;
+  language?: string;
+  createdDate: Date;
+}) {
+  const contactEmail = getContactEmail();
 
-  const fullName =
-    `${params.firstName} ${params.lastName}`
-      .trim();
+  const fullName = `${params.firstName} ${params.lastName}`.trim();
 
-  const internalSubject =
-    `New contact request from ${fullName}`;
+  const internalSubject = `New contact request from ${fullName}`;
 
-  const { data, error } =
-    await resend.emails.send({
-      from: getFromEmail(),
-      to: [contactEmail],
-      replyTo: params.email,
-      subject: internalSubject,
+  const { data, error } = await resend.emails.send({
+    from: getFromEmail(),
+    to: [contactEmail],
+    replyTo: params.email,
+    subject: internalSubject,
 
-      html: `
+    html: `
         <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 24px;">
+          ${EMAIL_LOGO_HTML}
           <p style="font-size: 13px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #c2410c;">
             New contact request
           </p>
@@ -458,29 +400,22 @@ export async function sendContactRequestInternalEmail(
 
             <p style="margin: 5px 0; color: #71717a; font-size: 12px; line-height: 20px;">
               <strong>Individual ID:</strong>
-              ${escapeHtml(
-                params.individualId ||
-                  "Public visitor"
-              )}
+              ${escapeHtml(params.individualId || "Public visitor")}
             </p>
 
             <p style="margin: 5px 0; color: #71717a; font-size: 12px; line-height: 20px;">
               <strong>Language:</strong>
-              ${escapeHtml(
-                params.language || "en"
-              )}
+              ${escapeHtml(params.language || "en")}
             </p>
 
             <p style="margin: 5px 0; color: #71717a; font-size: 12px; line-height: 20px;">
               <strong>Submitted at:</strong>
-              ${escapeHtml(
-                params.createdDate.toISOString()
-              )}
+              ${escapeHtml(params.createdDate.toISOString())}
             </p>
           </div>
         </div>
       `,
-    });
+  });
 
   if (error) {
     throw new Error(error.message);

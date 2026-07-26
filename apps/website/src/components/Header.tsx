@@ -542,20 +542,15 @@ export default function Header() {
             }
             className="flex items-center gap-2 text-left disabled:cursor-wait"
           >
-            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-orange-600 text-lg font-black text-white">
-              K
-            </div>
-
-            <div>
-              <p className="text-lg font-black tracking-tight text-zinc-950">
-                Moorish Concierge
-              </p>
-
-              <p className="-mt-1 text-xs font-medium text-orange-700">
-                Marrakech concierge
-                services
-              </p>
-            </div>
+            <Image
+              src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/fad1e3c7-d467-42db-58c0-d101e4598b00/public"
+              alt="Moorish Concierge"
+              width={280}
+              height={84}
+              className="h-16 w-auto object-contain"
+              priority
+              unoptimized
+            />
           </button>
 
           <nav className="hidden items-center gap-5 text-sm font-semibold text-zinc-700 lg:flex">
