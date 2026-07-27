@@ -40,7 +40,8 @@ export type AutomationScheduleType = (typeof AutomationScheduleType)[keyof typeo
 
 export const FlowTrigger = {
   CREATED: 'CREATED',
-  UPDATED: 'UPDATED'
+  UPDATED: 'UPDATED',
+  DELETED: 'DELETED'
 } as const
 
 export type FlowTrigger = (typeof FlowTrigger)[keyof typeof FlowTrigger]

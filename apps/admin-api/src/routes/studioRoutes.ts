@@ -3,6 +3,7 @@ import { Prisma } from "../../../../packages/database/generated/prisma/client.js
 import { prisma } from "../lib/prisma.js";
 import { audience, executeAutomation, safeSelect } from "../automation/automationEngine.js";
 import { nextRunAt, scheduleData } from "../automation/schedule.js";
+import { loadObjectRelationships } from "../automation/relationshipMetadata.js";
 
 export const router = Router();
 
@@ -88,8 +89,8 @@ function automationData(body: any) {
 function flowData(body: any) {
   const sourceEntity = required(body.sourceEntity, "Source object");
   const trigger = required(body.trigger, "Trigger");
-  if (!["CREATED", "UPDATED"].includes(trigger))
-    throw Object.assign(new Error("Trigger must be CREATED or UPDATED"), {
+  if (!["CREATED", "UPDATED", "DELETED"].includes(trigger))
+    throw Object.assign(new Error("Trigger must be CREATED, UPDATED or DELETED"), {
       status: 400,
     });
   const actions = jsonObject(body.actions, []);
@@ -101,7 +102,7 @@ function flowData(body: any) {
     name: required(body.name, "Flow name"),
     description: optional(body.description),
     sourceEntity,
-    trigger: trigger as "CREATED" | "UPDATED",
+    trigger: trigger as "CREATED" | "UPDATED" | "DELETED",
     condition: (jsonObject(body.condition, null) ??
       Prisma.JsonNull) as Prisma.InputJsonValue,
     actions: actions as Prisma.InputJsonValue,
@@ -210,7 +211,9 @@ router.get("/schema", async (_req, res, next) => {
       current.push(column);
       grouped.set(column.table_name, current);
     }
+    const relationships = await loadObjectRelationships();
     res.json({
+      relationships,
       models: [...grouped.entries()].map(([name, fields]) => ({
         name: name ? name[0]!.toLowerCase() + name.slice(1) : name,
         table: `"${name}"`,

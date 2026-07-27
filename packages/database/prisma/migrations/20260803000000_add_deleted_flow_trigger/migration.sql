@@ -1,0 +1,1 @@
+ALTER TYPE "FlowTrigger" ADD VALUE 'DELETED';

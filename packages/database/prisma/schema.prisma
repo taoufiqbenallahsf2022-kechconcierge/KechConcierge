@@ -507,6 +507,7 @@ enum AutomationScheduleType {
 enum FlowTrigger {
   CREATED
   UPDATED
+  DELETED
 }
 
 enum ConsentChannel {

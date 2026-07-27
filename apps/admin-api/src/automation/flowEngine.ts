@@ -1,6 +1,7 @@
 import { prisma } from "../lib/prisma.js";
+import { loadObjectRelationships } from "./relationshipMetadata.js";
 
-type Trigger = "CREATED" | "UPDATED";
+type Trigger = "CREATED" | "UPDATED" | "DELETED";
 type Condition = {
   field?: string;
   operator?: string;
@@ -9,12 +10,14 @@ type Condition = {
 };
 type ConditionGroup = { logic?: "AND" | "OR"; items?: Condition[] };
 type FlowAction = {
-  type?: "UPDATE_RECORD" | "UPDATE_RELATED";
+  type?: "UPDATE_RECORD" | "UPDATE_RELATED" | "DELETE_RECORD" | "DELETE_RELATED";
   targetEntity?: string;
   matchField?: string;
   sourceField?: string;
+  relationshipId?: string;
   field?: string;
   value?: unknown;
+  conditions?: ConditionGroup;
 };
 
 const ALLOWED_ENTITIES = new Set([
@@ -86,11 +89,72 @@ function resolveValue(value: unknown, record: Record<string, unknown>) {
   return match ? record[match[1]!] : value;
 }
 
+function databaseCondition(candidate: Condition) {
+  if (!candidate.field) return {};
+  const values = Array.isArray(candidate.value)
+    ? candidate.value
+    : String(candidate.value ?? "").split(",").map(value => value.trim()).filter(Boolean);
+  switch (candidate.operator) {
+    case "NOT_EQUALS": return { [candidate.field]: { not: candidate.value } };
+    case "CONTAINS": return { [candidate.field]: { contains: candidate.value, mode: "insensitive" } };
+    case "STARTS_WITH": return { [candidate.field]: { startsWith: candidate.value, mode: "insensitive" } };
+    case "ENDS_WITH": return { [candidate.field]: { endsWith: candidate.value, mode: "insensitive" } };
+    case "IN": return { [candidate.field]: { in: values } };
+    case "NOT_IN": return { [candidate.field]: { notIn: values } };
+    case "GT": case "AFTER": return { [candidate.field]: { gt: candidate.value } };
+    case "GTE": return { [candidate.field]: { gte: candidate.value } };
+    case "LT": case "BEFORE": return { [candidate.field]: { lt: candidate.value } };
+    case "LTE": return { [candidate.field]: { lte: candidate.value } };
+    case "BETWEEN": return { [candidate.field]: { gte: candidate.value, lte: candidate.valueTo } };
+    case "IS_NULL": return { [candidate.field]: null };
+    case "IS_NOT_NULL": return { [candidate.field]: { not: null } };
+    case "TRUTHY": return { [candidate.field]: true };
+    case "FALSY": return { [candidate.field]: false };
+    case "EQUALS": default: return { [candidate.field]: candidate.value };
+  }
+}
+
+function databaseConditions(group?: ConditionGroup) {
+  const items = group?.items?.filter(condition => condition.field) ?? [];
+  if (!items.length) return {};
+  return { [group?.logic === "OR" ? "OR" : "AND"]: items.map(databaseCondition) };
+}
+
 async function executeAction(
   sourceEntity: string,
   record: Record<string, unknown>,
   action: FlowAction,
 ) {
+  if (action.type === "DELETE_RECORD") {
+    if (!ALLOWED_ENTITIES.has(sourceEntity) || typeof record.id !== "string")
+      throw new Error("Flow source entity cannot be deleted");
+    await (prisma as any)[sourceEntity].deleteMany({ where: { id: record.id } });
+    return;
+  }
+
+  if (action.type === "DELETE_RELATED") {
+    const relationships = await loadObjectRelationships();
+    const relationship = relationships.find(item =>
+      item.id === action.relationshipId &&
+      item.sourceEntity === sourceEntity &&
+      item.targetEntity === action.targetEntity
+    );
+    if (!relationship || !ALLOWED_ENTITIES.has(relationship.targetEntity))
+      throw new Error("Flow related-record configuration is invalid");
+    const matchValue = record[relationship.sourceField];
+    if (matchValue === undefined || matchValue === null)
+      throw new Error(`Flow source field "${relationship.sourceField}" has no value`);
+    await (prisma as any)[relationship.targetEntity].deleteMany({
+      where: {
+        AND: [
+          { [relationship.targetField]: matchValue },
+          databaseConditions(action.conditions),
+        ],
+      },
+    });
+    return;
+  }
+
   if (!action.field || BLOCKED_FIELDS.has(action.field))
     throw new Error("Flow action uses a protected or missing field");
 
@@ -106,21 +170,25 @@ async function executeAction(
   }
 
   if (action.type === "UPDATE_RELATED") {
-    const targetEntity = action.targetEntity ?? "";
-    const matchField = action.matchField ?? "";
-    const sourceField = action.sourceField ?? "id";
-    if (
-      !ALLOWED_ENTITIES.has(targetEntity) ||
-      !matchField ||
-      BLOCKED_FIELDS.has(matchField)
-    ) {
+    const relationships = await loadObjectRelationships();
+    const relationship = relationships.find(item =>
+      item.id === action.relationshipId &&
+      item.sourceEntity === sourceEntity &&
+      item.targetEntity === action.targetEntity
+    );
+    if (!relationship || !ALLOWED_ENTITIES.has(relationship.targetEntity)) {
       throw new Error("Flow related-record configuration is invalid");
     }
-    const matchValue = record[sourceField];
+    const matchValue = record[relationship.sourceField];
     if (matchValue === undefined || matchValue === null)
-      throw new Error(`Flow source field "${sourceField}" has no value`);
-    await (prisma as any)[targetEntity].updateMany({
-      where: { [matchField]: matchValue },
+      throw new Error(`Flow source field "${relationship.sourceField}" has no value`);
+    await (prisma as any)[relationship.targetEntity].updateMany({
+      where: {
+        AND: [
+          { [relationship.targetField]: matchValue },
+          databaseConditions(action.conditions),
+        ],
+      },
       data: { [action.field]: value },
     });
     return;
