@@ -56,8 +56,31 @@ export function AutomationEditorPage() {
 
 export function FlowsListPage() {
   const navigate = useNavigate(), [items, setItems] = useState<Row[]>([]);
+  const [pendingDelete, setPendingDelete] = useState<Row | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [error, setError] = useState("");
   useEffect(() => { void studioRequest<{ items: Row[] }>("/flows").then(data => setItems(data.items)); }, []);
-  return <section><Header title="Flows" description="Manage record-triggered flows." action={<button className="primary" onClick={() => navigate("/automation-studio/flows/new")}>+ New flow</button>} /><div className="studio-panel"><div className="tablewrap"><table><thead><tr><th>Name</th><th>Status</th><th>Object</th><th>Trigger</th><th>Last run</th></tr></thead><tbody>{items.map(row => <tr key={row.id} onClick={() => navigate(`/automation-studio/flows/${row.id}`)} className="clickable-row"><td>{row.name}</td><td>{row.isActive ? "Active" : "Inactive"}</td><td>{row.sourceEntity}</td><td>{row.trigger}</td><td>{row.lastRunDate ? new Date(row.lastRunDate).toLocaleString() : "Never"}</td></tr>)}</tbody></table>{!items.length && <div className="empty-state">No flows yet.</div>}</div></div></section>;
+  async function removeFlow() {
+    if (!pendingDelete) return;
+    setDeleting(true);
+    setError("");
+    try {
+      await studioRequest(`/flows/${pendingDelete.id}`, {
+        method: "DELETE",
+      });
+      setItems(current =>
+        current.filter(flow => flow.id !== pendingDelete.id),
+      );
+      setPendingDelete(null);
+    } catch (reason) {
+      setError(
+        reason instanceof Error ? reason.message : "Could not delete flow.",
+      );
+    } finally {
+      setDeleting(false);
+    }
+  }
+  return <section><Header title="Flows" description="Manage record-triggered flows." action={<button className="primary" onClick={() => navigate("/automation-studio/flows/new")}>+ New flow</button>} />{error && <div className="alert error">{error}</div>}<div className="studio-panel"><div className="tablewrap"><table><thead><tr><th>Name</th><th>Status</th><th>Object</th><th>Trigger</th><th>Last run</th><th>Actions</th></tr></thead><tbody>{items.map(row => <tr key={row.id} onClick={() => navigate(`/automation-studio/flows/${row.id}`)} className="clickable-row"><td>{row.name}</td><td>{row.isActive ? "Active" : "Inactive"}</td><td>{row.sourceEntity}</td><td>{row.trigger}</td><td>{row.lastRunDate ? new Date(row.lastRunDate).toLocaleString() : "Never"}</td><td><button type="button" className="danger-button" onClick={event => { event.stopPropagation(); setError(""); setPendingDelete(row); }}>Delete</button></td></tr>)}</tbody></table>{!items.length && <div className="empty-state">No flows yet.</div>}</div></div>{pendingDelete && <div className="flow-modal-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget && !deleting) setPendingDelete(null); }}><section className="flow-delete-modal" role="alertdialog" aria-modal="true" aria-labelledby="delete-flow-title"><div className="flow-delete-icon">!</div><div><div className="eyebrow">Permanent deletion</div><h2 id="delete-flow-title">Delete “{pendingDelete.name}”?</h2><p>This flow is about to be permanently deleted, including its trigger, paths, decisions, loops, and activities. This action cannot be undone.</p>{pendingDelete.isActive && <div className="flow-delete-warning">This flow is currently active. It will stop running immediately.</div>}</div><footer><button type="button" className="secondary" disabled={deleting} onClick={() => setPendingDelete(null)}>Cancel</button><button type="button" className="danger-button flow-confirm-delete" disabled={deleting} onClick={() => void removeFlow()}>{deleting ? "Deleting…" : "Yes, delete flow"}</button></footer></section></div>}</section>;
 }
 
 const operators: Record<string, string[]> = { string: ["EQUALS", "NOT_EQUALS", "CONTAINS", "STARTS_WITH", "ENDS_WITH", "IN", "NOT_IN"], number: ["EQUALS", "GT", "GTE", "LT", "LTE", "BETWEEN"], date: ["EQUALS", "BEFORE", "AFTER", "BETWEEN"], boolean: ["EQUALS", "TRUTHY", "FALSY"], enum: ["EQUALS", "NOT_EQUALS", "IN", "NOT_IN"] };

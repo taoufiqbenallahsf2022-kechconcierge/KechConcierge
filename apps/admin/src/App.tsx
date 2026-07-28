@@ -7,7 +7,8 @@ import {
   SenderEmailsPage,
 } from "./pages/StudioPages";
 import { EmailStudioPage } from "./pages/EnhancedStudioPages";
-import { AutomationEditorPage, AutomationsListPage, FlowEditorPage, FlowsListPage } from "./pages/AutomationManagementPages";
+import { AutomationEditorPage, AutomationsListPage, FlowsListPage } from "./pages/AutomationManagementPages";
+import { VisualFlowEditorPage } from "./pages/VisualFlowBuilderPage";
 import { IndividualList, IndividualCreate, IndividualDetail } from "./features/individuals/IndividualPages";
 import { ProductsList, ProductsCreate, ProductsDetail } from "./features/products/ProductsPages";
 import { LeadsList, LeadsCreate, LeadsDetail } from "./features/leads/LeadsPages";
@@ -63,8 +64,8 @@ export default function App() {
         <Route path="automation-studio/automations/new" element={<AutomationEditorPage />} />
         <Route path="automation-studio/automations/:id" element={<AutomationEditorPage />} />
         <Route path="automation-studio/flows" element={<FlowsListPage />} />
-        <Route path="automation-studio/flows/new" element={<FlowEditorPage />} />
-        <Route path="automation-studio/flows/:id" element={<FlowEditorPage />} />
+        <Route path="automation-studio/flows/new" element={<VisualFlowEditorPage />} />
+        <Route path="automation-studio/flows/:id" element={<VisualFlowEditorPage />} />
         <Route path="setup/sender-emails" element={<SenderEmailsPage />} />
         {entityRoutes({ list: IndividualList, create: IndividualCreate, detail: IndividualDetail, path: "individuals" })}
         {entityRoutes({ list: ProductsList, create: ProductsCreate, detail: ProductsDetail, path: "products" })}

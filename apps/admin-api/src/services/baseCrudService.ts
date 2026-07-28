@@ -142,7 +142,10 @@ export function createCrudService(
     async remove(id: string) {
       if (rule.readOnly)
         throw Object.assign(new Error("Read-only entity"), { status: 405 });
-      await delegate.delete({ where: { id } });
+      const row = await delegate.findUnique({ where: { id } });
+      if (!row) throw Object.assign(new Error("Not found"), { status: 404 });
+      await runRecordFlows(rule.delegate, "DELETED", row);
+      await (delegate as any).deleteMany({ where: { id } });
     },
   };
 }

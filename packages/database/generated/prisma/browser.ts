@@ -48,6 +48,21 @@ export type AutomationRun = Prisma.AutomationRunModel
  */
 export type RecordFlow = Prisma.RecordFlowModel
 /**
+ * Model RecordFlowVersion
+ * 
+ */
+export type RecordFlowVersion = Prisma.RecordFlowVersionModel
+/**
+ * Model RecordFlowRun
+ * 
+ */
+export type RecordFlowRun = Prisma.RecordFlowRunModel
+/**
+ * Model RecordFlowActivityRun
+ * 
+ */
+export type RecordFlowActivityRun = Prisma.RecordFlowActivityRunModel
+/**
  * Model Product
  * 
  */

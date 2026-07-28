@@ -3,6 +3,7 @@ import { Prisma } from "../../../../packages/database/generated/prisma/client.js
 import { prisma } from "../lib/prisma.js";
 import { audience, executeAutomation, safeSelect } from "../automation/automationEngine.js";
 import { nextRunAt, scheduleData } from "../automation/schedule.js";
+import { loadObjectRelationships } from "../automation/relationshipMetadata.js";
 
 export const router = Router();
 
@@ -88,8 +89,8 @@ function automationData(body: any) {
 function flowData(body: any) {
   const sourceEntity = required(body.sourceEntity, "Source object");
   const trigger = required(body.trigger, "Trigger");
-  if (!["CREATED", "UPDATED"].includes(trigger))
-    throw Object.assign(new Error("Trigger must be CREATED or UPDATED"), {
+  if (!["CREATED", "UPDATED", "DELETED"].includes(trigger))
+    throw Object.assign(new Error("Trigger must be CREATED, UPDATED or DELETED"), {
       status: 400,
     });
   const actions = jsonObject(body.actions, []);
@@ -101,7 +102,7 @@ function flowData(body: any) {
     name: required(body.name, "Flow name"),
     description: optional(body.description),
     sourceEntity,
-    trigger: trigger as "CREATED" | "UPDATED",
+    trigger: trigger as "CREATED" | "UPDATED" | "DELETED",
     condition: (jsonObject(body.condition, null) ??
       Prisma.JsonNull) as Prisma.InputJsonValue,
     actions: actions as Prisma.InputJsonValue,
@@ -178,7 +179,320 @@ crud(
     runs: { take: 5, orderBy: { startedDate: "desc" } },
   },
 );
-crud("/flows", prisma.recordFlow, flowData);
+const flowInclude = {
+  _count: { select: { versions: true, runs: true } },
+  versions: {
+    select: { id: true, version: true, status: true, createdDate: true, updatedDate: true },
+    orderBy: { version: "desc" as const },
+  },
+  runs: {
+    take: 50,
+    orderBy: { startedDate: "desc" as const },
+    include: { activities: { orderBy: { startedDate: "asc" as const } } },
+  },
+};
+
+router.get("/flows", async (_req, res, next) => {
+  try {
+    res.json({
+      items: await prisma.recordFlow.findMany({
+        orderBy: { updatedDate: "desc" },
+        include: flowInclude,
+      }),
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/flows", async (req, res, next) => {
+  try {
+    const data = { ...flowData(req.body), isActive: false };
+    const result = await prisma.$transaction(async (transaction) => {
+      const flow = await transaction.recordFlow.create({ data });
+      const version = await transaction.recordFlowVersion.create({
+        data: {
+          flowId: flow.id,
+          version: 1,
+          name: flow.name,
+          description: flow.description,
+          sourceEntity: flow.sourceEntity,
+          trigger: flow.trigger,
+          condition: flow.condition ?? Prisma.JsonNull,
+          actions: flow.actions as Prisma.InputJsonValue,
+          status: "DRAFT",
+        },
+      });
+      return { ...flow, draftVersionId: version.id };
+    });
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.patch("/flows/:id", async (req, res, next) => {
+  try {
+    res.json(await prisma.recordFlow.update({
+      where: { id: req.params.id },
+      data: { isActive: boolean(req.body.isActive, false) },
+    }));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/flows/:id/versions", async (req, res, next) => {
+  try {
+    const version = await prisma.$transaction(async (transaction) => {
+      const existingDraft = await transaction.recordFlowVersion.findFirst({
+        where: { flowId: req.params.id, status: "DRAFT" },
+        orderBy: { version: "desc" },
+      });
+      if (existingDraft) return existingDraft;
+      const base = await transaction.recordFlowVersion.findFirst({
+        where: { flowId: req.params.id },
+        orderBy: { version: "desc" },
+      });
+      if (!base)
+        throw Object.assign(new Error("Flow has no base version"), { status: 409 });
+      return transaction.recordFlowVersion.create({
+        data: {
+          flowId: base.flowId,
+          version: base.version + 1,
+          name: base.name,
+          description: base.description,
+          sourceEntity: base.sourceEntity,
+          trigger: base.trigger,
+          condition: base.condition ?? Prisma.JsonNull,
+          actions: base.actions as Prisma.InputJsonValue,
+          status: "DRAFT",
+        },
+      });
+    });
+    res.status(201).json(version);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.patch("/flows/:id/versions/:versionId", async (req, res, next) => {
+  try {
+    const data = flowData(req.body);
+    const existing = await prisma.recordFlowVersion.findFirst({
+      where: { id: req.params.versionId, flowId: req.params.id },
+    });
+    if (!existing) return res.status(404).json({ error: "Flow version not found" });
+    if (existing.status !== "DRAFT")
+      return res.status(409).json({ error: "Only draft versions can be edited" });
+    res.json(await prisma.recordFlowVersion.update({
+      where: { id: existing.id },
+      data: {
+        name: data.name,
+        description: data.description,
+        sourceEntity: data.sourceEntity,
+        trigger: data.trigger,
+        condition: data.condition,
+        actions: data.actions,
+      },
+    }));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/flows/:id/versions/:versionId/activate", async (req, res, next) => {
+  try {
+    const flow = await prisma.$transaction(async (transaction) => {
+      const version = await transaction.recordFlowVersion.findFirst({
+        where: { id: req.params.versionId, flowId: req.params.id },
+      });
+      if (!version)
+        throw Object.assign(new Error("Flow version not found"), { status: 404 });
+      await transaction.recordFlowVersion.updateMany({
+        where: { flowId: version.flowId, status: "ACTIVE" },
+        data: { status: "INACTIVE" },
+      });
+      await transaction.recordFlowVersion.update({
+        where: { id: version.id },
+        data: { status: "ACTIVE" },
+      });
+      return transaction.recordFlow.update({
+        where: { id: version.flowId },
+        data: {
+          name: version.name,
+          description: version.description,
+          sourceEntity: version.sourceEntity,
+          trigger: version.trigger,
+          condition: version.condition ?? Prisma.JsonNull,
+          actions: version.actions as Prisma.InputJsonValue,
+          currentVersion: version.version,
+          isActive: true,
+        },
+      });
+    });
+    res.json(flow);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/flows/:id/versions", async (req, res, next) => {
+  try {
+    res.json({
+      items: await prisma.recordFlowVersion.findMany({
+        where: { flowId: req.params.id },
+        orderBy: { version: "desc" },
+      }),
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/flows/:id/versions/:versionId", async (req, res, next) => {
+  try {
+    const version = await prisma.recordFlowVersion.findFirst({
+      where: { id: req.params.versionId, flowId: req.params.id },
+      include: {
+        runs: {
+          take: 50,
+          orderBy: { startedDate: "desc" },
+          include: {
+            activities: { orderBy: { startedDate: "asc" } },
+          },
+        },
+      },
+    });
+    if (!version) return res.status(404).json({ error: "Flow version not found" });
+    res.json(version);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/flows/:id/versions/:versionId/activity-metrics", async (req, res, next) => {
+  try {
+    const rows = await prisma.recordFlowActivityRun.groupBy({
+      by: ["activityId", "status"],
+      where: {
+        run: {
+          flowId: req.params.id,
+          flowVersionId: req.params.versionId,
+        },
+      },
+      _count: { _all: true },
+      _sum: { inputCount: true, outputCount: true, affectedCount: true },
+    });
+    res.json({ items: rows });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/flows/:id/versions/:versionId/activities/:activityId/logs", async (req, res, next) => {
+  try {
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const pageSize = Math.min(100, Math.max(10, Number(req.query.pageSize) || 25));
+    const logic = req.query.logic === "OR" ? "OR" : "AND";
+    let filters: Array<{ field?: string; operator?: string; value?: string; valueTo?: string }> = [];
+    if (typeof req.query.filters === "string") {
+      try {
+        const parsed = JSON.parse(req.query.filters);
+        if (Array.isArray(parsed)) filters = parsed.slice(0, 10);
+      } catch {
+        throw Object.assign(new Error("Invalid activity log filters"), { status: 400 });
+      }
+    }
+    const singleRecordTypes = [
+      "CREATE_MATCHING",
+      "UPDATE_ONE",
+      "UPDATE_RECORD",
+      "DELETE_RECORD",
+      "GET_RECORD",
+    ];
+    const filterClauses: Prisma.RecordFlowActivityRunWhereInput[] = filters.flatMap(
+      (filter): Prisma.RecordFlowActivityRunWhereInput[] => {
+      if (!filter.field || !filter.operator) return [];
+      if (filter.field === "triggerRecordId") {
+        const condition =
+          filter.operator === "EQUALS"
+            ? { equals: filter.value || "", mode: "insensitive" as const }
+            : { contains: filter.value || "", mode: "insensitive" as const };
+        return [{ run: { triggerRecordId: condition } }];
+      }
+      if (filter.field === "affectedId") {
+        const condition =
+          filter.operator === "EQUALS"
+            ? { equals: filter.value || "", mode: "insensitive" as const }
+            : { contains: filter.value || "", mode: "insensitive" as const };
+        return [{ affectedId: condition, activityType: { in: singleRecordTypes } }];
+      }
+      if (filter.field === "startedDate") {
+        if (filter.operator === "LAST_DAYS") {
+          const days = Math.max(1, Number(filter.value) || 1);
+          return [{ startedDate: { gte: new Date(Date.now() - days * 86400000) } }];
+        }
+        const first = filter.value ? new Date(filter.value) : undefined;
+        const second = filter.valueTo ? new Date(filter.valueTo) : undefined;
+        if (filter.operator === "BETWEEN" && first && second)
+          return [{ startedDate: { gte: first, lte: second } }];
+        if (filter.operator === "AFTER" && first)
+          return [{ startedDate: { gte: first } }];
+        if (filter.operator === "BEFORE" && first)
+          return [{ startedDate: { lte: first } }];
+      }
+        return [];
+      },
+    );
+    const where: Prisma.RecordFlowActivityRunWhereInput = {
+      activityId: req.params.activityId,
+      run: {
+        flowId: req.params.id,
+        flowVersionId: req.params.versionId,
+      },
+      ...(filterClauses.length ? { [logic]: filterClauses } : {}),
+    };
+    const [total, items] = await prisma.$transaction([
+      prisma.recordFlowActivityRun.count({ where }),
+      prisma.recordFlowActivityRun.findMany({
+        where,
+        orderBy: { startedDate: "desc" },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+        include: {
+          run: {
+            select: {
+              triggerRecordId: true,
+              status: true,
+              startedDate: true,
+            },
+          },
+        },
+      }),
+    ]);
+    res.json({
+      items,
+      pagination: {
+        page,
+        pageSize,
+        total,
+        totalPages: Math.max(1, Math.ceil(total / pageSize)),
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/flows/:id", async (req, res, next) => {
+  try {
+    await prisma.recordFlow.delete({ where: { id: req.params.id } });
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get("/schema", async (_req, res, next) => {
   try {
@@ -210,7 +524,9 @@ router.get("/schema", async (_req, res, next) => {
       current.push(column);
       grouped.set(column.table_name, current);
     }
+    const relationships = await loadObjectRelationships();
     res.json({
+      relationships,
       models: [...grouped.entries()].map(([name, fields]) => ({
         name: name ? name[0]!.toLowerCase() + name.slice(1) : name,
         table: `"${name}"`,
