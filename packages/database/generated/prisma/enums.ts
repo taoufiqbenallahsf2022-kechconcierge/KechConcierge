@@ -47,6 +47,33 @@ export const FlowTrigger = {
 export type FlowTrigger = (typeof FlowTrigger)[keyof typeof FlowTrigger]
 
 
+export const FlowRunStatus = {
+  RUNNING: 'RUNNING',
+  COMPLETED: 'COMPLETED',
+  COMPLETED_WITH_ERRORS: 'COMPLETED_WITH_ERRORS',
+  FAILED: 'FAILED'
+} as const
+
+export type FlowRunStatus = (typeof FlowRunStatus)[keyof typeof FlowRunStatus]
+
+
+export const FlowActivityRunStatus = {
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type FlowActivityRunStatus = (typeof FlowActivityRunStatus)[keyof typeof FlowActivityRunStatus]
+
+
+export const FlowVersionStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type FlowVersionStatus = (typeof FlowVersionStatus)[keyof typeof FlowVersionStatus]
+
+
 export const ConsentChannel = {
   EMAIL: 'EMAIL',
   SMS: 'SMS',

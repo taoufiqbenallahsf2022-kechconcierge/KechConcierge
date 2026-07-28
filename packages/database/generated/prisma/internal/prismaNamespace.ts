@@ -390,6 +390,9 @@ export const ModelName = {
   AudienceAutomation: 'AudienceAutomation',
   AutomationRun: 'AutomationRun',
   RecordFlow: 'RecordFlow',
+  RecordFlowVersion: 'RecordFlowVersion',
+  RecordFlowRun: 'RecordFlowRun',
+  RecordFlowActivityRun: 'RecordFlowActivityRun',
   Product: 'Product',
   WhatsAppConversation: 'WhatsAppConversation',
   WhatsAppMessage: 'WhatsAppMessage',
@@ -419,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "emailVerificationToken" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user"
+    modelProps: "emailVerificationToken" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -864,6 +867,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.RecordFlowCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.RecordFlowCountAggregateOutputType> | number
+        }
+      }
+    }
+    RecordFlowVersion: {
+      payload: Prisma.$RecordFlowVersionPayload<ExtArgs>
+      fields: Prisma.RecordFlowVersionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RecordFlowVersionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RecordFlowVersionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>
+        }
+        findFirst: {
+          args: Prisma.RecordFlowVersionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RecordFlowVersionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>
+        }
+        findMany: {
+          args: Prisma.RecordFlowVersionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>[]
+        }
+        create: {
+          args: Prisma.RecordFlowVersionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>
+        }
+        createMany: {
+          args: Prisma.RecordFlowVersionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RecordFlowVersionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>[]
+        }
+        delete: {
+          args: Prisma.RecordFlowVersionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>
+        }
+        update: {
+          args: Prisma.RecordFlowVersionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>
+        }
+        deleteMany: {
+          args: Prisma.RecordFlowVersionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RecordFlowVersionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RecordFlowVersionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>[]
+        }
+        upsert: {
+          args: Prisma.RecordFlowVersionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowVersionPayload>
+        }
+        aggregate: {
+          args: Prisma.RecordFlowVersionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRecordFlowVersion>
+        }
+        groupBy: {
+          args: Prisma.RecordFlowVersionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecordFlowVersionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RecordFlowVersionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecordFlowVersionCountAggregateOutputType> | number
+        }
+      }
+    }
+    RecordFlowRun: {
+      payload: Prisma.$RecordFlowRunPayload<ExtArgs>
+      fields: Prisma.RecordFlowRunFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RecordFlowRunFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RecordFlowRunFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>
+        }
+        findFirst: {
+          args: Prisma.RecordFlowRunFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RecordFlowRunFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>
+        }
+        findMany: {
+          args: Prisma.RecordFlowRunFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>[]
+        }
+        create: {
+          args: Prisma.RecordFlowRunCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>
+        }
+        createMany: {
+          args: Prisma.RecordFlowRunCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RecordFlowRunCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>[]
+        }
+        delete: {
+          args: Prisma.RecordFlowRunDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>
+        }
+        update: {
+          args: Prisma.RecordFlowRunUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>
+        }
+        deleteMany: {
+          args: Prisma.RecordFlowRunDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RecordFlowRunUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RecordFlowRunUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>[]
+        }
+        upsert: {
+          args: Prisma.RecordFlowRunUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowRunPayload>
+        }
+        aggregate: {
+          args: Prisma.RecordFlowRunAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRecordFlowRun>
+        }
+        groupBy: {
+          args: Prisma.RecordFlowRunGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecordFlowRunGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RecordFlowRunCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecordFlowRunCountAggregateOutputType> | number
+        }
+      }
+    }
+    RecordFlowActivityRun: {
+      payload: Prisma.$RecordFlowActivityRunPayload<ExtArgs>
+      fields: Prisma.RecordFlowActivityRunFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RecordFlowActivityRunFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RecordFlowActivityRunFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>
+        }
+        findFirst: {
+          args: Prisma.RecordFlowActivityRunFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RecordFlowActivityRunFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>
+        }
+        findMany: {
+          args: Prisma.RecordFlowActivityRunFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>[]
+        }
+        create: {
+          args: Prisma.RecordFlowActivityRunCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>
+        }
+        createMany: {
+          args: Prisma.RecordFlowActivityRunCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RecordFlowActivityRunCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>[]
+        }
+        delete: {
+          args: Prisma.RecordFlowActivityRunDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>
+        }
+        update: {
+          args: Prisma.RecordFlowActivityRunUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>
+        }
+        deleteMany: {
+          args: Prisma.RecordFlowActivityRunDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RecordFlowActivityRunUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RecordFlowActivityRunUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>[]
+        }
+        upsert: {
+          args: Prisma.RecordFlowActivityRunUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecordFlowActivityRunPayload>
+        }
+        aggregate: {
+          args: Prisma.RecordFlowActivityRunAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRecordFlowActivityRun>
+        }
+        groupBy: {
+          args: Prisma.RecordFlowActivityRunGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecordFlowActivityRunGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RecordFlowActivityRunCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecordFlowActivityRunCountAggregateOutputType> | number
         }
       }
     }
@@ -2040,11 +2265,65 @@ export const RecordFlowScalarFieldEnum = {
   isActive: 'isActive',
   lastRunDate: 'lastRunDate',
   lastError: 'lastError',
+  currentVersion: 'currentVersion',
   createdDate: 'createdDate',
   updatedDate: 'updatedDate'
 } as const
 
 export type RecordFlowScalarFieldEnum = (typeof RecordFlowScalarFieldEnum)[keyof typeof RecordFlowScalarFieldEnum]
+
+
+export const RecordFlowVersionScalarFieldEnum = {
+  id: 'id',
+  flowId: 'flowId',
+  version: 'version',
+  name: 'name',
+  description: 'description',
+  sourceEntity: 'sourceEntity',
+  trigger: 'trigger',
+  condition: 'condition',
+  actions: 'actions',
+  status: 'status',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type RecordFlowVersionScalarFieldEnum = (typeof RecordFlowVersionScalarFieldEnum)[keyof typeof RecordFlowVersionScalarFieldEnum]
+
+
+export const RecordFlowRunScalarFieldEnum = {
+  id: 'id',
+  flowId: 'flowId',
+  flowVersionId: 'flowVersionId',
+  triggerRecordId: 'triggerRecordId',
+  status: 'status',
+  error: 'error',
+  startedDate: 'startedDate',
+  completedDate: 'completedDate'
+} as const
+
+export type RecordFlowRunScalarFieldEnum = (typeof RecordFlowRunScalarFieldEnum)[keyof typeof RecordFlowRunScalarFieldEnum]
+
+
+export const RecordFlowActivityRunScalarFieldEnum = {
+  id: 'id',
+  runId: 'runId',
+  activityId: 'activityId',
+  activityType: 'activityType',
+  status: 'status',
+  inputCount: 'inputCount',
+  outputCount: 'outputCount',
+  affectedCount: 'affectedCount',
+  objectName: 'objectName',
+  affectedId: 'affectedId',
+  filterSummary: 'filterSummary',
+  summary: 'summary',
+  error: 'error',
+  startedDate: 'startedDate',
+  completedDate: 'completedDate'
+} as const
+
+export type RecordFlowActivityRunScalarFieldEnum = (typeof RecordFlowActivityRunScalarFieldEnum)[keyof typeof RecordFlowActivityRunScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {
@@ -2535,6 +2814,48 @@ export type ListEnumFlowTriggerFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'FlowVersionStatus'
+ */
+export type EnumFlowVersionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowVersionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FlowVersionStatus[]'
+ */
+export type ListEnumFlowVersionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowVersionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FlowRunStatus'
+ */
+export type EnumFlowRunStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowRunStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FlowRunStatus[]'
+ */
+export type ListEnumFlowRunStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowRunStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FlowActivityRunStatus'
+ */
+export type EnumFlowActivityRunStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowActivityRunStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FlowActivityRunStatus[]'
+ */
+export type ListEnumFlowActivityRunStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlowActivityRunStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ProductType'
  */
 export type EnumProductTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductType'>
@@ -2831,6 +3152,9 @@ export type GlobalOmitConfig = {
   audienceAutomation?: Prisma.AudienceAutomationOmit
   automationRun?: Prisma.AutomationRunOmit
   recordFlow?: Prisma.RecordFlowOmit
+  recordFlowVersion?: Prisma.RecordFlowVersionOmit
+  recordFlowRun?: Prisma.RecordFlowRunOmit
+  recordFlowActivityRun?: Prisma.RecordFlowActivityRunOmit
   product?: Prisma.ProductOmit
   whatsAppConversation?: Prisma.WhatsAppConversationOmit
   whatsAppMessage?: Prisma.WhatsAppMessageOmit

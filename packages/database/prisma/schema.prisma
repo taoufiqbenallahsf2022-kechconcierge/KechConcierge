@@ -109,10 +109,74 @@ model RecordFlow {
   isActive       Boolean     @default(false)
   lastRunDate    DateTime?
   lastError      String?
+  currentVersion Int         @default(1)
   createdDate    DateTime    @default(now())
   updatedDate    DateTime    @updatedAt
+  versions       RecordFlowVersion[]
+  runs           RecordFlowRun[]
 
   @@index([sourceEntity, trigger, isActive])
+}
+
+model RecordFlowVersion {
+  id           String      @id @default(cuid())
+  flowId       String
+  version      Int
+  name         String
+  description  String?
+  sourceEntity String
+  trigger      FlowTrigger
+  condition    Json?
+  actions      Json
+  status       FlowVersionStatus @default(DRAFT)
+  createdDate  DateTime    @default(now())
+  updatedDate  DateTime    @updatedAt
+
+  flow RecordFlow @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  runs RecordFlowRun[]
+
+  @@unique([flowId, version])
+  @@index([flowId, createdDate])
+}
+
+model RecordFlowRun {
+  id              String        @id @default(cuid())
+  flowId          String
+  flowVersionId   String?
+  triggerRecordId String?
+  status          FlowRunStatus @default(RUNNING)
+  error           String?
+  startedDate     DateTime      @default(now())
+  completedDate   DateTime?
+
+  flow        RecordFlow         @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  flowVersion RecordFlowVersion? @relation(fields: [flowVersionId], references: [id], onDelete: SetNull)
+  activities  RecordFlowActivityRun[]
+
+  @@index([flowId, startedDate])
+  @@index([flowVersionId])
+}
+
+model RecordFlowActivityRun {
+  id            String                 @id @default(cuid())
+  runId         String
+  activityId    String
+  activityType  String
+  status        FlowActivityRunStatus
+  inputCount    Int                    @default(0)
+  outputCount   Int                    @default(0)
+  affectedCount Int                    @default(0)
+  objectName    String?
+  affectedId    String?
+  filterSummary String?
+  summary       String?
+  error         String?
+  startedDate   DateTime               @default(now())
+  completedDate DateTime?
+
+  run RecordFlowRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId, activityId])
 }
 
 model Product {
@@ -508,6 +572,24 @@ enum FlowTrigger {
   CREATED
   UPDATED
   DELETED
+}
+
+enum FlowRunStatus {
+  RUNNING
+  COMPLETED
+  COMPLETED_WITH_ERRORS
+  FAILED
+}
+
+enum FlowActivityRunStatus {
+  COMPLETED
+  FAILED
+}
+
+enum FlowVersionStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
 }
 
 enum ConsentChannel {

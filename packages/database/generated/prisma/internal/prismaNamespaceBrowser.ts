@@ -57,6 +57,9 @@ export const ModelName = {
   AudienceAutomation: 'AudienceAutomation',
   AutomationRun: 'AutomationRun',
   RecordFlow: 'RecordFlow',
+  RecordFlowVersion: 'RecordFlowVersion',
+  RecordFlowRun: 'RecordFlowRun',
+  RecordFlowActivityRun: 'RecordFlowActivityRun',
   Product: 'Product',
   WhatsAppConversation: 'WhatsAppConversation',
   WhatsAppMessage: 'WhatsAppMessage',
@@ -187,11 +190,65 @@ export const RecordFlowScalarFieldEnum = {
   isActive: 'isActive',
   lastRunDate: 'lastRunDate',
   lastError: 'lastError',
+  currentVersion: 'currentVersion',
   createdDate: 'createdDate',
   updatedDate: 'updatedDate'
 } as const
 
 export type RecordFlowScalarFieldEnum = (typeof RecordFlowScalarFieldEnum)[keyof typeof RecordFlowScalarFieldEnum]
+
+
+export const RecordFlowVersionScalarFieldEnum = {
+  id: 'id',
+  flowId: 'flowId',
+  version: 'version',
+  name: 'name',
+  description: 'description',
+  sourceEntity: 'sourceEntity',
+  trigger: 'trigger',
+  condition: 'condition',
+  actions: 'actions',
+  status: 'status',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type RecordFlowVersionScalarFieldEnum = (typeof RecordFlowVersionScalarFieldEnum)[keyof typeof RecordFlowVersionScalarFieldEnum]
+
+
+export const RecordFlowRunScalarFieldEnum = {
+  id: 'id',
+  flowId: 'flowId',
+  flowVersionId: 'flowVersionId',
+  triggerRecordId: 'triggerRecordId',
+  status: 'status',
+  error: 'error',
+  startedDate: 'startedDate',
+  completedDate: 'completedDate'
+} as const
+
+export type RecordFlowRunScalarFieldEnum = (typeof RecordFlowRunScalarFieldEnum)[keyof typeof RecordFlowRunScalarFieldEnum]
+
+
+export const RecordFlowActivityRunScalarFieldEnum = {
+  id: 'id',
+  runId: 'runId',
+  activityId: 'activityId',
+  activityType: 'activityType',
+  status: 'status',
+  inputCount: 'inputCount',
+  outputCount: 'outputCount',
+  affectedCount: 'affectedCount',
+  objectName: 'objectName',
+  affectedId: 'affectedId',
+  filterSummary: 'filterSummary',
+  summary: 'summary',
+  error: 'error',
+  startedDate: 'startedDate',
+  completedDate: 'completedDate'
+} as const
+
+export type RecordFlowActivityRunScalarFieldEnum = (typeof RecordFlowActivityRunScalarFieldEnum)[keyof typeof RecordFlowActivityRunScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {
