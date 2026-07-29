@@ -1,0 +1,496 @@
+{
+  "header": {
+    "home": "Home",
+    "services": "Servizi",
+    "villas": "Ville",
+    "swimmingpool": "Piscine",
+    "activities": "Attività",
+    "transportation": "Trasporti",
+    "about": "Chi siamo",
+    "contact": "Contatto",
+    "login": "Accedi / Registrati",
+    "profile": "Modifica profilo",
+    "preferences": "Modifica preferenze",
+    "logout": "Disconnetti"
+  },
+  "authModal": {
+    "invalidCredentials": "Email o password non validi.",
+    "inactiveAccount": "Il tuo account è inattivo. Contatta il nostro team di supporto.",
+    "emailNotVerified": "Verifica il tuo indirizzo email prima di accedere.",
+    "emailAlreadyExists": "Esiste già un account associato a questo indirizzo email.",
+    "unexpectedError": "Si è verificato un errore. Riprova più tardi.",
+    "requiredField": "{{field}} è obbligatorio.",
+    "invalidEmail": "Inserisci un indirizzo email valido.",
+    "passwordTooShort": "La password deve contenere almeno 6 caratteri.",
+    "passwordsDoNotMatch": "Le password non corrispondono.",
+    "brand": "Moorish Concierge",
+    "welcomeBack": "Bentornato",
+    "createAccount": "Crea il tuo account",
+    "loginDescription": "Accedi per gestire le tue richieste e conversazioni.",
+    "signupDescription": "Crea un account. Ti invieremo un'email per verificare il tuo account prima dell'attivazione.",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "phoneNumber": "Numero di telefono",
+    "emailAddress": "Indirizzo email",
+    "country": "Paese",
+    "searchCountry": "Cerca paese...",
+    "preferredLanguage": "Lingua preferita",
+    "password": "Password",
+    "confirmPassword": "Conferma password",
+    "forgotPassword": "Password dimenticata?",
+    "login": "Accedi",
+    "signup": "Registrati",
+    "or": "O",
+    "noAccountYet": "Non hai ancora un account?",
+    "alreadyHaveAccount": "Hai già un account?",
+    "createOne": "Creane uno",
+    "checkEmail": "Controlla la tua email",
+    "verificationSentPrefix": "Abbiamo inviato un link di verifica a",
+    "verificationSentSuffix": "Apri la tua casella email e verifica il tuo account prima di accedere.",
+    "spamMessage": "Se non vedi l'email, controlla la cartella spam o promozioni.",
+    "backToLogin": "Torna al login",
+    "loggedInSuccessfully": "Accesso effettuato con successo.",
+    "googleAuthSuccess": "Autenticazione Google completata con successo.",
+    "googleNoToken": "Google non ha restituito un token ID.",
+    "googleFailed": "Autenticazione Google non riuscita."
+  },
+  "forgotPassword": {
+    "backToWebsite": "Torna al sito",
+    "eyebrow": "Recupero account",
+    "title": "Hai dimenticato la password?",
+    "description": "Scegli come recuperare l’accesso al tuo account.",
+    "restoreEmail": "Recupera tramite e-mail",
+    "restoreEmailDescription": "Ricevi un link sicuro per reimpostare la password.",
+    "restoreOther": "Altre opzioni di recupero",
+    "restoreOtherDescription": "Recupera l’accesso utilizzando un altro metodo.",
+    "emailAddress": "Indirizzo e-mail",
+    "sendResetLink": "Invia il link",
+    "sending": "Invio...",
+    "back": "Indietro",
+    "invalidEmail": "Inserisci un indirizzo e-mail valido.",
+    "genericError": "Impossibile inviare il link. Riprova.",
+    "optionUnavailable": "Questa opzione di recupero non è ancora disponibile.",
+    "emailNotFound": "Non esiste alcun account con questo indirizzo e-mail.",
+    "externalProviderAccount": "Questo account utilizza Google e non dispone di una password da reimpostare.",
+    "resetNotAvailable": "La reimpostazione della password non è disponibile per questo account.",
+    "emailSent": "Un link per reimpostare la password è stato inviato alla tua e-mail."
+  },
+  "resetPassword": {
+    "backToWebsite": "Torna al sito",
+    "eyebrow": "Reimpostazione password",
+    "title": "Crea una nuova password",
+    "description": "Inserisci e conferma la nuova password del tuo account.",
+    "newPassword": "Nuova password",
+    "confirmPassword": "Conferma la password",
+    "passwordRequirement": "La password deve contenere almeno 8 caratteri.",
+    "showPassword": "Mostra password",
+    "hidePassword": "Nascondi password",
+    "submit": "Aggiorna password",
+    "updating": "Aggiornamento...",
+    "success": "La password è stata aggiornata correttamente.",
+    "returnToLogin": "Torna all’accesso",
+    "invalidToken": "Il link di reimpostazione è assente o non valido.",
+    "invalidOrExpired": "Questo link non è valido o è scaduto.",
+    "passwordTooShort": "La password deve contenere almeno 8 caratteri.",
+    "passwordsDoNotMatch": "Le due password non corrispondono.",
+    "genericError": "Impossibile aggiornare la password. Riprova."
+  },
+  "hero": {
+    "eyebrow": "Servizi di concierge a Marrakech",
+    "title": "Il tuo soggiorno a Marrakech, esperienze, trasporti e comfort in un unico posto.",
+    "description": "Moorish Concierge aiuta gli ospiti a trovare ville, appartamenti, escursioni, trasporti, esperienze SPA, ristoranti e supporto locale nella Città Rossa.",
+    "exploreVillas": "Esplora le ville",
+    "viewServices": "Vedi i servizi",
+    "startingFrom": "A partire da",
+    "price": "55 €",
+    "priceDescription": "appartamenti, attività e transfer",
+    "imageAlt": "Soggiorno di lusso a Marrakech"
+  },
+  "highlights": {
+    "curatedStaysTitle": "Soggiorni selezionati",
+    "curatedStaysDescription": "Ville e appartamenti selezionati per comfort, posizione ed esperienza degli ospiti.",
+    "localExperiencesTitle": "Esperienze locali",
+    "localExperiencesDescription": "Attività, trasporti, SPA, ristoranti e servizi personalizzati a Marrakech.",
+    "easyContactTitle": "Contatto facile",
+    "easyContactDescription": "WhatsApp, modulo di contatto o una pagina chat dedicata per contattarci facilmente."
+  },
+  "categories": {
+    "villasLabel": "Ville",
+    "villasDescription": "Ville private a Marrakech con piscine, giardini, personale e comfort premium.",
+    "activitiesLabel": "Attività",
+    "activitiesDescription": "Quad, passeggiate in cammello, escursioni nel deserto, tour della città, mongolfiera ed esperienze locali.",
+    "swimmingPoolsLabel": "Piscine",
+    "swimmingPoolsDescription": "Piscine private, pool club, pass giornalieri, relax di lusso ed esperienze per famiglie.",
+    "transportationLabel": "Trasporti",
+    "transportationDescription": "Auto private, veicoli di lusso, van e trasferimenti di gruppo con autisti affidabili.",
+    "spaLabel": "SPA",
+    "spaDescription": "Hammam, massaggi, bellezza e benessere.",
+    "restaurantsLabel": "Ristoranti",
+    "restaurantsDescription": "Ristoranti marocchini e internazionali selezionati per serate memorabili.",
+    "viewAll": "Vedi tutto",
+    "explore":"Esplora"
+  },
+  "contactSection": {
+    "eyebrow": "Hai bisogno di un soggiorno personalizzato?",
+    "title": "Indicaci le tue date, la dimensione del gruppo e l’esperienza desiderata.",
+    "description": "Questa prima versione è solo frontend. In seguito, messaggi e prenotazioni saranno collegati alla tua API e al sistema di amministrazione.",
+    "contactForm": "Modulo di contatto",
+    "openChat": "Apri chat"
+  },
+  "footer": {
+    "description": "Servizi concierge privati per soggiorni, trasporti, ristorazione, attività, benessere e vita notturna a Marrakech.",
+    "slogan": "Marrakech, attraverso uno sguardo marocchino.",
+    "menu": "Esplora",
+    "services": "Servizi",
+    "villas": "Ville",
+    "swimmingPools": "Piscine",
+    "chat": "Chat concierge",
+    "contact": "Contatti",
+    "legalTitle": "Informazioni legali",
+    "terms": "Termini di utilizzo e servizio",
+    "privacy": "Privacy e dati personali",
+    "consentPreferences": "Preferenze di consenso",
+    "guestResponsibilities": "Responsabilità degli ospiti",
+    "contactTitle": "Contatti",
+    "location": "Marrakech, Marocco",
+    "copyright": "Tutti i diritti riservati.",
+    "termsShort": "Termini",
+    "privacyShort": "Privacy"
+  },
+  "accountVerify": {
+    "eyebrow": "Verifica account",
+    "loadingTitle": "Il tuo account è in fase di verifica",
+    "loadingDescription": "Attendi mentre attiviamo il tuo account.",
+    "successTitle": "Account verificato",
+    "successMessage": "Email verificata con successo.",
+    "backToLogin": "Torna al login",
+    "errorTitle": "Impossibile verificare l’account",
+    "errorMessage": "Non siamo riusciti a verificare il tuo account. Contatta il nostro supporto.",
+    "missingToken": "Token di verifica mancante.",
+    "contactSupport": "Contatta il supporto",
+    "backToWebsite": "Torna al sito"
+  },
+  "productDetails": {
+    "backTo": "Torna a",
+    "highlights": "Punti salienti",
+    "details": "Dettagli",
+    "contactUs": "Contattaci",
+    "openChat": "Apri la chat",
+    "whatsapp": "Contattaci su WhatsApp",
+    "previousImage": "Immagine precedente",
+    "nextImage": "Immagine successiva",
+    "displayImage": "Mostra immagine",
+    "invalidCategory": "Categoria di prodotto non valida.",
+    "loadingError": "Impossibile caricare questo prodotto."
+  },
+  "contactPage": {
+    "eyebrow": "Contatti",
+    "title": "Dicci di cosa hai bisogno.",
+    "description": "Richiedi una villa, attività, transfer, SPA, ristorante o un programma completo a Marrakech.",
+    "otherOptions": "Altre opzioni di contatto",
+    "whatsapp": "WhatsApp",
+    "emailLabel": "E-mail",
+    "firstName": "Nome *",
+    "lastName": "Cognome *",
+    "email": "E-mail *",
+    "countryCode": "Prefisso internazionale",
+    "mobilePhone": "Telefono cellulare",
+    "requestType": "Tipo di richiesta *",
+    "subject": "Oggetto",
+    "comment": "Commento / richiesta *",
+    "send": "Invia messaggio",
+    "sending": "Invio...",
+    "success": "Il messaggio è stato inviato correttamente.",
+    "genericError": "Impossibile inviare il messaggio. Riprova.",
+    "validation": {
+      "firstName": "Inserisci il nome.",
+      "lastName": "Inserisci il cognome.",
+      "email": "Inserisci l’indirizzo e-mail.",
+      "invalidEmail": "Inserisci un indirizzo e-mail valido.",
+      "countryCode": "Seleziona il prefisso internazionale.",
+      "phone": "Inserisci il numero o rimuovi il prefisso.",
+      "requestType": "Seleziona il tipo di richiesta.",
+      "comment": "Scrivi il tuo messaggio."
+    },
+    "requestTypes": {
+      "ADVISOR_GUIDE": "Cerco consulente o guida",
+      "COMPLAINT": "Reclamo",
+      "SUPPORT": "Assistenza",
+      "PARTNERSHIP": "Partnership",
+      "OTHER": "Altro"
+    }
+  },
+  "accountPage": {
+    "eyebrow": "Account",
+    "profileTitle": "Il mio profilo",
+    "preferencesTitle": "Centro preferenze",
+    "description": "Gestisci le tue informazioni personali e le preferenze di comunicazione.",
+    "profileInformation": "Informazioni del profilo",
+    "profileInformationDescription": "Aggiorna i tuoi dati personali.",
+    "communicationPreferences": "Preferenze di comunicazione",
+    "communicationPreferencesDescription": "Scegli come Moorish Concierge può contattarti.",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Indirizzo e-mail",
+    "mobilePhone": "Telefono cellulare",
+    "notProvided": "Non indicato",
+    "protectedFieldsNote": "L’indirizzo e-mail e il numero di telefono non possono essere modificati direttamente. Invia una richiesta se desideri aggiornarli.",
+    "contactSupport": "Contattaci",
+    "saveProfile": "Salva profilo",
+    "savePreferences": "Salva preferenze",
+    "saving": "Salvataggio...",
+    "profileSaved": "Il profilo è stato aggiornato correttamente.",
+    "preferencesSaved": "Le preferenze di comunicazione sono state aggiornate correttamente.",
+    "loadError": "Impossibile caricare le informazioni del tuo account.",
+    "profileSaveError": "Impossibile aggiornare il profilo.",
+    "preferencesSaveError": "Impossibile aggiornare le preferenze di comunicazione.",
+    "country": "Paese",
+    "language": "Lingua preferita",
+    "selectCountry": "Seleziona un Paese",
+    "validation": {
+      "firstName": "Inserisci il nome.",
+      "lastName": "Inserisci il cognome.",
+      "language": "Seleziona la lingua preferita."
+    },
+    "channels": {
+      "emailTitle": "Comunicazioni e-mail",
+      "emailDescription": "Ricevi offerte, aggiornamenti e suggerimenti di viaggio via e-mail.",
+      "smsTitle": "Comunicazioni SMS",
+      "smsDescription": "Ricevi offerte e aggiornamenti importanti tramite SMS.",
+      "whatsappTitle": "Comunicazioni WhatsApp",
+      "whatsappDescription": "Ricevi offerte e aggiornamenti concierge tramite WhatsApp.",
+      "phoneTitle": "Comunicazioni telefoniche",
+      "phoneDescription": "Consenti al nostro team concierge di contattarti telefonicamente."
+    }
+  },
+  "servicesPage": {
+    "eyebrow": "Servizi",
+    "title": "Tutto ciò che serve per il tuo soggiorno a Marrakech.",
+    "description": "Scopri ville, trasporti, attività, piscine, ristoranti e opzioni benessere.",
+    "viewOptions": "Visualizza le opzioni",
+    "categories": {
+      "villa": {
+        "label": "Ville",
+        "description": "Ville private a Marrakech per coppie, famiglie e gruppi."
+      },
+      "transportation": {
+        "label": "Trasporti",
+        "description": "Autisti privati, arrivi e partenze aeroportuali e trasferimenti."
+      },
+      "swimmingpool": {
+        "label": "Piscine",
+        "description": "Accesso alle piscine e giornate di relax in strutture selezionate a Marrakech."
+      },
+      "activity": {
+        "label": "Attività",
+        "description": "Attività, escursioni ed esperienze da vivere nei dintorni di Marrakech."
+      },
+      "restaurant": {
+        "label": "Ristoranti",
+        "description": "Ristoranti, rooftop e opzioni gastronomiche per momenti e preferenze differenti."
+      },
+      "spa": {
+        "label": "Spa",
+        "description": "Hammam, massaggi e trattamenti benessere a Marrakech."
+      }
+    }
+  },
+  "aboutPage": {
+    "eyebrow": "Chi è Moorish Concierge",
+    "title": "Marrakech, vissuta attraverso uno sguardo locale.",
+    "heroDescription": "Moorish Concierge è un servizio di concierge privato creato per aiutare i visitatori a vivere Marrakech con maggiore comfort, fiducia e semplicità. Dal soggiorno ai trasporti, dalla ristorazione al benessere e alle attività, ogni consiglio nasce dalla conoscenza locale e si adatta ai tuoi programmi.",
+    "exploreServices": "Scopri i nostri servizi",
+    "contactUs": "Contattaci",
+    "highlights": {
+      "location": "Un servizio concierge dedicato a Marrakech.",
+      "availability": "Assistenza durante tutto il soggiorno, ogni giorno della settimana.",
+      "localKnowledge": "Consigli selezionati grazie alla conoscenza locale e all’esperienza pratica."
+    },
+    "storyEyebrow": "Chi siamo",
+    "storyTitle": "Più di una lista di luoghi. Un modo affidabile per entrare a Marrakech.",
+    "storyParagraph1": "Marrakech offre una straordinaria varietà di luoghi, persone ed esperienze. Può però essere difficile capire quali opzioni siano davvero adatte, affidabili o meritevoli. Moorish Concierge nasce per rendere queste scelte più semplici.",
+    "storyParagraph2": "Il servizio riunisce soggiorni privati, trasporti, ristoranti, piscine, attività, escursioni, benessere e vita notturna in un’esperienza organizzata con attenzione. Gli ospiti possono richiedere un singolo servizio oppure ricevere assistenza per pianificare più parti del soggiorno.",
+    "storyParagraph3": "L’obiettivo non è offrire il catalogo più grande possibile. È fornire consigli chiari, assistenza affidabile e opzioni realmente adatte al numero di persone, al budget, agli interessi e allo stile di ogni ospite.",
+    "servicesEyebrow": "Cosa organizziamo",
+    "servicesTitle": "Gli elementi essenziali di un soggiorno a Marrakech, gestiti con cura.",
+    "servicesDescription": "Ogni servizio può essere richiesto singolarmente o combinato in un soggiorno più completo.",
+    "services": {
+      "stays": {
+        "title": "Soggiorni privati",
+        "description": "Ville e alloggi selezionati per coppie, famiglie e gruppi."
+      },
+      "transportation": {
+        "title": "Trasporti",
+        "description": "Autisti privati, arrivi e partenze aeroportuali e trasferimenti a Marrakech."
+      },
+      "experiences": {
+        "title": "Attività ed escursioni",
+        "description": "Deserto, visite culturali, attività all’aperto ed esperienze nei dintorni di Marrakech."
+      },
+      "pools": {
+        "title": "Piscine",
+        "description": "Luoghi selezionati per giornate di relax, pranzi e momenti tranquilli."
+      },
+      "dining": {
+        "title": "Ristorazione",
+        "description": "Ristoranti, rooftop e proposte gastronomiche per gusti e budget diversi."
+      },
+      "nightlife": {
+        "title": "Vita notturna",
+        "description": "Lounge, club e consigli per la sera, con assistenza per le prenotazioni."
+      },
+      "wellness": {
+        "title": "Benessere",
+        "description": "Spa, hammam, massaggi e trattamenti rilassanti in strutture affidabili."
+      },
+      "concierge": {
+        "title": "Assistenza concierge",
+        "description": "Supporto personalizzato prima e durante il soggiorno per coordinare ogni richiesta."
+      }
+    },
+    "principlesEyebrow": "Il nostro approccio",
+    "principlesTitle": "Conoscenza locale, opzioni affidabili e attenzione personale.",
+    "principles": {
+      "local": {
+        "title": "Attraverso uno sguardo marocchino",
+        "description": "I consigli si basano sulla conoscenza locale di Marrakech, delle sue zone, dei suoi ritmi e dei suoi standard."
+      },
+      "trusted": {
+        "title": "Selezionato con attenzione",
+        "description": "La priorità è data a opzioni affidabili, informazioni chiare e servizi adatti alle esigenze reali."
+      },
+      "personal": {
+        "title": "Pensato per ogni ospite",
+        "description": "Numero di persone, budget, durata, preferenze e priorità vengono considerati prima di ogni consiglio."
+      }
+    },
+    "ctaEyebrow": "Organizza il tuo soggiorno",
+    "ctaTitle": "Dicci di cosa hai bisogno e inizia a costruire il tuo soggiorno a Marrakech.",
+    "ctaDescription": "Richiedi una villa, un trasporto, un’attività, un ristorante o assistenza per più parti del viaggio.",
+    "openConcierge": "Apri la chat concierge",
+    "sendRequest": "Invia una richiesta"
+  },
+    "termsPage": {
+    "eyebrow": "Informazioni legali",
+    "title": "Termini di utilizzo e servizio",
+    "introduction": "Questi termini definiscono le regole applicabili quando accedi a Moorish Concierge, crei un account, richiedi consigli o utilizzi i servizi concierge organizzati tramite la piattaforma.",
+    "importantNotice": "Moorish Concierge può coordinare servizi offerti da proprietari, autisti, ristoranti, organizzatori di attività e altri fornitori indipendenti. Le condizioni definitive di una prenotazione possono includere anche le regole specifiche del fornitore.",
+    "lastUpdated": "Ultimo aggiornamento: luglio 2026",
+    "contents": "Indice",
+    "managePreferences": "Gestisci le mie preferenze",
+    "contactTitle": "Hai domande su questi termini?",
+    "contactDescription": "Contatta Moorish Concierge per qualsiasi domanda relativa a una prenotazione, ai tuoi dati personali, alle preferenze di comunicazione o a questi termini.",
+    "contactButton": "Contattaci",
+    "sections": {
+      "service": {
+        "title": "1. Natura del servizio",
+        "paragraphs": [
+          "Moorish Concierge fornisce informazioni turistiche, consigli, assistenza e servizi di coordinamento a Marrakech. In base alla richiesta, possiamo aiutare i viaggiatori a individuare e contattare strutture ricettive, autisti, ristoranti, spa, organizzatori di attività e altri partner.",
+          "Salvo diversa indicazione espressa per iscritto, Moorish Concierge non possiede né gestisce direttamente le proprietà, i veicoli, i ristoranti o le attività presentati sulla piattaforma."
+        ]
+      },
+      "account": {
+        "title": "2. Account e informazioni",
+        "paragraphs": [
+          "Gli utenti devono fornire informazioni accurate, complete e aggiornate durante la creazione di un account o l’invio di una richiesta.",
+          "Gli utenti sono responsabili della protezione della propria password e devono informarci qualora ritengano che il proprio account sia stato utilizzato senza autorizzazione.",
+          "Moorish Concierge può sospendere un account utilizzato in modo fraudolento, illegale o tale da creare un rischio per i viaggiatori, i fornitori o la piattaforma."
+        ]
+      },
+      "consent": {
+        "title": "3. Consenso alle comunicazioni",
+        "paragraphs": [
+          "Al momento della creazione di un account, le preferenze di comunicazione vengono inizialmente registrate come OPTIN per comunicazioni tramite e-mail, SMS, WhatsApp e telefono, in conformità con le informazioni presentate durante la registrazione e con questi termini.",
+          "Queste comunicazioni possono riguardare assistenza concierge, aggiornamenti sulle prenotazioni, informazioni sui servizi, offerte e consigli di viaggio.",
+          "Gli utenti possono revocare o modificare le proprie preferenze in qualsiasi momento dal Centro preferenze dell’account o contattandoci. La revoca riguarda le comunicazioni future e non impedisce le comunicazioni necessarie all’esecuzione di una richiesta o prenotazione in corso."
+        ]
+      },
+      "bookings": {
+        "title": "4. Richieste, disponibilità e prenotazioni",
+        "paragraphs": [
+          "Le descrizioni, i prezzi e le disponibilità presentati sul sito sono indicativi fino alla conferma da parte del fornitore interessato.",
+          "Un consiglio o un messaggio concierge non garantisce la disponibilità. Una prenotazione è confermata solo dopo il completamento delle condizioni di conferma, pagamento o approvazione del fornitore.",
+          "I viaggiatori devono verificare le date, il numero di partecipanti, i servizi inclusi, i punti di incontro e le eventuali richieste particolari prima di confermare."
+        ]
+      },
+      "payments": {
+        "title": "5. Prezzi, pagamenti e cancellazioni",
+        "paragraphs": [
+          "I prezzi possono variare in base alla disponibilità, alla stagione, al numero di partecipanti, alle condizioni del fornitore, ai servizi aggiuntivi, alle imposte o ad altri costi comunicati.",
+          "Le condizioni di pagamento, deposito, cancellazione e rimborso possono variare in base al fornitore e saranno comunicate prima della conferma, quando applicabile.",
+          "Il viaggiatore deve verificare e accettare il prezzo finale e le condizioni di cancellazione prima di effettuare qualsiasi pagamento."
+        ]
+      },
+      "providers": {
+        "title": "6. Fornitori indipendenti",
+        "paragraphs": [
+          "Alcuni servizi sono forniti da soggetti terzi indipendenti. Tali fornitori restano responsabili della corretta esecuzione dei servizi, delle licenze e assicurazioni richieste e del rispetto degli obblighi legali e di sicurezza.",
+          "Moorish Concierge seleziona e coordina i fornitori con attenzione, ma non può garantire che un servizio di terzi sia privo di ritardi, interruzioni, modifiche o eventi imprevisti."
+        ]
+      },
+      "conduct": {
+        "title": "7. Comportamento e responsabilità nelle proprietà",
+        "paragraphs": [
+          "I viaggiatori devono rispettare le proprietà, i veicoli, il personale, i vicini, le usanze locali e tutte le regole ragionevoli comunicate da Moorish Concierge o dal fornitore.",
+          "I viaggiatori sono responsabili di danni, perdite, costi di pulizia eccessivi, ospiti non autorizzati, eventi vietati, disturbi o usi impropri causati da loro o dai membri del loro gruppo.",
+          "Il fornitore o proprietario interessato può richiedere il rimborso dei danni, trattenere un deposito autorizzato o intraprendere le opportune azioni legali in caso di danni o comportamenti gravi.",
+          "Moorish Concierge non è responsabile di atti illegali, pericolosi, abusivi o dannosi commessi da un viaggiatore."
+        ]
+      },
+      "prohibited": {
+        "title": "8. Comportamenti vietati",
+        "paragraphs": [
+          "Gli utenti non devono utilizzare la piattaforma o i servizi per frode, molestie, violenza, sostanze illegali, sfruttamento, attività commerciale non autorizzata, danni alla proprietà o qualsiasi attività vietata dalla legge marocchina.",
+          "Moorish Concierge può rifiutare o interrompere l’assistenza quando una richiesta appare pericolosa, illegale, abusiva o dannosa per un fornitore, dipendente, viaggiatore o terzo."
+        ]
+      },
+      "liability": {
+        "title": "9. Responsabilità ed eventi imprevisti",
+        "paragraphs": [
+          "Nessuna disposizione di questi termini esclude una responsabilità che non può essere legalmente esclusa.",
+          "Nei limiti consentiti dalla legge, Moorish Concierge non è responsabile di perdite indirette o di eventi ragionevolmente fuori dal proprio controllo, comprese condizioni meteorologiche, traffico, scioperi, restrizioni pubbliche, cancellazioni dei fornitori, eventi naturali o malfunzionamenti di sistemi di terzi.",
+          "I viaggiatori restano responsabili dei propri documenti di viaggio, visti, decisioni sanitarie, assicurazioni, effetti personali e del rispetto delle leggi locali."
+        ]
+      },
+      "privacy": {
+        "title": "10. Dati personali e privacy",
+        "paragraphs": [
+          "Possiamo trattare informazioni relative all’identità, ai contatti, all’account, alle preferenze, alle richieste, alle prenotazioni e all’utilizzo del sito per fornire i servizi, gestire gli account, comunicare, migliorare la piattaforma e rispettare gli obblighi legali.",
+          "I dati personali devono essere raccolti per finalità identificate e legittime, limitati a quanto ragionevolmente necessario, mantenuti aggiornati e conservati per un periodo adeguato.",
+          "Le informazioni possono essere condivise con i fornitori quando necessario per rispondere a una richiesta o completare una prenotazione, nonché con fornitori tecnici responsabili di hosting, e-mail, autenticazione o funzionamento della piattaforma.",
+          "Gli utenti possono contattarci per esercitare i diritti di accesso, rettifica o altri diritti riconosciuti dalla normativa applicabile."
+        ]
+      },
+      "security": {
+        "title": "11. Sicurezza dei dati",
+        "paragraphs": [
+          "Moorish Concierge adotta misure tecniche e organizzative ragionevoli volte a proteggere le informazioni personali da accessi non autorizzati, perdite, alterazioni o divulgazioni.",
+          "Le password vengono conservate tramite hash sicuro e non in formato leggibile. In produzione devono essere utilizzate connessioni HTTPS sicure per i dati trasmessi tra il browser e la piattaforma.",
+          "Nessun sistema online può garantire una sicurezza assoluta. Gli utenti devono utilizzare una password forte e unica e non condividere le proprie credenziali."
+        ]
+      },
+      "rights": {
+        "title": "12. Legge applicabile e diritti degli utenti",
+        "paragraphs": [
+          "Questi termini sono destinati ad applicarsi in conformità con la legge marocchina vigente. I diritti obbligatori dei consumatori e i diritti relativi alla protezione dei dati restano applicabili.",
+          "In caso di disaccordo, gli utenti sono invitati a contattare prima Moorish Concierge affinché la situazione possa essere esaminata e si possa cercare una soluzione adeguata."
+        ]
+      },
+      "changes": {
+        "title": "13. Modifica dei termini",
+        "paragraphs": [
+          "Moorish Concierge può aggiornare questi termini per riflettere modifiche ai servizi, alle pratiche operative o agli obblighi legali.",
+          "La versione aggiornata sarà pubblicata su questa pagina con una nuova data di aggiornamento. Le modifiche importanti potranno inoltre essere comunicate tramite il sito, l’account o i dati di contatto registrati."
+        ]
+      }
+    }
+  },
+  "languagePrompt": {
+    "title": "Passare alla lingua preferita?",
+    "description": "La lingua impostata nel tuo account è",
+    "stayButton": "Resta in italiano",
+    "switchButton": "Cambia lingua",
+    "close": "Chiudi il suggerimento della lingua"
+  }
+
+}

@@ -1,0 +1,496 @@
+{
+  "header": {
+    "home": "Início",
+    "services": "Serviços",
+    "villas": "Villas",
+    "swimmingpool": "Piscinas",
+    "activities": "Atividades",
+    "transportation": "Transporte",
+    "about": "Sobre nós",
+    "contact": "Contato",
+    "login": "Entrar / Registar-se",
+    "profile": "Editar perfil",
+    "preferences": "Editar preferências",
+    "logout": "Terminar sessão"
+  },
+  "authModal": {
+    "invalidCredentials": "Email ou palavra-passe inválidos.",
+    "inactiveAccount": "A sua conta está inativa. Contacte a nossa equipa de suporte.",
+    "emailNotVerified": "Verifique o seu endereço de email antes de iniciar sessão.",
+    "emailAlreadyExists": "Já existe uma conta com este endereço de email.",
+    "unexpectedError": "Ocorreu um erro. Tente novamente mais tarde.",
+    "requiredField": "{{field}} é obrigatório.",
+    "invalidEmail": "Introduza um endereço de email válido.",
+    "passwordTooShort": "A palavra-passe deve conter pelo menos 6 caracteres.",
+    "passwordsDoNotMatch": "As palavras-passe não coincidem.",
+    "brand": "Moorish Concierge",
+    "welcomeBack": "Bem-vindo de volta",
+    "createAccount": "Crie a sua conta",
+    "loginDescription": "Entre para gerir os seus pedidos e conversas.",
+    "signupDescription": "Crie uma conta. Enviaremos um email para verificar a sua conta antes da ativação.",
+    "firstName": "Nome",
+    "lastName": "Apelido",
+    "phoneNumber": "Número de telefone",
+    "emailAddress": "Endereço de email",
+    "country": "País",
+    "searchCountry": "Pesquisar país...",
+    "preferredLanguage": "Idioma preferido",
+    "password": "Palavra-passe",
+    "confirmPassword": "Confirmar palavra-passe",
+    "forgotPassword": "Esqueceu-se da palavra-passe?",
+    "login": "Entrar",
+    "signup": "Registar-se",
+    "or": "OU",
+    "noAccountYet": "Ainda não tem conta?",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "createOne": "Criar uma",
+    "checkEmail": "Verifique o seu email",
+    "verificationSentPrefix": "Enviámos um link de verificação para",
+    "verificationSentSuffix": "Abra a sua caixa de entrada e verifique a conta antes de entrar.",
+    "spamMessage": "Se não vir o email, verifique a pasta de spam ou promoções.",
+    "backToLogin": "Voltar ao login",
+    "loggedInSuccessfully": "Login efetuado com sucesso.",
+    "googleAuthSuccess": "Autenticação Google concluída com sucesso.",
+    "googleNoToken": "O Google não devolveu um token de identificação.",
+    "googleFailed": "A autenticação Google falhou."
+  },
+  "forgotPassword": {
+    "backToWebsite": "Voltar ao site",
+    "eyebrow": "Recuperação da conta",
+    "title": "Esqueceu a palavra-passe?",
+    "description": "Escolha como pretende recuperar o acesso à sua conta.",
+    "restoreEmail": "Recuperar por e-mail",
+    "restoreEmailDescription": "Receba um link seguro para redefinir a palavra-passe.",
+    "restoreOther": "Outras opções de recuperação",
+    "restoreOtherDescription": "Recupere o acesso utilizando outro método.",
+    "emailAddress": "Endereço de e-mail",
+    "sendResetLink": "Enviar link",
+    "sending": "A enviar...",
+    "back": "Voltar",
+    "invalidEmail": "Introduza um endereço de e-mail válido.",
+    "genericError": "Não foi possível enviar o link. Tente novamente.",
+    "optionUnavailable": "Esta opção de recuperação ainda não está disponível.",
+    "emailNotFound": "Não existe nenhuma conta com este endereço de e-mail.",
+    "externalProviderAccount": "Esta conta utiliza o início de sessão Google e não possui uma palavra-passe para redefinir.",
+    "resetNotAvailable": "A redefinição da palavra-passe não está disponível para esta conta.",
+    "emailSent": "Foi enviado um link de redefinição para o seu e-mail."
+  },
+  "resetPassword": {
+    "backToWebsite": "Voltar ao site",
+    "eyebrow": "Redefinição da palavra-passe",
+    "title": "Crie uma nova palavra-passe",
+    "description": "Introduza e confirme a nova palavra-passe da sua conta.",
+    "newPassword": "Nova palavra-passe",
+    "confirmPassword": "Confirmar palavra-passe",
+    "passwordRequirement": "A palavra-passe deve conter pelo menos 8 caracteres.",
+    "showPassword": "Mostrar palavra-passe",
+    "hidePassword": "Ocultar palavra-passe",
+    "submit": "Atualizar palavra-passe",
+    "updating": "A atualizar...",
+    "success": "A palavra-passe foi atualizada com sucesso.",
+    "returnToLogin": "Voltar ao início de sessão",
+    "invalidToken": "O link de redefinição está ausente ou é inválido.",
+    "invalidOrExpired": "Este link é inválido ou expirou.",
+    "passwordTooShort": "A palavra-passe deve conter pelo menos 8 caracteres.",
+    "passwordsDoNotMatch": "As duas palavras-passe não coincidem.",
+    "genericError": "Não foi possível atualizar a palavra-passe. Tente novamente."
+  },
+  "hero": {
+    "eyebrow": "Serviços de concierge em Marraquexe",
+    "title": "A sua estadia em Marraquexe, experiências, transporte e conforto num só lugar.",
+    "description": "A Moorish Concierge ajuda os viajantes a encontrar villas, apartamentos, excursões, transporte, experiências de SPA, restaurantes e apoio local na Cidade Vermelha.",
+    "exploreVillas": "Explorar villas",
+    "viewServices": "Ver serviços",
+    "startingFrom": "A partir de",
+    "price": "55 €",
+    "priceDescription": "apartamentos, atividades e transfers",
+    "imageAlt": "Estadia de luxo em Marraquexe"
+  },
+  "highlights": {
+    "curatedStaysTitle": "Estadias selecionadas",
+    "curatedStaysDescription": "Villas e apartamentos selecionados pelo conforto, localização e experiência dos hóspedes.",
+    "localExperiencesTitle": "Experiências locais",
+    "localExperiencesDescription": "Atividades, transporte, SPA, restaurantes e serviços personalizados em Marraquexe.",
+    "easyContactTitle": "Contacto fácil",
+    "easyContactDescription": "WhatsApp, formulário de contacto ou uma página de chat dedicada para entrar em contacto."
+  },
+  "categories": {
+    "villasLabel": "Villas",
+    "villasDescription": "Villas privadas em Marraquexe com piscinas, jardins, equipa de apoio e conforto premium.",
+    "activitiesLabel": "Atividades",
+    "activitiesDescription": "Quads, passeios de camelo, excursões ao deserto, visitas guiadas, balão de ar quente e experiências locais.",
+    "swimmingPoolsLabel": "Piscinas",
+    "swimmingPoolsDescription": "Piscinas privadas, clubes de piscina, passes diários, relaxamento de luxo e experiências familiares.",
+    "transportationLabel": "Transporte",
+    "transportationDescription": "Carros privados, veículos de luxo, carrinhas e transfers de grupo com motoristas confiáveis.",
+    "spaLabel": "SPA",
+    "spaDescription": "Hammam, massagens, beleza e experiências de bem-estar.",
+    "restaurantsLabel": "Restaurantes",
+    "restaurantsDescription": "Restaurantes marroquinos e internacionais selecionados para noites memoráveis.",
+    "viewAll": "Ver tudo",
+    "explore":"Explorar"
+  },
+  "contactSection": {
+    "eyebrow": "Precisa de uma estadia personalizada?",
+    "title": "Diga-nos as suas datas, o tamanho do grupo e a experiência desejada.",
+    "description": "Esta primeira versão é apenas frontend. Mais tarde, as mensagens e reservas serão ligadas à sua API e sistema de administração.",
+    "contactForm": "Formulário de contacto",
+    "openChat": "Abrir chat"
+  },
+  "footer": {
+    "description": "Serviços privados de concierge para estadias, transporte, gastronomia, atividades, bem-estar e vida noturna em Marraquexe.",
+    "slogan": "Marraquexe, através de um olhar marroquino.",
+    "menu": "Explorar",
+    "services": "Serviços",
+    "villas": "Villas",
+    "swimmingPools": "Piscinas",
+    "chat": "Chat de concierge",
+    "contact": "Contacto",
+    "legalTitle": "Informação legal",
+    "terms": "Termos de utilização e serviço",
+    "privacy": "Privacidade e dados pessoais",
+    "consentPreferences": "Preferências de consentimento",
+    "guestResponsibilities": "Responsabilidades dos hóspedes",
+    "contactTitle": "Contacto",
+    "location": "Marraquexe, Marrocos",
+    "copyright": "Todos os direitos reservados.",
+    "termsShort": "Termos",
+    "privacyShort": "Privacidade"
+  },
+  "accountVerify": {
+    "eyebrow": "Verificação da conta",
+    "loadingTitle": "A sua conta está a ser verificada",
+    "loadingDescription": "Aguarde enquanto ativamos a sua conta.",
+    "successTitle": "Conta verificada",
+    "successMessage": "Email verificado com sucesso.",
+    "backToLogin": "Voltar ao login",
+    "errorTitle": "Não foi possível verificar a conta",
+    "errorMessage": "Não foi possível verificar a sua conta. Contacte a nossa equipa de suporte.",
+    "missingToken": "O token de verificação está em falta.",
+    "contactSupport": "Contactar suporte",
+    "backToWebsite": "Voltar ao site"
+  },
+  "productDetails": {
+    "backTo": "Voltar para",
+    "highlights": "Destaques",
+    "details": "Detalhes",
+    "contactUs": "Contacte-nos",
+    "openChat": "Abrir o chat",
+    "whatsapp": "Contacte-nos pelo WhatsApp",
+    "previousImage": "Imagem anterior",
+    "nextImage": "Imagem seguinte",
+    "displayImage": "Mostrar imagem",
+    "invalidCategory": "Categoria de produto inválida.",
+    "loadingError": "Não foi possível carregar este produto."
+  },
+  "contactPage": {
+    "eyebrow": "Contacto",
+    "title": "Diga-nos do que precisa.",
+    "description": "Peça uma villa, atividade, transfer, SPA, restaurante ou um plano completo em Marraquexe.",
+    "otherOptions": "Outras opções de contacto",
+    "whatsapp": "WhatsApp",
+    "emailLabel": "E-mail",
+    "firstName": "Nome *",
+    "lastName": "Apelido *",
+    "email": "E-mail *",
+    "countryCode": "Indicativo do país",
+    "mobilePhone": "Telemóvel",
+    "requestType": "Tipo de pedido *",
+    "subject": "Assunto",
+    "comment": "Comentário / pedido *",
+    "send": "Enviar mensagem",
+    "sending": "A enviar...",
+    "success": "A sua mensagem foi enviada com sucesso.",
+    "genericError": "Não foi possível enviar a mensagem. Tente novamente.",
+    "validation": {
+      "firstName": "Preencha o seu nome.",
+      "lastName": "Preencha o seu apelido.",
+      "email": "Preencha o seu e-mail.",
+      "invalidEmail": "Introduza um endereço de e-mail válido.",
+      "countryCode": "Selecione o indicativo do país.",
+      "phone": "Introduza o número ou remova o indicativo.",
+      "requestType": "Selecione o tipo de pedido.",
+      "comment": "Escreva a sua mensagem."
+    },
+    "requestTypes": {
+      "ADVISOR_GUIDE": "Procuro consultor ou guia",
+      "COMPLAINT": "Reclamação",
+      "SUPPORT": "Suporte",
+      "PARTNERSHIP": "Parceria",
+      "OTHER": "Outro"
+    }
+  },
+  "accountPage": {
+    "eyebrow": "Conta",
+    "profileTitle": "O meu perfil",
+    "preferencesTitle": "Centro de preferências",
+    "description": "Gira as suas informações pessoais e preferências de comunicação.",
+    "profileInformation": "Informações do perfil",
+    "profileInformationDescription": "Atualize os seus dados pessoais.",
+    "communicationPreferences": "Preferências de comunicação",
+    "communicationPreferencesDescription": "Escolha como a Moorish Concierge pode contactá-lo.",
+    "firstName": "Nome",
+    "lastName": "Apelido",
+    "email": "Endereço de e-mail",
+    "mobilePhone": "Telemóvel",
+    "notProvided": "Não indicado",
+    "protectedFieldsNote": "O seu endereço de e-mail e número de telefone não podem ser alterados diretamente. Envie um pedido se precisar de os atualizar.",
+    "contactSupport": "Contacte-nos",
+    "saveProfile": "Guardar perfil",
+    "savePreferences": "Guardar preferências",
+    "saving": "A guardar...",
+    "profileSaved": "O seu perfil foi atualizado com sucesso.",
+    "preferencesSaved": "As suas preferências de comunicação foram atualizadas com sucesso.",
+    "loadError": "Não foi possível carregar as informações da sua conta.",
+    "profileSaveError": "Não foi possível atualizar o seu perfil.",
+    "preferencesSaveError": "Não foi possível atualizar as suas preferências de comunicação.",
+    "country": "País",
+    "language": "Idioma preferido",
+    "selectCountry": "Selecione um país",
+    "validation": {
+      "firstName": "Introduza o seu nome.",
+      "lastName": "Introduza o seu apelido.",
+      "language": "Selecione o seu idioma preferido."
+    },
+    "channels": {
+      "emailTitle": "Comunicações por e-mail",
+      "emailDescription": "Receba ofertas, novidades e sugestões de viagem por e-mail.",
+      "smsTitle": "Comunicações por SMS",
+      "smsDescription": "Receba ofertas e informações importantes por SMS.",
+      "whatsappTitle": "Comunicações pelo WhatsApp",
+      "whatsappDescription": "Receba ofertas e novidades de concierge pelo WhatsApp.",
+      "phoneTitle": "Comunicações telefónicas",
+      "phoneDescription": "Permita que a nossa equipa de concierge o contacte por telefone."
+    }
+  },
+  "servicesPage": {
+    "eyebrow": "Serviços",
+    "title": "Tudo o que precisa para a sua estadia em Marraquexe.",
+    "description": "Descubra villas, transporte, atividades, piscinas, restaurantes e opções de bem-estar.",
+    "viewOptions": "Ver opções",
+    "categories": {
+      "villa": {
+        "label": "Villas",
+        "description": "Villas privadas em Marraquexe para casais, famílias e grupos."
+      },
+      "transportation": {
+        "label": "Transporte",
+        "description": "Motoristas privados, chegadas e partidas do aeroporto e transfers."
+      },
+      "swimmingpool": {
+        "label": "Piscinas",
+        "description": "Acesso a piscinas e dias de descanso em locais selecionados de Marraquexe."
+      },
+      "activity": {
+        "label": "Atividades",
+        "description": "Atividades, excursões e experiências para viver perto de Marraquexe."
+      },
+      "restaurant": {
+        "label": "Restaurantes",
+        "description": "Restaurantes, rooftops e opções gastronómicas para diferentes momentos e preferências."
+      },
+      "spa": {
+        "label": "Spa",
+        "description": "Hammams, massagens e tratamentos de bem-estar em Marraquexe."
+      }
+    }
+  },
+  "aboutPage": {
+    "eyebrow": "Sobre a Moorish Concierge",
+    "title": "Marraquexe, vivida através de um olhar local.",
+    "heroDescription": "A Moorish Concierge é um serviço de concierge privado criado para ajudar os visitantes a aproveitar Marraquexe com mais conforto, confiança e simplicidade. Desde o alojamento aos transportes, restaurantes, bem-estar e atividades, cada recomendação baseia-se no conhecimento local e adapta-se aos seus planos.",
+    "exploreServices": "Explorar os nossos serviços",
+    "contactUs": "Contacte-nos",
+    "highlights": {
+      "location": "Um serviço de concierge dedicado a Marraquexe.",
+      "availability": "Apoio durante toda a estadia, todos os dias da semana.",
+      "localKnowledge": "Recomendações selecionadas com conhecimento local e experiência prática."
+    },
+    "storyEyebrow": "Quem somos",
+    "storyTitle": "Mais do que uma lista de locais. Uma forma segura de entrar em Marraquexe.",
+    "storyParagraph1": "Marraquexe oferece uma variedade extraordinária de locais, pessoas e experiências. Também pode ser difícil perceber quais opções são realmente adequadas, fiáveis ou merecem o seu tempo. A Moorish Concierge foi criada para simplificar essas escolhas.",
+    "storyParagraph2": "O serviço reúne estadias privadas, transportes, restaurantes, piscinas, atividades, excursões, bem-estar e vida noturna numa experiência cuidadosamente organizada. Os hóspedes podem pedir apenas um serviço ou receber apoio no planeamento de várias partes da estadia.",
+    "storyParagraph3": "O objetivo não é oferecer o maior catálogo possível. É fornecer recomendações claras, apoio fiável e opções que correspondam verdadeiramente ao tamanho do grupo, orçamento, interesses e estilo de cada hóspede.",
+    "servicesEyebrow": "O que organizamos",
+    "servicesTitle": "As partes essenciais de uma estadia em Marraquexe, geridas com cuidado.",
+    "servicesDescription": "Cada serviço pode ser solicitado individualmente ou combinado numa estadia mais completa.",
+    "services": {
+      "stays": {
+        "title": "Estadias privadas",
+        "description": "Villas e alojamentos selecionados para casais, famílias e grupos."
+      },
+      "transportation": {
+        "title": "Transporte",
+        "description": "Motoristas privados, chegadas e partidas do aeroporto e transfers em Marraquexe."
+      },
+      "experiences": {
+        "title": "Atividades e excursões",
+        "description": "Deserto, visitas culturais, atividades ao ar livre e experiências perto de Marraquexe."
+      },
+      "pools": {
+        "title": "Piscinas",
+        "description": "Locais selecionados para dias de descanso, almoços e momentos tranquilos."
+      },
+      "dining": {
+        "title": "Restaurantes",
+        "description": "Restaurantes, rooftops e opções gastronómicas para diferentes gostos e orçamentos."
+      },
+      "nightlife": {
+        "title": "Vida noturna",
+        "description": "Lounges, clubes e recomendações para a noite, com apoio nas reservas."
+      },
+      "wellness": {
+        "title": "Bem-estar",
+        "description": "Spas, hammams, massagens e tratamentos relaxantes em locais de confiança."
+      },
+      "concierge": {
+        "title": "Apoio de concierge",
+        "description": "Orientação personalizada antes e durante a estadia para coordenar cada pedido."
+      }
+    },
+    "principlesEyebrow": "A nossa abordagem",
+    "principlesTitle": "Conhecimento local, opções fiáveis e atenção pessoal.",
+    "principles": {
+      "local": {
+        "title": "Através de um olhar marroquino",
+        "description": "As recomendações baseiam-se numa compreensão local de Marraquexe, das suas zonas, ritmo e padrões."
+      },
+      "trusted": {
+        "title": "Selecionado com cuidado",
+        "description": "A prioridade são opções fiáveis, informação clara e serviços adequados às necessidades reais."
+      },
+      "personal": {
+        "title": "Pensado para cada hóspede",
+        "description": "O tamanho do grupo, orçamento, duração, preferências e prioridades são considerados antes de qualquer recomendação."
+      }
+    },
+    "ctaEyebrow": "Planeie a sua estadia",
+    "ctaTitle": "Diga-nos do que precisa e comece a preparar a sua estadia em Marraquexe.",
+    "ctaDescription": "Peça uma villa, transporte, uma atividade, um restaurante ou apoio com várias partes da viagem.",
+    "openConcierge": "Abrir chat de concierge",
+    "sendRequest": "Enviar pedido"
+  },
+  "termsPage": {
+    "eyebrow": "Informações legais",
+    "title": "Termos de utilização e serviço",
+    "introduction": "Estes termos definem as regras aplicáveis quando acede à Moorish Concierge, cria uma conta, solicita recomendações ou utiliza serviços de concierge organizados através da plataforma.",
+    "importantNotice": "A Moorish Concierge pode coordenar serviços prestados por proprietários, motoristas, restaurantes, organizadores de atividades e outros prestadores independentes. As condições finais de uma reserva também podem incluir as regras próprias do prestador.",
+    "lastUpdated": "Última atualização: julho de 2026",
+    "contents": "Índice",
+    "managePreferences": "Gerir as minhas preferências",
+    "contactTitle": "Tem alguma questão sobre estes termos?",
+    "contactDescription": "Contacte a Moorish Concierge para qualquer questão relacionada com uma reserva, os seus dados pessoais, as suas preferências de comunicação ou estes termos.",
+    "contactButton": "Contacte-nos",
+    "sections": {
+      "service": {
+        "title": "1. Natureza do serviço",
+        "paragraphs": [
+          "A Moorish Concierge fornece informações turísticas, recomendações, assistência e serviços de coordenação em Marraquexe. Consoante o pedido, podemos ajudar os viajantes a identificar e contactar alojamentos, motoristas, restaurantes, spas, organizadores de atividades e outros parceiros.",
+          "Salvo indicação expressa em contrário por escrito, a Moorish Concierge não possui nem opera diretamente as propriedades, veículos, restaurantes ou atividades apresentados na plataforma."
+        ]
+      },
+      "account": {
+        "title": "2. Contas e informações",
+        "paragraphs": [
+          "Os utilizadores devem fornecer informações exatas, completas e atualizadas ao criar uma conta ou enviar um pedido.",
+          "Os utilizadores são responsáveis pela proteção da sua palavra-passe e devem informar-nos caso suspeitem que a sua conta foi utilizada sem autorização.",
+          "A Moorish Concierge pode suspender uma conta utilizada de forma fraudulenta, ilegal ou suscetível de criar um risco para viajantes, prestadores ou para a plataforma."
+        ]
+      },
+      "consent": {
+        "title": "3. Consentimento para comunicações",
+        "paragraphs": [
+          "Ao criar uma conta, as preferências de comunicação são inicialmente registadas como OPTIN para comunicações por e-mail, SMS, WhatsApp e telefone, de acordo com as informações apresentadas durante o registo e com estes termos.",
+          "Estas comunicações podem incluir assistência de concierge, atualizações de reservas, informações sobre serviços, ofertas e recomendações de viagem.",
+          "Os utilizadores podem retirar ou alterar as suas preferências a qualquer momento no Centro de Preferências da conta ou contactando-nos. A retirada aplica-se a comunicações futuras e não impede comunicações necessárias à execução de um pedido ou reserva em curso."
+        ]
+      },
+      "bookings": {
+        "title": "4. Pedidos, disponibilidade e reservas",
+        "paragraphs": [
+          "As descrições, preços e disponibilidades apresentados no site são indicativos até confirmação pelo prestador correspondente.",
+          "Uma recomendação ou mensagem de concierge não garante disponibilidade. Uma reserva apenas é confirmada quando forem cumpridas as condições de confirmação, pagamento ou aprovação do prestador.",
+          "Os viajantes devem verificar as datas, o número de participantes, os serviços incluídos, os pontos de encontro e quaisquer pedidos especiais antes de confirmar."
+        ]
+      },
+      "payments": {
+        "title": "5. Preços, pagamentos e cancelamentos",
+        "paragraphs": [
+          "Os preços podem variar consoante a disponibilidade, a época, o tamanho do grupo, as condições do prestador, os serviços adicionais, os impostos ou outros custos anunciados.",
+          "As condições de pagamento, depósito, cancelamento e reembolso podem variar de acordo com o prestador e serão comunicadas antes da confirmação, quando aplicável.",
+          "O viajante deve verificar e aceitar o preço final e as condições de cancelamento antes de efetuar qualquer pagamento."
+        ]
+      },
+      "providers": {
+        "title": "6. Prestadores independentes",
+        "paragraphs": [
+          "Alguns serviços são prestados por prestadores independentes. Estes continuam responsáveis pela correta execução dos seus serviços, pelas licenças e seguros exigidos e pelo cumprimento das suas obrigações legais e de segurança.",
+          "A Moorish Concierge seleciona e coordena os prestadores com cuidado, mas não pode garantir que um serviço de terceiros esteja livre de atrasos, interrupções, alterações ou acontecimentos imprevistos."
+        ]
+      },
+      "conduct": {
+        "title": "7. Comportamento e responsabilidade nas propriedades",
+        "paragraphs": [
+          "Os viajantes devem respeitar as propriedades, veículos, equipas, vizinhos, costumes locais e todas as regras razoáveis comunicadas pela Moorish Concierge ou pelo prestador.",
+          "Os viajantes são responsáveis por danos, perdas, custos de limpeza excessivos, convidados não autorizados, eventos proibidos, perturbações ou utilizações indevidas causadas por si ou pelos membros do seu grupo.",
+          "O prestador ou proprietário em causa pode solicitar o reembolso dos danos, reter um depósito autorizado ou iniciar as ações legais adequadas em caso de danos ou comportamento grave.",
+          "A Moorish Concierge não é responsável por atos ilegais, perigosos, abusivos ou prejudiciais praticados por um viajante."
+        ]
+      },
+      "prohibited": {
+        "title": "8. Comportamentos proibidos",
+        "paragraphs": [
+          "Os utilizadores não devem utilizar a plataforma ou os serviços para fraude, assédio, violência, substâncias ilícitas, exploração, atividade comercial não autorizada, danos materiais ou qualquer atividade proibida pela legislação marroquina.",
+          "A Moorish Concierge pode recusar ou interromper a assistência quando um pedido parecer perigoso, ilegal, abusivo ou prejudicial para um prestador, funcionário, viajante ou terceiro."
+        ]
+      },
+      "liability": {
+        "title": "9. Responsabilidade e acontecimentos imprevistos",
+        "paragraphs": [
+          "Nenhuma disposição destes termos exclui uma responsabilidade que não possa ser legalmente excluída.",
+          "Na medida permitida por lei, a Moorish Concierge não é responsável por perdas indiretas nem por acontecimentos razoavelmente fora do seu controlo, incluindo condições meteorológicas, trânsito, greves, restrições públicas, cancelamentos de prestadores, fenómenos naturais ou falhas de sistemas de terceiros.",
+          "Os viajantes continuam responsáveis pelos seus documentos de viagem, vistos, decisões de saúde, seguros, bens pessoais e pelo cumprimento das leis locais."
+        ]
+      },
+      "privacy": {
+        "title": "10. Dados pessoais e privacidade",
+        "paragraphs": [
+          "Podemos tratar informações de identidade, contacto, conta, preferências, pedidos, reservas e utilização do site para prestar os nossos serviços, gerir contas, comunicar, melhorar a plataforma e cumprir obrigações legais.",
+          "Os dados pessoais devem ser recolhidos para finalidades identificadas e legítimas, limitados ao que seja razoavelmente necessário, mantidos atualizados e conservados durante um período adequado.",
+          "As informações podem ser partilhadas com prestadores quando necessário para responder a um pedido ou concluir uma reserva, bem como com fornecedores técnicos responsáveis pelo alojamento, e-mails, autenticação ou funcionamento da plataforma.",
+          "Os utilizadores podem contactar-nos para exercer os seus direitos de acesso, retificação ou outros direitos reconhecidos pela legislação aplicável."
+        ]
+      },
+      "security": {
+        "title": "11. Segurança dos dados",
+        "paragraphs": [
+          "A Moorish Concierge aplica medidas técnicas e organizacionais razoáveis destinadas a proteger as informações pessoais contra acessos não autorizados, perdas, alterações ou divulgações.",
+          "As palavras-passe são armazenadas através de hash seguro e não em formato legível. Em produção, devem ser utilizadas ligações HTTPS seguras para os dados transmitidos entre o navegador e a plataforma.",
+          "Nenhum sistema online pode garantir segurança absoluta. Os utilizadores devem utilizar uma palavra-passe forte e única e não devem partilhar as suas credenciais."
+        ]
+      },
+      "rights": {
+        "title": "12. Lei aplicável e direitos dos utilizadores",
+        "paragraphs": [
+          "Estes termos destinam-se a ser aplicados em conformidade com a legislação marroquina aplicável. Os direitos obrigatórios dos consumidores e os direitos relativos à proteção de dados permanecem aplicáveis.",
+          "Em caso de desacordo, os utilizadores são convidados a contactar primeiro a Moorish Concierge para que a situação possa ser analisada e se procure uma solução adequada."
+        ]
+      },
+      "changes": {
+        "title": "13. Alteração dos termos",
+        "paragraphs": [
+          "A Moorish Concierge pode atualizar estes termos para refletir alterações aos serviços, às práticas operacionais ou às obrigações legais.",
+          "A versão atualizada será publicada nesta página com uma nova data de atualização. As alterações importantes também poderão ser comunicadas através do site, da conta ou dos dados de contacto registados."
+        ]
+      }
+    }
+  },
+  "languagePrompt": {
+    "title": "Mudar para o seu idioma preferido?",
+    "description": "O idioma definido na sua conta é",
+    "stayButton": "Continuar em português",
+    "switchButton": "Mudar idioma",
+    "close": "Fechar a sugestão de idioma"
+  }
+
+}
