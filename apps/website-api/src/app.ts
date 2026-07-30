@@ -13,10 +13,13 @@ app.set("trust proxy", 1);
 
 const allowedOrigins: Record<string, string[] | string> = {
   local: "*",
-  test: ["https://staging.moorishconcierge.com", "https://www.staging.moorishconcierge.com"],
+  test: [
+    "https://sandbox.moorishconcierge.com",
+    "https://www.sandbox.moorishconcierge.com",
+  ],
   production: [
     "https://moorishconcierge.com",
-    "https://www.moorishconcierge.com"
+    "https://www.moorishconcierge.com",
   ],
 };
 
@@ -39,7 +42,7 @@ app.use(
 
       return callback(new Error("Not allowed by CORS"));
     },
-  })
+  }),
 );
 
 app.use(express.json());
