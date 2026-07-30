@@ -66,7 +66,8 @@ function buildPasswordResetUrl(token: string, language?: string) {
 
 function getFromEmail() {
   return (
-    process.env.RESEND_FROM_EMAIL || "Moorish Concierge <onboarding@resend.dev>"
+    process.env.RESEND_FROM_EMAIL ||
+    "Moorish Concierge <contact@moorishconcierge.com>"
   );
 }
 
