@@ -57,6 +57,16 @@ export default function ItemCard({
     item.images?.[0] ||
     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c";
 
+  const optimizedImageUrl =
+    imageUrl.startsWith(
+      "https://images.unsplash.com/"
+    ) ||
+    imageUrl.startsWith(
+      "https://plus.unsplash.com/"
+    )
+      ? `${imageUrl}?auto=format&fit=crop&w=900&q=80`
+      : imageUrl;
+
   function localizePath(
     path: string
   ) {
@@ -104,7 +114,7 @@ export default function ItemCard({
     >
       <div className="relative h-56 overflow-hidden">
         <Image
-          src={`${imageUrl}?auto=format&fit=crop&w=900&q=80`}
+          src={optimizedImageUrl}
           alt={item.title}
           fill
           className={`object-cover transition duration-500 ${
