@@ -21,6 +21,14 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description:
       "Private concierge services, luxury stays, experiences and transportation in Marrakech.",
+    icons: {
+      icon:
+        "https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public",
+      shortcut:
+        "https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public",
+      apple:
+        "https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public",
+    },
   };
 }
 
