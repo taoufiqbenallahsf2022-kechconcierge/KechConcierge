@@ -902,8 +902,8 @@ export default function Header() {
         </div>
 
         {menuOpen && (
-          <div className="border-t border-orange-100 bg-white px-4 py-4 lg:hidden">
-            <div className="flex flex-col gap-3">
+          <div className="absolute inset-x-0 top-full z-50 h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-white px-5 py-5 lg:hidden">
+            <div className="flex min-h-full flex-col gap-4">
               {navItems.map(
                 (item) => {
                   const targetPath =
@@ -942,7 +942,7 @@ export default function Header() {
                           pendingPath
                         )
                       }
-                      className={`flex items-center gap-2 text-left font-semibold ${
+                      className={`order-3 flex items-center gap-2 rounded-xl px-2 py-2 text-left font-semibold ${
                         isLoading
                           ? "text-orange-700"
                           : "text-zinc-800"
@@ -961,7 +961,7 @@ export default function Header() {
                 }
               )}
 
-              <div className="grid grid-cols-3 gap-2 rounded-2xl bg-orange-50 p-3">
+              <div className="order-2 grid grid-cols-3 gap-2 rounded-2xl bg-orange-50 p-3">
                 {languages.map(
                   (language) => (
                     <button
@@ -1010,7 +1010,7 @@ export default function Header() {
               {!authResolved ? (
                 <MobileAuthSkeleton />
               ) : user ? (
-                <div className="rounded-2xl bg-orange-50 p-3">
+                <div className="order-1 rounded-2xl bg-orange-50 p-3">
                   <div className="mb-3 flex items-center gap-3">
                     <span className="grid h-10 w-10 place-items-center rounded-full bg-orange-600 text-sm font-black text-white">
                       {
@@ -1125,7 +1125,7 @@ export default function Header() {
                       pendingPath
                     )
                   }
-                  className="rounded-full bg-zinc-950 px-5 py-3 font-bold text-white disabled:cursor-wait disabled:opacity-60"
+                  className="order-1 rounded-full bg-zinc-950 px-5 py-3 font-bold text-white disabled:cursor-wait disabled:opacity-60"
                 >
                   {t.header.login}
                 </button>
@@ -1179,7 +1179,7 @@ function MobileAuthSkeleton() {
   return (
     <div
       aria-hidden="true"
-      className="h-12 w-full animate-pulse rounded-full bg-zinc-200"
+      className="order-1 h-12 w-full animate-pulse rounded-full bg-zinc-200"
     />
   );
 }
