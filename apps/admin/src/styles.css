@@ -1150,3 +1150,16 @@ button.compact-flow-node:hover { border-color: #0284c7; box-shadow: 0 8px 22px r
   .flow-fullscreen .visual-flow-shell { grid-template-columns: 1fr; }
   .activity-picker-grid { grid-template-columns: 1fr; }
 }
+
+.details-editor { display: grid; gap: 10px; }
+.detail-editor-row { display: grid; grid-template-columns: 30px minmax(150px, .65fr) minmax(220px, 1.35fr) 38px; gap: 9px; align-items: center; }
+.detail-editor-index { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; background: #f5e9e4; color: #914126; font-size: 12px; font-weight: 800; }
+.detail-editor-remove { height: 38px; border: 1px solid #ead5ce; border-radius: 8px; background: #fff7f4; color: #a23d28; font-size: 20px; cursor: pointer; }
+.detail-editor-remove:disabled { cursor: not-allowed; opacity: .35; }
+.detail-editor-footer { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 3px; }
+.detail-editor-footer .secondary { padding: 8px 12px; }
+@media(max-width:720px) {
+  .detail-editor-row { grid-template-columns: 28px 1fr 38px; }
+  .detail-editor-row input:nth-of-type(2) { grid-column: 2/4; }
+  .detail-editor-footer { align-items: flex-start; flex-direction: column; }
+}

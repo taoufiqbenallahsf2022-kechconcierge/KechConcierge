@@ -3,7 +3,7 @@ import enCountries from 'i18n-iso-countries/langs/en.json';
 countries.registerLocale(enCountries);
 export type FieldKind='text'|'email'|'phone'|'textarea'|'number'|'boolean'|'date'|'datetime'|'password'|'enum'|'image'|'tags'|'keyValue';
 export type FieldOption=string|{value:string;label:string};
-export type Field={name:string;label:string;kind:FieldKind;required?:boolean;options?:FieldOption[];readOnly?:boolean;hiddenInForm?:boolean;section?:string;placeholder?:string};
+export type Field={name:string;label:string;kind:FieldKind;required?:boolean;minItems?:number;maxItems?:number;options?:FieldOption[];readOnly?:boolean;hiddenInForm?:boolean;section?:string;placeholder?:string};
 export type EntityConfig={key:string;label:string;plural:string;readOnly?:boolean;dateFields?:string[];titleFields:string[];subtitleFields?:string[];listFields:string[];fields:Field[]};
 const person:Field[]=[
 {name:'firstName',label:'First name',kind:'text',required:true,section:'Personal information'},
@@ -24,13 +24,13 @@ const audit:Field[]=[
 ];
 const productLanguages=['EN','FR','DE','IT','PT','ES'];
 const productLocalized:Field[]=productLanguages.flatMap(lang=>[
-{name:`title${lang}`,label:`Title (${lang})`,kind:'text',section:`Content · ${lang}`},
-{name:`subtitle${lang}`,label:`Subtitle (${lang})`,kind:'text',section:`Content · ${lang}`},
-{name:`priceTitle${lang}`,label:`Price label (${lang})`,kind:'text',section:`Content · ${lang}`},
-{name:`description${lang}`,label:`Description (${lang})`,kind:'textarea',section:`Content · ${lang}`},
-{name:`address${lang}`,label:`Address (${lang})`,kind:'textarea',section:`Content · ${lang}`},
-{name:`tags${lang}`,label:`Tags (${lang})`,kind:'tags',section:`Content · ${lang}`},
-{name:`details${lang}`,label:`Details (${lang})`,kind:'keyValue',section:`Content · ${lang}`}
+{name:`title${lang}`,label:`Title (${lang})`,kind:'text',required:true,section:`Content · ${lang}`},
+{name:`subtitle${lang}`,label:`Subtitle (${lang})`,kind:'text',required:true,section:`Content · ${lang}`},
+{name:`priceTitle${lang}`,label:`Price label (${lang})`,kind:'text',required:true,section:`Content · ${lang}`},
+{name:`description${lang}`,label:`Description (${lang})`,kind:'textarea',required:true,section:`Content · ${lang}`},
+{name:`address${lang}`,label:`Address (${lang})`,kind:'textarea',required:true,section:`Content · ${lang}`},
+{name:`tags${lang}`,label:`Tags (${lang})`,kind:'tags',required:true,minItems:2,section:`Content · ${lang}`},
+{name:`details${lang}`,label:`Details (${lang})`,kind:'keyValue',required:true,minItems:3,maxItems:10,section:`Content · ${lang}`}
 ]);
 const imageFields:Field[]=Array.from({length:21},(_,i)=>({name:`image${i+1}`,label:`Image ${i+1}`,kind:'image',section:'Gallery'}));
 export const entities:EntityConfig[]=[
@@ -41,7 +41,7 @@ export const entities:EntityConfig[]=[
 {key:'products',label:'Product',plural:'Products',titleFields:['titleEN','uniqueCode'],subtitleFields:['type'],listFields:['thumbnail','uniqueCode','titleEN','type','priceEuro','isActive','updatedAt'],dateFields:['createdAt','updatedAt'],fields:[
 {name:'uniqueCode',label:'Unique code',kind:'text',required:true,section:'General information'},
 {name:'type',label:'Product type',kind:'enum',required:true,options:['VILLA','SWIMMINGPOOL','SPA','RESTAURANT','ACTIVITY','TRANSPORTATION'],section:'General information'},
-{name:'priceEuro',label:'Price (€)',kind:'number',section:'General information'},
+{name:'priceEuro',label:'Price (€)',kind:'number',required:true,section:'General information'},
 {name:'order',label:'Display order',kind:'number',section:'General information'},
 {name:'thumbnail',label:'Thumbnail',kind:'image',required:true,section:'Media'},
 {name:'isActive',label:'Active',kind:'boolean',section:'Status'},

@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "plus.unsplash.com"
+      },
+      {
+        protocol: "https",
+        hostname: "imagedelivery.net",
+        pathname: "/qcrNy2QA3vt3EbTLsOQBpA/**"
       }
     ]
   }

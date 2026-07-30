@@ -6,7 +6,8 @@ export function DisplayValue({field,value}:{field?:Field;value:unknown}){
  if(field?.kind==='datetime'||field?.kind==='date')return <>{formatDate(value,field.kind==='datetime')}</>;
  if(field?.kind==='image')return <a href={String(value)} target="_blank" rel="noreferrer"><img className="field-image" src={String(value)} alt={field.label}/></a>;
  if(field?.kind==='tags'&&Array.isArray(value))return <div className="tag-list">{value.map((x,i)=><span className="tag" key={i}>{String(x)}</span>)}</div>;
- if(field?.kind==='keyValue'&&typeof value==='object')return <div className="kv-list">{Object.entries(value as Record<string,unknown>).map(([k,v])=><div key={k}><b>{k}</b><span>{String(v)}</span></div>)}</div>;
+ if(field?.kind==='keyValue'&&Array.isArray(value))return <div className="kv-list">{value.map((item,i)=><div key={i}><b>{String(item?.label??'')}</b><span>{String(item?.value??'')}</span></div>)}</div>;
+ if(field?.kind==='keyValue'&&value&&typeof value==='object')return <div className="kv-list">{Object.entries(value as Record<string,unknown>).map(([k,v])=><div key={k}><b>{k}</b><span>{String(v)}</span></div>)}</div>;
  if(field?.kind==='email')return <a href={`mailto:${String(value)}`}>{String(value)}</a>;
  if(field?.kind==='phone')return <a href={`tel:${String(value)}`}>{String(value)}</a>;
  if(field?.kind==='enum'||['status','source','managedBy','participantStage','channelStatus','type','role'].some(x=>field?.name.toLowerCase().includes(x.toLowerCase())))return <span className="badge">{String(value).replaceAll('_',' ')}</span>;
