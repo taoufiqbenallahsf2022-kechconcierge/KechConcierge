@@ -1,5 +1,6 @@
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import type { EntityConfig, Field } from "../config/entities";
+import { API_BASE_URL } from "../store/api";
 function inputDate(value: unknown, datetime = false) {
   if (!value) return "";
   const d = new Date(String(value));
@@ -30,6 +31,13 @@ function parse(field: Field, value: string, checked: boolean) {
       return null;
     }
   }
+  if (field.kind === "imageAltManager") {
+    try {
+      return JSON.parse(value || "{}");
+    } catch {
+      return {};
+    }
+  }
   return value || null;
 }
 function initialValue(field: Field, value: unknown) {
@@ -37,6 +45,8 @@ function initialValue(field: Field, value: unknown) {
   if (field.kind === "datetime") return inputDate(value, true);
   if (field.kind === "tags" && Array.isArray(value)) return value.join(", ");
   if (field.kind === "keyValue" && value && typeof value === "object")
+    return JSON.stringify(value);
+  if (field.kind === "imageAltManager" && value && typeof value === "object")
     return JSON.stringify(value);
   return String(value ?? "");
 }
@@ -85,6 +95,7 @@ export function EntityForm({
         if (
           f.minItems &&
           Array.isArray(body[f.name]) &&
+          (body[f.name] as unknown[]).length > 0 &&
           (body[f.name] as unknown[]).length < f.minItems
         ) {
           throw new Error(`${f.label} requires at least ${f.minItems} entries.`);
@@ -99,13 +110,23 @@ export function EntityForm({
     <form className="record-form" onSubmit={submit}>
       {sections.map(([section, fields]) => (
         <section className="form-section" key={section}>
-          <h2>{section}</h2>
+          <div className="form-section-title">
+            <h2>{section}</h2>
+            {config.key === "products" && /^Content · (FR|DE|IT|PT|ES)$/.test(section) && (
+              <GenerateSectionFromEnglishButton language={section.slice(-2)} />
+            )}
+          </div>
           <div className="form-grid">
             {fields.map((f) => (
               <FieldInput
                 key={f.name}
                 field={f}
-                value={initialValue(f, initial[f.name])}
+                value={initialValue(
+                  f,
+                  f.kind === "imageAltManager"
+                    ? initial.imageAlts
+                    : initial[f.name],
+                )}
                 checked={Boolean(initial[f.name])}
               />
             ))}
@@ -158,6 +179,8 @@ function FieldInput({
         </select>
       ) : field.kind === "keyValue" ? (
         <DetailsInput field={field} value={value} />
+      ) : field.kind === "imageAltManager" ? (
+        <ImageAltManager field={field} value={value} />
       ) : field.kind === "textarea" ? (
         <textarea
           {...common}
@@ -165,6 +188,8 @@ function FieldInput({
           defaultValue={value}
           placeholder={field.placeholder}
         />
+      ) : field.kind === "image" ? (
+        <ImageUrlInput field={field} value={value} />
       ) : (
         <input
           {...common}
@@ -192,11 +217,224 @@ function FieldInput({
           step={field.kind === "number" ? "any" : undefined}
         />
       )}{" "}
-      {field.kind === "image" && value && (
-        <img className="form-image-preview" src={value} alt="Preview" />
-      )}
-      {field.kind === "tags" && <small>Separate tags with commas. At least {field.minItems ?? 1} are required.</small>}
+      {field.kind === "tags" && <small>Separate tags with commas. If provided, add at least {field.minItems ?? 1}.</small>}
     </label>
+  );
+}
+
+const translatedFieldNames = ["title", "subtitle", "priceTitle", "description", "address"] as const;
+
+function GenerateSectionFromEnglishButton({ language }: { language: string }) {
+  const [generating, setGenerating] = useState(false);
+  const [message, setMessage] = useState("");
+  const [failed, setFailed] = useState(false);
+
+  async function generate(event: React.MouseEvent<HTMLButtonElement>) {
+    const form = event.currentTarget.closest("form.record-form") as HTMLFormElement | null;
+    if (!form) return;
+    const formData = new FormData(form);
+    const detailsRaw = String(formData.get("detailsEN") ?? "").trim();
+    let details: DetailRow[] = [];
+    try {
+      details = JSON.parse(detailsRaw || "[]");
+    } catch {
+      setFailed(true);
+      setMessage("English details are not valid.");
+      return;
+    }
+    const source = {
+      title: String(formData.get("titleEN") ?? "").trim(),
+      subtitle: String(formData.get("subtitleEN") ?? "").trim(),
+      priceTitle: String(formData.get("priceTitleEN") ?? "").trim(),
+      description: String(formData.get("descriptionEN") ?? "").trim(),
+      address: String(formData.get("addressEN") ?? "").trim(),
+      tags: String(formData.get("tagsEN") ?? "").split(",").map((tag) => tag.trim()).filter(Boolean),
+      details,
+    };
+    if (!source.title || !source.description) {
+      setFailed(true);
+      setMessage("Add at least the English title and description first.");
+      return;
+    }
+    setGenerating(true);
+    setFailed(false);
+    setMessage("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/translate-content`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ targetLanguage: language.toLowerCase(), source }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.message ?? "Unable to generate this language");
+      const content = payload.content ?? {};
+      for (const fieldName of translatedFieldNames) {
+        const input = form.elements.namedItem(`${fieldName}${language}`) as HTMLInputElement | HTMLTextAreaElement | null;
+        if (!input) continue;
+        input.value = String(content[fieldName] ?? "");
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      const tagsInput = form.elements.namedItem(`tags${language}`) as HTMLInputElement | null;
+      if (tagsInput) {
+        tagsInput.value = Array.isArray(content.tags) ? content.tags.join(", ") : "";
+        tagsInput.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      window.dispatchEvent(new CustomEvent("admin:product-translation", {
+        detail: { fieldName: `details${language}`, details: content.details ?? [] },
+      }));
+      setMessage("Generated — review and edit anything you like.");
+    } catch (error) {
+      setFailed(true);
+      setMessage(error instanceof Error ? error.message : "Unable to generate this language");
+    } finally {
+      setGenerating(false);
+    }
+  }
+
+  return (
+    <div className="translation-action">
+      {message && <small className={failed ? "error" : "success"}>{message}</small>}
+      <button type="button" className="secondary" disabled={generating} onClick={generate}>
+        {generating ? "Generating…" : "Generate from English"}
+      </button>
+    </div>
+  );
+}
+
+const altLanguages = ["en", "fr", "de", "it", "pt", "es"] as const;
+
+function ImageAltManager({ field, value }: { field: Field; value: string }) {
+  const initial = useMemo(() => {
+    try {
+      const parsed = JSON.parse(value || "{}");
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      return {};
+    }
+  }, [value]);
+  const [alts, setAlts] = useState<Record<string, Record<string, string>>>(initial);
+  const [generating, setGenerating] = useState(false);
+  const [generationError, setGenerationError] = useState("");
+
+  async function generate() {
+    const form = document.querySelector("form.record-form") as HTMLFormElement | null;
+    if (!form) return;
+    const formData = new FormData(form);
+    const images = ["thumbnail", ...Array.from({ length: 50 }, (_, index) => `image${index + 1}`)]
+      .map((key) => ({ key, url: String(formData.get(key) ?? "").trim() }))
+      .filter((image) => image.url);
+    if (!images.length) {
+      setGenerationError("Add at least one image first.");
+      return;
+    }
+    const content = Object.fromEntries(altLanguages.map((language) => {
+      const suffix = language.toUpperCase();
+      return [language, {
+        title: String(formData.get(`title${suffix}`) ?? "").trim(),
+        subtitle: String(formData.get(`subtitle${suffix}`) ?? "").trim(),
+        description: String(formData.get(`description${suffix}`) ?? "").trim(),
+        tags: String(formData.get(`tags${suffix}`) ?? "").trim(),
+        details: String(formData.get(`details${suffix}`) ?? "").trim(),
+      }];
+    }));
+    setGenerating(true);
+    setGenerationError("");
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/generate-alt-text`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ images, content }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.message ?? "Unable to generate alt text");
+      setAlts((current) => {
+        const next = { ...current };
+        for (const [imageKey, translations] of Object.entries(payload.alts ?? {})) {
+          next[imageKey] = { ...(next[imageKey] ?? {}), ...(translations as Record<string, string>) };
+        }
+        return next;
+      });
+    } catch (error) {
+      setGenerationError(error instanceof Error ? error.message : "Unable to generate alt text");
+    } finally {
+      setGenerating(false);
+    }
+  }
+
+  return (
+    <div className="image-alt-manager">
+      <input type="hidden" name={field.name} value={JSON.stringify(alts)} />
+      <div className="image-alt-manager-head">
+        <div><b>Visual image alt text by language</b><small>Analyzes each Cloudflare image with the localized product context and creates a distinct, editable alt for every language.</small></div>
+        <button type="button" className="secondary" disabled={generating} onClick={generate}>
+          {generating ? "Generating…" : "Generate AI suggestions"}
+        </button>
+      </div>
+      {generationError && <small className="flow-error">{generationError}</small>}
+      {!Object.keys(alts).length ? (
+        <div className="image-alt-empty">No alt text has been generated yet.</div>
+      ) : (
+        <div className="image-alt-language-list">
+          {altLanguages.map((language) => {
+            const entries = Object.entries(alts).filter(([, translations]) => translations?.[language]);
+            if (!entries.length) return null;
+            return <section key={language}>
+              <h3>{language.toUpperCase()}</h3>
+              <div>{entries.map(([imageKey, translations]) => <label key={imageKey}>
+                <span>{imageKey === "thumbnail" ? "Thumbnail" : imageKey.replace("image", "Image ")}</span>
+                <input value={translations[language] ?? ""} maxLength={160} onChange={(event) => setAlts((current) => ({
+                  ...current,
+                  [imageKey]: { ...(current[imageKey] ?? {}), [language]: event.target.value },
+                }))} />
+              </label>)}</div>
+            </section>;
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ImageUrlInput({ field, value }: { field: Field; value: string }) {
+  const [currentUrl, setCurrentUrl] = useState(value);
+  const [imageAvailable, setImageAvailable] = useState(Boolean(value));
+
+  return (
+    <div className="image-url-editor">
+      <input
+        name={field.name}
+        required={field.required}
+        value={currentUrl}
+        placeholder="https://…"
+        onChange={(event) => {
+          setCurrentUrl(event.target.value);
+          setImageAvailable(Boolean(event.target.value.trim()));
+        }}
+      />
+      <span
+        className={`image-preview-trigger ${imageAvailable ? "available" : ""}`}
+        tabIndex={imageAvailable ? 0 : -1}
+        aria-label={imageAvailable ? `Preview ${field.label}` : "Enter an image URL to preview"}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+          <circle cx="12" cy="12" r="2.7" />
+        </svg>
+        {currentUrl.trim() && (
+          <span className="image-preview-popover">
+            <img
+              src={currentUrl}
+              alt={`${field.label} preview`}
+              onLoad={() => setImageAvailable(true)}
+              onError={() => setImageAvailable(false)}
+            />
+          </span>
+        )}
+      </span>
+    </div>
   );
 }
 
@@ -227,6 +465,20 @@ function DetailsInput({ field, value }: { field: Field; value: string }) {
     return rows.slice(0, maximum);
   }, [maximum, minimum, value]);
   const [rows, setRows] = useState(initialRows);
+
+  useEffect(() => {
+    function applyTranslation(event: Event) {
+      const detail = (event as CustomEvent<{ fieldName: string; details: DetailRow[] }>).detail;
+      if (detail?.fieldName !== field.name || !Array.isArray(detail.details)) return;
+      const translatedRows = detail.details
+        .map((row) => ({ label: String(row?.label ?? ""), value: String(row?.value ?? "") }))
+        .slice(0, maximum);
+      while (translatedRows.length < minimum) translatedRows.push({ label: "", value: "" });
+      setRows(translatedRows);
+    }
+    window.addEventListener("admin:product-translation", applyTranslation);
+    return () => window.removeEventListener("admin:product-translation", applyTranslation);
+  }, [field.name, maximum, minimum]);
 
   function updateRow(index: number, key: keyof DetailRow, nextValue: string) {
     setRows((current) =>

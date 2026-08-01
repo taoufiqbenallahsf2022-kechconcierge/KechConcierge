@@ -248,6 +248,36 @@ model Product {
   image18       String?
   image19       String?
   image20       String?
+  image22       String?
+  image23       String?
+  image24       String?
+  image25       String?
+  image26       String?
+  image27       String?
+  image28       String?
+  image29       String?
+  image30       String?
+  image31       String?
+  image32       String?
+  image33       String?
+  image34       String?
+  image35       String?
+  image36       String?
+  image37       String?
+  image38       String?
+  image39       String?
+  image40       String?
+  image41       String?
+  image42       String?
+  image43       String?
+  image44       String?
+  image45       String?
+  image46       String?
+  image47       String?
+  image48       String?
+  image49       String?
+  image50       String?
+  imageAlts     Json?
   isActive      Boolean     @default(true)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt

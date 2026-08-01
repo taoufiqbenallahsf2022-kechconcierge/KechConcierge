@@ -542,15 +542,26 @@ export default function Header() {
             }
             className="flex items-center gap-2 text-left disabled:cursor-wait"
           >
-            <Image
-              src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/fad1e3c7-d467-42db-58c0-d101e4598b00/public"
-              alt="Moorish Concierge"
-              width={280}
-              height={84}
-              className="h-16 w-auto object-contain"
-              priority
-              unoptimized
-            />
+            <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-2xl border border-orange-200 bg-orange-50 p-2 shadow-sm">
+              <Image
+                src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/9439a16a-b801-4983-24a3-04e000b8f400/public"
+                alt=""
+                width={32}
+                height={32}
+                className="ml-1 h-[22px] w-[22px] object-contain"
+                priority
+                unoptimized
+              />
+            </span>
+
+            <span className="hidden text-left sm:block">
+              <span className="block text-lg font-black tracking-tight text-zinc-950">
+                Moorish Concierge
+              </span>
+              <span className="-mt-1 block text-xs font-medium text-orange-700">
+                Marrakech concierge services
+              </span>
+            </span>
           </button>
 
           <nav className="hidden items-center gap-5 text-sm font-semibold text-zinc-700 lg:flex">

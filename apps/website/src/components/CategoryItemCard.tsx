@@ -129,7 +129,7 @@ export default function CategoryItemCard({
         <div className="relative h-64 overflow-hidden">
           <Image
             src={item.thumbnail}
-            alt={item.title}
+            alt={item.thumbnailAlt || item.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className={`object-cover transition duration-500 ${
