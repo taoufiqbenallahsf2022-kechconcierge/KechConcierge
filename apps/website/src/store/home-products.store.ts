@@ -6,6 +6,7 @@ export type HomeProduct = {
   uniqueCode: string;
   order: number | null;
   thumbnail: string;
+  thumbnailAlt: string;
   priceEuro: number;
   title: string;
   subtitle: string;

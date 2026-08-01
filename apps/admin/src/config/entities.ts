@@ -1,9 +1,9 @@
 import countries from 'i18n-iso-countries';
 import enCountries from 'i18n-iso-countries/langs/en.json';
 countries.registerLocale(enCountries);
-export type FieldKind='text'|'email'|'phone'|'textarea'|'number'|'boolean'|'date'|'datetime'|'password'|'enum'|'image'|'tags'|'keyValue';
+export type FieldKind='text'|'email'|'phone'|'textarea'|'number'|'boolean'|'date'|'datetime'|'password'|'enum'|'image'|'imageAltManager'|'tags'|'keyValue';
 export type FieldOption=string|{value:string;label:string};
-export type Field={name:string;label:string;kind:FieldKind;required?:boolean;minItems?:number;maxItems?:number;options?:FieldOption[];readOnly?:boolean;hiddenInForm?:boolean;section?:string;placeholder?:string};
+export type Field={name:string;label:string;kind:FieldKind;required?:boolean;minItems?:number;maxItems?:number;options?:FieldOption[];readOnly?:boolean;hiddenInForm?:boolean;section?:string;placeholder?:string;sourceField?:string};
 export type EntityConfig={key:string;label:string;plural:string;readOnly?:boolean;dateFields?:string[];titleFields:string[];subtitleFields?:string[];listFields:string[];fields:Field[]};
 const person:Field[]=[
 {name:'firstName',label:'First name',kind:'text',required:true,section:'Personal information'},
@@ -24,15 +24,15 @@ const audit:Field[]=[
 ];
 const productLanguages=['EN','FR','DE','IT','PT','ES'];
 const productLocalized:Field[]=productLanguages.flatMap(lang=>[
-{name:`title${lang}`,label:`Title (${lang})`,kind:'text',required:true,section:`Content · ${lang}`},
-{name:`subtitle${lang}`,label:`Subtitle (${lang})`,kind:'text',required:true,section:`Content · ${lang}`},
-{name:`priceTitle${lang}`,label:`Price label (${lang})`,kind:'text',required:true,section:`Content · ${lang}`},
-{name:`description${lang}`,label:`Description (${lang})`,kind:'textarea',required:true,section:`Content · ${lang}`},
-{name:`address${lang}`,label:`Address (${lang})`,kind:'textarea',required:true,section:`Content · ${lang}`},
-{name:`tags${lang}`,label:`Tags (${lang})`,kind:'tags',required:true,minItems:2,section:`Content · ${lang}`},
-{name:`details${lang}`,label:`Details (${lang})`,kind:'keyValue',required:true,minItems:3,maxItems:10,section:`Content · ${lang}`}
+{name:`title${lang}`,label:`Title (${lang})`,kind:'text',section:`Content · ${lang}`},
+{name:`subtitle${lang}`,label:`Subtitle (${lang})`,kind:'text',section:`Content · ${lang}`},
+{name:`priceTitle${lang}`,label:`Price label (${lang})`,kind:'text',section:`Content · ${lang}`},
+{name:`description${lang}`,label:`Description (${lang})`,kind:'textarea',section:`Content · ${lang}`},
+{name:`address${lang}`,label:`Address (${lang})`,kind:'textarea',section:`Content · ${lang}`},
+{name:`tags${lang}`,label:`Tags (${lang})`,kind:'tags',minItems:2,section:`Content · ${lang}`},
+{name:`details${lang}`,label:`Details (${lang})`,kind:'keyValue',minItems:3,maxItems:10,section:`Content · ${lang}`}
 ]);
-const imageFields:Field[]=Array.from({length:21},(_,i)=>({name:`image${i+1}`,label:`Image ${i+1}`,kind:'image',section:'Gallery'}));
+const imageFields:Field[]=Array.from({length:50},(_,i)=>({name:`image${i+1}`,label:`Image ${i+1}`,kind:'image',section:'Gallery'}));
 export const entities:EntityConfig[]=[
 {key:'individuals',label:'Individual',plural:'Individuals',titleFields:['firstName','lastName'],subtitleFields:['manualEmail','email','mobilePhone'],listFields:['firstName','lastName','manualEmail','email','mobilePhone','source','isActive','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person.map(field=>field.name==='email'?{...field,name:'manualEmail',label:'Manual email'}:field),{name:'email',label:'Account email',kind:'email',readOnly:true,hiddenInForm:true,section:'Authentication'},{name:'authProvider',label:'Authentication provider',kind:'text',readOnly:true,section:'Authentication'},{name:'isActive',label:'Active',kind:'boolean',section:'Status'},{name:'emailVerified',label:'Email verified',kind:'boolean',section:'Status'},{name:'lastSuccessfulLoginDate',label:'Last successful login',kind:'datetime',readOnly:true,section:'Authentication'},...audit]},
 {key:'leads',label:'Lead',plural:'Leads',titleFields:['firstName','lastName'],subtitleFields:['email'],listFields:['firstName','lastName','email','mobilePhone','statusDescription','source','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person,{name:'statusDescription',label:'Status',kind:'text',required:true,section:'Status'},{name:'individualId',label:'Individual ID',kind:'text',required:true,section:'Relationships'},...audit]},
@@ -41,11 +41,12 @@ export const entities:EntityConfig[]=[
 {key:'products',label:'Product',plural:'Products',titleFields:['titleEN','uniqueCode'],subtitleFields:['type'],listFields:['thumbnail','uniqueCode','titleEN','type','priceEuro','isActive','updatedAt'],dateFields:['createdAt','updatedAt'],fields:[
 {name:'uniqueCode',label:'Unique code',kind:'text',required:true,section:'General information'},
 {name:'type',label:'Product type',kind:'enum',required:true,options:['VILLA','SWIMMINGPOOL','SPA','RESTAURANT','ACTIVITY','TRANSPORTATION'],section:'General information'},
-{name:'priceEuro',label:'Price (€)',kind:'number',required:true,section:'General information'},
+{name:'priceEuro',label:'Price (€)',kind:'number',section:'General information'},
 {name:'order',label:'Display order',kind:'number',section:'General information'},
 {name:'thumbnail',label:'Thumbnail',kind:'image',required:true,section:'Media'},
 {name:'isActive',label:'Active',kind:'boolean',section:'Status'},
 ...imageFields,...productLocalized,
+{name:'imageAlts',label:'Image SEO alt text',kind:'imageAltManager',section:'SEO · Image alt text'},
 {name:'createdAt',label:'Created date',kind:'datetime',readOnly:true,section:'System information'},
 {name:'updatedAt',label:'Last modified',kind:'datetime',readOnly:true,section:'System information'}]},
 {key:'consents',label:'Consent',plural:'Consents',titleFields:['channel'],subtitleFields:['channelStatus'],listFields:['individualId','channel','channelStatus','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[{name:'individualId',label:'Individual ID',kind:'text',required:true,section:'Relationship'},{name:'channel',label:'Channel',kind:'enum',required:true,options:['EMAIL','SMS','WHATSAPP','PHONE'],section:'Consent'},{name:'channelStatus',label:'Status',kind:'enum',options:['OPTIN','UNKNOWN','OPTOUT'],section:'Consent'},...audit]},

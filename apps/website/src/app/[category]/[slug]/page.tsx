@@ -152,10 +152,10 @@ function isDisplayDetail(
 
 function extractImages(
   product: ProductDetails
-): string[] {
-  const images: string[] = [];
+): { url: string; alt: string }[] {
+  const images: { url: string; alt: string }[] = [];
 
-  for (let index = 1; index <= 20; index += 1) {
+  for (let index = 1; index <= 50; index += 1) {
     const imageKey =
       `image${index}` as keyof ProductDetails;
 
@@ -165,7 +165,10 @@ function extractImages(
       typeof image === "string" &&
       image.trim().length > 0
     ) {
-      images.push(image);
+      images.push({
+        url: image,
+        alt: product.imageAlts?.[`image${index}`] || product.title,
+      });
     }
   }
 
@@ -173,7 +176,7 @@ function extractImages(
     images.length === 0 &&
     product.thumbnail
   ) {
-    images.push(product.thumbnail);
+    images.push({ url: product.thumbnail, alt: product.thumbnailAlt || product.title });
   }
 
   return images;
@@ -541,7 +544,7 @@ export default function DetailsPage() {
 
   const activeImage =
     images[selectedImage] ||
-    product.thumbnail;
+    { url: product.thumbnail, alt: product.thumbnailAlt || product.title };
 
   const FRONTEND_URL =
   process.env.NEXT_PUBLIC_API_URL;
@@ -578,11 +581,9 @@ export default function DetailsPage() {
             onTouchEnd={handleTouchEnd}
           >
             <Image
-              key={`${selectedImage}-${activeImage}`}
-              src={activeImage}
-              alt={`${product.title} image ${
-                selectedImage + 1
-              }`}
+              key={`${selectedImage}-${activeImage.url}`}
+              src={activeImage.url}
+              alt={activeImage.alt}
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 55vw"
@@ -622,7 +623,7 @@ export default function DetailsPage() {
               {images.map(
                 (image, index) => (
                   <button
-                    key={`${index}-${image}`}
+                    key={`${index}-${image.url}`}
                     type="button"
                     onClick={() =>
                       setSelectedImage(index)
@@ -637,10 +638,8 @@ export default function DetailsPage() {
                     }`}
                   >
                     <Image
-                      src={image}
-                      alt={`${product.title} image ${
-                        index + 1
-                      }`}
+                      src={image.url}
+                      alt={image.alt}
                       fill
                       sizes="128px"
                       className="object-cover"

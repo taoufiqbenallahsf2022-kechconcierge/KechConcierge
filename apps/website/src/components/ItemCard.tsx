@@ -13,6 +13,7 @@ type ItemCardProps = {
     uniqueCode?: string;
     slug?: string;
     thumbnail?: string;
+    thumbnailAlt?: string;
     images?: string[];
     title: string;
     subtitle?: string;
@@ -115,7 +116,7 @@ export default function ItemCard({
       <div className="relative h-56 overflow-hidden">
         <Image
           src={optimizedImageUrl}
-          alt={item.title}
+          alt={item.thumbnailAlt || item.title}
           fill
           className={`object-cover transition duration-500 ${
             loading

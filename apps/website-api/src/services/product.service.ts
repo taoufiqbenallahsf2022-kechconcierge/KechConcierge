@@ -23,6 +23,12 @@ function normalizeLang(lang?: string): Language {
 }
 
 function mapProduct(product: any, lang: Language, full = false) {
+  const localizedImageAlts = Object.fromEntries(
+    Object.entries(product.imageAlts ?? {}).map(([key, translations]: [string, any]) => [
+      key,
+      translations?.[lang.toLowerCase()] || translations?.EN || translations?.en || "",
+    ]),
+  );
   const base = {
     id: product.id,
     type: product.type,
@@ -35,36 +41,25 @@ function mapProduct(product: any, lang: Language, full = false) {
     subtitle: product[`subtitle${lang}`],
     priceTitle: product[`priceTitle${lang}`],
     address: product[`address${lang}`],
+    thumbnailAlt: localizedImageAlts.thumbnail || product[`title${lang}`] || "",
   };
 
   if (!full) return base;
 
+  const gallery = Object.fromEntries(
+    Array.from({ length: 50 }, (_, index) => {
+      const key = `image${index + 1}`;
+      return [key, product[key]];
+    }),
+  );
   return {
     ...base,
     description: product[`description${lang}`],
     tags: product[`tags${lang}`],
     details: product[`details${lang}`],
 
-    image1: product.image1,
-    image2: product.image2,
-    image3: product.image3,
-    image4: product.image4,
-    image5: product.image5,
-    image6: product.image6,
-    image7: product.image7,
-    image8: product.image8,
-    image9: product.image9,
-    image10: product.image10,
-    image11: product.image11,
-    image12: product.image12,
-    image13: product.image13,
-    image14: product.image14,
-    image15: product.image15,
-    image16: product.image16,
-    image17: product.image17,
-    image18: product.image18,
-    image19: product.image19,
-    image20: product.image20,
+    ...gallery,
+    imageAlts: localizedImageAlts,
   };
 }
 
