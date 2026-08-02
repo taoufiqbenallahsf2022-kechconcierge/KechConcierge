@@ -2,4 +2,4 @@ import {useParams} from 'react-router-dom';import {entityMap} from '../../config
 const entity='products',config=entityMap[entity];
 export function ProductsList(){return <EntityListView entity={entity} config={config}/>}
 export function ProductsCreate(){return <EntityCreateView entity={entity} config={config}/>}
-export function ProductsDetail(){const {id=''}=useParams();const {data,isLoading,error}=useGetOneQuery({entity,id});if(isLoading)return <div className="empty-state">Loading record…</div>;if(error||!data)return <div className="empty-state">Record not found.</div>;return <EntityDetailShell entity={entity} id={id} config={config} data={data}></EntityDetailShell>}
+export function ProductsDetail(){const {id=''}=useParams();const {data,isLoading,error}=useGetOneQuery({entity,id});if(isLoading)return <div className="empty-state">Loading record…</div>;if(error||!data)return <div className="empty-state">Record not found.</div>;const gallery=Array.from({length:50},(_,index)=>data[`image${index+1}`]).filter(Boolean);return <EntityDetailShell entity={entity} id={id} config={config} data={{...data,gallery}}></EntityDetailShell>}
