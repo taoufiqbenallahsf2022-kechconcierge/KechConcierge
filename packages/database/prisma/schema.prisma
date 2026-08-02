@@ -21,6 +21,22 @@ model EmailVerificationToken {
   @@index([email])
 }
 
+model Segment {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  sourceObject String
+  definition   Json
+  isActive     Boolean  @default(true)
+  createdDate  DateTime @default(now())
+  createdBy    String?
+  updatedDate  DateTime @updatedAt
+  updatedBy    String?
+
+  @@index([sourceObject])
+  @@index([updatedDate])
+}
+
 model SenderEmail {
   id          String   @id @default(cuid())
   name        String

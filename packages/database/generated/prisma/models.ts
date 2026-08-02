@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/EmailVerificationToken.ts'
+export type * from './models/Segment.ts'
 export type * from './models/SenderEmail.ts'
 export type * from './models/EmailTemplate.ts'
 export type * from './models/AudienceAutomation.ts'

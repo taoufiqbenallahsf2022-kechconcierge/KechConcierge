@@ -6,9 +6,11 @@ import { DataHub } from "./pages/DataHub";
 import {
   SenderEmailsPage,
 } from "./pages/StudioPages";
-import { EmailStudioPage } from "./pages/EnhancedStudioPages";
+import { EmailStudioPage } from "./pages/EmailStudioPage";
 import { AutomationEditorPage, AutomationsListPage, FlowsListPage } from "./pages/AutomationManagementPages";
 import { VisualFlowEditorPage } from "./pages/VisualFlowBuilderPage";
+import { SegmentBuilderPage, SegmentsListPage } from "./pages/SegmentsPages";
+import { SegmentGuidedPage, SegmentModePage } from "./pages/SegmentGuidedPage";
 import { IndividualList, IndividualCreate, IndividualDetail } from "./features/individuals/IndividualPages";
 import { ProductsList, ProductsCreate, ProductsDetail } from "./features/products/ProductsPages";
 import { LeadsList, LeadsCreate, LeadsDetail } from "./features/leads/LeadsPages";
@@ -60,6 +62,11 @@ export default function App() {
         <Route index element={<Navigate to="/data-hub" replace />} />
         <Route path="data-hub" element={<DataHub />} />
         <Route path="email-studio" element={<EmailStudioPage />} />
+        <Route path="segments" element={<SegmentsListPage />} />
+        <Route path="segments/new" element={<SegmentModePage />} />
+        <Route path="segments/new/guided" element={<SegmentGuidedPage />} />
+        <Route path="segments/new/advanced" element={<SegmentBuilderPage />} />
+        <Route path="segments/:id" element={<SegmentBuilderPage />} />
         <Route path="automation-studio/automations" element={<AutomationsListPage />} />
         <Route path="automation-studio/automations/new" element={<AutomationEditorPage />} />
         <Route path="automation-studio/automations/:id" element={<AutomationEditorPage />} />
