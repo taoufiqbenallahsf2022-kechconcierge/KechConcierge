@@ -23,6 +23,11 @@ export * from './enums.ts';
  */
 export type EmailVerificationToken = Prisma.EmailVerificationTokenModel
 /**
+ * Model Segment
+ * 
+ */
+export type Segment = Prisma.SegmentModel
+/**
  * Model SenderEmail
  * 
  */

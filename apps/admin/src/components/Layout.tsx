@@ -7,6 +7,7 @@ const groups = [
     label: "Studios",
     items: [
       { to: "/email-studio", label: "Email Studio", icon: "✦" },
+      { to: "/segments", label: "Segments", icon: "◎" },
       { to: "/automation-studio/automations", label: "Automations", icon: "↯" },
       { to: "/automation-studio/flows", label: "Flows", icon: "⌁" },
     ],

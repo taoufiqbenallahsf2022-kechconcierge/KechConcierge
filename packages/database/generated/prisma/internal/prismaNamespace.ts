@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   EmailVerificationToken: 'EmailVerificationToken',
+  Segment: 'Segment',
   SenderEmail: 'SenderEmail',
   EmailTemplate: 'EmailTemplate',
   AudienceAutomation: 'AudienceAutomation',
@@ -422,7 +423,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "emailVerificationToken" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user"
+    modelProps: "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -497,6 +498,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.EmailVerificationTokenCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.EmailVerificationTokenCountAggregateOutputType> | number
+        }
+      }
+    }
+    Segment: {
+      payload: Prisma.$SegmentPayload<ExtArgs>
+      fields: Prisma.SegmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SegmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SegmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>
+        }
+        findFirst: {
+          args: Prisma.SegmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SegmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>
+        }
+        findMany: {
+          args: Prisma.SegmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>[]
+        }
+        create: {
+          args: Prisma.SegmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>
+        }
+        createMany: {
+          args: Prisma.SegmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SegmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>[]
+        }
+        delete: {
+          args: Prisma.SegmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>
+        }
+        update: {
+          args: Prisma.SegmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.SegmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SegmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SegmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.SegmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SegmentPayload>
+        }
+        aggregate: {
+          args: Prisma.SegmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSegment>
+        }
+        groupBy: {
+          args: Prisma.SegmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SegmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SegmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SegmentCountAggregateOutputType> | number
         }
       }
     }
@@ -2181,6 +2256,22 @@ export const EmailVerificationTokenScalarFieldEnum = {
 export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
 
 
+export const SegmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  sourceObject: 'sourceObject',
+  definition: 'definition',
+  isActive: 'isActive',
+  createdDate: 'createdDate',
+  createdBy: 'createdBy',
+  updatedDate: 'updatedDate',
+  updatedBy: 'updatedBy'
+} as const
+
+export type SegmentScalarFieldEnum = (typeof SegmentScalarFieldEnum)[keyof typeof SegmentScalarFieldEnum]
+
+
 export const SenderEmailScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -3177,6 +3268,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   emailVerificationToken?: Prisma.EmailVerificationTokenOmit
+  segment?: Prisma.SegmentOmit
   senderEmail?: Prisma.SenderEmailOmit
   emailTemplate?: Prisma.EmailTemplateOmit
   audienceAutomation?: Prisma.AudienceAutomationOmit

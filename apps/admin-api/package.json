@@ -8,7 +8,8 @@
     "dev": "tsx watch src/server.ts",
     "prebuild": "npm --prefix ../../packages/database run generate",
     "build": "tsc",
-    "start": "node dist/apps/admin-api/src/server.js"
+    "start": "node dist/apps/admin-api/src/server.js",
+    "simulate:segments": "tsx src/scripts/generateSegmentSimulation.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

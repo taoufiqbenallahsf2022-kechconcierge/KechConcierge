@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   EmailVerificationToken: 'EmailVerificationToken',
+  Segment: 'Segment',
   SenderEmail: 'SenderEmail',
   EmailTemplate: 'EmailTemplate',
   AudienceAutomation: 'AudienceAutomation',
@@ -104,6 +105,22 @@ export const EmailVerificationTokenScalarFieldEnum = {
 } as const
 
 export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+
+
+export const SegmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  sourceObject: 'sourceObject',
+  definition: 'definition',
+  isActive: 'isActive',
+  createdDate: 'createdDate',
+  createdBy: 'createdBy',
+  updatedDate: 'updatedDate',
+  updatedBy: 'updatedBy'
+} as const
+
+export type SegmentScalarFieldEnum = (typeof SegmentScalarFieldEnum)[keyof typeof SegmentScalarFieldEnum]
 
 
 export const SenderEmailScalarFieldEnum = {
