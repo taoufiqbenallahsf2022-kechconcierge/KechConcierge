@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { generateProductAltText, generateProductTranslation, service } from "../../services/entities/productService.js";
+import { createCloudflareDirectUpload } from "../../services/cloudflareImagesService.js";
 export const router = Router();
 router.get("/", async (req, res, next) => {
   try {
@@ -32,6 +33,13 @@ router.post("/generate-alt-text", async (req, res, next) => {
 router.post("/translate-content", async (req, res, next) => {
   try {
     res.json(await generateProductTranslation(req.body));
+  } catch (e) {
+    next(e);
+  }
+});
+router.post("/images/direct-upload", async (req, res, next) => {
+  try {
+    res.status(201).json(await createCloudflareDirectUpload(req.body ?? {}));
   } catch (e) {
     next(e);
   }

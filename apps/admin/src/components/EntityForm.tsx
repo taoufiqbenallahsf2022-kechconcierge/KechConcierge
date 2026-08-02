@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import type { EntityConfig, Field } from "../config/entities";
 import { API_BASE_URL } from "../store/api";
+import { ProductImageGallery } from "./ProductImageGallery";
 function inputDate(value: unknown, datetime = false) {
   if (!value) return "";
   const d = new Date(String(value));
@@ -38,6 +39,9 @@ function parse(field: Field, value: string, checked: boolean) {
       return {};
     }
   }
+  if (field.kind === "imageGallery") {
+    try { const parsed = JSON.parse(value || "[]"); return Array.isArray(parsed) ? parsed.map(String).filter(Boolean).slice(0, 50) : []; } catch { return []; }
+  }
   return value || null;
 }
 function initialValue(field: Field, value: unknown) {
@@ -48,6 +52,7 @@ function initialValue(field: Field, value: unknown) {
     return JSON.stringify(value);
   if (field.kind === "imageAltManager" && value && typeof value === "object")
     return JSON.stringify(value);
+  if (field.kind === "imageGallery" && Array.isArray(value)) return JSON.stringify(value);
   return String(value ?? "");
 }
 export function EntityForm({
@@ -78,6 +83,8 @@ export function EntityForm({
     const fd = new FormData(e.currentTarget),
       body: Record<string, unknown> = {};
     try {
+      if (Number(fd.get("galleryUploadPending") ?? 0) > 0) throw new Error("Wait for all gallery images to finish uploading before saving.");
+      if (Number(fd.get("galleryUploadFailed") ?? 0) > 0) throw new Error("Remove failed gallery images before saving.");
       for (const f of config.fields.filter(
         (x) => !x.hiddenInForm && !x.readOnly,
       )) {
@@ -100,6 +107,11 @@ export function EntityForm({
         ) {
           throw new Error(`${f.label} requires at least ${f.minItems} entries.`);
         }
+      }
+      if (config.key === "products" && Array.isArray(body.gallery)) {
+        const gallery = body.gallery as string[];
+        for (let index = 0; index < 50; index++) body[`image${index + 1}`] = gallery[index] ?? null;
+        delete body.gallery;
       }
       await onSubmit(body);
     } catch (x) {
@@ -125,6 +137,8 @@ export function EntityForm({
                   f,
                   f.kind === "imageAltManager"
                     ? initial.imageAlts
+                    : f.kind === "imageGallery"
+                      ? Array.from({ length: 50 }, (_, index) => initial[`image${index + 1}`]).filter(Boolean)
                     : initial[f.name],
                 )}
                 checked={Boolean(initial[f.name])}
@@ -162,7 +176,7 @@ function FieldInput({
     );
   return (
     <label
-      className={`form-field ${field.kind === "textarea" || field.kind === "keyValue" ? "wide" : ""}`}
+      className={`form-field ${field.kind === "textarea" || field.kind === "keyValue" || field.kind === "imageGallery" || field.kind === "imageAltManager" ? "wide" : ""}`}
     >
       <span>
         {field.label}
@@ -181,6 +195,8 @@ function FieldInput({
         <DetailsInput field={field} value={value} />
       ) : field.kind === "imageAltManager" ? (
         <ImageAltManager field={field} value={value} />
+      ) : field.kind === "imageGallery" ? (
+        <ProductImageGallery name={field.name} value={value} />
       ) : field.kind === "textarea" ? (
         <textarea
           {...common}
@@ -318,13 +334,30 @@ function ImageAltManager({ field, value }: { field: Field; value: string }) {
   const [generating, setGenerating] = useState(false);
   const [generationError, setGenerationError] = useState("");
 
+  useEffect(() => {
+    const reorder = (event: Event) => {
+      const mapping = (event as CustomEvent<{ mapping: Record<string, string> }>).detail?.mapping ?? {};
+      setAlts(current => {
+        const next: Record<string, Record<string, string>> = {};
+        if (current.thumbnail) next.thumbnail = current.thumbnail;
+        for (const [oldKey, newKey] of Object.entries(mapping)) if (current[oldKey]) next[newKey] = current[oldKey];
+        return next;
+      });
+    };
+    window.addEventListener("admin:product-gallery-order", reorder);
+    return () => window.removeEventListener("admin:product-gallery-order", reorder);
+  }, []);
+
   async function generate() {
     const form = document.querySelector("form.record-form") as HTMLFormElement | null;
     if (!form) return;
     const formData = new FormData(form);
-    const images = ["thumbnail", ...Array.from({ length: 50 }, (_, index) => `image${index + 1}`)]
-      .map((key) => ({ key, url: String(formData.get(key) ?? "").trim() }))
-      .filter((image) => image.url);
+    let gallery: string[] = [];
+    try { const parsed = JSON.parse(String(formData.get("gallery") ?? "[]")); gallery = Array.isArray(parsed) ? parsed.map(String).filter(Boolean).slice(0, 50) : []; } catch { gallery = []; }
+    const images = [
+      { key: "thumbnail", url: String(formData.get("thumbnail") ?? "").trim() },
+      ...gallery.map((url, index) => ({ key: `image${index + 1}`, url })),
+    ].filter((image) => image.url);
     if (!images.length) {
       setGenerationError("Add at least one image first.");
       return;

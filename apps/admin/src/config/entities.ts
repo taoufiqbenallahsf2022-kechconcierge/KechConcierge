@@ -1,9 +1,9 @@
 import countries from 'i18n-iso-countries';
 import enCountries from 'i18n-iso-countries/langs/en.json';
 countries.registerLocale(enCountries);
-export type FieldKind='text'|'email'|'phone'|'textarea'|'number'|'boolean'|'date'|'datetime'|'password'|'enum'|'image'|'imageAltManager'|'tags'|'keyValue';
+export type FieldKind='text'|'email'|'phone'|'textarea'|'number'|'boolean'|'date'|'datetime'|'password'|'enum'|'image'|'imageGallery'|'imageAltManager'|'tags'|'keyValue';
 export type FieldOption=string|{value:string;label:string};
-export type Field={name:string;label:string;kind:FieldKind;required?:boolean;minItems?:number;maxItems?:number;options?:FieldOption[];readOnly?:boolean;hiddenInForm?:boolean;section?:string;placeholder?:string;sourceField?:string};
+export type Field={name:string;label:string;kind:FieldKind;required?:boolean;minItems?:number;maxItems?:number;options?:FieldOption[];readOnly?:boolean;hiddenInForm?:boolean;hiddenInDetail?:boolean;section?:string;placeholder?:string;sourceField?:string};
 export type EntityConfig={key:string;label:string;plural:string;readOnly?:boolean;dateFields?:string[];titleFields:string[];subtitleFields?:string[];listFields:string[];fields:Field[]};
 const person:Field[]=[
 {name:'firstName',label:'First name',kind:'text',required:true,section:'Personal information'},
@@ -32,7 +32,7 @@ const productLocalized:Field[]=productLanguages.flatMap(lang=>[
 {name:`tags${lang}`,label:`Tags (${lang})`,kind:'tags',minItems:2,section:`Content · ${lang}`},
 {name:`details${lang}`,label:`Details (${lang})`,kind:'keyValue',minItems:3,maxItems:10,section:`Content · ${lang}`}
 ]);
-const imageFields:Field[]=Array.from({length:50},(_,i)=>({name:`image${i+1}`,label:`Image ${i+1}`,kind:'image',section:'Gallery'}));
+const imageFields:Field[]=[...Array.from({length:50},(_,i)=>({name:`image${i+1}`,label:`Image ${i+1}`,kind:'image' as const,section:'Gallery',hiddenInForm:true,hiddenInDetail:true})),{name:'gallery',label:'Product gallery',kind:'imageGallery',section:'Gallery'}];
 export const entities:EntityConfig[]=[
 {key:'individuals',label:'Individual',plural:'Individuals',titleFields:['firstName','lastName'],subtitleFields:['manualEmail','email','mobilePhone'],listFields:['firstName','lastName','manualEmail','email','mobilePhone','source','isActive','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person.map(field=>field.name==='email'?{...field,name:'manualEmail',label:'Manual email'}:field),{name:'email',label:'Account email',kind:'email',readOnly:true,hiddenInForm:true,section:'Authentication'},{name:'authProvider',label:'Authentication provider',kind:'text',readOnly:true,section:'Authentication'},{name:'isActive',label:'Active',kind:'boolean',section:'Status'},{name:'emailVerified',label:'Email verified',kind:'boolean',section:'Status'},{name:'lastSuccessfulLoginDate',label:'Last successful login',kind:'datetime',readOnly:true,section:'Authentication'},...audit]},
 {key:'leads',label:'Lead',plural:'Leads',titleFields:['firstName','lastName'],subtitleFields:['email'],listFields:['firstName','lastName','email','mobilePhone','statusDescription','source','updatedDate'],dateFields:['createdDate','updatedDate'],fields:[...person,{name:'statusDescription',label:'Status',kind:'text',required:true,section:'Status'},{name:'individualId',label:'Individual ID',kind:'text',required:true,section:'Relationships'},...audit]},
