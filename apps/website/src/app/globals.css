@@ -36,3 +36,13 @@ button, input, textarea { font: inherit; }
     radial-gradient(circle at bottom right, rgba(199, 51, 31, 0.16), transparent 32%),
     linear-gradient(135deg, #fffaf7, #ffffff);
 }
+
+@keyframes booking-slide {
+  from { transform: translateX(100%); opacity: 0.65; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes booking-rise {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

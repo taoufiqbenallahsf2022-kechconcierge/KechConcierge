@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
 import {
   TouchEvent,
@@ -23,6 +23,8 @@ import {
   ProductType,
   useProductDetailsStore,
 } from "@/store/product-details.store";
+import ProductBookingPanel from "@/components/ProductBookingPanel";
+import ProductImageLightbox from "@/components/ProductImageLightbox";
 
 type CategorySlug =
   | "villas"
@@ -283,6 +285,9 @@ export default function DetailsPage() {
 
   const [selectedImage, setSelectedImage] =
     useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [showStickyBooking, setShowStickyBooking] = useState(false);
+  const bookingAnchorRef = useRef<HTMLDivElement | null>(null);
 
   const touchStartX = useRef<number | null>(
     null
@@ -399,6 +404,24 @@ export default function DetailsPage() {
     startLoading,
     uniqueCode,
   ]);
+
+  useEffect(() => {
+    const anchor = bookingAnchorRef.current;
+    if (!anchor) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyBooking(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(anchor);
+    return () => observer.disconnect();
+  }, [product?.id]);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("moorish-product-booking-bar", { detail: { visible: showStickyBooking } }));
+    return () => {
+      window.dispatchEvent(new CustomEvent("moorish-product-booking-bar", { detail: { visible: false } }));
+    };
+  }, [showStickyBooking]);
 
   const images = useMemo(() => {
     if (!product) {
@@ -564,7 +587,7 @@ export default function DetailsPage() {
   `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
   return (
-    <section className="mx-auto max-w-7xl overflow-x-hidden px-4 py-20">
+    <section className="mx-auto max-w-7xl overflow-x-clip px-4 pb-32 pt-20">
       <Link
         href={categoryPath}
         className="font-black text-orange-700 transition hover:text-orange-800"
@@ -573,12 +596,13 @@ export default function DetailsPage() {
       </Link>
 
       <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-        <div className="min-w-0 overflow-hidden">
+        <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
           <div
-            className="relative h-[520px] w-full max-w-full touch-pan-y overflow-hidden rounded-[2rem] card-shadow"
+            className="group relative h-[520px] w-full max-w-full touch-pan-y cursor-zoom-in overflow-hidden rounded-[2rem] card-shadow"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onClick={() => setLightboxOpen(true)}
           >
             <Image
               key={`${selectedImage}-${activeImage.url}`}
@@ -590,11 +614,15 @@ export default function DetailsPage() {
               className="object-cover"
             />
 
+            <span className="pointer-events-none absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-zinc-950 opacity-0 shadow-xl transition duration-300 group-hover:scale-110 group-hover:opacity-100">
+              <ZoomIn size={25} />
+            </span>
+
             {images.length > 1 && (
               <>
                 <button
                   type="button"
-                  onClick={showPreviousImage}
+                  onClick={(event) => { event.stopPropagation(); showPreviousImage(); }}
                   aria-label="{t.productDetails.previousImage}"
                   className="absolute left-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-lg backdrop-blur transition hover:bg-white"
                 >
@@ -603,7 +631,7 @@ export default function DetailsPage() {
 
                 <button
                   type="button"
-                  onClick={showNextImage}
+                  onClick={(event) => { event.stopPropagation(); showNextImage(); }}
                   aria-label="{t.productDetails.nextImage}"
                   className="absolute right-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-lg backdrop-blur transition hover:bg-white"
                 >
@@ -671,6 +699,10 @@ export default function DetailsPage() {
           <p className="text-3xl font-black text-orange-700">
             €{product.priceEuro}
           </p>
+
+          <div ref={bookingAnchorRef}>
+            <ProductBookingPanel locale={locale} productName={product.title} sticky={false} />
+          </div>
 
           {product.subtitle && (
             <p className="mt-5 break-words text-lg font-bold leading-8 text-zinc-600">
@@ -756,6 +788,16 @@ export default function DetailsPage() {
           </div>
         </div>
       </div>
+
+      {showStickyBooking && (
+        <div className="fixed inset-x-0 bottom-0 z-40 animate-[booking-rise_.35s_ease-out] bg-white/95 backdrop-blur-xl">
+          <ProductBookingPanel locale={locale} productName={product.title} sticky />
+        </div>
+      )}
+
+      {lightboxOpen && (
+        <ProductImageLightbox images={images} selected={selectedImage} onSelect={setSelectedImage} onClose={() => setLightboxOpen(false)} />
+      )}
     </section>
   );
 }

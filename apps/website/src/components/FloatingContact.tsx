@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageCircle, X, Send, Phone } from "lucide-react";
 
 export default function FloatingContact() {
@@ -10,9 +10,16 @@ export default function FloatingContact() {
   "+212 6 13 85 98 34";
 
   const [open, setOpen] = useState(false);
+  const [bookingBarVisible, setBookingBarVisible] = useState(false);
+
+  useEffect(() => {
+    const updateOffset = (event: Event) => setBookingBarVisible(Boolean((event as CustomEvent<{ visible?: boolean }>).detail?.visible));
+    window.addEventListener("moorish-product-booking-bar", updateOffset);
+    return () => window.removeEventListener("moorish-product-booking-bar", updateOffset);
+  }, []);
 
   return (
-    <div className={`fixed z-50 ${open ? "inset-0 sm:inset-auto sm:bottom-5 sm:right-5" : "bottom-5 right-5"}`}>
+    <div className={`fixed z-50 transition-[bottom] duration-300 ${open ? `inset-0 sm:inset-auto sm:right-5 ${bookingBarVisible ? "sm:bottom-24" : "sm:bottom-5"}` : `right-5 ${bookingBarVisible ? "bottom-24" : "bottom-5"}`}`}>
       {open && (
         <div className="flex h-[100dvh] w-full flex-col overflow-hidden bg-white sm:mb-4 sm:h-auto sm:w-[min(340px,calc(100vw-2rem))] sm:rounded-3xl sm:card-shadow">
           <div className="flex items-center justify-between bg-zinc-950 px-5 py-4 text-white">
