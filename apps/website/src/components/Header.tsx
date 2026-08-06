@@ -3,35 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 
-import {
-  ChevronDown,
-  Loader2,
-  Menu,
-  UserRound,
-  X,
-} from "lucide-react";
+import { ChevronDown, Loader2, Menu, UserRound, X } from "lucide-react";
 
 import AuthModal from "./AuthModal";
 
-import {
-  getDictionary,
-  getLocaleFromPath,
-} from "@/lib/i18n";
+import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
-import {
-  useAuthStore,
-} from "@/store/auth.store";
+import { useAuthStore } from "@/store/auth.store";
 
 type HeaderUser = {
   firstName: string;
@@ -40,126 +22,84 @@ type HeaderUser = {
   phone?: string;
 };
 
-type AccountSection =
-  | "profile"
-  | "preferences";
+type AccountSection = "profile" | "preferences";
 
 const languages = [
   {
     code: "en",
     label: "English",
     short: "EN",
-    flag:
-      "https://flagcdn.com/w40/gb.png",
+    flag: "https://flagcdn.com/w40/gb.png",
   },
   {
     code: "fr",
     label: "Français",
     short: "FR",
-    flag:
-      "https://flagcdn.com/w40/fr.png",
+    flag: "https://flagcdn.com/w40/fr.png",
   },
   {
     code: "de",
     label: "Deutsch",
     short: "DE",
-    flag:
-      "https://flagcdn.com/w40/de.png",
+    flag: "https://flagcdn.com/w40/de.png",
   },
   {
     code: "it",
     label: "Italiano",
     short: "IT",
-    flag:
-      "https://flagcdn.com/w40/it.png",
+    flag: "https://flagcdn.com/w40/it.png",
   },
   {
     code: "pt",
     label: "Português",
     short: "PT",
-    flag:
-      "https://flagcdn.com/w40/pt.png",
+    flag: "https://flagcdn.com/w40/pt.png",
   },
   {
     code: "es",
     label: "Español",
     short: "ES",
-    flag:
-      "https://flagcdn.com/w40/es.png",
+    flag: "https://flagcdn.com/w40/es.png",
   },
 ] as const;
 
-const localeCodes = languages.map(
-  (language) => language.code
-);
+const localeCodes = languages.map((language) => language.code);
 
-function getCurrentLocale(
-  pathname: string
-) {
-  const firstSegment = pathname
-    .split("/")
-    .filter(Boolean)[0];
+function getCurrentLocale(pathname: string) {
+  const firstSegment = pathname.split("/").filter(Boolean)[0];
 
-  return localeCodes.includes(
-    firstSegment as
-      (typeof localeCodes)[number]
-  )
+  return localeCodes.includes(firstSegment as (typeof localeCodes)[number])
     ? firstSegment
     : "en";
 }
 
-function removeLocaleFromPath(
-  pathname: string
-) {
-  const segments = pathname
-    .split("/")
-    .filter(Boolean);
+function removeLocaleFromPath(pathname: string) {
+  const segments = pathname.split("/").filter(Boolean);
 
-  if (
-    localeCodes.includes(
-      segments[0] as
-        (typeof localeCodes)[number]
-    )
-  ) {
-    const pathWithoutLocale =
-      "/" +
-      segments
-        .slice(1)
-        .join("/");
+  if (localeCodes.includes(segments[0] as (typeof localeCodes)[number])) {
+    const pathWithoutLocale = "/" + segments.slice(1).join("/");
 
-    return pathWithoutLocale === "/"
-      ? "/"
-      : pathWithoutLocale;
+    return pathWithoutLocale === "/" ? "/" : pathWithoutLocale;
   }
 
   return pathname;
 }
 
-function buildLocalizedPath(
-  pathname: string,
-  locale: string
-) {
-  const pathWithoutLocale =
-    removeLocaleFromPath(pathname);
+function buildLocalizedPath(pathname: string, locale: string) {
+  const pathWithoutLocale = removeLocaleFromPath(pathname);
 
   if (locale === "en") {
     return pathWithoutLocale || "/";
   }
 
-  if (
-    pathWithoutLocale === "/" ||
-    pathWithoutLocale === ""
-  ) {
+  if (pathWithoutLocale === "/" || pathWithoutLocale === "") {
     return `/${locale}`;
   }
 
   return `/${locale}${pathWithoutLocale}`;
 }
 
-function buildStaticLocalizedPath(
-  path: string,
-  locale: string
-) {
+function buildStaticLocalizedPath(path: string, locale: string) {
   if (locale === "en") {
     return path;
   }
@@ -171,51 +111,26 @@ function buildStaticLocalizedPath(
   return `/${locale}${path}`;
 }
 
-function getInitials(
-  user: HeaderUser
-) {
-  const first =
-    user.firstName
-      ?.trim()
-      ?.[0] ?? "";
+function getInitials(user: HeaderUser) {
+  const first = user.firstName?.trim()?.[0] ?? "";
 
-  const last =
-    user.lastName
-      ?.trim()
-      ?.[0] ?? "";
+  const last = user.lastName?.trim()?.[0] ?? "";
 
-  return (
-    `${first}${last}`.toUpperCase() ||
-    "U"
-  );
+  return `${first}${last}`.toUpperCase() || "U";
 }
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] =
-    useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const [authOpen, setAuthOpen] =
-    useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
 
-  const [
-    languageOpen,
-    setLanguageOpen,
-  ] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
 
-  const [
-    userMenuOpen,
-    setUserMenuOpen,
-  ] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-  const [user, setUser] =
-    useState<HeaderUser | null>(
-      null
-    );
+  const [user, setUser] = useState<HeaderUser | null>(null);
 
-  const [
-    authResolved,
-    setAuthResolved,
-  ] = useState(false);
+  const [authResolved, setAuthResolved] = useState(false);
 
   /*
    * Stores the route currently being opened.
@@ -223,29 +138,17 @@ export default function Header() {
    * null means that no header navigation
    * is currently pending.
    */
-  const [
-    pendingPath,
-    setPendingPath,
-  ] = useState<string | null>(
-    null
-  );
+  const [pendingPath, setPendingPath] = useState<string | null>(null);
 
-  const searchParams =
-    useSearchParams();
+  const searchParams = useSearchParams();
 
-  const pathname =
-    usePathname();
+  const pathname = usePathname();
 
-  const router =
-    useRouter();
+  const router = useRouter();
 
-  const locale =
-    getLocaleFromPath(
-      pathname
-    );
+  const locale = getLocaleFromPath(pathname);
 
-  const t =
-    getDictionary(locale);
+  const t = getDictionary(locale);
 
   const navItems = [
     {
@@ -262,18 +165,15 @@ export default function Header() {
     },
     {
       href: "/swimmingpools",
-      label:
-        t.header.swimmingpool,
+      label: t.header.swimmingpool,
     },
     {
       href: "/activities",
-      label:
-        t.header.activities,
+      label: t.header.activities,
     },
     {
       href: "/transportation",
-      label:
-        t.header.transportation,
+      label: t.header.transportation,
     },
     {
       href: "/about",
@@ -285,17 +185,11 @@ export default function Header() {
     },
   ];
 
-  const currentLocale =
-    getCurrentLocale(
-      pathname
-    );
+  const currentLocale = getCurrentLocale(pathname);
 
   const currentLanguage =
-    languages.find(
-      (language) =>
-        language.code ===
-        currentLocale
-    ) ?? languages[0];
+    languages.find((language) => language.code === currentLocale) ??
+    languages[0];
 
   /*
    * When the pathname changes, navigation
@@ -310,40 +204,24 @@ export default function Header() {
 
   useEffect(() => {
     function loadUser() {
-      const storedUser =
-        localStorage.getItem(
-          "kech_user"
-        );
+      const storedUser = localStorage.getItem("kech_user");
 
-      const storedToken =
-        localStorage.getItem(
-          "kech_access_token"
-        );
+      const storedToken = localStorage.getItem("kech_access_token");
 
-      if (
-        !storedUser ||
-        !storedToken
-      ) {
+      if (!storedUser || !storedToken) {
         setUser(null);
         setAuthResolved(true);
         return;
       }
 
       try {
-        const parsedUser =
-          JSON.parse(
-            storedUser
-          ) as HeaderUser;
+        const parsedUser = JSON.parse(storedUser) as HeaderUser;
 
         setUser(parsedUser);
       } catch {
-        localStorage.removeItem(
-          "kech_user"
-        );
+        localStorage.removeItem("kech_user");
 
-        localStorage.removeItem(
-          "kech_access_token"
-        );
+        localStorage.removeItem("kech_access_token");
 
         setUser(null);
       } finally {
@@ -353,58 +231,33 @@ export default function Header() {
 
     loadUser();
 
-    window.addEventListener(
-      "kech-auth-change",
-      loadUser
-    );
+    window.addEventListener("kech-auth-change", loadUser);
 
-    window.addEventListener(
-      "storage",
-      loadUser
-    );
+    window.addEventListener("storage", loadUser);
 
     return () => {
-      window.removeEventListener(
-        "kech-auth-change",
-        loadUser
-      );
+      window.removeEventListener("kech-auth-change", loadUser);
 
-      window.removeEventListener(
-        "storage",
-        loadUser
-      );
+      window.removeEventListener("storage", loadUser);
     };
   }, []);
 
   useEffect(() => {
-    if (
-      searchParams.get("auth") ===
-      "login"
-    ) {
+    if (searchParams.get("auth") === "login") {
       setAuthOpen(true);
     }
   }, [searchParams]);
 
-  function prefetchPath(
-    targetPath: string
-  ) {
-    if (
-      targetPath === pathname ||
-      pendingPath
-    ) {
+  function prefetchPath(targetPath: string) {
+    if (targetPath === pathname || pendingPath) {
       return;
     }
 
     router.prefetch(targetPath);
   }
 
-  function navigateTo(
-    targetPath: string
-  ) {
-    if (
-      pendingPath ||
-      targetPath === pathname
-    ) {
+  function navigateTo(targetPath: string) {
+    if (pendingPath || targetPath === pathname) {
       return;
     }
 
@@ -415,18 +268,12 @@ export default function Header() {
     router.push(targetPath);
   }
 
-  function changeLanguage(
-    nextLocale: string
-  ) {
+  function changeLanguage(nextLocale: string) {
     if (pendingPath) {
       return;
     }
 
-    const targetPath =
-      buildLocalizedPath(
-        pathname,
-        nextLocale
-      );
+    const targetPath = buildLocalizedPath(pathname, nextLocale);
 
     if (targetPath === pathname) {
       setLanguageOpen(false);
@@ -442,8 +289,7 @@ export default function Header() {
      * Language changes use a complete page load
      * in your current implementation.
      */
-    window.location.href =
-      targetPath;
+    window.location.href = targetPath;
   }
 
   function logout() {
@@ -451,20 +297,14 @@ export default function Header() {
       return;
     }
 
-    useAuthStore
-      .getState()
-      .logout();
+    useAuthStore.getState().logout();
 
     setUser(null);
     setAuthResolved(true);
     setUserMenuOpen(false);
     setMenuOpen(false);
 
-    const targetPath =
-      buildStaticLocalizedPath(
-        "/",
-        currentLocale
-      );
+    const targetPath = buildStaticLocalizedPath("/", currentLocale);
 
     /*
      * When logout happens on the localized home page,
@@ -480,14 +320,11 @@ export default function Header() {
     router.replace(targetPath);
   }
 
-  function goToAccount(
-    section: AccountSection
-  ) {
-    const targetPath =
-      buildStaticLocalizedPath(
-        `/account?section=${section}`,
-        currentLocale
-      );
+  function goToAccount(section: AccountSection) {
+    const targetPath = buildStaticLocalizedPath(
+      `/account?section=${section}`,
+      currentLocale,
+    );
 
     setUserMenuOpen(false);
     setMenuOpen(false);
@@ -509,42 +346,28 @@ export default function Header() {
             type="button"
             onClick={() => {
               const targetPath =
-                currentLocale === "en"
-                  ? "/"
-                  : `/${currentLocale}`;
+                currentLocale === "en" ? "/" : `/${currentLocale}`;
 
-              navigateTo(
-                targetPath
-              );
+              navigateTo(targetPath);
             }}
             onMouseEnter={() => {
               const targetPath =
-                currentLocale === "en"
-                  ? "/"
-                  : `/${currentLocale}`;
+                currentLocale === "en" ? "/" : `/${currentLocale}`;
 
-              prefetchPath(
-                targetPath
-              );
+              prefetchPath(targetPath);
             }}
             onFocus={() => {
               const targetPath =
-                currentLocale === "en"
-                  ? "/"
-                  : `/${currentLocale}`;
+                currentLocale === "en" ? "/" : `/${currentLocale}`;
 
-              prefetchPath(
-                targetPath
-              );
+              prefetchPath(targetPath);
             }}
-            disabled={
-              Boolean(pendingPath)
-            }
+            disabled={Boolean(pendingPath)}
             className="flex items-center gap-2 text-left disabled:cursor-wait"
           >
             <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-2xl border border-orange-200 bg-orange-50 p-2 shadow-sm">
               <Image
-                src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/9439a16a-b801-4983-24a3-04e000b8f400/public"
+                src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/59ce5c08-f6de-4e4e-ae8b-03323b36a200/public"
                 alt=""
                 width={32}
                 height={32}
@@ -565,62 +388,29 @@ export default function Header() {
           </button>
 
           <nav className="hidden items-center gap-5 text-sm font-semibold text-zinc-700 lg:flex">
-            {navItems.map(
-              (item) => {
-                const targetPath =
-                  buildLocalizedPath(
-                    item.href,
-                    currentLocale
-                  );
+            {navItems.map((item) => {
+              const targetPath = buildLocalizedPath(item.href, currentLocale);
 
-                const isLoading =
-                  pendingPath ===
-                  targetPath;
+              const isLoading = pendingPath === targetPath;
 
-                return (
-                  <button
-                    key={
-                      item.href
-                    }
-                    type="button"
-                    onClick={() =>
-                      navigateTo(
-                        targetPath
-                      )
-                    }
-                    onMouseEnter={() =>
-                      prefetchPath(
-                        targetPath
-                      )
-                    }
-                    onFocus={() =>
-                      prefetchPath(
-                        targetPath
-                      )
-                    }
-                    disabled={
-                      Boolean(
-                        pendingPath
-                      )
-                    }
-                    className={`inline-flex items-center gap-1.5 transition ${
-                      isLoading
-                        ? "text-orange-700"
-                        : "hover:text-orange-700"
-                    } disabled:cursor-wait disabled:opacity-70`}
-                  >
-                    {isLoading && (
-                      <Loader2
-                        size={14}
-                        className="animate-spin"
-                      />
-                    )}
+              return (
+                <button
+                  key={item.href}
+                  type="button"
+                  onClick={() => navigateTo(targetPath)}
+                  onMouseEnter={() => prefetchPath(targetPath)}
+                  onFocus={() => prefetchPath(targetPath)}
+                  disabled={Boolean(pendingPath)}
+                  className={`inline-flex items-center gap-1.5 transition ${
+                    isLoading ? "text-orange-700" : "hover:text-orange-700"
+                  } disabled:cursor-wait disabled:opacity-70`}
+                >
+                  {isLoading && <Loader2 size={14} className="animate-spin" />}
 
-                    {item.label}
-                  </button>
-                );
-              }
-            )}
+                  {item.label}
+                </button>
+              );
+            })}
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
@@ -632,25 +422,16 @@ export default function Header() {
                     return;
                   }
 
-                  setLanguageOpen(
-                    (current) =>
-                      !current
-                  );
+                  setLanguageOpen((current) => !current);
 
-                  setUserMenuOpen(
-                    false
-                  );
+                  setUserMenuOpen(false);
                 }}
-                disabled={
-                  Boolean(pendingPath)
-                }
+                disabled={Boolean(pendingPath)}
                 className="flex h-[42px] min-w-[100px] items-center justify-between gap-2 rounded-full border border-orange-100 bg-orange-50 px-4 text-sm font-black text-orange-800 transition hover:bg-orange-100 disabled:cursor-wait disabled:opacity-60"
               >
                 <span className="flex items-center gap-2">
                   <Image
-                    src={
-                      currentLanguage.flag
-                    }
+                    src={currentLanguage.flag}
                     alt={`${currentLanguage.label} flag`}
                     width={22}
                     height={16}
@@ -658,82 +439,51 @@ export default function Header() {
                     unoptimized
                   />
 
-                  <span>
-                    {
-                      currentLanguage.short
-                    }
-                  </span>
+                  <span>{currentLanguage.short}</span>
                 </span>
 
-                <ChevronDown
-                  size={15}
-                />
+                <ChevronDown size={15} />
               </button>
 
               {languageOpen && (
                 <div className="absolute right-0 top-12 z-50 w-52 overflow-hidden rounded-2xl border border-orange-100 bg-white p-2 shadow-xl">
-                  {languages.map(
-                    (language) => {
-                      const targetPath =
-                        buildLocalizedPath(
-                          pathname,
-                          language.code
-                        );
+                  {languages.map((language) => {
+                    const targetPath = buildLocalizedPath(
+                      pathname,
+                      language.code,
+                    );
 
-                      const isLoading =
-                        pendingPath ===
-                        targetPath;
+                    const isLoading = pendingPath === targetPath;
 
-                      return (
-                        <button
-                          key={
-                            language.code
-                          }
-                          type="button"
-                          onClick={() =>
-                            changeLanguage(
-                              language.code
-                            )
-                          }
-                          disabled={
-                            Boolean(
-                              pendingPath
-                            )
-                          }
-                          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold transition ${
-                            currentLanguage.code ===
-                            language.code
-                              ? "bg-orange-50 text-orange-800"
-                              : "text-zinc-700 hover:bg-orange-50 hover:text-orange-800"
-                          } disabled:cursor-wait disabled:opacity-60`}
-                        >
-                          <Image
-                            src={
-                              language.flag
-                            }
-                            alt={`${language.label} flag`}
-                            width={22}
-                            height={16}
-                            className="h-4 w-6 rounded-sm object-cover"
-                            unoptimized
-                          />
+                    return (
+                      <button
+                        key={language.code}
+                        type="button"
+                        onClick={() => changeLanguage(language.code)}
+                        disabled={Boolean(pendingPath)}
+                        className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold transition ${
+                          currentLanguage.code === language.code
+                            ? "bg-orange-50 text-orange-800"
+                            : "text-zinc-700 hover:bg-orange-50 hover:text-orange-800"
+                        } disabled:cursor-wait disabled:opacity-60`}
+                      >
+                        <Image
+                          src={language.flag}
+                          alt={`${language.label} flag`}
+                          width={22}
+                          height={16}
+                          className="h-4 w-6 rounded-sm object-cover"
+                          unoptimized
+                        />
 
-                          <span className="flex-1">
-                            {
-                              language.label
-                            }
-                          </span>
+                        <span className="flex-1">{language.label}</span>
 
-                          {isLoading && (
-                            <Loader2
-                              size={15}
-                              className="animate-spin"
-                            />
-                          )}
-                        </button>
-                      );
-                    }
-                  )}
+                        {isLoading && (
+                          <Loader2 size={15} className="animate-spin" />
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -745,49 +495,29 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => {
-                    if (
-                      pendingPath
-                    ) {
+                    if (pendingPath) {
                       return;
                     }
 
-                    setUserMenuOpen(
-                      (current) =>
-                        !current
-                    );
+                    setUserMenuOpen((current) => !current);
 
-                    setLanguageOpen(
-                      false
-                    );
+                    setLanguageOpen(false);
                   }}
-                  disabled={
-                    Boolean(pendingPath)
-                  }
+                  disabled={Boolean(pendingPath)}
                   className="flex h-[42px] items-center gap-2 rounded-full border border-orange-100 bg-orange-50 pl-1 pr-3 font-black text-orange-800 transition hover:bg-orange-100 disabled:cursor-wait disabled:opacity-60"
                 >
                   <span className="grid h-9 w-9 place-items-center rounded-full bg-orange-600 text-sm font-black text-white">
-                    {
-                      getInitials(
-                        user
-                      )
-                    }
+                    {getInitials(user)}
                   </span>
 
-                  <ChevronDown
-                    size={15}
-                  />
+                  <ChevronDown size={15} />
                 </button>
 
                 {userMenuOpen && (
                   <div className="absolute right-0 top-12 z-50 w-64 overflow-hidden rounded-2xl border border-orange-100 bg-white p-2 shadow-xl">
                     <div className="border-b border-orange-100 px-3 py-3">
                       <p className="font-black text-zinc-950">
-                        {
-                          user.firstName
-                        }{" "}
-                        {
-                          user.lastName
-                        }
+                        {user.firstName} {user.lastName}
                       </p>
 
                       <p className="truncate text-sm text-zinc-500">
@@ -796,70 +526,39 @@ export default function Header() {
                     </div>
 
                     <AccountMenuButton
-                      label={
-                        t.header.profile
-                      }
+                      label={t.header.profile}
                       targetPath={buildStaticLocalizedPath(
                         "/account?section=profile",
-                        currentLocale
+                        currentLocale,
                       )}
-                      pendingPath={
-                        pendingPath
-                      }
-                      onPrefetch={
-                        prefetchPath
-                      }
-                      onClick={() =>
-                        goToAccount(
-                          "profile"
-                        )
-                      }
+                      pendingPath={pendingPath}
+                      onPrefetch={prefetchPath}
+                      onClick={() => goToAccount("profile")}
                       className="mt-2"
                     />
 
                     <AccountMenuButton
-                      label={
-                        t.header.preferences
-                      }
+                      label={t.header.preferences}
                       targetPath={buildStaticLocalizedPath(
                         "/account?section=preferences",
-                        currentLocale
+                        currentLocale,
                       )}
-                      pendingPath={
-                        pendingPath
-                      }
-                      onPrefetch={
-                        prefetchPath
-                      }
-                      onClick={() =>
-                        goToAccount(
-                          "preferences"
-                        )
-                      }
+                      pendingPath={pendingPath}
+                      onPrefetch={prefetchPath}
+                      onClick={() => goToAccount("preferences")}
                     />
 
                     <button
                       type="button"
-                      onClick={
-                        logout
-                      }
-                      disabled={
-                        Boolean(
-                          pendingPath
-                        )
-                      }
+                      onClick={logout}
+                      disabled={Boolean(pendingPath)}
                       className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold text-red-600 transition hover:bg-red-50 disabled:cursor-wait disabled:opacity-60"
                     >
                       {pendingPath && (
-                        <Loader2
-                          size={15}
-                          className="animate-spin"
-                        />
+                        <Loader2 size={15} className="animate-spin" />
                       )}
 
-                      {
-                        t.header.logout
-                      }
+                      {t.header.logout}
                     </button>
                   </div>
                 )}
@@ -867,17 +566,11 @@ export default function Header() {
             ) : (
               <button
                 type="button"
-                onClick={() =>
-                  setAuthOpen(true)
-                }
-                disabled={
-                  Boolean(pendingPath)
-                }
+                onClick={() => setAuthOpen(true)}
+                disabled={Boolean(pendingPath)}
                 className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-orange-700 disabled:cursor-wait disabled:opacity-60"
               >
-                <UserRound
-                  size={16}
-                />
+                <UserRound size={16} />
 
                 {t.header.login}
               </button>
@@ -891,14 +584,9 @@ export default function Header() {
                 return;
               }
 
-              setMenuOpen(
-                (current) =>
-                  !current
-              );
+              setMenuOpen((current) => !current);
             }}
-            disabled={
-              Boolean(pendingPath)
-            }
+            disabled={Boolean(pendingPath)}
             className="rounded-xl border border-orange-100 p-2 disabled:cursor-wait disabled:opacity-60 lg:hidden"
             aria-label="Open menu"
           >
@@ -915,107 +603,57 @@ export default function Header() {
         {menuOpen && (
           <div className="absolute inset-x-0 top-full z-50 h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-white px-5 py-5 lg:hidden">
             <div className="flex min-h-full flex-col gap-4">
-              {navItems.map(
-                (item) => {
-                  const targetPath =
-                    buildLocalizedPath(
-                      item.href,
-                      currentLocale
-                    );
+              {navItems.map((item) => {
+                const targetPath = buildLocalizedPath(item.href, currentLocale);
 
-                  const isLoading =
-                    pendingPath ===
-                    targetPath;
+                const isLoading = pendingPath === targetPath;
 
-                  return (
-                    <button
-                      key={
-                        item.href
-                      }
-                      type="button"
-                      onClick={() =>
-                        navigateTo(
-                          targetPath
-                        )
-                      }
-                      onMouseEnter={() =>
-                        prefetchPath(
-                          targetPath
-                        )
-                      }
-                      onFocus={() =>
-                        prefetchPath(
-                          targetPath
-                        )
-                      }
-                      disabled={
-                        Boolean(
-                          pendingPath
-                        )
-                      }
-                      className={`order-3 flex items-center gap-2 rounded-xl px-2 py-2 text-left font-semibold ${
-                        isLoading
-                          ? "text-orange-700"
-                          : "text-zinc-800"
-                      } disabled:cursor-wait disabled:opacity-70`}
-                    >
-                      {isLoading && (
-                        <Loader2
-                          size={16}
-                          className="animate-spin"
-                        />
-                      )}
+                return (
+                  <button
+                    key={item.href}
+                    type="button"
+                    onClick={() => navigateTo(targetPath)}
+                    onMouseEnter={() => prefetchPath(targetPath)}
+                    onFocus={() => prefetchPath(targetPath)}
+                    disabled={Boolean(pendingPath)}
+                    className={`order-3 flex items-center gap-2 rounded-xl px-2 py-2 text-left font-semibold ${
+                      isLoading ? "text-orange-700" : "text-zinc-800"
+                    } disabled:cursor-wait disabled:opacity-70`}
+                  >
+                    {isLoading && (
+                      <Loader2 size={16} className="animate-spin" />
+                    )}
 
-                      {item.label}
-                    </button>
-                  );
-                }
-              )}
+                    {item.label}
+                  </button>
+                );
+              })}
 
               <div className="order-2 grid grid-cols-3 gap-2 rounded-2xl bg-orange-50 p-3">
-                {languages.map(
-                  (language) => (
-                    <button
-                      key={
-                        language.code
-                      }
-                      type="button"
-                      onClick={() =>
-                        changeLanguage(
-                          language.code
-                        )
-                      }
-                      disabled={
-                        Boolean(
-                          pendingPath
-                        )
-                      }
-                      className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-black ${
-                        currentLanguage.code ===
-                        language.code
-                          ? "bg-orange-600 text-white"
-                          : "bg-white text-orange-800"
-                      } disabled:cursor-wait disabled:opacity-60`}
-                    >
-                      <Image
-                        src={
-                          language.flag
-                        }
-                        alt={`${language.label} flag`}
-                        width={22}
-                        height={16}
-                        className="h-4 w-6 rounded-sm object-cover"
-                        unoptimized
-                      />
+                {languages.map((language) => (
+                  <button
+                    key={language.code}
+                    type="button"
+                    onClick={() => changeLanguage(language.code)}
+                    disabled={Boolean(pendingPath)}
+                    className={`flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-black ${
+                      currentLanguage.code === language.code
+                        ? "bg-orange-600 text-white"
+                        : "bg-white text-orange-800"
+                    } disabled:cursor-wait disabled:opacity-60`}
+                  >
+                    <Image
+                      src={language.flag}
+                      alt={`${language.label} flag`}
+                      width={22}
+                      height={16}
+                      className="h-4 w-6 rounded-sm object-cover"
+                      unoptimized
+                    />
 
-                      <span>
-                        {
-                          language.short
-                        }
-                      </span>
-                    </button>
-                  )
-                )}
+                    <span>{language.short}</span>
+                  </button>
+                ))}
               </div>
 
               {!authResolved ? (
@@ -1024,21 +662,12 @@ export default function Header() {
                 <div className="order-1 rounded-2xl bg-orange-50 p-3">
                   <div className="mb-3 flex items-center gap-3">
                     <span className="grid h-10 w-10 place-items-center rounded-full bg-orange-600 text-sm font-black text-white">
-                      {
-                        getInitials(
-                          user
-                        )
-                      }
+                      {getInitials(user)}
                     </span>
 
                     <div className="min-w-0">
                       <p className="font-black text-zinc-950">
-                        {
-                          user.firstName
-                        }{" "}
-                        {
-                          user.lastName
-                        }
+                        {user.firstName} {user.lastName}
                       </p>
 
                       <p className="truncate text-sm text-zinc-500">
@@ -1049,73 +678,42 @@ export default function Header() {
 
                   <div className="grid gap-2">
                     <MobileAccountButton
-                      label={
-                        t.header.profile
-                      }
+                      label={t.header.profile}
                       loading={
                         pendingPath ===
                         buildStaticLocalizedPath(
                           "/account?section=profile",
-                          currentLocale
+                          currentLocale,
                         )
                       }
-                      disabled={
-                        Boolean(
-                          pendingPath
-                        )
-                      }
-                      onClick={() =>
-                        goToAccount(
-                          "profile"
-                        )
-                      }
+                      disabled={Boolean(pendingPath)}
+                      onClick={() => goToAccount("profile")}
                     />
 
                     <MobileAccountButton
-                      label={
-                        t.header.preferences
-                      }
+                      label={t.header.preferences}
                       loading={
                         pendingPath ===
                         buildStaticLocalizedPath(
                           "/account?section=preferences",
-                          currentLocale
+                          currentLocale,
                         )
                       }
-                      disabled={
-                        Boolean(
-                          pendingPath
-                        )
-                      }
-                      onClick={() =>
-                        goToAccount(
-                          "preferences"
-                        )
-                      }
+                      disabled={Boolean(pendingPath)}
+                      onClick={() => goToAccount("preferences")}
                     />
 
                     <button
                       type="button"
-                      onClick={
-                        logout
-                      }
-                      disabled={
-                        Boolean(
-                          pendingPath
-                        )
-                      }
+                      onClick={logout}
+                      disabled={Boolean(pendingPath)}
                       className="flex items-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-left font-bold text-red-600 disabled:cursor-wait disabled:opacity-60"
                     >
                       {pendingPath && (
-                        <Loader2
-                          size={16}
-                          className="animate-spin"
-                        />
+                        <Loader2 size={16} className="animate-spin" />
                       )}
 
-                      {
-                        t.header.logout
-                      }
+                      {t.header.logout}
                     </button>
                   </div>
                 </div>
@@ -1123,19 +721,11 @@ export default function Header() {
                 <button
                   type="button"
                   onClick={() => {
-                    setMenuOpen(
-                      false
-                    );
+                    setMenuOpen(false);
 
-                    setAuthOpen(
-                      true
-                    );
+                    setAuthOpen(true);
                   }}
-                  disabled={
-                    Boolean(
-                      pendingPath
-                    )
-                  }
+                  disabled={Boolean(pendingPath)}
                   className="order-1 rounded-full bg-zinc-950 px-5 py-3 font-bold text-white disabled:cursor-wait disabled:opacity-60"
                 >
                   {t.header.login}
@@ -1146,12 +736,7 @@ export default function Header() {
         )}
       </header>
 
-      <AuthModal
-        open={authOpen}
-        onClose={() =>
-          setAuthOpen(false)
-        }
-      />
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
 
       <style jsx global>{`
         @keyframes header-progress {
@@ -1169,8 +754,7 @@ export default function Header() {
         }
 
         .animate-header-progress {
-          animation: header-progress
-            1.15s ease-in-out infinite;
+          animation: header-progress 1.15s ease-in-out infinite;
         }
       `}</style>
     </>
@@ -1206,40 +790,26 @@ function AccountMenuButton({
   label: string;
   targetPath: string;
   pendingPath: string | null;
-  onPrefetch: (
-    path: string
-  ) => void;
+  onPrefetch: (path: string) => void;
   onClick: () => void;
   className?: string;
 }) {
-  const isLoading =
-    pendingPath === targetPath;
+  const isLoading = pendingPath === targetPath;
 
   return (
     <button
       type="button"
       onClick={onClick}
-      onMouseEnter={() =>
-        onPrefetch(targetPath)
-      }
-      onFocus={() =>
-        onPrefetch(targetPath)
-      }
-      disabled={
-        Boolean(pendingPath)
-      }
+      onMouseEnter={() => onPrefetch(targetPath)}
+      onFocus={() => onPrefetch(targetPath)}
+      disabled={Boolean(pendingPath)}
       className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold transition ${
         isLoading
           ? "bg-orange-50 text-orange-800"
           : "text-zinc-700 hover:bg-orange-50 hover:text-orange-800"
       } disabled:cursor-wait disabled:opacity-70 ${className}`}
     >
-      {isLoading && (
-        <Loader2
-          size={15}
-          className="animate-spin"
-        />
-      )}
+      {isLoading && <Loader2 size={15} className="animate-spin" />}
 
       {label}
     </button>
@@ -1265,10 +835,7 @@ function MobileAccountButton({
       className="flex items-center gap-2 rounded-xl bg-white px-4 py-3 text-left font-bold text-zinc-800 disabled:cursor-wait disabled:opacity-70"
     >
       {loading && (
-        <Loader2
-          size={16}
-          className="animate-spin text-orange-700"
-        />
+        <Loader2 size={16} className="animate-spin text-orange-700" />
       )}
 
       {label}

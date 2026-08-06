@@ -96,6 +96,7 @@ export type VisitorStage = (typeof VisitorStage)[keyof typeof VisitorStage]
 
 export const RequestType = {
   ADVISOR_GUIDE: 'ADVISOR_GUIDE',
+  PRODUCT_REQUEST: 'PRODUCT_REQUEST',
   COMPLAINT: 'COMPLAINT',
   SUPPORT: 'SUPPORT',
   PARTNERSHIP: 'PARTNERSHIP',
