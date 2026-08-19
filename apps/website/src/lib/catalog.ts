@@ -1,21 +1,25 @@
 import { CatalogItem, Category } from "@/types/catalog";
 
-export const categoryLabels: Record<Category, string> = {
+export const categoryLabels: Partial<Record<Category, string>> = {
   villas: "Villas",
   activities: "Activities",
   transportation: "Transportation",
   spa: "SPA",
   restaurants: "Restaurants",
-  swimmingpools: "Swimming pools"
+  beachclubs: "Beach Clubs",
+  nightclubs: "Night Clubs",
+  packs: "Packs"
 };
 
-export const categoryDescriptions: Record<Category, string> = {
+export const categoryDescriptions: Partial<Record<Category, string>> = {
   villas: "Private villas in Marrakech with pools, gardens, staff options, and premium comfort.",
   activities: "Quad, camel rides, desert trips, city tours, hot air balloon, and local experiences.",
-  swimmingpools: "Quad, camel rides, desert trips, city tours, hot air balloon, and local experiences.",
+  beachclubs: "Pool days, private cabanas and relaxed resort experiences.",
   transportation: "Private cars, luxury vehicles, vans, and group transfers with reliable drivers.",
   spa: "Hammam, massage, beauty, and wellness experiences.",
-  restaurants: "Selected Moroccan and international restaurants for memorable evenings."
+  restaurants: "Selected Moroccan and international restaurants for memorable evenings.",
+  nightclubs: "Nightlife experiences, tables and exclusive club plans in Marrakech.",
+  packs: "Curated combinations of services and experiences with flexible plans."
 };
 
 const img = {

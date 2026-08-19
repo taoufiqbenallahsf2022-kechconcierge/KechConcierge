@@ -7,7 +7,8 @@ export type HomeProduct = {
   order: number | null;
   thumbnail: string;
   thumbnailAlt: string;
-  priceEuro: number;
+  priceEuro: number | null;
+  currency: string | null;
   title: string;
   subtitle: string;
   priceTitle: string;
@@ -17,6 +18,8 @@ export type HomeProduct = {
 type HomeProductsResponse = {
   villa?: HomeProduct[];
   swimmingpool?: HomeProduct[];
+  nightclub?: HomeProduct[];
+  pack?: HomeProduct[];
   activity?: HomeProduct[];
   spa?: HomeProduct[];
   transportation?: HomeProduct[];
@@ -27,6 +30,7 @@ type HomeProductsState = {
   products: HomeProductsResponse | null;
   loading: boolean;
   error: string | null;
+  currentLanguage: string | null;
   fetchHomeProducts: (lang?: string) => Promise<void>;
 };
 
@@ -36,9 +40,10 @@ export const useHomeProductsStore = create<HomeProductsState>((set, get) => ({
   products: null,
   loading: false,
   error: null,
+  currentLanguage: null,
 
   fetchHomeProducts: async (lang = "EN") => {
-    if (get().products) return;
+    if (get().products && get().currentLanguage === lang) return;
 
     set({ loading: true, error: null });
 
@@ -55,6 +60,7 @@ export const useHomeProductsStore = create<HomeProductsState>((set, get) => ({
         products: data,
         loading: false,
         error: null,
+        currentLanguage: lang,
       });
     } catch (error) {
       set({
@@ -64,6 +70,7 @@ export const useHomeProductsStore = create<HomeProductsState>((set, get) => ({
           error instanceof Error
             ? error.message
             : "Unable to load home products.",
+        currentLanguage: null,
       });
     }
   },

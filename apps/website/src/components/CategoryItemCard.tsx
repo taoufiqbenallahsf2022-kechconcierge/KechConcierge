@@ -39,7 +39,9 @@ const categoryPaths: Record<
   TRANSPORTATION:
     "transportation",
   SWIMMINGPOOL:
-    "swimmingpools",
+    "beachclubs",
+  NIGHTCLUB: "nightclubs",
+  PACK: "packs",
   ACTIVITY: "activities",
   RESTAURANT:
     "restaurants",
@@ -168,18 +170,7 @@ export default function CategoryItemCard({
             </h2>
 
             <div className="shrink-0 text-right">
-              <p className="text-xs font-bold text-zinc-500">
-                {
-                  item.priceTitle
-                }
-              </p>
-
-              <p className="text-xl font-black text-orange-700">
-                €
-                {
-                  item.priceEuro
-                }
-              </p>
+              {item.priceEuro != null && <><p className="text-xs font-bold text-zinc-500">{item.priceTitle || t.hero.startingFrom}</p><p className="text-xl font-black text-orange-700">{item.priceEuro} {item.currency ?? "EUR"}</p></>}
             </div>
           </div>
 

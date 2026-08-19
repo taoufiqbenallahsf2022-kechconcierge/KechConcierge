@@ -395,6 +395,30 @@ export const ModelName = {
   RecordFlowRun: 'RecordFlowRun',
   RecordFlowActivityRun: 'RecordFlowActivityRun',
   Product: 'Product',
+  Villa: 'Villa',
+  VillaImage: 'VillaImage',
+  Restaurant: 'Restaurant',
+  RestaurantImage: 'RestaurantImage',
+  BeachClub: 'BeachClub',
+  BeachClubImage: 'BeachClubImage',
+  BeachClubPlan: 'BeachClubPlan',
+  BeachClubPlanOption: 'BeachClubPlanOption',
+  NightClub: 'NightClub',
+  NightClubImage: 'NightClubImage',
+  NightClubPlan: 'NightClubPlan',
+  NightClubPlanOption: 'NightClubPlanOption',
+  Pack: 'Pack',
+  PackImage: 'PackImage',
+  PackPlan: 'PackPlan',
+  PackPlanOption: 'PackPlanOption',
+  Activity: 'Activity',
+  ActivityImage: 'ActivityImage',
+  ActivityPlan: 'ActivityPlan',
+  ActivityPlanOption: 'ActivityPlanOption',
+  Transportation: 'Transportation',
+  TransportationImage: 'TransportationImage',
+  TransportationPlan: 'TransportationPlan',
+  TransportationPlanOption: 'TransportationPlanOption',
   WhatsAppConversation: 'WhatsAppConversation',
   WhatsAppMessage: 'WhatsAppMessage',
   Individual: 'Individual',
@@ -423,7 +447,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user"
+    modelProps: "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1238,6 +1262,1782 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProductCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProductCountAggregateOutputType> | number
+        }
+      }
+    }
+    Villa: {
+      payload: Prisma.$VillaPayload<ExtArgs>
+      fields: Prisma.VillaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VillaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VillaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>
+        }
+        findFirst: {
+          args: Prisma.VillaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VillaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>
+        }
+        findMany: {
+          args: Prisma.VillaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>[]
+        }
+        create: {
+          args: Prisma.VillaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>
+        }
+        createMany: {
+          args: Prisma.VillaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VillaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>[]
+        }
+        delete: {
+          args: Prisma.VillaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>
+        }
+        update: {
+          args: Prisma.VillaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>
+        }
+        deleteMany: {
+          args: Prisma.VillaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VillaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VillaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>[]
+        }
+        upsert: {
+          args: Prisma.VillaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaPayload>
+        }
+        aggregate: {
+          args: Prisma.VillaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVilla>
+        }
+        groupBy: {
+          args: Prisma.VillaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VillaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VillaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VillaCountAggregateOutputType> | number
+        }
+      }
+    }
+    VillaImage: {
+      payload: Prisma.$VillaImagePayload<ExtArgs>
+      fields: Prisma.VillaImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VillaImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VillaImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>
+        }
+        findFirst: {
+          args: Prisma.VillaImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VillaImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>
+        }
+        findMany: {
+          args: Prisma.VillaImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>[]
+        }
+        create: {
+          args: Prisma.VillaImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>
+        }
+        createMany: {
+          args: Prisma.VillaImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VillaImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>[]
+        }
+        delete: {
+          args: Prisma.VillaImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>
+        }
+        update: {
+          args: Prisma.VillaImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.VillaImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VillaImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VillaImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.VillaImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VillaImagePayload>
+        }
+        aggregate: {
+          args: Prisma.VillaImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVillaImage>
+        }
+        groupBy: {
+          args: Prisma.VillaImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VillaImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VillaImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VillaImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    Restaurant: {
+      payload: Prisma.$RestaurantPayload<ExtArgs>
+      fields: Prisma.RestaurantFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RestaurantFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RestaurantFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>
+        }
+        findFirst: {
+          args: Prisma.RestaurantFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RestaurantFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>
+        }
+        findMany: {
+          args: Prisma.RestaurantFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>[]
+        }
+        create: {
+          args: Prisma.RestaurantCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>
+        }
+        createMany: {
+          args: Prisma.RestaurantCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RestaurantCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>[]
+        }
+        delete: {
+          args: Prisma.RestaurantDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>
+        }
+        update: {
+          args: Prisma.RestaurantUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>
+        }
+        deleteMany: {
+          args: Prisma.RestaurantDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RestaurantUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RestaurantUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>[]
+        }
+        upsert: {
+          args: Prisma.RestaurantUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantPayload>
+        }
+        aggregate: {
+          args: Prisma.RestaurantAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRestaurant>
+        }
+        groupBy: {
+          args: Prisma.RestaurantGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RestaurantGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RestaurantCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RestaurantCountAggregateOutputType> | number
+        }
+      }
+    }
+    RestaurantImage: {
+      payload: Prisma.$RestaurantImagePayload<ExtArgs>
+      fields: Prisma.RestaurantImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RestaurantImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RestaurantImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>
+        }
+        findFirst: {
+          args: Prisma.RestaurantImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RestaurantImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>
+        }
+        findMany: {
+          args: Prisma.RestaurantImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>[]
+        }
+        create: {
+          args: Prisma.RestaurantImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>
+        }
+        createMany: {
+          args: Prisma.RestaurantImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RestaurantImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>[]
+        }
+        delete: {
+          args: Prisma.RestaurantImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>
+        }
+        update: {
+          args: Prisma.RestaurantImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.RestaurantImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RestaurantImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RestaurantImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.RestaurantImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RestaurantImagePayload>
+        }
+        aggregate: {
+          args: Prisma.RestaurantImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRestaurantImage>
+        }
+        groupBy: {
+          args: Prisma.RestaurantImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RestaurantImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RestaurantImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RestaurantImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    BeachClub: {
+      payload: Prisma.$BeachClubPayload<ExtArgs>
+      fields: Prisma.BeachClubFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BeachClubFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BeachClubFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>
+        }
+        findFirst: {
+          args: Prisma.BeachClubFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BeachClubFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>
+        }
+        findMany: {
+          args: Prisma.BeachClubFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>[]
+        }
+        create: {
+          args: Prisma.BeachClubCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>
+        }
+        createMany: {
+          args: Prisma.BeachClubCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BeachClubCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>[]
+        }
+        delete: {
+          args: Prisma.BeachClubDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>
+        }
+        update: {
+          args: Prisma.BeachClubUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>
+        }
+        deleteMany: {
+          args: Prisma.BeachClubDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BeachClubUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BeachClubUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>[]
+        }
+        upsert: {
+          args: Prisma.BeachClubUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPayload>
+        }
+        aggregate: {
+          args: Prisma.BeachClubAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBeachClub>
+        }
+        groupBy: {
+          args: Prisma.BeachClubGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeachClubGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BeachClubCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeachClubCountAggregateOutputType> | number
+        }
+      }
+    }
+    BeachClubImage: {
+      payload: Prisma.$BeachClubImagePayload<ExtArgs>
+      fields: Prisma.BeachClubImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BeachClubImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BeachClubImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>
+        }
+        findFirst: {
+          args: Prisma.BeachClubImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BeachClubImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>
+        }
+        findMany: {
+          args: Prisma.BeachClubImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>[]
+        }
+        create: {
+          args: Prisma.BeachClubImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>
+        }
+        createMany: {
+          args: Prisma.BeachClubImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BeachClubImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>[]
+        }
+        delete: {
+          args: Prisma.BeachClubImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>
+        }
+        update: {
+          args: Prisma.BeachClubImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.BeachClubImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BeachClubImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BeachClubImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.BeachClubImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubImagePayload>
+        }
+        aggregate: {
+          args: Prisma.BeachClubImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBeachClubImage>
+        }
+        groupBy: {
+          args: Prisma.BeachClubImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeachClubImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BeachClubImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeachClubImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    BeachClubPlan: {
+      payload: Prisma.$BeachClubPlanPayload<ExtArgs>
+      fields: Prisma.BeachClubPlanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BeachClubPlanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BeachClubPlanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>
+        }
+        findFirst: {
+          args: Prisma.BeachClubPlanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BeachClubPlanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>
+        }
+        findMany: {
+          args: Prisma.BeachClubPlanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>[]
+        }
+        create: {
+          args: Prisma.BeachClubPlanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>
+        }
+        createMany: {
+          args: Prisma.BeachClubPlanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BeachClubPlanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>[]
+        }
+        delete: {
+          args: Prisma.BeachClubPlanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>
+        }
+        update: {
+          args: Prisma.BeachClubPlanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>
+        }
+        deleteMany: {
+          args: Prisma.BeachClubPlanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BeachClubPlanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BeachClubPlanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>[]
+        }
+        upsert: {
+          args: Prisma.BeachClubPlanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanPayload>
+        }
+        aggregate: {
+          args: Prisma.BeachClubPlanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBeachClubPlan>
+        }
+        groupBy: {
+          args: Prisma.BeachClubPlanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeachClubPlanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BeachClubPlanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeachClubPlanCountAggregateOutputType> | number
+        }
+      }
+    }
+    BeachClubPlanOption: {
+      payload: Prisma.$BeachClubPlanOptionPayload<ExtArgs>
+      fields: Prisma.BeachClubPlanOptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BeachClubPlanOptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BeachClubPlanOptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>
+        }
+        findFirst: {
+          args: Prisma.BeachClubPlanOptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BeachClubPlanOptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>
+        }
+        findMany: {
+          args: Prisma.BeachClubPlanOptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>[]
+        }
+        create: {
+          args: Prisma.BeachClubPlanOptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>
+        }
+        createMany: {
+          args: Prisma.BeachClubPlanOptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BeachClubPlanOptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>[]
+        }
+        delete: {
+          args: Prisma.BeachClubPlanOptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>
+        }
+        update: {
+          args: Prisma.BeachClubPlanOptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.BeachClubPlanOptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BeachClubPlanOptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BeachClubPlanOptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.BeachClubPlanOptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BeachClubPlanOptionPayload>
+        }
+        aggregate: {
+          args: Prisma.BeachClubPlanOptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBeachClubPlanOption>
+        }
+        groupBy: {
+          args: Prisma.BeachClubPlanOptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeachClubPlanOptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BeachClubPlanOptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BeachClubPlanOptionCountAggregateOutputType> | number
+        }
+      }
+    }
+    NightClub: {
+      payload: Prisma.$NightClubPayload<ExtArgs>
+      fields: Prisma.NightClubFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NightClubFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NightClubFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>
+        }
+        findFirst: {
+          args: Prisma.NightClubFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NightClubFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>
+        }
+        findMany: {
+          args: Prisma.NightClubFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>[]
+        }
+        create: {
+          args: Prisma.NightClubCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>
+        }
+        createMany: {
+          args: Prisma.NightClubCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NightClubCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>[]
+        }
+        delete: {
+          args: Prisma.NightClubDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>
+        }
+        update: {
+          args: Prisma.NightClubUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>
+        }
+        deleteMany: {
+          args: Prisma.NightClubDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NightClubUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NightClubUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>[]
+        }
+        upsert: {
+          args: Prisma.NightClubUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPayload>
+        }
+        aggregate: {
+          args: Prisma.NightClubAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNightClub>
+        }
+        groupBy: {
+          args: Prisma.NightClubGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NightClubGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NightClubCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NightClubCountAggregateOutputType> | number
+        }
+      }
+    }
+    NightClubImage: {
+      payload: Prisma.$NightClubImagePayload<ExtArgs>
+      fields: Prisma.NightClubImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NightClubImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NightClubImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>
+        }
+        findFirst: {
+          args: Prisma.NightClubImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NightClubImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>
+        }
+        findMany: {
+          args: Prisma.NightClubImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>[]
+        }
+        create: {
+          args: Prisma.NightClubImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>
+        }
+        createMany: {
+          args: Prisma.NightClubImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NightClubImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>[]
+        }
+        delete: {
+          args: Prisma.NightClubImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>
+        }
+        update: {
+          args: Prisma.NightClubImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.NightClubImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NightClubImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NightClubImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.NightClubImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubImagePayload>
+        }
+        aggregate: {
+          args: Prisma.NightClubImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNightClubImage>
+        }
+        groupBy: {
+          args: Prisma.NightClubImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NightClubImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NightClubImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NightClubImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    NightClubPlan: {
+      payload: Prisma.$NightClubPlanPayload<ExtArgs>
+      fields: Prisma.NightClubPlanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NightClubPlanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NightClubPlanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>
+        }
+        findFirst: {
+          args: Prisma.NightClubPlanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NightClubPlanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>
+        }
+        findMany: {
+          args: Prisma.NightClubPlanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>[]
+        }
+        create: {
+          args: Prisma.NightClubPlanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>
+        }
+        createMany: {
+          args: Prisma.NightClubPlanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NightClubPlanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>[]
+        }
+        delete: {
+          args: Prisma.NightClubPlanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>
+        }
+        update: {
+          args: Prisma.NightClubPlanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>
+        }
+        deleteMany: {
+          args: Prisma.NightClubPlanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NightClubPlanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NightClubPlanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>[]
+        }
+        upsert: {
+          args: Prisma.NightClubPlanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanPayload>
+        }
+        aggregate: {
+          args: Prisma.NightClubPlanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNightClubPlan>
+        }
+        groupBy: {
+          args: Prisma.NightClubPlanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NightClubPlanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NightClubPlanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NightClubPlanCountAggregateOutputType> | number
+        }
+      }
+    }
+    NightClubPlanOption: {
+      payload: Prisma.$NightClubPlanOptionPayload<ExtArgs>
+      fields: Prisma.NightClubPlanOptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NightClubPlanOptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NightClubPlanOptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>
+        }
+        findFirst: {
+          args: Prisma.NightClubPlanOptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NightClubPlanOptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>
+        }
+        findMany: {
+          args: Prisma.NightClubPlanOptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>[]
+        }
+        create: {
+          args: Prisma.NightClubPlanOptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>
+        }
+        createMany: {
+          args: Prisma.NightClubPlanOptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NightClubPlanOptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>[]
+        }
+        delete: {
+          args: Prisma.NightClubPlanOptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>
+        }
+        update: {
+          args: Prisma.NightClubPlanOptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.NightClubPlanOptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NightClubPlanOptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NightClubPlanOptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.NightClubPlanOptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NightClubPlanOptionPayload>
+        }
+        aggregate: {
+          args: Prisma.NightClubPlanOptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNightClubPlanOption>
+        }
+        groupBy: {
+          args: Prisma.NightClubPlanOptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NightClubPlanOptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NightClubPlanOptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NightClubPlanOptionCountAggregateOutputType> | number
+        }
+      }
+    }
+    Pack: {
+      payload: Prisma.$PackPayload<ExtArgs>
+      fields: Prisma.PackFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PackFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PackFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>
+        }
+        findFirst: {
+          args: Prisma.PackFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PackFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>
+        }
+        findMany: {
+          args: Prisma.PackFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>[]
+        }
+        create: {
+          args: Prisma.PackCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>
+        }
+        createMany: {
+          args: Prisma.PackCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PackCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>[]
+        }
+        delete: {
+          args: Prisma.PackDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>
+        }
+        update: {
+          args: Prisma.PackUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>
+        }
+        deleteMany: {
+          args: Prisma.PackDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PackUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PackUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>[]
+        }
+        upsert: {
+          args: Prisma.PackUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPayload>
+        }
+        aggregate: {
+          args: Prisma.PackAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePack>
+        }
+        groupBy: {
+          args: Prisma.PackGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PackGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PackCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PackCountAggregateOutputType> | number
+        }
+      }
+    }
+    PackImage: {
+      payload: Prisma.$PackImagePayload<ExtArgs>
+      fields: Prisma.PackImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PackImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PackImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>
+        }
+        findFirst: {
+          args: Prisma.PackImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PackImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>
+        }
+        findMany: {
+          args: Prisma.PackImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>[]
+        }
+        create: {
+          args: Prisma.PackImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>
+        }
+        createMany: {
+          args: Prisma.PackImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PackImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>[]
+        }
+        delete: {
+          args: Prisma.PackImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>
+        }
+        update: {
+          args: Prisma.PackImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.PackImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PackImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PackImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.PackImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackImagePayload>
+        }
+        aggregate: {
+          args: Prisma.PackImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePackImage>
+        }
+        groupBy: {
+          args: Prisma.PackImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PackImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PackImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PackImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    PackPlan: {
+      payload: Prisma.$PackPlanPayload<ExtArgs>
+      fields: Prisma.PackPlanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PackPlanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PackPlanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>
+        }
+        findFirst: {
+          args: Prisma.PackPlanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PackPlanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>
+        }
+        findMany: {
+          args: Prisma.PackPlanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>[]
+        }
+        create: {
+          args: Prisma.PackPlanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>
+        }
+        createMany: {
+          args: Prisma.PackPlanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PackPlanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>[]
+        }
+        delete: {
+          args: Prisma.PackPlanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>
+        }
+        update: {
+          args: Prisma.PackPlanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>
+        }
+        deleteMany: {
+          args: Prisma.PackPlanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PackPlanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PackPlanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>[]
+        }
+        upsert: {
+          args: Prisma.PackPlanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanPayload>
+        }
+        aggregate: {
+          args: Prisma.PackPlanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePackPlan>
+        }
+        groupBy: {
+          args: Prisma.PackPlanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PackPlanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PackPlanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PackPlanCountAggregateOutputType> | number
+        }
+      }
+    }
+    PackPlanOption: {
+      payload: Prisma.$PackPlanOptionPayload<ExtArgs>
+      fields: Prisma.PackPlanOptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PackPlanOptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PackPlanOptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>
+        }
+        findFirst: {
+          args: Prisma.PackPlanOptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PackPlanOptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>
+        }
+        findMany: {
+          args: Prisma.PackPlanOptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>[]
+        }
+        create: {
+          args: Prisma.PackPlanOptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>
+        }
+        createMany: {
+          args: Prisma.PackPlanOptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PackPlanOptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>[]
+        }
+        delete: {
+          args: Prisma.PackPlanOptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>
+        }
+        update: {
+          args: Prisma.PackPlanOptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.PackPlanOptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PackPlanOptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PackPlanOptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.PackPlanOptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PackPlanOptionPayload>
+        }
+        aggregate: {
+          args: Prisma.PackPlanOptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePackPlanOption>
+        }
+        groupBy: {
+          args: Prisma.PackPlanOptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PackPlanOptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PackPlanOptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PackPlanOptionCountAggregateOutputType> | number
+        }
+      }
+    }
+    Activity: {
+      payload: Prisma.$ActivityPayload<ExtArgs>
+      fields: Prisma.ActivityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ActivityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ActivityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>
+        }
+        findFirst: {
+          args: Prisma.ActivityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ActivityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>
+        }
+        findMany: {
+          args: Prisma.ActivityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+        }
+        create: {
+          args: Prisma.ActivityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>
+        }
+        createMany: {
+          args: Prisma.ActivityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ActivityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+        }
+        delete: {
+          args: Prisma.ActivityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>
+        }
+        update: {
+          args: Prisma.ActivityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>
+        }
+        deleteMany: {
+          args: Prisma.ActivityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ActivityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ActivityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>[]
+        }
+        upsert: {
+          args: Prisma.ActivityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPayload>
+        }
+        aggregate: {
+          args: Prisma.ActivityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateActivity>
+        }
+        groupBy: {
+          args: Prisma.ActivityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ActivityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivityCountAggregateOutputType> | number
+        }
+      }
+    }
+    ActivityImage: {
+      payload: Prisma.$ActivityImagePayload<ExtArgs>
+      fields: Prisma.ActivityImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ActivityImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ActivityImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>
+        }
+        findFirst: {
+          args: Prisma.ActivityImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ActivityImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>
+        }
+        findMany: {
+          args: Prisma.ActivityImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>[]
+        }
+        create: {
+          args: Prisma.ActivityImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>
+        }
+        createMany: {
+          args: Prisma.ActivityImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ActivityImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>[]
+        }
+        delete: {
+          args: Prisma.ActivityImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>
+        }
+        update: {
+          args: Prisma.ActivityImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.ActivityImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ActivityImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ActivityImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.ActivityImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityImagePayload>
+        }
+        aggregate: {
+          args: Prisma.ActivityImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateActivityImage>
+        }
+        groupBy: {
+          args: Prisma.ActivityImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivityImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ActivityImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivityImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    ActivityPlan: {
+      payload: Prisma.$ActivityPlanPayload<ExtArgs>
+      fields: Prisma.ActivityPlanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ActivityPlanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ActivityPlanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>
+        }
+        findFirst: {
+          args: Prisma.ActivityPlanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ActivityPlanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>
+        }
+        findMany: {
+          args: Prisma.ActivityPlanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>[]
+        }
+        create: {
+          args: Prisma.ActivityPlanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>
+        }
+        createMany: {
+          args: Prisma.ActivityPlanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ActivityPlanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>[]
+        }
+        delete: {
+          args: Prisma.ActivityPlanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>
+        }
+        update: {
+          args: Prisma.ActivityPlanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>
+        }
+        deleteMany: {
+          args: Prisma.ActivityPlanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ActivityPlanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ActivityPlanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>[]
+        }
+        upsert: {
+          args: Prisma.ActivityPlanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanPayload>
+        }
+        aggregate: {
+          args: Prisma.ActivityPlanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateActivityPlan>
+        }
+        groupBy: {
+          args: Prisma.ActivityPlanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivityPlanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ActivityPlanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivityPlanCountAggregateOutputType> | number
+        }
+      }
+    }
+    ActivityPlanOption: {
+      payload: Prisma.$ActivityPlanOptionPayload<ExtArgs>
+      fields: Prisma.ActivityPlanOptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ActivityPlanOptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ActivityPlanOptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>
+        }
+        findFirst: {
+          args: Prisma.ActivityPlanOptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ActivityPlanOptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>
+        }
+        findMany: {
+          args: Prisma.ActivityPlanOptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>[]
+        }
+        create: {
+          args: Prisma.ActivityPlanOptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>
+        }
+        createMany: {
+          args: Prisma.ActivityPlanOptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ActivityPlanOptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>[]
+        }
+        delete: {
+          args: Prisma.ActivityPlanOptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>
+        }
+        update: {
+          args: Prisma.ActivityPlanOptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ActivityPlanOptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ActivityPlanOptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ActivityPlanOptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ActivityPlanOptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ActivityPlanOptionPayload>
+        }
+        aggregate: {
+          args: Prisma.ActivityPlanOptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateActivityPlanOption>
+        }
+        groupBy: {
+          args: Prisma.ActivityPlanOptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivityPlanOptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ActivityPlanOptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ActivityPlanOptionCountAggregateOutputType> | number
+        }
+      }
+    }
+    Transportation: {
+      payload: Prisma.$TransportationPayload<ExtArgs>
+      fields: Prisma.TransportationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TransportationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TransportationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>
+        }
+        findFirst: {
+          args: Prisma.TransportationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TransportationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>
+        }
+        findMany: {
+          args: Prisma.TransportationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>[]
+        }
+        create: {
+          args: Prisma.TransportationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>
+        }
+        createMany: {
+          args: Prisma.TransportationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TransportationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>[]
+        }
+        delete: {
+          args: Prisma.TransportationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>
+        }
+        update: {
+          args: Prisma.TransportationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>
+        }
+        deleteMany: {
+          args: Prisma.TransportationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TransportationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TransportationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>[]
+        }
+        upsert: {
+          args: Prisma.TransportationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPayload>
+        }
+        aggregate: {
+          args: Prisma.TransportationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTransportation>
+        }
+        groupBy: {
+          args: Prisma.TransportationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransportationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TransportationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransportationCountAggregateOutputType> | number
+        }
+      }
+    }
+    TransportationImage: {
+      payload: Prisma.$TransportationImagePayload<ExtArgs>
+      fields: Prisma.TransportationImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TransportationImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TransportationImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>
+        }
+        findFirst: {
+          args: Prisma.TransportationImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TransportationImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>
+        }
+        findMany: {
+          args: Prisma.TransportationImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>[]
+        }
+        create: {
+          args: Prisma.TransportationImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>
+        }
+        createMany: {
+          args: Prisma.TransportationImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TransportationImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>[]
+        }
+        delete: {
+          args: Prisma.TransportationImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>
+        }
+        update: {
+          args: Prisma.TransportationImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.TransportationImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TransportationImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TransportationImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.TransportationImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationImagePayload>
+        }
+        aggregate: {
+          args: Prisma.TransportationImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTransportationImage>
+        }
+        groupBy: {
+          args: Prisma.TransportationImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransportationImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TransportationImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransportationImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    TransportationPlan: {
+      payload: Prisma.$TransportationPlanPayload<ExtArgs>
+      fields: Prisma.TransportationPlanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TransportationPlanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TransportationPlanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>
+        }
+        findFirst: {
+          args: Prisma.TransportationPlanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TransportationPlanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>
+        }
+        findMany: {
+          args: Prisma.TransportationPlanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>[]
+        }
+        create: {
+          args: Prisma.TransportationPlanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>
+        }
+        createMany: {
+          args: Prisma.TransportationPlanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TransportationPlanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>[]
+        }
+        delete: {
+          args: Prisma.TransportationPlanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>
+        }
+        update: {
+          args: Prisma.TransportationPlanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>
+        }
+        deleteMany: {
+          args: Prisma.TransportationPlanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TransportationPlanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TransportationPlanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>[]
+        }
+        upsert: {
+          args: Prisma.TransportationPlanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanPayload>
+        }
+        aggregate: {
+          args: Prisma.TransportationPlanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTransportationPlan>
+        }
+        groupBy: {
+          args: Prisma.TransportationPlanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransportationPlanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TransportationPlanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransportationPlanCountAggregateOutputType> | number
+        }
+      }
+    }
+    TransportationPlanOption: {
+      payload: Prisma.$TransportationPlanOptionPayload<ExtArgs>
+      fields: Prisma.TransportationPlanOptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TransportationPlanOptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TransportationPlanOptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>
+        }
+        findFirst: {
+          args: Prisma.TransportationPlanOptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TransportationPlanOptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>
+        }
+        findMany: {
+          args: Prisma.TransportationPlanOptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>[]
+        }
+        create: {
+          args: Prisma.TransportationPlanOptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>
+        }
+        createMany: {
+          args: Prisma.TransportationPlanOptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TransportationPlanOptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>[]
+        }
+        delete: {
+          args: Prisma.TransportationPlanOptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>
+        }
+        update: {
+          args: Prisma.TransportationPlanOptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.TransportationPlanOptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TransportationPlanOptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TransportationPlanOptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.TransportationPlanOptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TransportationPlanOptionPayload>
+        }
+        aggregate: {
+          args: Prisma.TransportationPlanOptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTransportationPlanOption>
+        }
+        groupBy: {
+          args: Prisma.TransportationPlanOptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransportationPlanOptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TransportationPlanOptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TransportationPlanOptionCountAggregateOutputType> | number
         }
       }
     }
@@ -2525,6 +4325,654 @@ export const ProductScalarFieldEnum = {
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
+export const VillaScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  priceEuro: 'priceEuro',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  priceTitleFR: 'priceTitleFR',
+  priceTitleEN: 'priceTitleEN',
+  priceTitleDE: 'priceTitleDE',
+  priceTitleIT: 'priceTitleIT',
+  priceTitlePT: 'priceTitlePT',
+  priceTitleES: 'priceTitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  addressFR: 'addressFR',
+  addressEN: 'addressEN',
+  addressDE: 'addressDE',
+  addressIT: 'addressIT',
+  addressPT: 'addressPT',
+  addressES: 'addressES',
+  tagsFR: 'tagsFR',
+  tagsEN: 'tagsEN',
+  tagsDE: 'tagsDE',
+  tagsIT: 'tagsIT',
+  tagsPT: 'tagsPT',
+  tagsES: 'tagsES',
+  detailsFR: 'detailsFR',
+  detailsEN: 'detailsEN',
+  detailsDE: 'detailsDE',
+  detailsIT: 'detailsIT',
+  detailsPT: 'detailsPT',
+  detailsES: 'detailsES',
+  imageAlts: 'imageAlts',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VillaScalarFieldEnum = (typeof VillaScalarFieldEnum)[keyof typeof VillaScalarFieldEnum]
+
+
+export const VillaImageScalarFieldEnum = {
+  id: 'id',
+  villaId: 'villaId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type VillaImageScalarFieldEnum = (typeof VillaImageScalarFieldEnum)[keyof typeof VillaImageScalarFieldEnum]
+
+
+export const RestaurantScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  priceEuro: 'priceEuro',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  priceTitleFR: 'priceTitleFR',
+  priceTitleEN: 'priceTitleEN',
+  priceTitleDE: 'priceTitleDE',
+  priceTitleIT: 'priceTitleIT',
+  priceTitlePT: 'priceTitlePT',
+  priceTitleES: 'priceTitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  addressFR: 'addressFR',
+  addressEN: 'addressEN',
+  addressDE: 'addressDE',
+  addressIT: 'addressIT',
+  addressPT: 'addressPT',
+  addressES: 'addressES',
+  tagsFR: 'tagsFR',
+  tagsEN: 'tagsEN',
+  tagsDE: 'tagsDE',
+  tagsIT: 'tagsIT',
+  tagsPT: 'tagsPT',
+  tagsES: 'tagsES',
+  detailsFR: 'detailsFR',
+  detailsEN: 'detailsEN',
+  detailsDE: 'detailsDE',
+  detailsIT: 'detailsIT',
+  detailsPT: 'detailsPT',
+  detailsES: 'detailsES',
+  imageAlts: 'imageAlts',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RestaurantScalarFieldEnum = (typeof RestaurantScalarFieldEnum)[keyof typeof RestaurantScalarFieldEnum]
+
+
+export const RestaurantImageScalarFieldEnum = {
+  id: 'id',
+  restaurantId: 'restaurantId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type RestaurantImageScalarFieldEnum = (typeof RestaurantImageScalarFieldEnum)[keyof typeof RestaurantImageScalarFieldEnum]
+
+
+export const BeachClubScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BeachClubScalarFieldEnum = (typeof BeachClubScalarFieldEnum)[keyof typeof BeachClubScalarFieldEnum]
+
+
+export const BeachClubImageScalarFieldEnum = {
+  id: 'id',
+  beachClubId: 'beachClubId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type BeachClubImageScalarFieldEnum = (typeof BeachClubImageScalarFieldEnum)[keyof typeof BeachClubImageScalarFieldEnum]
+
+
+export const BeachClubPlanScalarFieldEnum = {
+  id: 'id',
+  beachClubId: 'beachClubId',
+  uniqueCode: 'uniqueCode',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BeachClubPlanScalarFieldEnum = (typeof BeachClubPlanScalarFieldEnum)[keyof typeof BeachClubPlanScalarFieldEnum]
+
+
+export const BeachClubPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type BeachClubPlanOptionScalarFieldEnum = (typeof BeachClubPlanOptionScalarFieldEnum)[keyof typeof BeachClubPlanOptionScalarFieldEnum]
+
+
+export const NightClubScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NightClubScalarFieldEnum = (typeof NightClubScalarFieldEnum)[keyof typeof NightClubScalarFieldEnum]
+
+
+export const NightClubImageScalarFieldEnum = {
+  id: 'id',
+  nightClubId: 'nightClubId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type NightClubImageScalarFieldEnum = (typeof NightClubImageScalarFieldEnum)[keyof typeof NightClubImageScalarFieldEnum]
+
+
+export const NightClubPlanScalarFieldEnum = {
+  id: 'id',
+  nightClubId: 'nightClubId',
+  uniqueCode: 'uniqueCode',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  durationMinutes: 'durationMinutes',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NightClubPlanScalarFieldEnum = (typeof NightClubPlanScalarFieldEnum)[keyof typeof NightClubPlanScalarFieldEnum]
+
+
+export const NightClubPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type NightClubPlanOptionScalarFieldEnum = (typeof NightClubPlanOptionScalarFieldEnum)[keyof typeof NightClubPlanOptionScalarFieldEnum]
+
+
+export const PackScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PackScalarFieldEnum = (typeof PackScalarFieldEnum)[keyof typeof PackScalarFieldEnum]
+
+
+export const PackImageScalarFieldEnum = {
+  id: 'id',
+  packId: 'packId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type PackImageScalarFieldEnum = (typeof PackImageScalarFieldEnum)[keyof typeof PackImageScalarFieldEnum]
+
+
+export const PackPlanScalarFieldEnum = {
+  id: 'id',
+  packId: 'packId',
+  uniqueCode: 'uniqueCode',
+  serviceType: 'serviceType',
+  origin: 'origin',
+  destination: 'destination',
+  durationMinutes: 'durationMinutes',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PackPlanScalarFieldEnum = (typeof PackPlanScalarFieldEnum)[keyof typeof PackPlanScalarFieldEnum]
+
+
+export const PackPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type PackPlanOptionScalarFieldEnum = (typeof PackPlanOptionScalarFieldEnum)[keyof typeof PackPlanOptionScalarFieldEnum]
+
+
+export const ActivityScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
+
+
+export const ActivityImageScalarFieldEnum = {
+  id: 'id',
+  activityId: 'activityId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type ActivityImageScalarFieldEnum = (typeof ActivityImageScalarFieldEnum)[keyof typeof ActivityImageScalarFieldEnum]
+
+
+export const ActivityPlanScalarFieldEnum = {
+  id: 'id',
+  activityId: 'activityId',
+  uniqueCode: 'uniqueCode',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  durationMinutes: 'durationMinutes',
+  minimumGuests: 'minimumGuests',
+  maximumGuests: 'maximumGuests',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ActivityPlanScalarFieldEnum = (typeof ActivityPlanScalarFieldEnum)[keyof typeof ActivityPlanScalarFieldEnum]
+
+
+export const ActivityPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type ActivityPlanOptionScalarFieldEnum = (typeof ActivityPlanOptionScalarFieldEnum)[keyof typeof ActivityPlanOptionScalarFieldEnum]
+
+
+export const TransportationScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TransportationScalarFieldEnum = (typeof TransportationScalarFieldEnum)[keyof typeof TransportationScalarFieldEnum]
+
+
+export const TransportationImageScalarFieldEnum = {
+  id: 'id',
+  transportationId: 'transportationId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type TransportationImageScalarFieldEnum = (typeof TransportationImageScalarFieldEnum)[keyof typeof TransportationImageScalarFieldEnum]
+
+
+export const TransportationPlanScalarFieldEnum = {
+  id: 'id',
+  transportationId: 'transportationId',
+  uniqueCode: 'uniqueCode',
+  serviceType: 'serviceType',
+  origin: 'origin',
+  destination: 'destination',
+  durationMinutes: 'durationMinutes',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TransportationPlanScalarFieldEnum = (typeof TransportationPlanScalarFieldEnum)[keyof typeof TransportationPlanScalarFieldEnum]
+
+
+export const TransportationPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type TransportationPlanOptionScalarFieldEnum = (typeof TransportationPlanOptionScalarFieldEnum)[keyof typeof TransportationPlanOptionScalarFieldEnum]
+
+
 export const WhatsAppConversationScalarFieldEnum = {
   id: 'id',
   whatsappPhone: 'whatsappPhone',
@@ -3005,6 +5453,90 @@ export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMode
 
 
 /**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BeachClubPricingUnit'
+ */
+export type EnumBeachClubPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BeachClubPricingUnit'>
+    
+
+
+/**
+ * Reference to a field of type 'BeachClubPricingUnit[]'
+ */
+export type ListEnumBeachClubPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BeachClubPricingUnit[]'>
+    
+
+
+/**
+ * Reference to a field of type 'NightClubPricingUnit'
+ */
+export type EnumNightClubPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NightClubPricingUnit'>
+    
+
+
+/**
+ * Reference to a field of type 'NightClubPricingUnit[]'
+ */
+export type ListEnumNightClubPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NightClubPricingUnit[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PackPricingUnit'
+ */
+export type EnumPackPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PackPricingUnit'>
+    
+
+
+/**
+ * Reference to a field of type 'PackPricingUnit[]'
+ */
+export type ListEnumPackPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PackPricingUnit[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ActivityPricingUnit'
+ */
+export type EnumActivityPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityPricingUnit'>
+    
+
+
+/**
+ * Reference to a field of type 'ActivityPricingUnit[]'
+ */
+export type ListEnumActivityPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActivityPricingUnit[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TransportationPricingUnit'
+ */
+export type EnumTransportationPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransportationPricingUnit'>
+    
+
+
+/**
+ * Reference to a field of type 'TransportationPricingUnit[]'
+ */
+export type ListEnumTransportationPricingUnitFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransportationPricingUnit[]'>
+    
+
+
+/**
  * Reference to a field of type 'WhatsAppManagedBy'
  */
 export type EnumWhatsAppManagedByFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WhatsAppManagedBy'>
@@ -3278,6 +5810,30 @@ export type GlobalOmitConfig = {
   recordFlowRun?: Prisma.RecordFlowRunOmit
   recordFlowActivityRun?: Prisma.RecordFlowActivityRunOmit
   product?: Prisma.ProductOmit
+  villa?: Prisma.VillaOmit
+  villaImage?: Prisma.VillaImageOmit
+  restaurant?: Prisma.RestaurantOmit
+  restaurantImage?: Prisma.RestaurantImageOmit
+  beachClub?: Prisma.BeachClubOmit
+  beachClubImage?: Prisma.BeachClubImageOmit
+  beachClubPlan?: Prisma.BeachClubPlanOmit
+  beachClubPlanOption?: Prisma.BeachClubPlanOptionOmit
+  nightClub?: Prisma.NightClubOmit
+  nightClubImage?: Prisma.NightClubImageOmit
+  nightClubPlan?: Prisma.NightClubPlanOmit
+  nightClubPlanOption?: Prisma.NightClubPlanOptionOmit
+  pack?: Prisma.PackOmit
+  packImage?: Prisma.PackImageOmit
+  packPlan?: Prisma.PackPlanOmit
+  packPlanOption?: Prisma.PackPlanOptionOmit
+  activity?: Prisma.ActivityOmit
+  activityImage?: Prisma.ActivityImageOmit
+  activityPlan?: Prisma.ActivityPlanOmit
+  activityPlanOption?: Prisma.ActivityPlanOptionOmit
+  transportation?: Prisma.TransportationOmit
+  transportationImage?: Prisma.TransportationImageOmit
+  transportationPlan?: Prisma.TransportationPlanOmit
+  transportationPlanOption?: Prisma.TransportationPlanOptionOmit
   whatsAppConversation?: Prisma.WhatsAppConversationOmit
   whatsAppMessage?: Prisma.WhatsAppMessageOmit
   individual?: Prisma.IndividualOmit

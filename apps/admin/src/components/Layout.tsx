@@ -13,6 +13,18 @@ const groups = [
     ],
   },
   {
+    label: "Catalog V2",
+    items: [
+      { to: "/entities/villas", label: "Villas", icon: "⌂" },
+      { to: "/entities/restaurants", label: "Restaurants", icon: "◈" },
+      { to: "/entities/beach-clubs", label: "Beach Clubs", icon: "≈" },
+      { to: "/entities/night-clubs", label: "Night Clubs", icon: "✦" },
+      { to: "/entities/packs", label: "Packs", icon: "▣" },
+      { to: "/entities/activities", label: "Activities", icon: "◇" },
+      { to: "/entities/transportation", label: "Transportation", icon: "→" },
+    ],
+  },
+  {
     label: "Operations",
     items: [
       { to: "/entities/chats", label: "Live Chats", icon: "◉" },

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useRef, useMemo } from "react";
+import { useCallback, useEffect, useRef, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import ItemCard from "./ItemCard";
 import { Category } from "@/types/catalog";
@@ -12,7 +12,9 @@ import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
 const categoryToApiKey: Record<string, string> = {
   villas: "villa",
-  swimmingpools: "swimmingpool",
+  beachclubs: "swimmingpool",
+  nightclubs: "nightclub",
+  packs: "pack",
   activities: "activity",
   transportation: "transportation",
   spa: "spa",
@@ -42,6 +44,8 @@ function HorizontalSectionSkeleton() {
 
 export default function HorizontalSection({ category }: { category: Category }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
   const pathname = usePathname();
 
   const lang = useMemo(() => {
@@ -76,6 +80,23 @@ export default function HorizontalSection({ category }: { category: Category }) 
   const apiKey = categoryToApiKey[category];
   const items = apiKey && products ? products[apiKey as keyof typeof products] || [] : [];
 
+  const updateScrollAvailability = useCallback(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) { setCanScrollLeft(false); setCanScrollRight(false); return; }
+    const tolerance = 2;
+    setCanScrollLeft(scroller.scrollLeft > tolerance);
+    setCanScrollRight(scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - tolerance);
+  }, []);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(updateScrollAvailability);
+    const scroller = scrollerRef.current;
+    if (!scroller) return () => cancelAnimationFrame(frame);
+    const observer = new ResizeObserver(updateScrollAvailability);
+    observer.observe(scroller);
+    return () => { cancelAnimationFrame(frame); observer.disconnect(); };
+  }, [items.length, updateScrollAvailability]);
+
   if (!loading && !error && items.length === 0) {
     return null;
   }
@@ -107,21 +128,7 @@ export default function HorizontalSection({ category }: { category: Category }) 
           </p>
         </div>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <button
-            onClick={() => scroll("left")}
-            className="grid h-11 w-11 place-items-center rounded-full bg-white text-zinc-950 card-shadow hover:bg-orange-50"
-          >
-            <ChevronLeft />
-          </button>
-
-          <button
-            onClick={() => scroll("right")}
-            className="grid h-11 w-11 place-items-center rounded-full bg-white text-zinc-950 card-shadow hover:bg-orange-50"
-          >
-            <ChevronRight />
-          </button>
-
+        <div className="hidden items-center md:flex">
           <Link
             href={localizePath(`/${category}`)}
             className="rounded-full bg-zinc-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-orange-700"
@@ -140,32 +147,37 @@ export default function HorizontalSection({ category }: { category: Category }) 
       )}
 
       {!loading && !error && (
-        <div
-          ref={scrollerRef}
-          className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6"
-        >
-          {items.map((item) => (
-            <div key={item.id} className="snap-start">
-              <ItemCard item={item as any}  locale={locale}/>
-            </div>
-          ))}
+        <div className="relative">
+          {canScrollLeft && <button type="button" onClick={() => scroll("left")} className="nightclub-carousel-arrow absolute left-2 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-zinc-100 bg-white/95 text-zinc-950 shadow-xl backdrop-blur transition hover:scale-105 hover:bg-orange-50 md:grid" aria-label="Previous products"><ChevronLeft /></button>}
+          <div
+            ref={scrollerRef}
+            onScroll={updateScrollAvailability}
+            className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6"
+          >
+            {items.map((item) => (
+              <div key={item.id} className="snap-start">
+                <ItemCard item={item as any} locale={locale}/>
+              </div>
+            ))}
+          </div>
+          {canScrollRight && <button type="button" onClick={() => scroll("right")} className="nightclub-carousel-arrow absolute right-2 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-zinc-100 bg-white/95 text-zinc-950 shadow-xl backdrop-blur transition hover:scale-105 hover:bg-orange-50 md:grid" aria-label="Next products"><ChevronRight /></button>}
         </div>
       )}
 
       <div className="flex gap-3 md:hidden">
-        <button
+        {canScrollLeft && <button
           onClick={() => scroll("left")}
-          className="grid h-11 w-11 place-items-center rounded-full bg-white text-zinc-950 card-shadow"
+          className="nightclub-carousel-arrow grid h-11 w-11 place-items-center rounded-full bg-white text-zinc-950 card-shadow"
         >
           <ChevronLeft />
-        </button>
+        </button>}
 
-        <button
+        {canScrollRight && <button
           onClick={() => scroll("right")}
-          className="grid h-11 w-11 place-items-center rounded-full bg-white text-zinc-950 card-shadow"
+          className="nightclub-carousel-arrow grid h-11 w-11 place-items-center rounded-full bg-white text-zinc-950 card-shadow"
         >
           <ChevronRight />
-        </button>
+        </button>}
 
         <Link
           href={localizePath(`/${category}`)}

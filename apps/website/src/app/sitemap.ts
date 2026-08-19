@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const routes = ["", "/about", "/services", "/contact", "/villas", "/transportation", "/swimmingpools", "/activities", "/restaurants", "/spa", "/terms"];
+const routes = ["", "/about", "/services", "/contact", "/villas", "/transportation", "/beachclubs", "/nightclubs", "/activities", "/packs", "/restaurants", "/spa", "/terms"];
 const languages = ["en", "fr", "de", "it", "pt", "es"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
