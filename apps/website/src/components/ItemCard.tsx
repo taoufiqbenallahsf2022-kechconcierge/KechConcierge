@@ -18,7 +18,8 @@ type ItemCardProps = {
     title: string;
     subtitle?: string;
     address?: string;
-    priceEuro?: number;
+    priceEuro?: number | null;
+    currency?: string | null;
     priceTitle?: string;
   };
   locale: string;
@@ -29,6 +30,9 @@ const typeToCategory: Record<string, string> = {
   APARTMENT: "apartments",
   ACTIVITY: "activities",
   TRANSPORTATION: "transportation",
+  SWIMMINGPOOL: "beachclubs",
+  NIGHTCLUB: "nightclubs",
+  PACK: "packs",
   SPA: "spa",
   RESTAURANT: "restaurants",
 };
@@ -181,7 +185,7 @@ export default function ItemCard({
             {item.priceTitle ||
               "From"}{" "}
             <span className="text-orange-700">
-              {item.priceEuro}€
+              {item.priceEuro} {item.currency ?? "EUR"}
             </span>
           </div>
         )}

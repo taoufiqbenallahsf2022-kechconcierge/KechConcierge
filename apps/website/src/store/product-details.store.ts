@@ -4,6 +4,8 @@ export type ProductType =
   | "VILLA"
   | "TRANSPORTATION"
   | "SWIMMINGPOOL"
+  | "NIGHTCLUB"
+  | "PACK"
   | "ACTIVITY"
   | "RESTAURANT"
   | "SPA";
@@ -29,7 +31,8 @@ export type ProductDetails = {
 
   thumbnail: string;
   thumbnailAlt: string;
-  priceEuro: number;
+  priceEuro: number | null;
+  currency: string | null;
 
   title: string;
   subtitle: string;
@@ -91,6 +94,20 @@ export type ProductDetails = {
   image49: string | null;
   image50: string | null;
   imageAlts: Record<string, string>;
+  plans: Array<{
+    id: string;
+    uniqueCode: string;
+    salePrice: number;
+    currency: string;
+    pricingUnit: string | null;
+    title: string;
+    description: string;
+    serviceType: string | null;
+    origin: string | null;
+    destination: string | null;
+    durationMinutes: number | null;
+    options: Array<{ id: string; title: string; order: number }>;
+  }>;
 };
 
 type ProductDetailsState = {

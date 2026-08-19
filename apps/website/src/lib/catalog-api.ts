@@ -13,6 +13,8 @@ export type ApiProductType =
   | "VILLA"
   | "TRANSPORTATION"
   | "SWIMMINGPOOL"
+  | "NIGHTCLUB"
+  | "PACK"
   | "ACTIVITY"
   | "RESTAURANT"
   | "SPA";
@@ -24,7 +26,8 @@ export type CatalogItem = {
   order: number | null;
   thumbnail: string;
   thumbnailAlt: string;
-  priceEuro: number;
+  priceEuro: number | null;
+  currency: string | null;
   title: string;
   subtitle: string;
   priceTitle: string;
@@ -48,6 +51,12 @@ const categoryTypeMap: Record<string, ApiProductType> = {
 
   swimmingpool: "SWIMMINGPOOL",
   swimmingpools: "SWIMMINGPOOL",
+  beachclub: "SWIMMINGPOOL",
+  beachclubs: "SWIMMINGPOOL",
+  nightclub: "NIGHTCLUB",
+  nightclubs: "NIGHTCLUB",
+  pack: "PACK",
+  packs: "PACK",
 
   activity: "ACTIVITY",
   activities: "ACTIVITY",
@@ -61,7 +70,9 @@ const categoryTypeMap: Record<string, ApiProductType> = {
 const canonicalCategoryMap: Record<ApiProductType, string> = {
   VILLA: "villas",
   TRANSPORTATION: "transportation",
-  SWIMMINGPOOL: "swimmingpools",
+  SWIMMINGPOOL: "beachclubs",
+  NIGHTCLUB: "nightclubs",
+  PACK: "packs",
   ACTIVITY: "activities",
   RESTAURANT: "restaurants",
   SPA: "spa",
@@ -70,7 +81,7 @@ const canonicalCategoryMap: Record<ApiProductType, string> = {
 const categoryContent: Record<
   SupportedLocale,
   Record<
-    ApiProductType,
+    Exclude<ApiProductType, "NIGHTCLUB" | "PACK">,
     {
       label: string;
       description: string;
@@ -372,6 +383,8 @@ export function getCategoryContent(
   locale: SupportedLocale,
   type: ApiProductType
 ) {
+  if (type === "NIGHTCLUB") return { label: "Night Clubs", description: "Nightlife experiences, tables and exclusive club plans in Marrakech.", catalogLabel: "Catalog", emptyMessage: "No night clubs were found." };
+  if (type === "PACK") return { label: "Packs", description: "Curated combinations of services and experiences with flexible plans.", catalogLabel: "Catalog", emptyMessage: "No packs were found." };
   return categoryContent[locale][type];
 }
 

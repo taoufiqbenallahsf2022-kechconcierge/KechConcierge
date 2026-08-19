@@ -73,6 +73,126 @@ export type RecordFlowActivityRun = Prisma.RecordFlowActivityRunModel
  */
 export type Product = Prisma.ProductModel
 /**
+ * Model Villa
+ * 
+ */
+export type Villa = Prisma.VillaModel
+/**
+ * Model VillaImage
+ * 
+ */
+export type VillaImage = Prisma.VillaImageModel
+/**
+ * Model Restaurant
+ * 
+ */
+export type Restaurant = Prisma.RestaurantModel
+/**
+ * Model RestaurantImage
+ * 
+ */
+export type RestaurantImage = Prisma.RestaurantImageModel
+/**
+ * Model BeachClub
+ * 
+ */
+export type BeachClub = Prisma.BeachClubModel
+/**
+ * Model BeachClubImage
+ * 
+ */
+export type BeachClubImage = Prisma.BeachClubImageModel
+/**
+ * Model BeachClubPlan
+ * 
+ */
+export type BeachClubPlan = Prisma.BeachClubPlanModel
+/**
+ * Model BeachClubPlanOption
+ * 
+ */
+export type BeachClubPlanOption = Prisma.BeachClubPlanOptionModel
+/**
+ * Model NightClub
+ * 
+ */
+export type NightClub = Prisma.NightClubModel
+/**
+ * Model NightClubImage
+ * 
+ */
+export type NightClubImage = Prisma.NightClubImageModel
+/**
+ * Model NightClubPlan
+ * 
+ */
+export type NightClubPlan = Prisma.NightClubPlanModel
+/**
+ * Model NightClubPlanOption
+ * 
+ */
+export type NightClubPlanOption = Prisma.NightClubPlanOptionModel
+/**
+ * Model Pack
+ * 
+ */
+export type Pack = Prisma.PackModel
+/**
+ * Model PackImage
+ * 
+ */
+export type PackImage = Prisma.PackImageModel
+/**
+ * Model PackPlan
+ * 
+ */
+export type PackPlan = Prisma.PackPlanModel
+/**
+ * Model PackPlanOption
+ * 
+ */
+export type PackPlanOption = Prisma.PackPlanOptionModel
+/**
+ * Model Activity
+ * 
+ */
+export type Activity = Prisma.ActivityModel
+/**
+ * Model ActivityImage
+ * 
+ */
+export type ActivityImage = Prisma.ActivityImageModel
+/**
+ * Model ActivityPlan
+ * 
+ */
+export type ActivityPlan = Prisma.ActivityPlanModel
+/**
+ * Model ActivityPlanOption
+ * 
+ */
+export type ActivityPlanOption = Prisma.ActivityPlanOptionModel
+/**
+ * Model Transportation
+ * 
+ */
+export type Transportation = Prisma.TransportationModel
+/**
+ * Model TransportationImage
+ * 
+ */
+export type TransportationImage = Prisma.TransportationImageModel
+/**
+ * Model TransportationPlan
+ * 
+ */
+export type TransportationPlan = Prisma.TransportationPlanModel
+/**
+ * Model TransportationPlanOption
+ * 
+ */
+export type TransportationPlanOption = Prisma.TransportationPlanOptionModel
+/**
  * Model WhatsAppConversation
  * 
  */

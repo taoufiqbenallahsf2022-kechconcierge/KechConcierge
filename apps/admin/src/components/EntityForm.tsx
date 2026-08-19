@@ -108,7 +108,7 @@ export function EntityForm({
           throw new Error(`${f.label} requires at least ${f.minItems} entries.`);
         }
       }
-      if (config.key === "products" && Array.isArray(body.gallery)) {
+      if (["products", "villas", "restaurants", "beach-clubs", "night-clubs", "activities", "transportation", "packs"].includes(config.key) && Array.isArray(body.gallery)) {
         const gallery = body.gallery as string[];
         for (let index = 0; index < 50; index++) body[`image${index + 1}`] = gallery[index] ?? null;
         delete body.gallery;
@@ -124,7 +124,7 @@ export function EntityForm({
         <section className="form-section" key={section}>
           <div className="form-section-title">
             <h2>{section}</h2>
-            {config.key === "products" && /^Content · (FR|DE|IT|PT|ES)$/.test(section) && (
+            {["products", "villas", "restaurants", "beach-clubs", "night-clubs", "activities", "transportation", "packs"].includes(config.key) && /^Content · (FR|DE|IT|PT|ES)$/.test(section) && (
               <GenerateSectionFromEnglishButton language={section.slice(-2)} />
             )}
           </div>
@@ -238,7 +238,7 @@ function FieldInput({
   );
 }
 
-const translatedFieldNames = ["title", "subtitle", "priceTitle", "description", "address"] as const;
+const translatedFieldNames = ["title", "subtitle", "priceTitle", "description", "address", "location"] as const;
 
 function GenerateSectionFromEnglishButton({ language }: { language: string }) {
   const [generating, setGenerating] = useState(false);
@@ -263,7 +263,7 @@ function GenerateSectionFromEnglishButton({ language }: { language: string }) {
       subtitle: String(formData.get("subtitleEN") ?? "").trim(),
       priceTitle: String(formData.get("priceTitleEN") ?? "").trim(),
       description: String(formData.get("descriptionEN") ?? "").trim(),
-      address: String(formData.get("addressEN") ?? "").trim(),
+      address: String(formData.get("addressEN") ?? formData.get("locationEN") ?? "").trim(),
       tags: String(formData.get("tagsEN") ?? "").split(",").map((tag) => tag.trim()).filter(Boolean),
       details,
     };
@@ -288,7 +288,7 @@ function GenerateSectionFromEnglishButton({ language }: { language: string }) {
       for (const fieldName of translatedFieldNames) {
         const input = form.elements.namedItem(`${fieldName}${language}`) as HTMLInputElement | HTMLTextAreaElement | null;
         if (!input) continue;
-        input.value = String(content[fieldName] ?? "");
+        input.value = String(fieldName === "location" ? content.address ?? "" : content[fieldName] ?? "");
         input.dispatchEvent(new Event("input", { bubbles: true }));
         input.dispatchEvent(new Event("change", { bubbles: true }));
       }
@@ -412,7 +412,7 @@ function ImageAltManager({ field, value }: { field: Field; value: string }) {
       ) : (
         <div className="image-alt-language-list">
           {altLanguages.map((language) => {
-            const entries = Object.entries(alts).filter(([, translations]) => translations?.[language]);
+            const entries = Object.entries(alts);
             if (!entries.length) return null;
             return <section key={language}>
               <h3>{language.toUpperCase()}</h3>

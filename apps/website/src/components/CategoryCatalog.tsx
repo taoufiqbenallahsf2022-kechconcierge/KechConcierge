@@ -23,7 +23,9 @@ import {
 type CategorySlug =
   | "villas"
   | "transportation"
-  | "swimmingpools"
+  | "beachclubs"
+  | "nightclubs"
+  | "packs"
   | "activities"
   | "restaurants"
   | "spa";
@@ -67,7 +69,7 @@ function getCategoryText(
             .transportationDescription,
       };
 
-    case "swimmingpools":
+    case "beachclubs":
       return {
         label:
           dictionary.categories.swimmingPoolsLabel,
@@ -75,6 +77,12 @@ function getCategoryText(
           dictionary.categories
             .swimmingPoolsDescription,
       };
+
+    case "nightclubs":
+      return { label: "Night Clubs", description: "Nightlife experiences, tables and exclusive club plans in Marrakech." };
+
+    case "packs":
+      return { label: "Packs", description: "Curated combinations of services and experiences with flexible plans." };
 
     case "activities":
       return {

@@ -22,7 +22,7 @@ const countries = [
 ] as const;
 
 const copy = {
-  en: { cta: "Book now", title: "Request this experience", intro: "Share your dates and contact details. Our concierge will get back to you shortly.", start: "Start date", end: "End date", first: "First name", last: "Last name", email: "Email address", phone: "Mobile number", send: "Send request", sending: "Sending…", success: "Your request has been sent. Our concierge will contact you shortly.", error: "Please complete every field with valid information.", message: (a: string, b: string, p: string) => `Product request for ${p}, from ${a} to ${b}.` },
+  en: { cta: "Book now", title: "Request this experience", intro: "Share your dates and contact details. Our concierge will get back to you shortly.", plan: "Choose a plan", selectPlan: "Select a plan…", planError: "Please select a plan before booking.", start: "Start date", end: "End date", first: "First name", last: "Last name", email: "Email address", phone: "Mobile number", send: "Send request", sending: "Sending…", success: "Your request has been sent. Our concierge will contact you shortly.", error: "Please complete every field with valid information.", message: (a: string, b: string, p: string) => `Product request for ${p}, from ${a} to ${b}.` },
   fr: { cta: "Faire une demande", title: "Demander cette expérience", intro: "Indiquez vos dates et coordonnées. Notre conciergerie vous répondra rapidement.", start: "Date de début", end: "Date de fin", first: "Prénom", last: "Nom", email: "Adresse e-mail", phone: "Téléphone mobile", send: "Envoyer la demande", sending: "Envoi…", success: "Votre demande a été envoyée. Notre conciergerie vous contactera rapidement.", error: "Veuillez renseigner correctement tous les champs.", message: (a: string, b: string, p: string) => `Demande concernant ${p}, du ${a} au ${b}.` },
   es: { cta: "Solicitar ahora", title: "Solicitar esta experiencia", intro: "Indica tus fechas y datos. Nuestro equipo de conserjería te responderá pronto.", start: "Fecha de inicio", end: "Fecha de fin", first: "Nombre", last: "Apellido", email: "Correo electrónico", phone: "Teléfono móvil", send: "Enviar solicitud", sending: "Enviando…", success: "Tu solicitud ha sido enviada.", error: "Completa correctamente todos los campos.", message: (a: string, b: string, p: string) => `Solicitud sobre ${p}, del ${a} al ${b}.` },
   pt: { cta: "Fazer pedido", title: "Solicitar esta experiência", intro: "Partilhe as datas e os contactos. A nossa equipa responderá em breve.", start: "Data de início", end: "Data de fim", first: "Nome", last: "Apelido", email: "E-mail", phone: "Telemóvel", send: "Enviar pedido", sending: "A enviar…", success: "O seu pedido foi enviado.", error: "Preencha corretamente todos os campos.", message: (a: string, b: string, p: string) => `Pedido sobre ${p}, de ${a} a ${b}.` },
@@ -30,13 +30,17 @@ const copy = {
   de: { cta: "Anfrage senden", title: "Dieses Erlebnis anfragen", intro: "Teilen Sie uns Ihre Daten und Kontaktdaten mit. Unser Concierge meldet sich bald.", start: "Startdatum", end: "Enddatum", first: "Vorname", last: "Nachname", email: "E-Mail-Adresse", phone: "Mobilnummer", send: "Anfrage senden", sending: "Wird gesendet…", success: "Ihre Anfrage wurde gesendet.", error: "Bitte füllen Sie alle Felder korrekt aus.", message: (a: string, b: string, p: string) => `Produktanfrage für ${p}, vom ${a} bis ${b}.` },
 } satisfies Record<Locale, unknown>;
 
-type Props = { locale: Locale; productName: string; sticky: boolean };
+type BookingPlan = { id: string; title: string; salePrice: number; currency: string };
+type Props = { locale: Locale; productName: string; sticky: boolean; plans?: BookingPlan[]; selectedPlanId?: string | null; open?: boolean; onOpenChange?: (open: boolean) => void; hideTrigger?: boolean };
 
-export default function ProductBookingPanel({ locale, productName, sticky }: Props) {
+export default function ProductBookingPanel({ locale, productName, sticky, plans = [], selectedPlanId = null, open: controlledOpen, onOpenChange, hideTrigger = false }: Props) {
   const text = copy[locale];
   const user = useAuthStore((state) => state.user);
   const accessToken = useAuthStore((state) => state.accessToken);
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = (value: boolean) => { setInternalOpen(value); onOpenChange?.(value); };
+  const [planId, setPlanId] = useState(selectedPlanId ?? "");
   const [countryOpen, setCountryOpen] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [feedback, setFeedback] = useState("");
@@ -44,6 +48,10 @@ export default function ProductBookingPanel({ locale, productName, sticky }: Pro
   const countryNames = useMemo(() => new Intl.DisplayNames([locale], { type: "region" }), [locale]);
   const selectedCountry = countries.find((item) => item.iso === form.countryIso) || countries[0];
   const today = new Date().toISOString().slice(0, 10);
+  const selectedPlan = plans.find((plan) => plan.id === planId);
+  const bookingSubject = selectedPlan ? `${productName} — ${selectedPlan.title}` : productName;
+
+  useEffect(() => { setPlanId(selectedPlanId ?? ""); }, [selectedPlanId, open]);
 
   useEffect(() => {
     if (user) setForm((current) => ({ ...current, firstName: current.firstName || user.firstName, lastName: current.lastName || user.lastName, email: current.email || user.email }));
@@ -60,6 +68,7 @@ export default function ProductBookingPanel({ locale, productName, sticky }: Pro
   }
 
   async function submit() {
+    if (plans.length && !selectedPlan) { setStatus("error"); setFeedback("planError" in text ? text.planError : "Please select a plan before booking."); return; }
     const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
     if (!form.startDate || !form.endDate || form.endDate < form.startDate || !form.firstName.trim() || !form.lastName.trim() || !validEmail || !form.phone.trim()) {
       setStatus("error"); setFeedback(text.error); return;
@@ -72,7 +81,7 @@ export default function ProductBookingPanel({ locale, productName, sticky }: Pro
         body: JSON.stringify({
           firstName: form.firstName.trim(), lastName: form.lastName.trim(), email: form.email.trim(),
           mobilePhone: `${form.countryCode}${form.phone.replace(/\s+/g, "").replace(/^0+/, "")}`,
-          requestType: "PRODUCT_REQUEST", subject: productName, comment: text.message(form.startDate, form.endDate, productName), language: locale,
+          requestType: "PRODUCT_REQUEST", subject: bookingSubject, comment: text.message(form.startDate, form.endDate, bookingSubject), language: locale,
         }),
       });
       const data = await response.json();
@@ -85,9 +94,9 @@ export default function ProductBookingPanel({ locale, productName, sticky }: Pro
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className={sticky ? "group flex w-full items-center justify-center gap-3 bg-orange-600 px-6 py-4 text-lg font-black text-white shadow-[0_-10px_35px_rgba(234,88,12,.2)] transition hover:bg-orange-700" : "group mt-5 flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-orange-600 px-7 py-4 text-lg font-black text-white shadow-lg shadow-orange-600/20 transition duration-300 hover:-translate-y-1 hover:bg-orange-700 hover:shadow-xl"}>
+      {!hideTrigger && <button type="button" onClick={() => setOpen(true)} className={sticky ? "group flex w-full items-center justify-center gap-3 bg-orange-600 px-6 py-4 text-lg font-black text-white shadow-[0_-10px_35px_rgba(234,88,12,.2)] transition hover:bg-orange-700" : "group mt-5 flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-orange-600 px-7 py-4 text-lg font-black text-white shadow-lg shadow-orange-600/20 transition duration-300 hover:-translate-y-1 hover:bg-orange-700 hover:shadow-xl"}>
         <CalendarDays className="transition group-hover:rotate-6 group-hover:scale-110" /> {text.cta}
-      </button>
+      </button>}
 
       {open && typeof document !== "undefined" && createPortal(
         <div className="fixed inset-0 z-[80] bg-zinc-950/75 backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
@@ -97,7 +106,8 @@ export default function ProductBookingPanel({ locale, productName, sticky }: Pro
               <button type="button" onClick={() => setOpen(false)} className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-zinc-200 bg-white transition hover:rotate-90 hover:border-orange-300 hover:text-orange-700" aria-label="Close"><X /></button>
             </div>
             <div className="flex-1 overflow-y-auto px-6 py-6 sm:px-9">
-              <div className="rounded-2xl bg-orange-50 p-4 font-black text-orange-900">{productName}</div>
+              <div className="rounded-2xl bg-orange-50 p-4 font-black text-orange-900">{bookingSubject}</div>
+              {!!plans.length && <label className="mt-6 grid gap-2 text-sm font-bold text-zinc-700">{"plan" in text ? text.plan : "Choose a plan"}<select value={planId} onChange={(event) => { setPlanId(event.target.value); if (status !== "idle") { setStatus("idle"); setFeedback(""); } }} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500"><option value="">{"selectPlan" in text ? text.selectPlan : "Select a plan…"}</option>{plans.map((plan) => <option key={plan.id} value={plan.id}>{plan.title} — {plan.salePrice} {plan.currency}</option>)}</select></label>}
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2 text-sm font-bold text-zinc-700">{text.start}<input type="date" min={today} value={form.startDate} onChange={(e) => update("startDate", e.target.value)} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
                 <label className="grid gap-2 text-sm font-bold text-zinc-700">{text.end}<input type="date" min={form.startDate || today} value={form.endDate} onChange={(e) => update("endDate", e.target.value)} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>

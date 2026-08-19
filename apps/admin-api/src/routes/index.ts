@@ -17,6 +17,7 @@ import { router as whatsapp_conversationsRouter } from "./entities/whatsAppConve
 import { router as whatsapp_messagesRouter } from "./entities/whatsAppMessageRoutes.js";
 import { router as studioRouter } from "./studioRoutes.js";
 import { router as segmentRouter } from "./segmentRoutes.js";
+import { activityRouter, beachClubRouter, nightClubRouter, packRouter, restaurantRouter, transportationRouter, villaRouter } from "./catalogDomainRoutes.js";
 export const api = Router();
 api.get("/health", (_q, r) =>
   r.json({ status: "ok", service: "moorish-admin-api" }),
@@ -76,6 +77,21 @@ api.use("/leads", leadsRouter);
 api.use("/prospects", prospectsRouter);
 api.use("/accounts", accountsRouter);
 api.use("/products", productsRouter);
+api.use("/v2/villas", villaRouter);
+api.use("/v2/restaurants", restaurantRouter);
+api.use("/v2/beach-clubs", beachClubRouter);
+api.use("/v2/night-clubs", nightClubRouter);
+api.use("/v2/packs", packRouter);
+api.use("/v2/activities", activityRouter);
+api.use("/v2/transportation", transportationRouter);
+// Stable admin resource names; /v2 aliases are kept for explicit API consumers.
+api.use("/villas", villaRouter);
+api.use("/restaurants", restaurantRouter);
+api.use("/beach-clubs", beachClubRouter);
+api.use("/night-clubs", nightClubRouter);
+api.use("/packs", packRouter);
+api.use("/activities", activityRouter);
+api.use("/transportation", transportationRouter);
 api.use("/consents", consentsRouter);
 api.use("/users", usersRouter);
 api.use("/page-visits", page_visitsRouter);

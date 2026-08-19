@@ -164,8 +164,8 @@ export default function Header() {
       label: t.header.villas,
     },
     {
-      href: "/swimmingpools",
-      label: t.header.swimmingpool,
+      href: "/beachclubs",
+      label: "Beach Clubs",
     },
     {
       href: "/activities",
@@ -363,28 +363,34 @@ export default function Header() {
               prefetchPath(targetPath);
             }}
             disabled={Boolean(pendingPath)}
-            className="flex items-center gap-2 text-left disabled:cursor-wait"
+            className="relative flex h-10 w-12 items-center justify-start text-left disabled:cursor-wait sm:h-11 sm:w-14"
           >
-            <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-2xl border border-orange-200 bg-orange-50 p-2 shadow-sm">
-              <Image
-                src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/59ce5c08-f6de-4e4e-ae8b-03323b36a200/public"
-                alt=""
-                width={32}
-                height={32}
-                className="ml-1 h-[22px] w-[22px] object-contain"
-                priority
-                unoptimized
-              />
-            </span>
-
-            <span className="hidden text-left sm:block">
-              <span className="block text-lg font-black tracking-tight text-zinc-950">
-                Moorish Concierge
-              </span>
-              <span className="-mt-1 block text-xs font-medium text-orange-700">
-                Marrakech concierge services
-              </span>
-            </span>
+            <Image
+              src="/brand/original-m-mark.png"
+              alt="Moorish Concierge Marrakech"
+              width={500}
+              height={500}
+              className="site-logo-image site-logo-image-light h-10 w-10 object-contain sm:h-11 sm:w-11"
+              priority
+            />
+            <Image
+              src="/brand/original-m-mark.png"
+              alt=""
+              aria-hidden="true"
+              width={500}
+              height={500}
+              className="site-logo-image site-logo-image-dark site-logo-image-dark-base absolute -left-1 top-1/2 hidden h-10 w-10 -translate-y-1/2 object-contain sm:h-11 sm:w-11"
+              priority
+            />
+            <Image
+              src="/brand/original-m-mark.png"
+              alt=""
+              aria-hidden="true"
+              width={500}
+              height={500}
+              className="site-logo-image site-logo-image-dark site-logo-image-dark-accent absolute -left-1 top-1/2 hidden h-10 w-10 -translate-y-1/2 object-contain sm:h-11 sm:w-11"
+              priority
+            />
           </button>
 
           <nav className="hidden items-center gap-5 text-sm font-semibold text-zinc-700 lg:flex">

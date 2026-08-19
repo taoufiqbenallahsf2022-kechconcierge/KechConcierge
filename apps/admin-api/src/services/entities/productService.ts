@@ -184,25 +184,21 @@ export async function generateProductAltText(body: any) {
     .slice(0, 51);
   if (!images.length) badRequest("At least one image field is required.");
   const content = body?.content && typeof body.content === "object" ? body.content : {};
-  const readyContent = Object.fromEntries(
-    languages
-      .map((language) => language.toLowerCase())
-      .map((language) => [language, content[language]])
-      .filter(([, value]: any) =>
-        value && value.title && value.subtitle && value.description,
-      ),
-  );
-  if (!Object.keys(readyContent).length) {
-    badRequest("Complete title, subtitle and description for at least one language first.");
+  const english = content.en && typeof content.en === "object" ? content.en : {};
+  if (!String(english.title ?? "").trim() || !String(english.description ?? "").trim()) {
+    badRequest("Complete the English title and description first.");
   }
-
-  const generalContent = Object.fromEntries(
-    Object.entries(readyContent).map(([language, value]: [string, any]) => [language, {
-      title: String(value.title ?? "").trim(),
-      subtitle: String(value.subtitle ?? "").trim(),
-      description: String(value.description ?? "").trim(),
-    }]),
-  );
+  // Always request every supported language. Missing localized product context falls
+  // back to English, while the generated alt itself is still written in that locale.
+  const generalContent = Object.fromEntries(languages.map((code) => {
+    const language = code.toLowerCase();
+    const value = content[language] && typeof content[language] === "object" ? content[language] : english;
+    return [language, {
+      title: String(value.title || english.title || "").trim(),
+      subtitle: String(value.subtitle || english.subtitle || "").trim(),
+      description: String(value.description || english.description || "").trim(),
+    }];
+  }));
 
   const alts: Record<string, Record<string, string>> = {};
   for (let offset = 0; offset < images.length; offset += 5) {
@@ -216,7 +212,7 @@ export async function generateProductAltText(body: any) {
         response_format: { type: "json_object" },
         messages: [{
           role: "system",
-          content: `Analyze every supplied image and write an accurate, concise HTML alt text for it in each supplied language. Describe what is genuinely visible and use the localized product title, subtitle and description only for context. Correctly identify logos, interiors, exteriors, pools, food, vehicles, people, or other visible subjects. Never add an amenity or fact that is not visible. Avoid keyword stuffing and phrases such as "image of". Maximum 125 characters. Return only JSON shaped {\"alts\":{\"image1\":{\"en\":\"...\",\"fr\":\"...\"}}}.`,
+          content: `Analyze every supplied image and write an accurate, concise HTML alt text in ALL six required languages: en, fr, de, it, pt and es. Every image object must contain all six keys. Describe only what is genuinely visible and use localized product content only for context. Never add an amenity or fact that is not visible. Avoid keyword stuffing and phrases such as "image of". Maximum 125 characters. Return only JSON shaped {\"alts\":{\"image1\":{\"en\":\"...\",\"fr\":\"...\",\"de\":\"...\",\"it\":\"...\",\"pt\":\"...\",\"es\":\"...\"}}}.`,
         }, {
           role: "user",
           content: [
