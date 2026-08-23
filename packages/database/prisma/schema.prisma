@@ -21,6 +21,22 @@ model EmailVerificationToken {
   @@index([email])
 }
 
+model Segment {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  sourceObject String
+  definition   Json
+  isActive     Boolean  @default(true)
+  createdDate  DateTime @default(now())
+  createdBy    String?
+  updatedDate  DateTime @updatedAt
+  updatedBy    String?
+
+  @@index([sourceObject])
+  @@index([updatedDate])
+}
+
 model SenderEmail {
   id          String   @id @default(cuid())
   name        String
@@ -48,7 +64,7 @@ model EmailTemplate {
 }
 
 model AudienceAutomation {
-  id                 String   @id @default(cuid())
+  id                 String                 @id @default(cuid())
   name               String
   description        String?
   sqlQuery           String
@@ -57,22 +73,22 @@ model AudienceAutomation {
   languageField      String?
   senderEmailId      String
   emailTemplateId    String
-  isActive           Boolean  @default(false)
+  isActive           Boolean                @default(false)
   scheduleType       AutomationScheduleType @default(MANUAL)
-  scheduleMinute     Int      @default(0)
+  scheduleMinute     Int                    @default(0)
   scheduleHour       Int?
   scheduleDayOfWeek  Int?
   scheduleDayOfMonth Int?
-  scheduleTimezone   String   @default("Africa/Casablanca")
+  scheduleTimezone   String                 @default("Africa/Casablanca")
   scheduleStartAt    DateTime?
   scheduleEndAt      DateTime?
   nextRunAt          DateTime?
   lastRunAt          DateTime?
-  createdDate        DateTime @default(now())
-  updatedDate        DateTime @updatedAt
+  createdDate        DateTime               @default(now())
+  updatedDate        DateTime               @updatedAt
 
-  senderEmail   SenderEmail    @relation(fields: [senderEmailId], references: [id])
-  emailTemplate EmailTemplate  @relation(fields: [emailTemplateId], references: [id])
+  senderEmail   SenderEmail     @relation(fields: [senderEmailId], references: [id])
+  emailTemplate EmailTemplate   @relation(fields: [emailTemplateId], references: [id])
   runs          AutomationRun[]
 
   @@index([senderEmailId])
@@ -99,19 +115,19 @@ model AutomationRun {
 }
 
 model RecordFlow {
-  id             String      @id @default(cuid())
+  id             String              @id @default(cuid())
   name           String
   description    String?
   sourceEntity   String
   trigger        FlowTrigger
   condition      Json?
   actions        Json
-  isActive       Boolean     @default(false)
+  isActive       Boolean             @default(false)
   lastRunDate    DateTime?
   lastError      String?
-  currentVersion Int         @default(1)
-  createdDate    DateTime    @default(now())
-  updatedDate    DateTime    @updatedAt
+  currentVersion Int                 @default(1)
+  createdDate    DateTime            @default(now())
+  updatedDate    DateTime            @updatedAt
   versions       RecordFlowVersion[]
   runs           RecordFlowRun[]
 
@@ -119,7 +135,7 @@ model RecordFlow {
 }
 
 model RecordFlowVersion {
-  id           String      @id @default(cuid())
+  id           String            @id @default(cuid())
   flowId       String
   version      Int
   name         String
@@ -129,10 +145,10 @@ model RecordFlowVersion {
   condition    Json?
   actions      Json
   status       FlowVersionStatus @default(DRAFT)
-  createdDate  DateTime    @default(now())
-  updatedDate  DateTime    @updatedAt
+  createdDate  DateTime          @default(now())
+  updatedDate  DateTime          @updatedAt
 
-  flow RecordFlow @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  flow RecordFlow      @relation(fields: [flowId], references: [id], onDelete: Cascade)
   runs RecordFlowRun[]
 
   @@unique([flowId, version])
@@ -149,8 +165,8 @@ model RecordFlowRun {
   startedDate     DateTime      @default(now())
   completedDate   DateTime?
 
-  flow        RecordFlow         @relation(fields: [flowId], references: [id], onDelete: Cascade)
-  flowVersion RecordFlowVersion? @relation(fields: [flowVersionId], references: [id], onDelete: SetNull)
+  flow        RecordFlow              @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  flowVersion RecordFlowVersion?      @relation(fields: [flowVersionId], references: [id], onDelete: SetNull)
   activities  RecordFlowActivityRun[]
 
   @@index([flowId, startedDate])
@@ -158,20 +174,20 @@ model RecordFlowRun {
 }
 
 model RecordFlowActivityRun {
-  id            String                 @id @default(cuid())
+  id            String                @id @default(cuid())
   runId         String
   activityId    String
   activityType  String
   status        FlowActivityRunStatus
-  inputCount    Int                    @default(0)
-  outputCount   Int                    @default(0)
-  affectedCount Int                    @default(0)
+  inputCount    Int                   @default(0)
+  outputCount   Int                   @default(0)
+  affectedCount Int                   @default(0)
   objectName    String?
   affectedId    String?
   filterSummary String?
   summary       String?
   error         String?
-  startedDate   DateTime               @default(now())
+  startedDate   DateTime              @default(now())
   completedDate DateTime?
 
   run RecordFlowRun @relation(fields: [runId], references: [id], onDelete: Cascade)
@@ -248,10 +264,685 @@ model Product {
   image18       String?
   image19       String?
   image20       String?
+  image22       String?
+  image23       String?
+  image24       String?
+  image25       String?
+  image26       String?
+  image27       String?
+  image28       String?
+  image29       String?
+  image30       String?
+  image31       String?
+  image32       String?
+  image33       String?
+  image34       String?
+  image35       String?
+  image36       String?
+  image37       String?
+  image38       String?
+  image39       String?
+  image40       String?
+  image41       String?
+  image42       String?
+  image43       String?
+  image44       String?
+  image45       String?
+  image46       String?
+  image47       String?
+  image48       String?
+  image49       String?
+  image50       String?
+  imageAlts     Json?
   isActive      Boolean     @default(true)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   image21       String?
+}
+
+// Independent catalog domains. These intentionally do not inherit from Product:
+// each business area can evolve and migrate without changing the others.
+model Villa {
+  id            String       @id @default(cuid())
+  uniqueCode    String       @unique
+  priceEuro     Decimal?     @db.Decimal(12, 2)
+  order         Int?
+  thumbnail     String
+  titleFR       String?      @db.Text
+  titleEN       String?      @db.Text
+  titleDE       String?      @db.Text
+  titleIT       String?      @db.Text
+  titlePT       String?      @db.Text
+  titleES       String?      @db.Text
+  subtitleFR    String?      @db.Text
+  subtitleEN    String?      @db.Text
+  subtitleDE    String?      @db.Text
+  subtitleIT    String?      @db.Text
+  subtitlePT    String?      @db.Text
+  subtitleES    String?      @db.Text
+  priceTitleFR  String?      @db.Text
+  priceTitleEN  String?      @db.Text
+  priceTitleDE  String?      @db.Text
+  priceTitleIT  String?      @db.Text
+  priceTitlePT  String?      @db.Text
+  priceTitleES  String?      @db.Text
+  descriptionFR String?      @db.Text
+  descriptionEN String?      @db.Text
+  descriptionDE String?      @db.Text
+  descriptionIT String?      @db.Text
+  descriptionPT String?      @db.Text
+  descriptionES String?      @db.Text
+  addressFR     String?      @db.Text
+  addressEN     String?      @db.Text
+  addressDE     String?      @db.Text
+  addressIT     String?      @db.Text
+  addressPT     String?      @db.Text
+  addressES     String?      @db.Text
+  tagsFR        Json?
+  tagsEN        Json?
+  tagsDE        Json?
+  tagsIT        Json?
+  tagsPT        Json?
+  tagsES        Json?
+  detailsFR     Json?
+  detailsEN     Json?
+  detailsDE     Json?
+  detailsIT     Json?
+  detailsPT     Json?
+  detailsES     Json?
+  imageAlts     Json?
+  isActive      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  images        VillaImage[]
+}
+
+model VillaImage {
+  id      String  @id @default(cuid())
+  villaId String
+  url     String
+  order   Int     @default(0)
+  altFR   String? @db.Text
+  altEN   String? @db.Text
+  altDE   String? @db.Text
+  altIT   String? @db.Text
+  altPT   String? @db.Text
+  altES   String? @db.Text
+  villa   Villa   @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@unique([villaId, order])
+}
+
+model Restaurant {
+  id            String            @id @default(cuid())
+  uniqueCode    String            @unique
+  priceEuro     Decimal?          @db.Decimal(12, 2)
+  order         Int?
+  thumbnail     String
+  titleFR       String?           @db.Text
+  titleEN       String?           @db.Text
+  titleDE       String?           @db.Text
+  titleIT       String?           @db.Text
+  titlePT       String?           @db.Text
+  titleES       String?           @db.Text
+  subtitleFR    String?           @db.Text
+  subtitleEN    String?           @db.Text
+  subtitleDE    String?           @db.Text
+  subtitleIT    String?           @db.Text
+  subtitlePT    String?           @db.Text
+  subtitleES    String?           @db.Text
+  priceTitleFR  String?           @db.Text
+  priceTitleEN  String?           @db.Text
+  priceTitleDE  String?           @db.Text
+  priceTitleIT  String?           @db.Text
+  priceTitlePT  String?           @db.Text
+  priceTitleES  String?           @db.Text
+  descriptionFR String?           @db.Text
+  descriptionEN String?           @db.Text
+  descriptionDE String?           @db.Text
+  descriptionIT String?           @db.Text
+  descriptionPT String?           @db.Text
+  descriptionES String?           @db.Text
+  addressFR     String?           @db.Text
+  addressEN     String?           @db.Text
+  addressDE     String?           @db.Text
+  addressIT     String?           @db.Text
+  addressPT     String?           @db.Text
+  addressES     String?           @db.Text
+  tagsFR        Json?
+  tagsEN        Json?
+  tagsDE        Json?
+  tagsIT        Json?
+  tagsPT        Json?
+  tagsES        Json?
+  detailsFR     Json?
+  detailsEN     Json?
+  detailsDE     Json?
+  detailsIT     Json?
+  detailsPT     Json?
+  detailsES     Json?
+  imageAlts     Json?
+  isActive      Boolean           @default(true)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  images        RestaurantImage[]
+}
+
+model RestaurantImage {
+  id           String     @id @default(cuid())
+  restaurantId String
+  url          String
+  order        Int        @default(0)
+  altFR        String?    @db.Text
+  altEN        String?    @db.Text
+  altDE        String?    @db.Text
+  altIT        String?    @db.Text
+  altPT        String?    @db.Text
+  altES        String?    @db.Text
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@unique([restaurantId, order])
+}
+
+model BeachClub {
+  id            String           @id @default(cuid())
+  uniqueCode    String           @unique
+  order         Int?
+  thumbnail     String
+  titleFR       String?          @db.Text
+  titleEN       String?          @db.Text
+  titleDE       String?          @db.Text
+  titleIT       String?          @db.Text
+  titlePT       String?          @db.Text
+  titleES       String?          @db.Text
+  subtitleFR    String?          @db.Text
+  subtitleEN    String?          @db.Text
+  subtitleDE    String?          @db.Text
+  subtitleIT    String?          @db.Text
+  subtitlePT    String?          @db.Text
+  subtitleES    String?          @db.Text
+  descriptionFR String?          @db.Text
+  descriptionEN String?          @db.Text
+  descriptionDE String?          @db.Text
+  descriptionIT String?          @db.Text
+  descriptionPT String?          @db.Text
+  descriptionES String?          @db.Text
+  locationFR    String?          @db.Text
+  locationEN    String?          @db.Text
+  locationDE    String?          @db.Text
+  locationIT    String?          @db.Text
+  locationPT    String?          @db.Text
+  locationES    String?          @db.Text
+  isActive      Boolean          @default(true)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  images        BeachClubImage[]
+  plans         BeachClubPlan[]
+}
+
+model BeachClubImage {
+  id          String    @id @default(cuid())
+  beachClubId String
+  url         String
+  order       Int       @default(0)
+  altFR       String?   @db.Text
+  altEN       String?   @db.Text
+  altDE       String?   @db.Text
+  altIT       String?   @db.Text
+  altPT       String?   @db.Text
+  altES       String?   @db.Text
+  beachClub   BeachClub @relation(fields: [beachClubId], references: [id], onDelete: Cascade)
+
+  @@unique([beachClubId, order])
+}
+
+model BeachClubPlan {
+  id            String                @id @default(cuid())
+  beachClubId   String
+  uniqueCode    String
+  salePrice     Decimal               @db.Decimal(12, 2)
+  internalCost  Decimal?              @db.Decimal(12, 2)
+  currency      String                @default("MAD")
+  pricingUnit   BeachClubPricingUnit?
+  order         Int                   @default(0)
+  isActive      Boolean               @default(true)
+  titleFR       String?               @db.Text
+  titleEN       String?               @db.Text
+  titleDE       String?               @db.Text
+  titleIT       String?               @db.Text
+  titlePT       String?               @db.Text
+  titleES       String?               @db.Text
+  descriptionFR String?               @db.Text
+  descriptionEN String?               @db.Text
+  descriptionDE String?               @db.Text
+  descriptionIT String?               @db.Text
+  descriptionPT String?               @db.Text
+  descriptionES String?               @db.Text
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  beachClub     BeachClub             @relation(fields: [beachClubId], references: [id], onDelete: Cascade)
+  options       BeachClubPlanOption[]
+
+  @@unique([beachClubId, uniqueCode])
+  @@index([beachClubId, isActive, order])
+}
+
+model BeachClubPlanOption {
+  id       String        @id @default(cuid())
+  planId   String
+  order    Int           @default(0)
+  isActive Boolean       @default(true)
+  titleFR  String?       @db.Text
+  titleEN  String?       @db.Text
+  titleDE  String?       @db.Text
+  titleIT  String?       @db.Text
+  titlePT  String?       @db.Text
+  titleES  String?       @db.Text
+  plan     BeachClubPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@index([planId, isActive, order])
+}
+
+model NightClub {
+  id String @id @default(cuid())
+  uniqueCode String @unique
+  order Int?
+  thumbnail String
+  titleFR String? @db.Text
+  titleEN String? @db.Text
+  titleDE String? @db.Text
+  titleIT String? @db.Text
+  titlePT String? @db.Text
+  titleES String? @db.Text
+  subtitleFR String? @db.Text
+  subtitleEN String? @db.Text
+  subtitleDE String? @db.Text
+  subtitleIT String? @db.Text
+  subtitlePT String? @db.Text
+  subtitleES String? @db.Text
+  descriptionFR String? @db.Text
+  descriptionEN String? @db.Text
+  descriptionDE String? @db.Text
+  descriptionIT String? @db.Text
+  descriptionPT String? @db.Text
+  descriptionES String? @db.Text
+  locationFR String? @db.Text
+  locationEN String? @db.Text
+  locationDE String? @db.Text
+  locationIT String? @db.Text
+  locationPT String? @db.Text
+  locationES String? @db.Text
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  images NightClubImage[]
+  plans NightClubPlan[]
+}
+
+model NightClubImage {
+  id String @id @default(cuid())
+  nightClubId String
+  url String
+  order Int @default(0)
+  altFR String? @db.Text
+  altEN String? @db.Text
+  altDE String? @db.Text
+  altIT String? @db.Text
+  altPT String? @db.Text
+  altES String? @db.Text
+  nightClub NightClub @relation(fields: [nightClubId], references: [id], onDelete: Cascade)
+  @@unique([nightClubId, order])
+}
+
+model NightClubPlan {
+  id String @id @default(cuid())
+  nightClubId String
+  uniqueCode String
+  salePrice Decimal @db.Decimal(12, 2)
+  internalCost Decimal? @db.Decimal(12, 2)
+  currency String @default("MAD")
+  pricingUnit NightClubPricingUnit?
+  durationMinutes Int?
+  order Int @default(0)
+  isActive Boolean @default(true)
+  titleFR String? @db.Text
+  titleEN String? @db.Text
+  titleDE String? @db.Text
+  titleIT String? @db.Text
+  titlePT String? @db.Text
+  titleES String? @db.Text
+  descriptionFR String? @db.Text
+  descriptionEN String? @db.Text
+  descriptionDE String? @db.Text
+  descriptionIT String? @db.Text
+  descriptionPT String? @db.Text
+  descriptionES String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  nightClub NightClub @relation(fields: [nightClubId], references: [id], onDelete: Cascade)
+  options NightClubPlanOption[]
+  @@unique([nightClubId, uniqueCode])
+  @@index([nightClubId, isActive, order])
+}
+
+model NightClubPlanOption {
+  id String @id @default(cuid())
+  planId String
+  order Int @default(0)
+  isActive Boolean @default(true)
+  titleFR String? @db.Text
+  titleEN String? @db.Text
+  titleDE String? @db.Text
+  titleIT String? @db.Text
+  titlePT String? @db.Text
+  titleES String? @db.Text
+  plan NightClubPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  @@index([planId, isActive, order])
+}
+
+model Pack {
+  id String @id @default(cuid())
+  uniqueCode String @unique
+  order Int?
+  thumbnail String
+  titleFR String? @db.Text
+  titleEN String? @db.Text
+  titleDE String? @db.Text
+  titleIT String? @db.Text
+  titlePT String? @db.Text
+  titleES String? @db.Text
+  subtitleFR String? @db.Text
+  subtitleEN String? @db.Text
+  subtitleDE String? @db.Text
+  subtitleIT String? @db.Text
+  subtitlePT String? @db.Text
+  subtitleES String? @db.Text
+  descriptionFR String? @db.Text
+  descriptionEN String? @db.Text
+  descriptionDE String? @db.Text
+  descriptionIT String? @db.Text
+  descriptionPT String? @db.Text
+  descriptionES String? @db.Text
+  locationFR String? @db.Text
+  locationEN String? @db.Text
+  locationDE String? @db.Text
+  locationIT String? @db.Text
+  locationPT String? @db.Text
+  locationES String? @db.Text
+  isActive Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  images PackImage[]
+  plans PackPlan[]
+}
+
+model PackImage {
+  id String @id @default(cuid())
+  packId String
+  url String
+  order Int @default(0)
+  altFR String? @db.Text
+  altEN String? @db.Text
+  altDE String? @db.Text
+  altIT String? @db.Text
+  altPT String? @db.Text
+  altES String? @db.Text
+  pack Pack @relation(fields: [packId], references: [id], onDelete: Cascade)
+  @@unique([packId, order])
+}
+
+model PackPlan {
+  id String @id @default(cuid())
+  packId String
+  uniqueCode String
+  serviceType String?
+  origin String?
+  destination String?
+  durationMinutes Int?
+  salePrice Decimal @db.Decimal(12, 2)
+  internalCost Decimal? @db.Decimal(12, 2)
+  currency String @default("MAD")
+  pricingUnit PackPricingUnit?
+  order Int @default(0)
+  isActive Boolean @default(true)
+  titleFR String? @db.Text
+  titleEN String? @db.Text
+  titleDE String? @db.Text
+  titleIT String? @db.Text
+  titlePT String? @db.Text
+  titleES String? @db.Text
+  descriptionFR String? @db.Text
+  descriptionEN String? @db.Text
+  descriptionDE String? @db.Text
+  descriptionIT String? @db.Text
+  descriptionPT String? @db.Text
+  descriptionES String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pack Pack @relation(fields: [packId], references: [id], onDelete: Cascade)
+  options PackPlanOption[]
+  @@unique([packId, uniqueCode])
+  @@index([packId, isActive, order])
+}
+
+model PackPlanOption {
+  id String @id @default(cuid())
+  planId String
+  order Int @default(0)
+  isActive Boolean @default(true)
+  titleFR String? @db.Text
+  titleEN String? @db.Text
+  titleDE String? @db.Text
+  titleIT String? @db.Text
+  titlePT String? @db.Text
+  titleES String? @db.Text
+  plan PackPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  @@index([planId, isActive, order])
+}
+
+model Activity {
+  id            String          @id @default(cuid())
+  uniqueCode    String          @unique
+  order         Int?
+  thumbnail     String
+  titleFR       String?         @db.Text
+  titleEN       String?         @db.Text
+  titleDE       String?         @db.Text
+  titleIT       String?         @db.Text
+  titlePT       String?         @db.Text
+  titleES       String?         @db.Text
+  subtitleFR    String?         @db.Text
+  subtitleEN    String?         @db.Text
+  subtitleDE    String?         @db.Text
+  subtitleIT    String?         @db.Text
+  subtitlePT    String?         @db.Text
+  subtitleES    String?         @db.Text
+  descriptionFR String?         @db.Text
+  descriptionEN String?         @db.Text
+  descriptionDE String?         @db.Text
+  descriptionIT String?         @db.Text
+  descriptionPT String?         @db.Text
+  descriptionES String?         @db.Text
+  locationFR    String?         @db.Text
+  locationEN    String?         @db.Text
+  locationDE    String?         @db.Text
+  locationIT    String?         @db.Text
+  locationPT    String?         @db.Text
+  locationES    String?         @db.Text
+  isActive      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  images        ActivityImage[]
+  plans         ActivityPlan[]
+}
+
+model ActivityImage {
+  id         String   @id @default(cuid())
+  activityId String
+  url        String
+  order      Int      @default(0)
+  altFR      String?  @db.Text
+  altEN      String?  @db.Text
+  altDE      String?  @db.Text
+  altIT      String?  @db.Text
+  altPT      String?  @db.Text
+  altES      String?  @db.Text
+  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@unique([activityId, order])
+}
+
+model ActivityPlan {
+  id              String               @id @default(cuid())
+  activityId      String
+  uniqueCode      String
+  salePrice       Decimal              @db.Decimal(12, 2)
+  internalCost    Decimal?             @db.Decimal(12, 2)
+  currency        String               @default("MAD")
+  pricingUnit     ActivityPricingUnit?
+  durationMinutes Int?
+  minimumGuests   Int?
+  maximumGuests   Int?
+  order           Int                  @default(0)
+  isActive        Boolean              @default(true)
+  titleFR         String?              @db.Text
+  titleEN         String?              @db.Text
+  titleDE         String?              @db.Text
+  titleIT         String?              @db.Text
+  titlePT         String?              @db.Text
+  titleES         String?              @db.Text
+  descriptionFR   String?              @db.Text
+  descriptionEN   String?              @db.Text
+  descriptionDE   String?              @db.Text
+  descriptionIT   String?              @db.Text
+  descriptionPT   String?              @db.Text
+  descriptionES   String?              @db.Text
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+  activity        Activity             @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  options         ActivityPlanOption[]
+
+  @@unique([activityId, uniqueCode])
+  @@index([activityId, isActive, order])
+}
+
+model ActivityPlanOption {
+  id       String       @id @default(cuid())
+  planId   String
+  order    Int          @default(0)
+  isActive Boolean      @default(true)
+  titleFR  String?      @db.Text
+  titleEN  String?      @db.Text
+  titleDE  String?      @db.Text
+  titleIT  String?      @db.Text
+  titlePT  String?      @db.Text
+  titleES  String?      @db.Text
+  plan     ActivityPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@index([planId, isActive, order])
+}
+
+model Transportation {
+  id            String                @id @default(cuid())
+  uniqueCode    String                @unique
+  order         Int?
+  thumbnail     String
+  titleFR       String?               @db.Text
+  titleEN       String?               @db.Text
+  titleDE       String?               @db.Text
+  titleIT       String?               @db.Text
+  titlePT       String?               @db.Text
+  titleES       String?               @db.Text
+  subtitleFR    String?               @db.Text
+  subtitleEN    String?               @db.Text
+  subtitleDE    String?               @db.Text
+  subtitleIT    String?               @db.Text
+  subtitlePT    String?               @db.Text
+  subtitleES    String?               @db.Text
+  descriptionFR String?               @db.Text
+  descriptionEN String?               @db.Text
+  descriptionDE String?               @db.Text
+  descriptionIT String?               @db.Text
+  descriptionPT String?               @db.Text
+  descriptionES String?               @db.Text
+  locationFR    String?               @db.Text
+  locationEN    String?               @db.Text
+  locationDE    String?               @db.Text
+  locationIT    String?               @db.Text
+  locationPT    String?               @db.Text
+  locationES    String?               @db.Text
+  isActive      Boolean               @default(true)
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+  images        TransportationImage[]
+  plans         TransportationPlan[]
+}
+
+model TransportationImage {
+  id               String         @id @default(cuid())
+  transportationId String
+  url              String
+  order            Int            @default(0)
+  altFR            String?        @db.Text
+  altEN            String?        @db.Text
+  altDE            String?        @db.Text
+  altIT            String?        @db.Text
+  altPT            String?        @db.Text
+  altES            String?        @db.Text
+  transportation   Transportation @relation(fields: [transportationId], references: [id], onDelete: Cascade)
+
+  @@unique([transportationId, order])
+}
+
+model TransportationPlan {
+  id               String                     @id @default(cuid())
+  transportationId String
+  uniqueCode       String
+  serviceType      String?
+  origin           String?
+  destination      String?
+  durationMinutes  Int?
+  salePrice        Decimal                    @db.Decimal(12, 2)
+  internalCost     Decimal?                   @db.Decimal(12, 2)
+  currency         String                     @default("MAD")
+  pricingUnit      TransportationPricingUnit?
+  order            Int                        @default(0)
+  isActive         Boolean                    @default(true)
+  titleFR          String?                    @db.Text
+  titleEN          String?                    @db.Text
+  titleDE          String?                    @db.Text
+  titleIT          String?                    @db.Text
+  titlePT          String?                    @db.Text
+  titleES          String?                    @db.Text
+  descriptionFR    String?                    @db.Text
+  descriptionEN    String?                    @db.Text
+  descriptionDE    String?                    @db.Text
+  descriptionIT    String?                    @db.Text
+  descriptionPT    String?                    @db.Text
+  descriptionES    String?                    @db.Text
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime                   @updatedAt
+  transportation   Transportation             @relation(fields: [transportationId], references: [id], onDelete: Cascade)
+  options          TransportationPlanOption[]
+
+  @@unique([transportationId, uniqueCode])
+  @@index([transportationId, isActive, order])
+}
+
+model TransportationPlanOption {
+  id       String             @id @default(cuid())
+  planId   String
+  order    Int                @default(0)
+  isActive Boolean            @default(true)
+  titleFR  String?            @db.Text
+  titleEN  String?            @db.Text
+  titleDE  String?            @db.Text
+  titleIT  String?            @db.Text
+  titlePT  String?            @db.Text
+  titleES  String?            @db.Text
+  plan     TransportationPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@index([planId, isActive, order])
 }
 
 model WhatsAppConversation {
@@ -411,7 +1102,7 @@ model Consent {
 }
 
 model PageVisit {
-  id           String       @id @default(cuid())
+  id           String          @id @default(cuid())
   pageUrl      String
   pageName     String?
   visitorId    String?
@@ -421,15 +1112,15 @@ model PageVisit {
   prospectId   String?
   accountId    String?
   individualId String?
-  visitDate    DateTime     @default(now())
+  visitDate    DateTime        @default(now())
   referrer     String?
   userAgent    String?
   ipAddress    String?
   sessionId    String?
-  account      Account?     @relation(fields: [accountId], references: [id])
-  individual   Individual?  @relation(fields: [individualId], references: [id])
-  lead         Lead?        @relation(fields: [leadId], references: [id])
-  prospect     Prospect?    @relation(fields: [prospectId], references: [id])
+  account      Account?        @relation(fields: [accountId], references: [id])
+  individual   Individual?     @relation(fields: [individualId], references: [id])
+  lead         Lead?           @relation(fields: [leadId], references: [id])
+  prospect     Prospect?       @relation(fields: [prospectId], references: [id])
   journey      VisitorJourney? @relation(fields: [journeyId], references: [id], onDelete: SetNull)
 
   @@index([visitorId])
@@ -462,32 +1153,32 @@ model ContactRequest {
 }
 
 model Chat {
-  id               String               @id @default(cuid())
-  visitorId        String?
-  journeyId        String?
-  sessionId        String?
-  leadId           String?
-  prospectId       String?
-  accountId        String?
-  individualId     String?
-  advisorId        String?
-  participantStage ChatParticipantStage @default(VISITOR)
-  managedBy        ChatManagedBy        @default(AI)
-  status           ChatStatus           @default(OPEN)
-  language         String               @default("en")
+  id                 String               @id @default(cuid())
+  visitorId          String?
+  journeyId          String?
+  sessionId          String?
+  leadId             String?
+  prospectId         String?
+  accountId          String?
+  individualId       String?
+  advisorId          String?
+  participantStage   ChatParticipantStage @default(VISITOR)
+  managedBy          ChatManagedBy        @default(AI)
+  status             ChatStatus           @default(OPEN)
+  language           String               @default("en")
   endUserTypingUntil DateTime?
   advisorTypingUntil DateTime?
-  createdDate      DateTime             @default(now())
-  createdBy        String?
-  updatedDate      DateTime             @updatedAt
-  updatedBy        String?
-  account          Account?             @relation(fields: [accountId], references: [id])
-  advisor          User?                @relation(fields: [advisorId], references: [id])
-  individual       Individual?          @relation(fields: [individualId], references: [id])
-  lead             Lead?                @relation(fields: [leadId], references: [id])
-  prospect         Prospect?            @relation(fields: [prospectId], references: [id])
-  messages         ChatMessage[]
-  journey          VisitorJourney? @relation(fields: [journeyId], references: [id], onDelete: SetNull)
+  createdDate        DateTime             @default(now())
+  createdBy          String?
+  updatedDate        DateTime             @updatedAt
+  updatedBy          String?
+  account            Account?             @relation(fields: [accountId], references: [id])
+  advisor            User?                @relation(fields: [advisorId], references: [id])
+  individual         Individual?          @relation(fields: [individualId], references: [id])
+  lead               Lead?                @relation(fields: [leadId], references: [id])
+  prospect           Prospect?            @relation(fields: [prospectId], references: [id])
+  messages           ChatMessage[]
+  journey            VisitorJourney?      @relation(fields: [journeyId], references: [id], onDelete: SetNull)
 
   @@index([visitorId])
   @@index([journeyId])
@@ -497,13 +1188,13 @@ model Chat {
 }
 
 model VisitorJourney {
-  id           String   @id
+  id           String    @id
   visitorId    String
   individualId String?
-  startedAt    DateTime @default(now())
+  startedAt    DateTime  @default(now())
   claimedAt    DateTime?
   endedAt      DateTime?
-  lastSeenAt   DateTime @updatedAt
+  lastSeenAt   DateTime  @updatedAt
 
   individual Individual? @relation(fields: [individualId], references: [id], onDelete: SetNull)
   pageVisits PageVisit[]
@@ -608,6 +1299,7 @@ enum VisitorStage {
 
 enum RequestType {
   ADVISOR_GUIDE
+  PRODUCT_REQUEST
   COMPLAINT
   SUPPORT
   PARTNERSHIP
@@ -670,4 +1362,52 @@ enum ProductType {
   RESTAURANT
   ACTIVITY
   TRANSPORTATION
+}
+
+enum BeachClubPricingUnit {
+  PER_PERSON
+  PER_ADULT
+  PER_CHILD
+  PER_SUNBED
+  PER_TABLE
+  PER_CABANA
+  HALF_DAY
+  FULL_DAY
+  FIXED
+}
+
+enum NightClubPricingUnit {
+  PER_PERSON
+  PER_TABLE
+  FIXED
+}
+
+enum PackPricingUnit {
+  PER_PERSON
+  PER_GROUP
+  PER_VEHICLE
+  PER_HOUR
+  HALF_DAY
+  FULL_DAY
+  FIXED
+}
+
+enum ActivityPricingUnit {
+  PER_PERSON
+  PER_ADULT
+  PER_CHILD
+  PER_GROUP
+  HALF_DAY
+  FULL_DAY
+  FIXED
+}
+
+enum TransportationPricingUnit {
+  PER_VEHICLE
+  PER_PERSON
+  PER_HOUR
+  PER_TRIP
+  HALF_DAY
+  FULL_DAY
+  FIXED
 }

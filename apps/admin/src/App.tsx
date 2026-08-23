@@ -6,9 +6,11 @@ import { DataHub } from "./pages/DataHub";
 import {
   SenderEmailsPage,
 } from "./pages/StudioPages";
-import { EmailStudioPage } from "./pages/EnhancedStudioPages";
+import { EmailStudioPage } from "./pages/EmailStudioPage";
 import { AutomationEditorPage, AutomationsListPage, FlowsListPage } from "./pages/AutomationManagementPages";
 import { VisualFlowEditorPage } from "./pages/VisualFlowBuilderPage";
+import { SegmentBuilderPage, SegmentsListPage } from "./pages/SegmentsPages";
+import { SegmentGuidedPage, SegmentModePage } from "./pages/SegmentGuidedPage";
 import { IndividualList, IndividualCreate, IndividualDetail } from "./features/individuals/IndividualPages";
 import { ProductsList, ProductsCreate, ProductsDetail } from "./features/products/ProductsPages";
 import { LeadsList, LeadsCreate, LeadsDetail } from "./features/leads/LeadsPages";
@@ -22,6 +24,7 @@ import { ChatList, ChatDetail } from "./features/chats/ChatPages";
 import { WhatsappConversationsList, WhatsappConversationsDetail } from "./features/whatsapp-conversations/WhatsappConversationsPages";
 import { WhatsappMessagesList, WhatsappMessagesDetail } from "./features/whatsapp-messages/WhatsappMessagesPages";
 import { ChatMessagesList, ChatMessagesDetail } from "./features/chat-messages/ChatMessagesPages";
+import { Activities, BeachClubs, NightClubs, Packs, Restaurants, Transportation, Villas } from "./features/catalog/IndependentCatalogPages";
 
 function entityRoutes({
   list: List,
@@ -60,6 +63,11 @@ export default function App() {
         <Route index element={<Navigate to="/data-hub" replace />} />
         <Route path="data-hub" element={<DataHub />} />
         <Route path="email-studio" element={<EmailStudioPage />} />
+        <Route path="segments" element={<SegmentsListPage />} />
+        <Route path="segments/new" element={<SegmentModePage />} />
+        <Route path="segments/new/guided" element={<SegmentGuidedPage />} />
+        <Route path="segments/new/advanced" element={<SegmentBuilderPage />} />
+        <Route path="segments/:id" element={<SegmentBuilderPage />} />
         <Route path="automation-studio/automations" element={<AutomationsListPage />} />
         <Route path="automation-studio/automations/new" element={<AutomationEditorPage />} />
         <Route path="automation-studio/automations/:id" element={<AutomationEditorPage />} />
@@ -69,6 +77,13 @@ export default function App() {
         <Route path="setup/sender-emails" element={<SenderEmailsPage />} />
         {entityRoutes({ list: IndividualList, create: IndividualCreate, detail: IndividualDetail, path: "individuals" })}
         {entityRoutes({ list: ProductsList, create: ProductsCreate, detail: ProductsDetail, path: "products" })}
+        {entityRoutes({ list: Villas.List, create: Villas.Create, detail: Villas.Detail, path: "villas" })}
+        {entityRoutes({ list: Restaurants.List, create: Restaurants.Create, detail: Restaurants.Detail, path: "restaurants" })}
+        {entityRoutes({ list: BeachClubs.List, create: BeachClubs.Create, detail: BeachClubs.Detail, path: "beach-clubs" })}
+        {entityRoutes({ list: NightClubs.List, create: NightClubs.Create, detail: NightClubs.Detail, path: "night-clubs" })}
+        {entityRoutes({ list: Packs.List, create: Packs.Create, detail: Packs.Detail, path: "packs" })}
+        {entityRoutes({ list: Activities.List, create: Activities.Create, detail: Activities.Detail, path: "activities" })}
+        {entityRoutes({ list: Transportation.List, create: Transportation.Create, detail: Transportation.Detail, path: "transportation" })}
         {entityRoutes({ list: LeadsList, create: LeadsCreate, detail: LeadsDetail, path: "leads" })}
         {entityRoutes({ list: ProspectsList, create: ProspectsCreate, detail: ProspectsDetail, path: "prospects" })}
         {entityRoutes({ list: AccountsList, create: AccountsCreate, detail: AccountsDetail, path: "accounts" })}

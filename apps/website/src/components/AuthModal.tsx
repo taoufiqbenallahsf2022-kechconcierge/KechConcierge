@@ -387,8 +387,8 @@ export default function AuthModal({ open, onClose }: Props) {
 
   if (verificationEmailSent) {
     return (
-      <div className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/60 px-4">
-        <div className="relative w-full max-w-md rounded-3xl bg-white p-6 text-center card-shadow">
+      <div className="fixed inset-0 z-50 overflow-y-auto bg-zinc-950/60 sm:grid sm:place-items-center sm:px-4 sm:py-6">
+        <div className="relative min-h-[100dvh] w-full bg-white p-6 text-center card-shadow sm:min-h-0 sm:max-w-md sm:rounded-3xl">
           <button
             onClick={closeAndReset}
             className="absolute right-4 top-4 rounded-full bg-orange-50 p-2 text-orange-800"
@@ -438,12 +438,12 @@ export default function AuthModal({ open, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/60 px-4"
+      className="fixed inset-0 z-50 overflow-y-auto bg-zinc-950/60 sm:grid sm:place-items-center sm:px-4 sm:py-6"
       onClick={closeDropdowns}
     >
       <div
         onClick={(event) => event.stopPropagation()}
-        className={`relative w-full rounded-3xl bg-white p-6 card-shadow transition-all ${
+        className={`relative min-h-[100dvh] w-full overflow-visible bg-white px-5 pb-10 pt-6 card-shadow transition-all sm:min-h-0 sm:max-h-[calc(100dvh-3rem)] sm:overflow-y-auto sm:rounded-3xl sm:p-6 ${
           mode === "signup" ? "max-w-3xl" : "max-w-md"
         }`}
       >

@@ -85,11 +85,11 @@ export default function Footer() {
 
             <FooterLink
               href={localizePath(
-                "/swimmingpools",
+                "/beachclubs",
                 locale
               )}
             >
-              {t.footer.swimmingPools}
+              Beach Clubs
             </FooterLink>
 
             <FooterLink

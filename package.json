@@ -18,6 +18,8 @@
 
     "db:generate": "npm --prefix packages/database run generate",
     "db:migrate": "npm --prefix packages/database run migrate",
+    "db:migrate:deploy": "npm --prefix packages/database run migrate:deploy",
+    "db:backfill:legacy-villas": "npm --prefix packages/database run backfill:legacy-villas",
     "db:seed": "npm --prefix packages/database run seed",
     "db:test": "npm --prefix packages/database run test:db"
   },

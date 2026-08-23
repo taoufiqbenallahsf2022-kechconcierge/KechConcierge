@@ -96,6 +96,7 @@ export type VisitorStage = (typeof VisitorStage)[keyof typeof VisitorStage]
 
 export const RequestType = {
   ADVISOR_GUIDE: 'ADVISOR_GUIDE',
+  PRODUCT_REQUEST: 'PRODUCT_REQUEST',
   COMPLAINT: 'COMPLAINT',
   SUPPORT: 'SUPPORT',
   PARTNERSHIP: 'PARTNERSHIP',
@@ -185,3 +186,66 @@ export const ProductType = {
 } as const
 
 export type ProductType = (typeof ProductType)[keyof typeof ProductType]
+
+
+export const BeachClubPricingUnit = {
+  PER_PERSON: 'PER_PERSON',
+  PER_ADULT: 'PER_ADULT',
+  PER_CHILD: 'PER_CHILD',
+  PER_SUNBED: 'PER_SUNBED',
+  PER_TABLE: 'PER_TABLE',
+  PER_CABANA: 'PER_CABANA',
+  HALF_DAY: 'HALF_DAY',
+  FULL_DAY: 'FULL_DAY',
+  FIXED: 'FIXED'
+} as const
+
+export type BeachClubPricingUnit = (typeof BeachClubPricingUnit)[keyof typeof BeachClubPricingUnit]
+
+
+export const NightClubPricingUnit = {
+  PER_PERSON: 'PER_PERSON',
+  PER_TABLE: 'PER_TABLE',
+  FIXED: 'FIXED'
+} as const
+
+export type NightClubPricingUnit = (typeof NightClubPricingUnit)[keyof typeof NightClubPricingUnit]
+
+
+export const PackPricingUnit = {
+  PER_PERSON: 'PER_PERSON',
+  PER_GROUP: 'PER_GROUP',
+  PER_VEHICLE: 'PER_VEHICLE',
+  PER_HOUR: 'PER_HOUR',
+  HALF_DAY: 'HALF_DAY',
+  FULL_DAY: 'FULL_DAY',
+  FIXED: 'FIXED'
+} as const
+
+export type PackPricingUnit = (typeof PackPricingUnit)[keyof typeof PackPricingUnit]
+
+
+export const ActivityPricingUnit = {
+  PER_PERSON: 'PER_PERSON',
+  PER_ADULT: 'PER_ADULT',
+  PER_CHILD: 'PER_CHILD',
+  PER_GROUP: 'PER_GROUP',
+  HALF_DAY: 'HALF_DAY',
+  FULL_DAY: 'FULL_DAY',
+  FIXED: 'FIXED'
+} as const
+
+export type ActivityPricingUnit = (typeof ActivityPricingUnit)[keyof typeof ActivityPricingUnit]
+
+
+export const TransportationPricingUnit = {
+  PER_VEHICLE: 'PER_VEHICLE',
+  PER_PERSON: 'PER_PERSON',
+  PER_HOUR: 'PER_HOUR',
+  PER_TRIP: 'PER_TRIP',
+  HALF_DAY: 'HALF_DAY',
+  FULL_DAY: 'FULL_DAY',
+  FIXED: 'FIXED'
+} as const
+
+export type TransportationPricingUnit = (typeof TransportationPricingUnit)[keyof typeof TransportationPricingUnit]

@@ -4,7 +4,10 @@ export type Category =
   | "transportation"
   | "spa"
   | "restaurants"
-  | "swimmingpools";
+  | "beachclubs"
+  | "swimmingpools"
+  | "nightclubs"
+  | "packs";
 
 export type CatalogItem = {
   id: string;

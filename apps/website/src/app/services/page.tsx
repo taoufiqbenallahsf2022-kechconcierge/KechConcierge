@@ -29,13 +29,13 @@ const categories =
     categoryLabels
   ) as Category[];
 
-const CATEGORY_TRANSLATION_KEYS: Record<
+const CATEGORY_TRANSLATION_KEYS: Partial<Record<
   Category,
   ServiceTranslationKey
-> = {
+>> = {
   villas: "villa",
   transportation: "transportation",
-  swimmingpools: "swimmingpool",
+  beachclubs: "swimmingpool",
   activities: "activity",
   restaurants: "restaurant",
   spa: "spa",
@@ -84,10 +84,9 @@ export default function ServicesPage() {
                 category
               ];
 
-            const categoryContent =
-              t.servicesPage.categories[
-                translationKey
-              ];
+            const categoryContent = translationKey
+              ? t.servicesPage.categories[translationKey]
+              : { label: categoryLabels[category], description: "Nightlife experiences, tables and exclusive club plans in Marrakech." };
 
             return (
               <Link

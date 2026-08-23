@@ -8,7 +8,9 @@ import {
 type CategorySlug =
   | "villas"
   | "transportation"
-  | "swimmingpools"
+  | "beachclubs"
+  | "nightclubs"
+  | "packs"
   | "activities"
   | "restaurants"
   | "spa";
@@ -42,10 +44,20 @@ function getCategoryConfiguration(
 
     case "swimmingpool":
     case "swimmingpools":
+    case "beachclub":
+    case "beachclubs":
       return {
-        category: "swimmingpools",
+        category: "beachclubs",
         productType: "SWIMMINGPOOL",
       };
+
+    case "nightclub":
+    case "nightclubs":
+      return { category: "nightclubs", productType: "NIGHTCLUB" };
+
+    case "pack":
+    case "packs":
+      return { category: "packs", productType: "PACK" };
 
     case "activity":
     case "activities":

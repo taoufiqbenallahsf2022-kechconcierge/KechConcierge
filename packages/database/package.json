@@ -3,6 +3,8 @@
   "scripts": {
     "generate": "prisma generate",
     "migrate": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy && npm run backfill:legacy-villas",
+    "backfill:legacy-villas": "node --experimental-strip-types prisma/backfills/migrate-legacy-villas.ts",
     "seed": "prisma db seed",
     "test:db": "tsx prisma/test.ts"
   },

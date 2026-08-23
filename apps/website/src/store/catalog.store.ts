@@ -4,6 +4,8 @@ export type ProductType =
   | "VILLA"
   | "TRANSPORTATION"
   | "SWIMMINGPOOL"
+  | "NIGHTCLUB"
+  | "PACK"
   | "ACTIVITY"
   | "RESTAURANT"
   | "SPA";
@@ -14,7 +16,9 @@ export type CatalogItem = {
   uniqueCode: string;
   order: number | null;
   thumbnail: string;
-  priceEuro: number;
+  thumbnailAlt: string;
+  priceEuro: number | null;
+  currency: string | null;
   title: string;
   subtitle: string;
   priceTitle: string;

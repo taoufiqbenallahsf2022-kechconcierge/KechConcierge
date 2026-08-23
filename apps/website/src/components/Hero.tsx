@@ -12,7 +12,7 @@ function localizePath(path: string, locale: string) {
   return `/${locale}${path}`;
 }
 
-export default function Hero() { 
+export default function Hero() {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const t = getDictionary(locale);
@@ -55,7 +55,7 @@ export default function Hero() {
         <div className="relative">
           <div className="relative h-[540px] overflow-hidden rounded-[2.5rem] card-shadow">
             <Image
-              src="https://images.unsplash.com/photo-1653323792487-6ecc6217040b"
+              src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/7eccd9c6-1d05-4f4e-806f-be8cfb22fc00/public"
               alt={t.hero.imageAlt}
               fill
               className="object-cover"

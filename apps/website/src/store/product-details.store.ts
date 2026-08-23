@@ -4,6 +4,8 @@ export type ProductType =
   | "VILLA"
   | "TRANSPORTATION"
   | "SWIMMINGPOOL"
+  | "NIGHTCLUB"
+  | "PACK"
   | "ACTIVITY"
   | "RESTAURANT"
   | "SPA";
@@ -28,7 +30,9 @@ export type ProductDetails = {
   order: number | null;
 
   thumbnail: string;
-  priceEuro: number;
+  thumbnailAlt: string;
+  priceEuro: number | null;
+  currency: string | null;
 
   title: string;
   subtitle: string;
@@ -59,6 +63,51 @@ export type ProductDetails = {
   image18: string | null;
   image19: string | null;
   image20: string | null;
+  image21: string | null;
+  image22: string | null;
+  image23: string | null;
+  image24: string | null;
+  image25: string | null;
+  image26: string | null;
+  image27: string | null;
+  image28: string | null;
+  image29: string | null;
+  image30: string | null;
+  image31: string | null;
+  image32: string | null;
+  image33: string | null;
+  image34: string | null;
+  image35: string | null;
+  image36: string | null;
+  image37: string | null;
+  image38: string | null;
+  image39: string | null;
+  image40: string | null;
+  image41: string | null;
+  image42: string | null;
+  image43: string | null;
+  image44: string | null;
+  image45: string | null;
+  image46: string | null;
+  image47: string | null;
+  image48: string | null;
+  image49: string | null;
+  image50: string | null;
+  imageAlts: Record<string, string>;
+  plans: Array<{
+    id: string;
+    uniqueCode: string;
+    salePrice: number;
+    currency: string;
+    pricingUnit: string | null;
+    title: string;
+    description: string;
+    serviceType: string | null;
+    origin: string | null;
+    destination: string | null;
+    durationMinutes: number | null;
+    options: Array<{ id: string; title: string; order: number }>;
+  }>;
 };
 
 type ProductDetailsState = {

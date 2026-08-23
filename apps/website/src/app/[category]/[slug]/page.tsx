@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
 import {
   TouchEvent,
@@ -23,11 +23,16 @@ import {
   ProductType,
   useProductDetailsStore,
 } from "@/store/product-details.store";
+import ProductBookingPanel from "@/components/ProductBookingPanel";
+import ProductImageLightbox from "@/components/ProductImageLightbox";
+import ProductPlansModal from "@/components/ProductPlansModal";
 
 type CategorySlug =
   | "villas"
   | "transportation"
-  | "swimmingpools"
+  | "beachclubs"
+  | "nightclubs"
+  | "packs"
   | "activities"
   | "restaurants"
   | "spa";
@@ -35,6 +40,17 @@ type CategorySlug =
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
   "http://localhost:3001";
+
+const planCopy = {
+  en: { title: "Available plans", hint: "Swipe to compare →" }, fr: { title: "Formules disponibles", hint: "Faites défiler pour comparer →" },
+  de: { title: "Verfügbare Angebote", hint: "Zum Vergleichen wischen →" }, it: { title: "Piani disponibili", hint: "Scorri per confrontare →" },
+  pt: { title: "Planos disponíveis", hint: "Deslize para comparar →" }, es: { title: "Planes disponibles", hint: "Desliza para comparar →" },
+} as const;
+
+const galleryCopy = {
+  en: "View gallery", fr: "Voir la galerie", de: "Galerie ansehen",
+  it: "Vedi galleria", pt: "Ver galeria", es: "Ver galería",
+} as const;
 
 
 function getProductType(
@@ -51,7 +67,17 @@ function getProductType(
 
     case "swimmingpool":
     case "swimmingpools":
+    case "beachclub":
+    case "beachclubs":
       return "SWIMMINGPOOL";
+
+    case "nightclub":
+    case "nightclubs":
+      return "NIGHTCLUB";
+
+    case "pack":
+    case "packs":
+      return "PACK";
 
     case "activity":
     case "activities":
@@ -80,7 +106,13 @@ function getCanonicalCategory(
       return "transportation";
 
     case "SWIMMINGPOOL":
-      return "swimmingpools";
+      return "beachclubs";
+
+    case "NIGHTCLUB":
+      return "nightclubs";
+
+    case "PACK":
+      return "packs";
 
     case "ACTIVITY":
       return "activities";
@@ -113,8 +145,14 @@ function getCategoryLabel(
     case "transportation":
       return dictionary.categories.transportationLabel;
 
-    case "swimmingpools":
+    case "beachclubs":
       return dictionary.categories.swimmingPoolsLabel;
+
+    case "nightclubs":
+      return "Night Clubs";
+
+    case "packs":
+      return "Packs";
 
     case "activities":
       return dictionary.categories.activitiesLabel;
@@ -152,10 +190,10 @@ function isDisplayDetail(
 
 function extractImages(
   product: ProductDetails
-): string[] {
-  const images: string[] = [];
+): { url: string; alt: string }[] {
+  const images: { url: string; alt: string }[] = [];
 
-  for (let index = 1; index <= 20; index += 1) {
+  for (let index = 1; index <= 50; index += 1) {
     const imageKey =
       `image${index}` as keyof ProductDetails;
 
@@ -165,7 +203,10 @@ function extractImages(
       typeof image === "string" &&
       image.trim().length > 0
     ) {
-      images.push(image);
+      images.push({
+        url: image,
+        alt: product.imageAlts?.[`image${index}`] || product.title,
+      });
     }
   }
 
@@ -173,7 +214,7 @@ function extractImages(
     images.length === 0 &&
     product.thumbnail
   ) {
-    images.push(product.thumbnail);
+    images.push({ url: product.thumbnail, alt: product.thumbnailAlt || product.title });
   }
 
   return images;
@@ -280,6 +321,12 @@ export default function DetailsPage() {
 
   const [selectedImage, setSelectedImage] =
     useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [showStickyBooking, setShowStickyBooking] = useState(false);
+  const [plansOpen, setPlansOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [bookingPlanId, setBookingPlanId] = useState<string | null>(null);
+  const bookingAnchorRef = useRef<HTMLDivElement | null>(null);
 
   const touchStartX = useRef<number | null>(
     null
@@ -314,6 +361,7 @@ export default function DetailsPage() {
           "lang",
           locale.toUpperCase()
         );
+        url.searchParams.set("type", productType!);
 
         const response = await fetch(
           url.toString(),
@@ -396,6 +444,24 @@ export default function DetailsPage() {
     startLoading,
     uniqueCode,
   ]);
+
+  useEffect(() => {
+    const anchor = bookingAnchorRef.current;
+    if (!anchor) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyBooking(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(anchor);
+    return () => observer.disconnect();
+  }, [product?.id]);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("moorish-product-booking-bar", { detail: { visible: showStickyBooking } }));
+    return () => {
+      window.dispatchEvent(new CustomEvent("moorish-product-booking-bar", { detail: { visible: false } }));
+    };
+  }, [showStickyBooking]);
 
   const images = useMemo(() => {
     if (!product) {
@@ -541,7 +607,7 @@ export default function DetailsPage() {
 
   const activeImage =
     images[selectedImage] ||
-    product.thumbnail;
+    { url: product.thumbnail, alt: product.thumbnailAlt || product.title };
 
   const FRONTEND_URL =
   process.env.NEXT_PUBLIC_API_URL;
@@ -561,7 +627,7 @@ export default function DetailsPage() {
   `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
   return (
-    <section className="mx-auto max-w-7xl overflow-x-hidden px-4 py-20">
+    <section className="mx-auto max-w-7xl overflow-x-clip px-4 pb-32 pt-20">
       <Link
         href={categoryPath}
         className="font-black text-orange-700 transition hover:text-orange-800"
@@ -570,51 +636,52 @@ export default function DetailsPage() {
       </Link>
 
       <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-        <div className="min-w-0 overflow-hidden">
+        <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
           <div
-            className="relative h-[520px] w-full max-w-full touch-pan-y overflow-hidden rounded-[2rem] card-shadow"
+            className="group relative h-[520px] w-full max-w-full touch-pan-y cursor-pointer overflow-hidden rounded-[2rem] card-shadow"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onClick={() => setLightboxOpen(true)}
           >
             <Image
-              key={`${selectedImage}-${activeImage}`}
-              src={activeImage}
-              alt={`${product.title} image ${
-                selectedImage + 1
-              }`}
+              key={`${selectedImage}-${activeImage.url}`}
+              src={activeImage.url}
+              alt={activeImage.alt}
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 55vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015]"
             />
 
             {images.length > 1 && (
               <>
                 <button
                   type="button"
-                  onClick={showPreviousImage}
+                  onClick={(event) => { event.stopPropagation(); showPreviousImage(); }}
                   aria-label="{t.productDetails.previousImage}"
-                  className="absolute left-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-lg backdrop-blur transition hover:bg-white"
+                  className="nightclub-carousel-arrow absolute left-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-lg backdrop-blur transition hover:bg-white"
                 >
                   <ChevronLeft size={24} />
                 </button>
 
                 <button
                   type="button"
-                  onClick={showNextImage}
+                  onClick={(event) => { event.stopPropagation(); showNextImage(); }}
                   aria-label="{t.productDetails.nextImage}"
-                  className="absolute right-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-lg backdrop-blur transition hover:bg-white"
+                  className="nightclub-carousel-arrow absolute right-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-lg backdrop-blur transition hover:bg-white"
                 >
                   <ChevronRight size={24} />
                 </button>
 
-                <div className="absolute bottom-4 right-4 rounded-full bg-zinc-950/75 px-4 py-2 text-sm font-black text-white backdrop-blur">
-                  {selectedImage + 1} /{" "}
-                  {images.length}
-                </div>
               </>
             )}
+
+            <div className="pointer-events-none absolute bottom-4 right-4 flex items-center gap-2 rounded-full border border-white/30 bg-zinc-950/75 px-4 py-2.5 text-sm font-black text-white shadow-lg backdrop-blur-md transition group-hover:bg-zinc-950/90">
+              <Images size={18} />
+              <span>{galleryCopy[locale]}</span>
+              {images.length > 1 && <span className="text-white/70">· {selectedImage + 1}/{images.length}</span>}
+            </div>
           </div>
 
           {images.length > 1 && (
@@ -622,7 +689,7 @@ export default function DetailsPage() {
               {images.map(
                 (image, index) => (
                   <button
-                    key={`${index}-${image}`}
+                    key={`${index}-${image.url}`}
                     type="button"
                     onClick={() =>
                       setSelectedImage(index)
@@ -637,10 +704,8 @@ export default function DetailsPage() {
                     }`}
                   >
                     <Image
-                      src={image}
-                      alt={`${product.title} image ${
-                        index + 1
-                      }`}
+                      src={image.url}
+                      alt={image.alt}
                       fill
                       sizes="128px"
                       className="object-cover"
@@ -665,13 +730,11 @@ export default function DetailsPage() {
             {product.address}
           </p>
 
-          <p className="mt-5 text-sm font-bold text-zinc-500">
-            {product.priceTitle}
-          </p>
+          {product.priceEuro != null && <><p className="mt-5 text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p></>}
 
-          <p className="text-3xl font-black text-orange-700">
-            €{product.priceEuro}
-          </p>
+          {!!product.plans?.length && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productName={product.title} plans={product.plans} sticky={false} /><button type="button" onClick={() => setPlansOpen(true)} className="mt-5 rounded-full border-2 border-orange-600 bg-white px-7 py-4 text-lg font-black text-orange-700 transition hover:bg-orange-50">{planCopy[locale].title}</button></div>}
+
+          {!product.plans?.length && <div ref={bookingAnchorRef}><ProductBookingPanel locale={locale} productName={product.title} sticky={false} /></div>}
 
           {product.subtitle && (
             <p className="mt-5 break-words text-lg font-bold leading-8 text-zinc-600">
@@ -757,6 +820,20 @@ export default function DetailsPage() {
           </div>
         </div>
       </div>
+
+      {showStickyBooking && !product.plans?.length && (
+        <div className="fixed inset-x-0 bottom-0 z-40 animate-[booking-rise_.35s_ease-out] bg-white/95 backdrop-blur-xl">
+          <ProductBookingPanel locale={locale} productName={product.title} sticky />
+        </div>
+      )}
+
+      {!!product.plans?.length && <ProductPlansModal open={plansOpen} locale={locale} plans={product.plans} onClose={() => setPlansOpen(false)} onBook={(planId) => { setPlansOpen(false); setBookingPlanId(planId); setBookingOpen(true); }} />}
+
+      {!!product.plans?.length && <ProductBookingPanel locale={locale} productName={product.title} plans={product.plans} selectedPlanId={bookingPlanId} open={bookingOpen} onOpenChange={setBookingOpen} hideTrigger sticky={false} />}
+
+      {lightboxOpen && (
+        <ProductImageLightbox images={images} selected={selectedImage} onSelect={setSelectedImage} onClose={() => setLightboxOpen(false)} />
+      )}
     </section>
   );
 }

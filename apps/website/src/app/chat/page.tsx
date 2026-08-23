@@ -56,6 +56,7 @@ export default function ChatPage() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesScrollRef = useRef<HTMLDivElement>(null);
   const typingSentAt = useRef(0);
 
   useEffect(() => {
@@ -114,8 +115,35 @@ export default function ChatPage() {
   }, [loadChat, loadChats, routeChatId]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = messagesScrollRef.current;
+    if (!container) return;
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: "smooth",
+    });
   }, [activeChat?.messages.length, activeChat?.advisorTyping]);
+
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    const updateHeight = () => {
+      document.documentElement.style.setProperty(
+        "--chat-viewport-height",
+        `${viewport?.height ?? window.innerHeight}px`,
+      );
+      requestAnimationFrame(() => {
+        const container = messagesScrollRef.current;
+        if (container) container.scrollTop = container.scrollHeight;
+      });
+    };
+    updateHeight();
+    viewport?.addEventListener("resize", updateHeight);
+    window.addEventListener("orientationchange", updateHeight);
+    return () => {
+      viewport?.removeEventListener("resize", updateHeight);
+      window.removeEventListener("orientationchange", updateHeight);
+      document.documentElement.style.removeProperty("--chat-viewport-height");
+    };
+  }, []);
 
   function localizedChatPath(id?: string) {
     const prefix = locale === "en" ? "" : `/${locale}`;
@@ -189,7 +217,7 @@ export default function ChatPage() {
   const activeTitle = activeChat?.title ?? "Moorish Concierge";
 
   return (
-    <div className="h-screen overflow-hidden bg-[#fffaf7]">
+    <div className="fixed inset-x-0 top-0 h-[var(--chat-viewport-height,100dvh)] overflow-hidden overscroll-none bg-[#fffaf7]">
       <div className="flex h-full">
         <aside className="hidden w-[340px] border-r border-orange-100 bg-white lg:flex lg:flex-col">
           <div className="border-b border-orange-100 p-5">
@@ -216,7 +244,7 @@ export default function ChatPage() {
         </aside>
 
         <section className="flex min-w-0 flex-1 flex-col">
-          <div className="border-b border-orange-100 bg-white px-5 py-4">
+          <div className="shrink-0 border-b border-orange-100 bg-white px-4 py-3 sm:px-5 sm:py-4">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-600 text-white"><Bot size={20} /></div>
               <div>
@@ -226,8 +254,8 @@ export default function ChatPage() {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-4 py-6">
-            <div className="mx-auto flex max-w-4xl flex-col gap-4">
+          <div ref={messagesScrollRef} className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:py-6">
+            <div className="mx-auto flex min-h-full max-w-4xl flex-col justify-end gap-4">
               {error && <div className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</div>}
               {displayMessages.map((msg) => {
                 const mine = ["VISITOR", "INDIVIDUAL", "LEAD", "PROSPECT", "ACCOUNT"].includes(msg.senderType);
@@ -248,7 +276,7 @@ export default function ChatPage() {
             </div>
           </div>
 
-          <div className="border-t border-orange-100 bg-white p-4">
+          <div className="shrink-0 border-t border-orange-100 bg-white p-3 pb-[max(.75rem,env(safe-area-inset-bottom))] sm:p-4">
             <div className="mx-auto flex max-w-4xl items-end gap-3">
               <textarea value={message} onChange={(event) => onMessageChange(event.target.value)} placeholder={t.placeholder} rows={1} maxLength={5000} className="max-h-40 min-h-[52px] flex-1 resize-none rounded-2xl border border-zinc-200 px-4 py-3 outline-none focus:border-orange-500" onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); void sendMessage(); } }} />
               <button onClick={() => void sendMessage()} disabled={sending || !message.trim()} aria-label={t.placeholder} className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-orange-600 text-white transition hover:bg-orange-700 disabled:opacity-50"><Send size={18} /></button>

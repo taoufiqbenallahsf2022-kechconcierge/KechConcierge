@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageCircle, X, Send, Phone } from "lucide-react";
 
 export default function FloatingContact() {
@@ -10,11 +10,18 @@ export default function FloatingContact() {
   "+212 6 13 85 98 34";
 
   const [open, setOpen] = useState(false);
+  const [bookingBarVisible, setBookingBarVisible] = useState(false);
+
+  useEffect(() => {
+    const updateOffset = (event: Event) => setBookingBarVisible(Boolean((event as CustomEvent<{ visible?: boolean }>).detail?.visible));
+    window.addEventListener("moorish-product-booking-bar", updateOffset);
+    return () => window.removeEventListener("moorish-product-booking-bar", updateOffset);
+  }, []);
 
   return (
-    <div className="fixed bottom-5 right-5 z-50">
+    <div className={`fixed z-50 transition-[bottom] duration-300 ${open ? `inset-0 sm:inset-auto sm:right-5 ${bookingBarVisible ? "sm:bottom-24" : "sm:bottom-5"}` : `right-5 ${bookingBarVisible ? "bottom-24" : "bottom-5"}`}`}>
       {open && (
-        <div className="mb-4 w-[min(340px,calc(100vw-2rem))] overflow-hidden rounded-3xl bg-white card-shadow">
+        <div className="flex h-[100dvh] w-full flex-col overflow-hidden bg-white sm:mb-4 sm:h-auto sm:w-[min(340px,calc(100vw-2rem))] sm:rounded-3xl sm:card-shadow">
           <div className="flex items-center justify-between bg-zinc-950 px-5 py-4 text-white">
             <div>
               <p className="font-black">Contact Moorish Concierge</p>
@@ -25,7 +32,7 @@ export default function FloatingContact() {
             </button>
           </div>
 
-          <div className="grid gap-3 p-4">
+          <div className="grid flex-1 content-center gap-4 p-6 sm:block sm:flex-none sm:space-y-3 sm:p-4">
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\s+/g, "")}`}
               target="_blank"
@@ -58,7 +65,7 @@ export default function FloatingContact() {
 
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-white shadow-2xl shadow-orange-500/30 transition hover:bg-orange-700"
+        className={`flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-white shadow-2xl shadow-orange-500/30 transition hover:bg-orange-700 ${open ? "fixed bottom-5 right-5 sm:static" : ""}`}
         aria-label="Contact us"
       >
         {open ? <X /> : <MessageCircle />}

@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   EmailVerificationToken: 'EmailVerificationToken',
+  Segment: 'Segment',
   SenderEmail: 'SenderEmail',
   EmailTemplate: 'EmailTemplate',
   AudienceAutomation: 'AudienceAutomation',
@@ -61,6 +62,30 @@ export const ModelName = {
   RecordFlowRun: 'RecordFlowRun',
   RecordFlowActivityRun: 'RecordFlowActivityRun',
   Product: 'Product',
+  Villa: 'Villa',
+  VillaImage: 'VillaImage',
+  Restaurant: 'Restaurant',
+  RestaurantImage: 'RestaurantImage',
+  BeachClub: 'BeachClub',
+  BeachClubImage: 'BeachClubImage',
+  BeachClubPlan: 'BeachClubPlan',
+  BeachClubPlanOption: 'BeachClubPlanOption',
+  NightClub: 'NightClub',
+  NightClubImage: 'NightClubImage',
+  NightClubPlan: 'NightClubPlan',
+  NightClubPlanOption: 'NightClubPlanOption',
+  Pack: 'Pack',
+  PackImage: 'PackImage',
+  PackPlan: 'PackPlan',
+  PackPlanOption: 'PackPlanOption',
+  Activity: 'Activity',
+  ActivityImage: 'ActivityImage',
+  ActivityPlan: 'ActivityPlan',
+  ActivityPlanOption: 'ActivityPlanOption',
+  Transportation: 'Transportation',
+  TransportationImage: 'TransportationImage',
+  TransportationPlan: 'TransportationPlan',
+  TransportationPlanOption: 'TransportationPlanOption',
   WhatsAppConversation: 'WhatsAppConversation',
   WhatsAppMessage: 'WhatsAppMessage',
   Individual: 'Individual',
@@ -104,6 +129,22 @@ export const EmailVerificationTokenScalarFieldEnum = {
 } as const
 
 export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+
+
+export const SegmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  sourceObject: 'sourceObject',
+  definition: 'definition',
+  isActive: 'isActive',
+  createdDate: 'createdDate',
+  createdBy: 'createdBy',
+  updatedDate: 'updatedDate',
+  updatedBy: 'updatedBy'
+} as const
+
+export type SegmentScalarFieldEnum = (typeof SegmentScalarFieldEnum)[keyof typeof SegmentScalarFieldEnum]
 
 
 export const SenderEmailScalarFieldEnum = {
@@ -320,6 +361,36 @@ export const ProductScalarFieldEnum = {
   image18: 'image18',
   image19: 'image19',
   image20: 'image20',
+  image22: 'image22',
+  image23: 'image23',
+  image24: 'image24',
+  image25: 'image25',
+  image26: 'image26',
+  image27: 'image27',
+  image28: 'image28',
+  image29: 'image29',
+  image30: 'image30',
+  image31: 'image31',
+  image32: 'image32',
+  image33: 'image33',
+  image34: 'image34',
+  image35: 'image35',
+  image36: 'image36',
+  image37: 'image37',
+  image38: 'image38',
+  image39: 'image39',
+  image40: 'image40',
+  image41: 'image41',
+  image42: 'image42',
+  image43: 'image43',
+  image44: 'image44',
+  image45: 'image45',
+  image46: 'image46',
+  image47: 'image47',
+  image48: 'image48',
+  image49: 'image49',
+  image50: 'image50',
+  imageAlts: 'imageAlts',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -327,6 +398,654 @@ export const ProductScalarFieldEnum = {
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const VillaScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  priceEuro: 'priceEuro',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  priceTitleFR: 'priceTitleFR',
+  priceTitleEN: 'priceTitleEN',
+  priceTitleDE: 'priceTitleDE',
+  priceTitleIT: 'priceTitleIT',
+  priceTitlePT: 'priceTitlePT',
+  priceTitleES: 'priceTitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  addressFR: 'addressFR',
+  addressEN: 'addressEN',
+  addressDE: 'addressDE',
+  addressIT: 'addressIT',
+  addressPT: 'addressPT',
+  addressES: 'addressES',
+  tagsFR: 'tagsFR',
+  tagsEN: 'tagsEN',
+  tagsDE: 'tagsDE',
+  tagsIT: 'tagsIT',
+  tagsPT: 'tagsPT',
+  tagsES: 'tagsES',
+  detailsFR: 'detailsFR',
+  detailsEN: 'detailsEN',
+  detailsDE: 'detailsDE',
+  detailsIT: 'detailsIT',
+  detailsPT: 'detailsPT',
+  detailsES: 'detailsES',
+  imageAlts: 'imageAlts',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VillaScalarFieldEnum = (typeof VillaScalarFieldEnum)[keyof typeof VillaScalarFieldEnum]
+
+
+export const VillaImageScalarFieldEnum = {
+  id: 'id',
+  villaId: 'villaId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type VillaImageScalarFieldEnum = (typeof VillaImageScalarFieldEnum)[keyof typeof VillaImageScalarFieldEnum]
+
+
+export const RestaurantScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  priceEuro: 'priceEuro',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  priceTitleFR: 'priceTitleFR',
+  priceTitleEN: 'priceTitleEN',
+  priceTitleDE: 'priceTitleDE',
+  priceTitleIT: 'priceTitleIT',
+  priceTitlePT: 'priceTitlePT',
+  priceTitleES: 'priceTitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  addressFR: 'addressFR',
+  addressEN: 'addressEN',
+  addressDE: 'addressDE',
+  addressIT: 'addressIT',
+  addressPT: 'addressPT',
+  addressES: 'addressES',
+  tagsFR: 'tagsFR',
+  tagsEN: 'tagsEN',
+  tagsDE: 'tagsDE',
+  tagsIT: 'tagsIT',
+  tagsPT: 'tagsPT',
+  tagsES: 'tagsES',
+  detailsFR: 'detailsFR',
+  detailsEN: 'detailsEN',
+  detailsDE: 'detailsDE',
+  detailsIT: 'detailsIT',
+  detailsPT: 'detailsPT',
+  detailsES: 'detailsES',
+  imageAlts: 'imageAlts',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RestaurantScalarFieldEnum = (typeof RestaurantScalarFieldEnum)[keyof typeof RestaurantScalarFieldEnum]
+
+
+export const RestaurantImageScalarFieldEnum = {
+  id: 'id',
+  restaurantId: 'restaurantId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type RestaurantImageScalarFieldEnum = (typeof RestaurantImageScalarFieldEnum)[keyof typeof RestaurantImageScalarFieldEnum]
+
+
+export const BeachClubScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BeachClubScalarFieldEnum = (typeof BeachClubScalarFieldEnum)[keyof typeof BeachClubScalarFieldEnum]
+
+
+export const BeachClubImageScalarFieldEnum = {
+  id: 'id',
+  beachClubId: 'beachClubId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type BeachClubImageScalarFieldEnum = (typeof BeachClubImageScalarFieldEnum)[keyof typeof BeachClubImageScalarFieldEnum]
+
+
+export const BeachClubPlanScalarFieldEnum = {
+  id: 'id',
+  beachClubId: 'beachClubId',
+  uniqueCode: 'uniqueCode',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BeachClubPlanScalarFieldEnum = (typeof BeachClubPlanScalarFieldEnum)[keyof typeof BeachClubPlanScalarFieldEnum]
+
+
+export const BeachClubPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type BeachClubPlanOptionScalarFieldEnum = (typeof BeachClubPlanOptionScalarFieldEnum)[keyof typeof BeachClubPlanOptionScalarFieldEnum]
+
+
+export const NightClubScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NightClubScalarFieldEnum = (typeof NightClubScalarFieldEnum)[keyof typeof NightClubScalarFieldEnum]
+
+
+export const NightClubImageScalarFieldEnum = {
+  id: 'id',
+  nightClubId: 'nightClubId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type NightClubImageScalarFieldEnum = (typeof NightClubImageScalarFieldEnum)[keyof typeof NightClubImageScalarFieldEnum]
+
+
+export const NightClubPlanScalarFieldEnum = {
+  id: 'id',
+  nightClubId: 'nightClubId',
+  uniqueCode: 'uniqueCode',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  durationMinutes: 'durationMinutes',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NightClubPlanScalarFieldEnum = (typeof NightClubPlanScalarFieldEnum)[keyof typeof NightClubPlanScalarFieldEnum]
+
+
+export const NightClubPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type NightClubPlanOptionScalarFieldEnum = (typeof NightClubPlanOptionScalarFieldEnum)[keyof typeof NightClubPlanOptionScalarFieldEnum]
+
+
+export const PackScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PackScalarFieldEnum = (typeof PackScalarFieldEnum)[keyof typeof PackScalarFieldEnum]
+
+
+export const PackImageScalarFieldEnum = {
+  id: 'id',
+  packId: 'packId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type PackImageScalarFieldEnum = (typeof PackImageScalarFieldEnum)[keyof typeof PackImageScalarFieldEnum]
+
+
+export const PackPlanScalarFieldEnum = {
+  id: 'id',
+  packId: 'packId',
+  uniqueCode: 'uniqueCode',
+  serviceType: 'serviceType',
+  origin: 'origin',
+  destination: 'destination',
+  durationMinutes: 'durationMinutes',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PackPlanScalarFieldEnum = (typeof PackPlanScalarFieldEnum)[keyof typeof PackPlanScalarFieldEnum]
+
+
+export const PackPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type PackPlanOptionScalarFieldEnum = (typeof PackPlanOptionScalarFieldEnum)[keyof typeof PackPlanOptionScalarFieldEnum]
+
+
+export const ActivityScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
+
+
+export const ActivityImageScalarFieldEnum = {
+  id: 'id',
+  activityId: 'activityId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type ActivityImageScalarFieldEnum = (typeof ActivityImageScalarFieldEnum)[keyof typeof ActivityImageScalarFieldEnum]
+
+
+export const ActivityPlanScalarFieldEnum = {
+  id: 'id',
+  activityId: 'activityId',
+  uniqueCode: 'uniqueCode',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  durationMinutes: 'durationMinutes',
+  minimumGuests: 'minimumGuests',
+  maximumGuests: 'maximumGuests',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ActivityPlanScalarFieldEnum = (typeof ActivityPlanScalarFieldEnum)[keyof typeof ActivityPlanScalarFieldEnum]
+
+
+export const ActivityPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type ActivityPlanOptionScalarFieldEnum = (typeof ActivityPlanOptionScalarFieldEnum)[keyof typeof ActivityPlanOptionScalarFieldEnum]
+
+
+export const TransportationScalarFieldEnum = {
+  id: 'id',
+  uniqueCode: 'uniqueCode',
+  order: 'order',
+  thumbnail: 'thumbnail',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  subtitleFR: 'subtitleFR',
+  subtitleEN: 'subtitleEN',
+  subtitleDE: 'subtitleDE',
+  subtitleIT: 'subtitleIT',
+  subtitlePT: 'subtitlePT',
+  subtitleES: 'subtitleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  locationFR: 'locationFR',
+  locationEN: 'locationEN',
+  locationDE: 'locationDE',
+  locationIT: 'locationIT',
+  locationPT: 'locationPT',
+  locationES: 'locationES',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TransportationScalarFieldEnum = (typeof TransportationScalarFieldEnum)[keyof typeof TransportationScalarFieldEnum]
+
+
+export const TransportationImageScalarFieldEnum = {
+  id: 'id',
+  transportationId: 'transportationId',
+  url: 'url',
+  order: 'order',
+  altFR: 'altFR',
+  altEN: 'altEN',
+  altDE: 'altDE',
+  altIT: 'altIT',
+  altPT: 'altPT',
+  altES: 'altES'
+} as const
+
+export type TransportationImageScalarFieldEnum = (typeof TransportationImageScalarFieldEnum)[keyof typeof TransportationImageScalarFieldEnum]
+
+
+export const TransportationPlanScalarFieldEnum = {
+  id: 'id',
+  transportationId: 'transportationId',
+  uniqueCode: 'uniqueCode',
+  serviceType: 'serviceType',
+  origin: 'origin',
+  destination: 'destination',
+  durationMinutes: 'durationMinutes',
+  salePrice: 'salePrice',
+  internalCost: 'internalCost',
+  currency: 'currency',
+  pricingUnit: 'pricingUnit',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES',
+  descriptionFR: 'descriptionFR',
+  descriptionEN: 'descriptionEN',
+  descriptionDE: 'descriptionDE',
+  descriptionIT: 'descriptionIT',
+  descriptionPT: 'descriptionPT',
+  descriptionES: 'descriptionES',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TransportationPlanScalarFieldEnum = (typeof TransportationPlanScalarFieldEnum)[keyof typeof TransportationPlanScalarFieldEnum]
+
+
+export const TransportationPlanOptionScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  isActive: 'isActive',
+  titleFR: 'titleFR',
+  titleEN: 'titleEN',
+  titleDE: 'titleDE',
+  titleIT: 'titleIT',
+  titlePT: 'titlePT',
+  titleES: 'titleES'
+} as const
+
+export type TransportationPlanOptionScalarFieldEnum = (typeof TransportationPlanOptionScalarFieldEnum)[keyof typeof TransportationPlanOptionScalarFieldEnum]
 
 
 export const WhatsAppConversationScalarFieldEnum = {

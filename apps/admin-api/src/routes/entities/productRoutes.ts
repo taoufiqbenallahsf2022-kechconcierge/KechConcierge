@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { service } from "../../services/entities/productService.js";
+import { generateProductAltText, generateProductTranslation, service } from "../../services/entities/productService.js";
+import { createCloudflareDirectUpload } from "../../services/cloudflareImagesService.js";
 export const router = Router();
 router.get("/", async (req, res, next) => {
   try {
@@ -18,6 +19,27 @@ router.get("/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     res.status(201).json(await service.create(req.body));
+  } catch (e) {
+    next(e);
+  }
+});
+router.post("/generate-alt-text", async (req, res, next) => {
+  try {
+    res.json(await generateProductAltText(req.body));
+  } catch (e) {
+    next(e);
+  }
+});
+router.post("/translate-content", async (req, res, next) => {
+  try {
+    res.json(await generateProductTranslation(req.body));
+  } catch (e) {
+    next(e);
+  }
+});
+router.post("/images/direct-upload", async (req, res, next) => {
+  try {
+    res.status(201).json(await createCloudflareDirectUpload(req.body ?? {}));
   } catch (e) {
     next(e);
   }

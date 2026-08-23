@@ -11,10 +11,123 @@
 
 html { scroll-behavior: smooth; }
 
+/* Desktop design density: 90% of the 16px design baseline. Tailwind's
+   rem-based type, spacing, radii and sizing remain sharp and reflow normally. */
+@media (min-width: 1024px) {
+  html { font-size: 14.4px; }
+}
+
 body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea,
+select,
+[contenteditable="true"],
+[role="textbox"] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+body.nightclub-theme {
+  --background: #080808;
+  --foreground: #f5f5f5;
+  background-color: #080808;
+  background-image:
+    linear-gradient(rgba(6, 6, 8, .16), rgba(8, 8, 10, .34)),
+    url("/brand/nightclub-atmosphere.webp");
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: #f5f5f5;
+}
+
+body.nightclub-theme header,
+body.nightclub-theme footer,
+body.nightclub-theme .bg-white,
+body.nightclub-theme .bg-\[\#fffaf6\] {
+  background-color: #0d0d0f !important;
+}
+
+body.nightclub-theme main {
+  background:
+    linear-gradient(rgba(7, 7, 9, .18), rgba(10, 8, 9, .30)),
+    url("/brand/nightclub-atmosphere.webp") center top / cover fixed no-repeat !important;
+}
+
+@media (max-width: 767px) {
+  body.nightclub-theme {
+    background-attachment: scroll;
+  }
+
+  body.nightclub-theme main {
+    background-attachment: scroll !important;
+  }
+}
+
+body.nightclub-theme .text-zinc-950,
+body.nightclub-theme .text-zinc-900,
+body.nightclub-theme .text-zinc-800,
+body.nightclub-theme .text-zinc-700 {
+  color: #f4f4f5 !important;
+}
+
+body.nightclub-theme .text-zinc-600,
+body.nightclub-theme .text-zinc-500,
+body.nightclub-theme .text-zinc-400 {
+  color: #a1a1aa !important;
+}
+
+body.nightclub-theme .border-zinc-100,
+body.nightclub-theme .border-zinc-200,
+body.nightclub-theme .border-orange-100 {
+  border-color: #29292e !important;
+}
+
+body.nightclub-theme .bg-orange-50,
+body.nightclub-theme .orange-gradient {
+  background: #15100e !important;
+}
+
+body.nightclub-theme .card-shadow {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+}
+
+body.nightclub-theme .site-logo-image-light {
+  display: none;
+}
+
+body.nightclub-theme .site-logo-image-dark {
+  display: block;
+}
+
+body.nightclub-theme .site-logo-image-dark-base {
+  filter: brightness(0) invert(1);
+}
+
+/* Restore the unfiltered orange square over the white dark-mode mark. */
+body.nightclub-theme .site-logo-image-dark-accent {
+  clip-path: inset(74% 0 8% 82%);
+}
+
+body.nightclub-theme .nightclub-carousel-arrow {
+  border-color: rgba(249, 115, 22, .7) !important;
+  background: rgba(194, 65, 12, .96) !important;
+  color: #fff !important;
+}
+
+body.nightclub-theme .nightclub-carousel-arrow:hover {
+  background: #ea580c !important;
 }
 
 button, input, textarea { font: inherit; }
@@ -35,4 +148,14 @@ button, input, textarea { font: inherit; }
     radial-gradient(circle at top left, rgba(242, 106, 33, 0.22), transparent 32%),
     radial-gradient(circle at bottom right, rgba(199, 51, 31, 0.16), transparent 32%),
     linear-gradient(135deg, #fffaf7, #ffffff);
+}
+
+@keyframes booking-slide {
+  from { transform: translateX(100%); opacity: 0.65; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes booking-rise {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }

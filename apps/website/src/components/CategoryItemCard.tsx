@@ -39,7 +39,9 @@ const categoryPaths: Record<
   TRANSPORTATION:
     "transportation",
   SWIMMINGPOOL:
-    "swimmingpools",
+    "beachclubs",
+  NIGHTCLUB: "nightclubs",
+  PACK: "packs",
   ACTIVITY: "activities",
   RESTAURANT:
     "restaurants",
@@ -129,7 +131,7 @@ export default function CategoryItemCard({
         <div className="relative h-64 overflow-hidden">
           <Image
             src={item.thumbnail}
-            alt={item.title}
+            alt={item.thumbnailAlt || item.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className={`object-cover transition duration-500 ${
@@ -168,18 +170,7 @@ export default function CategoryItemCard({
             </h2>
 
             <div className="shrink-0 text-right">
-              <p className="text-xs font-bold text-zinc-500">
-                {
-                  item.priceTitle
-                }
-              </p>
-
-              <p className="text-xl font-black text-orange-700">
-                €
-                {
-                  item.priceEuro
-                }
-              </p>
+              {item.priceEuro != null && <><p className="text-xs font-bold text-zinc-500">{item.priceTitle || t.hero.startingFrom}</p><p className="text-xl font-black text-orange-700">{item.priceEuro} {item.currency ?? "EUR"}</p></>}
             </div>
           </div>
 

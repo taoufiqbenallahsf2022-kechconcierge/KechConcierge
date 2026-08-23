@@ -93,6 +93,35 @@ export type ProductMinAggregateOutputType = {
   image18: string | null
   image19: string | null
   image20: string | null
+  image22: string | null
+  image23: string | null
+  image24: string | null
+  image25: string | null
+  image26: string | null
+  image27: string | null
+  image28: string | null
+  image29: string | null
+  image30: string | null
+  image31: string | null
+  image32: string | null
+  image33: string | null
+  image34: string | null
+  image35: string | null
+  image36: string | null
+  image37: string | null
+  image38: string | null
+  image39: string | null
+  image40: string | null
+  image41: string | null
+  image42: string | null
+  image43: string | null
+  image44: string | null
+  image45: string | null
+  image46: string | null
+  image47: string | null
+  image48: string | null
+  image49: string | null
+  image50: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -156,6 +185,35 @@ export type ProductMaxAggregateOutputType = {
   image18: string | null
   image19: string | null
   image20: string | null
+  image22: string | null
+  image23: string | null
+  image24: string | null
+  image25: string | null
+  image26: string | null
+  image27: string | null
+  image28: string | null
+  image29: string | null
+  image30: string | null
+  image31: string | null
+  image32: string | null
+  image33: string | null
+  image34: string | null
+  image35: string | null
+  image36: string | null
+  image37: string | null
+  image38: string | null
+  image39: string | null
+  image40: string | null
+  image41: string | null
+  image42: string | null
+  image43: string | null
+  image44: string | null
+  image45: string | null
+  image46: string | null
+  image47: string | null
+  image48: string | null
+  image49: string | null
+  image50: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -231,6 +289,36 @@ export type ProductCountAggregateOutputType = {
   image18: number
   image19: number
   image20: number
+  image22: number
+  image23: number
+  image24: number
+  image25: number
+  image26: number
+  image27: number
+  image28: number
+  image29: number
+  image30: number
+  image31: number
+  image32: number
+  image33: number
+  image34: number
+  image35: number
+  image36: number
+  image37: number
+  image38: number
+  image39: number
+  image40: number
+  image41: number
+  image42: number
+  image43: number
+  image44: number
+  image45: number
+  image46: number
+  image47: number
+  image48: number
+  image49: number
+  image50: number
+  imageAlts: number
   isActive: number
   createdAt: number
   updatedAt: number
@@ -306,6 +394,35 @@ export type ProductMinAggregateInputType = {
   image18?: true
   image19?: true
   image20?: true
+  image22?: true
+  image23?: true
+  image24?: true
+  image25?: true
+  image26?: true
+  image27?: true
+  image28?: true
+  image29?: true
+  image30?: true
+  image31?: true
+  image32?: true
+  image33?: true
+  image34?: true
+  image35?: true
+  image36?: true
+  image37?: true
+  image38?: true
+  image39?: true
+  image40?: true
+  image41?: true
+  image42?: true
+  image43?: true
+  image44?: true
+  image45?: true
+  image46?: true
+  image47?: true
+  image48?: true
+  image49?: true
+  image50?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -369,6 +486,35 @@ export type ProductMaxAggregateInputType = {
   image18?: true
   image19?: true
   image20?: true
+  image22?: true
+  image23?: true
+  image24?: true
+  image25?: true
+  image26?: true
+  image27?: true
+  image28?: true
+  image29?: true
+  image30?: true
+  image31?: true
+  image32?: true
+  image33?: true
+  image34?: true
+  image35?: true
+  image36?: true
+  image37?: true
+  image38?: true
+  image39?: true
+  image40?: true
+  image41?: true
+  image42?: true
+  image43?: true
+  image44?: true
+  image45?: true
+  image46?: true
+  image47?: true
+  image48?: true
+  image49?: true
+  image50?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -444,6 +590,36 @@ export type ProductCountAggregateInputType = {
   image18?: true
   image19?: true
   image20?: true
+  image22?: true
+  image23?: true
+  image24?: true
+  image25?: true
+  image26?: true
+  image27?: true
+  image28?: true
+  image29?: true
+  image30?: true
+  image31?: true
+  image32?: true
+  image33?: true
+  image34?: true
+  image35?: true
+  image36?: true
+  image37?: true
+  image38?: true
+  image39?: true
+  image40?: true
+  image41?: true
+  image42?: true
+  image43?: true
+  image44?: true
+  image45?: true
+  image46?: true
+  image47?: true
+  image48?: true
+  image49?: true
+  image50?: true
+  imageAlts?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -606,6 +782,36 @@ export type ProductGroupByOutputType = {
   image18: string | null
   image19: string | null
   image20: string | null
+  image22: string | null
+  image23: string | null
+  image24: string | null
+  image25: string | null
+  image26: string | null
+  image27: string | null
+  image28: string | null
+  image29: string | null
+  image30: string | null
+  image31: string | null
+  image32: string | null
+  image33: string | null
+  image34: string | null
+  image35: string | null
+  image36: string | null
+  image37: string | null
+  image38: string | null
+  image39: string | null
+  image40: string | null
+  image41: string | null
+  image42: string | null
+  image43: string | null
+  image44: string | null
+  image45: string | null
+  image46: string | null
+  image47: string | null
+  image48: string | null
+  image49: string | null
+  image50: string | null
+  imageAlts: runtime.JsonValue | null
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -704,6 +910,36 @@ export type ProductWhereInput = {
   image18?: Prisma.StringNullableFilter<"Product"> | string | null
   image19?: Prisma.StringNullableFilter<"Product"> | string | null
   image20?: Prisma.StringNullableFilter<"Product"> | string | null
+  image22?: Prisma.StringNullableFilter<"Product"> | string | null
+  image23?: Prisma.StringNullableFilter<"Product"> | string | null
+  image24?: Prisma.StringNullableFilter<"Product"> | string | null
+  image25?: Prisma.StringNullableFilter<"Product"> | string | null
+  image26?: Prisma.StringNullableFilter<"Product"> | string | null
+  image27?: Prisma.StringNullableFilter<"Product"> | string | null
+  image28?: Prisma.StringNullableFilter<"Product"> | string | null
+  image29?: Prisma.StringNullableFilter<"Product"> | string | null
+  image30?: Prisma.StringNullableFilter<"Product"> | string | null
+  image31?: Prisma.StringNullableFilter<"Product"> | string | null
+  image32?: Prisma.StringNullableFilter<"Product"> | string | null
+  image33?: Prisma.StringNullableFilter<"Product"> | string | null
+  image34?: Prisma.StringNullableFilter<"Product"> | string | null
+  image35?: Prisma.StringNullableFilter<"Product"> | string | null
+  image36?: Prisma.StringNullableFilter<"Product"> | string | null
+  image37?: Prisma.StringNullableFilter<"Product"> | string | null
+  image38?: Prisma.StringNullableFilter<"Product"> | string | null
+  image39?: Prisma.StringNullableFilter<"Product"> | string | null
+  image40?: Prisma.StringNullableFilter<"Product"> | string | null
+  image41?: Prisma.StringNullableFilter<"Product"> | string | null
+  image42?: Prisma.StringNullableFilter<"Product"> | string | null
+  image43?: Prisma.StringNullableFilter<"Product"> | string | null
+  image44?: Prisma.StringNullableFilter<"Product"> | string | null
+  image45?: Prisma.StringNullableFilter<"Product"> | string | null
+  image46?: Prisma.StringNullableFilter<"Product"> | string | null
+  image47?: Prisma.StringNullableFilter<"Product"> | string | null
+  image48?: Prisma.StringNullableFilter<"Product"> | string | null
+  image49?: Prisma.StringNullableFilter<"Product"> | string | null
+  image50?: Prisma.StringNullableFilter<"Product"> | string | null
+  imageAlts?: Prisma.JsonNullableFilter<"Product">
   isActive?: Prisma.BoolFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -779,6 +1015,36 @@ export type ProductOrderByWithRelationInput = {
   image18?: Prisma.SortOrderInput | Prisma.SortOrder
   image19?: Prisma.SortOrderInput | Prisma.SortOrder
   image20?: Prisma.SortOrderInput | Prisma.SortOrder
+  image22?: Prisma.SortOrderInput | Prisma.SortOrder
+  image23?: Prisma.SortOrderInput | Prisma.SortOrder
+  image24?: Prisma.SortOrderInput | Prisma.SortOrder
+  image25?: Prisma.SortOrderInput | Prisma.SortOrder
+  image26?: Prisma.SortOrderInput | Prisma.SortOrder
+  image27?: Prisma.SortOrderInput | Prisma.SortOrder
+  image28?: Prisma.SortOrderInput | Prisma.SortOrder
+  image29?: Prisma.SortOrderInput | Prisma.SortOrder
+  image30?: Prisma.SortOrderInput | Prisma.SortOrder
+  image31?: Prisma.SortOrderInput | Prisma.SortOrder
+  image32?: Prisma.SortOrderInput | Prisma.SortOrder
+  image33?: Prisma.SortOrderInput | Prisma.SortOrder
+  image34?: Prisma.SortOrderInput | Prisma.SortOrder
+  image35?: Prisma.SortOrderInput | Prisma.SortOrder
+  image36?: Prisma.SortOrderInput | Prisma.SortOrder
+  image37?: Prisma.SortOrderInput | Prisma.SortOrder
+  image38?: Prisma.SortOrderInput | Prisma.SortOrder
+  image39?: Prisma.SortOrderInput | Prisma.SortOrder
+  image40?: Prisma.SortOrderInput | Prisma.SortOrder
+  image41?: Prisma.SortOrderInput | Prisma.SortOrder
+  image42?: Prisma.SortOrderInput | Prisma.SortOrder
+  image43?: Prisma.SortOrderInput | Prisma.SortOrder
+  image44?: Prisma.SortOrderInput | Prisma.SortOrder
+  image45?: Prisma.SortOrderInput | Prisma.SortOrder
+  image46?: Prisma.SortOrderInput | Prisma.SortOrder
+  image47?: Prisma.SortOrderInput | Prisma.SortOrder
+  image48?: Prisma.SortOrderInput | Prisma.SortOrder
+  image49?: Prisma.SortOrderInput | Prisma.SortOrder
+  image50?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageAlts?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -857,6 +1123,36 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   image18?: Prisma.StringNullableFilter<"Product"> | string | null
   image19?: Prisma.StringNullableFilter<"Product"> | string | null
   image20?: Prisma.StringNullableFilter<"Product"> | string | null
+  image22?: Prisma.StringNullableFilter<"Product"> | string | null
+  image23?: Prisma.StringNullableFilter<"Product"> | string | null
+  image24?: Prisma.StringNullableFilter<"Product"> | string | null
+  image25?: Prisma.StringNullableFilter<"Product"> | string | null
+  image26?: Prisma.StringNullableFilter<"Product"> | string | null
+  image27?: Prisma.StringNullableFilter<"Product"> | string | null
+  image28?: Prisma.StringNullableFilter<"Product"> | string | null
+  image29?: Prisma.StringNullableFilter<"Product"> | string | null
+  image30?: Prisma.StringNullableFilter<"Product"> | string | null
+  image31?: Prisma.StringNullableFilter<"Product"> | string | null
+  image32?: Prisma.StringNullableFilter<"Product"> | string | null
+  image33?: Prisma.StringNullableFilter<"Product"> | string | null
+  image34?: Prisma.StringNullableFilter<"Product"> | string | null
+  image35?: Prisma.StringNullableFilter<"Product"> | string | null
+  image36?: Prisma.StringNullableFilter<"Product"> | string | null
+  image37?: Prisma.StringNullableFilter<"Product"> | string | null
+  image38?: Prisma.StringNullableFilter<"Product"> | string | null
+  image39?: Prisma.StringNullableFilter<"Product"> | string | null
+  image40?: Prisma.StringNullableFilter<"Product"> | string | null
+  image41?: Prisma.StringNullableFilter<"Product"> | string | null
+  image42?: Prisma.StringNullableFilter<"Product"> | string | null
+  image43?: Prisma.StringNullableFilter<"Product"> | string | null
+  image44?: Prisma.StringNullableFilter<"Product"> | string | null
+  image45?: Prisma.StringNullableFilter<"Product"> | string | null
+  image46?: Prisma.StringNullableFilter<"Product"> | string | null
+  image47?: Prisma.StringNullableFilter<"Product"> | string | null
+  image48?: Prisma.StringNullableFilter<"Product"> | string | null
+  image49?: Prisma.StringNullableFilter<"Product"> | string | null
+  image50?: Prisma.StringNullableFilter<"Product"> | string | null
+  imageAlts?: Prisma.JsonNullableFilter<"Product">
   isActive?: Prisma.BoolFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Product"> | Date | string
@@ -932,6 +1228,36 @@ export type ProductOrderByWithAggregationInput = {
   image18?: Prisma.SortOrderInput | Prisma.SortOrder
   image19?: Prisma.SortOrderInput | Prisma.SortOrder
   image20?: Prisma.SortOrderInput | Prisma.SortOrder
+  image22?: Prisma.SortOrderInput | Prisma.SortOrder
+  image23?: Prisma.SortOrderInput | Prisma.SortOrder
+  image24?: Prisma.SortOrderInput | Prisma.SortOrder
+  image25?: Prisma.SortOrderInput | Prisma.SortOrder
+  image26?: Prisma.SortOrderInput | Prisma.SortOrder
+  image27?: Prisma.SortOrderInput | Prisma.SortOrder
+  image28?: Prisma.SortOrderInput | Prisma.SortOrder
+  image29?: Prisma.SortOrderInput | Prisma.SortOrder
+  image30?: Prisma.SortOrderInput | Prisma.SortOrder
+  image31?: Prisma.SortOrderInput | Prisma.SortOrder
+  image32?: Prisma.SortOrderInput | Prisma.SortOrder
+  image33?: Prisma.SortOrderInput | Prisma.SortOrder
+  image34?: Prisma.SortOrderInput | Prisma.SortOrder
+  image35?: Prisma.SortOrderInput | Prisma.SortOrder
+  image36?: Prisma.SortOrderInput | Prisma.SortOrder
+  image37?: Prisma.SortOrderInput | Prisma.SortOrder
+  image38?: Prisma.SortOrderInput | Prisma.SortOrder
+  image39?: Prisma.SortOrderInput | Prisma.SortOrder
+  image40?: Prisma.SortOrderInput | Prisma.SortOrder
+  image41?: Prisma.SortOrderInput | Prisma.SortOrder
+  image42?: Prisma.SortOrderInput | Prisma.SortOrder
+  image43?: Prisma.SortOrderInput | Prisma.SortOrder
+  image44?: Prisma.SortOrderInput | Prisma.SortOrder
+  image45?: Prisma.SortOrderInput | Prisma.SortOrder
+  image46?: Prisma.SortOrderInput | Prisma.SortOrder
+  image47?: Prisma.SortOrderInput | Prisma.SortOrder
+  image48?: Prisma.SortOrderInput | Prisma.SortOrder
+  image49?: Prisma.SortOrderInput | Prisma.SortOrder
+  image50?: Prisma.SortOrderInput | Prisma.SortOrder
+  imageAlts?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1015,6 +1341,36 @@ export type ProductScalarWhereWithAggregatesInput = {
   image18?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   image19?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   image20?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image22?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image23?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image24?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image25?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image26?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image27?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image28?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image29?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image30?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image31?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image32?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image33?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image34?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image35?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image36?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image37?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image38?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image39?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image40?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image41?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image42?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image43?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image44?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image45?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image46?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image47?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image48?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image49?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  image50?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
+  imageAlts?: Prisma.JsonNullableWithAggregatesFilter<"Product">
   isActive?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Product"> | Date | string
@@ -1090,6 +1446,36 @@ export type ProductCreateInput = {
   image18?: string | null
   image19?: string | null
   image20?: string | null
+  image22?: string | null
+  image23?: string | null
+  image24?: string | null
+  image25?: string | null
+  image26?: string | null
+  image27?: string | null
+  image28?: string | null
+  image29?: string | null
+  image30?: string | null
+  image31?: string | null
+  image32?: string | null
+  image33?: string | null
+  image34?: string | null
+  image35?: string | null
+  image36?: string | null
+  image37?: string | null
+  image38?: string | null
+  image39?: string | null
+  image40?: string | null
+  image41?: string | null
+  image42?: string | null
+  image43?: string | null
+  image44?: string | null
+  image45?: string | null
+  image46?: string | null
+  image47?: string | null
+  image48?: string | null
+  image49?: string | null
+  image50?: string | null
+  imageAlts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1165,6 +1551,36 @@ export type ProductUncheckedCreateInput = {
   image18?: string | null
   image19?: string | null
   image20?: string | null
+  image22?: string | null
+  image23?: string | null
+  image24?: string | null
+  image25?: string | null
+  image26?: string | null
+  image27?: string | null
+  image28?: string | null
+  image29?: string | null
+  image30?: string | null
+  image31?: string | null
+  image32?: string | null
+  image33?: string | null
+  image34?: string | null
+  image35?: string | null
+  image36?: string | null
+  image37?: string | null
+  image38?: string | null
+  image39?: string | null
+  image40?: string | null
+  image41?: string | null
+  image42?: string | null
+  image43?: string | null
+  image44?: string | null
+  image45?: string | null
+  image46?: string | null
+  image47?: string | null
+  image48?: string | null
+  image49?: string | null
+  image50?: string | null
+  imageAlts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1240,6 +1656,36 @@ export type ProductUpdateInput = {
   image18?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image19?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image20?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image22?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image23?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image24?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image25?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image26?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image27?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image28?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image29?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image30?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image31?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image32?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image33?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image34?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image35?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image36?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image37?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image38?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image39?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image40?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image41?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image42?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image43?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image44?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image45?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image46?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image47?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image48?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image49?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image50?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAlts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1315,6 +1761,36 @@ export type ProductUncheckedUpdateInput = {
   image18?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image19?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image20?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image22?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image23?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image24?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image25?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image26?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image27?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image28?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image29?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image30?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image31?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image32?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image33?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image34?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image35?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image36?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image37?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image38?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image39?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image40?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image41?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image42?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image43?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image44?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image45?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image46?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image47?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image48?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image49?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image50?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAlts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1390,6 +1866,36 @@ export type ProductCreateManyInput = {
   image18?: string | null
   image19?: string | null
   image20?: string | null
+  image22?: string | null
+  image23?: string | null
+  image24?: string | null
+  image25?: string | null
+  image26?: string | null
+  image27?: string | null
+  image28?: string | null
+  image29?: string | null
+  image30?: string | null
+  image31?: string | null
+  image32?: string | null
+  image33?: string | null
+  image34?: string | null
+  image35?: string | null
+  image36?: string | null
+  image37?: string | null
+  image38?: string | null
+  image39?: string | null
+  image40?: string | null
+  image41?: string | null
+  image42?: string | null
+  image43?: string | null
+  image44?: string | null
+  image45?: string | null
+  image46?: string | null
+  image47?: string | null
+  image48?: string | null
+  image49?: string | null
+  image50?: string | null
+  imageAlts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1465,6 +1971,36 @@ export type ProductUpdateManyMutationInput = {
   image18?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image19?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image20?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image22?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image23?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image24?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image25?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image26?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image27?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image28?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image29?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image30?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image31?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image32?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image33?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image34?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image35?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image36?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image37?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image38?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image39?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image40?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image41?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image42?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image43?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image44?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image45?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image46?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image47?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image48?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image49?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image50?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAlts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1540,6 +2076,36 @@ export type ProductUncheckedUpdateManyInput = {
   image18?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image19?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image20?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image22?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image23?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image24?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image25?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image26?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image27?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image28?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image29?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image30?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image31?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image32?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image33?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image34?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image35?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image36?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image37?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image38?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image39?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image40?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image41?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image42?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image43?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image44?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image45?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image46?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image47?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image48?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image49?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image50?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imageAlts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1615,6 +2181,36 @@ export type ProductCountOrderByAggregateInput = {
   image18?: Prisma.SortOrder
   image19?: Prisma.SortOrder
   image20?: Prisma.SortOrder
+  image22?: Prisma.SortOrder
+  image23?: Prisma.SortOrder
+  image24?: Prisma.SortOrder
+  image25?: Prisma.SortOrder
+  image26?: Prisma.SortOrder
+  image27?: Prisma.SortOrder
+  image28?: Prisma.SortOrder
+  image29?: Prisma.SortOrder
+  image30?: Prisma.SortOrder
+  image31?: Prisma.SortOrder
+  image32?: Prisma.SortOrder
+  image33?: Prisma.SortOrder
+  image34?: Prisma.SortOrder
+  image35?: Prisma.SortOrder
+  image36?: Prisma.SortOrder
+  image37?: Prisma.SortOrder
+  image38?: Prisma.SortOrder
+  image39?: Prisma.SortOrder
+  image40?: Prisma.SortOrder
+  image41?: Prisma.SortOrder
+  image42?: Prisma.SortOrder
+  image43?: Prisma.SortOrder
+  image44?: Prisma.SortOrder
+  image45?: Prisma.SortOrder
+  image46?: Prisma.SortOrder
+  image47?: Prisma.SortOrder
+  image48?: Prisma.SortOrder
+  image49?: Prisma.SortOrder
+  image50?: Prisma.SortOrder
+  imageAlts?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1683,6 +2279,35 @@ export type ProductMaxOrderByAggregateInput = {
   image18?: Prisma.SortOrder
   image19?: Prisma.SortOrder
   image20?: Prisma.SortOrder
+  image22?: Prisma.SortOrder
+  image23?: Prisma.SortOrder
+  image24?: Prisma.SortOrder
+  image25?: Prisma.SortOrder
+  image26?: Prisma.SortOrder
+  image27?: Prisma.SortOrder
+  image28?: Prisma.SortOrder
+  image29?: Prisma.SortOrder
+  image30?: Prisma.SortOrder
+  image31?: Prisma.SortOrder
+  image32?: Prisma.SortOrder
+  image33?: Prisma.SortOrder
+  image34?: Prisma.SortOrder
+  image35?: Prisma.SortOrder
+  image36?: Prisma.SortOrder
+  image37?: Prisma.SortOrder
+  image38?: Prisma.SortOrder
+  image39?: Prisma.SortOrder
+  image40?: Prisma.SortOrder
+  image41?: Prisma.SortOrder
+  image42?: Prisma.SortOrder
+  image43?: Prisma.SortOrder
+  image44?: Prisma.SortOrder
+  image45?: Prisma.SortOrder
+  image46?: Prisma.SortOrder
+  image47?: Prisma.SortOrder
+  image48?: Prisma.SortOrder
+  image49?: Prisma.SortOrder
+  image50?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1746,6 +2371,35 @@ export type ProductMinOrderByAggregateInput = {
   image18?: Prisma.SortOrder
   image19?: Prisma.SortOrder
   image20?: Prisma.SortOrder
+  image22?: Prisma.SortOrder
+  image23?: Prisma.SortOrder
+  image24?: Prisma.SortOrder
+  image25?: Prisma.SortOrder
+  image26?: Prisma.SortOrder
+  image27?: Prisma.SortOrder
+  image28?: Prisma.SortOrder
+  image29?: Prisma.SortOrder
+  image30?: Prisma.SortOrder
+  image31?: Prisma.SortOrder
+  image32?: Prisma.SortOrder
+  image33?: Prisma.SortOrder
+  image34?: Prisma.SortOrder
+  image35?: Prisma.SortOrder
+  image36?: Prisma.SortOrder
+  image37?: Prisma.SortOrder
+  image38?: Prisma.SortOrder
+  image39?: Prisma.SortOrder
+  image40?: Prisma.SortOrder
+  image41?: Prisma.SortOrder
+  image42?: Prisma.SortOrder
+  image43?: Prisma.SortOrder
+  image44?: Prisma.SortOrder
+  image45?: Prisma.SortOrder
+  image46?: Prisma.SortOrder
+  image47?: Prisma.SortOrder
+  image48?: Prisma.SortOrder
+  image49?: Prisma.SortOrder
+  image50?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1840,6 +2494,36 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   image18?: boolean
   image19?: boolean
   image20?: boolean
+  image22?: boolean
+  image23?: boolean
+  image24?: boolean
+  image25?: boolean
+  image26?: boolean
+  image27?: boolean
+  image28?: boolean
+  image29?: boolean
+  image30?: boolean
+  image31?: boolean
+  image32?: boolean
+  image33?: boolean
+  image34?: boolean
+  image35?: boolean
+  image36?: boolean
+  image37?: boolean
+  image38?: boolean
+  image39?: boolean
+  image40?: boolean
+  image41?: boolean
+  image42?: boolean
+  image43?: boolean
+  image44?: boolean
+  image45?: boolean
+  image46?: boolean
+  image47?: boolean
+  image48?: boolean
+  image49?: boolean
+  image50?: boolean
+  imageAlts?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1915,6 +2599,36 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   image18?: boolean
   image19?: boolean
   image20?: boolean
+  image22?: boolean
+  image23?: boolean
+  image24?: boolean
+  image25?: boolean
+  image26?: boolean
+  image27?: boolean
+  image28?: boolean
+  image29?: boolean
+  image30?: boolean
+  image31?: boolean
+  image32?: boolean
+  image33?: boolean
+  image34?: boolean
+  image35?: boolean
+  image36?: boolean
+  image37?: boolean
+  image38?: boolean
+  image39?: boolean
+  image40?: boolean
+  image41?: boolean
+  image42?: boolean
+  image43?: boolean
+  image44?: boolean
+  image45?: boolean
+  image46?: boolean
+  image47?: boolean
+  image48?: boolean
+  image49?: boolean
+  image50?: boolean
+  imageAlts?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1990,6 +2704,36 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   image18?: boolean
   image19?: boolean
   image20?: boolean
+  image22?: boolean
+  image23?: boolean
+  image24?: boolean
+  image25?: boolean
+  image26?: boolean
+  image27?: boolean
+  image28?: boolean
+  image29?: boolean
+  image30?: boolean
+  image31?: boolean
+  image32?: boolean
+  image33?: boolean
+  image34?: boolean
+  image35?: boolean
+  image36?: boolean
+  image37?: boolean
+  image38?: boolean
+  image39?: boolean
+  image40?: boolean
+  image41?: boolean
+  image42?: boolean
+  image43?: boolean
+  image44?: boolean
+  image45?: boolean
+  image46?: boolean
+  image47?: boolean
+  image48?: boolean
+  image49?: boolean
+  image50?: boolean
+  imageAlts?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2065,13 +2809,43 @@ export type ProductSelectScalar = {
   image18?: boolean
   image19?: boolean
   image20?: boolean
+  image22?: boolean
+  image23?: boolean
+  image24?: boolean
+  image25?: boolean
+  image26?: boolean
+  image27?: boolean
+  image28?: boolean
+  image29?: boolean
+  image30?: boolean
+  image31?: boolean
+  image32?: boolean
+  image33?: boolean
+  image34?: boolean
+  image35?: boolean
+  image36?: boolean
+  image37?: boolean
+  image38?: boolean
+  image39?: boolean
+  image40?: boolean
+  image41?: boolean
+  image42?: boolean
+  image43?: boolean
+  image44?: boolean
+  image45?: boolean
+  image46?: boolean
+  image47?: boolean
+  image48?: boolean
+  image49?: boolean
+  image50?: boolean
+  imageAlts?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   image21?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uniqueCode" | "type" | "priceEuro" | "order" | "thumbnail" | "titleFR" | "titleEN" | "titleDE" | "titleIT" | "titlePT" | "titleES" | "subtitleFR" | "subtitleEN" | "subtitleDE" | "subtitleIT" | "subtitlePT" | "subtitleES" | "priceTitleFR" | "priceTitleEN" | "priceTitleDE" | "priceTitleIT" | "priceTitlePT" | "priceTitleES" | "descriptionFR" | "descriptionEN" | "descriptionDE" | "descriptionIT" | "descriptionPT" | "descriptionES" | "addressFR" | "addressEN" | "addressDE" | "addressIT" | "addressPT" | "addressES" | "tagsFR" | "tagsEN" | "tagsDE" | "tagsIT" | "tagsPT" | "tagsES" | "detailsFR" | "detailsEN" | "detailsDE" | "detailsIT" | "detailsPT" | "detailsES" | "image1" | "image2" | "image3" | "image4" | "image5" | "image6" | "image7" | "image8" | "image9" | "image10" | "image11" | "image12" | "image13" | "image14" | "image15" | "image16" | "image17" | "image18" | "image19" | "image20" | "isActive" | "createdAt" | "updatedAt" | "image21", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uniqueCode" | "type" | "priceEuro" | "order" | "thumbnail" | "titleFR" | "titleEN" | "titleDE" | "titleIT" | "titlePT" | "titleES" | "subtitleFR" | "subtitleEN" | "subtitleDE" | "subtitleIT" | "subtitlePT" | "subtitleES" | "priceTitleFR" | "priceTitleEN" | "priceTitleDE" | "priceTitleIT" | "priceTitlePT" | "priceTitleES" | "descriptionFR" | "descriptionEN" | "descriptionDE" | "descriptionIT" | "descriptionPT" | "descriptionES" | "addressFR" | "addressEN" | "addressDE" | "addressIT" | "addressPT" | "addressES" | "tagsFR" | "tagsEN" | "tagsDE" | "tagsIT" | "tagsPT" | "tagsES" | "detailsFR" | "detailsEN" | "detailsDE" | "detailsIT" | "detailsPT" | "detailsES" | "image1" | "image2" | "image3" | "image4" | "image5" | "image6" | "image7" | "image8" | "image9" | "image10" | "image11" | "image12" | "image13" | "image14" | "image15" | "image16" | "image17" | "image18" | "image19" | "image20" | "image22" | "image23" | "image24" | "image25" | "image26" | "image27" | "image28" | "image29" | "image30" | "image31" | "image32" | "image33" | "image34" | "image35" | "image36" | "image37" | "image38" | "image39" | "image40" | "image41" | "image42" | "image43" | "image44" | "image45" | "image46" | "image47" | "image48" | "image49" | "image50" | "imageAlts" | "isActive" | "createdAt" | "updatedAt" | "image21", ExtArgs["result"]["product"]>
 
 export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Product"
@@ -2145,6 +2919,36 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     image18: string | null
     image19: string | null
     image20: string | null
+    image22: string | null
+    image23: string | null
+    image24: string | null
+    image25: string | null
+    image26: string | null
+    image27: string | null
+    image28: string | null
+    image29: string | null
+    image30: string | null
+    image31: string | null
+    image32: string | null
+    image33: string | null
+    image34: string | null
+    image35: string | null
+    image36: string | null
+    image37: string | null
+    image38: string | null
+    image39: string | null
+    image40: string | null
+    image41: string | null
+    image42: string | null
+    image43: string | null
+    image44: string | null
+    image45: string | null
+    image46: string | null
+    image47: string | null
+    image48: string | null
+    image49: string | null
+    image50: string | null
+    imageAlts: runtime.JsonValue | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -2640,6 +3444,36 @@ export interface ProductFieldRefs {
   readonly image18: Prisma.FieldRef<"Product", 'String'>
   readonly image19: Prisma.FieldRef<"Product", 'String'>
   readonly image20: Prisma.FieldRef<"Product", 'String'>
+  readonly image22: Prisma.FieldRef<"Product", 'String'>
+  readonly image23: Prisma.FieldRef<"Product", 'String'>
+  readonly image24: Prisma.FieldRef<"Product", 'String'>
+  readonly image25: Prisma.FieldRef<"Product", 'String'>
+  readonly image26: Prisma.FieldRef<"Product", 'String'>
+  readonly image27: Prisma.FieldRef<"Product", 'String'>
+  readonly image28: Prisma.FieldRef<"Product", 'String'>
+  readonly image29: Prisma.FieldRef<"Product", 'String'>
+  readonly image30: Prisma.FieldRef<"Product", 'String'>
+  readonly image31: Prisma.FieldRef<"Product", 'String'>
+  readonly image32: Prisma.FieldRef<"Product", 'String'>
+  readonly image33: Prisma.FieldRef<"Product", 'String'>
+  readonly image34: Prisma.FieldRef<"Product", 'String'>
+  readonly image35: Prisma.FieldRef<"Product", 'String'>
+  readonly image36: Prisma.FieldRef<"Product", 'String'>
+  readonly image37: Prisma.FieldRef<"Product", 'String'>
+  readonly image38: Prisma.FieldRef<"Product", 'String'>
+  readonly image39: Prisma.FieldRef<"Product", 'String'>
+  readonly image40: Prisma.FieldRef<"Product", 'String'>
+  readonly image41: Prisma.FieldRef<"Product", 'String'>
+  readonly image42: Prisma.FieldRef<"Product", 'String'>
+  readonly image43: Prisma.FieldRef<"Product", 'String'>
+  readonly image44: Prisma.FieldRef<"Product", 'String'>
+  readonly image45: Prisma.FieldRef<"Product", 'String'>
+  readonly image46: Prisma.FieldRef<"Product", 'String'>
+  readonly image47: Prisma.FieldRef<"Product", 'String'>
+  readonly image48: Prisma.FieldRef<"Product", 'String'>
+  readonly image49: Prisma.FieldRef<"Product", 'String'>
+  readonly image50: Prisma.FieldRef<"Product", 'String'>
+  readonly imageAlts: Prisma.FieldRef<"Product", 'Json'>
   readonly isActive: Prisma.FieldRef<"Product", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Product", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Product", 'DateTime'>

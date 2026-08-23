@@ -7,8 +7,21 @@ const groups = [
     label: "Studios",
     items: [
       { to: "/email-studio", label: "Email Studio", icon: "✦" },
+      { to: "/segments", label: "Segments", icon: "◎" },
       { to: "/automation-studio/automations", label: "Automations", icon: "↯" },
       { to: "/automation-studio/flows", label: "Flows", icon: "⌁" },
+    ],
+  },
+  {
+    label: "Catalog V2",
+    items: [
+      { to: "/entities/villas", label: "Villas", icon: "⌂" },
+      { to: "/entities/restaurants", label: "Restaurants", icon: "◈" },
+      { to: "/entities/beach-clubs", label: "Beach Clubs", icon: "≈" },
+      { to: "/entities/night-clubs", label: "Night Clubs", icon: "✦" },
+      { to: "/entities/packs", label: "Packs", icon: "▣" },
+      { to: "/entities/activities", label: "Activities", icon: "◇" },
+      { to: "/entities/transportation", label: "Transportation", icon: "→" },
     ],
   },
   {
