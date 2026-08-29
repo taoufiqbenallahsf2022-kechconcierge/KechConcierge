@@ -60,6 +60,8 @@ const categoryTypeMap: Record<string, ApiProductType> = {
 
   activity: "ACTIVITY",
   activities: "ACTIVITY",
+  experience: "ACTIVITY",
+  experiences: "ACTIVITY",
 
   restaurant: "RESTAURANT",
   restaurants: "RESTAURANT",
@@ -73,7 +75,7 @@ const canonicalCategoryMap: Record<ApiProductType, string> = {
   SWIMMINGPOOL: "beachclubs",
   NIGHTCLUB: "nightclubs",
   PACK: "packs",
-  ACTIVITY: "activities",
+  ACTIVITY: "experiences",
   RESTAURANT: "restaurants",
   SPA: "spa",
 };
@@ -113,14 +115,14 @@ const categoryContent: Record<
       emptyMessage: "No swimming pool options were found.",
     },
     ACTIVITY: {
-      label: "Activities",
+      label: "Experiences",
       description:
         "Quad rides, camel rides, desert trips, city tours, and local experiences.",
       catalogLabel: "Catalog",
-      emptyMessage: "No activities were found.",
+      emptyMessage: "No experiences were found.",
     },
     RESTAURANT: {
-      label: "Restaurants",
+      label: "Restaurants & Rooftops",
       description:
         "Selected Moroccan and international restaurants for memorable meals.",
       catalogLabel: "Catalog",
@@ -158,14 +160,14 @@ const categoryContent: Record<
       emptyMessage: "Aucune piscine n’a été trouvée.",
     },
     ACTIVITY: {
-      label: "Activités",
+      label: "Expériences",
       description:
         "Quad, balades à dos de chameau, désert, visites de la ville et expériences locales.",
       catalogLabel: "Catalogue",
-      emptyMessage: "Aucune activité n’a été trouvée.",
+      emptyMessage: "Aucune expérience n’a été trouvée.",
     },
     RESTAURANT: {
-      label: "Restaurants",
+      label: "Restaurants & Rooftops",
       description:
         "Restaurants marocains et internationaux sélectionnés pour des repas mémorables.",
       catalogLabel: "Catalogue",
@@ -203,14 +205,14 @@ const categoryContent: Record<
       emptyMessage: "No se encontraron piscinas.",
     },
     ACTIVITY: {
-      label: "Actividades",
+      label: "Experiencias",
       description:
         "Quad, paseos en camello, excursiones al desierto, visitas y experiencias locales.",
       catalogLabel: "Catálogo",
-      emptyMessage: "No se encontraron actividades.",
+      emptyMessage: "No se encontraron experiencias.",
     },
     RESTAURANT: {
-      label: "Restaurantes",
+      label: "Restaurantes y rooftops",
       description:
         "Restaurantes marroquíes e internacionales seleccionados para comidas memorables.",
       catalogLabel: "Catálogo",
@@ -248,14 +250,14 @@ const categoryContent: Record<
       emptyMessage: "Nenhuma piscina foi encontrada.",
     },
     ACTIVITY: {
-      label: "Atividades",
+      label: "Experiências",
       description:
         "Quad, passeios de camelo, deserto, visitas à cidade e experiências locais.",
       catalogLabel: "Catálogo",
-      emptyMessage: "Nenhuma atividade foi encontrada.",
+      emptyMessage: "Nenhuma experiência foi encontrada.",
     },
     RESTAURANT: {
-      label: "Restaurantes",
+      label: "Restaurantes e rooftops",
       description:
         "Restaurantes marroquinos e internacionais selecionados para refeições memoráveis.",
       catalogLabel: "Catálogo",
@@ -293,14 +295,14 @@ const categoryContent: Record<
       emptyMessage: "Nessuna piscina trovata.",
     },
     ACTIVITY: {
-      label: "Attività",
+      label: "Esperienze",
       description:
         "Quad, passeggiate in cammello, deserto, visite della città ed esperienze locali.",
       catalogLabel: "Catalogo",
-      emptyMessage: "Nessuna attività trovata.",
+      emptyMessage: "Nessuna esperienza trovata.",
     },
     RESTAURANT: {
-      label: "Ristoranti",
+      label: "Ristoranti e rooftop",
       description:
         "Ristoranti marocchini e internazionali selezionati per pasti memorabili.",
       catalogLabel: "Catalogo",
@@ -338,14 +340,14 @@ const categoryContent: Record<
       emptyMessage: "Keine Pools gefunden.",
     },
     ACTIVITY: {
-      label: "Aktivitäten",
+      label: "Erlebnisse",
       description:
         "Quad, Kamelritte, Wüstenausflüge, Stadtführungen und lokale Erlebnisse.",
       catalogLabel: "Katalog",
-      emptyMessage: "Keine Aktivitäten gefunden.",
+      emptyMessage: "Keine Erlebnisse gefunden.",
     },
     RESTAURANT: {
-      label: "Restaurants",
+      label: "Restaurants & Dachterrassen",
       description:
         "Ausgewählte marokkanische und internationale Restaurants für besondere Mahlzeiten.",
       catalogLabel: "Katalog",

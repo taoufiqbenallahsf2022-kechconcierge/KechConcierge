@@ -179,7 +179,7 @@ export default function TermsPage() {
   return (
     <main>
       <section className="border-b border-zinc-200 bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-20 md:py-24">
+        <div className="mx-auto max-w-[1500px] px-5 py-20 md:py-24 xl:px-8">
           <div className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-4 py-2 text-sm font-black uppercase tracking-[0.18em] text-orange-700">
             <FileText size={17} />
 
@@ -204,7 +204,7 @@ export default function TermsPage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-10 px-4 py-16 lg:grid-cols-[250px_minmax(0,1fr)]">
+      <section className="mx-auto grid max-w-[1500px] gap-10 px-5 py-16 lg:grid-cols-[280px_minmax(0,1fr)] xl:px-8">
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-3xl border border-zinc-200 bg-white p-5 card-shadow">
             <p className="font-black text-zinc-950">

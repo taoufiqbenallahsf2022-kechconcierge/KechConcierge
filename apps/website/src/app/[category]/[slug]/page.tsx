@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
@@ -26,6 +25,7 @@ import {
 import ProductBookingPanel from "@/components/ProductBookingPanel";
 import ProductImageLightbox from "@/components/ProductImageLightbox";
 import ProductPlansModal from "@/components/ProductPlansModal";
+import ProgressiveImage from "@/components/ProgressiveImage";
 
 type CategorySlug =
   | "villas"
@@ -33,7 +33,7 @@ type CategorySlug =
   | "beachclubs"
   | "nightclubs"
   | "packs"
-  | "activities"
+  | "experiences"
   | "restaurants"
   | "spa";
 
@@ -81,6 +81,8 @@ function getProductType(
 
     case "activity":
     case "activities":
+    case "experience":
+    case "experiences":
       return "ACTIVITY";
 
     case "restaurant":
@@ -115,7 +117,7 @@ function getCanonicalCategory(
       return "packs";
 
     case "ACTIVITY":
-      return "activities";
+      return "experiences";
 
     case "RESTAURANT":
       return "restaurants";
@@ -154,7 +156,7 @@ function getCategoryLabel(
     case "packs":
       return "Packs";
 
-    case "activities":
+    case "experiences":
       return dictionary.categories.activitiesLabel;
 
     case "restaurants":
@@ -241,7 +243,7 @@ function WhatsAppIcon({
 function ProductDetailsSkeleton() {
   
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20">
+    <section className="mx-auto max-w-[1500px] px-5 py-20 xl:px-8">
       <div className="h-5 w-40 animate-pulse rounded-full bg-zinc-200" />
 
       <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
@@ -324,6 +326,7 @@ export default function DetailsPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [showStickyBooking, setShowStickyBooking] = useState(false);
   const [plansOpen, setPlansOpen] = useState(false);
+  const [plansAttentionDismissed, setPlansAttentionDismissed] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [bookingPlanId, setBookingPlanId] = useState<string | null>(null);
   const bookingAnchorRef = useRef<HTMLDivElement | null>(null);
@@ -552,7 +555,7 @@ export default function DetailsPage() {
 
   if (!productType) {
     return (
-      <section className="mx-auto max-w-7xl px-4 py-20">
+      <section className="mx-auto max-w-[1500px] px-5 py-20 xl:px-8">
         <div className="rounded-3xl bg-red-50 p-8 text-center font-bold text-red-700">
           {t.productDetails.invalidCategory}
         </div>
@@ -566,7 +569,7 @@ export default function DetailsPage() {
 
   if (error || !product) {
     return (
-      <section className="mx-auto max-w-7xl px-4 py-20">
+      <section className="mx-auto max-w-[1500px] px-5 py-20 xl:px-8">
         <div className="rounded-3xl bg-red-50 p-8 text-center text-red-700">
           <p className="text-xl font-black">
             Unable to load this product.
@@ -627,7 +630,7 @@ export default function DetailsPage() {
   `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
   return (
-    <section className="mx-auto max-w-7xl overflow-x-clip px-4 pb-32 pt-20">
+    <section className="mx-auto max-w-[1500px] overflow-x-clip px-5 pb-32 pt-20 xl:px-8">
       <Link
         href={categoryPath}
         className="font-black text-orange-700 transition hover:text-orange-800"
@@ -644,7 +647,7 @@ export default function DetailsPage() {
             onTouchEnd={handleTouchEnd}
             onClick={() => setLightboxOpen(true)}
           >
-            <Image
+            <ProgressiveImage
               key={`${selectedImage}-${activeImage.url}`}
               src={activeImage.url}
               alt={activeImage.alt}
@@ -703,7 +706,7 @@ export default function DetailsPage() {
                         : "border-transparent hover:border-orange-200"
                     }`}
                   >
-                    <Image
+                    <ProgressiveImage
                       src={image.url}
                       alt={image.alt}
                       fill
@@ -732,7 +735,7 @@ export default function DetailsPage() {
 
           {product.priceEuro != null && <><p className="mt-5 text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p></>}
 
-          {!!product.plans?.length && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productName={product.title} plans={product.plans} sticky={false} /><button type="button" onClick={() => setPlansOpen(true)} className="mt-5 rounded-full border-2 border-orange-600 bg-white px-7 py-4 text-lg font-black text-orange-700 transition hover:bg-orange-50">{planCopy[locale].title}</button></div>}
+          {!!product.plans?.length && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productName={product.title} plans={product.plans} sticky={false} /><button type="button" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-5 rounded-full border-2 px-7 py-4 text-lg font-black transition`}>{planCopy[locale].title}</button></div>}
 
           {!product.plans?.length && <div ref={bookingAnchorRef}><ProductBookingPanel locale={locale} productName={product.title} sticky={false} /></div>}
 
@@ -742,9 +745,13 @@ export default function DetailsPage() {
             </p>
           )}
 
-          <p className="mt-6 break-words text-lg leading-8 text-zinc-700">
-            {product.description}
-          </p>
+          <div className="mt-6 break-words text-lg leading-8 text-zinc-700">
+            {product.description.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => (
+              <p key={index} className={`${index ? "mt-5" : ""} whitespace-pre-line`}>
+                {paragraph.trim()}
+              </p>
+            ))}
+          </div>
 
           {product.tags.length > 0 && (
             <div className="mt-8">
@@ -792,17 +799,17 @@ export default function DetailsPage() {
             </div>
           )}
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 grid grid-cols-1 gap-3 lg:grid-cols-2">
             <Link
               href={contactPath}
-              className="rounded-full bg-orange-600 px-7 py-4 text-center font-black text-white transition hover:bg-orange-700"
+              className="flex min-h-16 w-full items-center justify-center rounded-full bg-orange-600 px-6 py-4 text-center font-black leading-snug text-white transition hover:bg-orange-700"
             >
               {t.productDetails.contactUs}
             </Link>
 
             <Link
               href={chatPath}
-              className="rounded-full bg-zinc-950 px-7 py-4 text-center font-black text-white transition hover:bg-orange-700"
+              className="flex min-h-16 w-full items-center justify-center rounded-full bg-zinc-950 px-6 py-4 text-center font-black leading-snug text-white transition hover:bg-orange-700"
             >
               {t.productDetails.openChat}
             </Link>
@@ -811,7 +818,7 @@ export default function DetailsPage() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-black text-white shadow-sm transition hover:bg-[#1ebe5d] hover:shadow-md"
+              className="flex min-h-16 w-full items-center justify-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-center font-black leading-snug text-white shadow-sm transition hover:bg-[#1ebe5d] hover:shadow-md lg:col-span-2"
             >
               <WhatsAppIcon size={18} />
 

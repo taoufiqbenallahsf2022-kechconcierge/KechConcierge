@@ -384,6 +384,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  WebsiteConfiguration: 'WebsiteConfiguration',
   EmailVerificationToken: 'EmailVerificationToken',
   Segment: 'Segment',
   SenderEmail: 'SenderEmail',
@@ -431,7 +432,8 @@ export const ModelName = {
   Chat: 'Chat',
   VisitorJourney: 'VisitorJourney',
   ChatMessage: 'ChatMessage',
-  User: 'User'
+  User: 'User',
+  AdminPushSubscription: 'AdminPushSubscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -447,10 +449,84 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user"
+    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "chat" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    WebsiteConfiguration: {
+      payload: Prisma.$WebsiteConfigurationPayload<ExtArgs>
+      fields: Prisma.WebsiteConfigurationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WebsiteConfigurationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WebsiteConfigurationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>
+        }
+        findFirst: {
+          args: Prisma.WebsiteConfigurationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WebsiteConfigurationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>
+        }
+        findMany: {
+          args: Prisma.WebsiteConfigurationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>[]
+        }
+        create: {
+          args: Prisma.WebsiteConfigurationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>
+        }
+        createMany: {
+          args: Prisma.WebsiteConfigurationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WebsiteConfigurationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>[]
+        }
+        delete: {
+          args: Prisma.WebsiteConfigurationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>
+        }
+        update: {
+          args: Prisma.WebsiteConfigurationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>
+        }
+        deleteMany: {
+          args: Prisma.WebsiteConfigurationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WebsiteConfigurationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WebsiteConfigurationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>[]
+        }
+        upsert: {
+          args: Prisma.WebsiteConfigurationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WebsiteConfigurationPayload>
+        }
+        aggregate: {
+          args: Prisma.WebsiteConfigurationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWebsiteConfiguration>
+        }
+        groupBy: {
+          args: Prisma.WebsiteConfigurationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WebsiteConfigurationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WebsiteConfigurationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WebsiteConfigurationCountAggregateOutputType> | number
+        }
+      }
+    }
     EmailVerificationToken: {
       payload: Prisma.$EmailVerificationTokenPayload<ExtArgs>
       fields: Prisma.EmailVerificationTokenFieldRefs
@@ -4003,6 +4079,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AdminPushSubscription: {
+      payload: Prisma.$AdminPushSubscriptionPayload<ExtArgs>
+      fields: Prisma.AdminPushSubscriptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdminPushSubscriptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdminPushSubscriptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>
+        }
+        findFirst: {
+          args: Prisma.AdminPushSubscriptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdminPushSubscriptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>
+        }
+        findMany: {
+          args: Prisma.AdminPushSubscriptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>[]
+        }
+        create: {
+          args: Prisma.AdminPushSubscriptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>
+        }
+        createMany: {
+          args: Prisma.AdminPushSubscriptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdminPushSubscriptionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>[]
+        }
+        delete: {
+          args: Prisma.AdminPushSubscriptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>
+        }
+        update: {
+          args: Prisma.AdminPushSubscriptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdminPushSubscriptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdminPushSubscriptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdminPushSubscriptionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdminPushSubscriptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminPushSubscriptionPayload>
+        }
+        aggregate: {
+          args: Prisma.AdminPushSubscriptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdminPushSubscription>
+        }
+        groupBy: {
+          args: Prisma.AdminPushSubscriptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminPushSubscriptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdminPushSubscriptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminPushSubscriptionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4040,6 +4190,16 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const WebsiteConfigurationScalarFieldEnum = {
+  id: 'id',
+  heroSlides: 'heroSlides',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type WebsiteConfigurationScalarFieldEnum = (typeof WebsiteConfigurationScalarFieldEnum)[keyof typeof WebsiteConfigurationScalarFieldEnum]
 
 
 export const EmailVerificationTokenScalarFieldEnum = {
@@ -5223,6 +5383,20 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const AdminPushSubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  endpoint: 'endpoint',
+  p256dh: 'p256dh',
+  auth: 'auth',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdminPushSubscriptionScalarFieldEnum = (typeof AdminPushSubscriptionScalarFieldEnum)[keyof typeof AdminPushSubscriptionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -5799,6 +5973,7 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
+  websiteConfiguration?: Prisma.WebsiteConfigurationOmit
   emailVerificationToken?: Prisma.EmailVerificationTokenOmit
   segment?: Prisma.SegmentOmit
   senderEmail?: Prisma.SenderEmailOmit
@@ -5847,6 +6022,7 @@ export type GlobalOmitConfig = {
   visitorJourney?: Prisma.VisitorJourneyOmit
   chatMessage?: Prisma.ChatMessageOmit
   user?: Prisma.UserOmit
+  adminPushSubscription?: Prisma.AdminPushSubscriptionOmit
 }
 
 /* Types for Logging */

@@ -15,7 +15,7 @@ const categoryToApiKey: Record<string, string> = {
   beachclubs: "swimmingpool",
   nightclubs: "nightclub",
   packs: "pack",
-  activities: "activity",
+  experiences: "activity",
   transportation: "transportation",
   spa: "spa",
   restaurants: "restaurant",
@@ -114,7 +114,7 @@ export default function HorizontalSection({ category }: { category: Category }) 
   }
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12">
+    <section className="mx-auto max-w-[1500px] px-5 py-12 xl:px-8">
       <div className="mb-6 flex items-end justify-between gap-4">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
@@ -154,9 +154,9 @@ export default function HorizontalSection({ category }: { category: Category }) 
             onScroll={updateScrollAvailability}
             className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6"
           >
-            {items.map((item) => (
+            {items.map((item, index) => (
               <div key={item.id} className="snap-start">
-                <ItemCard item={item as any} locale={locale}/>
+                <ItemCard item={item as any} locale={locale} priority={category === "restaurants" && index < 3}/>
               </div>
             ))}
           </div>

@@ -14,7 +14,7 @@ export default function Home() {
       <HorizontalSection category="restaurants" />
       <HorizontalSection category="nightclubs" />
       <HorizontalSection category="beachclubs" />
-      <HorizontalSection category="activities" />
+      <HorizontalSection category="experiences" />
       <HorizontalSection category="packs" />
 
       <HomePageContact />

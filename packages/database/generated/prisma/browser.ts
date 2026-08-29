@@ -18,6 +18,11 @@ export { Prisma }
 export * as $Enums from './enums.ts'
 export * from './enums.ts';
 /**
+ * Model WebsiteConfiguration
+ * 
+ */
+export type WebsiteConfiguration = Prisma.WebsiteConfigurationModel
+/**
  * Model EmailVerificationToken
  * 
  */
@@ -257,3 +262,8 @@ export type ChatMessage = Prisma.ChatMessageModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model AdminPushSubscription
+ * 
+ */
+export type AdminPushSubscription = Prisma.AdminPushSubscriptionModel

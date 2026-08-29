@@ -2,10 +2,10 @@ import { CatalogItem, Category } from "@/types/catalog";
 
 export const categoryLabels: Partial<Record<Category, string>> = {
   villas: "Villas",
-  activities: "Activities",
+  experiences: "Experiences",
   transportation: "Transportation",
   spa: "SPA",
-  restaurants: "Restaurants",
+  restaurants: "Restaurants & Rooftops",
   beachclubs: "Beach Clubs",
   nightclubs: "Night Clubs",
   packs: "Packs"
@@ -13,11 +13,11 @@ export const categoryLabels: Partial<Record<Category, string>> = {
 
 export const categoryDescriptions: Partial<Record<Category, string>> = {
   villas: "Private villas in Marrakech with pools, gardens, staff options, and premium comfort.",
-  activities: "Quad, camel rides, desert trips, city tours, hot air balloon, and local experiences.",
+  experiences: "Quad rides, camel rides, desert trips, city tours, hot-air balloons, and local experiences.",
   beachclubs: "Pool days, private cabanas and relaxed resort experiences.",
   transportation: "Private cars, luxury vehicles, vans, and group transfers with reliable drivers.",
   spa: "Hammam, massage, beauty, and wellness experiences.",
-  restaurants: "Selected Moroccan and international restaurants for memorable evenings.",
+  restaurants: "Selected restaurants and rooftops for memorable Marrakech evenings.",
   nightclubs: "Nightlife experiences, tables and exclusive club plans in Marrakech.",
   packs: "Curated combinations of services and experiences with flexible plans."
 };
@@ -201,7 +201,7 @@ export const catalogItems: CatalogItem[] = [
 
   {
     id: "act1",
-    category: "activities",
+    category: "experiences",
     slug: "quad-adventure",
     title: "Quad Adventure",
     location: "Agafay / Palmeraie",
@@ -214,7 +214,7 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     id: "act2",
-    category: "activities",
+    category: "experiences",
     slug: "ourika-day-trip",
     title: "Ourika Valley Day Trip",
     location: "Atlas Mountains",
@@ -227,7 +227,7 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     id: "act3",
-    category: "activities",
+    category: "experiences",
     slug: "camel-ride-palmeraie",
     title: "Camel Ride Palmeraie",
     location: "Palmeraie",
@@ -240,7 +240,7 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     id: "act4",
-    category: "activities",
+    category: "experiences",
     slug: "agafay-dinner-show",
     title: "Agafay Dinner Show",
     location: "Agafay Desert",
@@ -253,7 +253,7 @@ export const catalogItems: CatalogItem[] = [
   },
   {
     id: "act5",
-    category: "activities",
+    category: "experiences",
     slug: "marrakech-guided-tour",
     title: "Marrakech Guided Tour",
     location: "Medina",

@@ -129,6 +129,7 @@ export default function Header() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const [user, setUser] = useState<HeaderUser | null>(null);
+  const [pastHomepageHero, setPastHomepageHero] = useState(false);
 
   const [authResolved, setAuthResolved] = useState(false);
 
@@ -147,6 +148,7 @@ export default function Header() {
   const router = useRouter();
 
   const locale = getLocaleFromPath(pathname);
+  const isHomepage = removeLocaleFromPath(pathname) === "/";
 
   const t = getDictionary(locale);
 
@@ -168,7 +170,7 @@ export default function Header() {
       label: "Beach Clubs",
     },
     {
-      href: "/activities",
+      href: "/experiences",
       label: t.header.activities,
     },
     {
@@ -201,6 +203,15 @@ export default function Header() {
     setUserMenuOpen(false);
     setLanguageOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isHomepage) { setPastHomepageHero(false); return; }
+    const updateHeader = () => setPastHomepageHero(window.scrollY >= Math.max(120, window.innerHeight - 140));
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    window.addEventListener("resize", updateHeader);
+    return () => { window.removeEventListener("scroll", updateHeader); window.removeEventListener("resize", updateHeader); };
+  }, [isHomepage]);
 
   useEffect(() => {
     function loadUser() {
@@ -334,14 +345,14 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-orange-100 bg-white/90 backdrop-blur">
+      <header className={`site-header top-0 z-40 ${isHomepage ? "fixed inset-x-0" : "sticky"} ${isHomepage && !pastHomepageHero ? "home-header-dark border-transparent bg-transparent" : "border-b border-orange-100 bg-white/95 backdrop-blur"}`}>
         {pendingPath && (
           <div className="absolute inset-x-0 top-0 z-[60] h-1 overflow-hidden bg-orange-100">
             <div className="h-full w-1/3 animate-header-progress rounded-full bg-orange-600" />
           </div>
         )}
 
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+        <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 xl:px-8">
           <button
             type="button"
             onClick={() => {

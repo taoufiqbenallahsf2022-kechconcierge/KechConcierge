@@ -5,10 +5,20 @@ import {
   claimVisitorJourney,
   ensureVisitorJourney,
 } from "../services/visitor-journey.service";
+import { notifyAdminsOfChatMessage } from "../services/admin-push.service";
 
 const router = Router();
 const ADVISOR_EMAIL = "mounadi0711@gmail.com";
 const LANGUAGES = new Set(["en", "fr", "es", "pt", "it", "de"]);
+const AUTOMATIC_REPLY_DELAY_MS = 2800;
+const FIRST_MESSAGE_ACKNOWLEDGEMENT: Record<string, string> = {
+  en: "Thank you for your message. Your personal advisor, Asmaa Mounadi, will take care of your request and get back to you shortly. In the meantime, feel free to share any useful details here.",
+  fr: "Merci pour votre message. Votre conseillère personnelle, Asmaa Mounadi, prendra en charge votre demande et vous répondra prochainement. En attendant, n’hésitez pas à partager ici toute information utile.",
+  es: "Gracias por tu mensaje. Tu asesora personal, Asmaa Mounadi, se encargará de tu solicitud y se pondrá en contacto contigo en breve. Mientras tanto, puedes compartir aquí cualquier información útil.",
+  pt: "Obrigado pela sua mensagem. A sua consultora pessoal, Asmaa Mounadi, irá acompanhar o seu pedido e responderá em breve. Entretanto, pode partilhar aqui qualquer informação útil.",
+  it: "Grazie per il messaggio. La tua consulente personale, Asmaa Mounadi, si occuperà della richiesta e ti risponderà al più presto. Nel frattempo, puoi condividere qui qualsiasi informazione utile.",
+  de: "Vielen Dank für Ihre Nachricht. Ihre persönliche Beraterin, Asmaa Mounadi, kümmert sich um Ihre Anfrage und meldet sich in Kürze bei Ihnen. In der Zwischenzeit können Sie hier gerne weitere hilfreiche Informationen mitteilen.",
+};
 
 type Identity =
   | {
@@ -70,6 +80,7 @@ function ownerWhere(owner: Identity) {
 async function ownedChat(id: string, owner: Identity) {
   const chat = await prisma.chat.findFirst({
     where: { id, ...ownerWhere(owner) },
+    include: { individual: { select: { firstName: true, lastName: true } } },
   });
   if (!chat)
     throw Object.assign(new Error("Conversation not found"), { status: 404 });
@@ -77,19 +88,21 @@ async function ownedChat(id: string, owner: Identity) {
 }
 
 function publicChat(chat: any) {
-  const individualName = chat.individual
-    ? `${chat.individual.firstName} ${chat.individual.lastName}`.trim()
+  const visibleMessages = Array.isArray(chat.messages)
+    ? chat.messages.filter((message: any) => new Date(message.sendTime).getTime() <= Date.now())
+    : chat.messages;
+  const advisorName = chat.advisor
+    ? `${chat.advisor.firstName} ${chat.advisor.lastName}`.trim()
     : null;
   return {
     ...chat,
-    title: individualName
-      ? `${individualName} - Assistant`
-      : "Visitor - Assistant",
+    messages: visibleMessages,
+    title: advisorName || "Moorish Concierge",
     unread:
       typeof chat._count?.messages === "number"
         ? chat._count.messages > 0
-        : Array.isArray(chat.messages)
-          ? chat.messages.some(
+        : Array.isArray(visibleMessages)
+          ? visibleMessages.some(
               (message: any) =>
                 ["ADVISOR", "AI"].includes(message.senderType) &&
                 !message.isRead,
@@ -115,6 +128,7 @@ router.get("/", async (req, res, next) => {
           select: { firstName: true, lastName: true },
         },
         messages: {
+          where: { sendTime: { lte: new Date() } },
           orderBy: { sendTime: "desc" },
           take: 1,
         },
@@ -124,6 +138,7 @@ router.get("/", async (req, res, next) => {
               where: {
                 isRead: false,
                 senderType: { in: ["ADVISOR", "AI"] },
+                sendTime: { lte: new Date() },
               },
             },
           },
@@ -185,12 +200,15 @@ router.post("/", async (req, res, next) => {
       });
     }
 
+    const now = new Date();
+    const automaticReplyAt = new Date(now.getTime() + AUTOMATIC_REPLY_DELAY_MS);
     const chat = await prisma.chat.create({
       data: {
         advisorId: advisor.id,
         language,
         managedBy: "MANUAL",
         status: "WAITING_FOR_ADVISOR",
+        advisorTypingUntil: automaticReplyAt,
         participantStage:
           owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
         individualId:
@@ -198,22 +216,37 @@ router.post("/", async (req, res, next) => {
         visitorId: owner.visitorId,
         journeyId: owner.journeyId,
         messages: {
-          create: {
+          create: [{
             senderType: owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
             senderId:
               owner.kind === "individual"
                 ? owner.individualId
                 : owner.visitorId,
             message,
-          },
+            sendTime: now,
+          }, {
+            senderType: "AI",
+            senderId: advisor.id,
+            message: FIRST_MESSAGE_ACKNOWLEDGEMENT[language] ?? FIRST_MESSAGE_ACKNOWLEDGEMENT.en,
+            sendTime: automaticReplyAt,
+          }],
         },
       } as any,
       include: {
         individual: { select: { firstName: true, lastName: true } },
         advisor: { select: { firstName: true, lastName: true } },
-        messages: { orderBy: { sendTime: "asc" } },
+        messages: {
+          where: { sendTime: { lte: now } },
+          orderBy: { sendTime: "asc" },
+        },
       },
     });
+    const participantName = chat.individual
+      ? `${chat.individual.firstName} ${chat.individual.lastName}`.trim()
+      : "Website visitor";
+    void notifyAdminsOfChatMessage({ chatId: chat.id, participantName, message }).catch((error) =>
+      console.error("Unable to prepare admin chat notification", error),
+    );
     res.status(201).json({ chat: publicChat(chat) });
   } catch (error) {
     next(error);
@@ -229,6 +262,7 @@ router.get("/:id", async (req, res, next) => {
         chatId: req.params.id,
         senderType: { in: ["ADVISOR", "AI"] },
         isRead: false,
+        sendTime: { lte: new Date() },
       },
       data: { isRead: true },
     });
@@ -237,7 +271,10 @@ router.get("/:id", async (req, res, next) => {
       include: {
         individual: { select: { firstName: true, lastName: true } },
         advisor: { select: { firstName: true, lastName: true } },
-        messages: { orderBy: { sendTime: "asc" } },
+        messages: {
+          where: { sendTime: { lte: new Date() } },
+          orderBy: { sendTime: "asc" },
+        },
       },
     });
     res.json({ chat: publicChat(chat) });
@@ -249,7 +286,7 @@ router.get("/:id", async (req, res, next) => {
 router.post("/:id/messages", async (req, res, next) => {
   try {
     const owner = identity(req);
-    await ownedChat(req.params.id, owner);
+    const chat = await ownedChat(req.params.id, owner);
     const message =
       typeof req.body?.message === "string" ? req.body.message.trim() : "";
     if (!message)
@@ -275,6 +312,12 @@ router.post("/:id/messages", async (req, res, next) => {
         } as any,
       }),
     ]);
+    const participantName = chat.individual
+      ? `${chat.individual.firstName} ${chat.individual.lastName}`.trim()
+      : "Website visitor";
+    void notifyAdminsOfChatMessage({ chatId: chat.id, participantName, message }).catch((error) =>
+      console.error("Unable to prepare admin chat notification", error),
+    );
     res.status(201).json({ message: created });
   } catch (error) {
     next(error);

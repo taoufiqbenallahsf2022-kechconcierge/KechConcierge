@@ -6,10 +6,11 @@ import { getPasswordResetEmailTranslation } from "../i18n/password-reset-email-t
 import { getContactRequestEmailTranslation } from "../i18n/contact-request-email-translations";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const EMAIL_LOGO_URL = `${normalizeWebsiteUrl()}/brand/original-m-mark.png`;
 const EMAIL_LOGO_HTML = `
   <div style="text-align: center; margin: 0 auto 28px;">
     <img
-      src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public"
+      src="${EMAIL_LOGO_URL}"
       alt="Moorish Concierge"
       width="80"
       style="display: inline-block; width: 80px; max-width: 55%; height: auto; border: 0;"

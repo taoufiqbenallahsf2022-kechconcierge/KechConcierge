@@ -51,12 +51,9 @@ export async function generateMetadata(): Promise<Metadata> {
       images: ["https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public"],
     },
     icons: {
-      icon:
-        "https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public",
-      shortcut:
-        "https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public",
-      apple:
-        "https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public",
+      icon: "/brand/original-m-mark.png",
+      shortcut: "/brand/original-m-mark.png",
+      apple: "/brand/original-m-mark.png",
     },
   };
 }

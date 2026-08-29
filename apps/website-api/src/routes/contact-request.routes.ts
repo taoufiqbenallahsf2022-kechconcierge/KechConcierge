@@ -20,6 +20,7 @@ import {
   sendContactRequestConfirmationEmail,
   sendContactRequestInternalEmail,
 } from "../services/email.service";
+import { notifyAdminsOfContactRequest } from "../services/admin-push.service";
 
 const router = Router();
 
@@ -452,6 +453,13 @@ router.post(
               contactRequest.createdDate,
           }),
         ]);
+
+      void notifyAdminsOfContactRequest({
+        requestId: contactRequest.id,
+        participantName: `${contactRequest.firstName} ${contactRequest.lastName}`.trim(),
+        requestType: String(contactRequest.requestType),
+        subject: contactRequest.subject,
+      }).catch((error) => console.error("Unable to prepare admin contact-request notification", error));
 
       const [
         clientEmailResult,
