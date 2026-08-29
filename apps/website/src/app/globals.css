@@ -38,6 +38,21 @@ img {
   -webkit-user-drag: none;
 }
 
+.site-header { transition: background-color .28s ease, border-color .28s ease, box-shadow .28s ease; }
+.site-header.home-header-dark { border-color: transparent !important; background: transparent !important; box-shadow: none !important; color: #fff !important; backdrop-filter: none !important; }
+.site-header.home-header-dark nav,
+.site-header.home-header-dark nav button { color: #fff !important; }
+.site-header.home-header-dark .site-logo-image-light { display: none; }
+.site-header.home-header-dark .site-logo-image-dark { display: block !important; }
+.site-header.home-header-dark .site-logo-image-dark-base { filter: brightness(0) invert(1) !important; }
+.site-header.home-header-dark .site-logo-image-dark-accent { clip-path: inset(74% 0 8% 82%); }
+.site-header.home-header-dark > .mx-auto > div > div > button,
+.site-header.home-header-dark > .mx-auto > div > button,
+.site-header.home-header-dark > .mx-auto > button:last-child { border-color: rgba(255,255,255,.3) !important; background-color: rgba(0,0,0,.18) !important; color: #fff !important; backdrop-filter: blur(10px); }
+.site-header.home-header-dark > .mx-auto > div > div > button:hover,
+.site-header.home-header-dark > .mx-auto > div > button:hover,
+.site-header.home-header-dark > .mx-auto > button:last-child:hover { background-color: rgba(255,255,255,.16) !important; }
+
 body.nightclub-theme {
   --background: #080808;
   --foreground: #f5f5f5;
@@ -159,3 +174,43 @@ button, input, textarea { font: inherit; }
   from { transform: translateY(100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+@keyframes plan-quick-attention {
+  0%, 100% { transform: scale(1); box-shadow: 0 4px 10px rgba(194, 65, 12, .10); }
+  50% { transform: scale(1.012); box-shadow: 0 0 0 5px rgba(249, 115, 22, .13), 0 8px 18px rgba(194, 65, 12, .22); }
+}
+
+.plan-quick-attention { animation: plan-quick-attention 900ms ease-in-out infinite; }
+
+.available-plans-button {
+  border-color: #ea580c;
+  background: #fff;
+  color: #c2410c;
+}
+
+.available-plans-button:hover { background: #fff7ed; }
+
+@keyframes nightclub-plan-attention {
+  0%, 100% { transform: scale(1); box-shadow: 0 5px 14px rgba(249, 115, 22, .22); }
+  50% { transform: scale(1.018); box-shadow: 0 0 0 6px rgba(249, 115, 22, .28), 0 9px 24px rgba(234, 88, 12, .46); }
+}
+
+body.nightclub-theme .available-plans-button {
+  border-color: #fb923c !important;
+  background: linear-gradient(135deg, #f97316, #dc2626) !important;
+  color: #fff !important;
+}
+
+body.nightclub-theme .available-plans-button:hover {
+  background: linear-gradient(135deg, #fb923c, #ea580c) !important;
+}
+
+body.nightclub-theme .plan-quick-attention { animation-name: nightclub-plan-attention; }
+
+@media (prefers-reduced-motion: reduce) {
+  .plan-quick-attention { animation: none; }
+}
+
+.chat-typing{display:flex;align-items:center;gap:.65rem;width:max-content;max-width:85%;padding:.6rem .85rem;border:1px solid rgba(255,255,255,.1);border-radius:1rem 1rem 1rem .3rem;background:rgba(255,255,255,.07);color:#a1a1aa;font-size:.78rem}.chat-typing-dots{display:flex;align-items:center;gap:3px}.chat-typing-dots i{width:5px;height:5px;border-radius:50%;background:#fb5a20;animation:chat-typing-dot .9s ease-in-out infinite}.chat-typing-dots i:nth-child(2){animation-delay:.14s}.chat-typing-dots i:nth-child(3){animation-delay:.28s}@keyframes chat-typing-dot{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}@media(prefers-reduced-motion:reduce){.chat-typing-dots i{animation:none}}
+.hero-reveal-line{animation:hero-reveal 1.15s ease-in-out infinite}@keyframes hero-reveal{0%{transform:scaleX(.25);opacity:.3}50%{transform:scaleX(1);opacity:1}100%{transform:scaleX(.25);opacity:.3}}@media(prefers-reduced-motion:reduce){.hero-reveal-line{animation:none;opacity:.75}}
+.progressive-image-placeholder{position:absolute;inset:0;z-index:0;overflow:hidden;background-color:#eee8e3;background-position:center;background-size:cover;filter:saturate(.75);opacity:1;transition:opacity .3s ease}.progressive-image-placeholder:not(.is-loaded):after{content:"";position:absolute;inset:0;transform:translateX(-110%);background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.38) 48%,transparent 72%);animation:image-shimmer 1.35s ease-in-out infinite}.progressive-image-placeholder[style]{filter:blur(12px) saturate(.75);transform:scale(1.08)}.progressive-image-placeholder.is-loaded{opacity:0}.progressive-image{z-index:1;opacity:0!important;transition-property:opacity,transform!important;transition-duration:.3s,.5s!important;transition-timing-function:ease!important}.progressive-image.is-loaded{opacity:1!important}@keyframes image-shimmer{to{transform:translateX(110%)}}@media(prefers-reduced-motion:reduce){.progressive-image-placeholder:not(.is-loaded):after{animation:none}.progressive-image{transition:none!important}}

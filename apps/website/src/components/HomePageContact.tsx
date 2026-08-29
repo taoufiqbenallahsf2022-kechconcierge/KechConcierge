@@ -16,7 +16,7 @@ export default function HomePageContact() {
   const t = getDictionary(locale);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
+    <section className="mx-auto max-w-[1500px] px-5 py-16 xl:px-8">
         <div className="rounded-[2rem] bg-zinc-950 p-8 text-white md:p-12">
             <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-400">
             {t.contactSection.eyebrow}

@@ -1,6 +1,6 @@
 export type Category =
   | "villas"
-  | "activities"
+  | "experiences"
   | "transportation"
   | "spa"
   | "restaurants"

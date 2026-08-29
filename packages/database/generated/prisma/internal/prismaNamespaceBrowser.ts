@@ -51,6 +51,7 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  WebsiteConfiguration: 'WebsiteConfiguration',
   EmailVerificationToken: 'EmailVerificationToken',
   Segment: 'Segment',
   SenderEmail: 'SenderEmail',
@@ -98,7 +99,8 @@ export const ModelName = {
   Chat: 'Chat',
   VisitorJourney: 'VisitorJourney',
   ChatMessage: 'ChatMessage',
-  User: 'User'
+  User: 'User',
+  AdminPushSubscription: 'AdminPushSubscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -115,6 +117,16 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const WebsiteConfigurationScalarFieldEnum = {
+  id: 'id',
+  heroSlides: 'heroSlides',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type WebsiteConfigurationScalarFieldEnum = (typeof WebsiteConfigurationScalarFieldEnum)[keyof typeof WebsiteConfigurationScalarFieldEnum]
 
 
 export const EmailVerificationTokenScalarFieldEnum = {
@@ -1296,6 +1308,20 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const AdminPushSubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  endpoint: 'endpoint',
+  p256dh: 'p256dh',
+  auth: 'auth',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdminPushSubscriptionScalarFieldEnum = (typeof AdminPushSubscriptionScalarFieldEnum)[keyof typeof AdminPushSubscriptionScalarFieldEnum]
 
 
 export const SortOrder = {

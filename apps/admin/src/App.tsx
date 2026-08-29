@@ -25,6 +25,7 @@ import { WhatsappConversationsList, WhatsappConversationsDetail } from "./featur
 import { WhatsappMessagesList, WhatsappMessagesDetail } from "./features/whatsapp-messages/WhatsappMessagesPages";
 import { ChatMessagesList, ChatMessagesDetail } from "./features/chat-messages/ChatMessagesPages";
 import { Activities, BeachClubs, NightClubs, Packs, Restaurants, Transportation, Villas } from "./features/catalog/IndependentCatalogPages";
+import { WebsiteConfigurationPage } from "./pages/WebsiteConfigurationPage";
 
 function entityRoutes({
   list: List,
@@ -62,6 +63,9 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Navigate to="/data-hub" replace />} />
         <Route path="data-hub" element={<DataHub />} />
+        <Route path="website" element={<Navigate to="/website/slideshow" replace />} />
+        <Route path="website/slideshow" element={<WebsiteConfigurationPage />} />
+        <Route path="website-configuration" element={<Navigate to="/website/slideshow" replace />} />
         <Route path="email-studio" element={<EmailStudioPage />} />
         <Route path="segments" element={<SegmentsListPage />} />
         <Route path="segments/new" element={<SegmentModePage />} />

@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      { source: "/activities/:path*", destination: "/experiences/:path*", permanent: true },
+      { source: "/:locale/activities/:path*", destination: "/:locale/experiences/:path*", permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       {
@@ -15,6 +21,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "imagedelivery.net",
         pathname: "/qcrNy2QA3vt3EbTLsOQBpA/**"
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com"
       }
     ]
   }

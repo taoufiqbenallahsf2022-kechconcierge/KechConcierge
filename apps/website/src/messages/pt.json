@@ -4,7 +4,7 @@
     "services": "Serviços",
     "villas": "Villas",
     "swimmingpool": "Clubes de praia",
-    "activities": "Atividades",
+    "activities": "Experiências",
     "transportation": "Transporte",
     "about": "Sobre nós",
     "contact": "Contato",
@@ -117,7 +117,7 @@
   "categories": {
     "villasLabel": "Villas",
     "villasDescription": "Villas privadas em Marraquexe com piscinas, jardins, equipa de apoio e conforto premium.",
-    "activitiesLabel": "Atividades",
+    "activitiesLabel": "Experiências",
     "activitiesDescription": "Quads, passeios de camelo, excursões ao deserto, visitas guiadas, balão de ar quente e experiências locais.",
     "swimmingPoolsLabel": "Clubes de praia",
     "swimmingPoolsDescription": "Piscinas privadas, clubes de piscina, passes diários, relaxamento de luxo e experiências familiares.",
@@ -125,7 +125,7 @@
     "transportationDescription": "Carros privados, veículos de luxo, carrinhas e transfers de grupo com motoristas confiáveis.",
     "spaLabel": "SPA",
     "spaDescription": "Hammam, massagens, beleza e experiências de bem-estar.",
-    "restaurantsLabel": "Restaurantes",
+    "restaurantsLabel": "Restaurantes e rooftops",
     "restaurantsDescription": "Restaurantes marroquinos e internacionais selecionados para noites memoráveis.",
     "viewAll": "Ver tudo",
     "explore":"Explorar"
@@ -282,11 +282,11 @@
         "description": "Acesso a piscinas e dias de descanso em locais selecionados de Marraquexe."
       },
       "activity": {
-        "label": "Atividades",
+        "label": "Experiências",
         "description": "Atividades, excursões e experiências para viver perto de Marraquexe."
       },
       "restaurant": {
-        "label": "Restaurantes",
+        "label": "Restaurantes e rooftops",
         "description": "Restaurantes, rooftops e opções gastronómicas para diferentes momentos e preferências."
       },
       "spa": {
@@ -324,7 +324,7 @@
         "description": "Motoristas privados, chegadas e partidas do aeroporto e transfers em Marraquexe."
       },
       "experiences": {
-        "title": "Atividades e excursões",
+        "title": "Experiências e excursões",
         "description": "Deserto, visitas culturais, atividades ao ar livre e experiências perto de Marraquexe."
       },
       "pools": {
@@ -332,7 +332,7 @@
         "description": "Locais selecionados para dias de descanso, almoços e momentos tranquilos."
       },
       "dining": {
-        "title": "Restaurantes",
+        "title": "Restaurantes e rooftops",
         "description": "Restaurantes, rooftops e opções gastronómicas para diferentes gostos e orçamentos."
       },
       "nightlife": {

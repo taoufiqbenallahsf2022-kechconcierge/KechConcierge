@@ -32,6 +32,13 @@ export default function LayoutContent({
   }, [isNightClubPage]);
 
   useEffect(() => {
+    const isLocalHost =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "::1";
+
+    if (process.env.NODE_ENV !== "production" || isLocalHost) return;
+
     const isEditableTarget = (target: EventTarget | null) => {
       if (!(target instanceof HTMLElement)) return false;
 

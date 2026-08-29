@@ -11,7 +11,7 @@ type CategorySlug =
   | "beachclubs"
   | "nightclubs"
   | "packs"
-  | "activities"
+  | "experiences"
   | "restaurants"
   | "spa";
 
@@ -61,8 +61,10 @@ function getCategoryConfiguration(
 
     case "activity":
     case "activities":
+    case "experience":
+    case "experiences":
       return {
-        category: "activities",
+        category: "experiences",
         productType: "ACTIVITY",
       };
 

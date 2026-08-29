@@ -4,7 +4,7 @@
     "services": "Dienstleistungen",
     "villas": "Villen",
     "swimmingpool": "Beachclubs",
-    "activities": "Aktivitäten",
+    "activities": "Erlebnisse",
     "transportation": "Transport",
     "about": "Über uns",
     "contact": "Kontakt",
@@ -117,7 +117,7 @@
   "categories": {
     "villasLabel": "Villen",
     "villasDescription": "Private Villen in Marrakesch mit Pools, Gärten, Personal und erstklassigem Komfort.",
-    "activitiesLabel": "Aktivitäten",
+    "activitiesLabel": "Erlebnisse",
     "activitiesDescription": "Quad-Touren, Kamelritte, Wüstenausflüge, Stadtrundfahrten, Heißluftballons und lokale Erlebnisse.",
     "swimmingPoolsLabel": "Beachclubs",
     "swimmingPoolsDescription": "Private Pools, Poolclubs, Tagespässe, luxuriöse Entspannung und familienfreundliche Badeerlebnisse.",
@@ -125,7 +125,7 @@
     "transportationDescription": "Private Autos, Luxusfahrzeuge, Vans und Gruppentransfers mit zuverlässigen Fahrern.",
     "spaLabel": "SPA",
     "spaDescription": "Hammam, Massagen, Schönheit und Wellness-Erlebnisse.",
-    "restaurantsLabel": "Restaurants",
+    "restaurantsLabel": "Restaurants & Dachterrassen",
     "restaurantsDescription": "Ausgewählte marokkanische und internationale Restaurants für unvergessliche Abende.",
     "viewAll": "Alle anzeigen",
     "explore":"Entdecken"
@@ -282,11 +282,11 @@
         "description": "Poolzugang und entspannte Tage an ausgewählten Orten in Marrakesch."
       },
       "activity": {
-        "label": "Aktivitäten",
+        "label": "Erlebnisse",
         "description": "Aktivitäten, Ausflüge und besondere Erlebnisse rund um Marrakesch."
       },
       "restaurant": {
-        "label": "Restaurants",
+        "label": "Restaurants & Dachterrassen",
         "description": "Restaurants, Rooftops und gastronomische Angebote für unterschiedliche Momente und Vorlieben."
       },
       "spa": {
@@ -324,7 +324,7 @@
         "description": "Private Fahrer, Flughafenabholung, Rückfahrten und Transfers in Marrakesch."
       },
       "experiences": {
-        "title": "Aktivitäten und Ausflüge",
+        "title": "Erlebnisse und Ausflüge",
         "description": "Wüste, Kultur, Outdoor-Aktivitäten und Erlebnisse rund um Marrakesch."
       },
       "pools": {
@@ -332,7 +332,7 @@
         "description": "Ausgewählte Orte für entspannte Tage, Mittagessen und ruhige Momente."
       },
       "dining": {
-        "title": "Gastronomie",
+        "title": "Restaurants & Dachterrassen",
         "description": "Restaurants, Rooftops und kulinarische Angebote für unterschiedliche Vorlieben und Budgets."
       },
       "nightlife": {

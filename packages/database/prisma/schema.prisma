@@ -7,6 +7,13 @@ datasource db {
   provider = "postgresql"
 }
 
+model WebsiteConfiguration {
+  id          String   @id @default("primary")
+  heroSlides  Json     @default("[]")
+  updatedAt   DateTime @updatedAt
+  updatedBy   String?
+}
+
 model EmailVerificationToken {
   id        String   @id @default(cuid())
   email     String
@@ -1236,7 +1243,22 @@ model User {
   updatedDate DateTime @updatedAt
   updatedBy   String?
 
-  assignedChats Chat[]
+  assignedChats      Chat[]
+  pushSubscriptions AdminPushSubscription[]
+}
+
+model AdminPushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String   @unique @db.Text
+  p256dh    String   @db.Text
+  auth      String   @db.Text
+  userAgent String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 enum ChannelStatus {

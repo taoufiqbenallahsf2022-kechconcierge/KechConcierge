@@ -94,6 +94,22 @@ function normalizePlan(body: Record<string, unknown>, creating: boolean, pricing
   return data;
 }
 
+function planDataForDelegate(data: Record<string, unknown>, delegate: NonNullable<DomainConfig["planDelegate"]>) {
+  const common = new Set([
+    "uniqueCode", "salePrice", "internalCost", "currency", "pricingUnit", "order", "isActive",
+    ...languages.flatMap((language) => [`title${language}`, `description${language}`]),
+  ]);
+  const domainFields: Partial<Record<NonNullable<DomainConfig["planDelegate"]>, string[]>> = {
+    beachClubPlan: [],
+    nightClubPlan: ["durationMinutes"],
+    activityPlan: ["durationMinutes", "minimumGuests", "maximumGuests"],
+    transportationPlan: ["serviceType", "origin", "destination", "durationMinutes"],
+    packPlan: ["serviceType", "origin", "destination", "durationMinutes"],
+  };
+  const allowed = new Set([...common, ...(domainFields[delegate] ?? [])]);
+  return Object.fromEntries(Object.entries(data).filter(([field]) => allowed.has(field)));
+}
+
 function normalizeOption(body: Record<string, unknown>) {
   const data = cleanTextFields(body);
   for (const field of ["id", "planId", "createdAt", "updatedAt", "plan"]) delete data[field];
@@ -156,13 +172,14 @@ export function createCatalogDomainService(config: DomainConfig) {
     async createPlan(parentId: string, body: Record<string, unknown>) {
       if (!config.planDelegate || !config.parentForeignKey) fail("This domain does not support plans.");
       const planDelegate = db[config.planDelegate!];
-      const data = normalizePlan(body, true, config.pricingUnits);
+      const data = planDataForDelegate(normalizePlan(body, true, config.pricingUnits), config.planDelegate);
       data[config.parentForeignKey!] = parentId;
       return planDelegate.create({ data, include: { options: { orderBy: { order: "asc" } } } });
     },
     async updatePlan(id: string, body: Record<string, unknown>) {
       if (!config.planDelegate) fail("This domain does not support plans.");
-      return db[config.planDelegate!].update({ where: { id }, data: normalizePlan(body, false, config.pricingUnits), include: { options: { orderBy: { order: "asc" } } } });
+      const data = planDataForDelegate(normalizePlan(body, false, config.pricingUnits), config.planDelegate);
+      return db[config.planDelegate].update({ where: { id }, data, include: { options: { orderBy: { order: "asc" } } } });
     },
     async removePlan(id: string) {
       if (!config.planDelegate) fail("This domain does not support plans.");

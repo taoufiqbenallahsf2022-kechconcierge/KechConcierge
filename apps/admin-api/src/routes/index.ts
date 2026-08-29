@@ -17,6 +17,8 @@ import { router as whatsapp_conversationsRouter } from "./entities/whatsAppConve
 import { router as whatsapp_messagesRouter } from "./entities/whatsAppMessageRoutes.js";
 import { router as studioRouter } from "./studioRoutes.js";
 import { router as segmentRouter } from "./segmentRoutes.js";
+import { router as websiteConfigurationRouter } from "./websiteConfigurationRoutes.js";
+import { router as pushNotificationRouter } from "./pushNotificationRoutes.js";
 import { activityRouter, beachClubRouter, nightClubRouter, packRouter, restaurantRouter, transportationRouter, villaRouter } from "./catalogDomainRoutes.js";
 export const api = Router();
 api.get("/health", (_q, r) =>
@@ -24,6 +26,8 @@ api.get("/health", (_q, r) =>
 );
 api.use("/auth", authRouter);
 api.use(requireAdminAuth);
+api.use("/website-configuration", websiteConfigurationRouter);
+api.use("/push-notifications", pushNotificationRouter);
 api.use("/studio/segments", segmentRouter);
 api.use("/studio", studioRouter);
 api.post("/chats/:id/messages", async (req, res, next) => {

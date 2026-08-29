@@ -16,7 +16,7 @@ export default function Highlights() {
 
   return (
     
-      <section className="mx-auto max-w-7xl px-4 py-16">
+      <section className="mx-auto max-w-[1500px] px-5 py-16 xl:px-8">
         <div className="grid gap-5 md:grid-cols-3">
           {[
             {

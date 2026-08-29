@@ -271,7 +271,10 @@ export default function ChatPage() {
                   </div>
                 );
               })}
-              {activeChat?.advisorTyping && <div className="text-sm italic text-zinc-400">{t.typing}</div>}
+              {activeChat?.advisorTyping && <div className="chat-typing" role="status" aria-live="polite">
+                <span className="chat-typing-dots" aria-hidden="true"><i /><i /><i /></span>
+                <span>{t.typing}</span>
+              </div>}
               <div ref={messagesEndRef} />
             </div>
           </div>

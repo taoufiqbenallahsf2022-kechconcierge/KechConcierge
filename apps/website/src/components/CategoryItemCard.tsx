@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveImage from "./ProgressiveImage";
 
 import {
   ArrowRight,
@@ -29,6 +29,7 @@ import {
 
 type CategoryItemCardProps = {
   item: CatalogItem;
+  priority?: boolean;
 };
 
 const categoryPaths: Record<
@@ -42,7 +43,7 @@ const categoryPaths: Record<
     "beachclubs",
   NIGHTCLUB: "nightclubs",
   PACK: "packs",
-  ACTIVITY: "activities",
+  ACTIVITY: "experiences",
   RESTAURANT:
     "restaurants",
   SPA: "spa",
@@ -65,6 +66,7 @@ function buildProductPath(
 
 export default function CategoryItemCard({
   item,
+  priority = false,
 }: CategoryItemCardProps) {
   const pathname =
     usePathname();
@@ -129,10 +131,11 @@ export default function CategoryItemCard({
         className="block w-full text-left disabled:cursor-wait"
       >
         <div className="relative h-64 overflow-hidden">
-          <Image
+          <ProgressiveImage
             src={item.thumbnail}
             alt={item.thumbnailAlt || item.title}
             fill
+            priority={priority}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className={`object-cover transition duration-500 ${
               loading
