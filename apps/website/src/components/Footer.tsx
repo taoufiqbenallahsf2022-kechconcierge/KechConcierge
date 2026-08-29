@@ -44,7 +44,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-16 bg-zinc-950 text-white">
-      <div className="mx-auto grid max-w-[1500px] gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 xl:px-8">
+      <div className="mx-auto grid max-w-[1380px] gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 xl:px-8">
         <div className="sm:col-span-2 lg:col-span-1">
           <p className="text-2xl font-black">
             Moorish Concierge
@@ -196,7 +196,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-3 px-5 py-5 text-center text-sm text-zinc-500 sm:flex-row sm:text-left xl:px-8">
+        <div className="mx-auto flex max-w-[1380px] flex-col items-center justify-between gap-3 px-5 py-5 text-center text-sm text-zinc-500 sm:flex-row sm:text-left xl:px-8">
           <p>
             © {new Date().getFullYear()}{" "}
             Moorish Concierge.{" "}

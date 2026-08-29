@@ -103,7 +103,7 @@ export default function Hero() {
       </div>
     </div>
 
-    {activeSlide && <div className={`relative mx-auto flex min-h-[680px] max-w-[1500px] flex-col justify-center px-5 py-24 transition-opacity duration-500 sm:min-h-[740px] sm:px-8 lg:min-h-[calc(100svh-86px)] xl:px-8 ${mediaReady ? "opacity-100" : "opacity-0"}`}>
+    {activeSlide && <div className={`relative mx-auto flex min-h-[680px] max-w-[1380px] flex-col justify-center px-5 py-24 transition-opacity duration-500 sm:min-h-[740px] sm:px-8 lg:min-h-[calc(100svh-86px)] xl:px-8 ${mediaReady ? "opacity-100" : "opacity-0"}`}>
       <div className="max-w-3xl">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/15 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-orange-100 backdrop-blur-md sm:text-sm"><Sparkles size={15} /> {activeSlide.eyebrow || t.hero.eyebrow}</div>
         <div className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.24em] text-orange-300"><MapPin size={16} /> Marrakech <span className="h-px w-10 bg-orange-300/70" /> <span>{String(activeIndex + 1).padStart(2, "0")}</span></div>
