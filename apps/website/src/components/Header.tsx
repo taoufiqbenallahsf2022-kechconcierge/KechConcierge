@@ -352,7 +352,7 @@ export default function Header() {
           </div>
         )}
 
-        <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 xl:px-8">
+        <div className="mx-auto flex max-w-[1380px] items-center justify-between px-5 py-4 xl:px-8">
           <button
             type="button"
             onClick={() => {

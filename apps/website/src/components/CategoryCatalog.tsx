@@ -284,7 +284,7 @@ export default function CategoryCatalog({
   ]);
 
   return (
-    <section className="mx-auto max-w-[1500px] px-5 py-20 xl:px-8">
+    <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
       <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
         Catalog
       </p>

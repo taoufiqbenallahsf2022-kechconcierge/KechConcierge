@@ -114,7 +114,7 @@ export default function HorizontalSection({ category }: { category: Category }) 
   }
 
   return (
-    <section className="mx-auto max-w-[1500px] px-5 py-12 xl:px-8">
+    <section className="mx-auto max-w-[1380px] px-5 py-12 xl:px-8">
       <div className="mb-6 flex items-end justify-between gap-4">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">

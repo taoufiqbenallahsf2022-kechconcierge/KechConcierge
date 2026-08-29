@@ -243,7 +243,7 @@ function WhatsAppIcon({
 function ProductDetailsSkeleton() {
   
   return (
-    <section className="mx-auto max-w-[1500px] px-5 py-20 xl:px-8">
+    <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
       <div className="h-5 w-40 animate-pulse rounded-full bg-zinc-200" />
 
       <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
@@ -555,7 +555,7 @@ export default function DetailsPage() {
 
   if (!productType) {
     return (
-      <section className="mx-auto max-w-[1500px] px-5 py-20 xl:px-8">
+      <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
         <div className="rounded-3xl bg-red-50 p-8 text-center font-bold text-red-700">
           {t.productDetails.invalidCategory}
         </div>
@@ -569,7 +569,7 @@ export default function DetailsPage() {
 
   if (error || !product) {
     return (
-      <section className="mx-auto max-w-[1500px] px-5 py-20 xl:px-8">
+      <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
         <div className="rounded-3xl bg-red-50 p-8 text-center text-red-700">
           <p className="text-xl font-black">
             Unable to load this product.
@@ -630,7 +630,7 @@ export default function DetailsPage() {
   `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
   return (
-    <section className="mx-auto max-w-[1500px] overflow-x-clip px-5 pb-32 pt-20 xl:px-8">
+    <section className="mx-auto max-w-[1380px] overflow-x-clip px-5 pb-32 pt-20 xl:px-8">
       <Link
         href={categoryPath}
         className="font-black text-orange-700 transition hover:text-orange-800"
