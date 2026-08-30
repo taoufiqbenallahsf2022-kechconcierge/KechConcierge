@@ -40,8 +40,8 @@ img {
 
 .site-header { transition: background-color .28s ease, border-color .28s ease, box-shadow .28s ease; }
 .site-header.home-header-dark { border-color: transparent !important; background: transparent !important; box-shadow: none !important; color: #fff !important; backdrop-filter: none !important; }
-.site-header.home-header-dark nav,
-.site-header.home-header-dark nav button { color: #fff !important; }
+.site-header.home-header-dark .primary-site-nav,
+.site-header.home-header-dark .primary-site-nav button { color: #fff !important; }
 .site-header.home-header-dark .site-logo-image-light { display: none; }
 .site-header.home-header-dark .site-logo-image-dark { display: block !important; }
 .site-header.home-header-dark .site-logo-image-dark-base { filter: brightness(0) invert(1) !important; }
