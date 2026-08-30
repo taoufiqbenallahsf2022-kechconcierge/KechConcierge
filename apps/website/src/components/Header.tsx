@@ -424,7 +424,7 @@ export default function Header() {
             />
           </button>
 
-          <nav className="hidden items-center gap-5 text-sm font-semibold text-zinc-700 lg:flex">
+          <nav className="primary-site-nav hidden items-center gap-5 text-sm font-semibold text-zinc-700 lg:flex">
             {navItems.map((item) => {
               const targetPath = buildLocalizedPath(item.href, currentLocale);
 
