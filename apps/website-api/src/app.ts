@@ -8,6 +8,7 @@ import accountRoutes from "./routes/account.routes";
 import chatRoutes from "./routes/chat.routes";
 import pageVisitRoutes from "./routes/page-visit.routes";
 import websiteConfigurationRoutes from "./routes/website-configuration.routes";
+import tripCartRoutes from "./routes/trip-cart.routes";
 
 const app: Express = express();
 app.set("trust proxy", 1);
@@ -56,6 +57,7 @@ app.use("/api/account", accountRoutes);
 app.use("/api/chats", chatRoutes);
 app.use("/api/page-visits", pageVisitRoutes);
 app.use("/api/website-configuration", websiteConfigurationRoutes);
+app.use("/api/trip-cart", tripCartRoutes);
 
 app.use(
   (

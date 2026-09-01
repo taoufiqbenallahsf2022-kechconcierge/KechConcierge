@@ -267,6 +267,16 @@ export type PageVisit = Prisma.PageVisitModel
  */
 export type ContactRequest = Prisma.ContactRequestModel
 /**
+ * Model TripCart
+ * 
+ */
+export type TripCart = Prisma.TripCartModel
+/**
+ * Model TripCartItem
+ * 
+ */
+export type TripCartItem = Prisma.TripCartItemModel
+/**
  * Model Chat
  * 
  */

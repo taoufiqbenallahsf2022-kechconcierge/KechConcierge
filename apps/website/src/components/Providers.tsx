@@ -5,6 +5,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { useAuthStore } from "@/store/auth.store";
 import { PageVisitTracker } from "./PageVisitTracker";
+import TripExperience from "./TripExperience";
 
 export default function Providers({
   children,
@@ -30,6 +31,7 @@ export default function Providers({
         <PageVisitTracker />
       </Suspense>
       {children}
+      <TripExperience />
     </GoogleOAuthProvider>
   );
 }

@@ -6,6 +6,7 @@ import { useParams, usePathname } from "next/navigation";
 import {
   TouchEvent,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -26,6 +27,7 @@ import ProductBookingPanel from "@/components/ProductBookingPanel";
 import ProductImageLightbox from "@/components/ProductImageLightbox";
 import ProductPlansModal from "@/components/ProductPlansModal";
 import ProgressiveImage from "@/components/ProgressiveImage";
+import AddToTripButton from "@/components/AddToTripButton";
 
 type CategorySlug =
   | "villas"
@@ -330,6 +332,21 @@ export default function DetailsPage() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [bookingPlanId, setBookingPlanId] = useState<string | null>(null);
   const bookingAnchorRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      root.style.scrollBehavior = previousScrollBehavior;
+    });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      root.style.scrollBehavior = previousScrollBehavior;
+    };
+  }, [categoryParameter, uniqueCode]);
 
   const touchStartX = useRef<number | null>(
     null
@@ -738,6 +755,8 @@ export default function DetailsPage() {
           {!!product.plans?.length && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productName={product.title} plans={product.plans} sticky={false} /><button type="button" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-5 rounded-full border-2 px-7 py-4 text-lg font-black transition`}>{planCopy[locale].title}</button></div>}
 
           {!product.plans?.length && <div ref={bookingAnchorRef}><ProductBookingPanel locale={locale} productName={product.title} sticky={false} /></div>}
+
+          <AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} />
 
           {product.subtitle && (
             <p className="mt-5 break-words text-lg font-bold leading-8 text-zinc-600">

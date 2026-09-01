@@ -36,6 +36,7 @@ const groups = [
     items: [
       { to: "/entities/chats", label: "Live Chats", icon: "◉" },
       { to: "/entities/contact-requests", label: "Contact Requests", icon: "✉" },
+      { to: "/entities/trip-carts", label: "Trip Carts", icon: "▤" },
     ],
   },
   {

@@ -188,6 +188,15 @@ export const ProductType = {
 export type ProductType = (typeof ProductType)[keyof typeof ProductType]
 
 
+export const TripCartStatus = {
+  ACTIVE: 'ACTIVE',
+  SUBMITTED: 'SUBMITTED',
+  ABANDONED: 'ABANDONED'
+} as const
+
+export type TripCartStatus = (typeof TripCartStatus)[keyof typeof TripCartStatus]
+
+
 export const BeachClubPricingUnit = {
   PER_PERSON: 'PER_PERSON',
   PER_ADULT: 'PER_ADULT',

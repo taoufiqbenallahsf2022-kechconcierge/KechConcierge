@@ -99,7 +99,8 @@ export default function CategoryItemCard({
     setLoading(true);
 
     router.push(
-      productPath
+      productPath,
+      { scroll: true }
     );
   }
 
