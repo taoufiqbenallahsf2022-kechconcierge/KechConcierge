@@ -385,8 +385,22 @@ export function getCategoryContent(
   locale: SupportedLocale,
   type: ApiProductType
 ) {
-  if (type === "NIGHTCLUB") return { label: "Night Clubs", description: "Nightlife experiences, tables and exclusive club plans in Marrakech.", catalogLabel: "Catalog", emptyMessage: "No night clubs were found." };
-  if (type === "PACK") return { label: "Packs", description: "Curated combinations of services and experiences with flexible plans.", catalogLabel: "Catalog", emptyMessage: "No packs were found." };
+  if (type === "NIGHTCLUB") return {
+    en: { label: "Night Clubs", description: "Discover selected night clubs, tables and exclusive nightlife experiences in Marrakech.", catalogLabel: "Catalog", emptyMessage: "No night clubs were found." },
+    fr: { label: "Clubs et vie nocturne", description: "Découvrez des clubs sélectionnés, des tables et des expériences nocturnes exclusives à Marrakech.", catalogLabel: "Catalogue", emptyMessage: "Aucun club n’a été trouvé." },
+    es: { label: "Discotecas", description: "Descubre discotecas seleccionadas, mesas y experiencias nocturnas exclusivas en Marrakech.", catalogLabel: "Catálogo", emptyMessage: "No se encontraron discotecas." },
+    pt: { label: "Discotecas", description: "Descubra discotecas selecionadas, mesas e experiências noturnas exclusivas em Marraquexe.", catalogLabel: "Catálogo", emptyMessage: "Nenhuma discoteca foi encontrada." },
+    it: { label: "Night club", description: "Scopri night club selezionati, tavoli ed esperienze notturne esclusive a Marrakech.", catalogLabel: "Catalogo", emptyMessage: "Nessun night club trovato." },
+    de: { label: "Nachtclubs", description: "Entdecken Sie ausgewählte Nachtclubs, Tische und exklusive Nachterlebnisse in Marrakesch.", catalogLabel: "Katalog", emptyMessage: "Keine Nachtclubs gefunden." },
+  }[locale];
+  if (type === "PACK") return {
+    en: { label: "Packages", description: "Explore curated Marrakech packages combining stays, transportation and memorable experiences.", catalogLabel: "Catalog", emptyMessage: "No packages were found." },
+    fr: { label: "Formules", description: "Explorez des formules Marrakech réunissant séjours, transport et expériences mémorables.", catalogLabel: "Catalogue", emptyMessage: "Aucune formule n’a été trouvée." },
+    es: { label: "Paquetes", description: "Explora paquetes de Marrakech que combinan estancias, transporte y experiencias memorables.", catalogLabel: "Catálogo", emptyMessage: "No se encontraron paquetes." },
+    pt: { label: "Pacotes", description: "Explore pacotes de Marraquexe que combinam estadias, transporte e experiências memoráveis.", catalogLabel: "Catálogo", emptyMessage: "Nenhum pacote foi encontrado." },
+    it: { label: "Pacchetti", description: "Scopri pacchetti Marrakech che combinano soggiorni, trasporti ed esperienze memorabili.", catalogLabel: "Catalogo", emptyMessage: "Nessun pacchetto trovato." },
+    de: { label: "Pakete", description: "Entdecken Sie Marrakesch-Pakete mit Aufenthalten, Transport und unvergesslichen Erlebnissen.", catalogLabel: "Katalog", emptyMessage: "Keine Pakete gefunden." },
+  }[locale];
   return categoryContent[locale][type];
 }
 

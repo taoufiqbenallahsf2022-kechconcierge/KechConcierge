@@ -109,3 +109,13 @@ export async function getProductDetails(uniqueCode: string, lang?: string, reque
   const spa = await prisma.product.findFirst({ where: { uniqueCode, type: "SPA", isActive: true } });
   return spa ? mapLegacySpa(spa, language, true) : null;
 }
+
+export async function getProductSeoIndex() {
+  const types: IndependentType[] = ["VILLA", "TRANSPORTATION", "SWIMMINGPOOL", "NIGHTCLUB", "ACTIVITY", "PACK", "RESTAURANT"];
+  const rows = await Promise.all(types.map(async (type) => {
+    const products = await (prisma as any)[delegateByType[type]].findMany({ where: { isActive: true }, select: { uniqueCode: true, updatedAt: true } });
+    return products.map((product: { uniqueCode: string; updatedAt: Date }) => ({ type, uniqueCode: product.uniqueCode, updatedAt: product.updatedAt }));
+  }));
+  const spas = await prisma.product.findMany({ where: { type: "SPA", isActive: true }, select: { uniqueCode: true, updatedAt: true } });
+  return [...rows.flat(), ...spas.map((product) => ({ type: "SPA" as const, uniqueCode: product.uniqueCode, updatedAt: product.updatedAt }))];
+}
