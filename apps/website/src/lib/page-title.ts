@@ -1,8 +1,10 @@
 import {
+  getDictionary,
   getLocaleFromPath,
   locales,
   type Locale,
 } from "@/lib/i18n";
+import { getCategoryContent, getCategoryType, isSupportedLocale } from "@/lib/catalog-api";
 
 type TitleCopy = {
   home: string;
@@ -239,4 +241,29 @@ export function getPageTitle(pathname: string) {
     locale,
     title: `${resolveTitle(pathname, locale)} | Moorish Concierge`,
   };
+}
+
+export function getPageMetadata(pathname: string) {
+  const { locale, title } = getPageTitle(pathname);
+  const path = stripLocale(pathname);
+  const dictionary = getDictionary(locale);
+  const category = path.split("/").filter(Boolean)[0];
+  const categoryType = category ? getCategoryType(category) : null;
+  let description = dictionary.footer.description;
+
+  if (path === "/") description = dictionary.hero.description;
+  else if (path === "/about") description = dictionary.aboutPage.heroDescription;
+  else if (path === "/services") description = dictionary.servicesPage.description;
+  else if (path === "/contact") description = dictionary.contactPage.description;
+  else if (path === "/terms") description = dictionary.termsPage.introduction;
+  else if (path === "/account") description = dictionary.accountPage.description;
+  else if (categoryType && path.split("/").filter(Boolean).length === 1 && isSupportedLocale(locale)) {
+    description = getCategoryContent(locale, categoryType).description;
+  }
+
+  const isPrivate = ["/account", "/chat", "/trip", "/forgot-password", "/reset-password"].some(
+    (privatePath) => path === privatePath || path.startsWith(`${privatePath}/`),
+  );
+
+  return { locale, title, description, isPrivate };
 }
