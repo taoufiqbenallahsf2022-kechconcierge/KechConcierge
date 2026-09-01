@@ -15,6 +15,7 @@ type TitleCopy = {
   resetPassword: string;
   terms: string;
   chat: string;
+  trip: string;
   notFound: string;
   categories: Record<string, string>;
 };
@@ -31,6 +32,7 @@ const TITLES: Record<Locale, TitleCopy> = {
     resetPassword: "Reset Your Password",
     terms: "Terms and Conditions",
     chat: "Chat with Your Concierge",
+    trip: "Build Your Marrakech Trip",
     notFound: "Page Not Found",
     categories: {
       villas: "Luxury Villas in Marrakech",
@@ -55,6 +57,7 @@ const TITLES: Record<Locale, TitleCopy> = {
     resetPassword: "Réinitialiser votre mot de passe",
     terms: "Conditions générales",
     chat: "Discutez avec votre concierge",
+    trip: "Composez votre voyage à Marrakech",
     notFound: "Page introuvable",
     categories: {
       villas: "Villas de luxe à Marrakech",
@@ -79,6 +82,7 @@ const TITLES: Record<Locale, TitleCopy> = {
     resetPassword: "Restablecer tu contraseña",
     terms: "Términos y condiciones",
     chat: "Chatea con tu conserje",
+    trip: "Crea tu viaje a Marrakech",
     notFound: "Página no encontrada",
     categories: {
       villas: "Villas de lujo en Marrakech",
@@ -103,6 +107,7 @@ const TITLES: Record<Locale, TitleCopy> = {
     resetPassword: "Redefinir a palavra-passe",
     terms: "Termos e condições",
     chat: "Converse com o seu concierge",
+    trip: "Crie a sua viagem a Marrakech",
     notFound: "Página não encontrada",
     categories: {
       villas: "Villas de luxo em Marrakech",
@@ -127,6 +132,7 @@ const TITLES: Record<Locale, TitleCopy> = {
     resetPassword: "Reimposta la password",
     terms: "Termini e condizioni",
     chat: "Chatta con il tuo concierge",
+    trip: "Crea il tuo viaggio a Marrakech",
     notFound: "Pagina non trovata",
     categories: {
       villas: "Ville di lusso a Marrakech",
@@ -151,6 +157,7 @@ const TITLES: Record<Locale, TitleCopy> = {
     resetPassword: "Passwort zurücksetzen",
     terms: "Allgemeine Geschäftsbedingungen",
     chat: "Chatten Sie mit Ihrem Concierge",
+    trip: "Stellen Sie Ihre Marrakesch-Reise zusammen",
     notFound: "Seite nicht gefunden",
     categories: {
       villas: "Luxusvillen in Marrakesch",
@@ -180,6 +187,7 @@ const STATIC_ROUTE_KEYS: Record<
   "/reset-password": "resetPassword",
   "/terms": "terms",
   "/chat": "chat",
+  "/trip": "trip",
 };
 
 function stripLocale(pathname: string) {

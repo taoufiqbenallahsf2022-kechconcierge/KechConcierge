@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Check, ChevronDown, ChevronLeft, ChevronRight, CircleUserRound, ConciergeBell, Home, Info, Loader2, Mail, Menu, UserRound, X } from "lucide-react";
 
 import AuthModal from "./AuthModal";
+import { TripHeaderButton } from "./TripExperience";
 
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
@@ -424,7 +425,7 @@ export default function Header() {
             />
           </button>
 
-          <nav className="hidden items-center gap-5 text-sm font-semibold text-zinc-700 lg:flex">
+          <nav className="primary-site-nav hidden items-center gap-5 text-sm font-semibold text-zinc-700 lg:flex">
             {navItems.map((item) => {
               const targetPath = buildLocalizedPath(item.href, currentLocale);
 
@@ -451,6 +452,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
+            <TripHeaderButton />
             <div className="relative">
               <button
                 type="button"
@@ -605,15 +607,17 @@ export default function Header() {
                 type="button"
                 onClick={() => setAuthOpen(true)}
                 disabled={Boolean(pendingPath)}
-                className="inline-flex items-center gap-2 rounded-full bg-zinc-950 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-orange-700 disabled:cursor-wait disabled:opacity-60"
+                className="inline-grid h-[42px] w-[42px] place-items-center rounded-full bg-zinc-950 text-white transition hover:bg-orange-700 disabled:cursor-wait disabled:opacity-60"
+                aria-label={t.header.login}
+                title={t.header.login}
               >
-                <UserRound size={16} />
-
-                {t.header.login}
+                <UserRound size={19} />
               </button>
             )}
           </div>
 
+          <div className="flex items-center gap-2 lg:hidden">
+          <TripHeaderButton />
           <button
             type="button"
             onClick={() => {
@@ -636,6 +640,7 @@ export default function Header() {
               <Menu />
             )}
           </button>
+          </div>
         </div>
 
         {menuOpen && (

@@ -20,6 +20,7 @@ import { ConsentsList, ConsentsCreate, ConsentsDetail } from "./features/consent
 import { UsersList, UsersCreate, UsersDetail } from "./features/users/UsersPages";
 import { PageVisitsList, PageVisitsDetail } from "./features/page-visits/PageVisitsPages";
 import { ContactRequestsList, ContactRequestsDetail } from "./features/contact-requests/ContactRequestsPages";
+import { TripCartsList, TripCartsDetail } from "./features/trip-carts/TripCartsPages";
 import { ChatList, ChatDetail } from "./features/chats/ChatPages";
 import { WhatsappConversationsList, WhatsappConversationsDetail } from "./features/whatsapp-conversations/WhatsappConversationsPages";
 import { WhatsappMessagesList, WhatsappMessagesDetail } from "./features/whatsapp-messages/WhatsappMessagesPages";
@@ -95,6 +96,7 @@ export default function App() {
         {entityRoutes({ list: UsersList, create: UsersCreate, detail: UsersDetail, path: "users" })}
         {entityRoutes({ list: PageVisitsList, detail: PageVisitsDetail, path: "page-visits" })}
         {entityRoutes({ list: ContactRequestsList, detail: ContactRequestsDetail, path: "contact-requests" })}
+        {entityRoutes({ list: TripCartsList, detail: TripCartsDetail, path: "trip-carts" })}
         <Route path="entities/chats" element={<ChatList />} />
         <Route path="chats/:id" element={<ChatDetail />} />
         {entityRoutes({ list: WhatsappConversationsList, detail: WhatsappConversationsDetail, path: "whatsapp-conversations" })}

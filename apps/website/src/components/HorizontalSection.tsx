@@ -115,27 +115,36 @@ export default function HorizontalSection({ category }: { category: Category }) 
 
   return (
     <section className="mx-auto max-w-[1380px] px-5 py-12 xl:px-8">
-      <div className="mb-6 flex items-end justify-between gap-4">
-        <div>
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
-            {t.categories.explore}
-          </p>
-          <h2 className="mt-2 text-3xl font-black text-zinc-950">
-            {labels[category]}
-          </h2>
-          <p className="mt-2 max-w-2xl text-zinc-600">
-            {descriptions[category]}
-          </p>
-        </div>
+      <div className="mb-6">
+        <div className="flex items-end justify-between gap-4">
+          <div className="min-w-0">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-orange-700 sm:text-sm">
+              {t.categories.explore}
+            </p>
+            <h2 className="mt-1 text-3xl font-black text-zinc-950 sm:mt-2">
+              {labels[category]}
+            </h2>
+          </div>
 
-        <div className="hidden items-center md:flex">
           <Link
             href={localizePath(`/${category}`)}
-            className="rounded-full bg-zinc-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-orange-700"
+            className="mb-1 shrink-0 rounded-full bg-zinc-950 px-4 py-2.5 text-xs font-black text-white transition active:scale-95 md:hidden"
           >
             {t.categories.viewAll}
           </Link>
+
+          <div className="hidden items-center md:flex">
+            <Link
+              href={localizePath(`/${category}`)}
+              className="rounded-full bg-zinc-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-orange-700"
+            >
+              {t.categories.viewAll}
+            </Link>
+          </div>
         </div>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-600 sm:text-base">
+          {descriptions[category]}
+        </p>
       </div>
 
       {loading && <HorizontalSectionSkeleton />}
@@ -164,28 +173,6 @@ export default function HorizontalSection({ category }: { category: Category }) 
         </div>
       )}
 
-      <div className="flex gap-3 md:hidden">
-        {canScrollLeft && <button
-          onClick={() => scroll("left")}
-          className="nightclub-carousel-arrow grid h-11 w-11 place-items-center rounded-full bg-white text-zinc-950 card-shadow"
-        >
-          <ChevronLeft />
-        </button>}
-
-        {canScrollRight && <button
-          onClick={() => scroll("right")}
-          className="nightclub-carousel-arrow grid h-11 w-11 place-items-center rounded-full bg-white text-zinc-950 card-shadow"
-        >
-          <ChevronRight />
-        </button>}
-
-        <Link
-          href={localizePath(`/${category}`)}
-          className="rounded-full bg-zinc-950 px-5 py-3 text-sm font-bold text-white"
-        >
-          {t.categories.viewAll}
-        </Link>
-      </div>
     </section>
   );
 }

@@ -34,6 +34,7 @@ export type ContactRequestMinAggregateOutputType = {
   subject: string | null
   comment: string | null
   requesterStage: $Enums.ContactRequesterStage | null
+  visitorId: string | null
   individualId: string | null
   leadId: string | null
   prospectId: string | null
@@ -54,6 +55,7 @@ export type ContactRequestMaxAggregateOutputType = {
   subject: string | null
   comment: string | null
   requesterStage: $Enums.ContactRequesterStage | null
+  visitorId: string | null
   individualId: string | null
   leadId: string | null
   prospectId: string | null
@@ -74,6 +76,7 @@ export type ContactRequestCountAggregateOutputType = {
   subject: number
   comment: number
   requesterStage: number
+  visitorId: number
   individualId: number
   leadId: number
   prospectId: number
@@ -96,6 +99,7 @@ export type ContactRequestMinAggregateInputType = {
   subject?: true
   comment?: true
   requesterStage?: true
+  visitorId?: true
   individualId?: true
   leadId?: true
   prospectId?: true
@@ -116,6 +120,7 @@ export type ContactRequestMaxAggregateInputType = {
   subject?: true
   comment?: true
   requesterStage?: true
+  visitorId?: true
   individualId?: true
   leadId?: true
   prospectId?: true
@@ -136,6 +141,7 @@ export type ContactRequestCountAggregateInputType = {
   subject?: true
   comment?: true
   requesterStage?: true
+  visitorId?: true
   individualId?: true
   leadId?: true
   prospectId?: true
@@ -229,6 +235,7 @@ export type ContactRequestGroupByOutputType = {
   subject: string | null
   comment: string
   requesterStage: $Enums.ContactRequesterStage
+  visitorId: string | null
   individualId: string | null
   leadId: string | null
   prospectId: string | null
@@ -270,6 +277,7 @@ export type ContactRequestWhereInput = {
   subject?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   comment?: Prisma.StringFilter<"ContactRequest"> | string
   requesterStage?: Prisma.EnumContactRequesterStageFilter<"ContactRequest"> | $Enums.ContactRequesterStage
+  visitorId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   individualId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   leadId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   prospectId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
@@ -294,6 +302,7 @@ export type ContactRequestOrderByWithRelationInput = {
   subject?: Prisma.SortOrderInput | Prisma.SortOrder
   comment?: Prisma.SortOrder
   requesterStage?: Prisma.SortOrder
+  visitorId?: Prisma.SortOrderInput | Prisma.SortOrder
   individualId?: Prisma.SortOrderInput | Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -321,6 +330,7 @@ export type ContactRequestWhereUniqueInput = Prisma.AtLeast<{
   subject?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   comment?: Prisma.StringFilter<"ContactRequest"> | string
   requesterStage?: Prisma.EnumContactRequesterStageFilter<"ContactRequest"> | $Enums.ContactRequesterStage
+  visitorId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   individualId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   leadId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   prospectId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
@@ -345,6 +355,7 @@ export type ContactRequestOrderByWithAggregationInput = {
   subject?: Prisma.SortOrderInput | Prisma.SortOrder
   comment?: Prisma.SortOrder
   requesterStage?: Prisma.SortOrder
+  visitorId?: Prisma.SortOrderInput | Prisma.SortOrder
   individualId?: Prisma.SortOrderInput | Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   prospectId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -371,6 +382,7 @@ export type ContactRequestScalarWhereWithAggregatesInput = {
   subject?: Prisma.StringNullableWithAggregatesFilter<"ContactRequest"> | string | null
   comment?: Prisma.StringWithAggregatesFilter<"ContactRequest"> | string
   requesterStage?: Prisma.EnumContactRequesterStageWithAggregatesFilter<"ContactRequest"> | $Enums.ContactRequesterStage
+  visitorId?: Prisma.StringNullableWithAggregatesFilter<"ContactRequest"> | string | null
   individualId?: Prisma.StringNullableWithAggregatesFilter<"ContactRequest"> | string | null
   leadId?: Prisma.StringNullableWithAggregatesFilter<"ContactRequest"> | string | null
   prospectId?: Prisma.StringNullableWithAggregatesFilter<"ContactRequest"> | string | null
@@ -391,6 +403,7 @@ export type ContactRequestCreateInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -411,6 +424,7 @@ export type ContactRequestUncheckedCreateInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   individualId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -431,6 +445,7 @@ export type ContactRequestUpdateInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -451,6 +466,7 @@ export type ContactRequestUncheckedUpdateInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -471,6 +487,7 @@ export type ContactRequestCreateManyInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   individualId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -491,6 +508,7 @@ export type ContactRequestUpdateManyMutationInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -507,6 +525,7 @@ export type ContactRequestUncheckedUpdateManyInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -537,6 +556,7 @@ export type ContactRequestCountOrderByAggregateInput = {
   subject?: Prisma.SortOrder
   comment?: Prisma.SortOrder
   requesterStage?: Prisma.SortOrder
+  visitorId?: Prisma.SortOrder
   individualId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -557,6 +577,7 @@ export type ContactRequestMaxOrderByAggregateInput = {
   subject?: Prisma.SortOrder
   comment?: Prisma.SortOrder
   requesterStage?: Prisma.SortOrder
+  visitorId?: Prisma.SortOrder
   individualId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -577,6 +598,7 @@ export type ContactRequestMinOrderByAggregateInput = {
   subject?: Prisma.SortOrder
   comment?: Prisma.SortOrder
   requesterStage?: Prisma.SortOrder
+  visitorId?: Prisma.SortOrder
   individualId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   prospectId?: Prisma.SortOrder
@@ -773,6 +795,7 @@ export type ContactRequestCreateWithoutIndividualInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -792,6 +815,7 @@ export type ContactRequestUncheckedCreateWithoutIndividualInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   leadId?: string | null
   prospectId?: string | null
   accountId?: string | null
@@ -840,6 +864,7 @@ export type ContactRequestScalarWhereInput = {
   subject?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   comment?: Prisma.StringFilter<"ContactRequest"> | string
   requesterStage?: Prisma.EnumContactRequesterStageFilter<"ContactRequest"> | $Enums.ContactRequesterStage
+  visitorId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   individualId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   leadId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
   prospectId?: Prisma.StringNullableFilter<"ContactRequest"> | string | null
@@ -860,6 +885,7 @@ export type ContactRequestCreateWithoutLeadInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -879,6 +905,7 @@ export type ContactRequestUncheckedCreateWithoutLeadInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   individualId?: string | null
   prospectId?: string | null
   accountId?: string | null
@@ -924,6 +951,7 @@ export type ContactRequestCreateWithoutProspectInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -943,6 +971,7 @@ export type ContactRequestUncheckedCreateWithoutProspectInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   individualId?: string | null
   leadId?: string | null
   accountId?: string | null
@@ -988,6 +1017,7 @@ export type ContactRequestCreateWithoutAccountInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   createdDate?: Date | string
   createdBy?: string | null
   updatedDate?: Date | string
@@ -1007,6 +1037,7 @@ export type ContactRequestUncheckedCreateWithoutAccountInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   individualId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -1052,6 +1083,7 @@ export type ContactRequestCreateManyIndividualInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   leadId?: string | null
   prospectId?: string | null
   accountId?: string | null
@@ -1071,6 +1103,7 @@ export type ContactRequestUpdateWithoutIndividualInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1090,6 +1123,7 @@ export type ContactRequestUncheckedUpdateWithoutIndividualInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1109,6 +1143,7 @@ export type ContactRequestUncheckedUpdateManyWithoutIndividualInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1128,6 +1163,7 @@ export type ContactRequestCreateManyLeadInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   individualId?: string | null
   prospectId?: string | null
   accountId?: string | null
@@ -1147,6 +1183,7 @@ export type ContactRequestUpdateWithoutLeadInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1166,6 +1203,7 @@ export type ContactRequestUncheckedUpdateWithoutLeadInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1185,6 +1223,7 @@ export type ContactRequestUncheckedUpdateManyWithoutLeadInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1204,6 +1243,7 @@ export type ContactRequestCreateManyProspectInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   individualId?: string | null
   leadId?: string | null
   accountId?: string | null
@@ -1223,6 +1263,7 @@ export type ContactRequestUpdateWithoutProspectInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1242,6 +1283,7 @@ export type ContactRequestUncheckedUpdateWithoutProspectInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1261,6 +1303,7 @@ export type ContactRequestUncheckedUpdateManyWithoutProspectInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1280,6 +1323,7 @@ export type ContactRequestCreateManyAccountInput = {
   subject?: string | null
   comment: string
   requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
   individualId?: string | null
   leadId?: string | null
   prospectId?: string | null
@@ -1299,6 +1343,7 @@ export type ContactRequestUpdateWithoutAccountInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1318,6 +1363,7 @@ export type ContactRequestUncheckedUpdateWithoutAccountInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1337,6 +1383,7 @@ export type ContactRequestUncheckedUpdateManyWithoutAccountInput = {
   subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1358,6 +1405,7 @@ export type ContactRequestSelect<ExtArgs extends runtime.Types.Extensions.Intern
   subject?: boolean
   comment?: boolean
   requesterStage?: boolean
+  visitorId?: boolean
   individualId?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1382,6 +1430,7 @@ export type ContactRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   subject?: boolean
   comment?: boolean
   requesterStage?: boolean
+  visitorId?: boolean
   individualId?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1406,6 +1455,7 @@ export type ContactRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   subject?: boolean
   comment?: boolean
   requesterStage?: boolean
+  visitorId?: boolean
   individualId?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1430,6 +1480,7 @@ export type ContactRequestSelectScalar = {
   subject?: boolean
   comment?: boolean
   requesterStage?: boolean
+  visitorId?: boolean
   individualId?: boolean
   leadId?: boolean
   prospectId?: boolean
@@ -1440,7 +1491,7 @@ export type ContactRequestSelectScalar = {
   updatedBy?: boolean
 }
 
-export type ContactRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "mobilePhone" | "requestType" | "subject" | "comment" | "requesterStage" | "individualId" | "leadId" | "prospectId" | "accountId" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["contactRequest"]>
+export type ContactRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "mobilePhone" | "requestType" | "subject" | "comment" | "requesterStage" | "visitorId" | "individualId" | "leadId" | "prospectId" | "accountId" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["contactRequest"]>
 export type ContactRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.ContactRequest$accountArgs<ExtArgs>
   individual?: boolean | Prisma.ContactRequest$individualArgs<ExtArgs>
@@ -1478,6 +1529,7 @@ export type $ContactRequestPayload<ExtArgs extends runtime.Types.Extensions.Inte
     subject: string | null
     comment: string
     requesterStage: $Enums.ContactRequesterStage
+    visitorId: string | null
     individualId: string | null
     leadId: string | null
     prospectId: string | null
@@ -1922,6 +1974,7 @@ export interface ContactRequestFieldRefs {
   readonly subject: Prisma.FieldRef<"ContactRequest", 'String'>
   readonly comment: Prisma.FieldRef<"ContactRequest", 'String'>
   readonly requesterStage: Prisma.FieldRef<"ContactRequest", 'ContactRequesterStage'>
+  readonly visitorId: Prisma.FieldRef<"ContactRequest", 'String'>
   readonly individualId: Prisma.FieldRef<"ContactRequest", 'String'>
   readonly leadId: Prisma.FieldRef<"ContactRequest", 'String'>
   readonly prospectId: Prisma.FieldRef<"ContactRequest", 'String'>

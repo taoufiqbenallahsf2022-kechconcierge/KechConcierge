@@ -708,6 +708,23 @@ export type EnumContactRequesterStageWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumContactRequesterStageFilter<$PrismaModel>
 }
 
+export type EnumTripCartStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.TripCartStatus | Prisma.EnumTripCartStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TripCartStatus[] | Prisma.ListEnumTripCartStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TripCartStatus[] | Prisma.ListEnumTripCartStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTripCartStatusFilter<$PrismaModel> | $Enums.TripCartStatus
+}
+
+export type EnumTripCartStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TripCartStatus | Prisma.EnumTripCartStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TripCartStatus[] | Prisma.ListEnumTripCartStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TripCartStatus[] | Prisma.ListEnumTripCartStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTripCartStatusWithAggregatesFilter<$PrismaModel> | $Enums.TripCartStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTripCartStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTripCartStatusFilter<$PrismaModel>
+}
+
 export type EnumChatParticipantStageFilter<$PrismaModel = never> = {
   equals?: $Enums.ChatParticipantStage | Prisma.EnumChatParticipantStageFieldRefInput<$PrismaModel>
   in?: $Enums.ChatParticipantStage[] | Prisma.ListEnumChatParticipantStageFieldRefInput<$PrismaModel>
@@ -1416,6 +1433,23 @@ export type NestedEnumContactRequesterStageWithAggregatesFilter<$PrismaModel = n
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumContactRequesterStageFilter<$PrismaModel>
   _max?: Prisma.NestedEnumContactRequesterStageFilter<$PrismaModel>
+}
+
+export type NestedEnumTripCartStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.TripCartStatus | Prisma.EnumTripCartStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TripCartStatus[] | Prisma.ListEnumTripCartStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TripCartStatus[] | Prisma.ListEnumTripCartStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTripCartStatusFilter<$PrismaModel> | $Enums.TripCartStatus
+}
+
+export type NestedEnumTripCartStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TripCartStatus | Prisma.EnumTripCartStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TripCartStatus[] | Prisma.ListEnumTripCartStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TripCartStatus[] | Prisma.ListEnumTripCartStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTripCartStatusWithAggregatesFilter<$PrismaModel> | $Enums.TripCartStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTripCartStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTripCartStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumChatParticipantStageFilter<$PrismaModel = never> = {

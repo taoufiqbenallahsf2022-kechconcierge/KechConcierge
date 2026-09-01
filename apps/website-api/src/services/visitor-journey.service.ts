@@ -71,6 +71,81 @@ export async function claimVisitorJourney(
       where: { journeyId, individualId: null },
       data: { individualId, accountId, prospectId, leadId, participantStage: chatStage, updatedBy: "JOURNEY_CLAIM" },
     });
-    return { claimed: true, pageVisits: pageVisits.count, chats: chats.count };
+
+    const visitorCart = await tx.tripCart.findFirst({
+      where: { visitorId, individualId: null, status: "ACTIVE" },
+      include: { items: true },
+    });
+    let claimedTripCart = false;
+
+    if (visitorCart) {
+      const individualCart = await tx.tripCart.findFirst({
+        where: { individualId, status: "ACTIVE" },
+        include: { items: true },
+      });
+
+      if (!individualCart) {
+        await tx.tripCart.update({
+          where: { id: visitorCart.id },
+          data: { individualId },
+        });
+      } else if (individualCart.id !== visitorCart.id) {
+        for (const item of visitorCart.items) {
+          const existingItem = individualCart.items.find(
+            candidate => candidate.productId === item.productId,
+          );
+          await tx.tripCartItem.upsert({
+            where: {
+              tripCartId_productId: {
+                tripCartId: individualCart.id,
+                productId: item.productId,
+              },
+            },
+            create: {
+              tripCartId: individualCart.id,
+              productId: item.productId,
+              productType: item.productType,
+              productName: item.productName,
+              category: item.category,
+              image: item.image,
+              plans: item.plans ?? undefined,
+              planId: item.planId,
+              planTitle: item.planTitle,
+              startDate: item.startDate,
+              endDate: item.endDate,
+            },
+            update: !existingItem || item.updatedDate > existingItem.updatedDate
+              ? {
+                  productType: item.productType,
+                  productName: item.productName,
+                  category: item.category,
+                  image: item.image,
+                  plans: item.plans ?? undefined,
+                  planId: item.planId,
+                  planTitle: item.planTitle,
+                  startDate: item.startDate,
+                  endDate: item.endDate,
+                }
+              : {},
+          });
+        }
+        await tx.tripCart.update({
+          where: { id: visitorCart.id },
+          data: { status: "ABANDONED" },
+        });
+        await tx.tripCart.update({
+          where: { id: individualCart.id },
+          data: { updatedDate: new Date() },
+        });
+      }
+      claimedTripCart = true;
+    }
+
+    return {
+      claimed: true,
+      pageVisits: pageVisits.count,
+      chats: chats.count,
+      tripCart: claimedTripCart,
+    };
   });
 }

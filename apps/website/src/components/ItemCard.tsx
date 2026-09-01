@@ -96,7 +96,7 @@ export default function ItemCard({
 
     setLoading(true);
 
-    router.push(productPath);
+    router.push(productPath, { scroll: true });
   }
 
   function prefetchProduct() {
