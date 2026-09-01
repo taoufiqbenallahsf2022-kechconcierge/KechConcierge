@@ -6,10 +6,11 @@ import { getPasswordResetEmailTranslation } from "../i18n/password-reset-email-t
 import { getContactRequestEmailTranslation } from "../i18n/contact-request-email-translations";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const EMAIL_LOGO_URL = `${normalizeWebsiteUrl()}/brand/original-m-mark.png`;
 const EMAIL_LOGO_HTML = `
   <div style="text-align: center; margin: 0 auto 28px;">
     <img
-      src="https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public"
+      src="${EMAIL_LOGO_URL}"
       alt="Moorish Concierge"
       width="80"
       style="display: inline-block; width: 80px; max-width: 55%; height: auto; border: 0;"
@@ -224,8 +225,20 @@ export async function sendContactRequestConfirmationEmail(params: {
   subject?: string | null;
   comment: string;
   language?: string;
+  tripItems?: Array<{
+    productName: string;
+    category?: string | null;
+    image?: string | null;
+    planTitle?: string | null;
+    planPrice?: string | null;
+    startDate: string;
+    endDate: string;
+  }>;
 }) {
   const t = getContactRequestEmailTranslation(params.language);
+  const isTripRequest =
+    params.requestType === "PRODUCT_REQUEST" &&
+    Boolean(params.tripItems?.length);
 
   const contactEmail = getContactEmail();
 
@@ -233,7 +246,7 @@ export async function sendContactRequestConfirmationEmail(params: {
     from: getFromEmail(),
     to: [params.email],
     replyTo: contactEmail,
-    subject: t.subject,
+    subject: isTripRequest ? t.tripSubject : t.subject,
 
     html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
@@ -243,7 +256,7 @@ export async function sendContactRequestConfirmationEmail(params: {
           </p>
 
           <h1 style="color: #18181b; margin: 8px 0 0;">
-            ${t.title}
+            ${isTripRequest ? t.tripTitle : t.title}
           </h1>
 
           <p style="color: #52525b; font-size: 15px; line-height: 24px; margin-top: 24px;">
@@ -251,38 +264,50 @@ export async function sendContactRequestConfirmationEmail(params: {
           </p>
 
           <p style="color: #52525b; font-size: 15px; line-height: 24px;">
-            ${t.line1}
+            ${isTripRequest ? t.tripLine1 : t.line1}
           </p>
 
           <p style="color: #52525b; font-size: 15px; line-height: 24px;">
-            ${t.line2}
+            ${isTripRequest ? t.tripLine2 : t.line2}
           </p>
 
           <div style="margin-top: 24px; border: 1px solid #fed7aa; border-radius: 18px; background: #fff7ed; padding: 20px;">
             <p style="margin: 0 0 16px; color: #9a3412; font-size: 16px; font-weight: bold;">
-              ${t.summaryTitle}
+              ${isTripRequest ? t.tripSummaryTitle : t.summaryTitle}
             </p>
 
-            <p style="margin: 8px 0; color: #52525b; font-size: 14px; line-height: 22px;">
-              <strong>${t.requestType}:</strong>
-              ${escapeHtml(params.requestType)}
-            </p>
+            ${isTripRequest
+              ? params.tripItems!.map((item, index) => `
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top: ${index === 0 ? "0" : "12px"}; border: 1px solid #fed7aa; border-radius: 14px; background: #ffffff; border-collapse: separate; overflow: hidden;">
+                  <tr>
+                    ${item.image ? `<td width="120" valign="top" style="width: 120px; padding: 0;"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.productName)}" width="120" height="140" style="display: block; width: 120px; height: 140px; border: 0; object-fit: cover;" /></td>` : ""}
+                    <td valign="top" style="padding: 16px;">
+                      ${item.category ? `<p style="margin: 0 0 5px; color: #c2410c; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1.4px;">${escapeHtml(item.category)}</p>` : ""}
+                      <p style="margin: 0; color: #18181b; font-size: 16px; line-height: 22px; font-weight: bold;">${index + 1}. ${escapeHtml(item.productName)}</p>
+                      ${item.planTitle ? `<p style="margin: 10px 0 0; color: #52525b; font-size: 13px; line-height: 20px;"><strong>${t.tripPlanLabel}:</strong><br />${escapeHtml(item.planTitle)}${item.planPrice ? ` · ${escapeHtml(item.planPrice)}` : ""}</p>` : ""}
+                      <p style="margin: 8px 0 0; color: #52525b; font-size: 13px; line-height: 20px;"><strong>${t.tripDatesLabel}:</strong><br />${escapeHtml(item.startDate)} &rarr; ${escapeHtml(item.endDate)}</p>
+                    </td>
+                  </tr>
+                </table>
+              `).join("")
+              : `
+                <p style="margin: 8px 0; color: #52525b; font-size: 14px; line-height: 22px;">
+                  <strong>${t.requestType}:</strong>
+                  ${escapeHtml(params.requestType)}
+                </p>
 
-            ${
-              params.subject
-                ? `
+                ${params.subject ? `
                   <p style="margin: 8px 0; color: #52525b; font-size: 14px; line-height: 22px;">
                     <strong>${t.subjectLabel}:</strong>
                     ${escapeHtml(params.subject)}
                   </p>
-                `
-                : ""
-            }
+                ` : ""}
 
-            <p style="margin: 8px 0; color: #52525b; font-size: 14px; line-height: 22px;">
-              <strong>${t.messageLabel}:</strong><br />
-              ${formatMultilineText(params.comment)}
-            </p>
+                <p style="margin: 8px 0; color: #52525b; font-size: 14px; line-height: 22px;">
+                  <strong>${t.messageLabel}:</strong><br />
+                  ${formatMultilineText(params.comment)}
+                </p>
+              `}
 
             <p style="margin: 14px 0 0; color: #71717a; font-size: 12px; line-height: 20px;">
               <strong>${t.referenceLabel}:</strong>

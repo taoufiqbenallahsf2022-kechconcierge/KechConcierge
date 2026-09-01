@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import { PushNotificationControl } from "./PushNotificationControl";
 
 const groups = [
   { label: "Workspace", items: [{ to: "/data-hub", label: "Data Hub", icon: "◫" }] },
@@ -13,7 +14,7 @@ const groups = [
     ],
   },
   {
-    label: "Catalog V2",
+    label: "Catalog",
     items: [
       { to: "/entities/villas", label: "Villas", icon: "⌂" },
       { to: "/entities/restaurants", label: "Restaurants", icon: "◈" },
@@ -25,10 +26,17 @@ const groups = [
     ],
   },
   {
+    label: "Website",
+    items: [
+      { to: "/website/slideshow", label: "Slideshow", icon: "◩" },
+    ],
+  },
+  {
     label: "Operations",
     items: [
       { to: "/entities/chats", label: "Live Chats", icon: "◉" },
       { to: "/entities/contact-requests", label: "Contact Requests", icon: "✉" },
+      { to: "/entities/trip-carts", label: "Trip Carts", icon: "▤" },
     ],
   },
   {
@@ -62,10 +70,13 @@ export function Layout() {
             </div>
           ))}
         </nav>
+        <div className="admin-account-tools">
+          <PushNotificationControl />
         <div className="admin-profile">
           <div className="profile-avatar">{user?.firstName?.[0]}{user?.lastName?.[0]}</div>
           <div className="profile-copy"><b>{user?.firstName} {user?.lastName}</b><span>{user?.role}</span></div>
           <button onClick={() => void logout()} title="Sign out" aria-label="Sign out">↗</button>
+        </div>
         </div>
       </aside>
       <main><Outlet /></main>

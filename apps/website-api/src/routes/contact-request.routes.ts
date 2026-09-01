@@ -20,6 +20,7 @@ import {
   sendContactRequestConfirmationEmail,
   sendContactRequestInternalEmail,
 } from "../services/email.service";
+import { notifyAdminsOfContactRequest } from "../services/admin-push.service";
 
 const router = Router();
 
@@ -31,6 +32,7 @@ type CreateContactRequestBody = {
   requestType?: unknown;
   subject?: unknown;
   comment?: unknown;
+  tripItems?: unknown;
 
   /*
    * This must contain the language of
@@ -38,6 +40,39 @@ type CreateContactRequestBody = {
    */
   language?: unknown;
 };
+
+type TripEmailItem = {
+  productName: string;
+  category: string | null;
+  image: string | null;
+  planTitle: string | null;
+  planPrice: string | null;
+  startDate: string;
+  endDate: string;
+};
+
+function normalizeTripItems(value: unknown): TripEmailItem[] {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 20).flatMap((entry) => {
+    if (!entry || typeof entry !== "object") return [];
+    const item = entry as Record<string, unknown>;
+    const productName = requiredString(item.productName);
+    const startDate = requiredString(item.startDate);
+    const endDate = requiredString(item.endDate);
+    if (!productName || !startDate || !endDate) return [];
+    return [{
+      productName: productName.slice(0, 200),
+      category: optionalString(item.category)?.slice(0, 120) ?? null,
+      image: /^https?:\/\//i.test(optionalString(item.image) ?? "")
+        ? optionalString(item.image)!.slice(0, 2000)
+        : null,
+      planTitle: optionalString(item.planTitle)?.slice(0, 200) ?? null,
+      planPrice: optionalString(item.planPrice)?.slice(0, 100) ?? null,
+      startDate: startDate.slice(0, 40),
+      endDate: endDate.slice(0, 40),
+    }];
+  });
+}
 
 type AccessTokenPayload =
   JwtPayload & {
@@ -229,6 +264,11 @@ router.post(
         req.body as
           CreateContactRequestBody;
 
+      const visitorId =
+        optionalString(
+          req.header("x-visitor-id")
+        );
+
       const firstName =
         requiredString(
           body.firstName
@@ -348,6 +388,7 @@ router.post(
 
       const normalizedEmail =
         email.toLowerCase();
+      const tripItems = normalizeTripItems(body.tripItems);
 
       const contactRequest =
         await prisma.contactRequest.create({
@@ -369,6 +410,8 @@ router.post(
 
             individualId,
 
+            visitorId,
+
             createdBy:
               auditUser,
 
@@ -386,6 +429,7 @@ router.post(
             subject: true,
             comment: true,
             individualId: true,
+            visitorId: true,
             createdDate: true,
           },
         });
@@ -416,6 +460,7 @@ router.post(
              * contact-form page language.
              */
             language,
+            tripItems,
           }),
 
           sendContactRequestInternalEmail({
@@ -452,6 +497,13 @@ router.post(
               contactRequest.createdDate,
           }),
         ]);
+
+      void notifyAdminsOfContactRequest({
+        requestId: contactRequest.id,
+        participantName: `${contactRequest.firstName} ${contactRequest.lastName}`.trim(),
+        requestType: String(contactRequest.requestType),
+        subject: contactRequest.subject,
+      }).catch((error) => console.error("Unable to prepare admin contact-request notification", error));
 
       const [
         clientEmailResult,

@@ -14,8 +14,13 @@ export default function FloatingContact() {
 
   useEffect(() => {
     const updateOffset = (event: Event) => setBookingBarVisible(Boolean((event as CustomEvent<{ visible?: boolean }>).detail?.visible));
+    const openContact = () => setOpen(true);
     window.addEventListener("moorish-product-booking-bar", updateOffset);
-    return () => window.removeEventListener("moorish-product-booking-bar", updateOffset);
+    window.addEventListener("moorish-open-contact", openContact);
+    return () => {
+      window.removeEventListener("moorish-product-booking-bar", updateOffset);
+      window.removeEventListener("moorish-open-contact", openContact);
+    };
   }, []);
 
   return (
@@ -32,7 +37,7 @@ export default function FloatingContact() {
             </button>
           </div>
 
-          <div className="grid flex-1 content-center gap-4 p-6 sm:block sm:flex-none sm:space-y-3 sm:p-4">
+          <div className="grid flex-1 content-start gap-3 p-5 pt-6 sm:block sm:flex-none sm:space-y-3 sm:p-4">
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\s+/g, "")}`}
               target="_blank"
@@ -65,7 +70,7 @@ export default function FloatingContact() {
 
       <button
         onClick={() => setOpen(!open)}
-        className={`flex h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-white shadow-2xl shadow-orange-500/30 transition hover:bg-orange-700 ${open ? "fixed bottom-5 right-5 sm:static" : ""}`}
+        className={`h-16 w-16 items-center justify-center rounded-full bg-orange-600 text-white shadow-2xl shadow-orange-500/30 transition hover:bg-orange-700 ${open ? "hidden sm:flex sm:static" : "flex"}`}
         aria-label="Contact us"
       >
         {open ? <X /> : <MessageCircle />}

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import ProgressiveImage from "./ProgressiveImage";
 import { MapPin, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -23,12 +23,13 @@ type ItemCardProps = {
     priceTitle?: string;
   };
   locale: string;
+  priority?: boolean;
 };
 
 const typeToCategory: Record<string, string> = {
   VILLA: "villas",
   APARTMENT: "apartments",
-  ACTIVITY: "activities",
+  ACTIVITY: "experiences",
   TRANSPORTATION: "transportation",
   SWIMMINGPOOL: "beachclubs",
   NIGHTCLUB: "nightclubs",
@@ -40,6 +41,7 @@ const typeToCategory: Record<string, string> = {
 export default function ItemCard({
   item,
   locale,
+  priority = false,
 }: ItemCardProps) {
   const router = useRouter();
 
@@ -94,7 +96,7 @@ export default function ItemCard({
 
     setLoading(true);
 
-    router.push(productPath);
+    router.push(productPath, { scroll: true });
   }
 
   function prefetchProduct() {
@@ -118,10 +120,12 @@ export default function ItemCard({
       className="group relative block min-w-[300px] max-w-[300px] overflow-hidden rounded-3xl bg-white text-left card-shadow transition disabled:cursor-wait"
     >
       <div className="relative h-56 overflow-hidden">
-        <Image
+        <ProgressiveImage
           src={optimizedImageUrl}
           alt={item.thumbnailAlt || item.title}
           fill
+          priority={priority}
+          sizes="300px"
           className={`object-cover transition duration-500 ${
             loading
               ? "scale-105 opacity-70"

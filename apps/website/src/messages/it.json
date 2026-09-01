@@ -4,7 +4,7 @@
     "services": "Servizi",
     "villas": "Ville",
     "swimmingpool": "Beach club",
-    "activities": "Attività",
+    "activities": "Esperienze",
     "transportation": "Trasporti",
     "about": "Chi siamo",
     "contact": "Contatto",
@@ -117,7 +117,7 @@
   "categories": {
     "villasLabel": "Ville",
     "villasDescription": "Ville private a Marrakech con piscine, giardini, personale e comfort premium.",
-    "activitiesLabel": "Attività",
+    "activitiesLabel": "Esperienze",
     "activitiesDescription": "Quad, passeggiate in cammello, escursioni nel deserto, tour della città, mongolfiera ed esperienze locali.",
     "swimmingPoolsLabel": "Beach club",
     "swimmingPoolsDescription": "Piscine private, pool club, pass giornalieri, relax di lusso ed esperienze per famiglie.",
@@ -125,7 +125,7 @@
     "transportationDescription": "Auto private, veicoli di lusso, van e trasferimenti di gruppo con autisti affidabili.",
     "spaLabel": "SPA",
     "spaDescription": "Hammam, massaggi, bellezza e benessere.",
-    "restaurantsLabel": "Ristoranti",
+    "restaurantsLabel": "Ristoranti e rooftop",
     "restaurantsDescription": "Ristoranti marocchini e internazionali selezionati per serate memorabili.",
     "viewAll": "Vedi tutto",
     "explore":"Esplora"
@@ -282,11 +282,11 @@
         "description": "Accesso alle piscine e giornate di relax in strutture selezionate a Marrakech."
       },
       "activity": {
-        "label": "Attività",
+        "label": "Esperienze",
         "description": "Attività, escursioni ed esperienze da vivere nei dintorni di Marrakech."
       },
       "restaurant": {
-        "label": "Ristoranti",
+        "label": "Ristoranti e rooftop",
         "description": "Ristoranti, rooftop e opzioni gastronomiche per momenti e preferenze differenti."
       },
       "spa": {
@@ -324,7 +324,7 @@
         "description": "Autisti privati, arrivi e partenze aeroportuali e trasferimenti a Marrakech."
       },
       "experiences": {
-        "title": "Attività ed escursioni",
+        "title": "Esperienze ed escursioni",
         "description": "Deserto, visite culturali, attività all’aperto ed esperienze nei dintorni di Marrakech."
       },
       "pools": {
@@ -332,7 +332,7 @@
         "description": "Luoghi selezionati per giornate di relax, pranzi e momenti tranquilli."
       },
       "dining": {
-        "title": "Ristorazione",
+        "title": "Ristoranti e rooftop",
         "description": "Ristoranti, rooftop e proposte gastronomiche per gusti e budget diversi."
       },
       "nightlife": {

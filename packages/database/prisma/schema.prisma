@@ -7,6 +7,13 @@ datasource db {
   provider = "postgresql"
 }
 
+model WebsiteConfiguration {
+  id          String   @id @default("primary")
+  heroSlides  Json     @default("[]")
+  updatedAt   DateTime @updatedAt
+  updatedBy   String?
+}
+
 model EmailVerificationToken {
   id        String   @id @default(cuid())
   email     String
@@ -1009,6 +1016,7 @@ model Individual {
   contactRequests ContactRequest[]
   chats           Chat[]
   visitorJourneys VisitorJourney[]
+  tripCarts       TripCart[]
 
   @@index([email])
   @@index([manualEmail])
@@ -1138,6 +1146,7 @@ model ContactRequest {
   subject        String?
   comment        String
   requesterStage ContactRequesterStage @default(VISITOR)
+  visitorId      String?
   individualId   String?
   leadId         String?
   prospectId     String?
@@ -1150,6 +1159,47 @@ model ContactRequest {
   individual     Individual?           @relation(fields: [individualId], references: [id])
   lead           Lead?                 @relation(fields: [leadId], references: [id])
   prospect       Prospect?             @relation(fields: [prospectId], references: [id])
+
+  @@index([visitorId])
+}
+
+model TripCart {
+  id               String         @id @default(cuid())
+  visitorId        String
+  individualId     String?
+  status           TripCartStatus @default(ACTIVE)
+  email            String?
+  contactRequestId String?
+  submittedAt      DateTime?
+  createdDate      DateTime       @default(now())
+  updatedDate      DateTime       @updatedAt
+  individual       Individual?    @relation(fields: [individualId], references: [id], onDelete: SetNull)
+  items            TripCartItem[]
+
+  @@index([visitorId, status])
+  @@index([individualId, status])
+  @@index([status, updatedDate])
+}
+
+model TripCartItem {
+  id          String   @id @default(cuid())
+  tripCartId  String
+  productId   String
+  productType String
+  productName String
+  category    String
+  image       String?
+  plans       Json?
+  planId      String?
+  planTitle   String?
+  startDate   DateTime?
+  endDate     DateTime?
+  createdDate DateTime @default(now())
+  updatedDate DateTime @updatedAt
+  tripCart    TripCart @relation(fields: [tripCartId], references: [id], onDelete: Cascade)
+
+  @@unique([tripCartId, productId])
+  @@index([tripCartId])
 }
 
 model Chat {
@@ -1236,7 +1286,22 @@ model User {
   updatedDate DateTime @updatedAt
   updatedBy   String?
 
-  assignedChats Chat[]
+  assignedChats      Chat[]
+  pushSubscriptions AdminPushSubscription[]
+}
+
+model AdminPushSubscription {
+  id        String   @id @default(cuid())
+  userId    String
+  endpoint  String   @unique @db.Text
+  p256dh    String   @db.Text
+  auth      String   @db.Text
+  userAgent String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 enum ChannelStatus {
@@ -1362,6 +1427,12 @@ enum ProductType {
   RESTAURANT
   ACTIVITY
   TRANSPORTATION
+}
+
+enum TripCartStatus {
+  ACTIVE
+  SUBMITTED
+  ABANDONED
 }
 
 enum BeachClubPricingUnit {

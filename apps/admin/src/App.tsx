@@ -20,11 +20,13 @@ import { ConsentsList, ConsentsCreate, ConsentsDetail } from "./features/consent
 import { UsersList, UsersCreate, UsersDetail } from "./features/users/UsersPages";
 import { PageVisitsList, PageVisitsDetail } from "./features/page-visits/PageVisitsPages";
 import { ContactRequestsList, ContactRequestsDetail } from "./features/contact-requests/ContactRequestsPages";
+import { TripCartsList, TripCartsDetail } from "./features/trip-carts/TripCartsPages";
 import { ChatList, ChatDetail } from "./features/chats/ChatPages";
 import { WhatsappConversationsList, WhatsappConversationsDetail } from "./features/whatsapp-conversations/WhatsappConversationsPages";
 import { WhatsappMessagesList, WhatsappMessagesDetail } from "./features/whatsapp-messages/WhatsappMessagesPages";
 import { ChatMessagesList, ChatMessagesDetail } from "./features/chat-messages/ChatMessagesPages";
 import { Activities, BeachClubs, NightClubs, Packs, Restaurants, Transportation, Villas } from "./features/catalog/IndependentCatalogPages";
+import { WebsiteConfigurationPage } from "./pages/WebsiteConfigurationPage";
 
 function entityRoutes({
   list: List,
@@ -62,6 +64,9 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Navigate to="/data-hub" replace />} />
         <Route path="data-hub" element={<DataHub />} />
+        <Route path="website" element={<Navigate to="/website/slideshow" replace />} />
+        <Route path="website/slideshow" element={<WebsiteConfigurationPage />} />
+        <Route path="website-configuration" element={<Navigate to="/website/slideshow" replace />} />
         <Route path="email-studio" element={<EmailStudioPage />} />
         <Route path="segments" element={<SegmentsListPage />} />
         <Route path="segments/new" element={<SegmentModePage />} />
@@ -91,6 +96,7 @@ export default function App() {
         {entityRoutes({ list: UsersList, create: UsersCreate, detail: UsersDetail, path: "users" })}
         {entityRoutes({ list: PageVisitsList, detail: PageVisitsDetail, path: "page-visits" })}
         {entityRoutes({ list: ContactRequestsList, detail: ContactRequestsDetail, path: "contact-requests" })}
+        {entityRoutes({ list: TripCartsList, detail: TripCartsDetail, path: "trip-carts" })}
         <Route path="entities/chats" element={<ChatList />} />
         <Route path="chats/:id" element={<ChatDetail />} />
         {entityRoutes({ list: WhatsappConversationsList, detail: WhatsappConversationsDetail, path: "whatsapp-conversations" })}

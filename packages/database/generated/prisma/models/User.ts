@@ -247,6 +247,7 @@ export type UserWhereInput = {
   updatedDate?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"User"> | string | null
   assignedChats?: Prisma.ChatListRelationFilter
+  pushSubscriptions?: Prisma.AdminPushSubscriptionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -264,6 +265,7 @@ export type UserOrderByWithRelationInput = {
   updatedDate?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   assignedChats?: Prisma.ChatOrderByRelationAggregateInput
+  pushSubscriptions?: Prisma.AdminPushSubscriptionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -284,6 +286,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedDate?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"User"> | string | null
   assignedChats?: Prisma.ChatListRelationFilter
+  pushSubscriptions?: Prisma.AdminPushSubscriptionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -339,6 +342,7 @@ export type UserCreateInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   assignedChats?: Prisma.ChatCreateNestedManyWithoutAdvisorInput
+  pushSubscriptions?: Prisma.AdminPushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -356,6 +360,7 @@ export type UserUncheckedCreateInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   assignedChats?: Prisma.ChatUncheckedCreateNestedManyWithoutAdvisorInput
+  pushSubscriptions?: Prisma.AdminPushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -373,6 +378,7 @@ export type UserUpdateInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedChats?: Prisma.ChatUpdateManyWithoutAdvisorNestedInput
+  pushSubscriptions?: Prisma.AdminPushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -390,6 +396,7 @@ export type UserUncheckedUpdateInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedChats?: Prisma.ChatUncheckedUpdateManyWithoutAdvisorNestedInput
+  pushSubscriptions?: Prisma.AdminPushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -493,6 +500,11 @@ export type UserMinOrderByAggregateInput = {
   updatedBy?: Prisma.SortOrder
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
 export type UserCreateNestedOneWithoutAssignedChatsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAssignedChatsInput, Prisma.UserUncheckedCreateWithoutAssignedChatsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAssignedChatsInput
@@ -509,6 +521,20 @@ export type UserUpdateOneWithoutAssignedChatsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignedChatsInput, Prisma.UserUpdateWithoutAssignedChatsInput>, Prisma.UserUncheckedUpdateWithoutAssignedChatsInput>
 }
 
+export type UserCreateNestedOneWithoutPushSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPushSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushSubscriptionsInput
+  upsert?: Prisma.UserUpsertWithoutPushSubscriptionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPushSubscriptionsInput, Prisma.UserUpdateWithoutPushSubscriptionsInput>, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+}
+
 export type UserCreateWithoutAssignedChatsInput = {
   id?: string
   firstName: string
@@ -523,6 +549,7 @@ export type UserCreateWithoutAssignedChatsInput = {
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
+  pushSubscriptions?: Prisma.AdminPushSubscriptionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedChatsInput = {
@@ -539,6 +566,7 @@ export type UserUncheckedCreateWithoutAssignedChatsInput = {
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
+  pushSubscriptions?: Prisma.AdminPushSubscriptionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedChatsInput = {
@@ -571,6 +599,7 @@ export type UserUpdateWithoutAssignedChatsInput = {
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pushSubscriptions?: Prisma.AdminPushSubscriptionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedChatsInput = {
@@ -587,6 +616,91 @@ export type UserUncheckedUpdateWithoutAssignedChatsInput = {
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pushSubscriptions?: Prisma.AdminPushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPushSubscriptionsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  passwordHash: string
+  mobilePhone?: string | null
+  role: string
+  isActive?: boolean
+  lastLoginDate?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  assignedChats?: Prisma.ChatCreateNestedManyWithoutAdvisorInput
+}
+
+export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  passwordHash: string
+  mobilePhone?: string | null
+  role: string
+  isActive?: boolean
+  lastLoginDate?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  assignedChats?: Prisma.ChatUncheckedCreateNestedManyWithoutAdvisorInput
+}
+
+export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+}
+
+export type UserUpsertWithoutPushSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPushSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushSubscriptionsInput, Prisma.UserUncheckedCreateWithoutPushSubscriptionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPushSubscriptionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPushSubscriptionsInput, Prisma.UserUncheckedUpdateWithoutPushSubscriptionsInput>
+}
+
+export type UserUpdateWithoutPushSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedChats?: Prisma.ChatUpdateManyWithoutAdvisorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedChats?: Prisma.ChatUncheckedUpdateManyWithoutAdvisorNestedInput
 }
 
 
@@ -596,10 +710,12 @@ export type UserUncheckedUpdateWithoutAssignedChatsInput = {
 
 export type UserCountOutputType = {
   assignedChats: number
+  pushSubscriptions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignedChats?: boolean | UserCountOutputTypeCountAssignedChatsArgs
+  pushSubscriptions?: boolean | UserCountOutputTypeCountPushSubscriptionsArgs
 }
 
 /**
@@ -619,6 +735,13 @@ export type UserCountOutputTypeCountAssignedChatsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ChatWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdminPushSubscriptionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -635,6 +758,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedDate?: boolean
   updatedBy?: boolean
   assignedChats?: boolean | Prisma.User$assignedChatsArgs<ExtArgs>
+  pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -689,6 +813,7 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "passwordHash" | "mobilePhone" | "role" | "isActive" | "lastLoginDate" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignedChats?: boolean | Prisma.User$assignedChatsArgs<ExtArgs>
+  pushSubscriptions?: boolean | Prisma.User$pushSubscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -698,6 +823,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     assignedChats: Prisma.$ChatPayload<ExtArgs>[]
+    pushSubscriptions: Prisma.$AdminPushSubscriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1108,6 +1234,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   assignedChats<T extends Prisma.User$assignedChatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedChatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pushSubscriptions<T extends Prisma.User$pushSubscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pushSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminPushSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1564,6 +1691,30 @@ export type User$assignedChatsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
+}
+
+/**
+ * User.pushSubscriptions
+ */
+export type User$pushSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdminPushSubscription
+   */
+  select?: Prisma.AdminPushSubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdminPushSubscription
+   */
+  omit?: Prisma.AdminPushSubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdminPushSubscriptionInclude<ExtArgs> | null
+  where?: Prisma.AdminPushSubscriptionWhereInput
+  orderBy?: Prisma.AdminPushSubscriptionOrderByWithRelationInput | Prisma.AdminPushSubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.AdminPushSubscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdminPushSubscriptionScalarFieldEnum | Prisma.AdminPushSubscriptionScalarFieldEnum[]
 }
 
 /**

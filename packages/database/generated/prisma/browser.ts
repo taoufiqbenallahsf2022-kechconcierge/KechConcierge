@@ -18,6 +18,11 @@ export { Prisma }
 export * as $Enums from './enums.ts'
 export * from './enums.ts';
 /**
+ * Model WebsiteConfiguration
+ * 
+ */
+export type WebsiteConfiguration = Prisma.WebsiteConfigurationModel
+/**
  * Model EmailVerificationToken
  * 
  */
@@ -238,6 +243,16 @@ export type PageVisit = Prisma.PageVisitModel
  */
 export type ContactRequest = Prisma.ContactRequestModel
 /**
+ * Model TripCart
+ * 
+ */
+export type TripCart = Prisma.TripCartModel
+/**
+ * Model TripCartItem
+ * 
+ */
+export type TripCartItem = Prisma.TripCartItemModel
+/**
  * Model Chat
  * 
  */
@@ -257,3 +272,8 @@ export type ChatMessage = Prisma.ChatMessageModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model AdminPushSubscription
+ * 
+ */
+export type AdminPushSubscription = Prisma.AdminPushSubscriptionModel

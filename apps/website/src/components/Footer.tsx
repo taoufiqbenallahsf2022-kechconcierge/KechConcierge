@@ -44,7 +44,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-16 bg-zinc-950 text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-[1380px] gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 xl:px-8">
         <div className="sm:col-span-2 lg:col-span-1">
           <p className="text-2xl font-black">
             Moorish Concierge
@@ -57,6 +57,7 @@ export default function Footer() {
           <p className="mt-5 text-sm font-bold text-orange-400">
             {t.footer.slogan}
           </p>
+
         </div>
 
         <div>
@@ -185,11 +186,17 @@ export default function Footer() {
               {whatsappNumber}
             </a>
           </div>
+
+          <div className="mt-6 flex items-center gap-3" aria-label="Social media">
+            <SocialLink href="https://www.instagram.com/moorishconcierge" label="Instagram"><InstagramIcon /></SocialLink>
+            <SocialLink href="https://www.tiktok.com/@moorish.concierge" label="TikTok"><TikTokIcon /></SocialLink>
+            <SocialLink href="https://www.facebook.com/share/14o3RJ2x9Pc/?mibextid=wwXlfr" label="Facebook"><FacebookIcon /></SocialLink>
+          </div>
         </div>
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center text-sm text-zinc-500 sm:flex-row sm:text-left">
+        <div className="mx-auto flex max-w-[1380px] flex-col items-center justify-between gap-3 px-5 py-5 text-center text-sm text-zinc-500 sm:flex-row sm:text-left xl:px-8">
           <p>
             © {new Date().getFullYear()}{" "}
             Moorish Concierge.{" "}
@@ -221,6 +228,22 @@ export default function Footer() {
       </div>
     </footer>
   );
+}
+
+function SocialLink({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
+  return <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label} className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white/5 text-zinc-300 transition hover:-translate-y-0.5 hover:border-orange-500 hover:bg-orange-600 hover:text-white">{children}</a>;
+}
+
+function TikTokIcon() {
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82a5.86 5.86 0 0 1-1.38-3.42h-3.56v13.74a2.99 2.99 0 1 1-2.58-2.96v-3.6a6.58 6.58 0 1 0 6.14 6.56V9.17a9.35 9.35 0 0 0 5.46 1.75V7.36a5.9 5.9 0 0 1-4.08-1.54Z" /></svg>;
+}
+
+function InstagramIcon() {
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>;
+}
+
+function FacebookIcon() {
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.7 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5H17V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.5V13h2.8v8h3.4Z" /></svg>;
 }
 
 function FooterLink({

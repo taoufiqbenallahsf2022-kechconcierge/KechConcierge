@@ -26,7 +26,7 @@ type CategorySlug =
   | "beachclubs"
   | "nightclubs"
   | "packs"
-  | "activities"
+  | "experiences"
   | "restaurants"
   | "spa";
 
@@ -84,7 +84,7 @@ function getCategoryText(
     case "packs":
       return { label: "Packs", description: "Curated combinations of services and experiences with flexible plans." };
 
-    case "activities":
+    case "experiences":
       return {
         label:
           dictionary.categories.activitiesLabel,
@@ -284,7 +284,7 @@ export default function CategoryCatalog({
   ]);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20">
+    <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
       <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
         Catalog
       </p>
@@ -335,10 +335,11 @@ export default function CategoryCatalog({
         items.length > 0 && (
           <>
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <CategoryItemCard
                   key={item.id}
                   item={item}
+                  priority={index < 4}
                 />
               ))}
             </div>
