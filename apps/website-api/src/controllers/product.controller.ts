@@ -3,12 +3,17 @@ import {
   getHomeProducts,
   getProductsByType,
   getProductDetails,
+  getProductSeoIndex,
 } from "../services/product.service";
 
 export async function homeProducts(req: Request, res: Response) {
   const lang = req.query.lang as string | undefined;
   const products = await getHomeProducts(lang);
   res.json(products);
+}
+
+export async function productSeoIndex(_req: Request, res: Response) {
+  res.json(await getProductSeoIndex());
 }
 
 export async function productsByType(req: Request, res: Response) {
