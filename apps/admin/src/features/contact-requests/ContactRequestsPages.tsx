@@ -4,4 +4,4 @@ export function ContactRequestsList(){return <EntityListView entity={entity} con
 export function ContactRequestsCreate(){return <EntityCreateView entity={entity} config={config}/>}
 export function ContactRequestsDetail(){const {id=''}=useParams();const {data,isLoading,error}=useGetOneQuery({entity,id});if(isLoading)return <div className="empty-state">Loading record…</div>;if(error||!data)return <div className="empty-state">Record not found.</div>;
  const renderField=(field:any,value:unknown)=>field.name==='individualId'&&value?<Link className="record-link" to={`/entities/individuals/${value}`}>{String(value)}</Link>:undefined;
-return <EntityDetailShell entity={entity} id={id} config={config} data={data} renderField={renderField}></EntityDetailShell>}
+return <EntityDetailShell entity={entity} id={id} config={config} data={data} renderField={renderField}><div className="record-actions-panel"><Link className="primary-button" to={`/entities/orders/new?contactRequestId=${encodeURIComponent(id)}`}>Create order</Link></div></EntityDetailShell>}

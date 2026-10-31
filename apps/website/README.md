@@ -44,3 +44,8 @@ http://localhost:3000
 ```txt
 src/lib/catalog.ts
 ```
+# Public payment page
+
+Set `NEXT_PUBLIC_ADMIN_API_URL` to the public admin API base URL (including `/api`). Emailed payment links use it to create a hosted Stripe Checkout Session and verify the payment when Stripe returns the client to the website.
+
+Stripe secret keys and webhook secrets belong in `apps/admin-api`; never expose them through a `NEXT_PUBLIC_` website variable.

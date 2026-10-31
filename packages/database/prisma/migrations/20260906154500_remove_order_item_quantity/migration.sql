@@ -1,0 +1,1 @@
+ALTER TABLE "ConciergeOrderItem" DROP COLUMN "quantity";

@@ -18,10 +18,12 @@ export type CatalogItem = {
   thumbnail: string;
   thumbnailAlt: string;
   priceEuro: number | null;
+  priceWithDriverEuro: number | null;
   currency: string | null;
   title: string;
   subtitle: string;
   priceTitle: string;
+  priceWithDriverLabel: string;
   address: string;
 };
 

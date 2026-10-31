@@ -1,7 +1,7 @@
 import { prisma } from "../lib/prisma.js";
 
 const languages = ["EN", "FR", "DE", "IT", "PT", "ES"] as const;
-const textPrefixes = ["title", "subtitle", "description", "location", "priceTitle"] as const;
+const textPrefixes = ["title", "subtitle", "description", "location", "priceTitle", "priceWithDriverLabel"] as const;
 
 type DomainConfig = {
   delegate: "villa" | "restaurant" | "beachClub" | "nightClub" | "activity" | "transportation" | "pack";
@@ -54,6 +54,7 @@ function normalizeBase(body: Record<string, unknown>, creating: boolean) {
     data.thumbnail = thumbnail;
   }
   if ("priceEuro" in data) data.priceEuro = money(data.priceEuro, "priceEuro");
+  if ("priceWithDriverEuro" in data) data.priceWithDriverEuro = money(data.priceWithDriverEuro, "priceWithDriverEuro");
   return data;
 }
 
@@ -135,6 +136,10 @@ export function createCatalogDomainService(config: DomainConfig) {
   const baseData = (body: Record<string, unknown>, creating: boolean) => {
     const data = normalizeBase(body, creating);
     if (config.delegate !== "villa" && config.delegate !== "restaurant") delete data.imageAlts;
+    if (config.delegate !== "villa") {
+      delete data.priceWithDriverEuro;
+      for (const language of languages) delete data[`priceWithDriverLabel${language}`];
+    }
     return data;
   };
 

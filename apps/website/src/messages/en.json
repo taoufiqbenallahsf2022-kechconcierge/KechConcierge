@@ -147,15 +147,21 @@
     "chat": "Concierge chat",
     "contact": "Contact",
     "legalTitle": "Legal",
-    "terms": "Terms of Use & Service",
-    "privacy": "Privacy and personal data",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy",
     "consentPreferences": "Consent preferences",
     "guestResponsibilities": "Guest responsibilities",
     "contactTitle": "Contact",
     "location": "Marrakech, Morocco",
     "copyright": "All rights reserved.",
     "termsShort": "Terms",
-    "privacyShort": "Privacy"
+    "privacyShort": "Privacy",
+    "refundPolicy": "Refund Policy",
+    "refundPolicyShort": "Refunds",
+    "companyName": "Moorish Concierge LLC",
+    "usAddress": "1209 MOUNTAIN ROAD PL NE, STE R, ALBAQUERQUE, NM 87110, New Mexico",
+    "moroccoPhoneLabel": "Morocco / WhatsApp",
+    "usPhoneLabel": "United States"
   },
   "accountVerify": {
     "eyebrow": "Account verification",
@@ -372,10 +378,10 @@
   },
   "termsPage": {
     "eyebrow": "Legal information",
-    "title": "Terms of Use & Service",
+    "title": "Terms of Use",
     "introduction": "These terms explain the rules that apply when you access Moorish Concierge, create an account, request recommendations or use concierge services arranged through the platform.",
     "importantNotice": "Moorish Concierge may coordinate services offered by independent property owners, drivers, restaurants, activity operators and other third parties. The final conditions of a booking may also include the provider’s own rules.",
-    "lastUpdated": "Last updated: July 2026",
+    "lastUpdated": "Last updated: October 2026",
     "contents": "Contents",
     "managePreferences": "Manage my preferences",
     "contactTitle": "Questions about these terms?",
@@ -417,19 +423,28 @@
         "title": "5. Prices, payments and cancellations",
         "paragraphs": [
           "Prices may change because of availability, season, group size, provider conditions, additional services, taxes or other disclosed charges.",
-          "Payment, deposit, cancellation and refund conditions may vary by provider and will be communicated before confirmation whenever applicable.",
+          "Payment, deposit and cancellation details will be communicated before confirmation whenever applicable. Refunds are governed by the refund policy below.",
           "Guests remain responsible for reviewing and accepting the final price and cancellation conditions before payment."
         ]
       },
+      "refund": {
+        "title": "6. Refund policy",
+        "paragraphs": [
+          "A client may claim a refund by contacting Moorish Concierge within 24 hours after making any payment and identifying the relevant order or booking.",
+          "After that 24-hour period, the payment is non-refundable because Moorish Concierge begins sourcing, reserving and coordinating villas and other requested services.",
+          "A refund claimed within the 24-hour period will be returned to the original payment method. Processing time depends on the bank or payment provider.",
+          "This policy does not limit any mandatory consumer right or refund right that cannot legally be excluded."
+        ]
+      },
       "providers": {
-        "title": "6. Independent service providers",
+        "title": "7. Independent service providers",
         "paragraphs": [
           "Some services are delivered by independent third-party providers. These providers remain responsible for delivering their services, maintaining required licenses and insurance, and complying with applicable safety and legal obligations.",
           "Moorish Concierge selects and coordinates providers with care but cannot guarantee that every third-party service will be free from delay, interruption, modification or unforeseen events."
         ]
       },
       "conduct": {
-        "title": "7. Guest conduct and property responsibility",
+        "title": "8. Guest conduct and property responsibility",
         "paragraphs": [
           "Guests must respect properties, vehicles, staff, neighbors, local customs and all reasonable rules communicated by Moorish Concierge or the service provider.",
           "Guests are responsible for damage, loss, excessive cleaning, unauthorized parties, prohibited events, disturbance or misuse caused by them or members of their group.",
@@ -438,14 +453,14 @@
         ]
       },
       "prohibited": {
-        "title": "8. Prohibited behavior",
+        "title": "9. Prohibited behavior",
         "paragraphs": [
           "Users must not use the platform or services for fraud, harassment, violence, illegal substances, exploitation, unauthorized commercial activity, property damage or any activity prohibited by Moroccan law.",
           "Moorish Concierge may refuse or stop assistance where a request appears unsafe, illegal, abusive or harmful to a provider, employee, guest or third party."
         ]
       },
       "liability": {
-        "title": "9. Liability and unforeseen events",
+        "title": "10. Liability and unforeseen events",
         "paragraphs": [
           "Nothing in these terms excludes liability that cannot legally be excluded.",
           "To the extent permitted by applicable law, Moorish Concierge is not responsible for indirect losses or for events outside its reasonable control, including weather, traffic, strikes, government restrictions, provider cancellations, natural events or failures of third-party systems.",
@@ -453,7 +468,7 @@
         ]
       },
       "privacy": {
-        "title": "10. Personal data and privacy",
+        "title": "11. Personal data and privacy",
         "paragraphs": [
           "We may process identity, contact, account, preference, request, booking and website-usage information to provide services, manage accounts, communicate with users, improve the platform and comply with legal obligations.",
           "Personal data should be collected for identified and legitimate purposes, limited to what is reasonably necessary, kept accurate and retained only for an appropriate period.",
@@ -462,7 +477,7 @@
         ]
       },
       "security": {
-        "title": "11. Data security",
+        "title": "12. Data security",
         "paragraphs": [
           "Moorish Concierge uses reasonable technical and organizational measures intended to protect personal information from unauthorized access, loss, alteration or disclosure.",
           "Account passwords are stored using secure password hashing rather than as readable passwords. Secure HTTPS connections should be used in production for data transmitted between the browser and the platform.",
@@ -470,14 +485,14 @@
         ]
       },
       "rights": {
-        "title": "12. Applicable law and user rights",
+        "title": "13. Applicable law and user rights",
         "paragraphs": [
           "These terms are intended to operate in accordance with applicable Moroccan law. Mandatory consumer and data-protection rights remain unaffected.",
           "Where a disagreement occurs, users are encouraged to contact Moorish Concierge first so that the issue can be reviewed and an appropriate solution can be sought."
         ]
       },
       "changes": {
-        "title": "13. Changes to these terms",
+        "title": "14. Changes to these terms",
         "paragraphs": [
           "Moorish Concierge may update these terms to reflect changes to services, operational practices or legal obligations.",
           "The updated version will be published on this page with a revised update date. Material changes may also be communicated through the website, account or registered contact details."

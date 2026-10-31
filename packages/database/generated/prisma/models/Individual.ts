@@ -348,6 +348,7 @@ export type IndividualWhereInput = {
   consents?: Prisma.ConsentListRelationFilter
   pageVisits?: Prisma.PageVisitListRelationFilter
   contactRequests?: Prisma.ContactRequestListRelationFilter
+  conciergeOrders?: Prisma.ConciergeOrderListRelationFilter
   chats?: Prisma.ChatListRelationFilter
   visitorJourneys?: Prisma.VisitorJourneyListRelationFilter
   tripCarts?: Prisma.TripCartListRelationFilter
@@ -385,6 +386,7 @@ export type IndividualOrderByWithRelationInput = {
   consents?: Prisma.ConsentOrderByRelationAggregateInput
   pageVisits?: Prisma.PageVisitOrderByRelationAggregateInput
   contactRequests?: Prisma.ContactRequestOrderByRelationAggregateInput
+  conciergeOrders?: Prisma.ConciergeOrderOrderByRelationAggregateInput
   chats?: Prisma.ChatOrderByRelationAggregateInput
   visitorJourneys?: Prisma.VisitorJourneyOrderByRelationAggregateInput
   tripCarts?: Prisma.TripCartOrderByRelationAggregateInput
@@ -425,6 +427,7 @@ export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   consents?: Prisma.ConsentListRelationFilter
   pageVisits?: Prisma.PageVisitListRelationFilter
   contactRequests?: Prisma.ContactRequestListRelationFilter
+  conciergeOrders?: Prisma.ConciergeOrderListRelationFilter
   chats?: Prisma.ChatListRelationFilter
   visitorJourneys?: Prisma.VisitorJourneyListRelationFilter
   tripCarts?: Prisma.TripCartListRelationFilter
@@ -524,6 +527,7 @@ export type IndividualCreateInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
@@ -561,6 +565,7 @@ export type IndividualUncheckedCreateInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
@@ -598,6 +603,7 @@ export type IndividualUpdateInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
@@ -635,6 +641,7 @@ export type IndividualUncheckedUpdateInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
@@ -906,6 +913,22 @@ export type IndividualUpdateOneWithoutContactRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutContactRequestsInput, Prisma.IndividualUpdateWithoutContactRequestsInput>, Prisma.IndividualUncheckedUpdateWithoutContactRequestsInput>
 }
 
+export type IndividualCreateNestedOneWithoutConciergeOrdersInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutConciergeOrdersInput, Prisma.IndividualUncheckedCreateWithoutConciergeOrdersInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutConciergeOrdersInput
+  connect?: Prisma.IndividualWhereUniqueInput
+}
+
+export type IndividualUpdateOneWithoutConciergeOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutConciergeOrdersInput, Prisma.IndividualUncheckedCreateWithoutConciergeOrdersInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutConciergeOrdersInput
+  upsert?: Prisma.IndividualUpsertWithoutConciergeOrdersInput
+  disconnect?: Prisma.IndividualWhereInput | boolean
+  delete?: Prisma.IndividualWhereInput | boolean
+  connect?: Prisma.IndividualWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutConciergeOrdersInput, Prisma.IndividualUpdateWithoutConciergeOrdersInput>, Prisma.IndividualUncheckedUpdateWithoutConciergeOrdersInput>
+}
+
 export type IndividualCreateNestedOneWithoutTripCartsInput = {
   create?: Prisma.XOR<Prisma.IndividualCreateWithoutTripCartsInput, Prisma.IndividualUncheckedCreateWithoutTripCartsInput>
   connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutTripCartsInput
@@ -985,6 +1008,7 @@ export type IndividualCreateWithoutLeadsInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
@@ -1021,6 +1045,7 @@ export type IndividualUncheckedCreateWithoutLeadsInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
@@ -1073,6 +1098,7 @@ export type IndividualUpdateWithoutLeadsInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
@@ -1109,6 +1135,7 @@ export type IndividualUncheckedUpdateWithoutLeadsInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1145,6 +1172,7 @@ export type IndividualCreateWithoutProspectsInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
@@ -1181,6 +1209,7 @@ export type IndividualUncheckedCreateWithoutProspectsInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
@@ -1233,6 +1262,7 @@ export type IndividualUpdateWithoutProspectsInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
@@ -1269,6 +1299,7 @@ export type IndividualUncheckedUpdateWithoutProspectsInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1305,6 +1336,7 @@ export type IndividualCreateWithoutAccountsInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
@@ -1341,6 +1373,7 @@ export type IndividualUncheckedCreateWithoutAccountsInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
@@ -1393,6 +1426,7 @@ export type IndividualUpdateWithoutAccountsInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
@@ -1429,6 +1463,7 @@ export type IndividualUncheckedUpdateWithoutAccountsInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1465,6 +1500,7 @@ export type IndividualCreateWithoutConsentsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
@@ -1501,6 +1537,7 @@ export type IndividualUncheckedCreateWithoutConsentsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
@@ -1553,6 +1590,7 @@ export type IndividualUpdateWithoutConsentsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
@@ -1589,6 +1627,7 @@ export type IndividualUncheckedUpdateWithoutConsentsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1625,6 +1664,7 @@ export type IndividualCreateWithoutPageVisitsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
@@ -1661,6 +1701,7 @@ export type IndividualUncheckedCreateWithoutPageVisitsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
@@ -1713,6 +1754,7 @@ export type IndividualUpdateWithoutPageVisitsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
@@ -1749,6 +1791,7 @@ export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1785,6 +1828,7 @@ export type IndividualCreateWithoutContactRequestsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
@@ -1821,6 +1865,7 @@ export type IndividualUncheckedCreateWithoutContactRequestsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
@@ -1873,6 +1918,7 @@ export type IndividualUpdateWithoutContactRequestsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
@@ -1909,6 +1955,171 @@ export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
+  tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
+}
+
+export type IndividualCreateWithoutConciergeOrdersInput = {
+  id: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  manualEmail?: string | null
+  mobilePhone?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
+  address?: string | null
+  birthdate?: Date | string | null
+  country?: string | null
+  language: string
+  source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
+  passwordResetToken?: string | null
+  passwordResetTokenExpiresAt?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  lastSuccessfulLoginDate?: Date | string | null
+  leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
+  tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
+}
+
+export type IndividualUncheckedCreateWithoutConciergeOrdersInput = {
+  id: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  manualEmail?: string | null
+  mobilePhone?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
+  address?: string | null
+  birthdate?: Date | string | null
+  country?: string | null
+  language: string
+  source: string
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
+  passwordResetToken?: string | null
+  passwordResetTokenExpiresAt?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  lastSuccessfulLoginDate?: Date | string | null
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
+  tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
+}
+
+export type IndividualCreateOrConnectWithoutConciergeOrdersInput = {
+  where: Prisma.IndividualWhereUniqueInput
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutConciergeOrdersInput, Prisma.IndividualUncheckedCreateWithoutConciergeOrdersInput>
+}
+
+export type IndividualUpsertWithoutConciergeOrdersInput = {
+  update: Prisma.XOR<Prisma.IndividualUpdateWithoutConciergeOrdersInput, Prisma.IndividualUncheckedUpdateWithoutConciergeOrdersInput>
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutConciergeOrdersInput, Prisma.IndividualUncheckedCreateWithoutConciergeOrdersInput>
+  where?: Prisma.IndividualWhereInput
+}
+
+export type IndividualUpdateToOneWithWhereWithoutConciergeOrdersInput = {
+  where?: Prisma.IndividualWhereInput
+  data: Prisma.XOR<Prisma.IndividualUpdateWithoutConciergeOrdersInput, Prisma.IndividualUncheckedUpdateWithoutConciergeOrdersInput>
+}
+
+export type IndividualUpdateWithoutConciergeOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manualEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
+  tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
+}
+
+export type IndividualUncheckedUpdateWithoutConciergeOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manualEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1946,6 +2157,7 @@ export type IndividualCreateWithoutTripCartsInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
 }
@@ -1982,6 +2194,7 @@ export type IndividualUncheckedCreateWithoutTripCartsInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
 }
@@ -2034,6 +2247,7 @@ export type IndividualUpdateWithoutTripCartsInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
 }
@@ -2070,6 +2284,7 @@ export type IndividualUncheckedUpdateWithoutTripCartsInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
 }
@@ -2106,6 +2321,7 @@ export type IndividualCreateWithoutChatsInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
 }
@@ -2142,6 +2358,7 @@ export type IndividualUncheckedCreateWithoutChatsInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
 }
@@ -2194,6 +2411,7 @@ export type IndividualUpdateWithoutChatsInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
 }
@@ -2230,6 +2448,7 @@ export type IndividualUncheckedUpdateWithoutChatsInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
 }
@@ -2266,6 +2485,7 @@ export type IndividualCreateWithoutVisitorJourneysInput = {
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
 }
@@ -2302,6 +2522,7 @@ export type IndividualUncheckedCreateWithoutVisitorJourneysInput = {
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
   pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
   contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
   chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
   tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
 }
@@ -2354,6 +2575,7 @@ export type IndividualUpdateWithoutVisitorJourneysInput = {
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
 }
@@ -2390,6 +2612,7 @@ export type IndividualUncheckedUpdateWithoutVisitorJourneysInput = {
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
   pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
   tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
 }
@@ -2406,6 +2629,7 @@ export type IndividualCountOutputType = {
   consents: number
   pageVisits: number
   contactRequests: number
+  conciergeOrders: number
   chats: number
   visitorJourneys: number
   tripCarts: number
@@ -2418,6 +2642,7 @@ export type IndividualCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   consents?: boolean | IndividualCountOutputTypeCountConsentsArgs
   pageVisits?: boolean | IndividualCountOutputTypeCountPageVisitsArgs
   contactRequests?: boolean | IndividualCountOutputTypeCountContactRequestsArgs
+  conciergeOrders?: boolean | IndividualCountOutputTypeCountConciergeOrdersArgs
   chats?: boolean | IndividualCountOutputTypeCountChatsArgs
   visitorJourneys?: boolean | IndividualCountOutputTypeCountVisitorJourneysArgs
   tripCarts?: boolean | IndividualCountOutputTypeCountTripCartsArgs
@@ -2478,6 +2703,13 @@ export type IndividualCountOutputTypeCountContactRequestsArgs<ExtArgs extends ru
 /**
  * IndividualCountOutputType without action
  */
+export type IndividualCountOutputTypeCountConciergeOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConciergeOrderWhereInput
+}
+
+/**
+ * IndividualCountOutputType without action
+ */
 export type IndividualCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ChatWhereInput
 }
@@ -2529,6 +2761,7 @@ export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   consents?: boolean | Prisma.Individual$consentsArgs<ExtArgs>
   pageVisits?: boolean | Prisma.Individual$pageVisitsArgs<ExtArgs>
   contactRequests?: boolean | Prisma.Individual$contactRequestsArgs<ExtArgs>
+  conciergeOrders?: boolean | Prisma.Individual$conciergeOrdersArgs<ExtArgs>
   chats?: boolean | Prisma.Individual$chatsArgs<ExtArgs>
   visitorJourneys?: boolean | Prisma.Individual$visitorJourneysArgs<ExtArgs>
   tripCarts?: boolean | Prisma.Individual$tripCartsArgs<ExtArgs>
@@ -2627,6 +2860,7 @@ export type IndividualInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   consents?: boolean | Prisma.Individual$consentsArgs<ExtArgs>
   pageVisits?: boolean | Prisma.Individual$pageVisitsArgs<ExtArgs>
   contactRequests?: boolean | Prisma.Individual$contactRequestsArgs<ExtArgs>
+  conciergeOrders?: boolean | Prisma.Individual$conciergeOrdersArgs<ExtArgs>
   chats?: boolean | Prisma.Individual$chatsArgs<ExtArgs>
   visitorJourneys?: boolean | Prisma.Individual$visitorJourneysArgs<ExtArgs>
   tripCarts?: boolean | Prisma.Individual$tripCartsArgs<ExtArgs>
@@ -2644,6 +2878,7 @@ export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.Internal
     consents: Prisma.$ConsentPayload<ExtArgs>[]
     pageVisits: Prisma.$PageVisitPayload<ExtArgs>[]
     contactRequests: Prisma.$ContactRequestPayload<ExtArgs>[]
+    conciergeOrders: Prisma.$ConciergeOrderPayload<ExtArgs>[]
     chats: Prisma.$ChatPayload<ExtArgs>[]
     visitorJourneys: Prisma.$VisitorJourneyPayload<ExtArgs>[]
     tripCarts: Prisma.$TripCartPayload<ExtArgs>[]
@@ -3074,6 +3309,7 @@ export interface Prisma__IndividualClient<T, Null = never, ExtArgs extends runti
   consents<T extends Prisma.Individual$consentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$consentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pageVisits<T extends Prisma.Individual$pageVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$pageVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   contactRequests<T extends Prisma.Individual$contactRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$contactRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conciergeOrders<T extends Prisma.Individual$conciergeOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$conciergeOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConciergeOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chats<T extends Prisma.Individual$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   visitorJourneys<T extends Prisma.Individual$visitorJourneysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$visitorJourneysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitorJourneyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tripCarts<T extends Prisma.Individual$tripCartsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$tripCartsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TripCartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3665,6 +3901,30 @@ export type Individual$contactRequestsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.ContactRequestScalarFieldEnum | Prisma.ContactRequestScalarFieldEnum[]
+}
+
+/**
+ * Individual.conciergeOrders
+ */
+export type Individual$conciergeOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConciergeOrder
+   */
+  select?: Prisma.ConciergeOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ConciergeOrder
+   */
+  omit?: Prisma.ConciergeOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConciergeOrderInclude<ExtArgs> | null
+  where?: Prisma.ConciergeOrderWhereInput
+  orderBy?: Prisma.ConciergeOrderOrderByWithRelationInput | Prisma.ConciergeOrderOrderByWithRelationInput[]
+  cursor?: Prisma.ConciergeOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConciergeOrderScalarFieldEnum | Prisma.ConciergeOrderScalarFieldEnum[]
 }
 
 /**
