@@ -6,7 +6,7 @@ export const router = Router();
 router.get("/vapid-public-key", (_req, res) => {
   const publicKey = process.env.VAPID_PUBLIC_KEY?.trim();
   if (!publicKey) {
-    return res.status(503).json({ message: "Push notifications are not configured" });
+    return res.status(503).json({ message: "Notifications unavailable: VAPID_PUBLIC_KEY is missing from the Admin API environment. Configure the same public key used by Website API, then redeploy Admin API." });
   }
   res.json({ publicKey });
 });

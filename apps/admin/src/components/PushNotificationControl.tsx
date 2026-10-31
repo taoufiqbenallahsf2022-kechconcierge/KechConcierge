@@ -24,6 +24,7 @@ async function saveSubscription(subscription: PushSubscription) {
 
 export function PushNotificationControl() {
   const [state, setState] = useState<PushState>("checking");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (!("serviceWorker" in navigator) || !("PushManager" in window) || !("Notification" in window)) {
@@ -44,6 +45,7 @@ export function PushNotificationControl() {
 
   async function enable() {
     setState("loading");
+    setErrorMessage("");
     try {
       const permission = await Notification.requestPermission();
       if (permission !== "granted") {
@@ -62,13 +64,14 @@ export function PushNotificationControl() {
       setState("subscribed");
     } catch (error) {
       console.error(error);
+      setErrorMessage(error instanceof Error ? error.message : "Unable to enable notifications");
       setState("error");
     }
   }
 
   if (state === "checking" || state === "unsupported") return null;
   const label = state === "subscribed" ? "Notifications on" : state === "blocked" ? "Notifications blocked" : state === "error" ? "Try notifications again" : "Enable notifications";
-  return <button type="button" className={`push-control ${state === "subscribed" ? "is-on" : ""}`} onClick={state === "subscribed" || state === "blocked" || state === "loading" ? undefined : () => void enable()} title={state === "blocked" ? "Allow notifications for this site in your browser settings" : label} disabled={state === "loading"}>
+  return <div><button type="button" className={`push-control ${state === "subscribed" ? "is-on" : ""}`} onClick={state === "subscribed" || state === "blocked" || state === "loading" ? undefined : () => void enable()} title={state === "blocked" ? "Allow notifications for this site in your browser settings" : label} disabled={state === "loading"}>
     <span aria-hidden="true">{state === "subscribed" ? "●" : "◌"}</span>{state === "loading" ? "Enabling…" : label}
-  </button>;
+  </button>{errorMessage && <p role="alert" className="push-error">{errorMessage}</p>}</div>;
 }

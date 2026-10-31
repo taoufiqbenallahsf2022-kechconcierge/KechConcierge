@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import type { Locale } from "@/lib/i18n";
 import { useTripStore, type TripPlan } from "@/store/trip.store";
+import { productCta, useProductCtaContent } from "@/store/product-cta.store";
 
 const copy = {
   en: { add: "Add to trip", added: "Added to trip", title: "Add to your trip", intro: "Choose the plan and dates for this item before adding it.", plan: "Choose a plan", choose: "Select a plan…", start: "Start date", end: "End date", confirm: "Add to trip", saving: "Adding…", error: "Choose a plan and valid dates before adding this item." },
@@ -19,7 +20,8 @@ const copy = {
 type Props = { locale: Locale; productId: string; productType: string; productName: string; category: string; image: string; plans?: TripPlan[]; selectedPlanId?: string; className?: string };
 
 export default function AddToTripButton({ locale, productId, productType, productName, category, image, plans = [], selectedPlanId, className = "mt-3" }: Props) {
-  const text = copy[locale];
+  const cta = productCta(useProductCtaContent(), productType, locale);
+  const text = { ...copy[locale], add: cta.addToTrip || copy[locale].add, confirm: cta.addToTrip || copy[locale].confirm };
   const add = useTripStore((state) => state.add);
   const existingItem = useTripStore((state) => state.items.find((item) => item.productId === productId));
   const [open, setOpen] = useState(false);

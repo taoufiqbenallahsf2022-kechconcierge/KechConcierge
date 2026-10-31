@@ -10,6 +10,7 @@ datasource db {
 model WebsiteConfiguration {
   id          String   @id @default("primary")
   heroSlides  Json     @default("[]")
+  productCtas Json     @default("{}")
   updatedAt   DateTime @updatedAt
   updatedBy   String?
 }
