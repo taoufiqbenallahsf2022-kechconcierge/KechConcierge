@@ -5,6 +5,35 @@ import { createCloudflareDirectUpload } from "../services/cloudflareImagesServic
 import { HeroText, translateHeroText } from "../services/heroTranslationService.js";
 
 export const router = Router();
+const ctaTypes = ["VILLA", "TRANSPORTATION", "SWIMMINGPOOL", "NIGHTCLUB", "PACK", "ACTIVITY", "RESTAURANT", "SPA"];
+const ctaLocales = ["en", "fr", "de", "it", "pt", "es"];
+const ctaFields = ["booking", "options", "addToTrip", "optionAction", "optionsTitle"];
+router.get("/product-ctas", async (_req, res, next) => {
+  try {
+    const config = await prisma.websiteConfiguration.findUnique({ where: { id: "primary" } });
+    res.json({ content: config?.productCtas ?? {}, updatedAt: config?.updatedAt ?? null });
+  } catch (error) { next(error); }
+});
+router.put("/product-ctas", async (req, res, next) => {
+  try {
+    const input = req.body?.content;
+    if (!input || typeof input !== "object" || Array.isArray(input)) return res.status(400).json({ message: "CTA content must be an object" });
+    const content: Record<string, any> = {};
+    for (const type of ctaTypes) {
+      content[type] = {};
+      for (const locale of ctaLocales) {
+        content[type][locale] = {};
+        for (const field of ctaFields) {
+          const value = input[type]?.[locale]?.[field];
+          if (value != null && (typeof value !== "string" || value.length > 120)) return res.status(400).json({ message: `${type} ${locale} ${field} must be text of at most 120 characters` });
+          content[type][locale][field] = typeof value === "string" ? value.trim() : "";
+        }
+      }
+    }
+    const config = await prisma.websiteConfiguration.upsert({ where: { id: "primary" }, create: { id: "primary", productCtas: content, updatedBy: req.adminUser!.id }, update: { productCtas: content, updatedBy: req.adminUser!.id } });
+    res.json({ content: config.productCtas, updatedAt: config.updatedAt });
+  } catch (error) { next(error); }
+});
 const MAX_SLIDES = 5;
 const translatedLocales = ["fr", "de", "it", "pt", "es"];
 const text = (value: unknown, max = 1000) => typeof value === "string" ? value.trim().slice(0, max) : "";

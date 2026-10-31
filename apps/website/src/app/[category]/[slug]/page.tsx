@@ -29,6 +29,7 @@ import ProductPlansModal from "@/components/ProductPlansModal";
 import ProgressiveImage from "@/components/ProgressiveImage";
 import AddToTripButton from "@/components/AddToTripButton";
 import { getProductOptionCopy } from "@/lib/product-option-copy";
+import { productCta, useProductCtaContent } from "@/store/product-cta.store";
 
 type CategorySlug =
   | "villas"
@@ -321,6 +322,7 @@ export default function DetailsPage() {
   const [selectedImage, setSelectedImage] =
     useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const ctaContent = useProductCtaContent();
   const [showStickyBooking, setShowStickyBooking] = useState(false);
   const [plansOpen, setPlansOpen] = useState(false);
   const [plansAttentionDismissed, setPlansAttentionDismissed] = useState(false);
@@ -604,7 +606,7 @@ export default function DetailsPage() {
     t,
     canonicalCategory
   );
-  const productOptionCopy = getProductOptionCopy(locale, product.type);
+  const productOptionCopy = getProductOptionCopy(locale, product.type, productCta(ctaContent, product.type, locale));
 
   const categoryPath = getLocalizedPath(
     locale,
@@ -746,7 +748,7 @@ export default function DetailsPage() {
             {product.address}
           </p>
 
-          {product.priceEuro != null && <div className="mt-5"><p className="text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><div className="mt-1 flex flex-wrap items-center gap-2.5"><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p>{product.type === "VILLA" && product.priceWithDriverEuro != null && <p className="rounded-xl border border-orange-200 bg-orange-50 px-3 py-1.5 text-sm font-bold text-zinc-700"><span className="text-orange-700">{product.priceWithDriverEuro} {product.currency ?? "EUR"}</span>{product.priceWithDriverLabel ? ` · ${product.priceWithDriverLabel}` : ""}</p>}</div></div>}
+          {product.priceEuro != null && <div className="mt-5"><p className="text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1"><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p>{product.type === "VILLA" && product.priceWithDriverEuro != null && <p className="flex flex-wrap items-baseline gap-x-3 text-zinc-700"><span aria-hidden="true" className="text-2xl font-light text-zinc-400">|</span><span className="text-2xl font-black text-orange-700 sm:text-3xl">{product.priceWithDriverEuro} {product.currency ?? "EUR"}</span><span className="text-base font-semibold">{product.priceWithDriverLabel || ({ en: "with driver", fr: "avec chauffeur", de: "mit Fahrer", it: "con autista", pt: "com motorista", es: "con conductor" })[locale]}</span></p>}</div></div>}
 
           {!!product.plans?.length && product.type === "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-x-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} className="mt-5" /><button type="button" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-3 rounded-full border-2 px-7 py-4 text-lg font-black transition sm:col-span-2`}>{productOptionCopy.trigger}</button></div>}
 

@@ -27,6 +27,7 @@ import { WhatsappMessagesList, WhatsappMessagesDetail } from "./features/whatsap
 import { ChatMessagesList, ChatMessagesDetail } from "./features/chat-messages/ChatMessagesPages";
 import { Activities, BeachClubs, NightClubs, Packs, Restaurants, Transportation, Villas } from "./features/catalog/IndependentCatalogPages";
 import { WebsiteConfigurationPage } from "./pages/WebsiteConfigurationPage";
+import { ProductCtaConfigurationPage } from "./pages/ProductCtaConfigurationPage";
 import { OrdersList, OrderCreate, OrderDetail } from "./features/orders/OrdersPages";
 import { ContactRequestPerformancePage, EmailPerformancePage, LiveChatPerformancePage, PageVisitPerformancePage } from "./features/performance/PerformancePages";
 
@@ -68,6 +69,7 @@ export default function App() {
         <Route path="data-hub" element={<DataHub />} />
         <Route path="website" element={<Navigate to="/website/slideshow" replace />} />
         <Route path="website/slideshow" element={<WebsiteConfigurationPage />} />
+        <Route path="website/product-ctas" element={<ProductCtaConfigurationPage />} />
         <Route path="website-configuration" element={<Navigate to="/website/slideshow" replace />} />
         <Route path="email-studio" element={<EmailStudioPage />} />
         <Route path="segments" element={<SegmentsListPage />} />

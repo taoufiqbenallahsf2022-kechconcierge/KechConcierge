@@ -9,6 +9,7 @@ import type { Locale } from "@/lib/i18n";
 import { useAuthStore } from "@/store/auth.store";
 import { getVisitorId } from "@/lib/visitor";
 import { getProductOptionCopy } from "@/lib/product-option-copy";
+import { productCta, useProductCtaContent } from "@/store/product-cta.store";
 import type { ProductType } from "@/store/product-details.store";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -37,8 +38,9 @@ type BookingPlan = { id: string; title: string; salePrice: number; currency: str
 type Props = { locale: Locale; productType: ProductType; productName: string; sticky: boolean; plans?: BookingPlan[]; selectedPlanId?: string | null; open?: boolean; onOpenChange?: (open: boolean) => void; hideTrigger?: boolean };
 
 export default function ProductBookingPanel({ locale, productType, productName, sticky, plans = [], selectedPlanId = null, open: controlledOpen, onOpenChange, hideTrigger = false }: Props) {
-  const text = copy[locale];
-  const optionText = getProductOptionCopy(locale, productType);
+  const cta = productCta(useProductCtaContent(), productType, locale);
+  const text = { ...copy[locale], cta: cta.booking || copy[locale].cta };
+  const optionText = getProductOptionCopy(locale, productType, cta);
   const user = useAuthStore((state) => state.user);
   const accessToken = useAuthStore((state) => state.accessToken);
   const [internalOpen, setInternalOpen] = useState(false);

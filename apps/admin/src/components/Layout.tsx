@@ -29,6 +29,7 @@ const groups = [
     label: "Website",
     items: [
       { to: "/website/slideshow", label: "Slideshow", icon: "◩" },
+      { to: "/website/product-ctas", label: "Product CTAs", icon: "↗" },
     ],
   },
   {

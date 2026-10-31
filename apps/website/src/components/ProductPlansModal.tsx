@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import type { Locale } from "@/lib/i18n";
 import type { ProductDetails } from "@/store/product-details.store";
 import { getProductOptionCopy } from "@/lib/product-option-copy";
+import { productCta, useProductCtaContent } from "@/store/product-cta.store";
 
 type Plan = ProductDetails["plans"][number];
 type Props = { open: boolean; locale: Locale; productType: ProductDetails["type"]; plans: Plan[]; onClose: () => void; onBook: (planId: string) => void };
@@ -23,7 +24,7 @@ export default function ProductPlansModal({ open, locale, productType, plans, on
   const [index, setIndex] = useState(0);
   const desktopScroller = useRef<HTMLDivElement>(null);
   const text = copy[locale];
-  const optionText = getProductOptionCopy(locale, productType);
+  const optionText = getProductOptionCopy(locale, productType, productCta(useProductCtaContent(), productType, locale));
   const multiplePlans = plans.length > 1;
 
   const move = useCallback((direction: -1 | 1) => {
