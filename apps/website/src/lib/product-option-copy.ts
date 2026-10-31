@@ -1,5 +1,6 @@
 import type { Locale } from "@/lib/i18n";
 import type { ProductType } from "@/store/product-details.store";
+import type { CtaText } from "@/store/product-cta.store";
 
 const titles: Record<Locale, Partial<Record<ProductType, string>> & { default: string }> = {
   en: { default: "Available options", TRANSPORTATION: "Service options & pricing", ACTIVITY: "Experience options", SWIMMINGPOOL: "Available packages", NIGHTCLUB: "Table & experience options", PACK: "Available packages" },
@@ -20,15 +21,15 @@ const optionCopy = {
 } as const;
 
 const transportationTrigger: Record<Locale, string> = {
-  en: "View service options",
-  fr: "Voir les options de service",
-  de: "Serviceoptionen ansehen",
-  it: "Vedi le opzioni di servizio",
-  pt: "Ver opções de serviço",
-  es: "Ver opciones de servicio",
+  en: "Explore prices",
+  fr: "Découvrir les tarifs",
+  de: "Preise entdecken",
+  it: "Scopri i prezzi",
+  pt: "Explorar preços",
+  es: "Explorar precios",
 };
 
-export function getProductOptionCopy(locale: Locale, productType: ProductType) {
-  const title = titles[locale][productType] ?? titles[locale].default;
-  return { ...optionCopy[locale], title, trigger: productType === "TRANSPORTATION" ? transportationTrigger[locale] : title };
+export function getProductOptionCopy(locale: Locale, productType: ProductType, cta: CtaText = {}) {
+  const title = cta.optionsTitle || titles[locale][productType] || titles[locale].default;
+  return { ...optionCopy[locale], action: cta.optionAction || optionCopy[locale].action, title, trigger: cta.options || (productType === "TRANSPORTATION" ? transportationTrigger[locale] : title) };
 }

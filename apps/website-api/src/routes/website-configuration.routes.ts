@@ -2,6 +2,13 @@ import { Router } from "express";
 import { prisma } from "../config/prisma";
 
 const router = Router();
+router.get("/product-ctas", async (_req, res, next) => {
+  try {
+    const config = await prisma.websiteConfiguration.findUnique({ where: { id: "primary" }, select: { productCtas: true } });
+    res.setHeader("Cache-Control", "public, max-age=60");
+    res.json({ content: config?.productCtas ?? {} });
+  } catch (error) { next(error); }
+});
 
 router.get("/hero", async (_req, res, next) => {
   try {

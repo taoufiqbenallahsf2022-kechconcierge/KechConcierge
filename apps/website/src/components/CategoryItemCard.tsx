@@ -129,9 +129,9 @@ export default function CategoryItemCard({
         onFocus={prefetchProduct}
         disabled={loading}
         aria-busy={loading}
-        className="block w-full text-left disabled:cursor-wait"
+        className="flex h-full w-full flex-col text-left disabled:cursor-wait"
       >
-        <div className="relative h-64 overflow-hidden">
+        <div className="relative h-64 w-full shrink-0 overflow-hidden">
           <ProgressiveImage
             src={item.thumbnail}
             alt={item.thumbnailAlt || item.title}
@@ -162,22 +162,15 @@ export default function CategoryItemCard({
         </div>
 
         <div
-          className={`p-5 transition ${
+          className={`flex w-full flex-1 flex-col p-5 transition ${
             loading
               ? "opacity-70"
               : ""
           }`}
         >
-          <div className="flex items-start justify-between gap-4">
-            <h2 className="text-xl font-black text-zinc-950">
+            <h2 className="text-xl font-black leading-7 text-zinc-950">
               {item.title}
             </h2>
-
-            <div className="shrink-0 text-right">
-              {item.priceEuro != null && <><p className="text-xs font-bold text-zinc-500">{item.priceTitle || t.hero.startingFrom}</p><p className="text-xl font-black text-orange-700">{item.priceEuro} {item.currency ?? "EUR"}</p></>}
-              {item.type === "VILLA" && item.priceWithDriverEuro != null && <p className="mt-1.5 max-w-52 whitespace-normal rounded-lg border border-orange-100 bg-orange-50 px-2 py-1 text-xs font-semibold leading-4 text-zinc-600"><span className="font-bold text-orange-700">{item.priceWithDriverEuro} {item.currency ?? "EUR"}</span>{item.priceWithDriverLabel ? ` · ${item.priceWithDriverLabel}` : ""}</p>}
-            </div>
-          </div>
 
           <p className="mt-3 line-clamp-2 leading-6 text-zinc-600">
             {item.subtitle}
@@ -194,7 +187,19 @@ export default function CategoryItemCard({
             </span>
           </div>
 
-          <div className="mt-5 inline-flex items-center gap-2 font-black text-orange-700">
+          {typeof item.priceEuro === "number" && (
+            <div className="mt-4 text-sm font-bold text-zinc-950">
+              {item.priceTitle || t.hero.startingFrom}{" "}
+              <span className="text-orange-700">{item.priceEuro} {item.currency ?? "EUR"}</span>
+            </div>
+          )}
+          {item.type === "VILLA" && typeof item.priceWithDriverEuro === "number" && (
+            <p className="mt-1.5 self-start rounded-lg border border-orange-100 bg-orange-50 px-2 py-1 text-xs font-semibold leading-4 text-zinc-600">
+              <span className="font-bold text-orange-700">{item.priceWithDriverEuro} {item.currency ?? "EUR"}</span>{item.priceWithDriverLabel ? ` · ${item.priceWithDriverLabel}` : ""}
+            </p>
+          )}
+
+          <div className="mt-auto inline-flex items-center gap-2 pt-5 font-black text-orange-700">
             {loading ? (
               <>
                 <Loader2

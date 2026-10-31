@@ -27,7 +27,7 @@ type ServiceTranslationKey =
 const categories =
   Object.keys(
     categoryLabels
-  ) as Category[];
+  ).filter((category) => category !== "spa" && category !== "packs") as Category[];
 
 const CATEGORY_TRANSLATION_KEYS: Partial<Record<
   Category,
