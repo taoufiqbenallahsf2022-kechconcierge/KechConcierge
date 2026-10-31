@@ -175,6 +175,7 @@ export default function CategoryItemCard({
 
             <div className="shrink-0 text-right">
               {item.priceEuro != null && <><p className="text-xs font-bold text-zinc-500">{item.priceTitle || t.hero.startingFrom}</p><p className="text-xl font-black text-orange-700">{item.priceEuro} {item.currency ?? "EUR"}</p></>}
+              {item.type === "VILLA" && item.priceWithDriverEuro != null && <p className="mt-1.5 max-w-52 whitespace-normal rounded-lg border border-orange-100 bg-orange-50 px-2 py-1 text-xs font-semibold leading-4 text-zinc-600"><span className="font-bold text-orange-700">{item.priceWithDriverEuro} {item.currency ?? "EUR"}</span>{item.priceWithDriverLabel ? ` · ${item.priceWithDriverLabel}` : ""}</p>}
             </div>
           </div>
 

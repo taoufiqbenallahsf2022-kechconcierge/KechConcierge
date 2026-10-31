@@ -46,6 +46,8 @@ function mapIndependent(row: any, type: IndependentType, language: Language, ful
     id: row.id, type, uniqueCode: row.uniqueCode, order: row.order, thumbnail: row.thumbnail, thumbnailAlt: localizedAlts.thumbnail,
     priceEuro: price, currency, title: localized(row, "title", language), subtitle: localized(row, "subtitle", language),
     priceTitle: price == null ? "" : localized(row, "priceTitle", language) || startingFrom[language],
+    priceWithDriverEuro: type === "VILLA" && row.priceWithDriverEuro != null ? Number(row.priceWithDriverEuro) : null,
+    priceWithDriverLabel: type === "VILLA" && row.priceWithDriverEuro != null ? localized(row, "priceWithDriverLabel", language) : "",
     address: localized(row, "location", language) || localized(row, "address", language),
   };
   if (!full) return base;

@@ -53,6 +53,16 @@ export type AudienceAutomation = Prisma.AudienceAutomationModel
  */
 export type AutomationRun = Prisma.AutomationRunModel
 /**
+ * Model EmailMessage
+ * 
+ */
+export type EmailMessage = Prisma.EmailMessageModel
+/**
+ * Model EmailEvent
+ * 
+ */
+export type EmailEvent = Prisma.EmailEventModel
+/**
  * Model RecordFlow
  * 
  */
@@ -242,6 +252,21 @@ export type PageVisit = Prisma.PageVisitModel
  * 
  */
 export type ContactRequest = Prisma.ContactRequestModel
+/**
+ * Model ConciergeOrder
+ * 
+ */
+export type ConciergeOrder = Prisma.ConciergeOrderModel
+/**
+ * Model ConciergeOrderItem
+ * 
+ */
+export type ConciergeOrderItem = Prisma.ConciergeOrderItemModel
+/**
+ * Model ConciergeOrderPayment
+ * 
+ */
+export type ConciergeOrderPayment = Prisma.ConciergeOrderPaymentModel
 /**
  * Model TripCart
  * 

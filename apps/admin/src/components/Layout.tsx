@@ -37,6 +37,16 @@ const groups = [
       { to: "/entities/chats", label: "Live Chats", icon: "◉" },
       { to: "/entities/contact-requests", label: "Contact Requests", icon: "✉" },
       { to: "/entities/trip-carts", label: "Trip Carts", icon: "▤" },
+      { to: "/entities/orders", label: "Orders", icon: "€" },
+    ],
+  },
+  {
+    label: "Performance",
+    items: [
+      { to: "/performance/emails", label: "Email Performance", icon: "↗" },
+      { to: "/performance/contact-requests", label: "Contact Requests", icon: "✉" },
+      { to: "/performance/live-chats", label: "Live Chats", icon: "◉" },
+      { to: "/performance/page-visits", label: "Page Visits", icon: "⌁" },
     ],
   },
   {

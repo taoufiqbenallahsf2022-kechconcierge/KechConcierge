@@ -42,6 +42,11 @@ export default function Footer() {
       .NEXT_PUBLIC_CONTACT_EMAIL ||
     "contact@moorishconcierge.com";
 
+  const usPhoneNumber =
+    process.env
+      .NEXT_PUBLIC_US_PHONE_NUMBER ||
+    "+1 (864) 465-4768";
+
   return (
     <footer className="mt-16 bg-zinc-950 text-white">
       <div className="mx-auto grid max-w-[1380px] gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 xl:px-8">
@@ -139,6 +144,15 @@ export default function Footer() {
 
             <FooterLink
               href={localizePath(
+                "/terms#refund-policy",
+                locale
+              )}
+            >
+              {t.footer.refundPolicy}
+            </FooterLink>
+
+            <FooterLink
+              href={localizePath(
                 "/terms#consent",
                 locale
               )}
@@ -162,10 +176,16 @@ export default function Footer() {
             {t.footer.contactTitle}
           </p>
 
-          <div className="mt-4 space-y-2 text-zinc-400">
-            <p>
-              {t.footer.location}
-            </p>
+          <address className="mt-4 space-y-4 text-sm not-italic text-zinc-400">
+            <div>
+              <p className="font-bold text-zinc-200">
+                {t.footer.companyName}
+              </p>
+
+              <p className="mt-1 leading-6">
+                {t.footer.usAddress}
+              </p>
+            </div>
 
             <a
               href={`mailto:${contactEmail}`}
@@ -174,18 +194,40 @@ export default function Footer() {
               {contactEmail}
             </a>
 
-            <a
-              href={`https://wa.me/${whatsappNumber.replace(
-                /\D/g,
-                ""
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block transition hover:text-orange-400"
-            >
-              {whatsappNumber}
-            </a>
-          </div>
+            <div className="space-y-2 border-t border-white/10 pt-4">
+              <p>
+                {t.footer.location}
+              </p>
+
+              <a
+                href={`https://wa.me/${whatsappNumber.replace(
+                  /\D/g,
+                  ""
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block transition hover:text-orange-400"
+              >
+                <span className="font-semibold text-zinc-300">
+                  {t.footer.moroccoPhoneLabel}:
+                </span>{" "}
+                {whatsappNumber}
+              </a>
+
+              <a
+                href={`tel:${usPhoneNumber.replace(
+                  /[^\d+]/g,
+                  ""
+                )}`}
+                className="block transition hover:text-orange-400"
+              >
+                <span className="font-semibold text-zinc-300">
+                  {t.footer.usPhoneLabel}:
+                </span>{" "}
+                {usPhoneNumber}
+              </a>
+            </div>
+          </address>
 
           <div className="mt-6 flex items-center gap-3" aria-label="Social media">
             <SocialLink href="https://www.instagram.com/moorishconcierge" label="Instagram"><InstagramIcon /></SocialLink>
@@ -199,7 +241,7 @@ export default function Footer() {
         <div className="mx-auto flex max-w-[1380px] flex-col items-center justify-between gap-3 px-5 py-5 text-center text-sm text-zinc-500 sm:flex-row sm:text-left xl:px-8">
           <p>
             © {new Date().getFullYear()}{" "}
-            Moorish Concierge.{" "}
+            Moorish Concierge LLC.{" "}
             {t.footer.copyright}
           </p>
 
@@ -222,6 +264,16 @@ export default function Footer() {
               className="transition hover:text-orange-400"
             >
               {t.footer.privacyShort}
+            </Link>
+
+            <Link
+              href={localizePath(
+                "/terms#refund-policy",
+                locale
+              )}
+              className="transition hover:text-orange-400"
+            >
+              {t.footer.refundPolicyShort}
             </Link>
           </div>
         </div>

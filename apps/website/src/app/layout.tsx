@@ -51,8 +51,11 @@ export async function generateMetadata(): Promise<Metadata> {
       images: ["https://imagedelivery.net/qcrNy2QA3vt3EbTLsOQBpA/06b8c914-294e-4155-bb81-627ccaf3fa00/public"],
     },
     icons: {
-      icon: "/brand/original-m-mark.png",
-      shortcut: "/brand/original-m-mark.png",
+      icon: [
+        { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+        { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+      ],
+      shortcut: "/favicon-48x48.png",
       apple: "/brand/original-m-mark.png",
     },
   };

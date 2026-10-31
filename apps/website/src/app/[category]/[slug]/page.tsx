@@ -28,6 +28,7 @@ import ProductImageLightbox from "@/components/ProductImageLightbox";
 import ProductPlansModal from "@/components/ProductPlansModal";
 import ProgressiveImage from "@/components/ProgressiveImage";
 import AddToTripButton from "@/components/AddToTripButton";
+import { getProductOptionCopy } from "@/lib/product-option-copy";
 
 type CategorySlug =
   | "villas"
@@ -42,12 +43,6 @@ type CategorySlug =
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
   "http://localhost:3001";
-
-const planCopy = {
-  en: { title: "Available plans", hint: "Swipe to compare →" }, fr: { title: "Formules disponibles", hint: "Faites défiler pour comparer →" },
-  de: { title: "Verfügbare Angebote", hint: "Zum Vergleichen wischen →" }, it: { title: "Piani disponibili", hint: "Scorri per confrontare →" },
-  pt: { title: "Planos disponíveis", hint: "Deslize para comparar →" }, es: { title: "Planes disponibles", hint: "Desliza para comparar →" },
-} as const;
 
 const galleryCopy = {
   en: "View gallery", fr: "Voir la galerie", de: "Galerie ansehen",
@@ -609,6 +604,7 @@ export default function DetailsPage() {
     t,
     canonicalCategory
   );
+  const productOptionCopy = getProductOptionCopy(locale, product.type);
 
   const categoryPath = getLocalizedPath(
     locale,
@@ -750,13 +746,15 @@ export default function DetailsPage() {
             {product.address}
           </p>
 
-          {product.priceEuro != null && <><p className="mt-5 text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p></>}
+          {product.priceEuro != null && <div className="mt-5"><p className="text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><div className="mt-1 flex flex-wrap items-center gap-2.5"><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p>{product.type === "VILLA" && product.priceWithDriverEuro != null && <p className="rounded-xl border border-orange-200 bg-orange-50 px-3 py-1.5 text-sm font-bold text-zinc-700"><span className="text-orange-700">{product.priceWithDriverEuro} {product.currency ?? "EUR"}</span>{product.priceWithDriverLabel ? ` · ${product.priceWithDriverLabel}` : ""}</p>}</div></div>}
 
-          {!!product.plans?.length && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productName={product.title} plans={product.plans} sticky={false} /><button type="button" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-5 rounded-full border-2 px-7 py-4 text-lg font-black transition`}>{planCopy[locale].title}</button></div>}
+          {!!product.plans?.length && product.type === "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-x-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} className="mt-5" /><button type="button" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-3 rounded-full border-2 px-7 py-4 text-lg font-black transition sm:col-span-2`}>{productOptionCopy.trigger}</button></div>}
 
-          {!product.plans?.length && <div ref={bookingAnchorRef}><ProductBookingPanel locale={locale} productName={product.title} sticky={false} /></div>}
+          {!!product.plans?.length && product.type !== "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><button type="button" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-5 rounded-full border-2 px-7 py-4 text-lg font-black transition`}>{productOptionCopy.trigger}</button></div>}
 
-          <AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} />
+          {!product.plans?.length && <div ref={bookingAnchorRef}><ProductBookingPanel locale={locale} productType={product.type} productName={product.title} sticky={false} /></div>}
+
+          {(product.type !== "TRANSPORTATION" || !product.plans?.length) && <AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} />}
 
           {product.subtitle && (
             <p className="mt-5 break-words text-lg font-bold leading-8 text-zinc-600">
@@ -849,13 +847,13 @@ export default function DetailsPage() {
 
       {showStickyBooking && !product.plans?.length && (
         <div className="fixed inset-x-0 bottom-0 z-40 animate-[booking-rise_.35s_ease-out] bg-white/95 backdrop-blur-xl">
-          <ProductBookingPanel locale={locale} productName={product.title} sticky />
+          <ProductBookingPanel locale={locale} productType={product.type} productName={product.title} sticky />
         </div>
       )}
 
-      {!!product.plans?.length && <ProductPlansModal open={plansOpen} locale={locale} plans={product.plans} onClose={() => setPlansOpen(false)} onBook={(planId) => { setPlansOpen(false); setBookingPlanId(planId); setBookingOpen(true); }} />}
+      {!!product.plans?.length && <ProductPlansModal open={plansOpen} locale={locale} productType={product.type} plans={product.plans} onClose={() => setPlansOpen(false)} onBook={(planId) => { setPlansOpen(false); setBookingPlanId(planId); setBookingOpen(true); }} />}
 
-      {!!product.plans?.length && <ProductBookingPanel locale={locale} productName={product.title} plans={product.plans} selectedPlanId={bookingPlanId} open={bookingOpen} onOpenChange={setBookingOpen} hideTrigger sticky={false} />}
+      {!!product.plans?.length && <ProductBookingPanel locale={locale} productType={product.type} productName={product.title} plans={product.plans} selectedPlanId={bookingPlanId} open={bookingOpen} onOpenChange={setBookingOpen} hideTrigger sticky={false} />}
 
       {lightboxOpen && (
         <ProductImageLightbox images={images} selected={selectedImage} onSelect={setSelectedImage} onClose={() => setLightboxOpen(false)} />

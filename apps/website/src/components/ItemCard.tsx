@@ -19,8 +19,10 @@ type ItemCardProps = {
     subtitle?: string;
     address?: string;
     priceEuro?: number | null;
+    priceWithDriverEuro?: number | null;
     currency?: string | null;
     priceTitle?: string;
+    priceWithDriverLabel?: string;
   };
   locale: string;
   priority?: boolean;
@@ -192,6 +194,11 @@ export default function ItemCard({
               {item.priceEuro} {item.currency ?? "EUR"}
             </span>
           </div>
+        )}
+        {item.type === "VILLA" && typeof item.priceWithDriverEuro === "number" && (
+          <p className="mt-1.5 inline-block rounded-lg border border-orange-100 bg-orange-50 px-2 py-1 text-xs font-semibold leading-4 text-zinc-600">
+            <span className="font-bold text-orange-700">{item.priceWithDriverEuro} {item.currency ?? "EUR"}</span>{item.priceWithDriverLabel ? ` · ${item.priceWithDriverLabel}` : ""}
+          </p>
         )}
       </div>
     </button>

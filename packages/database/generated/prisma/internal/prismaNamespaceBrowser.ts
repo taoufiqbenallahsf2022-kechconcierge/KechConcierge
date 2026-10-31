@@ -58,6 +58,8 @@ export const ModelName = {
   EmailTemplate: 'EmailTemplate',
   AudienceAutomation: 'AudienceAutomation',
   AutomationRun: 'AutomationRun',
+  EmailMessage: 'EmailMessage',
+  EmailEvent: 'EmailEvent',
   RecordFlow: 'RecordFlow',
   RecordFlowVersion: 'RecordFlowVersion',
   RecordFlowRun: 'RecordFlowRun',
@@ -96,6 +98,9 @@ export const ModelName = {
   Consent: 'Consent',
   PageVisit: 'PageVisit',
   ContactRequest: 'ContactRequest',
+  ConciergeOrder: 'ConciergeOrder',
+  ConciergeOrderItem: 'ConciergeOrderItem',
+  ConciergeOrderPayment: 'ConciergeOrderPayment',
   TripCart: 'TripCart',
   TripCartItem: 'TripCartItem',
   Chat: 'Chat',
@@ -232,6 +237,40 @@ export const AutomationRunScalarFieldEnum = {
 } as const
 
 export type AutomationRunScalarFieldEnum = (typeof AutomationRunScalarFieldEnum)[keyof typeof AutomationRunScalarFieldEnum]
+
+
+export const EmailMessageScalarFieldEnum = {
+  id: 'id',
+  resendEmailId: 'resendEmailId',
+  messageId: 'messageId',
+  recipientEmail: 'recipientEmail',
+  senderEmail: 'senderEmail',
+  subject: 'subject',
+  category: 'category',
+  lastEvent: 'lastEvent',
+  sentAt: 'sentAt',
+  lastEventAt: 'lastEventAt',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type EmailMessageScalarFieldEnum = (typeof EmailMessageScalarFieldEnum)[keyof typeof EmailMessageScalarFieldEnum]
+
+
+export const EmailEventScalarFieldEnum = {
+  id: 'id',
+  webhookEventId: 'webhookEventId',
+  resendEmailId: 'resendEmailId',
+  type: 'type',
+  recipientEmail: 'recipientEmail',
+  occurredAt: 'occurredAt',
+  link: 'link',
+  bounceType: 'bounceType',
+  payload: 'payload',
+  createdDate: 'createdDate'
+} as const
+
+export type EmailEventScalarFieldEnum = (typeof EmailEventScalarFieldEnum)[keyof typeof EmailEventScalarFieldEnum]
 
 
 export const RecordFlowScalarFieldEnum = {
@@ -418,6 +457,7 @@ export const VillaScalarFieldEnum = {
   id: 'id',
   uniqueCode: 'uniqueCode',
   priceEuro: 'priceEuro',
+  priceWithDriverEuro: 'priceWithDriverEuro',
   order: 'order',
   thumbnail: 'thumbnail',
   titleFR: 'titleFR',
@@ -438,6 +478,12 @@ export const VillaScalarFieldEnum = {
   priceTitleIT: 'priceTitleIT',
   priceTitlePT: 'priceTitlePT',
   priceTitleES: 'priceTitleES',
+  priceWithDriverLabelFR: 'priceWithDriverLabelFR',
+  priceWithDriverLabelEN: 'priceWithDriverLabelEN',
+  priceWithDriverLabelDE: 'priceWithDriverLabelDE',
+  priceWithDriverLabelIT: 'priceWithDriverLabelIT',
+  priceWithDriverLabelPT: 'priceWithDriverLabelPT',
+  priceWithDriverLabelES: 'priceWithDriverLabelES',
   descriptionFR: 'descriptionFR',
   descriptionEN: 'descriptionEN',
   descriptionDE: 'descriptionDE',
@@ -1241,6 +1287,79 @@ export const ContactRequestScalarFieldEnum = {
 } as const
 
 export type ContactRequestScalarFieldEnum = (typeof ContactRequestScalarFieldEnum)[keyof typeof ContactRequestScalarFieldEnum]
+
+
+export const ConciergeOrderScalarFieldEnum = {
+  id: 'id',
+  orderNumber: 'orderNumber',
+  contactRequestId: 'contactRequestId',
+  individualId: 'individualId',
+  clientFirstName: 'clientFirstName',
+  clientLastName: 'clientLastName',
+  clientEmail: 'clientEmail',
+  clientPhone: 'clientPhone',
+  clientLanguage: 'clientLanguage',
+  currency: 'currency',
+  status: 'status',
+  paymentStatus: 'paymentStatus',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  remainingAmount: 'remainingAmount',
+  notes: 'notes',
+  createdDate: 'createdDate',
+  createdBy: 'createdBy',
+  updatedDate: 'updatedDate',
+  updatedBy: 'updatedBy'
+} as const
+
+export type ConciergeOrderScalarFieldEnum = (typeof ConciergeOrderScalarFieldEnum)[keyof typeof ConciergeOrderScalarFieldEnum]
+
+
+export const ConciergeOrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productType: 'productType',
+  productId: 'productId',
+  productName: 'productName',
+  planId: 'planId',
+  planName: 'planName',
+  optionId: 'optionId',
+  optionName: 'optionName',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  notes: 'notes',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type ConciergeOrderItemScalarFieldEnum = (typeof ConciergeOrderItemScalarFieldEnum)[keyof typeof ConciergeOrderItemScalarFieldEnum]
+
+
+export const ConciergeOrderPaymentScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  amount: 'amount',
+  currency: 'currency',
+  method: 'method',
+  status: 'status',
+  publicToken: 'publicToken',
+  paypalOrderId: 'paypalOrderId',
+  paypalCaptureId: 'paypalCaptureId',
+  stripeCheckoutSessionId: 'stripeCheckoutSessionId',
+  stripePaymentIntentId: 'stripePaymentIntentId',
+  checkoutUrl: 'checkoutUrl',
+  checkoutExpiresAt: 'checkoutExpiresAt',
+  emailSentAt: 'emailSentAt',
+  paidAt: 'paidAt',
+  recordedBy: 'recordedBy',
+  notes: 'notes',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type ConciergeOrderPaymentScalarFieldEnum = (typeof ConciergeOrderPaymentScalarFieldEnum)[keyof typeof ConciergeOrderPaymentScalarFieldEnum]
 
 
 export const TripCartScalarFieldEnum = {
