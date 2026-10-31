@@ -16,9 +16,9 @@ const copy = {
   de: { add: "Zur Reise hinzufügen", added: "Zur Reise hinzugefügt", title: "Zur Reise hinzufügen", intro: "Wählen Sie Angebot und Termine, bevor Sie diesen Eintrag hinzufügen.", plan: "Angebot wählen", choose: "Angebot auswählen…", start: "Startdatum", end: "Enddatum", confirm: "Zur Reise hinzufügen", saving: "Wird hinzugefügt…", error: "Wählen Sie ein Angebot und gültige Termine." },
 } satisfies Record<Locale, Record<string, string>>;
 
-type Props = { locale: Locale; productId: string; productType: string; productName: string; category: string; image: string; plans?: TripPlan[]; selectedPlanId?: string };
+type Props = { locale: Locale; productId: string; productType: string; productName: string; category: string; image: string; plans?: TripPlan[]; selectedPlanId?: string; className?: string };
 
-export default function AddToTripButton({ locale, productId, productType, productName, category, image, plans = [], selectedPlanId }: Props) {
+export default function AddToTripButton({ locale, productId, productType, productName, category, image, plans = [], selectedPlanId, className = "mt-3" }: Props) {
   const text = copy[locale];
   const add = useTripStore((state) => state.add);
   const existingItem = useTripStore((state) => state.items.find((item) => item.productId === productId));
@@ -45,7 +45,7 @@ export default function AddToTripButton({ locale, productId, productType, produc
   }
 
   return <>
-    <button type="button" onClick={() => { setPlanId(existingItem?.planId || selectedPlanId || ""); setStartDate(existingItem?.startDate || ""); setEndDate(existingItem?.endDate || ""); setError(""); setOpen(true); }} className="group mt-3 flex w-full items-center justify-center gap-2 rounded-full border-2 border-orange-600 bg-white px-7 py-3.5 font-black text-orange-700 transition hover:-translate-y-0.5 hover:bg-orange-50">
+    <button type="button" onClick={() => { setPlanId(existingItem?.planId || selectedPlanId || ""); setStartDate(existingItem?.startDate || ""); setEndDate(existingItem?.endDate || ""); setError(""); setOpen(true); }} className={`group flex w-full items-center justify-center gap-2 rounded-full border-2 border-orange-600 bg-white px-7 py-3.5 font-black text-orange-700 transition hover:-translate-y-0.5 hover:bg-orange-50 ${className}`}>
       {added ? <Check size={20} /> : <span className="relative"><Route size={20} /><Plus size={11} className="absolute -right-2 -top-1 rounded-full bg-orange-600 text-white" /></span>}{added ? text.added : text.add}
     </button>
     {open && typeof document !== "undefined" && createPortal(<div className="fixed inset-0 z-[90] bg-zinc-950/70 backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>

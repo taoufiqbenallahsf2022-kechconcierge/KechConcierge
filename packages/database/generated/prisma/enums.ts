@@ -197,6 +197,48 @@ export const TripCartStatus = {
 export type TripCartStatus = (typeof TripCartStatus)[keyof typeof TripCartStatus]
 
 
+export const OrderStatus = {
+  DRAFT: 'DRAFT',
+  CONFIRMED: 'CONFIRMED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const OrderPaymentStatus = {
+  UNPAID: 'UNPAID',
+  PAYMENT_REQUESTED: 'PAYMENT_REQUESTED',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  FULLY_PAID: 'FULLY_PAID'
+} as const
+
+export type OrderPaymentStatus = (typeof OrderPaymentStatus)[keyof typeof OrderPaymentStatus]
+
+
+export const OrderPaymentMethod = {
+  PAYPAL: 'PAYPAL',
+  STRIPE: 'STRIPE',
+  CASH: 'CASH',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  OTHER: 'OTHER'
+} as const
+
+export type OrderPaymentMethod = (typeof OrderPaymentMethod)[keyof typeof OrderPaymentMethod]
+
+
+export const PaymentRecordStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type PaymentRecordStatus = (typeof PaymentRecordStatus)[keyof typeof PaymentRecordStatus]
+
+
 export const BeachClubPricingUnit = {
   PER_PERSON: 'PER_PERSON',
   PER_ADULT: 'PER_ADULT',

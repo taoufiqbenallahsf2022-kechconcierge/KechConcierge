@@ -238,7 +238,7 @@ function FieldInput({
   );
 }
 
-const translatedFieldNames = ["title", "subtitle", "priceTitle", "description", "address", "location"] as const;
+const translatedFieldNames = ["title", "subtitle", "priceTitle", "priceWithDriverLabel", "description", "address", "location"] as const;
 
 function GenerateSectionFromEnglishButton({ language }: { language: string }) {
   const [generating, setGenerating] = useState(false);
@@ -262,6 +262,7 @@ function GenerateSectionFromEnglishButton({ language }: { language: string }) {
       title: String(formData.get("titleEN") ?? "").trim(),
       subtitle: String(formData.get("subtitleEN") ?? "").trim(),
       priceTitle: String(formData.get("priceTitleEN") ?? "").trim(),
+      priceWithDriverLabel: String(formData.get("priceWithDriverLabelEN") ?? "").trim(),
       description: String(formData.get("descriptionEN") ?? "").trim(),
       address: String(formData.get("addressEN") ?? formData.get("locationEN") ?? "").trim(),
       tags: String(formData.get("tagsEN") ?? "").split(",").map((tag) => tag.trim()).filter(Boolean),

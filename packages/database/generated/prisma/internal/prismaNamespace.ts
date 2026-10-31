@@ -391,6 +391,8 @@ export const ModelName = {
   EmailTemplate: 'EmailTemplate',
   AudienceAutomation: 'AudienceAutomation',
   AutomationRun: 'AutomationRun',
+  EmailMessage: 'EmailMessage',
+  EmailEvent: 'EmailEvent',
   RecordFlow: 'RecordFlow',
   RecordFlowVersion: 'RecordFlowVersion',
   RecordFlowRun: 'RecordFlowRun',
@@ -429,6 +431,9 @@ export const ModelName = {
   Consent: 'Consent',
   PageVisit: 'PageVisit',
   ContactRequest: 'ContactRequest',
+  ConciergeOrder: 'ConciergeOrder',
+  ConciergeOrderItem: 'ConciergeOrderItem',
+  ConciergeOrderPayment: 'ConciergeOrderPayment',
   TripCart: 'TripCart',
   TripCartItem: 'TripCartItem',
   Chat: 'Chat',
@@ -451,7 +456,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "tripCart" | "tripCartItem" | "chat" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
+    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "emailMessage" | "emailEvent" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "conciergeOrder" | "conciergeOrderItem" | "conciergeOrderPayment" | "tripCart" | "tripCartItem" | "chat" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -970,6 +975,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.AutomationRunCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AutomationRunCountAggregateOutputType> | number
+        }
+      }
+    }
+    EmailMessage: {
+      payload: Prisma.$EmailMessagePayload<ExtArgs>
+      fields: Prisma.EmailMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmailMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmailMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.EmailMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmailMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>
+        }
+        findMany: {
+          args: Prisma.EmailMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>[]
+        }
+        create: {
+          args: Prisma.EmailMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>
+        }
+        createMany: {
+          args: Prisma.EmailMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmailMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.EmailMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>
+        }
+        update: {
+          args: Prisma.EmailMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.EmailMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmailMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmailMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.EmailMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.EmailMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmailMessage>
+        }
+        groupBy: {
+          args: Prisma.EmailMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmailMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailMessageCountAggregateOutputType> | number
+        }
+      }
+    }
+    EmailEvent: {
+      payload: Prisma.$EmailEventPayload<ExtArgs>
+      fields: Prisma.EmailEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmailEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmailEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>
+        }
+        findFirst: {
+          args: Prisma.EmailEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmailEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>
+        }
+        findMany: {
+          args: Prisma.EmailEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>[]
+        }
+        create: {
+          args: Prisma.EmailEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>
+        }
+        createMany: {
+          args: Prisma.EmailEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmailEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>[]
+        }
+        delete: {
+          args: Prisma.EmailEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>
+        }
+        update: {
+          args: Prisma.EmailEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.EmailEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmailEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmailEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.EmailEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailEventPayload>
+        }
+        aggregate: {
+          args: Prisma.EmailEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmailEvent>
+        }
+        groupBy: {
+          args: Prisma.EmailEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmailEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailEventCountAggregateOutputType> | number
         }
       }
     }
@@ -3785,6 +3938,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ConciergeOrder: {
+      payload: Prisma.$ConciergeOrderPayload<ExtArgs>
+      fields: Prisma.ConciergeOrderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConciergeOrderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConciergeOrderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>
+        }
+        findFirst: {
+          args: Prisma.ConciergeOrderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConciergeOrderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>
+        }
+        findMany: {
+          args: Prisma.ConciergeOrderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>[]
+        }
+        create: {
+          args: Prisma.ConciergeOrderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>
+        }
+        createMany: {
+          args: Prisma.ConciergeOrderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConciergeOrderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>[]
+        }
+        delete: {
+          args: Prisma.ConciergeOrderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>
+        }
+        update: {
+          args: Prisma.ConciergeOrderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConciergeOrderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConciergeOrderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConciergeOrderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>[]
+        }
+        upsert: {
+          args: Prisma.ConciergeOrderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPayload>
+        }
+        aggregate: {
+          args: Prisma.ConciergeOrderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConciergeOrder>
+        }
+        groupBy: {
+          args: Prisma.ConciergeOrderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConciergeOrderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConciergeOrderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConciergeOrderCountAggregateOutputType> | number
+        }
+      }
+    }
+    ConciergeOrderItem: {
+      payload: Prisma.$ConciergeOrderItemPayload<ExtArgs>
+      fields: Prisma.ConciergeOrderItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConciergeOrderItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConciergeOrderItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>
+        }
+        findFirst: {
+          args: Prisma.ConciergeOrderItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConciergeOrderItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>
+        }
+        findMany: {
+          args: Prisma.ConciergeOrderItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>[]
+        }
+        create: {
+          args: Prisma.ConciergeOrderItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>
+        }
+        createMany: {
+          args: Prisma.ConciergeOrderItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConciergeOrderItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>[]
+        }
+        delete: {
+          args: Prisma.ConciergeOrderItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>
+        }
+        update: {
+          args: Prisma.ConciergeOrderItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConciergeOrderItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConciergeOrderItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConciergeOrderItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.ConciergeOrderItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderItemPayload>
+        }
+        aggregate: {
+          args: Prisma.ConciergeOrderItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConciergeOrderItem>
+        }
+        groupBy: {
+          args: Prisma.ConciergeOrderItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConciergeOrderItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConciergeOrderItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConciergeOrderItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    ConciergeOrderPayment: {
+      payload: Prisma.$ConciergeOrderPaymentPayload<ExtArgs>
+      fields: Prisma.ConciergeOrderPaymentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConciergeOrderPaymentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConciergeOrderPaymentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>
+        }
+        findFirst: {
+          args: Prisma.ConciergeOrderPaymentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConciergeOrderPaymentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>
+        }
+        findMany: {
+          args: Prisma.ConciergeOrderPaymentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>[]
+        }
+        create: {
+          args: Prisma.ConciergeOrderPaymentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>
+        }
+        createMany: {
+          args: Prisma.ConciergeOrderPaymentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConciergeOrderPaymentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>[]
+        }
+        delete: {
+          args: Prisma.ConciergeOrderPaymentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>
+        }
+        update: {
+          args: Prisma.ConciergeOrderPaymentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConciergeOrderPaymentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConciergeOrderPaymentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConciergeOrderPaymentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ConciergeOrderPaymentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConciergeOrderPaymentPayload>
+        }
+        aggregate: {
+          args: Prisma.ConciergeOrderPaymentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConciergeOrderPayment>
+        }
+        groupBy: {
+          args: Prisma.ConciergeOrderPaymentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConciergeOrderPaymentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConciergeOrderPaymentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConciergeOrderPaymentCountAggregateOutputType> | number
+        }
+      }
+    }
     TripCart: {
       payload: Prisma.$TripCartPayload<ExtArgs>
       fields: Prisma.TripCartFieldRefs
@@ -4455,6 +4830,40 @@ export const AutomationRunScalarFieldEnum = {
 export type AutomationRunScalarFieldEnum = (typeof AutomationRunScalarFieldEnum)[keyof typeof AutomationRunScalarFieldEnum]
 
 
+export const EmailMessageScalarFieldEnum = {
+  id: 'id',
+  resendEmailId: 'resendEmailId',
+  messageId: 'messageId',
+  recipientEmail: 'recipientEmail',
+  senderEmail: 'senderEmail',
+  subject: 'subject',
+  category: 'category',
+  lastEvent: 'lastEvent',
+  sentAt: 'sentAt',
+  lastEventAt: 'lastEventAt',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type EmailMessageScalarFieldEnum = (typeof EmailMessageScalarFieldEnum)[keyof typeof EmailMessageScalarFieldEnum]
+
+
+export const EmailEventScalarFieldEnum = {
+  id: 'id',
+  webhookEventId: 'webhookEventId',
+  resendEmailId: 'resendEmailId',
+  type: 'type',
+  recipientEmail: 'recipientEmail',
+  occurredAt: 'occurredAt',
+  link: 'link',
+  bounceType: 'bounceType',
+  payload: 'payload',
+  createdDate: 'createdDate'
+} as const
+
+export type EmailEventScalarFieldEnum = (typeof EmailEventScalarFieldEnum)[keyof typeof EmailEventScalarFieldEnum]
+
+
 export const RecordFlowScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -4639,6 +5048,7 @@ export const VillaScalarFieldEnum = {
   id: 'id',
   uniqueCode: 'uniqueCode',
   priceEuro: 'priceEuro',
+  priceWithDriverEuro: 'priceWithDriverEuro',
   order: 'order',
   thumbnail: 'thumbnail',
   titleFR: 'titleFR',
@@ -4659,6 +5069,12 @@ export const VillaScalarFieldEnum = {
   priceTitleIT: 'priceTitleIT',
   priceTitlePT: 'priceTitlePT',
   priceTitleES: 'priceTitleES',
+  priceWithDriverLabelFR: 'priceWithDriverLabelFR',
+  priceWithDriverLabelEN: 'priceWithDriverLabelEN',
+  priceWithDriverLabelDE: 'priceWithDriverLabelDE',
+  priceWithDriverLabelIT: 'priceWithDriverLabelIT',
+  priceWithDriverLabelPT: 'priceWithDriverLabelPT',
+  priceWithDriverLabelES: 'priceWithDriverLabelES',
   descriptionFR: 'descriptionFR',
   descriptionEN: 'descriptionEN',
   descriptionDE: 'descriptionDE',
@@ -5464,6 +5880,79 @@ export const ContactRequestScalarFieldEnum = {
 export type ContactRequestScalarFieldEnum = (typeof ContactRequestScalarFieldEnum)[keyof typeof ContactRequestScalarFieldEnum]
 
 
+export const ConciergeOrderScalarFieldEnum = {
+  id: 'id',
+  orderNumber: 'orderNumber',
+  contactRequestId: 'contactRequestId',
+  individualId: 'individualId',
+  clientFirstName: 'clientFirstName',
+  clientLastName: 'clientLastName',
+  clientEmail: 'clientEmail',
+  clientPhone: 'clientPhone',
+  clientLanguage: 'clientLanguage',
+  currency: 'currency',
+  status: 'status',
+  paymentStatus: 'paymentStatus',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  remainingAmount: 'remainingAmount',
+  notes: 'notes',
+  createdDate: 'createdDate',
+  createdBy: 'createdBy',
+  updatedDate: 'updatedDate',
+  updatedBy: 'updatedBy'
+} as const
+
+export type ConciergeOrderScalarFieldEnum = (typeof ConciergeOrderScalarFieldEnum)[keyof typeof ConciergeOrderScalarFieldEnum]
+
+
+export const ConciergeOrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productType: 'productType',
+  productId: 'productId',
+  productName: 'productName',
+  planId: 'planId',
+  planName: 'planName',
+  optionId: 'optionId',
+  optionName: 'optionName',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  notes: 'notes',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type ConciergeOrderItemScalarFieldEnum = (typeof ConciergeOrderItemScalarFieldEnum)[keyof typeof ConciergeOrderItemScalarFieldEnum]
+
+
+export const ConciergeOrderPaymentScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  amount: 'amount',
+  currency: 'currency',
+  method: 'method',
+  status: 'status',
+  publicToken: 'publicToken',
+  paypalOrderId: 'paypalOrderId',
+  paypalCaptureId: 'paypalCaptureId',
+  stripeCheckoutSessionId: 'stripeCheckoutSessionId',
+  stripePaymentIntentId: 'stripePaymentIntentId',
+  checkoutUrl: 'checkoutUrl',
+  checkoutExpiresAt: 'checkoutExpiresAt',
+  emailSentAt: 'emailSentAt',
+  paidAt: 'paidAt',
+  recordedBy: 'recordedBy',
+  notes: 'notes',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type ConciergeOrderPaymentScalarFieldEnum = (typeof ConciergeOrderPaymentScalarFieldEnum)[keyof typeof ConciergeOrderPaymentScalarFieldEnum]
+
+
 export const TripCartScalarFieldEnum = {
   id: 'id',
   visitorId: 'visitorId',
@@ -5995,6 +6484,62 @@ export type ListEnumContactRequesterStageFieldRefInput<$PrismaModel> = FieldRefI
 
 
 /**
+ * Reference to a field of type 'OrderStatus'
+ */
+export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'OrderStatus[]'
+ */
+export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OrderPaymentStatus'
+ */
+export type EnumOrderPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderPaymentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'OrderPaymentStatus[]'
+ */
+export type ListEnumOrderPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderPaymentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OrderPaymentMethod'
+ */
+export type EnumOrderPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderPaymentMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'OrderPaymentMethod[]'
+ */
+export type ListEnumOrderPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderPaymentMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentRecordStatus'
+ */
+export type EnumPaymentRecordStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentRecordStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PaymentRecordStatus[]'
+ */
+export type ListEnumPaymentRecordStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentRecordStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'TripCartStatus'
  */
 export type EnumTripCartStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TripCartStatus'>
@@ -6180,6 +6725,8 @@ export type GlobalOmitConfig = {
   emailTemplate?: Prisma.EmailTemplateOmit
   audienceAutomation?: Prisma.AudienceAutomationOmit
   automationRun?: Prisma.AutomationRunOmit
+  emailMessage?: Prisma.EmailMessageOmit
+  emailEvent?: Prisma.EmailEventOmit
   recordFlow?: Prisma.RecordFlowOmit
   recordFlowVersion?: Prisma.RecordFlowVersionOmit
   recordFlowRun?: Prisma.RecordFlowRunOmit
@@ -6218,6 +6765,9 @@ export type GlobalOmitConfig = {
   consent?: Prisma.ConsentOmit
   pageVisit?: Prisma.PageVisitOmit
   contactRequest?: Prisma.ContactRequestOmit
+  conciergeOrder?: Prisma.ConciergeOrderOmit
+  conciergeOrderItem?: Prisma.ConciergeOrderItemOmit
+  conciergeOrderPayment?: Prisma.ConciergeOrderPaymentOmit
   tripCart?: Prisma.TripCartOmit
   tripCartItem?: Prisma.TripCartItemOmit
   chat?: Prisma.ChatOmit

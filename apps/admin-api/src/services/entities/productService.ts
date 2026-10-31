@@ -271,6 +271,7 @@ export async function generateProductTranslation(body: any) {
     title,
     subtitle: String(source.subtitle ?? "").trim(),
     priceTitle: String(source.priceTitle ?? "").trim(),
+    priceWithDriverLabel: String(source.priceWithDriverLabel ?? "").trim(),
     description,
     address: String(source.address ?? "").trim(),
     tags: (Array.isArray(source.tags) ? source.tags : []).map((tag: unknown) => String(tag).trim()).filter(Boolean).slice(0, 20),
@@ -289,7 +290,7 @@ export async function generateProductTranslation(body: any) {
       response_format: { type: "json_object" },
       messages: [{
         role: "system",
-        content: `Translate product content from English into ${languageName}. Use simple, natural language. Preserve proper names, addresses, numbers, prices and meaning. Do not add facts, marketing claims or extra details. Translate every non-empty value and preserve empty values, tag count and detail count. Return only JSON shaped {"content":{"title":"","subtitle":"","priceTitle":"","description":"","address":"","tags":[""],"details":[{"label":"","value":""}]}}.`,
+        content: `Translate product content from English into ${languageName}. Use simple, natural language. Preserve proper names, addresses, numbers, prices and meaning. Do not add facts, marketing claims or extra details. Translate every non-empty value and preserve empty values, tag count and detail count. Return only JSON shaped {"content":{"title":"","subtitle":"","priceTitle":"","priceWithDriverLabel":"","description":"","address":"","tags":[""],"details":[{"label":"","value":""}]}}.`,
       }, {
         role: "user",
         content: JSON.stringify(safeSource),
@@ -313,6 +314,7 @@ export async function generateProductTranslation(body: any) {
     title: String(generated.title ?? "").trim(),
     subtitle: String(generated.subtitle ?? "").trim(),
     priceTitle: String(generated.priceTitle ?? "").trim(),
+    priceWithDriverLabel: String(generated.priceWithDriverLabel ?? "").trim(),
     description: String(generated.description ?? "").trim(),
     address: String(generated.address ?? "").trim(),
     tags: (Array.isArray(generated.tags) ? generated.tags : []).map((tag: unknown) => String(tag).trim()).filter(Boolean).slice(0, safeSource.tags.length),

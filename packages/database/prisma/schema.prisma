@@ -121,6 +121,44 @@ model AutomationRun {
   @@index([automationId, startedDate])
 }
 
+model EmailMessage {
+  id             String       @id @default(cuid())
+  resendEmailId  String       @unique
+  messageId      String?
+  recipientEmail String
+  senderEmail    String?
+  subject        String?
+  category       String?
+  lastEvent      String?
+  sentAt         DateTime
+  lastEventAt    DateTime?
+  createdDate    DateTime     @default(now())
+  updatedDate    DateTime     @updatedAt
+  events         EmailEvent[]
+
+  @@index([recipientEmail, sentAt])
+  @@index([sentAt])
+  @@index([lastEvent, sentAt])
+}
+
+model EmailEvent {
+  id             String       @id @default(cuid())
+  webhookEventId String       @unique
+  resendEmailId  String
+  type           String
+  recipientEmail String
+  occurredAt     DateTime
+  link           String?
+  bounceType     String?
+  payload        Json?
+  createdDate    DateTime     @default(now())
+  message        EmailMessage @relation(fields: [resendEmailId], references: [resendEmailId], onDelete: Cascade)
+
+  @@index([type, occurredAt])
+  @@index([recipientEmail, occurredAt])
+  @@index([resendEmailId, occurredAt])
+}
+
 model RecordFlow {
   id             String              @id @default(cuid())
   name           String
@@ -313,6 +351,7 @@ model Villa {
   id            String       @id @default(cuid())
   uniqueCode    String       @unique
   priceEuro     Decimal?     @db.Decimal(12, 2)
+  priceWithDriverEuro    Decimal?     @db.Decimal(12, 2)
   order         Int?
   thumbnail     String
   titleFR       String?      @db.Text
@@ -333,6 +372,12 @@ model Villa {
   priceTitleIT  String?      @db.Text
   priceTitlePT  String?      @db.Text
   priceTitleES  String?      @db.Text
+  priceWithDriverLabelFR String?      @db.Text
+  priceWithDriverLabelEN String?      @db.Text
+  priceWithDriverLabelDE String?      @db.Text
+  priceWithDriverLabelIT String?      @db.Text
+  priceWithDriverLabelPT String?      @db.Text
+  priceWithDriverLabelES String?      @db.Text
   descriptionFR String?      @db.Text
   descriptionEN String?      @db.Text
   descriptionDE String?      @db.Text
@@ -598,6 +643,7 @@ model NightClubImage {
   altPT String? @db.Text
   altES String? @db.Text
   nightClub NightClub @relation(fields: [nightClubId], references: [id], onDelete: Cascade)
+
   @@unique([nightClubId, order])
 }
 
@@ -628,6 +674,7 @@ model NightClubPlan {
   updatedAt DateTime @updatedAt
   nightClub NightClub @relation(fields: [nightClubId], references: [id], onDelete: Cascade)
   options NightClubPlanOption[]
+
   @@unique([nightClubId, uniqueCode])
   @@index([nightClubId, isActive, order])
 }
@@ -644,6 +691,7 @@ model NightClubPlanOption {
   titlePT String? @db.Text
   titleES String? @db.Text
   plan NightClubPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
   @@index([planId, isActive, order])
 }
 
@@ -695,6 +743,7 @@ model PackImage {
   altPT String? @db.Text
   altES String? @db.Text
   pack Pack @relation(fields: [packId], references: [id], onDelete: Cascade)
+
   @@unique([packId, order])
 }
 
@@ -728,6 +777,7 @@ model PackPlan {
   updatedAt DateTime @updatedAt
   pack Pack @relation(fields: [packId], references: [id], onDelete: Cascade)
   options PackPlanOption[]
+
   @@unique([packId, uniqueCode])
   @@index([packId, isActive, order])
 }
@@ -744,6 +794,7 @@ model PackPlanOption {
   titlePT String? @db.Text
   titleES String? @db.Text
   plan PackPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
   @@index([planId, isActive, order])
 }
 
@@ -1014,6 +1065,7 @@ model Individual {
   consents        Consent[]
   pageVisits      PageVisit[]
   contactRequests ContactRequest[]
+  conciergeOrders ConciergeOrder[]
   chats           Chat[]
   visitorJourneys VisitorJourney[]
   tripCarts       TripCart[]
@@ -1159,8 +1211,89 @@ model ContactRequest {
   individual     Individual?           @relation(fields: [individualId], references: [id])
   lead           Lead?                 @relation(fields: [leadId], references: [id])
   prospect       Prospect?             @relation(fields: [prospectId], references: [id])
+  orders         ConciergeOrder[]
 
   @@index([visitorId])
+}
+
+model ConciergeOrder {
+  id               String                  @id @default(cuid())
+  orderNumber      String                  @unique
+  contactRequestId String?
+  individualId     String?
+  clientFirstName  String
+  clientLastName   String
+  clientEmail      String
+  clientPhone      String?
+  clientLanguage   String                  @default("en")
+  currency         String                  @default("EUR")
+  status           OrderStatus             @default(DRAFT)
+  paymentStatus    OrderPaymentStatus      @default(UNPAID)
+  totalAmount      Decimal                 @db.Decimal(12, 2)
+  paidAmount       Decimal                 @default(0) @db.Decimal(12, 2)
+  remainingAmount  Decimal                 @db.Decimal(12, 2)
+  notes            String?
+  createdDate      DateTime                @default(now())
+  createdBy        String?
+  updatedDate      DateTime                @updatedAt
+  updatedBy        String?
+  contactRequest   ContactRequest?         @relation(fields: [contactRequestId], references: [id], onDelete: SetNull)
+  individual       Individual?             @relation(fields: [individualId], references: [id], onDelete: SetNull)
+  items            ConciergeOrderItem[]
+  payments         ConciergeOrderPayment[]
+
+  @@index([contactRequestId])
+  @@index([individualId])
+  @@index([status, paymentStatus])
+  @@index([clientEmail])
+}
+
+model ConciergeOrderItem {
+  id          String         @id @default(cuid())
+  orderId     String
+  productType String
+  productId   String?
+  productName String
+  planId      String?
+  planName    String?
+  optionId    String?
+  optionName  String?
+  startDate   DateTime?
+  endDate     DateTime?
+  unitPrice   Decimal        @db.Decimal(12, 2)
+  totalPrice  Decimal        @db.Decimal(12, 2)
+  notes       String?
+  createdDate DateTime       @default(now())
+  updatedDate DateTime       @updatedAt
+  order       ConciergeOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([productType, productId])
+}
+
+model ConciergeOrderPayment {
+  id                      String              @id @default(cuid())
+  orderId                 String
+  amount                  Decimal             @db.Decimal(12, 2)
+  currency                String              @default("EUR")
+  method                  OrderPaymentMethod
+  status                  PaymentRecordStatus @default(PENDING)
+  publicToken             String?             @unique
+  paypalOrderId           String?             @unique
+  paypalCaptureId         String?             @unique
+  stripeCheckoutSessionId String?             @unique
+  stripePaymentIntentId   String?             @unique
+  checkoutUrl             String?
+  checkoutExpiresAt       DateTime?
+  emailSentAt             DateTime?
+  paidAt                  DateTime?
+  recordedBy              String?
+  notes                   String?
+  createdDate             DateTime            @default(now())
+  updatedDate             DateTime            @updatedAt
+  order                   ConciergeOrder      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId, status])
 }
 
 model TripCart {
@@ -1433,6 +1566,36 @@ enum TripCartStatus {
   ACTIVE
   SUBMITTED
   ABANDONED
+}
+
+enum OrderStatus {
+  DRAFT
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum OrderPaymentStatus {
+  UNPAID
+  PAYMENT_REQUESTED
+  PARTIALLY_PAID
+  FULLY_PAID
+}
+
+enum OrderPaymentMethod {
+  PAYPAL
+  STRIPE
+  CASH
+  BANK_TRANSFER
+  OTHER
+}
+
+enum PaymentRecordStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
 }
 
 enum BeachClubPricingUnit {

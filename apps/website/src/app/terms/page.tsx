@@ -15,6 +15,7 @@ import {
   Home,
   Mail,
   Megaphone,
+  RefreshCcw,
   Scale,
   ShieldCheck,
   UserRoundCheck,
@@ -99,6 +100,15 @@ export default function TermsPage() {
         t.termsPage.sections.payments.title,
       paragraphs:
         t.termsPage.sections.payments
+          .paragraphs,
+    },
+    {
+      id: "refund-policy",
+      icon: RefreshCcw,
+      title:
+        t.termsPage.sections.refund.title,
+      paragraphs:
+        t.termsPage.sections.refund
           .paragraphs,
     },
     {

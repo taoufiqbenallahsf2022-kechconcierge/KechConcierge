@@ -21,16 +21,20 @@ import { router as segmentRouter } from "./segmentRoutes.js";
 import { router as websiteConfigurationRouter } from "./websiteConfigurationRoutes.js";
 import { router as pushNotificationRouter } from "./pushNotificationRoutes.js";
 import { activityRouter, beachClubRouter, nightClubRouter, packRouter, restaurantRouter, transportationRouter, villaRouter } from "./catalogDomainRoutes.js";
+import { orderRouter, publicOrderRouter } from "./orderRoutes.js";
+import { performanceRouter } from "./performanceRoutes.js";
 export const api = Router();
 api.get("/health", (_q, r) =>
   r.json({ status: "ok", service: "moorish-admin-api" }),
 );
 api.use("/auth", authRouter);
+api.use("/public", publicOrderRouter);
 api.use(requireAdminAuth);
 api.use("/website-configuration", websiteConfigurationRouter);
 api.use("/push-notifications", pushNotificationRouter);
 api.use("/studio/segments", segmentRouter);
 api.use("/studio", studioRouter);
+api.use("/performance", performanceRouter);
 api.post("/chats/:id/messages", async (req, res, next) => {
   try {
     const { message } = req.body;
@@ -102,6 +106,7 @@ api.use("/users", usersRouter);
 api.use("/page-visits", page_visitsRouter);
 api.use("/contact-requests", contact_requestsRouter);
 api.use("/trip-carts", trip_cartsRouter);
+api.use("/orders", orderRouter);
 api.use("/chats", chatsRouter);
 api.use("/chat-messages", chat_messagesRouter);
 api.use("/whatsapp-conversations", whatsapp_conversationsRouter);

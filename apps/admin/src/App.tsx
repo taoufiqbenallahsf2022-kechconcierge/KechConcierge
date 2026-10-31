@@ -27,6 +27,8 @@ import { WhatsappMessagesList, WhatsappMessagesDetail } from "./features/whatsap
 import { ChatMessagesList, ChatMessagesDetail } from "./features/chat-messages/ChatMessagesPages";
 import { Activities, BeachClubs, NightClubs, Packs, Restaurants, Transportation, Villas } from "./features/catalog/IndependentCatalogPages";
 import { WebsiteConfigurationPage } from "./pages/WebsiteConfigurationPage";
+import { OrdersList, OrderCreate, OrderDetail } from "./features/orders/OrdersPages";
+import { ContactRequestPerformancePage, EmailPerformancePage, LiveChatPerformancePage, PageVisitPerformancePage } from "./features/performance/PerformancePages";
 
 function entityRoutes({
   list: List,
@@ -80,6 +82,12 @@ export default function App() {
         <Route path="automation-studio/flows/new" element={<VisualFlowEditorPage />} />
         <Route path="automation-studio/flows/:id" element={<VisualFlowEditorPage />} />
         <Route path="setup/sender-emails" element={<SenderEmailsPage />} />
+        <Route path="performance" element={<Navigate to="/performance/emails" replace />} />
+        <Route path="performance/emails" element={<EmailPerformancePage />} />
+        <Route path="performance/contact-requests" element={<ContactRequestPerformancePage />} />
+        <Route path="performance/live-chats" element={<LiveChatPerformancePage />} />
+        <Route path="performance/engagement" element={<Navigate to="/performance/contact-requests" replace />} />
+        <Route path="performance/page-visits" element={<PageVisitPerformancePage />} />
         {entityRoutes({ list: IndividualList, create: IndividualCreate, detail: IndividualDetail, path: "individuals" })}
         {entityRoutes({ list: ProductsList, create: ProductsCreate, detail: ProductsDetail, path: "products" })}
         {entityRoutes({ list: Villas.List, create: Villas.Create, detail: Villas.Detail, path: "villas" })}
@@ -97,6 +105,7 @@ export default function App() {
         {entityRoutes({ list: PageVisitsList, detail: PageVisitsDetail, path: "page-visits" })}
         {entityRoutes({ list: ContactRequestsList, detail: ContactRequestsDetail, path: "contact-requests" })}
         {entityRoutes({ list: TripCartsList, detail: TripCartsDetail, path: "trip-carts" })}
+        {entityRoutes({ list: OrdersList, create: OrderCreate, detail: OrderDetail, path: "orders" })}
         <Route path="entities/chats" element={<ChatList />} />
         <Route path="chats/:id" element={<ChatDetail />} />
         {entityRoutes({ list: WhatsappConversationsList, detail: WhatsappConversationsDetail, path: "whatsapp-conversations" })}

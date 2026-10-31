@@ -147,15 +147,21 @@
     "chat": "Chat concierge",
     "contact": "Contatti",
     "legalTitle": "Informazioni legali",
-    "terms": "Termini di utilizzo e servizio",
-    "privacy": "Privacy e dati personali",
+    "terms": "Termini di utilizzo",
+    "privacy": "Informativa sulla privacy",
     "consentPreferences": "Preferenze di consenso",
     "guestResponsibilities": "Responsabilità degli ospiti",
     "contactTitle": "Contatti",
     "location": "Marrakech, Marocco",
     "copyright": "Tutti i diritti riservati.",
     "termsShort": "Termini",
-    "privacyShort": "Privacy"
+    "privacyShort": "Privacy",
+    "refundPolicy": "Politica di rimborso",
+    "refundPolicyShort": "Rimborsi",
+    "companyName": "Moorish Concierge LLC",
+    "usAddress": "1209 MOUNTAIN ROAD PL NE, STE R, ALBAQUERQUE, NM 87110, New Mexico",
+    "moroccoPhoneLabel": "Marocco / WhatsApp",
+    "usPhoneLabel": "Stati Uniti"
   },
   "accountVerify": {
     "eyebrow": "Verifica account",
@@ -372,10 +378,10 @@
   },
     "termsPage": {
     "eyebrow": "Informazioni legali",
-    "title": "Termini di utilizzo e servizio",
+    "title": "Termini di utilizzo",
     "introduction": "Questi termini definiscono le regole applicabili quando accedi a Moorish Concierge, crei un account, richiedi consigli o utilizzi i servizi concierge organizzati tramite la piattaforma.",
     "importantNotice": "Moorish Concierge può coordinare servizi offerti da proprietari, autisti, ristoranti, organizzatori di attività e altri fornitori indipendenti. Le condizioni definitive di una prenotazione possono includere anche le regole specifiche del fornitore.",
-    "lastUpdated": "Ultimo aggiornamento: luglio 2026",
+    "lastUpdated": "Ultimo aggiornamento: ottobre 2026",
     "contents": "Indice",
     "managePreferences": "Gestisci le mie preferenze",
     "contactTitle": "Hai domande su questi termini?",
@@ -417,19 +423,28 @@
         "title": "5. Prezzi, pagamenti e cancellazioni",
         "paragraphs": [
           "I prezzi possono variare in base alla disponibilità, alla stagione, al numero di partecipanti, alle condizioni del fornitore, ai servizi aggiuntivi, alle imposte o ad altri costi comunicati.",
-          "Le condizioni di pagamento, deposito, cancellazione e rimborso possono variare in base al fornitore e saranno comunicate prima della conferma, quando applicabile.",
+          "I dettagli relativi a pagamento, deposito e cancellazione saranno comunicati prima della conferma, ove applicabile. I rimborsi sono disciplinati dalla politica di rimborso riportata di seguito.",
           "Il viaggiatore deve verificare e accettare il prezzo finale e le condizioni di cancellazione prima di effettuare qualsiasi pagamento."
         ]
       },
+      "refund": {
+        "title": "6. Politica di rimborso",
+        "paragraphs": [
+          "Il cliente può richiedere il rimborso di qualsiasi pagamento contattando Moorish Concierge entro 24 ore dal pagamento e indicando l’ordine o la prenotazione interessata.",
+          "Trascorso tale periodo di 24 ore, il pagamento non è rimborsabile, poiché Moorish Concierge inizia a ricercare, prenotare e coordinare ville e altri servizi richiesti.",
+          "Ogni rimborso richiesto entro il termine di 24 ore sarà restituito al metodo di pagamento originale. I tempi di elaborazione dipendono dalla banca o dal fornitore di pagamento.",
+          "Questa politica non limita alcun diritto inderogabile del consumatore né alcun diritto al rimborso che non possa essere legalmente escluso."
+        ]
+      },
       "providers": {
-        "title": "6. Fornitori indipendenti",
+        "title": "7. Fornitori indipendenti",
         "paragraphs": [
           "Alcuni servizi sono forniti da soggetti terzi indipendenti. Tali fornitori restano responsabili della corretta esecuzione dei servizi, delle licenze e assicurazioni richieste e del rispetto degli obblighi legali e di sicurezza.",
           "Moorish Concierge seleziona e coordina i fornitori con attenzione, ma non può garantire che un servizio di terzi sia privo di ritardi, interruzioni, modifiche o eventi imprevisti."
         ]
       },
       "conduct": {
-        "title": "7. Comportamento e responsabilità nelle proprietà",
+        "title": "8. Comportamento e responsabilità nelle proprietà",
         "paragraphs": [
           "I viaggiatori devono rispettare le proprietà, i veicoli, il personale, i vicini, le usanze locali e tutte le regole ragionevoli comunicate da Moorish Concierge o dal fornitore.",
           "I viaggiatori sono responsabili di danni, perdite, costi di pulizia eccessivi, ospiti non autorizzati, eventi vietati, disturbi o usi impropri causati da loro o dai membri del loro gruppo.",
@@ -438,14 +453,14 @@
         ]
       },
       "prohibited": {
-        "title": "8. Comportamenti vietati",
+        "title": "9. Comportamenti vietati",
         "paragraphs": [
           "Gli utenti non devono utilizzare la piattaforma o i servizi per frode, molestie, violenza, sostanze illegali, sfruttamento, attività commerciale non autorizzata, danni alla proprietà o qualsiasi attività vietata dalla legge marocchina.",
           "Moorish Concierge può rifiutare o interrompere l’assistenza quando una richiesta appare pericolosa, illegale, abusiva o dannosa per un fornitore, dipendente, viaggiatore o terzo."
         ]
       },
       "liability": {
-        "title": "9. Responsabilità ed eventi imprevisti",
+        "title": "10. Responsabilità ed eventi imprevisti",
         "paragraphs": [
           "Nessuna disposizione di questi termini esclude una responsabilità che non può essere legalmente esclusa.",
           "Nei limiti consentiti dalla legge, Moorish Concierge non è responsabile di perdite indirette o di eventi ragionevolmente fuori dal proprio controllo, comprese condizioni meteorologiche, traffico, scioperi, restrizioni pubbliche, cancellazioni dei fornitori, eventi naturali o malfunzionamenti di sistemi di terzi.",
@@ -453,7 +468,7 @@
         ]
       },
       "privacy": {
-        "title": "10. Dati personali e privacy",
+        "title": "11. Dati personali e privacy",
         "paragraphs": [
           "Possiamo trattare informazioni relative all’identità, ai contatti, all’account, alle preferenze, alle richieste, alle prenotazioni e all’utilizzo del sito per fornire i servizi, gestire gli account, comunicare, migliorare la piattaforma e rispettare gli obblighi legali.",
           "I dati personali devono essere raccolti per finalità identificate e legittime, limitati a quanto ragionevolmente necessario, mantenuti aggiornati e conservati per un periodo adeguato.",
@@ -462,7 +477,7 @@
         ]
       },
       "security": {
-        "title": "11. Sicurezza dei dati",
+        "title": "12. Sicurezza dei dati",
         "paragraphs": [
           "Moorish Concierge adotta misure tecniche e organizzative ragionevoli volte a proteggere le informazioni personali da accessi non autorizzati, perdite, alterazioni o divulgazioni.",
           "Le password vengono conservate tramite hash sicuro e non in formato leggibile. In produzione devono essere utilizzate connessioni HTTPS sicure per i dati trasmessi tra il browser e la piattaforma.",
@@ -470,14 +485,14 @@
         ]
       },
       "rights": {
-        "title": "12. Legge applicabile e diritti degli utenti",
+        "title": "13. Legge applicabile e diritti degli utenti",
         "paragraphs": [
           "Questi termini sono destinati ad applicarsi in conformità con la legge marocchina vigente. I diritti obbligatori dei consumatori e i diritti relativi alla protezione dei dati restano applicabili.",
           "In caso di disaccordo, gli utenti sono invitati a contattare prima Moorish Concierge affinché la situazione possa essere esaminata e si possa cercare una soluzione adeguata."
         ]
       },
       "changes": {
-        "title": "13. Modifica dei termini",
+        "title": "14. Modifica dei termini",
         "paragraphs": [
           "Moorish Concierge può aggiornare questi termini per riflettere modifiche ai servizi, alle pratiche operative o agli obblighi legali.",
           "La versione aggiornata sarà pubblicata su questa pagina con una nuova data di aggiornamento. Le modifiche importanti potranno inoltre essere comunicate tramite il sito, l’account o i dati di contatto registrati."

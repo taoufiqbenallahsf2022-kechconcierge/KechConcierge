@@ -9,6 +9,8 @@
     "prebuild": "npm --prefix ../../packages/database run generate",
     "build": "tsc",
     "start": "node dist/apps/admin-api/src/server.js",
+    "pretest:payments": "npm run build",
+    "test:payments": "node --test test/stripePayments.test.mjs",
     "simulate:segments": "tsx src/scripts/generateSegmentSimulation.ts"
   },
   "dependencies": {
@@ -17,7 +19,9 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "resend": "^6.12.4",
+    "stripe": "^23.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
