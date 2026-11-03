@@ -1,6 +1,7 @@
 import "./globals.css";
 import Providers from "../components/Providers";
 import LayoutContent from "../components/LayoutContent";
+import TikTokPixel from "../components/TikTokPixel";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { getPageMetadata } from "@/lib/page-title";
@@ -79,6 +80,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <TikTokPixel />
+      </head>
       <body>
         <script
           type="application/ld+json"
