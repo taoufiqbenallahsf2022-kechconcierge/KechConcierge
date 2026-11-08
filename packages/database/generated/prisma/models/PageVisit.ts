@@ -27,6 +27,7 @@ export type AggregatePageVisit = {
 export type PageVisitMinAggregateOutputType = {
   id: string | null
   pageUrl: string | null
+  source: string | null
   pageName: string | null
   visitorId: string | null
   journeyId: string | null
@@ -40,11 +41,22 @@ export type PageVisitMinAggregateOutputType = {
   userAgent: string | null
   ipAddress: string | null
   sessionId: string | null
+  authenticationStatus: string | null
+  accessOutcome: string | null
+  previousPageUrl: string | null
+  clickedLinkUrl: string | null
+  navigationType: string | null
+  clientVisitedAt: Date | null
+  browserLanguage: string | null
+  webdriver: boolean | null
+  requestOrigin: string | null
+  fetchSite: string | null
 }
 
 export type PageVisitMaxAggregateOutputType = {
   id: string | null
   pageUrl: string | null
+  source: string | null
   pageName: string | null
   visitorId: string | null
   journeyId: string | null
@@ -58,11 +70,22 @@ export type PageVisitMaxAggregateOutputType = {
   userAgent: string | null
   ipAddress: string | null
   sessionId: string | null
+  authenticationStatus: string | null
+  accessOutcome: string | null
+  previousPageUrl: string | null
+  clickedLinkUrl: string | null
+  navigationType: string | null
+  clientVisitedAt: Date | null
+  browserLanguage: string | null
+  webdriver: boolean | null
+  requestOrigin: string | null
+  fetchSite: string | null
 }
 
 export type PageVisitCountAggregateOutputType = {
   id: number
   pageUrl: number
+  source: number
   pageName: number
   visitorId: number
   journeyId: number
@@ -76,6 +99,16 @@ export type PageVisitCountAggregateOutputType = {
   userAgent: number
   ipAddress: number
   sessionId: number
+  authenticationStatus: number
+  accessOutcome: number
+  previousPageUrl: number
+  clickedLinkUrl: number
+  navigationType: number
+  clientVisitedAt: number
+  browserLanguage: number
+  webdriver: number
+  requestOrigin: number
+  fetchSite: number
   _all: number
 }
 
@@ -83,6 +116,7 @@ export type PageVisitCountAggregateOutputType = {
 export type PageVisitMinAggregateInputType = {
   id?: true
   pageUrl?: true
+  source?: true
   pageName?: true
   visitorId?: true
   journeyId?: true
@@ -96,11 +130,22 @@ export type PageVisitMinAggregateInputType = {
   userAgent?: true
   ipAddress?: true
   sessionId?: true
+  authenticationStatus?: true
+  accessOutcome?: true
+  previousPageUrl?: true
+  clickedLinkUrl?: true
+  navigationType?: true
+  clientVisitedAt?: true
+  browserLanguage?: true
+  webdriver?: true
+  requestOrigin?: true
+  fetchSite?: true
 }
 
 export type PageVisitMaxAggregateInputType = {
   id?: true
   pageUrl?: true
+  source?: true
   pageName?: true
   visitorId?: true
   journeyId?: true
@@ -114,11 +159,22 @@ export type PageVisitMaxAggregateInputType = {
   userAgent?: true
   ipAddress?: true
   sessionId?: true
+  authenticationStatus?: true
+  accessOutcome?: true
+  previousPageUrl?: true
+  clickedLinkUrl?: true
+  navigationType?: true
+  clientVisitedAt?: true
+  browserLanguage?: true
+  webdriver?: true
+  requestOrigin?: true
+  fetchSite?: true
 }
 
 export type PageVisitCountAggregateInputType = {
   id?: true
   pageUrl?: true
+  source?: true
   pageName?: true
   visitorId?: true
   journeyId?: true
@@ -132,6 +188,16 @@ export type PageVisitCountAggregateInputType = {
   userAgent?: true
   ipAddress?: true
   sessionId?: true
+  authenticationStatus?: true
+  accessOutcome?: true
+  previousPageUrl?: true
+  clickedLinkUrl?: true
+  navigationType?: true
+  clientVisitedAt?: true
+  browserLanguage?: true
+  webdriver?: true
+  requestOrigin?: true
+  fetchSite?: true
   _all?: true
 }
 
@@ -210,6 +276,7 @@ export type PageVisitGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type PageVisitGroupByOutputType = {
   id: string
   pageUrl: string
+  source: string | null
   pageName: string | null
   visitorId: string | null
   journeyId: string | null
@@ -223,6 +290,16 @@ export type PageVisitGroupByOutputType = {
   userAgent: string | null
   ipAddress: string | null
   sessionId: string | null
+  authenticationStatus: string | null
+  accessOutcome: string | null
+  previousPageUrl: string | null
+  clickedLinkUrl: string | null
+  navigationType: string | null
+  clientVisitedAt: Date | null
+  browserLanguage: string | null
+  webdriver: boolean | null
+  requestOrigin: string | null
+  fetchSite: string | null
   _count: PageVisitCountAggregateOutputType | null
   _min: PageVisitMinAggregateOutputType | null
   _max: PageVisitMaxAggregateOutputType | null
@@ -249,6 +326,7 @@ export type PageVisitWhereInput = {
   NOT?: Prisma.PageVisitWhereInput | Prisma.PageVisitWhereInput[]
   id?: Prisma.StringFilter<"PageVisit"> | string
   pageUrl?: Prisma.StringFilter<"PageVisit"> | string
+  source?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   pageName?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   visitorId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   journeyId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
@@ -262,6 +340,16 @@ export type PageVisitWhereInput = {
   userAgent?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   ipAddress?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   sessionId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  authenticationStatus?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  accessOutcome?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  previousPageUrl?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  clickedLinkUrl?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  navigationType?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  clientVisitedAt?: Prisma.DateTimeNullableFilter<"PageVisit"> | Date | string | null
+  browserLanguage?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  webdriver?: Prisma.BoolNullableFilter<"PageVisit"> | boolean | null
+  requestOrigin?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  fetchSite?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   account?: Prisma.XOR<Prisma.AccountNullableScalarRelationFilter, Prisma.AccountWhereInput> | null
   individual?: Prisma.XOR<Prisma.IndividualNullableScalarRelationFilter, Prisma.IndividualWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
@@ -272,6 +360,7 @@ export type PageVisitWhereInput = {
 export type PageVisitOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
+  source?: Prisma.SortOrderInput | Prisma.SortOrder
   pageName?: Prisma.SortOrderInput | Prisma.SortOrder
   visitorId?: Prisma.SortOrderInput | Prisma.SortOrder
   journeyId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -285,6 +374,16 @@ export type PageVisitOrderByWithRelationInput = {
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
   ipAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  authenticationStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  accessOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  previousPageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  clickedLinkUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  navigationType?: Prisma.SortOrderInput | Prisma.SortOrder
+  clientVisitedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  browserLanguage?: Prisma.SortOrderInput | Prisma.SortOrder
+  webdriver?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestOrigin?: Prisma.SortOrderInput | Prisma.SortOrder
+  fetchSite?: Prisma.SortOrderInput | Prisma.SortOrder
   account?: Prisma.AccountOrderByWithRelationInput
   individual?: Prisma.IndividualOrderByWithRelationInput
   lead?: Prisma.LeadOrderByWithRelationInput
@@ -298,6 +397,7 @@ export type PageVisitWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PageVisitWhereInput[]
   NOT?: Prisma.PageVisitWhereInput | Prisma.PageVisitWhereInput[]
   pageUrl?: Prisma.StringFilter<"PageVisit"> | string
+  source?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   pageName?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   visitorId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   journeyId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
@@ -311,6 +411,16 @@ export type PageVisitWhereUniqueInput = Prisma.AtLeast<{
   userAgent?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   ipAddress?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   sessionId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  authenticationStatus?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  accessOutcome?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  previousPageUrl?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  clickedLinkUrl?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  navigationType?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  clientVisitedAt?: Prisma.DateTimeNullableFilter<"PageVisit"> | Date | string | null
+  browserLanguage?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  webdriver?: Prisma.BoolNullableFilter<"PageVisit"> | boolean | null
+  requestOrigin?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  fetchSite?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   account?: Prisma.XOR<Prisma.AccountNullableScalarRelationFilter, Prisma.AccountWhereInput> | null
   individual?: Prisma.XOR<Prisma.IndividualNullableScalarRelationFilter, Prisma.IndividualWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
@@ -321,6 +431,7 @@ export type PageVisitWhereUniqueInput = Prisma.AtLeast<{
 export type PageVisitOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
+  source?: Prisma.SortOrderInput | Prisma.SortOrder
   pageName?: Prisma.SortOrderInput | Prisma.SortOrder
   visitorId?: Prisma.SortOrderInput | Prisma.SortOrder
   journeyId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -334,6 +445,16 @@ export type PageVisitOrderByWithAggregationInput = {
   userAgent?: Prisma.SortOrderInput | Prisma.SortOrder
   ipAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   sessionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  authenticationStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  accessOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  previousPageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  clickedLinkUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  navigationType?: Prisma.SortOrderInput | Prisma.SortOrder
+  clientVisitedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  browserLanguage?: Prisma.SortOrderInput | Prisma.SortOrder
+  webdriver?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestOrigin?: Prisma.SortOrderInput | Prisma.SortOrder
+  fetchSite?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PageVisitCountOrderByAggregateInput
   _max?: Prisma.PageVisitMaxOrderByAggregateInput
   _min?: Prisma.PageVisitMinOrderByAggregateInput
@@ -345,6 +466,7 @@ export type PageVisitScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PageVisitScalarWhereWithAggregatesInput | Prisma.PageVisitScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PageVisit"> | string
   pageUrl?: Prisma.StringWithAggregatesFilter<"PageVisit"> | string
+  source?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
   pageName?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
   visitorId?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
   journeyId?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
@@ -358,11 +480,22 @@ export type PageVisitScalarWhereWithAggregatesInput = {
   userAgent?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
   ipAddress?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
   sessionId?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  authenticationStatus?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  accessOutcome?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  previousPageUrl?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  clickedLinkUrl?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  navigationType?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  clientVisitedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"PageVisit"> | Date | string | null
+  browserLanguage?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  webdriver?: Prisma.BoolNullableWithAggregatesFilter<"PageVisit"> | boolean | null
+  requestOrigin?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
+  fetchSite?: Prisma.StringNullableWithAggregatesFilter<"PageVisit"> | string | null
 }
 
 export type PageVisitCreateInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   visitorStage: $Enums.VisitorStage
@@ -371,6 +504,16 @@ export type PageVisitCreateInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
   account?: Prisma.AccountCreateNestedOneWithoutPageVisitsInput
   individual?: Prisma.IndividualCreateNestedOneWithoutPageVisitsInput
   lead?: Prisma.LeadCreateNestedOneWithoutPageVisitsInput
@@ -381,6 +524,7 @@ export type PageVisitCreateInput = {
 export type PageVisitUncheckedCreateInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -394,11 +538,22 @@ export type PageVisitUncheckedCreateInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -407,6 +562,16 @@ export type PageVisitUpdateInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountUpdateOneWithoutPageVisitsNestedInput
   individual?: Prisma.IndividualUpdateOneWithoutPageVisitsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutPageVisitsNestedInput
@@ -417,6 +582,7 @@ export type PageVisitUpdateInput = {
 export type PageVisitUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -430,11 +596,22 @@ export type PageVisitUncheckedUpdateInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitCreateManyInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -448,11 +625,22 @@ export type PageVisitCreateManyInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -461,11 +649,22 @@ export type PageVisitUpdateManyMutationInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -479,6 +678,16 @@ export type PageVisitUncheckedUpdateManyInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitListRelationFilter = {
@@ -494,6 +703,7 @@ export type PageVisitOrderByRelationAggregateInput = {
 export type PageVisitCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
+  source?: Prisma.SortOrder
   pageName?: Prisma.SortOrder
   visitorId?: Prisma.SortOrder
   journeyId?: Prisma.SortOrder
@@ -507,11 +717,22 @@ export type PageVisitCountOrderByAggregateInput = {
   userAgent?: Prisma.SortOrder
   ipAddress?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
+  authenticationStatus?: Prisma.SortOrder
+  accessOutcome?: Prisma.SortOrder
+  previousPageUrl?: Prisma.SortOrder
+  clickedLinkUrl?: Prisma.SortOrder
+  navigationType?: Prisma.SortOrder
+  clientVisitedAt?: Prisma.SortOrder
+  browserLanguage?: Prisma.SortOrder
+  webdriver?: Prisma.SortOrder
+  requestOrigin?: Prisma.SortOrder
+  fetchSite?: Prisma.SortOrder
 }
 
 export type PageVisitMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
+  source?: Prisma.SortOrder
   pageName?: Prisma.SortOrder
   visitorId?: Prisma.SortOrder
   journeyId?: Prisma.SortOrder
@@ -525,11 +746,22 @@ export type PageVisitMaxOrderByAggregateInput = {
   userAgent?: Prisma.SortOrder
   ipAddress?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
+  authenticationStatus?: Prisma.SortOrder
+  accessOutcome?: Prisma.SortOrder
+  previousPageUrl?: Prisma.SortOrder
+  clickedLinkUrl?: Prisma.SortOrder
+  navigationType?: Prisma.SortOrder
+  clientVisitedAt?: Prisma.SortOrder
+  browserLanguage?: Prisma.SortOrder
+  webdriver?: Prisma.SortOrder
+  requestOrigin?: Prisma.SortOrder
+  fetchSite?: Prisma.SortOrder
 }
 
 export type PageVisitMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   pageUrl?: Prisma.SortOrder
+  source?: Prisma.SortOrder
   pageName?: Prisma.SortOrder
   visitorId?: Prisma.SortOrder
   journeyId?: Prisma.SortOrder
@@ -543,6 +775,16 @@ export type PageVisitMinOrderByAggregateInput = {
   userAgent?: Prisma.SortOrder
   ipAddress?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
+  authenticationStatus?: Prisma.SortOrder
+  accessOutcome?: Prisma.SortOrder
+  previousPageUrl?: Prisma.SortOrder
+  clickedLinkUrl?: Prisma.SortOrder
+  navigationType?: Prisma.SortOrder
+  clientVisitedAt?: Prisma.SortOrder
+  browserLanguage?: Prisma.SortOrder
+  webdriver?: Prisma.SortOrder
+  requestOrigin?: Prisma.SortOrder
+  fetchSite?: Prisma.SortOrder
 }
 
 export type PageVisitCreateNestedManyWithoutIndividualInput = {
@@ -717,6 +959,10 @@ export type EnumVisitorStageFieldUpdateOperationsInput = {
   set?: $Enums.VisitorStage
 }
 
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+}
+
 export type PageVisitCreateNestedManyWithoutJourneyInput = {
   create?: Prisma.XOR<Prisma.PageVisitCreateWithoutJourneyInput, Prisma.PageVisitUncheckedCreateWithoutJourneyInput> | Prisma.PageVisitCreateWithoutJourneyInput[] | Prisma.PageVisitUncheckedCreateWithoutJourneyInput[]
   connectOrCreate?: Prisma.PageVisitCreateOrConnectWithoutJourneyInput | Prisma.PageVisitCreateOrConnectWithoutJourneyInput[]
@@ -762,6 +1008,7 @@ export type PageVisitUncheckedUpdateManyWithoutJourneyNestedInput = {
 export type PageVisitCreateWithoutIndividualInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   visitorStage: $Enums.VisitorStage
@@ -770,6 +1017,16 @@ export type PageVisitCreateWithoutIndividualInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
   account?: Prisma.AccountCreateNestedOneWithoutPageVisitsInput
   lead?: Prisma.LeadCreateNestedOneWithoutPageVisitsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutPageVisitsInput
@@ -779,6 +1036,7 @@ export type PageVisitCreateWithoutIndividualInput = {
 export type PageVisitUncheckedCreateWithoutIndividualInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -791,6 +1049,16 @@ export type PageVisitUncheckedCreateWithoutIndividualInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitCreateOrConnectWithoutIndividualInput = {
@@ -825,6 +1093,7 @@ export type PageVisitScalarWhereInput = {
   NOT?: Prisma.PageVisitScalarWhereInput | Prisma.PageVisitScalarWhereInput[]
   id?: Prisma.StringFilter<"PageVisit"> | string
   pageUrl?: Prisma.StringFilter<"PageVisit"> | string
+  source?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   pageName?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   visitorId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   journeyId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
@@ -838,11 +1107,22 @@ export type PageVisitScalarWhereInput = {
   userAgent?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   ipAddress?: Prisma.StringNullableFilter<"PageVisit"> | string | null
   sessionId?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  authenticationStatus?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  accessOutcome?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  previousPageUrl?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  clickedLinkUrl?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  navigationType?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  clientVisitedAt?: Prisma.DateTimeNullableFilter<"PageVisit"> | Date | string | null
+  browserLanguage?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  webdriver?: Prisma.BoolNullableFilter<"PageVisit"> | boolean | null
+  requestOrigin?: Prisma.StringNullableFilter<"PageVisit"> | string | null
+  fetchSite?: Prisma.StringNullableFilter<"PageVisit"> | string | null
 }
 
 export type PageVisitCreateWithoutLeadInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   visitorStage: $Enums.VisitorStage
@@ -851,6 +1131,16 @@ export type PageVisitCreateWithoutLeadInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
   account?: Prisma.AccountCreateNestedOneWithoutPageVisitsInput
   individual?: Prisma.IndividualCreateNestedOneWithoutPageVisitsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutPageVisitsInput
@@ -860,6 +1150,7 @@ export type PageVisitCreateWithoutLeadInput = {
 export type PageVisitUncheckedCreateWithoutLeadInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -872,6 +1163,16 @@ export type PageVisitUncheckedCreateWithoutLeadInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitCreateOrConnectWithoutLeadInput = {
@@ -903,6 +1204,7 @@ export type PageVisitUpdateManyWithWhereWithoutLeadInput = {
 export type PageVisitCreateWithoutProspectInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   visitorStage: $Enums.VisitorStage
@@ -911,6 +1213,16 @@ export type PageVisitCreateWithoutProspectInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
   account?: Prisma.AccountCreateNestedOneWithoutPageVisitsInput
   individual?: Prisma.IndividualCreateNestedOneWithoutPageVisitsInput
   lead?: Prisma.LeadCreateNestedOneWithoutPageVisitsInput
@@ -920,6 +1232,7 @@ export type PageVisitCreateWithoutProspectInput = {
 export type PageVisitUncheckedCreateWithoutProspectInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -932,6 +1245,16 @@ export type PageVisitUncheckedCreateWithoutProspectInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitCreateOrConnectWithoutProspectInput = {
@@ -963,6 +1286,7 @@ export type PageVisitUpdateManyWithWhereWithoutProspectInput = {
 export type PageVisitCreateWithoutAccountInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   visitorStage: $Enums.VisitorStage
@@ -971,6 +1295,16 @@ export type PageVisitCreateWithoutAccountInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
   individual?: Prisma.IndividualCreateNestedOneWithoutPageVisitsInput
   lead?: Prisma.LeadCreateNestedOneWithoutPageVisitsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutPageVisitsInput
@@ -980,6 +1314,7 @@ export type PageVisitCreateWithoutAccountInput = {
 export type PageVisitUncheckedCreateWithoutAccountInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -992,6 +1327,16 @@ export type PageVisitUncheckedCreateWithoutAccountInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitCreateOrConnectWithoutAccountInput = {
@@ -1023,6 +1368,7 @@ export type PageVisitUpdateManyWithWhereWithoutAccountInput = {
 export type PageVisitCreateWithoutJourneyInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   visitorStage: $Enums.VisitorStage
@@ -1031,6 +1377,16 @@ export type PageVisitCreateWithoutJourneyInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
   account?: Prisma.AccountCreateNestedOneWithoutPageVisitsInput
   individual?: Prisma.IndividualCreateNestedOneWithoutPageVisitsInput
   lead?: Prisma.LeadCreateNestedOneWithoutPageVisitsInput
@@ -1040,6 +1396,7 @@ export type PageVisitCreateWithoutJourneyInput = {
 export type PageVisitUncheckedCreateWithoutJourneyInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   visitorStage: $Enums.VisitorStage
@@ -1052,6 +1409,16 @@ export type PageVisitUncheckedCreateWithoutJourneyInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitCreateOrConnectWithoutJourneyInput = {
@@ -1083,6 +1450,7 @@ export type PageVisitUpdateManyWithWhereWithoutJourneyInput = {
 export type PageVisitCreateManyIndividualInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -1095,11 +1463,22 @@ export type PageVisitCreateManyIndividualInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitUpdateWithoutIndividualInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -1108,6 +1487,16 @@ export type PageVisitUpdateWithoutIndividualInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountUpdateOneWithoutPageVisitsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutPageVisitsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutPageVisitsNestedInput
@@ -1117,6 +1506,7 @@ export type PageVisitUpdateWithoutIndividualInput = {
 export type PageVisitUncheckedUpdateWithoutIndividualInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1129,11 +1519,22 @@ export type PageVisitUncheckedUpdateWithoutIndividualInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitUncheckedUpdateManyWithoutIndividualInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1146,11 +1547,22 @@ export type PageVisitUncheckedUpdateManyWithoutIndividualInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitCreateManyLeadInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -1163,11 +1575,22 @@ export type PageVisitCreateManyLeadInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -1176,6 +1599,16 @@ export type PageVisitUpdateWithoutLeadInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountUpdateOneWithoutPageVisitsNestedInput
   individual?: Prisma.IndividualUpdateOneWithoutPageVisitsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutPageVisitsNestedInput
@@ -1185,6 +1618,7 @@ export type PageVisitUpdateWithoutLeadInput = {
 export type PageVisitUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1197,11 +1631,22 @@ export type PageVisitUncheckedUpdateWithoutLeadInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1214,11 +1659,22 @@ export type PageVisitUncheckedUpdateManyWithoutLeadInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitCreateManyProspectInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -1231,11 +1687,22 @@ export type PageVisitCreateManyProspectInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitUpdateWithoutProspectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -1244,6 +1711,16 @@ export type PageVisitUpdateWithoutProspectInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountUpdateOneWithoutPageVisitsNestedInput
   individual?: Prisma.IndividualUpdateOneWithoutPageVisitsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutPageVisitsNestedInput
@@ -1253,6 +1730,7 @@ export type PageVisitUpdateWithoutProspectInput = {
 export type PageVisitUncheckedUpdateWithoutProspectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1265,11 +1743,22 @@ export type PageVisitUncheckedUpdateWithoutProspectInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitUncheckedUpdateManyWithoutProspectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1282,11 +1771,22 @@ export type PageVisitUncheckedUpdateManyWithoutProspectInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitCreateManyAccountInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   journeyId?: string | null
@@ -1299,11 +1799,22 @@ export type PageVisitCreateManyAccountInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitUpdateWithoutAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -1312,6 +1823,16 @@ export type PageVisitUpdateWithoutAccountInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   individual?: Prisma.IndividualUpdateOneWithoutPageVisitsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutPageVisitsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutPageVisitsNestedInput
@@ -1321,6 +1842,7 @@ export type PageVisitUpdateWithoutAccountInput = {
 export type PageVisitUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1333,11 +1855,22 @@ export type PageVisitUncheckedUpdateWithoutAccountInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   journeyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1350,11 +1883,22 @@ export type PageVisitUncheckedUpdateManyWithoutAccountInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitCreateManyJourneyInput = {
   id?: string
   pageUrl: string
+  source?: string | null
   pageName?: string | null
   visitorId?: string | null
   visitorStage: $Enums.VisitorStage
@@ -1367,11 +1911,22 @@ export type PageVisitCreateManyJourneyInput = {
   userAgent?: string | null
   ipAddress?: string | null
   sessionId?: string | null
+  authenticationStatus?: string | null
+  accessOutcome?: string | null
+  previousPageUrl?: string | null
+  clickedLinkUrl?: string | null
+  navigationType?: string | null
+  clientVisitedAt?: Date | string | null
+  browserLanguage?: string | null
+  webdriver?: boolean | null
+  requestOrigin?: string | null
+  fetchSite?: string | null
 }
 
 export type PageVisitUpdateWithoutJourneyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -1380,6 +1935,16 @@ export type PageVisitUpdateWithoutJourneyInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountUpdateOneWithoutPageVisitsNestedInput
   individual?: Prisma.IndividualUpdateOneWithoutPageVisitsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutPageVisitsNestedInput
@@ -1389,6 +1954,7 @@ export type PageVisitUpdateWithoutJourneyInput = {
 export type PageVisitUncheckedUpdateWithoutJourneyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -1401,11 +1967,22 @@ export type PageVisitUncheckedUpdateWithoutJourneyInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PageVisitUncheckedUpdateManyWithoutJourneyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   pageUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pageName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visitorStage?: Prisma.EnumVisitorStageFieldUpdateOperationsInput | $Enums.VisitorStage
@@ -1418,6 +1995,16 @@ export type PageVisitUncheckedUpdateManyWithoutJourneyInput = {
   userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ipAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sessionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authenticationStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousPageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clickedLinkUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  navigationType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  clientVisitedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  browserLanguage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webdriver?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requestOrigin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fetchSite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1425,6 +2012,7 @@ export type PageVisitUncheckedUpdateManyWithoutJourneyInput = {
 export type PageVisitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   pageUrl?: boolean
+  source?: boolean
   pageName?: boolean
   visitorId?: boolean
   journeyId?: boolean
@@ -1438,6 +2026,16 @@ export type PageVisitSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   userAgent?: boolean
   ipAddress?: boolean
   sessionId?: boolean
+  authenticationStatus?: boolean
+  accessOutcome?: boolean
+  previousPageUrl?: boolean
+  clickedLinkUrl?: boolean
+  navigationType?: boolean
+  clientVisitedAt?: boolean
+  browserLanguage?: boolean
+  webdriver?: boolean
+  requestOrigin?: boolean
+  fetchSite?: boolean
   account?: boolean | Prisma.PageVisit$accountArgs<ExtArgs>
   individual?: boolean | Prisma.PageVisit$individualArgs<ExtArgs>
   lead?: boolean | Prisma.PageVisit$leadArgs<ExtArgs>
@@ -1448,6 +2046,7 @@ export type PageVisitSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type PageVisitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   pageUrl?: boolean
+  source?: boolean
   pageName?: boolean
   visitorId?: boolean
   journeyId?: boolean
@@ -1461,6 +2060,16 @@ export type PageVisitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   userAgent?: boolean
   ipAddress?: boolean
   sessionId?: boolean
+  authenticationStatus?: boolean
+  accessOutcome?: boolean
+  previousPageUrl?: boolean
+  clickedLinkUrl?: boolean
+  navigationType?: boolean
+  clientVisitedAt?: boolean
+  browserLanguage?: boolean
+  webdriver?: boolean
+  requestOrigin?: boolean
+  fetchSite?: boolean
   account?: boolean | Prisma.PageVisit$accountArgs<ExtArgs>
   individual?: boolean | Prisma.PageVisit$individualArgs<ExtArgs>
   lead?: boolean | Prisma.PageVisit$leadArgs<ExtArgs>
@@ -1471,6 +2080,7 @@ export type PageVisitSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type PageVisitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   pageUrl?: boolean
+  source?: boolean
   pageName?: boolean
   visitorId?: boolean
   journeyId?: boolean
@@ -1484,6 +2094,16 @@ export type PageVisitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   userAgent?: boolean
   ipAddress?: boolean
   sessionId?: boolean
+  authenticationStatus?: boolean
+  accessOutcome?: boolean
+  previousPageUrl?: boolean
+  clickedLinkUrl?: boolean
+  navigationType?: boolean
+  clientVisitedAt?: boolean
+  browserLanguage?: boolean
+  webdriver?: boolean
+  requestOrigin?: boolean
+  fetchSite?: boolean
   account?: boolean | Prisma.PageVisit$accountArgs<ExtArgs>
   individual?: boolean | Prisma.PageVisit$individualArgs<ExtArgs>
   lead?: boolean | Prisma.PageVisit$leadArgs<ExtArgs>
@@ -1494,6 +2114,7 @@ export type PageVisitSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type PageVisitSelectScalar = {
   id?: boolean
   pageUrl?: boolean
+  source?: boolean
   pageName?: boolean
   visitorId?: boolean
   journeyId?: boolean
@@ -1507,9 +2128,19 @@ export type PageVisitSelectScalar = {
   userAgent?: boolean
   ipAddress?: boolean
   sessionId?: boolean
+  authenticationStatus?: boolean
+  accessOutcome?: boolean
+  previousPageUrl?: boolean
+  clickedLinkUrl?: boolean
+  navigationType?: boolean
+  clientVisitedAt?: boolean
+  browserLanguage?: boolean
+  webdriver?: boolean
+  requestOrigin?: boolean
+  fetchSite?: boolean
 }
 
-export type PageVisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pageUrl" | "pageName" | "visitorId" | "journeyId" | "visitorStage" | "leadId" | "prospectId" | "accountId" | "individualId" | "visitDate" | "referrer" | "userAgent" | "ipAddress" | "sessionId", ExtArgs["result"]["pageVisit"]>
+export type PageVisitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pageUrl" | "source" | "pageName" | "visitorId" | "journeyId" | "visitorStage" | "leadId" | "prospectId" | "accountId" | "individualId" | "visitDate" | "referrer" | "userAgent" | "ipAddress" | "sessionId" | "authenticationStatus" | "accessOutcome" | "previousPageUrl" | "clickedLinkUrl" | "navigationType" | "clientVisitedAt" | "browserLanguage" | "webdriver" | "requestOrigin" | "fetchSite", ExtArgs["result"]["pageVisit"]>
 export type PageVisitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.PageVisit$accountArgs<ExtArgs>
   individual?: boolean | Prisma.PageVisit$individualArgs<ExtArgs>
@@ -1544,6 +2175,7 @@ export type $PageVisitPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     pageUrl: string
+    source: string | null
     pageName: string | null
     visitorId: string | null
     journeyId: string | null
@@ -1557,6 +2189,16 @@ export type $PageVisitPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     userAgent: string | null
     ipAddress: string | null
     sessionId: string | null
+    authenticationStatus: string | null
+    accessOutcome: string | null
+    previousPageUrl: string | null
+    clickedLinkUrl: string | null
+    navigationType: string | null
+    clientVisitedAt: Date | null
+    browserLanguage: string | null
+    webdriver: boolean | null
+    requestOrigin: string | null
+    fetchSite: string | null
   }, ExtArgs["result"]["pageVisit"]>
   composites: {}
 }
@@ -1987,6 +2629,7 @@ export interface Prisma__PageVisitClient<T, Null = never, ExtArgs extends runtim
 export interface PageVisitFieldRefs {
   readonly id: Prisma.FieldRef<"PageVisit", 'String'>
   readonly pageUrl: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly source: Prisma.FieldRef<"PageVisit", 'String'>
   readonly pageName: Prisma.FieldRef<"PageVisit", 'String'>
   readonly visitorId: Prisma.FieldRef<"PageVisit", 'String'>
   readonly journeyId: Prisma.FieldRef<"PageVisit", 'String'>
@@ -2000,6 +2643,16 @@ export interface PageVisitFieldRefs {
   readonly userAgent: Prisma.FieldRef<"PageVisit", 'String'>
   readonly ipAddress: Prisma.FieldRef<"PageVisit", 'String'>
   readonly sessionId: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly authenticationStatus: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly accessOutcome: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly previousPageUrl: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly clickedLinkUrl: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly navigationType: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly clientVisitedAt: Prisma.FieldRef<"PageVisit", 'DateTime'>
+  readonly browserLanguage: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly webdriver: Prisma.FieldRef<"PageVisit", 'Boolean'>
+  readonly requestOrigin: Prisma.FieldRef<"PageVisit", 'String'>
+  readonly fetchSite: Prisma.FieldRef<"PageVisit", 'String'>
 }
     
 

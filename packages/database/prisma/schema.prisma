@@ -1043,6 +1043,8 @@ model Individual {
   country   String?
   language  String
   source    String
+  acquisitionSource String?
+  visitorIdentities VisitorIdentity[]
 
   isActive      Boolean @default(false)
   emailVerified Boolean @default(false)
@@ -1165,6 +1167,7 @@ model Consent {
 model PageVisit {
   id           String          @id @default(cuid())
   pageUrl      String
+  source       String?
   pageName     String?
   visitorId    String?
   journeyId    String?
@@ -1178,6 +1181,16 @@ model PageVisit {
   userAgent    String?
   ipAddress    String?
   sessionId    String?
+  authenticationStatus String?
+  accessOutcome        String?
+  previousPageUrl      String?
+  clickedLinkUrl       String?
+  navigationType       String?
+  clientVisitedAt      DateTime?
+  browserLanguage      String?
+  webdriver            Boolean?
+  requestOrigin        String?
+  fetchSite            String?
   account      Account?        @relation(fields: [accountId], references: [id])
   individual   Individual?     @relation(fields: [individualId], references: [id])
   lead         Lead?           @relation(fields: [leadId], references: [id])
@@ -1187,6 +1200,71 @@ model PageVisit {
   @@index([visitorId])
   @@index([journeyId])
   @@index([individualId, visitDate])
+  @@index([visitorId, visitDate])
+  @@index([source, visitDate])
+}
+
+model Visitor {
+  id String @id
+  firstName String?
+  lastName String?
+  email String?
+  phone String?
+  source String?
+  lastSource String?
+  landingPage String?
+  referrer String?
+  userAgent String?
+  language String?
+  deviceType String?
+  utmCampaign String?
+  utmMedium String?
+  firstSeenAt DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  identities VisitorIdentity[]
+
+  @@index([source, firstSeenAt])
+  @@index([lastSeenAt])
+  @@index([email])
+}
+
+model VisitorIdentity {
+  id String @id @default(cuid())
+  visitorId String
+  individualId String
+  linkedAt DateTime @default(now())
+  visitor Visitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  individual Individual @relation(fields: [individualId], references: [id], onDelete: Cascade)
+  @@unique([visitorId, individualId])
+  @@index([individualId])
+}
+
+model AgentQuery {
+  id String @id @default(cuid())
+  title String
+  prompt String
+  sql String
+  explanation String?
+  model String
+  createdBy String
+  createdDate DateTime @default(now())
+  updatedDate DateTime @updatedAt
+  executions AgentQueryExecution[]
+  @@index([createdBy, updatedDate])
+}
+
+model AgentQueryExecution {
+  id String @id @default(cuid())
+  queryId String
+  executedBy String
+  sql String
+  status String
+  rowCount Int?
+  durationMs Int
+  error String?
+  createdDate DateTime @default(now())
+  query AgentQuery @relation(fields: [queryId], references: [id], onDelete: Cascade)
+  @@index([queryId, createdDate])
 }
 
 model ContactRequest {

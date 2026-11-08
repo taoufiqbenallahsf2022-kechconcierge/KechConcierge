@@ -1,6 +1,7 @@
 import { Router, type Request } from "express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { prisma } from "../config/prisma";
+import { recordVisitor } from "../services/visitor-profile.service";
 
 const router = Router();
 
@@ -28,6 +29,7 @@ const db = prisma as any;
 const include = { items: { orderBy: { createdDate: "asc" } } };
 
 async function activeCart(identity: Owner, create = false) {
+  if (create) await recordVisitor({ visitorId: identity.visitorId, individualId: identity.individualId });
   if (identity.individualId) {
     let cart = await db.tripCart.findFirst({ where: { individualId: identity.individualId, status: "ACTIVE" }, include });
     const visitorCart = await db.tripCart.findFirst({ where: { visitorId: identity.visitorId, individualId: null, status: "ACTIVE" }, include });

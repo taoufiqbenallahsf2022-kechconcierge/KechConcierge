@@ -10,6 +10,7 @@ function validId(value: string, label: string) {
 export async function ensureVisitorJourney(visitorIdRaw: string, journeyIdRaw: string) {
   const visitorId = validId(visitorIdRaw, "Visitor ID");
   const journeyId = validId(journeyIdRaw, "Journey ID");
+  await prisma.visitor.upsert({ where: { id: visitorId }, create: { id: visitorId }, update: { lastSeenAt: new Date() } });
   const journey = await prisma.visitorJourney.upsert({
     where: { id: journeyId },
     create: { id: journeyId, visitorId },
@@ -58,6 +59,9 @@ export async function claimVisitorJourney(
     const pageStage = accountId ? "ACCOUNT" : prospectId ? "PROSPECT" : leadId ? "LEAD" : "ANONYMOUS";
     const chatStage = accountId ? "ACCOUNT" : prospectId ? "PROSPECT" : leadId ? "LEAD" : "INDIVIDUAL";
     const claimedAt = current.claimedAt ?? new Date();
+    const visitor = await tx.visitor.upsert({ where: { id: visitorId }, create: { id: visitorId }, update: { lastSeenAt: new Date() } });
+    await tx.visitorIdentity.upsert({ where: { visitorId_individualId: { visitorId, individualId } }, create: { visitorId, individualId }, update: {} });
+    if (visitor.source) await tx.individual.updateMany({ where: { id: individualId, acquisitionSource: null }, data: { acquisitionSource: visitor.source } });
 
     await tx.visitorJourney.update({
       where: { id: journeyId },
