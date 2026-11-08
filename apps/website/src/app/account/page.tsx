@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { reportAccountAccess, safeVisitUrl } from "@/lib/visit-diagnostics";
 
 import {
   usePathname,
@@ -371,6 +372,12 @@ export default function AccountPage() {
       "/contact"
     );
 
+  useEffect(() => {
+    // Section changes can reuse an already loaded account without another API request.
+    if (profile && !pageLoading && isAuthenticated && accessToken)
+      reportAccountAccess(window.location.href, "ACCOUNT_DATA_LOADED");
+  }, [profile, pageLoading, isAuthenticated, accessToken, pathname, section]);
+
   const countryNames =
     useMemo(
       () =>
@@ -384,10 +391,12 @@ export default function AccountPage() {
     );
 
   useEffect(() => {
+    const trackedUrl = safeVisitUrl(window.location.href);
     if (
       !isAuthenticated ||
       !accessToken
     ) {
+      reportAccountAccess(trackedUrl, "REDIRECTED_UNAUTHENTICATED");
       router.replace(
         loginPath
       );
@@ -448,6 +457,7 @@ export default function AccountPage() {
         ) {
           logout();
 
+          reportAccountAccess(trackedUrl, "REDIRECTED_UNAUTHENTICATED");
           router.replace(
             loginPath
           );
@@ -522,6 +532,7 @@ export default function AccountPage() {
         setInitialPreferences(
           mappedPreferences
         );
+        reportAccountAccess(trackedUrl, "ACCOUNT_DATA_LOADED");
       } catch (error) {
         if (
           error instanceof
@@ -536,6 +547,7 @@ export default function AccountPage() {
           "Unable to load account:",
           error
         );
+        reportAccountAccess(trackedUrl, "ACCOUNT_LOAD_FAILED");
 
         setProfileFeedback(
           t.accountPage.loadError

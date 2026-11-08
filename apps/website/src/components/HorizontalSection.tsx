@@ -168,6 +168,7 @@ export default function HorizontalSection({ category }: { category: Category }) 
                 <ItemCard item={item as any} locale={locale} priority={category === "restaurants" && index < 3}/>
               </div>
             ))}
+            {items.length > 0 && <Link href={localizePath(`/${category}`)} className="collection-end-card group flex w-44 shrink-0 snap-start flex-col items-center justify-center gap-3 self-stretch rounded-3xl bg-orange-50/60 px-5 py-8 text-center transition duration-300 hover:bg-orange-100/70 sm:w-48"><span className="grid h-12 w-12 place-items-center rounded-full border border-orange-200/80 bg-white/80 text-orange-700 transition duration-300 group-hover:translate-x-1"><ChevronRight size={22} strokeWidth={1.5} /></span><span className="space-y-1"><strong className="block text-base font-semibold text-zinc-900">{t.categories.viewAll}</strong><span className="block text-sm text-zinc-600">{labels[category]}</span></span></Link>}
           </div>
           {canScrollRight && <button type="button" onClick={() => scroll("right")} className="nightclub-carousel-arrow absolute right-2 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-zinc-100 bg-white/95 text-zinc-950 shadow-xl backdrop-blur transition hover:scale-105 hover:bg-orange-50 md:grid" aria-label="Next products"><ChevronRight /></button>}
         </div>

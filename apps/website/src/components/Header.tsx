@@ -12,6 +12,7 @@ import { Check, ChevronDown, ChevronLeft, ChevronRight, CircleUserRound, Concier
 import AuthModal from "./AuthModal";
 import { TripHeaderButton } from "./TripExperience";
 
+import { getCategoryTranslations } from "@/lib/category-translations";
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
 import { useAuthStore } from "@/store/auth.store";
@@ -188,14 +189,18 @@ export default function Header() {
     },
   ];
 
+  const { labels: categoryNames } = getCategoryTranslations(t);
   const mobileCategories = [
-    { href: "/villas", label: t.header.villas, image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=82&w=520" },
-    { href: "/beachclubs", label: t.header.swimmingpool, image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=82&w=520" },
-    { href: "/restaurants", label: t.categories.restaurantsLabel, image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=82&w=520" },
-    { href: "/experiences", label: t.header.activities, image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&q=82&w=520" },
+    { href: "/villas", label: categoryNames.villas, image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=82&w=520" },
+    { href: "/beachclubs", label: "Beach Clubs", image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=82&w=520" },
+    { href: "/restaurants", label: categoryNames.restaurants, image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=82&w=520" },
+    { href: "/experiences", label: categoryNames.experiences, image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&q=82&w=520" },
+    { href: "/transportation", label: categoryNames.transportation, image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=82&w=520" },
+    { href: "/nightclubs", label: categoryNames.nightclubs, image: "/brand/nightclub-atmosphere.webp" },
+    { href: "/spa", label: categoryNames.spa, image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=82&w=520" },
+    { href: "/packs", label: categoryNames.packs, image: "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=82&w=520" },
   ];
-
-  const mobileNavItems = [navItems[0], navItems[1], navItems[5], navItems[6], navItems[7]];
+  const mobileNavItems = navItems;
 
   const currentLocale = getCurrentLocale(pathname);
 
@@ -644,7 +649,7 @@ export default function Header() {
         </div>
 
         {menuOpen && (
-          <div className="no-scrollbar absolute inset-x-0 top-full h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-[#fffaf6] px-4 pb-8 pt-4 shadow-2xl md:hidden">
+          <div className="mobile-menu-panel no-scrollbar absolute inset-x-0 top-full h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-[#fffaf6] px-4 pb-8 pt-4 shadow-2xl md:hidden">
             {languageOpen ? (
               <div className="mx-auto w-full max-w-lg">
                 <button type="button" onClick={() => setLanguageOpen(false)} className="mb-4 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 font-bold text-zinc-900 shadow-sm">
@@ -663,12 +668,12 @@ export default function Header() {
               </div>
             ) : (
             <div className="mx-auto flex w-full max-w-lg flex-col gap-4">
-              <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1">
+              <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-4 pb-2">
                 {mobileCategories.map((item) => {
                   const targetPath = buildLocalizedPath(item.href, currentLocale);
-                  return <button key={item.href} type="button" onClick={() => navigateTo(targetPath)} disabled={Boolean(pendingPath)} className="w-[34%] max-w-[140px] shrink-0 snap-start overflow-hidden rounded-2xl border border-black/5 bg-white text-left shadow-sm transition active:scale-[.98]">
-                    <span className="relative block h-20 overflow-hidden bg-[#eee8e3]"><Image src={item.image} alt="" fill sizes="140px" className="object-cover transition duration-500 hover:scale-105" /></span>
-                    <span className="flex min-h-12 items-center justify-between gap-1.5 px-3 py-2.5 text-xs font-black text-zinc-950"><span className="truncate">{item.label}</span><ChevronRight size={15} className="shrink-0 text-orange-600" /></span>
+                  return <button key={item.href} type="button" onClick={() => navigateTo(targetPath)} disabled={Boolean(pendingPath)} className="w-40 shrink-0 snap-start overflow-hidden rounded-2xl border border-black/5 bg-white text-left shadow-sm transition active:scale-[.98]">
+                    <span className="relative block h-20 overflow-hidden bg-[#eee8e3]"><Image src={item.image} alt="" fill sizes="160px" className="object-cover transition duration-500 hover:scale-105" /></span>
+                    <span className="flex min-h-12 items-center justify-between gap-1.5 px-3 py-2.5 text-xs font-black text-zinc-950"><span>{item.label}</span><ChevronRight size={15} className="shrink-0 text-orange-600" /></span>
                   </button>;
                 })}
               </div>
@@ -723,7 +728,7 @@ export default function Header() {
         )}
 
         {menuOpen && (
-          <div className="no-scrollbar absolute inset-x-0 top-full hidden h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-white px-5 py-5 md:block lg:hidden">
+          <div className="mobile-menu-panel no-scrollbar absolute inset-x-0 top-full hidden h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-white px-5 py-5 md:block lg:hidden">
             <div className="flex min-h-full flex-col gap-4">
               {navItems.map((item) => {
                 const targetPath = buildLocalizedPath(item.href, currentLocale);

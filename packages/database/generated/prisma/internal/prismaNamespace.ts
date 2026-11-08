@@ -430,6 +430,10 @@ export const ModelName = {
   Account: 'Account',
   Consent: 'Consent',
   PageVisit: 'PageVisit',
+  Visitor: 'Visitor',
+  VisitorIdentity: 'VisitorIdentity',
+  AgentQuery: 'AgentQuery',
+  AgentQueryExecution: 'AgentQueryExecution',
   ContactRequest: 'ContactRequest',
   ConciergeOrder: 'ConciergeOrder',
   ConciergeOrderItem: 'ConciergeOrderItem',
@@ -456,7 +460,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "emailMessage" | "emailEvent" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "contactRequest" | "conciergeOrder" | "conciergeOrderItem" | "conciergeOrderPayment" | "tripCart" | "tripCartItem" | "chat" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
+    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "emailMessage" | "emailEvent" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "visitor" | "visitorIdentity" | "agentQuery" | "agentQueryExecution" | "contactRequest" | "conciergeOrder" | "conciergeOrderItem" | "conciergeOrderPayment" | "tripCart" | "tripCartItem" | "chat" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3864,6 +3868,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Visitor: {
+      payload: Prisma.$VisitorPayload<ExtArgs>
+      fields: Prisma.VisitorFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VisitorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VisitorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>
+        }
+        findFirst: {
+          args: Prisma.VisitorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VisitorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>
+        }
+        findMany: {
+          args: Prisma.VisitorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>[]
+        }
+        create: {
+          args: Prisma.VisitorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>
+        }
+        createMany: {
+          args: Prisma.VisitorCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VisitorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>[]
+        }
+        delete: {
+          args: Prisma.VisitorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>
+        }
+        update: {
+          args: Prisma.VisitorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>
+        }
+        deleteMany: {
+          args: Prisma.VisitorDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VisitorUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VisitorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>[]
+        }
+        upsert: {
+          args: Prisma.VisitorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorPayload>
+        }
+        aggregate: {
+          args: Prisma.VisitorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVisitor>
+        }
+        groupBy: {
+          args: Prisma.VisitorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VisitorGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VisitorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VisitorCountAggregateOutputType> | number
+        }
+      }
+    }
+    VisitorIdentity: {
+      payload: Prisma.$VisitorIdentityPayload<ExtArgs>
+      fields: Prisma.VisitorIdentityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VisitorIdentityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VisitorIdentityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>
+        }
+        findFirst: {
+          args: Prisma.VisitorIdentityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VisitorIdentityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>
+        }
+        findMany: {
+          args: Prisma.VisitorIdentityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>[]
+        }
+        create: {
+          args: Prisma.VisitorIdentityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>
+        }
+        createMany: {
+          args: Prisma.VisitorIdentityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VisitorIdentityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>[]
+        }
+        delete: {
+          args: Prisma.VisitorIdentityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>
+        }
+        update: {
+          args: Prisma.VisitorIdentityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>
+        }
+        deleteMany: {
+          args: Prisma.VisitorIdentityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VisitorIdentityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VisitorIdentityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>[]
+        }
+        upsert: {
+          args: Prisma.VisitorIdentityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VisitorIdentityPayload>
+        }
+        aggregate: {
+          args: Prisma.VisitorIdentityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVisitorIdentity>
+        }
+        groupBy: {
+          args: Prisma.VisitorIdentityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VisitorIdentityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VisitorIdentityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VisitorIdentityCountAggregateOutputType> | number
+        }
+      }
+    }
+    AgentQuery: {
+      payload: Prisma.$AgentQueryPayload<ExtArgs>
+      fields: Prisma.AgentQueryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AgentQueryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AgentQueryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>
+        }
+        findFirst: {
+          args: Prisma.AgentQueryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AgentQueryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>
+        }
+        findMany: {
+          args: Prisma.AgentQueryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>[]
+        }
+        create: {
+          args: Prisma.AgentQueryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>
+        }
+        createMany: {
+          args: Prisma.AgentQueryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AgentQueryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>[]
+        }
+        delete: {
+          args: Prisma.AgentQueryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>
+        }
+        update: {
+          args: Prisma.AgentQueryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>
+        }
+        deleteMany: {
+          args: Prisma.AgentQueryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AgentQueryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AgentQueryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>[]
+        }
+        upsert: {
+          args: Prisma.AgentQueryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryPayload>
+        }
+        aggregate: {
+          args: Prisma.AgentQueryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAgentQuery>
+        }
+        groupBy: {
+          args: Prisma.AgentQueryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AgentQueryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AgentQueryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AgentQueryCountAggregateOutputType> | number
+        }
+      }
+    }
+    AgentQueryExecution: {
+      payload: Prisma.$AgentQueryExecutionPayload<ExtArgs>
+      fields: Prisma.AgentQueryExecutionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AgentQueryExecutionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AgentQueryExecutionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>
+        }
+        findFirst: {
+          args: Prisma.AgentQueryExecutionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AgentQueryExecutionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>
+        }
+        findMany: {
+          args: Prisma.AgentQueryExecutionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>[]
+        }
+        create: {
+          args: Prisma.AgentQueryExecutionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>
+        }
+        createMany: {
+          args: Prisma.AgentQueryExecutionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AgentQueryExecutionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>[]
+        }
+        delete: {
+          args: Prisma.AgentQueryExecutionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>
+        }
+        update: {
+          args: Prisma.AgentQueryExecutionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>
+        }
+        deleteMany: {
+          args: Prisma.AgentQueryExecutionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AgentQueryExecutionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AgentQueryExecutionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>[]
+        }
+        upsert: {
+          args: Prisma.AgentQueryExecutionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AgentQueryExecutionPayload>
+        }
+        aggregate: {
+          args: Prisma.AgentQueryExecutionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAgentQueryExecution>
+        }
+        groupBy: {
+          args: Prisma.AgentQueryExecutionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AgentQueryExecutionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AgentQueryExecutionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AgentQueryExecutionCountAggregateOutputType> | number
+        }
+      }
+    }
     ContactRequest: {
       payload: Prisma.$ContactRequestPayload<ExtArgs>
       fields: Prisma.ContactRequestFieldRefs
@@ -5740,6 +6040,7 @@ export const IndividualScalarFieldEnum = {
   country: 'country',
   language: 'language',
   source: 'source',
+  acquisitionSource: 'acquisitionSource',
   isActive: 'isActive',
   emailVerified: 'emailVerified',
   emailVerificationToken: 'emailVerificationToken',
@@ -5839,6 +6140,7 @@ export type ConsentScalarFieldEnum = (typeof ConsentScalarFieldEnum)[keyof typeo
 export const PageVisitScalarFieldEnum = {
   id: 'id',
   pageUrl: 'pageUrl',
+  source: 'source',
   pageName: 'pageName',
   visitorId: 'visitorId',
   journeyId: 'journeyId',
@@ -5851,10 +6153,82 @@ export const PageVisitScalarFieldEnum = {
   referrer: 'referrer',
   userAgent: 'userAgent',
   ipAddress: 'ipAddress',
-  sessionId: 'sessionId'
+  sessionId: 'sessionId',
+  authenticationStatus: 'authenticationStatus',
+  accessOutcome: 'accessOutcome',
+  previousPageUrl: 'previousPageUrl',
+  clickedLinkUrl: 'clickedLinkUrl',
+  navigationType: 'navigationType',
+  clientVisitedAt: 'clientVisitedAt',
+  browserLanguage: 'browserLanguage',
+  webdriver: 'webdriver',
+  requestOrigin: 'requestOrigin',
+  fetchSite: 'fetchSite'
 } as const
 
 export type PageVisitScalarFieldEnum = (typeof PageVisitScalarFieldEnum)[keyof typeof PageVisitScalarFieldEnum]
+
+
+export const VisitorScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  source: 'source',
+  lastSource: 'lastSource',
+  landingPage: 'landingPage',
+  referrer: 'referrer',
+  userAgent: 'userAgent',
+  language: 'language',
+  deviceType: 'deviceType',
+  utmCampaign: 'utmCampaign',
+  utmMedium: 'utmMedium',
+  firstSeenAt: 'firstSeenAt',
+  lastSeenAt: 'lastSeenAt'
+} as const
+
+export type VisitorScalarFieldEnum = (typeof VisitorScalarFieldEnum)[keyof typeof VisitorScalarFieldEnum]
+
+
+export const VisitorIdentityScalarFieldEnum = {
+  id: 'id',
+  visitorId: 'visitorId',
+  individualId: 'individualId',
+  linkedAt: 'linkedAt'
+} as const
+
+export type VisitorIdentityScalarFieldEnum = (typeof VisitorIdentityScalarFieldEnum)[keyof typeof VisitorIdentityScalarFieldEnum]
+
+
+export const AgentQueryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  prompt: 'prompt',
+  sql: 'sql',
+  explanation: 'explanation',
+  model: 'model',
+  createdBy: 'createdBy',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type AgentQueryScalarFieldEnum = (typeof AgentQueryScalarFieldEnum)[keyof typeof AgentQueryScalarFieldEnum]
+
+
+export const AgentQueryExecutionScalarFieldEnum = {
+  id: 'id',
+  queryId: 'queryId',
+  executedBy: 'executedBy',
+  sql: 'sql',
+  status: 'status',
+  rowCount: 'rowCount',
+  durationMs: 'durationMs',
+  error: 'error',
+  createdDate: 'createdDate'
+} as const
+
+export type AgentQueryExecutionScalarFieldEnum = (typeof AgentQueryExecutionScalarFieldEnum)[keyof typeof AgentQueryExecutionScalarFieldEnum]
 
 
 export const ContactRequestScalarFieldEnum = {
@@ -6765,6 +7139,10 @@ export type GlobalOmitConfig = {
   account?: Prisma.AccountOmit
   consent?: Prisma.ConsentOmit
   pageVisit?: Prisma.PageVisitOmit
+  visitor?: Prisma.VisitorOmit
+  visitorIdentity?: Prisma.VisitorIdentityOmit
+  agentQuery?: Prisma.AgentQueryOmit
+  agentQueryExecution?: Prisma.AgentQueryExecutionOmit
   contactRequest?: Prisma.ContactRequestOmit
   conciergeOrder?: Prisma.ConciergeOrderOmit
   conciergeOrderItem?: Prisma.ConciergeOrderItemOmit

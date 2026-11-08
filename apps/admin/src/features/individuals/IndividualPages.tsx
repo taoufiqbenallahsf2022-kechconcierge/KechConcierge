@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { IndividualVisitors } from "../../pages/VisitorPages";
 import { entityMap } from "../../config/entities";
 import { useGetOneQuery } from "../../store/api";
 import { EntityListView } from "../../components/crm/EntityListView";
@@ -24,6 +25,7 @@ export function IndividualDetail() {
   return (
     <EntityDetailShell entity="individuals" id={id} config={config} data={data}>
       <IndividualRelated data={data} />
+      <IndividualVisitors individualId={id} />
     </EntityDetailShell>
   );
 }

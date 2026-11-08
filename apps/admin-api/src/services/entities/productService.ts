@@ -1,3 +1,4 @@
+import { openAIChatOptions } from "../openAIModel.js";
 import { rules } from "../../config/entities.js";
 import { createCrudService } from "../baseCrudService.js";
 
@@ -207,8 +208,7 @@ export async function generateProductAltText(body: any) {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: process.env.OPENAI_ALT_MODEL || process.env.OPENAI_MODEL || "gpt-4.1-mini",
-        temperature: 0.15,
+        ...openAIChatOptions("alt", 0.15),
         response_format: { type: "json_object" },
         messages: [{
           role: "system",
@@ -285,8 +285,7 @@ export async function generateProductTranslation(body: any) {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: process.env.OPENAI_TRANSLATION_MODEL || process.env.OPENAI_MODEL || "gpt-4.1-mini",
-      temperature: 0.1,
+      ...openAIChatOptions("translation", 0.1),
       response_format: { type: "json_object" },
       messages: [{
         role: "system",

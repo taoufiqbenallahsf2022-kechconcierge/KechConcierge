@@ -23,6 +23,7 @@ const copy = {
 export default function ProductPlansModal({ open, locale, productType, plans, onClose, onBook }: Props) {
   const [index, setIndex] = useState(0);
   const desktopScroller = useRef<HTMLDivElement>(null);
+  const mobileScroller = useRef<HTMLDivElement>(null);
   const text = copy[locale];
   const optionText = getProductOptionCopy(locale, productType, productCta(useProductCtaContent(), productType, locale));
   const multiplePlans = plans.length > 1;
@@ -30,6 +31,7 @@ export default function ProductPlansModal({ open, locale, productType, plans, on
   const move = useCallback((direction: -1 | 1) => {
     setIndex((current) => {
       const next = Math.max(0, Math.min(plans.length - 1, current + direction));
+      mobileScroller.current?.scrollTo({ left: next * mobileScroller.current.clientWidth, behavior: "smooth" });
       desktopScroller.current?.children[next]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
       return next;
     });
@@ -39,6 +41,7 @@ export default function ProductPlansModal({ open, locale, productType, plans, on
     if (open) {
       setIndex(0);
       desktopScroller.current?.scrollTo({ left: 0 });
+      mobileScroller.current?.scrollTo({ left: 0 });
     }
   }, [open]);
 
@@ -56,7 +59,6 @@ export default function ProductPlansModal({ open, locale, productType, plans, on
   }, [move, onClose, open]);
 
   if (!open || typeof document === "undefined" || !plans.length) return null;
-  const plan = plans[index];
 
   return createPortal(
     <div className="fixed inset-0 z-[75] bg-zinc-950/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={optionText.title} onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
@@ -67,14 +69,18 @@ export default function ProductPlansModal({ open, locale, productType, plans, on
         </header>
 
         <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden">
-          <article className="mx-auto flex min-h-0 w-full flex-1 flex-col overflow-y-auto px-6 py-7 pb-5 sm:hidden">
-            <p className="text-sm font-black uppercase tracking-[.16em] text-orange-700">{index + 1} / {plans.length} {optionText.count}</p>
+          <div ref={mobileScroller} className="no-scrollbar flex min-h-0 flex-1 snap-x snap-mandatory overflow-x-auto overscroll-x-contain sm:hidden" onScroll={(event) => { const el = event.currentTarget; setIndex(Math.max(0, Math.min(plans.length - 1, Math.round(el.scrollLeft / el.clientWidth)))); }}>
+            {plans.map((plan, planIndex) => (
+          <article key={plan.id} className="flex h-full min-h-0 w-full shrink-0 snap-center flex-col overflow-y-auto px-6 py-7 pb-5">
+            <p className="text-sm font-black uppercase tracking-[.16em] text-orange-700">{planIndex + 1} / {plans.length} {optionText.count}</p>
             <div className="mt-4"><h3 className="text-3xl font-black text-zinc-950">{plan.title}</h3><strong className="mt-2 block text-2xl font-black text-orange-700">{plan.salePrice} {plan.currency}</strong></div>
             {plan.pricingUnit && <p className="mt-2 text-xs font-black uppercase tracking-wide text-zinc-400">{plan.pricingUnit.replaceAll("_", " ")}</p>}
             {plan.description && <p className="mt-6 whitespace-pre-line text-lg leading-8 text-zinc-600">{plan.description}</p>}
             {!!plan.options.length && <div className="mt-7"><h4 className="font-black text-zinc-950">{text.included}</h4><ul className="mt-3 grid gap-3">{plan.options.map((option) => <li key={option.id} className="flex gap-3 rounded-2xl bg-white p-4 font-semibold text-zinc-700 shadow-sm"><span className="text-green-600">✓</span>{option.title}</li>)}</ul></div>}
             <button type="button" onClick={() => onBook(plan.id)} className="mt-7 rounded-full bg-orange-600 px-7 py-4 text-lg font-black text-white shadow-lg transition hover:bg-orange-700">{optionText.action}</button>
           </article>
+            ))}
+          </div>
 
           {multiplePlans && <nav className="flex shrink-0 items-center justify-between border-t border-orange-100 bg-white px-5 py-3 sm:hidden" aria-label={optionText.title}><button type="button" disabled={index === 0} onClick={() => move(-1)} className="flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 font-bold disabled:opacity-25" aria-label={optionText.previous}><ChevronLeft /> {index}</button><span className="text-sm font-black text-zinc-500">{index + 1} / {plans.length}</span><button type="button" disabled={index === plans.length - 1} onClick={() => move(1)} className="flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 font-bold disabled:opacity-25" aria-label={optionText.next}>{index + 2} <ChevronRight /></button></nav>}
 
