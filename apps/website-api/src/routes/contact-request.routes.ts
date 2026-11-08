@@ -21,6 +21,7 @@ import {
   sendContactRequestInternalEmail,
 } from "../services/email.service";
 import { notifyAdminsOfContactRequest } from "../services/admin-push.service";
+import { recordVisitor } from "../services/visitor-profile.service";
 
 const router = Router();
 
@@ -434,6 +435,7 @@ router.post(
           },
         });
 
+      if (visitorId) await recordVisitor({ visitorId, firstName, lastName, email: normalizedEmail, phone: mobilePhone, individualId, language: normalizeLanguage(body.language), userAgent: req.header("user-agent") }).catch(error => console.error("Visitor profile tracking failed", error));
       const emailResults =
         await Promise.allSettled([
           sendContactRequestConfirmationEmail({

@@ -39,6 +39,7 @@ export type IndividualMinAggregateOutputType = {
   country: string | null
   language: string | null
   source: string | null
+  acquisitionSource: string | null
   isActive: boolean | null
   emailVerified: boolean | null
   emailVerificationToken: string | null
@@ -67,6 +68,7 @@ export type IndividualMaxAggregateOutputType = {
   country: string | null
   language: string | null
   source: string | null
+  acquisitionSource: string | null
   isActive: boolean | null
   emailVerified: boolean | null
   emailVerificationToken: string | null
@@ -95,6 +97,7 @@ export type IndividualCountAggregateOutputType = {
   country: number
   language: number
   source: number
+  acquisitionSource: number
   isActive: number
   emailVerified: number
   emailVerificationToken: number
@@ -125,6 +128,7 @@ export type IndividualMinAggregateInputType = {
   country?: true
   language?: true
   source?: true
+  acquisitionSource?: true
   isActive?: true
   emailVerified?: true
   emailVerificationToken?: true
@@ -153,6 +157,7 @@ export type IndividualMaxAggregateInputType = {
   country?: true
   language?: true
   source?: true
+  acquisitionSource?: true
   isActive?: true
   emailVerified?: true
   emailVerificationToken?: true
@@ -181,6 +186,7 @@ export type IndividualCountAggregateInputType = {
   country?: true
   language?: true
   source?: true
+  acquisitionSource?: true
   isActive?: true
   emailVerified?: true
   emailVerificationToken?: true
@@ -282,6 +288,7 @@ export type IndividualGroupByOutputType = {
   country: string | null
   language: string
   source: string
+  acquisitionSource: string | null
   isActive: boolean
   emailVerified: boolean
   emailVerificationToken: string | null
@@ -331,6 +338,7 @@ export type IndividualWhereInput = {
   country?: Prisma.StringNullableFilter<"Individual"> | string | null
   language?: Prisma.StringFilter<"Individual"> | string
   source?: Prisma.StringFilter<"Individual"> | string
+  acquisitionSource?: Prisma.StringNullableFilter<"Individual"> | string | null
   isActive?: Prisma.BoolFilter<"Individual"> | boolean
   emailVerified?: Prisma.BoolFilter<"Individual"> | boolean
   emailVerificationToken?: Prisma.StringNullableFilter<"Individual"> | string | null
@@ -342,6 +350,7 @@ export type IndividualWhereInput = {
   updatedDate?: Prisma.DateTimeFilter<"Individual"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"Individual"> | string | null
   lastSuccessfulLoginDate?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   prospects?: Prisma.ProspectListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
@@ -369,6 +378,7 @@ export type IndividualOrderByWithRelationInput = {
   country?: Prisma.SortOrderInput | Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  acquisitionSource?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   emailVerificationToken?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -380,6 +390,7 @@ export type IndividualOrderByWithRelationInput = {
   updatedDate?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   lastSuccessfulLoginDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  visitorIdentities?: Prisma.VisitorIdentityOrderByRelationAggregateInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
   prospects?: Prisma.ProspectOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
@@ -411,6 +422,7 @@ export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.StringNullableFilter<"Individual"> | string | null
   language?: Prisma.StringFilter<"Individual"> | string
   source?: Prisma.StringFilter<"Individual"> | string
+  acquisitionSource?: Prisma.StringNullableFilter<"Individual"> | string | null
   isActive?: Prisma.BoolFilter<"Individual"> | boolean
   emailVerified?: Prisma.BoolFilter<"Individual"> | boolean
   emailVerificationToken?: Prisma.StringNullableFilter<"Individual"> | string | null
@@ -421,6 +433,7 @@ export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   updatedDate?: Prisma.DateTimeFilter<"Individual"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"Individual"> | string | null
   lastSuccessfulLoginDate?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   prospects?: Prisma.ProspectListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
@@ -448,6 +461,7 @@ export type IndividualOrderByWithAggregationInput = {
   country?: Prisma.SortOrderInput | Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  acquisitionSource?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   emailVerificationToken?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -482,6 +496,7 @@ export type IndividualScalarWhereWithAggregatesInput = {
   country?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   language?: Prisma.StringWithAggregatesFilter<"Individual"> | string
   source?: Prisma.StringWithAggregatesFilter<"Individual"> | string
+  acquisitionSource?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Individual"> | boolean
   emailVerified?: Prisma.BoolWithAggregatesFilter<"Individual"> | boolean
   emailVerificationToken?: Prisma.StringNullableWithAggregatesFilter<"Individual"> | string | null
@@ -510,6 +525,7 @@ export type IndividualCreateInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -521,6 +537,7 @@ export type IndividualCreateInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -548,6 +565,7 @@ export type IndividualUncheckedCreateInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -559,6 +577,7 @@ export type IndividualUncheckedCreateInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -586,6 +605,7 @@ export type IndividualUpdateInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -597,6 +617,7 @@ export type IndividualUpdateInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -624,6 +645,7 @@ export type IndividualUncheckedUpdateInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -635,6 +657,7 @@ export type IndividualUncheckedUpdateInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -662,6 +685,7 @@ export type IndividualCreateManyInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -690,6 +714,7 @@ export type IndividualUpdateManyMutationInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -718,6 +743,7 @@ export type IndividualUncheckedUpdateManyInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -746,6 +772,7 @@ export type IndividualCountOrderByAggregateInput = {
   country?: Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  acquisitionSource?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   emailVerificationToken?: Prisma.SortOrder
@@ -774,6 +801,7 @@ export type IndividualMaxOrderByAggregateInput = {
   country?: Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  acquisitionSource?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   emailVerificationToken?: Prisma.SortOrder
@@ -802,6 +830,7 @@ export type IndividualMinOrderByAggregateInput = {
   country?: Prisma.SortOrder
   language?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  acquisitionSource?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   emailVerified?: Prisma.SortOrder
   emailVerificationToken?: Prisma.SortOrder
@@ -895,6 +924,20 @@ export type IndividualUpdateOneWithoutPageVisitsNestedInput = {
   delete?: Prisma.IndividualWhereInput | boolean
   connect?: Prisma.IndividualWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutPageVisitsInput, Prisma.IndividualUpdateWithoutPageVisitsInput>, Prisma.IndividualUncheckedUpdateWithoutPageVisitsInput>
+}
+
+export type IndividualCreateNestedOneWithoutVisitorIdentitiesInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutVisitorIdentitiesInput, Prisma.IndividualUncheckedCreateWithoutVisitorIdentitiesInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutVisitorIdentitiesInput
+  connect?: Prisma.IndividualWhereUniqueInput
+}
+
+export type IndividualUpdateOneRequiredWithoutVisitorIdentitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutVisitorIdentitiesInput, Prisma.IndividualUncheckedCreateWithoutVisitorIdentitiesInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutVisitorIdentitiesInput
+  upsert?: Prisma.IndividualUpsertWithoutVisitorIdentitiesInput
+  connect?: Prisma.IndividualWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutVisitorIdentitiesInput, Prisma.IndividualUpdateWithoutVisitorIdentitiesInput>, Prisma.IndividualUncheckedUpdateWithoutVisitorIdentitiesInput>
 }
 
 export type IndividualCreateNestedOneWithoutContactRequestsInput = {
@@ -992,6 +1035,7 @@ export type IndividualCreateWithoutLeadsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1003,6 +1047,7 @@ export type IndividualCreateWithoutLeadsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
@@ -1029,6 +1074,7 @@ export type IndividualUncheckedCreateWithoutLeadsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1040,6 +1086,7 @@ export type IndividualUncheckedCreateWithoutLeadsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
@@ -1082,6 +1129,7 @@ export type IndividualUpdateWithoutLeadsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1093,6 +1141,7 @@ export type IndividualUpdateWithoutLeadsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
@@ -1119,6 +1168,7 @@ export type IndividualUncheckedUpdateWithoutLeadsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1130,6 +1180,7 @@ export type IndividualUncheckedUpdateWithoutLeadsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1156,6 +1207,7 @@ export type IndividualCreateWithoutProspectsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1167,6 +1219,7 @@ export type IndividualCreateWithoutProspectsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
@@ -1193,6 +1246,7 @@ export type IndividualUncheckedCreateWithoutProspectsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1204,6 +1258,7 @@ export type IndividualUncheckedCreateWithoutProspectsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
@@ -1246,6 +1301,7 @@ export type IndividualUpdateWithoutProspectsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1257,6 +1313,7 @@ export type IndividualUpdateWithoutProspectsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
@@ -1283,6 +1340,7 @@ export type IndividualUncheckedUpdateWithoutProspectsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1294,6 +1352,7 @@ export type IndividualUncheckedUpdateWithoutProspectsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1320,6 +1379,7 @@ export type IndividualCreateWithoutAccountsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1331,6 +1391,7 @@ export type IndividualCreateWithoutAccountsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
@@ -1357,6 +1418,7 @@ export type IndividualUncheckedCreateWithoutAccountsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1368,6 +1430,7 @@ export type IndividualUncheckedCreateWithoutAccountsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
@@ -1410,6 +1473,7 @@ export type IndividualUpdateWithoutAccountsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1421,6 +1485,7 @@ export type IndividualUpdateWithoutAccountsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
@@ -1447,6 +1512,7 @@ export type IndividualUncheckedUpdateWithoutAccountsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1458,6 +1524,7 @@ export type IndividualUncheckedUpdateWithoutAccountsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1484,6 +1551,7 @@ export type IndividualCreateWithoutConsentsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1495,6 +1563,7 @@ export type IndividualCreateWithoutConsentsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -1521,6 +1590,7 @@ export type IndividualUncheckedCreateWithoutConsentsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1532,6 +1602,7 @@ export type IndividualUncheckedCreateWithoutConsentsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -1574,6 +1645,7 @@ export type IndividualUpdateWithoutConsentsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1585,6 +1657,7 @@ export type IndividualUpdateWithoutConsentsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -1611,6 +1684,7 @@ export type IndividualUncheckedUpdateWithoutConsentsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1622,6 +1696,7 @@ export type IndividualUncheckedUpdateWithoutConsentsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1648,6 +1723,7 @@ export type IndividualCreateWithoutPageVisitsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1659,6 +1735,7 @@ export type IndividualCreateWithoutPageVisitsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -1685,6 +1762,7 @@ export type IndividualUncheckedCreateWithoutPageVisitsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1696,6 +1774,7 @@ export type IndividualUncheckedCreateWithoutPageVisitsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -1738,6 +1817,7 @@ export type IndividualUpdateWithoutPageVisitsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1749,6 +1829,7 @@ export type IndividualUpdateWithoutPageVisitsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -1775,6 +1856,179 @@ export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
+  tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
+}
+
+export type IndividualCreateWithoutVisitorIdentitiesInput = {
+  id: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  manualEmail?: string | null
+  mobilePhone?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
+  address?: string | null
+  birthdate?: Date | string | null
+  country?: string | null
+  language: string
+  source: string
+  acquisitionSource?: string | null
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
+  passwordResetToken?: string | null
+  passwordResetTokenExpiresAt?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  lastSuccessfulLoginDate?: Date | string | null
+  leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
+  tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
+}
+
+export type IndividualUncheckedCreateWithoutVisitorIdentitiesInput = {
+  id: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  manualEmail?: string | null
+  mobilePhone?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
+  address?: string | null
+  birthdate?: Date | string | null
+  country?: string | null
+  language: string
+  source: string
+  acquisitionSource?: string | null
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
+  passwordResetToken?: string | null
+  passwordResetTokenExpiresAt?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  lastSuccessfulLoginDate?: Date | string | null
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
+  tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
+}
+
+export type IndividualCreateOrConnectWithoutVisitorIdentitiesInput = {
+  where: Prisma.IndividualWhereUniqueInput
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutVisitorIdentitiesInput, Prisma.IndividualUncheckedCreateWithoutVisitorIdentitiesInput>
+}
+
+export type IndividualUpsertWithoutVisitorIdentitiesInput = {
+  update: Prisma.XOR<Prisma.IndividualUpdateWithoutVisitorIdentitiesInput, Prisma.IndividualUncheckedUpdateWithoutVisitorIdentitiesInput>
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutVisitorIdentitiesInput, Prisma.IndividualUncheckedCreateWithoutVisitorIdentitiesInput>
+  where?: Prisma.IndividualWhereInput
+}
+
+export type IndividualUpdateToOneWithWhereWithoutVisitorIdentitiesInput = {
+  where?: Prisma.IndividualWhereInput
+  data: Prisma.XOR<Prisma.IndividualUpdateWithoutVisitorIdentitiesInput, Prisma.IndividualUncheckedUpdateWithoutVisitorIdentitiesInput>
+}
+
+export type IndividualUpdateWithoutVisitorIdentitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manualEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
+  tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
+}
+
+export type IndividualUncheckedUpdateWithoutVisitorIdentitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manualEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1790,6 +2044,7 @@ export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
   consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
   contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
   conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
   chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1812,6 +2067,7 @@ export type IndividualCreateWithoutContactRequestsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1823,6 +2079,7 @@ export type IndividualCreateWithoutContactRequestsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -1849,6 +2106,7 @@ export type IndividualUncheckedCreateWithoutContactRequestsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1860,6 +2118,7 @@ export type IndividualUncheckedCreateWithoutContactRequestsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -1902,6 +2161,7 @@ export type IndividualUpdateWithoutContactRequestsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1913,6 +2173,7 @@ export type IndividualUpdateWithoutContactRequestsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -1939,6 +2200,7 @@ export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1950,6 +2212,7 @@ export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1976,6 +2239,7 @@ export type IndividualCreateWithoutConciergeOrdersInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -1987,6 +2251,7 @@ export type IndividualCreateWithoutConciergeOrdersInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -2013,6 +2278,7 @@ export type IndividualUncheckedCreateWithoutConciergeOrdersInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -2024,6 +2290,7 @@ export type IndividualUncheckedCreateWithoutConciergeOrdersInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -2066,6 +2333,7 @@ export type IndividualUpdateWithoutConciergeOrdersInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2077,6 +2345,7 @@ export type IndividualUpdateWithoutConciergeOrdersInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -2103,6 +2372,7 @@ export type IndividualUncheckedUpdateWithoutConciergeOrdersInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2114,6 +2384,7 @@ export type IndividualUncheckedUpdateWithoutConciergeOrdersInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2140,6 +2411,7 @@ export type IndividualCreateWithoutTripCartsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -2151,6 +2423,7 @@ export type IndividualCreateWithoutTripCartsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -2177,6 +2450,7 @@ export type IndividualUncheckedCreateWithoutTripCartsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -2188,6 +2462,7 @@ export type IndividualUncheckedCreateWithoutTripCartsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -2230,6 +2505,7 @@ export type IndividualUpdateWithoutTripCartsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2241,6 +2517,7 @@ export type IndividualUpdateWithoutTripCartsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -2267,6 +2544,7 @@ export type IndividualUncheckedUpdateWithoutTripCartsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2278,6 +2556,7 @@ export type IndividualUncheckedUpdateWithoutTripCartsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2304,6 +2583,7 @@ export type IndividualCreateWithoutChatsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -2315,6 +2595,7 @@ export type IndividualCreateWithoutChatsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -2341,6 +2622,7 @@ export type IndividualUncheckedCreateWithoutChatsInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -2352,6 +2634,7 @@ export type IndividualUncheckedCreateWithoutChatsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -2394,6 +2677,7 @@ export type IndividualUpdateWithoutChatsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2405,6 +2689,7 @@ export type IndividualUpdateWithoutChatsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -2431,6 +2716,7 @@ export type IndividualUncheckedUpdateWithoutChatsInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2442,6 +2728,7 @@ export type IndividualUncheckedUpdateWithoutChatsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2468,6 +2755,7 @@ export type IndividualCreateWithoutVisitorJourneysInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -2479,6 +2767,7 @@ export type IndividualCreateWithoutVisitorJourneysInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -2505,6 +2794,7 @@ export type IndividualUncheckedCreateWithoutVisitorJourneysInput = {
   country?: string | null
   language: string
   source: string
+  acquisitionSource?: string | null
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: string | null
@@ -2516,6 +2806,7 @@ export type IndividualUncheckedCreateWithoutVisitorJourneysInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -2558,6 +2849,7 @@ export type IndividualUpdateWithoutVisitorJourneysInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2569,6 +2861,7 @@ export type IndividualUpdateWithoutVisitorJourneysInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -2595,6 +2888,7 @@ export type IndividualUncheckedUpdateWithoutVisitorJourneysInput = {
   country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   language?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2606,6 +2900,7 @@ export type IndividualUncheckedUpdateWithoutVisitorJourneysInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2623,6 +2918,7 @@ export type IndividualUncheckedUpdateWithoutVisitorJourneysInput = {
  */
 
 export type IndividualCountOutputType = {
+  visitorIdentities: number
   leads: number
   prospects: number
   accounts: number
@@ -2636,6 +2932,7 @@ export type IndividualCountOutputType = {
 }
 
 export type IndividualCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  visitorIdentities?: boolean | IndividualCountOutputTypeCountVisitorIdentitiesArgs
   leads?: boolean | IndividualCountOutputTypeCountLeadsArgs
   prospects?: boolean | IndividualCountOutputTypeCountProspectsArgs
   accounts?: boolean | IndividualCountOutputTypeCountAccountsArgs
@@ -2656,6 +2953,13 @@ export type IndividualCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
    * Select specific fields to fetch from the IndividualCountOutputType
    */
   select?: Prisma.IndividualCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * IndividualCountOutputType without action
+ */
+export type IndividualCountOutputTypeCountVisitorIdentitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VisitorIdentityWhereInput
 }
 
 /**
@@ -2744,6 +3048,7 @@ export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   country?: boolean
   language?: boolean
   source?: boolean
+  acquisitionSource?: boolean
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: boolean
@@ -2755,6 +3060,7 @@ export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   updatedDate?: boolean
   updatedBy?: boolean
   lastSuccessfulLoginDate?: boolean
+  visitorIdentities?: boolean | Prisma.Individual$visitorIdentitiesArgs<ExtArgs>
   leads?: boolean | Prisma.Individual$leadsArgs<ExtArgs>
   prospects?: boolean | Prisma.Individual$prospectsArgs<ExtArgs>
   accounts?: boolean | Prisma.Individual$accountsArgs<ExtArgs>
@@ -2783,6 +3089,7 @@ export type IndividualSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   country?: boolean
   language?: boolean
   source?: boolean
+  acquisitionSource?: boolean
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: boolean
@@ -2811,6 +3118,7 @@ export type IndividualSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   country?: boolean
   language?: boolean
   source?: boolean
+  acquisitionSource?: boolean
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: boolean
@@ -2839,6 +3147,7 @@ export type IndividualSelectScalar = {
   country?: boolean
   language?: boolean
   source?: boolean
+  acquisitionSource?: boolean
   isActive?: boolean
   emailVerified?: boolean
   emailVerificationToken?: boolean
@@ -2852,8 +3161,9 @@ export type IndividualSelectScalar = {
   lastSuccessfulLoginDate?: boolean
 }
 
-export type IndividualOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "manualEmail" | "mobilePhone" | "passwordHash" | "googleId" | "authProvider" | "address" | "birthdate" | "country" | "language" | "source" | "isActive" | "emailVerified" | "emailVerificationToken" | "emailVerificationTokenExpiresAt" | "passwordResetToken" | "passwordResetTokenExpiresAt" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy" | "lastSuccessfulLoginDate", ExtArgs["result"]["individual"]>
+export type IndividualOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "manualEmail" | "mobilePhone" | "passwordHash" | "googleId" | "authProvider" | "address" | "birthdate" | "country" | "language" | "source" | "acquisitionSource" | "isActive" | "emailVerified" | "emailVerificationToken" | "emailVerificationTokenExpiresAt" | "passwordResetToken" | "passwordResetTokenExpiresAt" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy" | "lastSuccessfulLoginDate", ExtArgs["result"]["individual"]>
 export type IndividualInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  visitorIdentities?: boolean | Prisma.Individual$visitorIdentitiesArgs<ExtArgs>
   leads?: boolean | Prisma.Individual$leadsArgs<ExtArgs>
   prospects?: boolean | Prisma.Individual$prospectsArgs<ExtArgs>
   accounts?: boolean | Prisma.Individual$accountsArgs<ExtArgs>
@@ -2872,6 +3182,7 @@ export type IndividualIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Individual"
   objects: {
+    visitorIdentities: Prisma.$VisitorIdentityPayload<ExtArgs>[]
     leads: Prisma.$LeadPayload<ExtArgs>[]
     prospects: Prisma.$ProspectPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
@@ -2898,6 +3209,7 @@ export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.Internal
     country: string | null
     language: string
     source: string
+    acquisitionSource: string | null
     isActive: boolean
     emailVerified: boolean
     emailVerificationToken: string | null
@@ -3303,6 +3615,7 @@ readonly fields: IndividualFieldRefs;
  */
 export interface Prisma__IndividualClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  visitorIdentities<T extends Prisma.Individual$visitorIdentitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$visitorIdentitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitorIdentityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.Individual$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   prospects<T extends Prisma.Individual$prospectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$prospectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProspectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.Individual$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3356,6 +3669,7 @@ export interface IndividualFieldRefs {
   readonly country: Prisma.FieldRef<"Individual", 'String'>
   readonly language: Prisma.FieldRef<"Individual", 'String'>
   readonly source: Prisma.FieldRef<"Individual", 'String'>
+  readonly acquisitionSource: Prisma.FieldRef<"Individual", 'String'>
   readonly isActive: Prisma.FieldRef<"Individual", 'Boolean'>
   readonly emailVerified: Prisma.FieldRef<"Individual", 'Boolean'>
   readonly emailVerificationToken: Prisma.FieldRef<"Individual", 'String'>
@@ -3757,6 +4071,30 @@ export type IndividualDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Individuals to delete.
    */
   limit?: number
+}
+
+/**
+ * Individual.visitorIdentities
+ */
+export type Individual$visitorIdentitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VisitorIdentity
+   */
+  select?: Prisma.VisitorIdentitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VisitorIdentity
+   */
+  omit?: Prisma.VisitorIdentityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VisitorIdentityInclude<ExtArgs> | null
+  where?: Prisma.VisitorIdentityWhereInput
+  orderBy?: Prisma.VisitorIdentityOrderByWithRelationInput | Prisma.VisitorIdentityOrderByWithRelationInput[]
+  cursor?: Prisma.VisitorIdentityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VisitorIdentityScalarFieldEnum | Prisma.VisitorIdentityScalarFieldEnum[]
 }
 
 /**

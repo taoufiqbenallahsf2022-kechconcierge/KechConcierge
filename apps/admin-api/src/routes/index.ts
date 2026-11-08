@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { visitorRouter } from "./visitorRoutes.js";
+import { queryAgentRouter } from "./queryAgentRoutes.js";
 import { prisma } from "../lib/prisma.js";
 import { requireAdminAuth } from "../auth/middleware.js";
 import { router as authRouter } from "./authRoutes.js";
@@ -30,6 +32,8 @@ api.get("/health", (_q, r) =>
 api.use("/auth", authRouter);
 api.use("/public", publicOrderRouter);
 api.use(requireAdminAuth);
+api.use("/visitors", visitorRouter);
+api.use("/query-agent", queryAgentRouter);
 api.use("/website-configuration", websiteConfigurationRouter);
 api.use("/push-notifications", pushNotificationRouter);
 api.use("/studio/segments", segmentRouter);

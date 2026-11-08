@@ -28,7 +28,7 @@ export function TripHeaderButton() {
   const router = useRouter();
   const locale = getLocaleFromPath(pathname);
   const tripPath = locale === "en" ? "/trip" : `/${locale}/trip`;
-  return <button type="button" onClick={() => router.push(tripPath)} className="relative inline-grid h-[42px] w-[42px] place-items-center rounded-full border border-orange-100 bg-white/90 text-zinc-950 transition hover:border-orange-300 hover:text-orange-700" aria-label={`${copy[locale].trip} (${count})`} title={copy[locale].trip}>
+  return <button type="button" onClick={() => router.push(tripPath)} className="trip-header-button relative inline-grid h-[42px] w-[42px] place-items-center rounded-full border border-orange-100 bg-white/90 text-zinc-950 transition hover:border-orange-300 hover:text-orange-700" aria-label={`${copy[locale].trip} (${count})`} title={copy[locale].trip}>
     <ShoppingBag size={19} />
     {count > 0 && <span className="absolute -right-1 -top-1 grid min-h-5 min-w-5 place-items-center rounded-full bg-orange-600 px-1 text-[10px] font-black text-white">{count}</span>}
   </button>;

@@ -272,6 +272,26 @@ export type Consent = Prisma.ConsentModel
  */
 export type PageVisit = Prisma.PageVisitModel
 /**
+ * Model Visitor
+ * 
+ */
+export type Visitor = Prisma.VisitorModel
+/**
+ * Model VisitorIdentity
+ * 
+ */
+export type VisitorIdentity = Prisma.VisitorIdentityModel
+/**
+ * Model AgentQuery
+ * 
+ */
+export type AgentQuery = Prisma.AgentQueryModel
+/**
+ * Model AgentQueryExecution
+ * 
+ */
+export type AgentQueryExecution = Prisma.AgentQueryExecutionModel
+/**
  * Model ContactRequest
  * 
  */

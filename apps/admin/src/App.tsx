@@ -3,6 +3,8 @@ import { Layout } from "./components/Layout";
 import { useAuth } from "./auth/AuthContext";
 import { LoginPage } from "./pages/LoginPage";
 import { DataHub } from "./pages/DataHub";
+import { QueryAgentPage } from "./pages/QueryAgentPage";
+import { VisitorsPage, VisitorDetailPage } from "./pages/VisitorPages";
 import {
   SenderEmailsPage,
 } from "./pages/StudioPages";
@@ -67,6 +69,9 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Navigate to="/data-hub" replace />} />
         <Route path="data-hub" element={<DataHub />} />
+        <Route path="query-agent" element={<QueryAgentPage />} />
+        <Route path="visitors" element={<VisitorsPage />} />
+        <Route path="visitors/:id" element={<VisitorDetailPage />} />
         <Route path="website" element={<Navigate to="/website/slideshow" replace />} />
         <Route path="website/slideshow" element={<WebsiteConfigurationPage />} />
         <Route path="website/product-ctas" element={<ProductCtaConfigurationPage />} />

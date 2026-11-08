@@ -97,6 +97,10 @@ export const ModelName = {
   Account: 'Account',
   Consent: 'Consent',
   PageVisit: 'PageVisit',
+  Visitor: 'Visitor',
+  VisitorIdentity: 'VisitorIdentity',
+  AgentQuery: 'AgentQuery',
+  AgentQueryExecution: 'AgentQueryExecution',
   ContactRequest: 'ContactRequest',
   ConciergeOrder: 'ConciergeOrder',
   ConciergeOrderItem: 'ConciergeOrderItem',
@@ -1149,6 +1153,7 @@ export const IndividualScalarFieldEnum = {
   country: 'country',
   language: 'language',
   source: 'source',
+  acquisitionSource: 'acquisitionSource',
   isActive: 'isActive',
   emailVerified: 'emailVerified',
   emailVerificationToken: 'emailVerificationToken',
@@ -1248,6 +1253,7 @@ export type ConsentScalarFieldEnum = (typeof ConsentScalarFieldEnum)[keyof typeo
 export const PageVisitScalarFieldEnum = {
   id: 'id',
   pageUrl: 'pageUrl',
+  source: 'source',
   pageName: 'pageName',
   visitorId: 'visitorId',
   journeyId: 'journeyId',
@@ -1260,10 +1266,82 @@ export const PageVisitScalarFieldEnum = {
   referrer: 'referrer',
   userAgent: 'userAgent',
   ipAddress: 'ipAddress',
-  sessionId: 'sessionId'
+  sessionId: 'sessionId',
+  authenticationStatus: 'authenticationStatus',
+  accessOutcome: 'accessOutcome',
+  previousPageUrl: 'previousPageUrl',
+  clickedLinkUrl: 'clickedLinkUrl',
+  navigationType: 'navigationType',
+  clientVisitedAt: 'clientVisitedAt',
+  browserLanguage: 'browserLanguage',
+  webdriver: 'webdriver',
+  requestOrigin: 'requestOrigin',
+  fetchSite: 'fetchSite'
 } as const
 
 export type PageVisitScalarFieldEnum = (typeof PageVisitScalarFieldEnum)[keyof typeof PageVisitScalarFieldEnum]
+
+
+export const VisitorScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  source: 'source',
+  lastSource: 'lastSource',
+  landingPage: 'landingPage',
+  referrer: 'referrer',
+  userAgent: 'userAgent',
+  language: 'language',
+  deviceType: 'deviceType',
+  utmCampaign: 'utmCampaign',
+  utmMedium: 'utmMedium',
+  firstSeenAt: 'firstSeenAt',
+  lastSeenAt: 'lastSeenAt'
+} as const
+
+export type VisitorScalarFieldEnum = (typeof VisitorScalarFieldEnum)[keyof typeof VisitorScalarFieldEnum]
+
+
+export const VisitorIdentityScalarFieldEnum = {
+  id: 'id',
+  visitorId: 'visitorId',
+  individualId: 'individualId',
+  linkedAt: 'linkedAt'
+} as const
+
+export type VisitorIdentityScalarFieldEnum = (typeof VisitorIdentityScalarFieldEnum)[keyof typeof VisitorIdentityScalarFieldEnum]
+
+
+export const AgentQueryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  prompt: 'prompt',
+  sql: 'sql',
+  explanation: 'explanation',
+  model: 'model',
+  createdBy: 'createdBy',
+  createdDate: 'createdDate',
+  updatedDate: 'updatedDate'
+} as const
+
+export type AgentQueryScalarFieldEnum = (typeof AgentQueryScalarFieldEnum)[keyof typeof AgentQueryScalarFieldEnum]
+
+
+export const AgentQueryExecutionScalarFieldEnum = {
+  id: 'id',
+  queryId: 'queryId',
+  executedBy: 'executedBy',
+  sql: 'sql',
+  status: 'status',
+  rowCount: 'rowCount',
+  durationMs: 'durationMs',
+  error: 'error',
+  createdDate: 'createdDate'
+} as const
+
+export type AgentQueryExecutionScalarFieldEnum = (typeof AgentQueryExecutionScalarFieldEnum)[keyof typeof AgentQueryExecutionScalarFieldEnum]
 
 
 export const ContactRequestScalarFieldEnum = {

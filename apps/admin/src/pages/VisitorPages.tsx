@@ -1,0 +1,41 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { API_BASE_URL } from "../store/api";
+
+const date = (value: string) => value ? new Date(value).toLocaleString("en-GB", { timeZone: "UTC" }) + " GMT" : "—";
+async function get(path: string, signal?: AbortSignal) {
+  const response = await fetch(`${API_BASE_URL}/visitors${path}`, { credentials: "include", signal });
+  const body = await response.json(); if (!response.ok) throw new Error(body.message || "Unable to load visitors"); return body;
+}
+export function VisitorsPage() {
+  const [filters, setFilters] = useState({ search: "", source: "", audience: "", from: "", to: "" });
+  const [page, setPage] = useState(1), [data, setData] = useState<any>(), [error, setError] = useState("");
+  useEffect(() => {
+    const controller = new AbortController(); setError("");
+    const params = new URLSearchParams(Object.fromEntries(Object.entries(filters).filter(([, value]) => value))); params.set("page", String(page));
+    const timer = setTimeout(() => get(`?${params}`, controller.signal).then(setData).catch(cause => { if (!controller.signal.aborted) setError(cause.message); }), 200);
+    return () => { clearTimeout(timer); controller.abort(); };
+  }, [filters, page]);
+  const change = (key: string, value: string) => { setFilters(current => ({ ...current, [key]: value })); setPage(1); };
+  return <><header className="pagehead"><div><span className="eyebrow">Visitors</span><h1>Visitor history</h1><p>Browser profiles, acquisition sources, and website activity. All dates use GMT.</p></div></header>
+    <div className="toolbar typed-toolbar"><input aria-label="Search visitors" placeholder="Name, email, phone or visitor ID" value={filters.search} onChange={e => change("search", e.target.value)} /><input aria-label="Source" placeholder="Source, e.g. tiktok" value={filters.source} onChange={e => change("source", e.target.value)} /><select aria-label="Identity" value={filters.audience} onChange={e => change("audience", e.target.value)}><option value="">All visitors</option><option value="known">Linked to an individual</option><option value="visitor">Anonymous visitors</option></select><label>First seen from <input type="date" value={filters.from} onChange={e => change("from", e.target.value)} /></label><label>To <input type="date" value={filters.to} onChange={e => change("to", e.target.value)} /></label></div>
+    {error && <div role="alert" className="alert error">{error}</div>}{!data ? <div className="empty-state">Loading visitors…</div> : <><div className="tablewrap"><table><thead><tr><th>Visitor</th><th>Email / phone</th><th>First source</th><th>Latest source</th><th>Identity</th><th>First seen</th><th>Last seen</th></tr></thead><tbody>{data.items.map((v: any) => <tr key={v.id}><td><Link to={`/visitors/${v.id}`}><b>{[v.firstName, v.lastName].filter(Boolean).join(" ") || "Anonymous visitor"}</b><small className="visitor-subline">{v.id}</small></Link></td><td>{v.email || "—"}<small className="visitor-subline">{v.phone}</small></td><td>{v.source || "Unknown"}</td><td>{v.lastSource || "Unknown"}</td><td>{v.identities.length ? "Known" : "Visitor"}</td><td>{date(v.firstSeenAt)}</td><td>{date(v.lastSeenAt)}</td></tr>)}</tbody></table>{!data.items.length && <div className="empty-state">No visitors match these filters.</div>}</div><div className="pager"><span>{data.total} visitors · {page} / {data.pages}</span><button disabled={page <= 1} onClick={() => setPage(page - 1)}>Previous</button><button disabled={page >= data.pages} onClick={() => setPage(page + 1)}>Next</button></div></>}
+  </>;
+}
+export function VisitorDetailPage() {
+  const { id = "" } = useParams();
+  const [visitor, setVisitor] = useState<any>(), [activity, setActivity] = useState<any>(), [page, setPage] = useState(1), [type, setType] = useState("all"), [error, setError] = useState("");
+  useEffect(() => { get(`/${encodeURIComponent(id)}`).then(setVisitor).catch(e => setError(e.message)); }, [id]);
+  useEffect(() => { const controller = new AbortController(); get(`/${encodeURIComponent(id)}/activity?page=${page}&type=${type}`, controller.signal).then(setActivity).catch(e => { if (!controller.signal.aborted) setError(e.message); }); return () => controller.abort(); }, [id, page, type]);
+  return <><div className="breadcrumb"><Link to="/visitors">Visitors</Link> / {id}</div>{error && <div className="alert error">{error}</div>}{visitor && <>
+    <header className="record-header"><div><span className="eyebrow">Visitor profile</span><h1>{[visitor.firstName, visitor.lastName].filter(Boolean).join(" ") || "Anonymous visitor"}</h1><p>{visitor.id}</p></div></header>
+    <div className="record-card"><div className="detail-grid">{Object.entries({ Email: visitor.email, Phone: visitor.phone, "First source": visitor.source, "Latest source": visitor.lastSource, "First seen (GMT)": date(visitor.firstSeenAt), "Last seen (GMT)": date(visitor.lastSeenAt), "Landing page": visitor.landingPage, Referrer: visitor.referrer, Language: visitor.language, Device: visitor.deviceType, Campaign: visitor.utmCampaign, Medium: visitor.utmMedium }).map(([label, value]) => <div key={label}><span className="detail-label">{label}</span><div className="detail-value">{String(value || "—")}</div></div>)}</div><p>Linked individuals: {visitor.identities.length ? visitor.identities.map((identity: any) => <Link key={identity.individualId} className="tag" to={`/entities/individuals/${identity.individualId}`}>{identity.individual.firstName} {identity.individual.lastName} · {identity.individualId}</Link>) : "None"}</p></div>
+    <div className="performance-metrics visitor-counts">{Object.entries(visitor.counts).map(([key, value]) => <div key={key}><b>{String(value)}</b><span>{key}</span></div>)}</div>
+    <section className="related-card"><h2>Activity timeline</h2><div className="tabs">{["all", "visit", "contact", "chat", "trip"].map(kind => <button className={type === kind ? "active" : ""} key={kind} onClick={() => { setType(kind); setPage(1); }}>{kind}</button>)}</div>{activity && <><div className="tablewrap"><table><thead><tr><th>Activity</th><th>Event</th><th>Details</th><th>Individual</th><th>Date (GMT)</th></tr></thead><tbody>{activity.items.map((event: any) => <tr key={`${event.kind}-${event.id}`}><td>{event.kind}</td><td>{event.kind === "visit" ? <Link to={`/entities/page-visits/${event.id}`}>{event.label}</Link> : event.kind === "contact" ? <Link to={`/entities/contact-requests/${event.id}`}>{event.label}</Link> : event.kind === "chat" ? <Link to={`/chats/${event.id}`}>{event.label}</Link> : event.label}<small className="visitor-subline">{event.id}</small></td><td>{event.detail || "—"}{event.accessOutcome && <small className="visitor-subline">Account: {event.accessOutcome.replaceAll("_", " ")}</small>}{event.source && <small className="visitor-subline">Source: {event.source}</small>}</td><td>{event.individualId ? <Link to={`/entities/individuals/${event.individualId}`}>{event.individualId}</Link> : "Anonymous"}</td><td>{date(event.date)}{event.clientVisitedAt && <small className="visitor-subline">Browser: {date(event.clientVisitedAt)}</small>}</td></tr>)}</tbody></table>{!activity.items.length && <div className="empty-state">No activity in this category.</div>}</div><div className="pager"><button disabled={page <= 1} onClick={() => setPage(page - 1)}>Previous</button><span>Page {page}</span><button disabled={!activity.hasMore} onClick={() => setPage(page + 1)}>Next</button></div></>}</section>
+    </>}</>;
+}
+export function IndividualVisitors({ individualId }: { individualId: string }) {
+  const [data, setData] = useState<any>(), [error, setError] = useState("");
+  useEffect(() => { get(`?individualId=${encodeURIComponent(individualId)}`).then(setData).catch(cause => setError(cause.message)); }, [individualId]);
+  return <section className="related-card"><h2>Visitor profiles & acquisition</h2>{error ? <p role="alert">{error}</p> : !data ? <p>Loading browser profiles…</p> : data.items.length ? data.items.map((visitor: any) => <p key={visitor.id}><Link to={`/visitors/${visitor.id}`}>{visitor.id}</Link> · First source: {visitor.source || "Unknown"} · Latest: {visitor.lastSource || "Unknown"}</p>) : <p>No linked browser profiles recorded yet.</p>}</section>;
+}
