@@ -178,7 +178,7 @@ export default function ForgotPasswordPage() {
       : `/${locale}`;
 
   return (
-    <section className="mx-auto max-w-3xl px-4 py-20">
+    <section data-track-component="forgot-password" data-track-form="forgot-password" data-track-state={status} data-track-view="forgot-password" className="mx-auto max-w-3xl px-4 py-20">
       <Link
         href={homePath}
         className="inline-flex items-center gap-2 font-black text-orange-700"
@@ -283,7 +283,7 @@ export default function ForgotPasswordPage() {
 
               <input
                 type="email"
-                value={email}
+                data-track-field="email" value={email}
                 onChange={(event) => {
                   setEmail(
                     event.target.value

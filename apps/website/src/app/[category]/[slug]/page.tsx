@@ -645,7 +645,7 @@ export default function DetailsPage() {
   `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
   return (
-    <section className="mx-auto max-w-[1380px] overflow-x-clip px-5 pb-32 pt-20 xl:px-8">
+    <section data-track-component="product" data-product-id={product.id} data-product-type={product.type} className="mx-auto max-w-[1380px] overflow-x-clip px-5 pb-32 pt-20 xl:px-8">
       <Link
         href={categoryPath}
         className="font-black text-orange-700 transition hover:text-orange-800"
@@ -660,7 +660,7 @@ export default function DetailsPage() {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            onClick={() => setLightboxOpen(true)}
+            data-track-target="open-gallery" data-track-view="main-image" data-image-index={selectedImage} data-track-state={String(selectedImage)} data-track-state-name="image" onClick={() => setLightboxOpen(true)}
           >
             <ProgressiveImage
               key={`${selectedImage}-${activeImage.url}`}
@@ -748,13 +748,13 @@ export default function DetailsPage() {
             {product.address}
           </p>
 
-          {product.priceEuro != null && <div className="mt-5"><p className="text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1"><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p>{product.type === "VILLA" && product.priceWithDriverEuro != null && <p className="flex flex-wrap items-baseline gap-x-3 text-zinc-700"><span aria-hidden="true" className="text-2xl font-light text-zinc-400">|</span><span className="text-2xl font-black text-orange-700 sm:text-3xl">{product.priceWithDriverEuro} {product.currency ?? "EUR"}</span><span className="text-base font-semibold">{product.priceWithDriverLabel || ({ en: "with driver", fr: "avec chauffeur", de: "mit Fahrer", it: "con autista", pt: "com motorista", es: "con conductor" })[locale]}</span></p>}</div></div>}
+          {product.priceEuro != null && <div data-track-view="product-price" className="mt-5"><p className="text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1"><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p>{product.type === "VILLA" && product.priceWithDriverEuro != null && <p data-track-view="driver-inclusive-price" className="flex flex-wrap items-baseline gap-x-3 text-zinc-700"><span aria-hidden="true" className="text-2xl font-light text-zinc-400">|</span><span className="text-2xl font-black text-orange-700 sm:text-3xl">{product.priceWithDriverEuro} {product.currency ?? "EUR"}</span><span className="text-base font-semibold">{product.priceWithDriverLabel || ({ en: "with driver", fr: "avec chauffeur", de: "mit Fahrer", it: "con autista", pt: "com motorista", es: "con conductor" })[locale]}</span></p>}</div></div>}
 
-          {!!product.plans?.length && product.type === "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-x-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} className="mt-5" /><button type="button" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-3 rounded-full border-2 px-7 py-4 text-lg font-black transition sm:col-span-2`}>{productOptionCopy.trigger}</button></div>}
+          {!!product.plans?.length && product.type === "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-x-3 sm:grid-cols-2"><ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} className="mt-5" /><button type="button" data-track-target="open-plans" data-track-view="plans-cta" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-3 rounded-full border-2 px-7 py-4 text-lg font-black transition sm:col-span-2`}>{productOptionCopy.trigger}</button></div>}
 
-          {!!product.plans?.length && product.type !== "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><button type="button" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-5 rounded-full border-2 px-7 py-4 text-lg font-black transition`}>{productOptionCopy.trigger}</button></div>}
+          {!!product.plans?.length && product.type !== "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><button type="button" data-track-target="open-plans" data-track-view="plans-cta" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-5 rounded-full border-2 px-7 py-4 text-lg font-black transition`}>{productOptionCopy.trigger}</button></div>}
 
-          {!product.plans?.length && <div ref={bookingAnchorRef}><ProductBookingPanel locale={locale} productType={product.type} productName={product.title} sticky={false} /></div>}
+          {!product.plans?.length && <div ref={bookingAnchorRef}><ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} sticky={false} /></div>}
 
           {(product.type !== "TRANSPORTATION" || !product.plans?.length) && <AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} />}
 
@@ -766,7 +766,7 @@ export default function DetailsPage() {
 
           <div className="mt-6 break-words text-lg leading-8 text-zinc-700">
             {product.description.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => (
-              <p key={index} className={`${index ? "mt-5" : ""} whitespace-pre-line`}>
+              <p key={index} data-track-view={`description.${index}`} data-track-hover="description" className={`${index ? "mt-5" : ""} whitespace-pre-line`}>
                 {paragraph.trim()}
               </p>
             ))}
@@ -801,7 +801,7 @@ export default function DetailsPage() {
                 {visibleDetails.map(
                   (detail, index) => (
                     <div
-                      key={`${detail.label}-${index}`}
+                      key={`${detail.label}-${index}`} data-track-view={`detail.${index}`} data-track-hover="detail"
                       className="min-w-0"
                     >
                       <p className="break-words text-sm font-bold text-zinc-500">
@@ -849,16 +849,16 @@ export default function DetailsPage() {
 
       {showStickyBooking && !product.plans?.length && (
         <div className="fixed inset-x-0 bottom-0 z-40 animate-[booking-rise_.35s_ease-out] bg-white/95 backdrop-blur-xl">
-          <ProductBookingPanel locale={locale} productType={product.type} productName={product.title} sticky />
+          <ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} sticky />
         </div>
       )}
 
-      {!!product.plans?.length && <ProductPlansModal open={plansOpen} locale={locale} productType={product.type} plans={product.plans} onClose={() => setPlansOpen(false)} onBook={(planId) => { setPlansOpen(false); setBookingPlanId(planId); setBookingOpen(true); }} />}
+      {!!product.plans?.length && <ProductPlansModal productId={product.id} open={plansOpen} locale={locale} productType={product.type} plans={product.plans} onClose={() => setPlansOpen(false)} onBook={(planId) => { setPlansOpen(false); setBookingPlanId(planId); setBookingOpen(true); }} />}
 
-      {!!product.plans?.length && <ProductBookingPanel locale={locale} productType={product.type} productName={product.title} plans={product.plans} selectedPlanId={bookingPlanId} open={bookingOpen} onOpenChange={setBookingOpen} hideTrigger sticky={false} />}
+      {!!product.plans?.length && <ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} plans={product.plans} selectedPlanId={bookingPlanId} open={bookingOpen} onOpenChange={setBookingOpen} hideTrigger sticky={false} />}
 
       {lightboxOpen && (
-        <ProductImageLightbox images={images} selected={selectedImage} onSelect={setSelectedImage} onClose={() => setLightboxOpen(false)} />
+        <ProductImageLightbox productId={product.id} images={images} selected={selectedImage} onSelect={setSelectedImage} onClose={() => setLightboxOpen(false)} />
       )}
     </section>
   );

@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 
 type GalleryImage = { url: string; alt: string };
 
-export default function ProductImageLightbox({ images, selected, onSelect, onClose }: { images: GalleryImage[]; selected: number; onSelect: (index: number) => void; onClose: () => void }) {
+export default function ProductImageLightbox({ productId, images, selected, onSelect, onClose }: { productId?: string; images: GalleryImage[]; selected: number; onSelect: (index: number) => void; onClose: () => void }) {
   const scroller = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = scroller.current;
@@ -28,13 +28,13 @@ export default function ProductImageLightbox({ images, selected, onSelect, onClo
   if (!active) return null;
   const previous = () => onSelect(selected === 0 ? images.length - 1 : selected - 1);
   const next = () => onSelect(selected === images.length - 1 ? 0 : selected + 1);
-  return <div className="fixed inset-0 z-[90] flex flex-col bg-zinc-950 backdrop-blur md:bg-zinc-950/95 md:p-6">
+  return <div data-track-state={String(selected)} data-track-state-name="image" data-image-index={selected} data-track-overlay="gallery" data-track-component="gallery" data-product-id={productId} className="fixed inset-0 z-[90] flex flex-col bg-zinc-950 backdrop-blur md:bg-zinc-950/95 md:p-6">
     <div className="hidden items-center justify-between text-white md:flex"><p className="max-w-[75vw] truncate text-sm font-bold">{active.alt}</p><div className="flex items-center gap-3"><span className="text-sm font-black">{selected + 1} / {images.length}</span><button type="button" onClick={onClose} className="grid h-11 w-11 place-items-center rounded-full bg-white/10 transition hover:rotate-90 hover:bg-white hover:text-zinc-950" aria-label="Close gallery"><X /></button></div></div>
     <div
       className="relative flex-1 overflow-hidden md:mt-3 md:rounded-2xl"
     >
-      <div ref={scroller} className="no-scrollbar flex h-full w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain" onScroll={(event) => { const el = event.currentTarget; const index = Math.round(el.scrollLeft / el.clientWidth); if (index !== selected && index >= 0 && index < images.length) onSelect(index); }}>
-        {images.map((image, index) => <div key={`${image.url}-${index}`} className="relative h-full w-full shrink-0 snap-center"><ProgressiveImage src={image.url} alt={image.alt} fill priority={index === selected} sizes="100vw" className="select-none object-contain" draggable={false} /></div>)}
+      <div data-track-scroll="gallery-images" ref={scroller} className="no-scrollbar flex h-full w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain" onScroll={(event) => { const el = event.currentTarget; const index = Math.round(el.scrollLeft / el.clientWidth); if (index !== selected && index >= 0 && index < images.length) onSelect(index); }}>
+        {images.map((image, index) => <div key={`${image.url}-${index}`} data-track-view={`gallery-image.${index}`} data-image-index={index} className="relative h-full w-full shrink-0 snap-center"><ProgressiveImage src={image.url} alt={image.alt} fill priority={index === selected} sizes="100vw" className="select-none object-contain" draggable={false} /></div>)}
       </div>
       <div className="absolute left-4 top-[max(1rem,env(safe-area-inset-top))] z-10 flex items-center gap-2 rounded-full bg-black/55 px-3 py-2 text-xs font-black text-white shadow-lg backdrop-blur md:hidden"><Images size={15} aria-hidden="true" /><span>{selected + 1}/{images.length}</span></div>
       <button type="button" onClick={onClose} className="absolute right-4 top-[max(1rem,env(safe-area-inset-top))] z-10 grid h-11 w-11 place-items-center rounded-full bg-black/55 text-white shadow-lg backdrop-blur transition active:scale-95 md:hidden" aria-label="Close gallery"><X /></button>

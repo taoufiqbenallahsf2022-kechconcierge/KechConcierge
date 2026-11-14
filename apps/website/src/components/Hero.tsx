@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, MapPin, Sparkles } from "lucide-react";
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
@@ -44,6 +44,7 @@ export default function Hero() {
   const [slides, setSlides] = useState<HeroSlide[]>([]);
   const [mediaReady, setMediaReady] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const slideMethod = useRef("initial");
   const [settings, setSettings] = useState({ durationMs: 7000, transitionMs: 1000 });
 
   useEffect(() => {
@@ -72,24 +73,24 @@ export default function Hero() {
   useEffect(() => {
     if (!mediaReady || slides.length < 2) return;
     const duration = Math.min(60000, Math.max(1000, settings.durationMs));
-    const timer = window.setTimeout(() => setActiveIndex((current) => (current + 1) % slides.length), duration);
+    const timer = window.setTimeout(() => { slideMethod.current = "auto"; setActiveIndex((current) => (current + 1) % slides.length); }, duration);
     return () => window.clearTimeout(timer);
   }, [activeIndex, mediaReady, settings.durationMs, slides.length]);
 
-  const previous = () => { if (slides.length) setActiveIndex((current) => (current - 1 + slides.length) % slides.length); };
-  const next = () => { if (slides.length) setActiveIndex((current) => (current + 1) % slides.length); };
+  const previous = () => { slideMethod.current = "manual"; if (slides.length) setActiveIndex((current) => (current - 1 + slides.length) % slides.length); };
+  const next = () => { slideMethod.current = "manual"; if (slides.length) setActiveIndex((current) => (current + 1) % slides.length); };
   const handleFirstMediaError = () => {
     if (slides[0]?.id === "villa") setMediaReady(true);
     else { setSlides(fallbackSlides(t)); setActiveIndex(0); setMediaReady(false); }
   };
 
-  return <section
+  return <section data-track-state={String(activeIndex)} data-track-state-name="slide" data-track-method={slideMethod.current} data-track-component="hero" data-track-view="hero"
     className="relative isolate min-h-[680px] overflow-hidden bg-zinc-950 text-white sm:min-h-[740px] lg:min-h-[calc(100svh-86px)]"
     aria-roledescription="carousel" aria-label={t.hero.eyebrow}
     onKeyDown={(event) => { if (event.key === "ArrowLeft") previous(); if (event.key === "ArrowRight") next(); }}
   >
     <div className={`absolute inset-0 transition-opacity duration-700 ${mediaReady ? "opacity-100" : "opacity-0"}`}>
-      {slides.map((slide, index) => <div key={slide.id} className={`absolute inset-0 ${index === activeIndex ? "opacity-100" : "opacity-0"}`} style={{ transitionProperty: "opacity", transitionDuration: `${Math.max(0, settings.transitionMs)}ms` }} aria-hidden={index !== activeIndex}>
+      {slides.map((slide, index) => <div key={slide.id} data-track-view={`hero-slide.${slide.id}`} className={`absolute inset-0 ${index === activeIndex ? "opacity-100" : "opacity-0"}`} style={{ transitionProperty: "opacity", transitionDuration: `${Math.max(0, settings.transitionMs)}ms` }} aria-hidden={index !== activeIndex}>
         {slide.mediaType === "VIDEO" ? <video src={slide.mediaUrl} className="h-full w-full object-cover" autoPlay muted loop playsInline preload={index === 0 ? "auto" : "metadata"} onLoadedData={index === 0 ? () => setMediaReady(true) : undefined} onError={index === 0 ? handleFirstMediaError : undefined} aria-label={slide.altText || slide.title} /> : <img src={slide.mediaUrl} alt={index === activeIndex ? slide.altText : ""} className={`h-full w-full object-cover transition-transform duration-[9000ms] ease-out ${index === activeIndex ? "scale-105" : "scale-100"}`} fetchPriority={index === 0 ? "high" : "auto"} onLoad={index === 0 ? () => setMediaReady(true) : undefined} onError={index === 0 ? handleFirstMediaError : undefined} />}
       </div>)}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,8,6,.84)_0%,rgba(12,8,6,.58)_43%,rgba(12,8,6,.14)_75%,rgba(12,8,6,.32)_100%)]" />
@@ -110,8 +111,8 @@ export default function Hero() {
         <h1 className="text-balance text-5xl font-black leading-[0.98] tracking-[-0.045em] drop-shadow-xl sm:text-6xl lg:text-7xl xl:text-[5.8rem]">{activeSlide.title}</h1>
         {activeSlide.description && <p className="mt-7 max-w-2xl border-l-2 border-orange-400 pl-5 text-base leading-7 text-white/85 sm:pl-6 sm:text-lg">{activeSlide.description}</p>}
         <div className="mt-9 flex flex-wrap gap-3">
-          {activeSlide.buttonLabel && activeSlide.buttonUrl && <Link href={localizePath(activeSlide.buttonUrl, locale)} className="group inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-7 py-4 font-black text-white shadow-[0_15px_40px_rgba(234,88,12,.3)] transition hover:-translate-y-0.5 hover:bg-orange-500">{activeSlide.buttonLabel}<ArrowRight size={18} className="transition-transform group-hover:translate-x-1" /></Link>}
-          <Link href={localizePath("/contact", locale)} className="inline-flex items-center justify-center rounded-full border border-white/35 bg-white/10 px-7 py-4 font-black text-white backdrop-blur-md transition hover:border-white/70 hover:bg-white/20">{t.header.contact}</Link>
+          {activeSlide.buttonLabel && activeSlide.buttonUrl && <Link data-track-target="hero-primary" href={localizePath(activeSlide.buttonUrl, locale)} className="group inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-7 py-4 font-black text-white shadow-[0_15px_40px_rgba(234,88,12,.3)] transition hover:-translate-y-0.5 hover:bg-orange-500">{activeSlide.buttonLabel}<ArrowRight size={18} className="transition-transform group-hover:translate-x-1" /></Link>}
+          <Link data-track-target="hero-contact" href={localizePath("/contact", locale)} className="inline-flex items-center justify-center rounded-full border border-white/35 bg-white/10 px-7 py-4 font-black text-white backdrop-blur-md transition hover:border-white/70 hover:bg-white/20">{t.header.contact}</Link>
         </div>
       </div>
     </div>}

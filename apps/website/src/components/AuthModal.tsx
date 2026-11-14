@@ -1,4 +1,5 @@
 "use client";
+import { interactionHeaders, trackInteraction } from "@/lib/interactions";
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -218,7 +219,7 @@ export default function AuthModal({ open, onClose }: Props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-visitor-id": getVisitorId(),
+            ...interactionHeaders(),
             "x-journey-id": getVisitorJourneyId(),
           },
           body: JSON.stringify({
@@ -270,7 +271,7 @@ export default function AuthModal({ open, onClose }: Props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-visitor-id": getVisitorId(),
+            ...interactionHeaders(),
             "x-journey-id": getVisitorJourneyId(),
           },
           body: JSON.stringify({
@@ -330,7 +331,7 @@ export default function AuthModal({ open, onClose }: Props) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-visitor-id": getVisitorId(),
+          ...interactionHeaders(),
           "x-journey-id": getVisitorJourneyId(),
         },
         body: JSON.stringify({
@@ -387,7 +388,7 @@ export default function AuthModal({ open, onClose }: Props) {
 
   if (verificationEmailSent) {
     return (
-      <div className="fixed inset-0 z-50 overflow-y-auto bg-zinc-950/60 sm:grid sm:place-items-center sm:px-4 sm:py-6">
+      <div data-track-overlay="auth" data-track-component="auth" data-track-form="auth" data-track-state={status} className="fixed inset-0 z-50 overflow-y-auto bg-zinc-950/60 sm:grid sm:place-items-center sm:px-4 sm:py-6">
         <div className="relative min-h-[100dvh] w-full bg-white p-6 text-center card-shadow sm:min-h-0 sm:max-w-md sm:rounded-3xl">
           <button
             onClick={closeAndReset}
@@ -505,7 +506,7 @@ export default function AuthModal({ open, onClose }: Props) {
               <label className="flex items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
                 <User size={18} className="text-orange-700" />
                 <input
-                  value={firstName}
+                  data-track-field="firstName" value={firstName}
                   onChange={(event) => setFirstName(event.target.value)}
                   placeholder={t.authModal.firstName}
                   className="w-full outline-none"
@@ -515,7 +516,7 @@ export default function AuthModal({ open, onClose }: Props) {
               <label className="flex items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
                 <User size={18} className="text-orange-700" />
                 <input
-                  value={lastName}
+                  data-track-field="lastName" value={lastName}
                   onChange={(event) => setLastName(event.target.value)}
                   placeholder={t.authModal.lastName}
                   className="w-full outline-none"
@@ -544,7 +545,7 @@ export default function AuthModal({ open, onClose }: Props) {
                 <div className="h-5 w-px shrink-0 bg-zinc-200" />
 
                 <input
-                  value={mobilePhone}
+                  data-track-field="mobilePhone" value={mobilePhone}
                   onChange={(event) => setMobilePhone(event.target.value)}
                   placeholder={t.authModal.phoneNumber}
                   className="min-w-0 flex-1 outline-none"
@@ -580,7 +581,7 @@ export default function AuthModal({ open, onClose }: Props) {
               <label className="flex items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
                 <Mail size={18} className="text-orange-700" />
                 <input
-                  value={email}
+                  data-track-field="email" value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder={t.authModal.emailAddress}
                   className="w-full outline-none"
@@ -726,7 +727,7 @@ export default function AuthModal({ open, onClose }: Props) {
               <label className="flex items-center gap-3 rounded-2xl border border-zinc-200 px-4 py-3">
                 <Mail size={18} className="text-orange-700" />
                 <input
-                  value={email}
+                  data-track-field="email" value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder={t.authModal.emailAddress}
                   className="w-full outline-none"

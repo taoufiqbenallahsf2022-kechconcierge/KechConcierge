@@ -1,3 +1,4 @@
+import { interactionDescription, targetName } from "../../lib/interactionPresentation";
 import { Link, useParams } from "react-router-dom";
 import { IndividualVisitors } from "../../pages/VisitorPages";
 import { entityMap } from "../../config/entities";
@@ -31,6 +32,7 @@ export function IndividualDetail() {
 }
 const tabs = [
   ["pageVisits", "Page visits"],
+  ["interactions", "Interactions"],
   ["chats", "Website chats"],
   ["contactRequests", "Contact requests"],
   ["leads", "Leads"],
@@ -83,6 +85,10 @@ function RelatedTable({
         ["visitDate", "Visited"],
       ],
       path: (r) => `/entities/page-visits/${r.id}`,
+    },
+    interactions: {
+      cols: [["eventType", "What they did"], ["pageUrl", "Page"], ["target", "Item"], ["occurredAt", "Date (GMT)"]],
+      path: (r) => `/interactions/${r.id}`,
     },
     chats: {
       cols: [
@@ -159,7 +165,7 @@ function RelatedTable({
             >
               {d.cols.map(([k]) => (
                 <td key={k}>
-                  <DisplayValue
+                  {type === "interactions" && k === "eventType" ? interactionDescription(r).action : type === "interactions" && k === "pageUrl" ? interactionDescription(r).page : type === "interactions" && k === "target" ? targetName(r) : k === "occurredAt" ? (r[k] ? new Date(String(r[k])).toLocaleString("en-GB", { timeZone: "UTC" }) + " GMT" : "\u2014") : <DisplayValue
                     field={{
                       name: k,
                       label: k,
@@ -168,7 +174,7 @@ function RelatedTable({
                         : "text",
                     }}
                     value={r[k]}
-                  />
+                  />}
                 </td>
               ))}
               <td className="actions">

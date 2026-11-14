@@ -1,4 +1,5 @@
 "use client";
+import { interactionHeaders, trackInteraction } from "@/lib/interactions";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Bot, MessageSquarePlus, Send } from "lucide-react";
@@ -68,7 +69,7 @@ export default function ChatPage() {
       const currentToken = useAuthStore.getState().accessToken;
       return {
         "Content-Type": "application/json",
-        "x-visitor-id": getVisitorId(),
+        ...interactionHeaders(),
         "x-journey-id": getVisitorJourneyId(),
         ...(currentToken ? { Authorization: `Bearer ${currentToken}` } : {}),
       };
@@ -243,7 +244,7 @@ export default function ChatPage() {
           </div>
         </aside>
 
-        <section className="flex min-w-0 flex-1 flex-col">
+        <section data-track-component="chat" className="flex min-w-0 flex-1 flex-col">
           <div className="shrink-0 border-b border-orange-100 bg-white px-4 py-3 sm:px-5 sm:py-4">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-600 text-white"><Bot size={20} /></div>
@@ -280,8 +281,8 @@ export default function ChatPage() {
           </div>
 
           <div className="shrink-0 border-t border-orange-100 bg-white p-3 pb-[max(.75rem,env(safe-area-inset-bottom))] sm:p-4">
-            <div className="mx-auto flex max-w-4xl items-end gap-3">
-              <textarea value={message} onChange={(event) => onMessageChange(event.target.value)} placeholder={t.placeholder} rows={1} maxLength={5000} className="max-h-40 min-h-[52px] flex-1 resize-none rounded-2xl border border-zinc-200 px-4 py-3 outline-none focus:border-orange-500" onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); void sendMessage(); } }} />
+            <div data-track-form="chat" data-track-component="chat" className="mx-auto flex max-w-4xl items-end gap-3">
+              <textarea data-track-field="message" value={message} onChange={(event) => onMessageChange(event.target.value)} placeholder={t.placeholder} rows={1} maxLength={5000} className="max-h-40 min-h-[52px] flex-1 resize-none rounded-2xl border border-zinc-200 px-4 py-3 outline-none focus:border-orange-500" onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); void sendMessage(); } }} />
               <button onClick={() => void sendMessage()} disabled={sending || !message.trim()} aria-label={t.placeholder} className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-orange-600 text-white transition hover:bg-orange-700 disabled:opacity-50"><Send size={18} /></button>
             </div>
           </div>

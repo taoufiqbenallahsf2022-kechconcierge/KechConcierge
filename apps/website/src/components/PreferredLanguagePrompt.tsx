@@ -250,7 +250,7 @@ export default function PreferredLanguagePrompt() {
   if (!promptVisible || !preferredLanguage) return null;
 
   return (
-    <div
+    <div data-track-component="language-prompt" data-track-overlay="language-prompt"
       className="fixed inset-0 z-[200] grid place-items-center bg-black/70 px-4 py-8 backdrop-blur-[2px]"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget && !switching) {

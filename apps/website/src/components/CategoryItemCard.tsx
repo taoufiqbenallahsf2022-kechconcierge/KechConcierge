@@ -121,7 +121,7 @@ export default function CategoryItemCard({
       }`}
     >
       <button
-        type="button"
+        type="button" data-track-component="catalog-product-card" data-track-view={`product-card.${item.id}`} data-track-target="open-product" data-product-id={item.id}
         onClick={openProduct}
         onMouseEnter={
           prefetchProduct

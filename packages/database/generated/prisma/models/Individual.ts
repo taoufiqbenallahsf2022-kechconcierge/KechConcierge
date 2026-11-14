@@ -350,6 +350,7 @@ export type IndividualWhereInput = {
   updatedDate?: Prisma.DateTimeFilter<"Individual"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"Individual"> | string | null
   lastSuccessfulLoginDate?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
+  interactions?: Prisma.InteractionListRelationFilter
   visitorIdentities?: Prisma.VisitorIdentityListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   prospects?: Prisma.ProspectListRelationFilter
@@ -390,6 +391,7 @@ export type IndividualOrderByWithRelationInput = {
   updatedDate?: Prisma.SortOrder
   updatedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   lastSuccessfulLoginDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  interactions?: Prisma.InteractionOrderByRelationAggregateInput
   visitorIdentities?: Prisma.VisitorIdentityOrderByRelationAggregateInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
   prospects?: Prisma.ProspectOrderByRelationAggregateInput
@@ -433,6 +435,7 @@ export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   updatedDate?: Prisma.DateTimeFilter<"Individual"> | Date | string
   updatedBy?: Prisma.StringNullableFilter<"Individual"> | string | null
   lastSuccessfulLoginDate?: Prisma.DateTimeNullableFilter<"Individual"> | Date | string | null
+  interactions?: Prisma.InteractionListRelationFilter
   visitorIdentities?: Prisma.VisitorIdentityListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   prospects?: Prisma.ProspectListRelationFilter
@@ -537,6 +540,7 @@ export type IndividualCreateInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -577,6 +581,7 @@ export type IndividualUncheckedCreateInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -617,6 +622,7 @@ export type IndividualUpdateInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -657,6 +663,7 @@ export type IndividualUncheckedUpdateInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -940,6 +947,22 @@ export type IndividualUpdateOneRequiredWithoutVisitorIdentitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutVisitorIdentitiesInput, Prisma.IndividualUpdateWithoutVisitorIdentitiesInput>, Prisma.IndividualUncheckedUpdateWithoutVisitorIdentitiesInput>
 }
 
+export type IndividualCreateNestedOneWithoutInteractionsInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutInteractionsInput, Prisma.IndividualUncheckedCreateWithoutInteractionsInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutInteractionsInput
+  connect?: Prisma.IndividualWhereUniqueInput
+}
+
+export type IndividualUpdateOneWithoutInteractionsNestedInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutInteractionsInput, Prisma.IndividualUncheckedCreateWithoutInteractionsInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutInteractionsInput
+  upsert?: Prisma.IndividualUpsertWithoutInteractionsInput
+  disconnect?: Prisma.IndividualWhereInput | boolean
+  delete?: Prisma.IndividualWhereInput | boolean
+  connect?: Prisma.IndividualWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutInteractionsInput, Prisma.IndividualUpdateWithoutInteractionsInput>, Prisma.IndividualUncheckedUpdateWithoutInteractionsInput>
+}
+
 export type IndividualCreateNestedOneWithoutContactRequestsInput = {
   create?: Prisma.XOR<Prisma.IndividualCreateWithoutContactRequestsInput, Prisma.IndividualUncheckedCreateWithoutContactRequestsInput>
   connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutContactRequestsInput
@@ -1047,6 +1070,7 @@ export type IndividualCreateWithoutLeadsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -1086,6 +1110,7 @@ export type IndividualUncheckedCreateWithoutLeadsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -1141,6 +1166,7 @@ export type IndividualUpdateWithoutLeadsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -1180,6 +1206,7 @@ export type IndividualUncheckedUpdateWithoutLeadsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1219,6 +1246,7 @@ export type IndividualCreateWithoutProspectsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -1258,6 +1286,7 @@ export type IndividualUncheckedCreateWithoutProspectsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -1313,6 +1342,7 @@ export type IndividualUpdateWithoutProspectsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -1352,6 +1382,7 @@ export type IndividualUncheckedUpdateWithoutProspectsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1391,6 +1422,7 @@ export type IndividualCreateWithoutAccountsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -1430,6 +1462,7 @@ export type IndividualUncheckedCreateWithoutAccountsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -1485,6 +1518,7 @@ export type IndividualUpdateWithoutAccountsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -1524,6 +1558,7 @@ export type IndividualUncheckedUpdateWithoutAccountsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1563,6 +1598,7 @@ export type IndividualCreateWithoutConsentsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -1602,6 +1638,7 @@ export type IndividualUncheckedCreateWithoutConsentsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -1657,6 +1694,7 @@ export type IndividualUpdateWithoutConsentsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -1696,6 +1734,7 @@ export type IndividualUncheckedUpdateWithoutConsentsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1735,6 +1774,7 @@ export type IndividualCreateWithoutPageVisitsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -1774,6 +1814,7 @@ export type IndividualUncheckedCreateWithoutPageVisitsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -1829,6 +1870,7 @@ export type IndividualUpdateWithoutPageVisitsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -1868,6 +1910,7 @@ export type IndividualUncheckedUpdateWithoutPageVisitsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -1907,6 +1950,7 @@ export type IndividualCreateWithoutVisitorIdentitiesInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
@@ -1946,6 +1990,7 @@ export type IndividualUncheckedCreateWithoutVisitorIdentitiesInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
@@ -2001,6 +2046,7 @@ export type IndividualUpdateWithoutVisitorIdentitiesInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
@@ -2040,6 +2086,183 @@ export type IndividualUncheckedUpdateWithoutVisitorIdentitiesInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUncheckedUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUncheckedUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUncheckedUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedUpdateManyWithoutIndividualNestedInput
+  tripCarts?: Prisma.TripCartUncheckedUpdateManyWithoutIndividualNestedInput
+}
+
+export type IndividualCreateWithoutInteractionsInput = {
+  id: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  manualEmail?: string | null
+  mobilePhone?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
+  address?: string | null
+  birthdate?: Date | string | null
+  country?: string | null
+  language: string
+  source: string
+  acquisitionSource?: string | null
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
+  passwordResetToken?: string | null
+  passwordResetTokenExpiresAt?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
+  leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyCreateNestedManyWithoutIndividualInput
+  tripCarts?: Prisma.TripCartCreateNestedManyWithoutIndividualInput
+}
+
+export type IndividualUncheckedCreateWithoutInteractionsInput = {
+  id: string
+  firstName: string
+  lastName: string
+  email?: string | null
+  manualEmail?: string | null
+  mobilePhone?: string | null
+  passwordHash?: string | null
+  googleId?: string | null
+  authProvider?: string
+  address?: string | null
+  birthdate?: Date | string | null
+  country?: string | null
+  language: string
+  source: string
+  acquisitionSource?: string | null
+  isActive?: boolean
+  emailVerified?: boolean
+  emailVerificationToken?: string | null
+  emailVerificationTokenExpiresAt?: Date | string | null
+  passwordResetToken?: string | null
+  passwordResetTokenExpiresAt?: Date | string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  lastSuccessfulLoginDate?: Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
+  prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutIndividualInput
+  consents?: Prisma.ConsentUncheckedCreateNestedManyWithoutIndividualInput
+  pageVisits?: Prisma.PageVisitUncheckedCreateNestedManyWithoutIndividualInput
+  contactRequests?: Prisma.ContactRequestUncheckedCreateNestedManyWithoutIndividualInput
+  conciergeOrders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutIndividualInput
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutIndividualInput
+  visitorJourneys?: Prisma.VisitorJourneyUncheckedCreateNestedManyWithoutIndividualInput
+  tripCarts?: Prisma.TripCartUncheckedCreateNestedManyWithoutIndividualInput
+}
+
+export type IndividualCreateOrConnectWithoutInteractionsInput = {
+  where: Prisma.IndividualWhereUniqueInput
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutInteractionsInput, Prisma.IndividualUncheckedCreateWithoutInteractionsInput>
+}
+
+export type IndividualUpsertWithoutInteractionsInput = {
+  update: Prisma.XOR<Prisma.IndividualUpdateWithoutInteractionsInput, Prisma.IndividualUncheckedUpdateWithoutInteractionsInput>
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutInteractionsInput, Prisma.IndividualUncheckedCreateWithoutInteractionsInput>
+  where?: Prisma.IndividualWhereInput
+}
+
+export type IndividualUpdateToOneWithWhereWithoutInteractionsInput = {
+  where?: Prisma.IndividualWhereInput
+  data: Prisma.XOR<Prisma.IndividualUpdateWithoutInteractionsInput, Prisma.IndividualUncheckedUpdateWithoutInteractionsInput>
+}
+
+export type IndividualUpdateWithoutInteractionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manualEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
+  prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutIndividualNestedInput
+  consents?: Prisma.ConsentUpdateManyWithoutIndividualNestedInput
+  pageVisits?: Prisma.PageVisitUpdateManyWithoutIndividualNestedInput
+  contactRequests?: Prisma.ContactRequestUpdateManyWithoutIndividualNestedInput
+  conciergeOrders?: Prisma.ConciergeOrderUpdateManyWithoutIndividualNestedInput
+  chats?: Prisma.ChatUpdateManyWithoutIndividualNestedInput
+  visitorJourneys?: Prisma.VisitorJourneyUpdateManyWithoutIndividualNestedInput
+  tripCarts?: Prisma.TripCartUpdateManyWithoutIndividualNestedInput
+}
+
+export type IndividualUncheckedUpdateWithoutInteractionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  manualEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthdate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  acquisitionSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerificationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerificationTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetTokenExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2079,6 +2302,7 @@ export type IndividualCreateWithoutContactRequestsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -2118,6 +2342,7 @@ export type IndividualUncheckedCreateWithoutContactRequestsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -2173,6 +2398,7 @@ export type IndividualUpdateWithoutContactRequestsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -2212,6 +2438,7 @@ export type IndividualUncheckedUpdateWithoutContactRequestsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2251,6 +2478,7 @@ export type IndividualCreateWithoutConciergeOrdersInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -2290,6 +2518,7 @@ export type IndividualUncheckedCreateWithoutConciergeOrdersInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -2345,6 +2574,7 @@ export type IndividualUpdateWithoutConciergeOrdersInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -2384,6 +2614,7 @@ export type IndividualUncheckedUpdateWithoutConciergeOrdersInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2423,6 +2654,7 @@ export type IndividualCreateWithoutTripCartsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -2462,6 +2694,7 @@ export type IndividualUncheckedCreateWithoutTripCartsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -2517,6 +2750,7 @@ export type IndividualUpdateWithoutTripCartsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -2556,6 +2790,7 @@ export type IndividualUncheckedUpdateWithoutTripCartsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2595,6 +2830,7 @@ export type IndividualCreateWithoutChatsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -2634,6 +2870,7 @@ export type IndividualUncheckedCreateWithoutChatsInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -2689,6 +2926,7 @@ export type IndividualUpdateWithoutChatsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -2728,6 +2966,7 @@ export type IndividualUncheckedUpdateWithoutChatsInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2767,6 +3006,7 @@ export type IndividualCreateWithoutVisitorJourneysInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectCreateNestedManyWithoutIndividualInput
@@ -2806,6 +3046,7 @@ export type IndividualUncheckedCreateWithoutVisitorJourneysInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   lastSuccessfulLoginDate?: Date | string | null
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutIndividualInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutIndividualInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutIndividualInput
   prospects?: Prisma.ProspectUncheckedCreateNestedManyWithoutIndividualInput
@@ -2861,6 +3102,7 @@ export type IndividualUpdateWithoutVisitorJourneysInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUpdateManyWithoutIndividualNestedInput
@@ -2900,6 +3142,7 @@ export type IndividualUncheckedUpdateWithoutVisitorJourneysInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastSuccessfulLoginDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutIndividualNestedInput
   visitorIdentities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutIndividualNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutIndividualNestedInput
   prospects?: Prisma.ProspectUncheckedUpdateManyWithoutIndividualNestedInput
@@ -2918,6 +3161,7 @@ export type IndividualUncheckedUpdateWithoutVisitorJourneysInput = {
  */
 
 export type IndividualCountOutputType = {
+  interactions: number
   visitorIdentities: number
   leads: number
   prospects: number
@@ -2932,6 +3176,7 @@ export type IndividualCountOutputType = {
 }
 
 export type IndividualCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  interactions?: boolean | IndividualCountOutputTypeCountInteractionsArgs
   visitorIdentities?: boolean | IndividualCountOutputTypeCountVisitorIdentitiesArgs
   leads?: boolean | IndividualCountOutputTypeCountLeadsArgs
   prospects?: boolean | IndividualCountOutputTypeCountProspectsArgs
@@ -2953,6 +3198,13 @@ export type IndividualCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
    * Select specific fields to fetch from the IndividualCountOutputType
    */
   select?: Prisma.IndividualCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * IndividualCountOutputType without action
+ */
+export type IndividualCountOutputTypeCountInteractionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InteractionWhereInput
 }
 
 /**
@@ -3060,6 +3312,7 @@ export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   updatedDate?: boolean
   updatedBy?: boolean
   lastSuccessfulLoginDate?: boolean
+  interactions?: boolean | Prisma.Individual$interactionsArgs<ExtArgs>
   visitorIdentities?: boolean | Prisma.Individual$visitorIdentitiesArgs<ExtArgs>
   leads?: boolean | Prisma.Individual$leadsArgs<ExtArgs>
   prospects?: boolean | Prisma.Individual$prospectsArgs<ExtArgs>
@@ -3163,6 +3416,7 @@ export type IndividualSelectScalar = {
 
 export type IndividualOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "manualEmail" | "mobilePhone" | "passwordHash" | "googleId" | "authProvider" | "address" | "birthdate" | "country" | "language" | "source" | "acquisitionSource" | "isActive" | "emailVerified" | "emailVerificationToken" | "emailVerificationTokenExpiresAt" | "passwordResetToken" | "passwordResetTokenExpiresAt" | "createdDate" | "createdBy" | "updatedDate" | "updatedBy" | "lastSuccessfulLoginDate", ExtArgs["result"]["individual"]>
 export type IndividualInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  interactions?: boolean | Prisma.Individual$interactionsArgs<ExtArgs>
   visitorIdentities?: boolean | Prisma.Individual$visitorIdentitiesArgs<ExtArgs>
   leads?: boolean | Prisma.Individual$leadsArgs<ExtArgs>
   prospects?: boolean | Prisma.Individual$prospectsArgs<ExtArgs>
@@ -3182,6 +3436,7 @@ export type IndividualIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Individual"
   objects: {
+    interactions: Prisma.$InteractionPayload<ExtArgs>[]
     visitorIdentities: Prisma.$VisitorIdentityPayload<ExtArgs>[]
     leads: Prisma.$LeadPayload<ExtArgs>[]
     prospects: Prisma.$ProspectPayload<ExtArgs>[]
@@ -3615,6 +3870,7 @@ readonly fields: IndividualFieldRefs;
  */
 export interface Prisma__IndividualClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  interactions<T extends Prisma.Individual$interactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$interactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   visitorIdentities<T extends Prisma.Individual$visitorIdentitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$visitorIdentitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitorIdentityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.Individual$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   prospects<T extends Prisma.Individual$prospectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$prospectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProspectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4071,6 +4327,30 @@ export type IndividualDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Individuals to delete.
    */
   limit?: number
+}
+
+/**
+ * Individual.interactions
+ */
+export type Individual$interactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Interaction
+   */
+  select?: Prisma.InteractionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Interaction
+   */
+  omit?: Prisma.InteractionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InteractionInclude<ExtArgs> | null
+  where?: Prisma.InteractionWhereInput
+  orderBy?: Prisma.InteractionOrderByWithRelationInput | Prisma.InteractionOrderByWithRelationInput[]
+  cursor?: Prisma.InteractionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InteractionScalarFieldEnum | Prisma.InteractionScalarFieldEnum[]
 }
 
 /**

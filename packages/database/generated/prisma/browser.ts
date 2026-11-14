@@ -258,6 +258,11 @@ export type Visitor = Prisma.VisitorModel
  */
 export type VisitorIdentity = Prisma.VisitorIdentityModel
 /**
+ * Model Interaction
+ * 
+ */
+export type Interaction = Prisma.InteractionModel
+/**
  * Model AgentQuery
  * 
  */

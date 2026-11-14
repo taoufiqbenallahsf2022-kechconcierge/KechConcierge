@@ -270,6 +270,7 @@ export type VisitorWhereInput = {
   utmMedium?: Prisma.StringNullableFilter<"Visitor"> | string | null
   firstSeenAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   lastSeenAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
+  interactions?: Prisma.InteractionListRelationFilter
   identities?: Prisma.VisitorIdentityListRelationFilter
 }
 
@@ -290,6 +291,7 @@ export type VisitorOrderByWithRelationInput = {
   utmMedium?: Prisma.SortOrderInput | Prisma.SortOrder
   firstSeenAt?: Prisma.SortOrder
   lastSeenAt?: Prisma.SortOrder
+  interactions?: Prisma.InteractionOrderByRelationAggregateInput
   identities?: Prisma.VisitorIdentityOrderByRelationAggregateInput
 }
 
@@ -313,6 +315,7 @@ export type VisitorWhereUniqueInput = Prisma.AtLeast<{
   utmMedium?: Prisma.StringNullableFilter<"Visitor"> | string | null
   firstSeenAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
   lastSeenAt?: Prisma.DateTimeFilter<"Visitor"> | Date | string
+  interactions?: Prisma.InteractionListRelationFilter
   identities?: Prisma.VisitorIdentityListRelationFilter
 }, "id">
 
@@ -377,6 +380,7 @@ export type VisitorCreateInput = {
   utmMedium?: string | null
   firstSeenAt?: Date | string
   lastSeenAt?: Date | string
+  interactions?: Prisma.InteractionCreateNestedManyWithoutVisitorInput
   identities?: Prisma.VisitorIdentityCreateNestedManyWithoutVisitorInput
 }
 
@@ -397,6 +401,7 @@ export type VisitorUncheckedCreateInput = {
   utmMedium?: string | null
   firstSeenAt?: Date | string
   lastSeenAt?: Date | string
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutVisitorInput
   identities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutVisitorInput
 }
 
@@ -417,6 +422,7 @@ export type VisitorUpdateInput = {
   utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  interactions?: Prisma.InteractionUpdateManyWithoutVisitorNestedInput
   identities?: Prisma.VisitorIdentityUpdateManyWithoutVisitorNestedInput
 }
 
@@ -437,6 +443,7 @@ export type VisitorUncheckedUpdateInput = {
   utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutVisitorNestedInput
   identities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutVisitorNestedInput
 }
 
@@ -573,6 +580,20 @@ export type VisitorUpdateOneRequiredWithoutIdentitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VisitorUpdateToOneWithWhereWithoutIdentitiesInput, Prisma.VisitorUpdateWithoutIdentitiesInput>, Prisma.VisitorUncheckedUpdateWithoutIdentitiesInput>
 }
 
+export type VisitorCreateNestedOneWithoutInteractionsInput = {
+  create?: Prisma.XOR<Prisma.VisitorCreateWithoutInteractionsInput, Prisma.VisitorUncheckedCreateWithoutInteractionsInput>
+  connectOrCreate?: Prisma.VisitorCreateOrConnectWithoutInteractionsInput
+  connect?: Prisma.VisitorWhereUniqueInput
+}
+
+export type VisitorUpdateOneRequiredWithoutInteractionsNestedInput = {
+  create?: Prisma.XOR<Prisma.VisitorCreateWithoutInteractionsInput, Prisma.VisitorUncheckedCreateWithoutInteractionsInput>
+  connectOrCreate?: Prisma.VisitorCreateOrConnectWithoutInteractionsInput
+  upsert?: Prisma.VisitorUpsertWithoutInteractionsInput
+  connect?: Prisma.VisitorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VisitorUpdateToOneWithWhereWithoutInteractionsInput, Prisma.VisitorUpdateWithoutInteractionsInput>, Prisma.VisitorUncheckedUpdateWithoutInteractionsInput>
+}
+
 export type VisitorCreateWithoutIdentitiesInput = {
   id: string
   firstName?: string | null
@@ -590,6 +611,7 @@ export type VisitorCreateWithoutIdentitiesInput = {
   utmMedium?: string | null
   firstSeenAt?: Date | string
   lastSeenAt?: Date | string
+  interactions?: Prisma.InteractionCreateNestedManyWithoutVisitorInput
 }
 
 export type VisitorUncheckedCreateWithoutIdentitiesInput = {
@@ -609,6 +631,7 @@ export type VisitorUncheckedCreateWithoutIdentitiesInput = {
   utmMedium?: string | null
   firstSeenAt?: Date | string
   lastSeenAt?: Date | string
+  interactions?: Prisma.InteractionUncheckedCreateNestedManyWithoutVisitorInput
 }
 
 export type VisitorCreateOrConnectWithoutIdentitiesInput = {
@@ -644,6 +667,7 @@ export type VisitorUpdateWithoutIdentitiesInput = {
   utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  interactions?: Prisma.InteractionUpdateManyWithoutVisitorNestedInput
 }
 
 export type VisitorUncheckedUpdateWithoutIdentitiesInput = {
@@ -663,6 +687,103 @@ export type VisitorUncheckedUpdateWithoutIdentitiesInput = {
   utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   firstSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  interactions?: Prisma.InteractionUncheckedUpdateManyWithoutVisitorNestedInput
+}
+
+export type VisitorCreateWithoutInteractionsInput = {
+  id: string
+  firstName?: string | null
+  lastName?: string | null
+  email?: string | null
+  phone?: string | null
+  source?: string | null
+  lastSource?: string | null
+  landingPage?: string | null
+  referrer?: string | null
+  userAgent?: string | null
+  language?: string | null
+  deviceType?: string | null
+  utmCampaign?: string | null
+  utmMedium?: string | null
+  firstSeenAt?: Date | string
+  lastSeenAt?: Date | string
+  identities?: Prisma.VisitorIdentityCreateNestedManyWithoutVisitorInput
+}
+
+export type VisitorUncheckedCreateWithoutInteractionsInput = {
+  id: string
+  firstName?: string | null
+  lastName?: string | null
+  email?: string | null
+  phone?: string | null
+  source?: string | null
+  lastSource?: string | null
+  landingPage?: string | null
+  referrer?: string | null
+  userAgent?: string | null
+  language?: string | null
+  deviceType?: string | null
+  utmCampaign?: string | null
+  utmMedium?: string | null
+  firstSeenAt?: Date | string
+  lastSeenAt?: Date | string
+  identities?: Prisma.VisitorIdentityUncheckedCreateNestedManyWithoutVisitorInput
+}
+
+export type VisitorCreateOrConnectWithoutInteractionsInput = {
+  where: Prisma.VisitorWhereUniqueInput
+  create: Prisma.XOR<Prisma.VisitorCreateWithoutInteractionsInput, Prisma.VisitorUncheckedCreateWithoutInteractionsInput>
+}
+
+export type VisitorUpsertWithoutInteractionsInput = {
+  update: Prisma.XOR<Prisma.VisitorUpdateWithoutInteractionsInput, Prisma.VisitorUncheckedUpdateWithoutInteractionsInput>
+  create: Prisma.XOR<Prisma.VisitorCreateWithoutInteractionsInput, Prisma.VisitorUncheckedCreateWithoutInteractionsInput>
+  where?: Prisma.VisitorWhereInput
+}
+
+export type VisitorUpdateToOneWithWhereWithoutInteractionsInput = {
+  where?: Prisma.VisitorWhereInput
+  data: Prisma.XOR<Prisma.VisitorUpdateWithoutInteractionsInput, Prisma.VisitorUncheckedUpdateWithoutInteractionsInput>
+}
+
+export type VisitorUpdateWithoutInteractionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landingPage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deviceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  identities?: Prisma.VisitorIdentityUpdateManyWithoutVisitorNestedInput
+}
+
+export type VisitorUncheckedUpdateWithoutInteractionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  landingPage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referrer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userAgent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deviceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastSeenAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  identities?: Prisma.VisitorIdentityUncheckedUpdateManyWithoutVisitorNestedInput
 }
 
 
@@ -671,10 +792,12 @@ export type VisitorUncheckedUpdateWithoutIdentitiesInput = {
  */
 
 export type VisitorCountOutputType = {
+  interactions: number
   identities: number
 }
 
 export type VisitorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  interactions?: boolean | VisitorCountOutputTypeCountInteractionsArgs
   identities?: boolean | VisitorCountOutputTypeCountIdentitiesArgs
 }
 
@@ -686,6 +809,13 @@ export type VisitorCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
    * Select specific fields to fetch from the VisitorCountOutputType
    */
   select?: Prisma.VisitorCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * VisitorCountOutputType without action
+ */
+export type VisitorCountOutputTypeCountInteractionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InteractionWhereInput
 }
 
 /**
@@ -713,6 +843,7 @@ export type VisitorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   utmMedium?: boolean
   firstSeenAt?: boolean
   lastSeenAt?: boolean
+  interactions?: boolean | Prisma.Visitor$interactionsArgs<ExtArgs>
   identities?: boolean | Prisma.Visitor$identitiesArgs<ExtArgs>
   _count?: boolean | Prisma.VisitorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["visitor"]>
@@ -776,6 +907,7 @@ export type VisitorSelectScalar = {
 
 export type VisitorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "source" | "lastSource" | "landingPage" | "referrer" | "userAgent" | "language" | "deviceType" | "utmCampaign" | "utmMedium" | "firstSeenAt" | "lastSeenAt", ExtArgs["result"]["visitor"]>
 export type VisitorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  interactions?: boolean | Prisma.Visitor$interactionsArgs<ExtArgs>
   identities?: boolean | Prisma.Visitor$identitiesArgs<ExtArgs>
   _count?: boolean | Prisma.VisitorCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -785,6 +917,7 @@ export type VisitorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $VisitorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Visitor"
   objects: {
+    interactions: Prisma.$InteractionPayload<ExtArgs>[]
     identities: Prisma.$VisitorIdentityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1198,6 +1331,7 @@ readonly fields: VisitorFieldRefs;
  */
 export interface Prisma__VisitorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  interactions<T extends Prisma.Visitor$interactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visitor$interactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   identities<T extends Prisma.Visitor$identitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Visitor$identitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VisitorIdentityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1634,6 +1768,30 @@ export type VisitorDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Visitors to delete.
    */
   limit?: number
+}
+
+/**
+ * Visitor.interactions
+ */
+export type Visitor$interactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Interaction
+   */
+  select?: Prisma.InteractionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Interaction
+   */
+  omit?: Prisma.InteractionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InteractionInclude<ExtArgs> | null
+  where?: Prisma.InteractionWhereInput
+  orderBy?: Prisma.InteractionOrderByWithRelationInput | Prisma.InteractionOrderByWithRelationInput[]
+  cursor?: Prisma.InteractionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InteractionScalarFieldEnum | Prisma.InteractionScalarFieldEnum[]
 }
 
 /**

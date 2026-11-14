@@ -5,6 +5,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { useAuthStore } from "@/store/auth.store";
 import { PageVisitTracker } from "./PageVisitTracker";
+import { InteractionTracker } from "./InteractionTracker";
 import TripExperience from "./TripExperience";
 
 export default function Providers({
@@ -29,6 +30,7 @@ export default function Providers({
     >
       <Suspense fallback={null}>
         <PageVisitTracker />
+        <InteractionTracker />
       </Suspense>
       {children}
       <TripExperience />

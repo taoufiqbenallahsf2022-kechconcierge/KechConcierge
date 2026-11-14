@@ -71,6 +71,7 @@ export async function claimVisitorJourney(
       where: { journeyId, individualId: null },
       data: { individualId, accountId, prospectId, leadId, visitorStage: pageStage },
     });
+    await tx.interaction.updateMany({ where: { journeyId, individualId: null }, data: { individualId } });
     const chats = await tx.chat.updateMany({
       where: { journeyId, individualId: null },
       data: { individualId, accountId, prospectId, leadId, participantStage: chatStage, updatedBy: "JOURNEY_CLAIM" },

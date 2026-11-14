@@ -48,7 +48,7 @@ export default function Footer() {
     "+1 (864) 465-4768";
 
   return (
-    <footer className="mt-16 bg-zinc-950 text-white">
+    <footer data-track-component="footer" data-track-view="footer" className="mt-16 bg-zinc-950 text-white">
       <div className="mx-auto grid max-w-[1380px] gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 xl:px-8">
         <div className="sm:col-span-2 lg:col-span-1">
           <p className="text-2xl font-black">

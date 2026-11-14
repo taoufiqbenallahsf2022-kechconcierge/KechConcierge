@@ -931,7 +931,7 @@ export default function AccountPage() {
 
   if (pageLoading) {
     return (
-      <section className="mx-auto max-w-5xl px-4 py-20">
+      <section data-track-component="account" data-track-form="account" data-track-view={`account.${section}`} className="mx-auto max-w-5xl px-4 py-20">
         <div className="h-4 w-28 animate-pulse rounded-full bg-zinc-200" />
 
         <div className="mt-4 h-12 w-72 animate-pulse rounded-full bg-zinc-200" />
@@ -964,7 +964,7 @@ export default function AccountPage() {
   }
 
   return (
-    <section className="mx-auto max-w-5xl px-4 py-20">
+    <section data-track-component="account" data-track-form="account" data-track-view={`account.${section}`} className="mx-auto max-w-5xl px-4 py-20">
       <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
         {
           t.accountPage
