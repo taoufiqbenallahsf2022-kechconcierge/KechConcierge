@@ -5,6 +5,8 @@ import { validateReportingSql } from "../dist/apps/admin-api/src/services/queryA
 test("permits source aggregation, CTEs, joins, date filters and grouping", () => {
   for (const sql of [
     "SELECT source, COUNT(*) FROM reporting_visitors GROUP BY source",
+    'SELECT "metadata"->>\'direction\', count(*) FROM "Interaction" GROUP BY 1',
+
     'SELECT "id", "titleEN" FROM "Villa" WHERE "createdAt" >= CURRENT_DATE - INTERVAL \'3 months\'',
     'SELECT "email" FROM query_agent."User"',
     'SELECT count(*) FROM "TransportationPlan"',

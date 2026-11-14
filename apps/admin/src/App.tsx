@@ -1,3 +1,4 @@
+import { InteractionsPage, InteractionDetailPage } from "./pages/InteractionPages";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { useAuth } from "./auth/AuthContext";
@@ -69,6 +70,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Navigate to="/data-hub" replace />} />
         <Route path="data-hub" element={<DataHub />} />
+        <Route path="interactions" element={<InteractionsPage />} /><Route path="interactions/:id" element={<InteractionDetailPage />} />
         <Route path="query-agent" element={<QueryAgentPage />} />
         <Route path="visitors" element={<VisitorsPage />} />
         <Route path="visitors/:id" element={<VisitorDetailPage />} />

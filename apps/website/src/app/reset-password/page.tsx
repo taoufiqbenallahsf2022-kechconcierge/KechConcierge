@@ -201,7 +201,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <section className="mx-auto max-w-2xl px-4 py-20">
+    <section data-track-component="reset-password" data-track-form="reset-password" data-track-state={status} data-track-view="reset-password" className="mx-auto max-w-2xl px-4 py-20">
       <Link
         href={loginPath}
         className="inline-flex items-center gap-2 font-black text-orange-700"

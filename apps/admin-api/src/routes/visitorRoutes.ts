@@ -26,11 +26,11 @@ visitorRouter.get("/:id", async (req, res, next) => {
     const id = String(req.params.id);
     const visitor = await prisma.visitor.findUnique({ where: { id }, include: { identities: { include: { individual: { select: { id: true, firstName: true, lastName: true, email: true, manualEmail: true, acquisitionSource: true } } } } } });
     if (!visitor) return res.status(404).json({ message: "Visitor not found" });
-    const [visits, contacts, chats, carts] = await Promise.all([
+    const [visits, contacts, chats, carts, interactions] = await Promise.all([
       prisma.pageVisit.count({ where: { visitorId: id } }), prisma.contactRequest.count({ where: { visitorId: id } }),
-      prisma.chat.count({ where: { visitorId: id } }), prisma.tripCart.count({ where: { visitorId: id } }),
+      prisma.chat.count({ where: { visitorId: id } }), prisma.tripCart.count({ where: { visitorId: id } }), prisma.interaction.count({ where: { visitorId: id } }),
     ]);
-    res.json({ ...visitor, counts: { visits, contacts, chats, carts } });
+    res.json({ ...visitor, counts: { visits, contacts, chats, carts, interactions } });
   } catch (error) { next(error); }
 });
 
@@ -38,14 +38,15 @@ visitorRouter.get("/:id/activity", async (req, res, next) => {
   try {
     const id = String(req.params.id), page = Math.max(1, Number(req.query.page) || 1), pageSize = 25;
     const type = String(req.query.type ?? "all");
-    const kinds = ["visit", "contact", "chat", "trip"];
+    const kinds = ["visit", "contact", "chat", "trip", "interaction"];
     if (type !== "all" && !kinds.includes(type)) return res.status(400).json({ message: "Invalid activity type" });
     const rows = await prisma.$queryRaw<any[]>(Prisma.sql`
       SELECT * FROM (
-        SELECT 'visit' AS kind, id, "visitDate" AS date, COALESCE("pageName", "pageUrl") AS label, "pageUrl" AS detail, "individualId", source, "accessOutcome", "clientVisitedAt" FROM "PageVisit" WHERE "visitorId" = ${id}
-        UNION ALL SELECT 'contact', id, "createdDate", "requestType"::text, subject, "individualId", NULL, NULL, NULL FROM "ContactRequest" WHERE "visitorId" = ${id}
-        UNION ALL SELECT 'chat', id, "createdDate", status::text, "managedBy"::text, "individualId", NULL, NULL, NULL FROM "Chat" WHERE "visitorId" = ${id}
-        UNION ALL SELECT 'trip', id, "createdDate", status::text, NULL, "individualId", NULL, NULL, NULL FROM "TripCart" WHERE "visitorId" = ${id}
+        SELECT 'visit' AS kind, id, "visitDate" AS date, COALESCE("pageName", "pageUrl") AS label, "pageUrl" AS detail, "individualId", source, "accessOutcome", "clientVisitedAt", NULL::jsonb AS interaction FROM "PageVisit" WHERE "visitorId" = ${id}
+        UNION ALL SELECT 'contact', id, "createdDate", "requestType"::text, subject, "individualId", NULL, NULL, NULL, NULL::jsonb FROM "ContactRequest" WHERE "visitorId" = ${id}
+        UNION ALL SELECT 'chat', id, "createdDate", status::text, "managedBy"::text, "individualId", NULL, NULL, NULL, NULL::jsonb FROM "Chat" WHERE "visitorId" = ${id}
+        UNION ALL SELECT 'trip', id, "createdDate", status::text, NULL, "individualId", NULL, NULL, NULL, NULL::jsonb FROM "TripCart" WHERE "visitorId" = ${id}
+        UNION ALL SELECT 'interaction', id, "occurredAt", "eventType", concat_ws(' / ', component, target, "pageUrl"), "individualId", source, NULL, NULL, jsonb_build_object('eventType', "eventType", 'component', component, 'target', target, 'pageUrl', "pageUrl", 'durationMs', "durationMs", 'imageIndex', "imageIndex", 'metadata', metadata, 'deviceType', "deviceType") FROM "Interaction" WHERE "visitorId" = ${id}
       ) activity WHERE (${type} = 'all' OR kind = ${type}) ORDER BY date DESC, kind, id LIMIT ${pageSize + 1} OFFSET ${(page - 1) * pageSize}
     `);
     res.json({ items: rows.slice(0, pageSize), hasMore: rows.length > pageSize, page, pageSize });

@@ -261,7 +261,7 @@ export default function PaymentPage() {
           </div>
         </div>
 
-        <section
+        <section data-track-component="payment" data-track-form="payment" data-track-state={phase} data-track-view="payment"
           aria-busy={isLoading || isVerifying || isStarting}
           className="overflow-hidden rounded-[2rem] border border-orange-100 bg-white shadow-[0_30px_90px_rgba(93,47,20,0.14)]"
         >

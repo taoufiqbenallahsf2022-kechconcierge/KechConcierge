@@ -14,6 +14,7 @@ function normalizedProfile(data: any) {
 }
 export const service = createCrudService(rules["individuals"], {
   includeOne: {
+    interactions: { take: 50, orderBy: { occurredAt: "desc" } },
     pageVisits: { take: 50, orderBy: { visitDate: "desc" } },
     chats: { take: 50, orderBy: { updatedDate: "desc" } },
     contactRequests: { take: 50, orderBy: { createdDate: "desc" } },

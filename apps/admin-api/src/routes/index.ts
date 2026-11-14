@@ -1,3 +1,4 @@
+import { interactionRouter } from "./interactionRoutes.js";
 import { Router } from "express";
 import { visitorRouter } from "./visitorRoutes.js";
 import { queryAgentRouter } from "./queryAgentRoutes.js";
@@ -33,6 +34,7 @@ api.use("/auth", authRouter);
 api.use("/public", publicOrderRouter);
 api.use(requireAdminAuth);
 api.use("/visitors", visitorRouter);
+api.use("/interactions", interactionRouter);
 api.use("/query-agent", queryAgentRouter);
 api.use("/website-configuration", websiteConfigurationRouter);
 api.use("/push-notifications", pushNotificationRouter);

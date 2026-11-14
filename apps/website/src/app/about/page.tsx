@@ -150,8 +150,8 @@ export default function AboutPage() {
   ];
 
   return (
-    <main>
-      <section className="relative overflow-hidden border-b border-zinc-200 bg-white">
+    <main data-track-component="about">
+      <section data-track-view="about-section.1" className="relative overflow-hidden border-b border-zinc-200 bg-white">
         <div className="pointer-events-none absolute -right-40 -top-40 h-[480px] w-[480px] rounded-full bg-orange-100 blur-3xl" />
 
         <div className="pointer-events-none absolute -bottom-40 -left-40 h-[420px] w-[420px] rounded-full bg-zinc-100 blur-3xl" />
@@ -225,7 +225,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-[1380px] gap-12 px-5 py-24 lg:grid-cols-[0.85fr_1.15fr] xl:px-8">
+      <section data-track-view="about-section.2" className="mx-auto grid max-w-[1380px] gap-12 px-5 py-24 lg:grid-cols-[0.85fr_1.15fr] xl:px-8">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
             {t.aboutPage.storyEyebrow}
@@ -251,7 +251,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-zinc-950">
+      <section data-track-view="about-section.3" className="bg-zinc-950">
         <div className="mx-auto max-w-[1380px] px-5 py-24 xl:px-8">
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-400">
@@ -294,7 +294,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1380px] px-5 py-24 xl:px-8">
+      <section data-track-view="about-section.4" className="mx-auto max-w-[1380px] px-5 py-24 xl:px-8">
         <div className="text-center">
           <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
             {t.aboutPage.principlesEyebrow}
@@ -331,7 +331,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1380px] px-5 pb-24 xl:px-8">
+      <section data-track-view="about-section.5" className="mx-auto max-w-[1380px] px-5 pb-24 xl:px-8">
         <div className="overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-orange-600 to-orange-700 px-6 py-12 text-white md:px-12 md:py-16">
           <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
             <div>

@@ -9,7 +9,7 @@ import { getProductOptionCopy } from "@/lib/product-option-copy";
 import { productCta, useProductCtaContent } from "@/store/product-cta.store";
 
 type Plan = ProductDetails["plans"][number];
-type Props = { open: boolean; locale: Locale; productType: ProductDetails["type"]; plans: Plan[]; onClose: () => void; onBook: (planId: string) => void };
+type Props = { productId?: string; open: boolean; locale: Locale; productType: ProductDetails["type"]; plans: Plan[]; onClose: () => void; onBook: (planId: string) => void };
 
 const copy = {
   en: { included: "Included" },
@@ -20,7 +20,7 @@ const copy = {
   de: { included: "Inklusive" },
 } as const;
 
-export default function ProductPlansModal({ open, locale, productType, plans, onClose, onBook }: Props) {
+export default function ProductPlansModal({ productId, open, locale, productType, plans, onClose, onBook }: Props) {
   const [index, setIndex] = useState(0);
   const desktopScroller = useRef<HTMLDivElement>(null);
   const mobileScroller = useRef<HTMLDivElement>(null);
@@ -61,7 +61,7 @@ export default function ProductPlansModal({ open, locale, productType, plans, on
   if (!open || typeof document === "undefined" || !plans.length) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[75] bg-zinc-950/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={optionText.title} onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+    <div data-track-state={String(index)} data-track-state-name="plan" data-plan-id={plans[index]?.id} data-track-overlay="plans" data-track-component="plans" data-product-id={productId} className="fixed inset-0 z-[75] bg-zinc-950/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={optionText.title} onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
       <div className="flex h-[100dvh] w-full flex-col bg-[#fffaf6] sm:mx-auto sm:my-[12vh] sm:h-[min(76vh,720px)] sm:max-w-5xl sm:rounded-[2rem] sm:shadow-2xl">
         <header className="flex items-center justify-between border-b border-orange-100 bg-white px-5 py-4 sm:rounded-t-[2rem] sm:px-8">
           <div><p className="text-xs font-black uppercase tracking-[.2em] text-orange-700">Moorish Concierge</p><h2 className="mt-1 text-2xl font-black text-zinc-950">{optionText.title}</h2></div>
@@ -69,23 +69,23 @@ export default function ProductPlansModal({ open, locale, productType, plans, on
         </header>
 
         <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden">
-          <div ref={mobileScroller} className="no-scrollbar flex min-h-0 flex-1 snap-x snap-mandatory overflow-x-auto overscroll-x-contain sm:hidden" onScroll={(event) => { const el = event.currentTarget; setIndex(Math.max(0, Math.min(plans.length - 1, Math.round(el.scrollLeft / el.clientWidth)))); }}>
+          <div data-track-scroll="plans-mobile" ref={mobileScroller} className="no-scrollbar flex min-h-0 flex-1 snap-x snap-mandatory overflow-x-auto overscroll-x-contain sm:hidden" onScroll={(event) => { const el = event.currentTarget; setIndex(Math.max(0, Math.min(plans.length - 1, Math.round(el.scrollLeft / el.clientWidth)))); }}>
             {plans.map((plan, planIndex) => (
-          <article key={plan.id} className="flex h-full min-h-0 w-full shrink-0 snap-center flex-col overflow-y-auto px-6 py-7 pb-5">
+          <article data-track-view={`plan.${plan.id}`} data-track-hover="plan" data-plan-id={plan.id} data-track-scroll={`plan-content.${plan.id}`} key={plan.id} className="flex h-full min-h-0 w-full shrink-0 snap-center flex-col overflow-y-auto px-6 py-7 pb-5">
             <p className="text-sm font-black uppercase tracking-[.16em] text-orange-700">{planIndex + 1} / {plans.length} {optionText.count}</p>
             <div className="mt-4"><h3 className="text-3xl font-black text-zinc-950">{plan.title}</h3><strong className="mt-2 block text-2xl font-black text-orange-700">{plan.salePrice} {plan.currency}</strong></div>
             {plan.pricingUnit && <p className="mt-2 text-xs font-black uppercase tracking-wide text-zinc-400">{plan.pricingUnit.replaceAll("_", " ")}</p>}
             {plan.description && <p className="mt-6 whitespace-pre-line text-lg leading-8 text-zinc-600">{plan.description}</p>}
-            {!!plan.options.length && <div className="mt-7"><h4 className="font-black text-zinc-950">{text.included}</h4><ul className="mt-3 grid gap-3">{plan.options.map((option) => <li key={option.id} className="flex gap-3 rounded-2xl bg-white p-4 font-semibold text-zinc-700 shadow-sm"><span className="text-green-600">✓</span>{option.title}</li>)}</ul></div>}
-            <button type="button" onClick={() => onBook(plan.id)} className="mt-7 rounded-full bg-orange-600 px-7 py-4 text-lg font-black text-white shadow-lg transition hover:bg-orange-700">{optionText.action}</button>
+            {!!plan.options.length && <div className="mt-7"><h4 className="font-black text-zinc-950">{text.included}</h4><ul className="mt-3 grid gap-3">{plan.options.map((option) => <li data-track-view={`inclusion.${option.id}`} key={option.id} className="flex gap-3 rounded-2xl bg-white p-4 font-semibold text-zinc-700 shadow-sm"><span className="text-green-600">✓</span>{option.title}</li>)}</ul></div>}
+            <button type="button" data-track-target="request-plan" onClick={() => onBook(plan.id)} className="mt-7 rounded-full bg-orange-600 px-7 py-4 text-lg font-black text-white shadow-lg transition hover:bg-orange-700">{optionText.action}</button>
           </article>
             ))}
           </div>
 
           {multiplePlans && <nav className="flex shrink-0 items-center justify-between border-t border-orange-100 bg-white px-5 py-3 sm:hidden" aria-label={optionText.title}><button type="button" disabled={index === 0} onClick={() => move(-1)} className="flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 font-bold disabled:opacity-25" aria-label={optionText.previous}><ChevronLeft /> {index}</button><span className="text-sm font-black text-zinc-500">{index + 1} / {plans.length}</span><button type="button" disabled={index === plans.length - 1} onClick={() => move(1)} className="flex items-center gap-2 rounded-full border border-zinc-200 px-4 py-2 font-bold disabled:opacity-25" aria-label={optionText.next}>{index + 2} <ChevronRight /></button></nav>}
 
-          <div ref={desktopScroller} className="no-scrollbar hidden h-full w-full snap-x snap-mandatory scroll-px-10 items-stretch gap-5 overflow-x-auto overflow-y-hidden py-6 sm:flex [&>article:first-child]:ml-10 [&>article:last-child]:mr-10 [&>article]:h-full [&>article>button]:mx-3 [&>article>button]:mt-auto [&>article>button]:inline-flex [&>article>button]:min-h-11 [&>article>button]:items-center [&>article>button]:justify-center [&>article>button]:py-0 [&>article>button]:text-center [&>article>button]:leading-none">
-            {plans.map((item, itemIndex) => <article key={item.id} className="flex max-h-full w-[38%] min-w-[310px] shrink-0 snap-start flex-col overflow-y-auto rounded-3xl border border-orange-100 bg-white p-5 shadow-sm"><p className="text-xs font-black uppercase tracking-[.16em] text-orange-700">{itemIndex + 1} / {plans.length}</p><div className="mt-3"><h3 className="text-xl font-black text-zinc-950">{item.title}</h3><strong className="mt-2 block text-xl font-black text-orange-700">{item.salePrice} {item.currency}</strong></div>{item.pricingUnit && <p className="mt-1 text-xs font-black uppercase tracking-wide text-zinc-400">{item.pricingUnit.replaceAll("_", " ")}</p>}{item.description && <p className="mt-4 whitespace-pre-line leading-6 text-zinc-600">{item.description}</p>}{!!item.options.length && <ul className="mt-4 grid gap-2">{item.options.map((option) => <li key={option.id} className="flex gap-2 text-sm font-semibold text-zinc-700"><span className="text-green-600">✓</span>{option.title}</li>)}</ul>}<button type="button" onClick={() => onBook(item.id)} className="mt-5 rounded-full bg-orange-600 px-5 py-3 font-black text-white transition hover:bg-orange-700">{optionText.action}</button></article>)}
+          <div data-track-scroll="plans-desktop" ref={desktopScroller} className="no-scrollbar hidden h-full w-full snap-x snap-mandatory scroll-px-10 items-stretch gap-5 overflow-x-auto overflow-y-hidden py-6 sm:flex [&>article:first-child]:ml-10 [&>article:last-child]:mr-10 [&>article]:h-full [&>article>button]:mx-3 [&>article>button]:mt-auto [&>article>button]:inline-flex [&>article>button]:min-h-11 [&>article>button]:items-center [&>article>button]:justify-center [&>article>button]:py-0 [&>article>button]:text-center [&>article>button]:leading-none">
+            {plans.map((item, itemIndex) => <article data-track-view={`plan.${item.id}`} data-track-hover="plan" data-plan-id={item.id} data-track-scroll={`plan-content.${item.id}`} key={item.id} className="flex max-h-full w-[38%] min-w-[310px] shrink-0 snap-start flex-col overflow-y-auto rounded-3xl border border-orange-100 bg-white p-5 shadow-sm"><p className="text-xs font-black uppercase tracking-[.16em] text-orange-700">{itemIndex + 1} / {plans.length}</p><div className="mt-3"><h3 className="text-xl font-black text-zinc-950">{item.title}</h3><strong className="mt-2 block text-xl font-black text-orange-700">{item.salePrice} {item.currency}</strong></div>{item.pricingUnit && <p className="mt-1 text-xs font-black uppercase tracking-wide text-zinc-400">{item.pricingUnit.replaceAll("_", " ")}</p>}{item.description && <p data-track-view="plan-description" className="mt-4 whitespace-pre-line leading-6 text-zinc-600">{item.description}</p>}{!!item.options.length && <ul className="mt-4 grid gap-2">{item.options.map((option) => <li data-track-view={`inclusion.${option.id}`} key={option.id} className="flex gap-2 text-sm font-semibold text-zinc-700"><span className="text-green-600">✓</span>{option.title}</li>)}</ul>}<button type="button" data-track-target="request-plan" onClick={() => onBook(item.id)} className="mt-5 rounded-full bg-orange-600 px-5 py-3 font-black text-white transition hover:bg-orange-700">{optionText.action}</button></article>)}
           </div>
 
           {multiplePlans && <><button type="button" disabled={index === 0} onClick={() => move(-1)} className="nightclub-carousel-arrow absolute left-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-zinc-200 bg-white shadow-lg disabled:opacity-25 sm:grid" aria-label={optionText.previous}><ChevronLeft /></button><button type="button" disabled={index === plans.length - 1} onClick={() => move(1)} className="nightclub-carousel-arrow absolute right-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-zinc-200 bg-white shadow-lg disabled:opacity-25 sm:grid" aria-label={optionText.next}><ChevronRight /></button></>}

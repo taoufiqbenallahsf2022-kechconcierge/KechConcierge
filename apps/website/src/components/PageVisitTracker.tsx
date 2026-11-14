@@ -5,6 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useAuthStore } from "@/store/auth.store";
 import { getVisitorId, getVisitorJourneyId, getVisitorSessionId } from "@/lib/visitor";
 import { ACCOUNT_ACCESS_EVENT, clearAccountAccessOutcome, getAccountAccessOutcome, safeVisitUrl } from "@/lib/visit-diagnostics";
+import { interactionPage, attachInteractionVisit } from "@/lib/interactions";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
@@ -44,6 +45,7 @@ export function PageVisitTracker() {
     const key = `${identity}:${journeyId}:${pageUrl}`;
     if (lastVisit.current === key) return;
     lastVisit.current = key;
+    const interactionContext = interactionPage();
     const previousPageUrl = sessionStorage.getItem("moorish_last_page");
     sessionStorage.setItem("moorish_last_page", safeVisitUrl(pageUrl));
     const navigationType = firstNavigation.current
@@ -86,6 +88,7 @@ export function PageVisitTracker() {
       },
       body: JSON.stringify({
         pageUrl,
+        clientPageInstanceId: interactionContext.pageInstanceId,
         source: source.slice(0, 120),
         utmCampaign: searchParams.get("utm_campaign"),
         utmMedium: searchParams.get("utm_medium"),
@@ -102,7 +105,7 @@ export function PageVisitTracker() {
       }),
       keepalive: true,
     }).then(async response => {
-      if (response.ok) { visitId = (await response.json()).id; sendOutcome(); }
+      if (response.ok) { visitId = (await response.json()).id; attachInteractionVisit(interactionContext, visitId!); sendOutcome(); }
     }).catch(() => undefined);
   }, [accessToken, hasRestoredAuth, pathname, query]);
 

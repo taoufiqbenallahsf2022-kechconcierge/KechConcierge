@@ -371,7 +371,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={`site-header top-0 ${menuOpen ? "z-[70]" : "z-40"} ${isHomepage ? "fixed inset-x-0" : "sticky"} ${isHomepage && !pastHomepageHero ? "home-header-dark border-transparent bg-transparent" : "border-b border-orange-100 bg-white/95 backdrop-blur"}`}>
+      <header data-track-component="header" className={`site-header top-0 ${menuOpen ? "z-[70]" : "z-40"} ${isHomepage ? "fixed inset-x-0" : "sticky"} ${isHomepage && !pastHomepageHero ? "home-header-dark border-transparent bg-transparent" : "border-b border-orange-100 bg-white/95 backdrop-blur"}`}>
         {pendingPath && (
           <div className="absolute inset-x-0 top-0 z-[60] h-1 overflow-hidden bg-orange-100">
             <div className="h-full w-1/3 animate-header-progress rounded-full bg-orange-600" />
@@ -438,7 +438,7 @@ export default function Header() {
 
               return (
                 <button
-                  key={item.href}
+                  key={item.href} data-track-target={`navigate.${item.href}`}
                   type="button"
                   onClick={() => navigateTo(targetPath)}
                   onMouseEnter={() => prefetchPath(targetPath)}
@@ -649,7 +649,7 @@ export default function Header() {
         </div>
 
         {menuOpen && (
-          <div className="mobile-menu-panel no-scrollbar absolute inset-x-0 top-full h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-[#fffaf6] px-4 pb-8 pt-4 shadow-2xl md:hidden">
+          <div data-track-overlay="menu" data-track-view="mobile-menu" data-track-component="header-menu" className="mobile-menu-panel no-scrollbar absolute inset-x-0 top-full h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-[#fffaf6] px-4 pb-8 pt-4 shadow-2xl md:hidden">
             {languageOpen ? (
               <div className="mx-auto w-full max-w-lg">
                 <button type="button" onClick={() => setLanguageOpen(false)} className="mb-4 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 font-bold text-zinc-900 shadow-sm">
@@ -668,10 +668,10 @@ export default function Header() {
               </div>
             ) : (
             <div className="mx-auto flex w-full max-w-lg flex-col gap-4">
-              <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-4 pb-2">
+              <div data-track-scroll="header-categories" className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-4 pb-2">
                 {mobileCategories.map((item) => {
                   const targetPath = buildLocalizedPath(item.href, currentLocale);
-                  return <button key={item.href} type="button" onClick={() => navigateTo(targetPath)} disabled={Boolean(pendingPath)} className="w-40 shrink-0 snap-start overflow-hidden rounded-2xl border border-black/5 bg-white text-left shadow-sm transition active:scale-[.98]">
+                  return <button data-track-target={`navigate.${item.href}`} data-track-view={`category.${item.href}`} key={item.href} type="button" onClick={() => navigateTo(targetPath)} disabled={Boolean(pendingPath)} className="w-40 shrink-0 snap-start overflow-hidden rounded-2xl border border-black/5 bg-white text-left shadow-sm transition active:scale-[.98]">
                     <span className="relative block h-20 overflow-hidden bg-[#eee8e3]"><Image src={item.image} alt="" fill sizes="160px" className="object-cover transition duration-500 hover:scale-105" /></span>
                     <span className="flex min-h-12 items-center justify-between gap-1.5 px-3 py-2.5 text-xs font-black text-zinc-950"><span>{item.label}</span><ChevronRight size={15} className="shrink-0 text-orange-600" /></span>
                   </button>;
@@ -686,7 +686,7 @@ export default function Header() {
 
                 return (
                   <button
-                    key={item.href}
+                    key={item.href} data-track-target={`navigate.${item.href}`}
                     type="button"
                     onClick={() => navigateTo(targetPath)}
                     onMouseEnter={() => prefetchPath(targetPath)}
@@ -728,12 +728,12 @@ export default function Header() {
         )}
 
         {menuOpen && (
-          <div className="mobile-menu-panel no-scrollbar absolute inset-x-0 top-full hidden h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-white px-5 py-5 md:block lg:hidden">
+          <div data-track-overlay="menu" data-track-view="mobile-menu" data-track-component="header-menu" className="mobile-menu-panel no-scrollbar absolute inset-x-0 top-full hidden h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-orange-100 bg-white px-5 py-5 md:block lg:hidden">
             <div className="flex min-h-full flex-col gap-4">
               {navItems.map((item) => {
                 const targetPath = buildLocalizedPath(item.href, currentLocale);
                 const isLoading = pendingPath === targetPath;
-                return <button key={item.href} type="button" onClick={() => navigateTo(targetPath)} onMouseEnter={() => prefetchPath(targetPath)} onFocus={() => prefetchPath(targetPath)} disabled={Boolean(pendingPath)} className={`order-3 flex items-center gap-2 rounded-xl px-2 py-2 text-left font-semibold ${isLoading ? "text-orange-700" : "text-zinc-800"} disabled:cursor-wait disabled:opacity-70`}>
+                return <button data-track-target={`navigate.${item.href}`} data-track-view={`category.${item.href}`} key={item.href} type="button" onClick={() => navigateTo(targetPath)} onMouseEnter={() => prefetchPath(targetPath)} onFocus={() => prefetchPath(targetPath)} disabled={Boolean(pendingPath)} className={`order-3 flex items-center gap-2 rounded-xl px-2 py-2 text-left font-semibold ${isLoading ? "text-orange-700" : "text-zinc-800"} disabled:cursor-wait disabled:opacity-70`}>
                   {isLoading && <Loader2 size={16} className="animate-spin" />}{item.label}
                 </button>;
               })}
