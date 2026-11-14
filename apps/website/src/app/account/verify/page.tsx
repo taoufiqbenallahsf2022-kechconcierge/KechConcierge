@@ -62,7 +62,7 @@ function VerifyAccountContent() {
   }, [token, t.accountVerify.missingToken, t.accountVerify.errorMessage, t.accountVerify.successMessage]);
 
   return (
-    <section className="mx-auto grid min-h-[70vh] max-w-3xl place-items-center px-4 py-20">
+    <section data-track-component="verification" data-track-form="verification" data-track-view="verification" className="mx-auto grid min-h-[70vh] max-w-3xl place-items-center px-4 py-20">
       <div className="w-full rounded-[2rem] bg-white p-6 text-center card-shadow md:p-8">
         <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
           {t.accountVerify.eyebrow}

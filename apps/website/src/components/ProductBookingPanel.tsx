@@ -1,4 +1,5 @@
 "use client";
+import { interactionHeaders, trackInteraction } from "@/lib/interactions";
 
 import Image from "next/image";
 import { CalendarDays, ChevronDown, Loader2, Send, X } from "lucide-react";
@@ -35,9 +36,9 @@ const copy = {
 } satisfies Record<Locale, unknown>;
 
 type BookingPlan = { id: string; title: string; salePrice: number; currency: string };
-type Props = { locale: Locale; productType: ProductType; productName: string; sticky: boolean; plans?: BookingPlan[]; selectedPlanId?: string | null; open?: boolean; onOpenChange?: (open: boolean) => void; hideTrigger?: boolean };
+type Props = { productId?: string; locale: Locale; productType: ProductType; productName: string; sticky: boolean; plans?: BookingPlan[]; selectedPlanId?: string | null; open?: boolean; onOpenChange?: (open: boolean) => void; hideTrigger?: boolean };
 
-export default function ProductBookingPanel({ locale, productType, productName, sticky, plans = [], selectedPlanId = null, open: controlledOpen, onOpenChange, hideTrigger = false }: Props) {
+export default function ProductBookingPanel({ productId, locale, productType, productName, sticky, plans = [], selectedPlanId = null, open: controlledOpen, onOpenChange, hideTrigger = false }: Props) {
   const cta = productCta(useProductCtaContent(), productType, locale);
   const text = { ...copy[locale], cta: cta.booking || copy[locale].cta };
   const optionText = getProductOptionCopy(locale, productType, cta);
@@ -83,7 +84,7 @@ export default function ProductBookingPanel({ locale, productType, productName, 
     try {
       const response = await fetch(`${API_URL}/api/contact-requests`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json", "x-visitor-id": getVisitorId(), ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}) },
+        headers: { "Content-Type": "application/json", Accept: "application/json", ...interactionHeaders(), ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}) },
         body: JSON.stringify({
           firstName: form.firstName.trim(), lastName: form.lastName.trim(), email: form.email.trim(),
           mobilePhone: `${form.countryCode}${form.phone.replace(/\s+/g, "").replace(/^0+/, "")}`,
@@ -100,32 +101,32 @@ export default function ProductBookingPanel({ locale, productType, productName, 
 
   return (
     <>
-      {!hideTrigger && <button type="button" onClick={() => setOpen(true)} className={sticky ? "group flex w-full items-center justify-center gap-3 bg-orange-600 px-6 py-4 text-lg font-black text-white shadow-[0_-10px_35px_rgba(234,88,12,.2)] transition hover:bg-orange-700" : "group mt-5 flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-orange-600 px-7 py-4 text-lg font-black text-white shadow-lg shadow-orange-600/20 transition duration-300 hover:-translate-y-1 hover:bg-orange-700 hover:shadow-xl"}>
+      {!hideTrigger && <button data-track-target="open-booking" data-track-view={sticky ? "booking-cta-sticky" : "booking-cta"} type="button" onClick={() => setOpen(true)} className={sticky ? "group flex w-full items-center justify-center gap-3 bg-orange-600 px-6 py-4 text-lg font-black text-white shadow-[0_-10px_35px_rgba(234,88,12,.2)] transition hover:bg-orange-700" : "group mt-5 flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-orange-600 px-7 py-4 text-lg font-black text-white shadow-lg shadow-orange-600/20 transition duration-300 hover:-translate-y-1 hover:bg-orange-700 hover:shadow-xl"}>
         <CalendarDays className="transition group-hover:rotate-6 group-hover:scale-110" /> {text.cta}
       </button>}
 
       {open && typeof document !== "undefined" && createPortal(
-        <div className="fixed inset-0 z-[80] bg-zinc-950/75 backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
+        <div data-track-overlay="booking" data-track-component="booking" data-track-form="booking" data-track-state={status} data-product-id={productId} data-plan-id={planId || undefined} className="fixed inset-0 z-[80] bg-zinc-950/75 backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
           <aside className="ml-auto flex h-[100dvh] w-full animate-[booking-slide_.38s_cubic-bezier(.22,1,.36,1)] flex-col overflow-hidden bg-[#fffaf6] shadow-2xl lg:w-[min(620px,48vw)]">
             <div className="flex items-start justify-between border-b border-orange-100 bg-white px-6 py-5 sm:px-9 sm:py-7">
               <div><p className="text-xs font-black uppercase tracking-[.22em] text-orange-700">Moorish Concierge</p><h2 className="mt-2 text-3xl font-black text-zinc-950">{text.title}</h2><p className="mt-2 max-w-lg text-zinc-600">{text.intro}</p></div>
               <button type="button" onClick={() => setOpen(false)} className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-zinc-200 bg-white transition hover:rotate-90 hover:border-orange-300 hover:text-orange-700" aria-label="Close"><X /></button>
             </div>
-            <div className="flex-1 overflow-y-auto px-6 py-6 sm:px-9">
+            <div data-track-scroll="booking-content" className="flex-1 overflow-y-auto px-6 py-6 sm:px-9">
               <div className="rounded-2xl bg-orange-50 p-4 font-black text-orange-900">{bookingSubject}</div>
-              {!!plans.length && <label className="mt-6 grid gap-2 text-sm font-bold text-zinc-700">{optionText.choose}<select value={planId} onChange={(event) => { setPlanId(event.target.value); if (status !== "idle") { setStatus("idle"); setFeedback(""); } }} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500"><option value="">{optionText.select}</option>{plans.map((plan) => <option key={plan.id} value={plan.id}>{plan.title} — {plan.salePrice} {plan.currency}</option>)}</select></label>}
+              {!!plans.length && <label className="mt-6 grid gap-2 text-sm font-bold text-zinc-700">{optionText.choose}<select data-track-field="planId" value={planId} onChange={(event) => { setPlanId(event.target.value); if (status !== "idle") { setStatus("idle"); setFeedback(""); } }} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500"><option value="">{optionText.select}</option>{plans.map((plan) => <option key={plan.id} value={plan.id}>{plan.title} — {plan.salePrice} {plan.currency}</option>)}</select></label>}
               <div className="mt-6 grid min-w-0 gap-4 sm:grid-cols-2">
-                <label className="grid min-w-0 gap-2 text-sm font-bold text-zinc-700">{text.start}<input type="date" min={today} value={form.startDate} onChange={(e) => update("startDate", e.target.value)} className="block h-[50px] w-full min-w-0 max-w-full box-border rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
-                <label className="grid min-w-0 gap-2 text-sm font-bold text-zinc-700">{text.end}<input type="date" min={form.startDate || today} value={form.endDate} onChange={(e) => update("endDate", e.target.value)} className="block h-[50px] w-full min-w-0 max-w-full box-border rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
-                <label className="grid gap-2 text-sm font-bold text-zinc-700">{text.first}<input autoComplete="given-name" value={form.firstName} onChange={(e) => update("firstName", e.target.value)} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
-                <label className="grid gap-2 text-sm font-bold text-zinc-700">{text.last}<input autoComplete="family-name" value={form.lastName} onChange={(e) => update("lastName", e.target.value)} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
-                <label className="grid gap-2 text-sm font-bold text-zinc-700 sm:col-span-2">{text.email}<input type="email" autoComplete="email" value={form.email} onChange={(e) => update("email", e.target.value)} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
-                <div className="relative sm:col-span-2"><p className="mb-2 text-sm font-bold text-zinc-700">{text.phone}</p><div className="grid grid-cols-[145px_1fr] gap-2"><button type="button" onClick={() => setCountryOpen((value) => !value)} className="flex items-center justify-between rounded-2xl border border-zinc-200 bg-white px-3 py-3"><span className="flex items-center gap-2"><Image unoptimized src={`https://flagcdn.com/w40/${selectedCountry.iso}.png`} alt="" width={24} height={16} className="h-4 w-6 object-cover" />{selectedCountry.code}</span><ChevronDown size={16} /></button><input type="tel" autoComplete="tel" value={form.phone} onChange={(e) => update("phone", e.target.value)} className="min-w-0 rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></div>
+                <label className="grid min-w-0 gap-2 text-sm font-bold text-zinc-700">{text.start}<input data-track-field="startDate" type="date" min={today} value={form.startDate} onChange={(e) => update("startDate", e.target.value)} className="block h-[50px] w-full min-w-0 max-w-full box-border rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
+                <label className="grid min-w-0 gap-2 text-sm font-bold text-zinc-700">{text.end}<input data-track-field="endDate" type="date" min={form.startDate || today} value={form.endDate} onChange={(e) => update("endDate", e.target.value)} className="block h-[50px] w-full min-w-0 max-w-full box-border rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
+                <label className="grid gap-2 text-sm font-bold text-zinc-700">{text.first}<input data-track-field="firstName" autoComplete="given-name" value={form.firstName} onChange={(e) => update("firstName", e.target.value)} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
+                <label className="grid gap-2 text-sm font-bold text-zinc-700">{text.last}<input data-track-field="lastName" autoComplete="family-name" value={form.lastName} onChange={(e) => update("lastName", e.target.value)} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
+                <label className="grid gap-2 text-sm font-bold text-zinc-700 sm:col-span-2">{text.email}<input data-track-field="email" type="email" autoComplete="email" value={form.email} onChange={(e) => update("email", e.target.value)} className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></label>
+                <div className="relative sm:col-span-2"><p className="mb-2 text-sm font-bold text-zinc-700">{text.phone}</p><div className="grid grid-cols-[145px_1fr] gap-2"><button type="button" onClick={() => setCountryOpen((value) => !value)} className="flex items-center justify-between rounded-2xl border border-zinc-200 bg-white px-3 py-3"><span className="flex items-center gap-2"><Image unoptimized src={`https://flagcdn.com/w40/${selectedCountry.iso}.png`} alt="" width={24} height={16} className="h-4 w-6 object-cover" />{selectedCountry.code}</span><ChevronDown size={16} /></button><input data-track-field="phone" type="tel" autoComplete="tel" value={form.phone} onChange={(e) => update("phone", e.target.value)} className="min-w-0 rounded-2xl border border-zinc-200 bg-white px-4 py-3 outline-none focus:border-orange-500" /></div>
                   {countryOpen && <div className="absolute left-0 top-[82px] z-10 max-h-64 w-80 overflow-y-auto rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl">{countries.map((country) => <button key={`${country.iso}-${country.code}`} type="button" onClick={() => { setForm((current) => ({ ...current, countryIso: country.iso, countryCode: country.code })); setCountryOpen(false); }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left hover:bg-orange-50"><Image unoptimized src={`https://flagcdn.com/w40/${country.iso}.png`} alt="" width={24} height={16} className="h-4 w-6 object-cover" /><strong className="w-12">{country.code}</strong><span>{countryNames.of(country.region)}</span></button>)}</div>}
                 </div>
               </div>
               {feedback && <div className={`mt-5 rounded-2xl px-4 py-3 font-bold ${status === "success" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>{feedback}</div>}
-              <button type="button" disabled={status === "loading" || status === "success"} onClick={submit} className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-zinc-950 px-7 py-4 font-black text-white transition hover:bg-orange-700 disabled:opacity-60">{status === "loading" ? <Loader2 className="animate-spin" /> : <Send size={20} />}{status === "loading" ? text.sending : text.send}</button>
+              <button type="button" disabled={status === "loading" || status === "success"} data-track-target="booking-submit" onClick={submit} className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-zinc-950 px-7 py-4 font-black text-white transition hover:bg-orange-700 disabled:opacity-60">{status === "loading" ? <Loader2 className="animate-spin" /> : <Send size={20} />}{status === "loading" ? text.sending : text.send}</button>
             </div>
           </aside>
         </div>,

@@ -1,4 +1,5 @@
 "use client";
+import { interactionHeaders, trackInteraction } from "@/lib/interactions";
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -233,6 +234,7 @@ export default function ContactPage() {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            ...interactionHeaders(),
             ...(isAuthenticated && accessToken
             ? {
                 Authorization: `Bearer ${accessToken}`,
@@ -288,7 +290,7 @@ export default function ContactPage() {
   
 
   return (
-    <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 lg:grid-cols-[0.8fr_1.2fr]">
+    <section data-track-component="contact" data-track-form="contact" data-track-state={status} data-track-view="contact-form" className="mx-auto grid max-w-7xl gap-10 px-4 py-20 lg:grid-cols-[0.8fr_1.2fr]">
       <div>
         <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
           {t.contactPage.eyebrow}
@@ -319,7 +321,7 @@ export default function ContactPage() {
 
       <div className="rounded-[2rem] bg-white p-6 card-shadow md:p-8">
         <div className="grid gap-4 md:grid-cols-2">
-          <input
+          <input data-track-field="firstName"
             value={form.firstName}
             onChange={(event) =>
               update(
@@ -333,7 +335,7 @@ export default function ContactPage() {
             className="rounded-2xl border border-zinc-200 px-4 py-3 outline-none transition focus:border-orange-400 disabled:cursor-not-allowed disabled:bg-zinc-50"
           />
 
-          <input
+          <input data-track-field="lastName"
             value={form.lastName}
             onChange={(event) =>
               update(
@@ -348,7 +350,7 @@ export default function ContactPage() {
           />
 
           <div className="md:col-span-2">
-            <input
+            <input data-track-field="email"
               type="email"
               value={form.email}
               onChange={(event) =>
@@ -447,7 +449,7 @@ export default function ContactPage() {
                 )}
               </div>
 
-              <input
+              <input data-track-field="phone"
                 type="tel"
                 value={form.phone}
                 onChange={(event) =>
@@ -466,7 +468,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <select
+          <select data-track-field="requestType"
             value={form.requestType}
             onChange={(event) =>
               update(
@@ -497,7 +499,7 @@ export default function ContactPage() {
             )}
           </select>
 
-          <input
+          <input data-track-field="subject"
             value={form.subject}
             onChange={(event) =>
               update(
@@ -516,7 +518,7 @@ export default function ContactPage() {
           {form.subject.length}/255
         </div>
 
-        <textarea
+        <textarea data-track-field="message"
           value={form.message}
           onChange={(event) =>
             update(
@@ -532,7 +534,7 @@ export default function ContactPage() {
 
         <button
           type="button"
-          onClick={submit}
+          data-track-target="contact-submit" onClick={submit}
           disabled={status === "loading"}
           className="mt-4 flex min-h-12 items-center justify-center gap-2 rounded-full bg-orange-600 px-7 py-3 font-black text-white transition hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-70"
         >

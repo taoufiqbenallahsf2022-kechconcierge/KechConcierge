@@ -2,8 +2,8 @@ import { parse } from "pgsql-ast-parser";
 import { businessEntities } from "./queryAgentCatalog.js";
 
 export const reportingViews = ["reporting_visitors", "reporting_visitor_identities", "reporting_individuals", "reporting_page_visits", "reporting_contact_requests", "reporting_chats", "reporting_customers", "reporting_orders"];
-const functions = new Set(["count", "sum", "avg", "min", "max", "date_trunc", "date_part", "coalesce", "nullif", "lower", "upper", "round", "to_char", "now", "concat", "concat_ws", "trim", "length", "substring", "greatest", "least", "abs", "ceil", "floor", "bool_or", "bool_and"]);
-const casts = new Set(["text", "varchar", "int", "int4", "int8", "integer", "bigint", "numeric", "decimal", "date", "timestamp", "timestamptz", "interval", "bool", "boolean", "float", "float8", "double precision"]);
+const functions = new Set(["count", "sum", "avg", "min", "max", "date_trunc", "date_part", "coalesce", "nullif", "lower", "upper", "round", "to_char", "now", "concat", "concat_ws", "trim", "length", "substring", "greatest", "least", "abs", "ceil", "floor", "bool_or", "bool_and", "jsonb_array_length", "jsonb_array_elements_text", "jsonb_typeof", "jsonb_extract_path_text", "jsonb_build_object", "array_agg", "string_agg", "to_jsonb"]);
+const casts = new Set(["text", "varchar", "int", "int4", "int8", "integer", "bigint", "numeric", "decimal", "date", "timestamp", "timestamptz", "interval", "bool", "boolean", "float", "float8", "double precision", "json", "jsonb"]);
 const statements = new Set(["select", "with", "union", "union all"]);
 export function validateReportingSql(input: string) {
   try { return validate(input); }
@@ -39,7 +39,7 @@ function validate(input: string) {
     }
     if (node.type === "call" && (node.function?.schema || !functions.has(node.function?.name?.toLowerCase()))) throw new Error("SQL function is not permitted for reporting");
     if (node.type === "cast" && (node.to?.schema || !casts.has(node.to?.name?.toLowerCase()))) throw new Error("SQL cast is not permitted for reporting");
-    if (node.type === "binary" && !["=", "!=", "<>", "<", ">", "<=", ">=", "+", "-", "*", "/", "%", "AND", "OR", "LIKE", "NOT LIKE", "ILIKE", "NOT ILIKE", "IN", "NOT IN", "IS", "IS NOT", "||", "AT TIME ZONE"].includes(String(node.op).toUpperCase())) throw new Error("SQL operator is not permitted");
+    if (node.type === "binary" && !["=", "!=", "<>", "<", ">", "<=", ">=", "+", "-", "*", "/", "%", "AND", "OR", "LIKE", "NOT LIKE", "ILIKE", "NOT ILIKE", "IN", "NOT IN", "IS", "IS NOT", "||", "AT TIME ZONE", "->", "->>", "#>", "#>>"].includes(String(node.op).toUpperCase())) throw new Error("SQL operator is not permitted");
     Object.values(node).forEach(value => Array.isArray(value) ? value.forEach(item => walk(item, aliases)) : walk(value, aliases));
   };
   walk(ast[0]);

@@ -24,7 +24,7 @@ export default function FloatingContact() {
   }, []);
 
   return (
-    <div className={`fixed z-50 transition-[bottom] duration-300 ${open ? `inset-0 sm:inset-auto sm:right-5 ${bookingBarVisible ? "sm:bottom-24" : "sm:bottom-5"}` : `right-5 ${bookingBarVisible ? "bottom-24" : "bottom-5"}`}`}>
+    <div data-track-component="floating-contact" data-track-state={open ? "open" : "closed"} className={`fixed z-50 transition-[bottom] duration-300 ${open ? `inset-0 sm:inset-auto sm:right-5 ${bookingBarVisible ? "sm:bottom-24" : "sm:bottom-5"}` : `right-5 ${bookingBarVisible ? "bottom-24" : "bottom-5"}`}`}>
       {open && (
         <div className="flex h-[100dvh] w-full flex-col overflow-hidden bg-white sm:mb-4 sm:h-auto sm:w-[min(340px,calc(100vw-2rem))] sm:rounded-3xl sm:card-shadow">
           <div className="flex items-center justify-between bg-zinc-950 px-5 py-4 text-white">

@@ -99,6 +99,7 @@ export const ModelName = {
   PageVisit: 'PageVisit',
   Visitor: 'Visitor',
   VisitorIdentity: 'VisitorIdentity',
+  Interaction: 'Interaction',
   AgentQuery: 'AgentQuery',
   AgentQueryExecution: 'AgentQueryExecution',
   ContactRequest: 'ContactRequest',
@@ -1252,6 +1253,7 @@ export type ConsentScalarFieldEnum = (typeof ConsentScalarFieldEnum)[keyof typeo
 
 export const PageVisitScalarFieldEnum = {
   id: 'id',
+  clientPageInstanceId: 'clientPageInstanceId',
   pageUrl: 'pageUrl',
   source: 'source',
   pageName: 'pageName',
@@ -1312,6 +1314,47 @@ export const VisitorIdentityScalarFieldEnum = {
 } as const
 
 export type VisitorIdentityScalarFieldEnum = (typeof VisitorIdentityScalarFieldEnum)[keyof typeof VisitorIdentityScalarFieldEnum]
+
+
+export const InteractionScalarFieldEnum = {
+  id: 'id',
+  visitorId: 'visitorId',
+  journeyId: 'journeyId',
+  individualId: 'individualId',
+  sessionId: 'sessionId',
+  pageVisitId: 'pageVisitId',
+  pageInstanceId: 'pageInstanceId',
+  eventType: 'eventType',
+  producer: 'producer',
+  pageUrl: 'pageUrl',
+  pageType: 'pageType',
+  component: 'component',
+  target: 'target',
+  productId: 'productId',
+  productType: 'productType',
+  planId: 'planId',
+  imageIndex: 'imageIndex',
+  occurredAt: 'occurredAt',
+  receivedAt: 'receivedAt',
+  sequence: 'sequence',
+  elapsedMs: 'elapsedMs',
+  durationMs: 'durationMs',
+  inputType: 'inputType',
+  authenticated: 'authenticated',
+  source: 'source',
+  deviceType: 'deviceType',
+  browser: 'browser',
+  operatingSystem: 'operatingSystem',
+  viewportWidth: 'viewportWidth',
+  viewportHeight: 'viewportHeight',
+  pointerCapability: 'pointerCapability',
+  hoverCapability: 'hoverCapability',
+  language: 'language',
+  theme: 'theme',
+  metadata: 'metadata'
+} as const
+
+export type InteractionScalarFieldEnum = (typeof InteractionScalarFieldEnum)[keyof typeof InteractionScalarFieldEnum]
 
 
 export const AgentQueryScalarFieldEnum = {

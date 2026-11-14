@@ -432,6 +432,7 @@ export const ModelName = {
   PageVisit: 'PageVisit',
   Visitor: 'Visitor',
   VisitorIdentity: 'VisitorIdentity',
+  Interaction: 'Interaction',
   AgentQuery: 'AgentQuery',
   AgentQueryExecution: 'AgentQueryExecution',
   ContactRequest: 'ContactRequest',
@@ -460,7 +461,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "emailMessage" | "emailEvent" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "visitor" | "visitorIdentity" | "agentQuery" | "agentQueryExecution" | "contactRequest" | "conciergeOrder" | "conciergeOrderItem" | "conciergeOrderPayment" | "tripCart" | "tripCartItem" | "chat" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
+    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "emailMessage" | "emailEvent" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "visitor" | "visitorIdentity" | "interaction" | "agentQuery" | "agentQueryExecution" | "contactRequest" | "conciergeOrder" | "conciergeOrderItem" | "conciergeOrderPayment" | "tripCart" | "tripCartItem" | "chat" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4016,6 +4017,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Interaction: {
+      payload: Prisma.$InteractionPayload<ExtArgs>
+      fields: Prisma.InteractionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InteractionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InteractionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>
+        }
+        findFirst: {
+          args: Prisma.InteractionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InteractionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>
+        }
+        findMany: {
+          args: Prisma.InteractionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>[]
+        }
+        create: {
+          args: Prisma.InteractionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>
+        }
+        createMany: {
+          args: Prisma.InteractionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InteractionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>[]
+        }
+        delete: {
+          args: Prisma.InteractionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>
+        }
+        update: {
+          args: Prisma.InteractionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>
+        }
+        deleteMany: {
+          args: Prisma.InteractionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InteractionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InteractionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>[]
+        }
+        upsert: {
+          args: Prisma.InteractionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InteractionPayload>
+        }
+        aggregate: {
+          args: Prisma.InteractionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInteraction>
+        }
+        groupBy: {
+          args: Prisma.InteractionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InteractionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InteractionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InteractionCountAggregateOutputType> | number
+        }
+      }
+    }
     AgentQuery: {
       payload: Prisma.$AgentQueryPayload<ExtArgs>
       fields: Prisma.AgentQueryFieldRefs
@@ -6139,6 +6214,7 @@ export type ConsentScalarFieldEnum = (typeof ConsentScalarFieldEnum)[keyof typeo
 
 export const PageVisitScalarFieldEnum = {
   id: 'id',
+  clientPageInstanceId: 'clientPageInstanceId',
   pageUrl: 'pageUrl',
   source: 'source',
   pageName: 'pageName',
@@ -6199,6 +6275,47 @@ export const VisitorIdentityScalarFieldEnum = {
 } as const
 
 export type VisitorIdentityScalarFieldEnum = (typeof VisitorIdentityScalarFieldEnum)[keyof typeof VisitorIdentityScalarFieldEnum]
+
+
+export const InteractionScalarFieldEnum = {
+  id: 'id',
+  visitorId: 'visitorId',
+  journeyId: 'journeyId',
+  individualId: 'individualId',
+  sessionId: 'sessionId',
+  pageVisitId: 'pageVisitId',
+  pageInstanceId: 'pageInstanceId',
+  eventType: 'eventType',
+  producer: 'producer',
+  pageUrl: 'pageUrl',
+  pageType: 'pageType',
+  component: 'component',
+  target: 'target',
+  productId: 'productId',
+  productType: 'productType',
+  planId: 'planId',
+  imageIndex: 'imageIndex',
+  occurredAt: 'occurredAt',
+  receivedAt: 'receivedAt',
+  sequence: 'sequence',
+  elapsedMs: 'elapsedMs',
+  durationMs: 'durationMs',
+  inputType: 'inputType',
+  authenticated: 'authenticated',
+  source: 'source',
+  deviceType: 'deviceType',
+  browser: 'browser',
+  operatingSystem: 'operatingSystem',
+  viewportWidth: 'viewportWidth',
+  viewportHeight: 'viewportHeight',
+  pointerCapability: 'pointerCapability',
+  hoverCapability: 'hoverCapability',
+  language: 'language',
+  theme: 'theme',
+  metadata: 'metadata'
+} as const
+
+export type InteractionScalarFieldEnum = (typeof InteractionScalarFieldEnum)[keyof typeof InteractionScalarFieldEnum]
 
 
 export const AgentQueryScalarFieldEnum = {
@@ -7141,6 +7258,7 @@ export type GlobalOmitConfig = {
   pageVisit?: Prisma.PageVisitOmit
   visitor?: Prisma.VisitorOmit
   visitorIdentity?: Prisma.VisitorIdentityOmit
+  interaction?: Prisma.InteractionOmit
   agentQuery?: Prisma.AgentQueryOmit
   agentQueryExecution?: Prisma.AgentQueryExecutionOmit
   contactRequest?: Prisma.ContactRequestOmit

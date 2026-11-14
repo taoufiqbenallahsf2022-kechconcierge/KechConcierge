@@ -63,7 +63,7 @@ export default function ServicesPage() {
     getDictionary(locale);
 
   return (
-    <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
+    <section data-track-component="services" data-track-view="services" className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
       <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
         {t.servicesPage.eyebrow}
       </p>
@@ -90,7 +90,7 @@ export default function ServicesPage() {
 
             return (
               <Link
-                key={category}
+                key={category} data-track-view={`service.${category}`} data-track-target={`service.${category}`}
                 href={buildCategoryPath(
                   locale,
                   category

@@ -1026,6 +1026,7 @@ model WhatsAppMessage {
 }
 
 model Individual {
+  interactions Interaction[]
   id String @id
 
   firstName    String
@@ -1166,6 +1167,8 @@ model Consent {
 
 model PageVisit {
   id           String          @id @default(cuid())
+  clientPageInstanceId String?
+  interactions Interaction[]
   pageUrl      String
   source       String?
   pageName     String?
@@ -1198,6 +1201,7 @@ model PageVisit {
   journey      VisitorJourney? @relation(fields: [journeyId], references: [id], onDelete: SetNull)
 
   @@index([visitorId])
+  @@index([clientPageInstanceId, visitorId, journeyId])
   @@index([journeyId])
   @@index([individualId, visitDate])
   @@index([visitorId, visitDate])
@@ -1205,6 +1209,7 @@ model PageVisit {
 }
 
 model Visitor {
+  interactions Interaction[]
   id String @id
   firstName String?
   lastName String?
@@ -1237,6 +1242,56 @@ model VisitorIdentity {
   individual Individual @relation(fields: [individualId], references: [id], onDelete: Cascade)
   @@unique([visitorId, individualId])
   @@index([individualId])
+}
+
+model Interaction {
+  id                String @id
+  visitorId         String
+  journeyId         String
+  individualId      String?
+  sessionId         String?
+  pageVisitId       String?
+  pageInstanceId    String
+  eventType         String
+  producer          String @default("BROWSER")
+  pageUrl           String
+  pageType          String?
+  component         String?
+  target            String?
+  productId         String?
+  productType       String?
+  planId            String?
+  imageIndex        Int?
+  occurredAt        DateTime
+  receivedAt        DateTime @default(now())
+  sequence          Int?
+  elapsedMs         Int?
+  durationMs        Int?
+  inputType         String?
+  authenticated     Boolean @default(false)
+  source            String?
+  deviceType        String?
+  browser           String?
+  operatingSystem   String?
+  viewportWidth     Int?
+  viewportHeight    Int?
+  pointerCapability String?
+  hoverCapability   Boolean?
+  language          String?
+  theme             String?
+  metadata          Json?
+  visitor           Visitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  journey           VisitorJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  individual        Individual? @relation(fields: [individualId], references: [id], onDelete: SetNull)
+  pageVisit         PageVisit? @relation(fields: [pageVisitId], references: [id], onDelete: SetNull)
+
+  @@index([visitorId, occurredAt])
+  @@index([individualId, occurredAt])
+  @@index([journeyId, pageInstanceId, sequence])
+  @@index([pageVisitId, occurredAt])
+  @@index([eventType, receivedAt])
+  @@index([productId, eventType, occurredAt])
+  @@index([source, deviceType, receivedAt])
 }
 
 model AgentQuery {
@@ -1450,6 +1505,7 @@ model Chat {
 }
 
 model VisitorJourney {
+  interactions Interaction[]
   id           String    @id
   visitorId    String
   individualId String?

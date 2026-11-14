@@ -32,7 +32,7 @@ export default function TikTokPixel() {
             e = d.getElementsByTagName("script")[0];
             e.parentNode.insertBefore(n, e);
           };
-          ttq.load("DBL70JJC77U4J2JQT7FG");
+          ttq.load("DBS4U2BC77U89HHSFQVG");
           ttq.page();
         }(window, document, "ttq");
       `}

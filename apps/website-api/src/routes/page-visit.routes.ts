@@ -86,6 +86,7 @@ router.post("/", async (req, res, next) => {
     const visit = await prisma.pageVisit.create({
       data: {
         pageUrl,
+        clientPageInstanceId: text(req.body?.clientPageInstanceId, "Page instance ID", 100),
         pageName: text(req.body?.pageName, "Page name", 500),
         visitorId,
         source,
@@ -111,6 +112,9 @@ router.post("/", async (req, res, next) => {
         fetchSite: text(req.header("sec-fetch-site"), "Fetch site", 40),
       },
       select: { id: true, visitDate: true },
+    });
+    if (req.body?.clientPageInstanceId) await prisma.interaction.updateMany({
+      where: { visitorId, journeyId, pageInstanceId: req.body.clientPageInstanceId, pageVisitId: null }, data: { pageVisitId: visit.id, ...(source ? { source } : {}) },
     });
     res.status(201).json(visit);
   } catch (error) {

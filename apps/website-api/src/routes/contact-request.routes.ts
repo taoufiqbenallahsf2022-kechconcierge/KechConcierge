@@ -1,3 +1,4 @@
+import { recordInteractionOutcome } from "../services/interaction.service";
 import {
   Router,
   type Request,
@@ -435,6 +436,7 @@ router.post(
           },
         });
 
+      void recordInteractionOutcome(req, "request_submitted", contactRequest.id, "contact-request", individualId);
       if (visitorId) await recordVisitor({ visitorId, firstName, lastName, email: normalizedEmail, phone: mobilePhone, individualId, language: normalizeLanguage(body.language), userAgent: req.header("user-agent") }).catch(error => console.error("Visitor profile tracking failed", error));
       const emailResults =
         await Promise.allSettled([

@@ -1,3 +1,4 @@
+import { recordInteractionOutcome } from "../services/interaction.service";
 import { Router, type Request } from "express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { prisma } from "../config/prisma";
@@ -247,6 +248,7 @@ router.post("/", async (req, res, next) => {
     void notifyAdminsOfChatMessage({ chatId: chat.id, participantName, message }).catch((error) =>
       console.error("Unable to prepare admin chat notification", error),
     );
+    void recordInteractionOutcome(req, "chat_created", chat.id, "chat");
     res.status(201).json({ chat: publicChat(chat) });
   } catch (error) {
     next(error);
@@ -318,6 +320,7 @@ router.post("/:id/messages", async (req, res, next) => {
     void notifyAdminsOfChatMessage({ chatId: chat.id, participantName, message }).catch((error) =>
       console.error("Unable to prepare admin chat notification", error),
     );
+    void recordInteractionOutcome(req, "message_sent", created.id, "chat");
     res.status(201).json({ message: created });
   } catch (error) {
     next(error);
