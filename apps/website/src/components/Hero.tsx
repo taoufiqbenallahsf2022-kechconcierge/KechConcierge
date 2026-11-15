@@ -1,4 +1,5 @@
 "use client";
+import type { Locale } from "@/lib/i18n";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -6,21 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, MapPin, Sparkles } from "lucide-react";
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
-type HeroSlide = {
-  id: string;
-  mediaType: "IMAGE" | "VIDEO";
-  mediaUrl: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  buttonLabel: string;
-  buttonUrl: string;
-  altText: string;
-  durationMs?: number;
-  transitionMs?: number;
-  isActive?: boolean;
-  order?: number;
-};
+import type { HeroSlide, HeroConfiguration } from "@/types/hero";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
@@ -37,17 +24,18 @@ function fallbackSlides(t: ReturnType<typeof getDictionary>): HeroSlide[] {
   ];
 }
 
-export default function Hero() {
+export default function Hero({ initialConfiguration, initialLocale }: { initialConfiguration?: HeroConfiguration; initialLocale?: Locale }) {
   const pathname = usePathname();
-  const locale = getLocaleFromPath(pathname);
+  const locale = initialLocale || getLocaleFromPath(pathname);
   const t = getDictionary(locale);
-  const [slides, setSlides] = useState<HeroSlide[]>([]);
+  const [slides, setSlides] = useState<HeroSlide[]>(() => initialConfiguration ? (initialConfiguration.heroSlides.filter(slide => slide?.mediaUrl).slice(0, 5).length ? initialConfiguration.heroSlides.filter(slide => slide?.mediaUrl).slice(0, 5) : fallbackSlides(t)) : []);
   const [mediaReady, setMediaReady] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const slideMethod = useRef("initial");
-  const [settings, setSettings] = useState({ durationMs: 7000, transitionMs: 1000 });
+  const [settings, setSettings] = useState({ durationMs: Number(initialConfiguration?.settings?.durationMs) || 7000, transitionMs: Number(initialConfiguration?.settings?.transitionMs) || 1000 });
 
   useEffect(() => {
+    if (initialConfiguration) return;
     const controller = new AbortController();
     setSlides([]);
     setMediaReady(false);
@@ -66,7 +54,7 @@ export default function Hero() {
         }
       });
     return () => controller.abort();
-  }, [locale]);
+  }, [locale, initialConfiguration]);
 
   const activeSlide = slides[activeIndex] ?? slides[0];
 

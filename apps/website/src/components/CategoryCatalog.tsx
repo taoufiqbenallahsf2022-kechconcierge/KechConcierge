@@ -1,4 +1,5 @@
 "use client";
+import type { Locale } from "@/lib/i18n";
 
 import Link from "next/link";
 import {
@@ -6,7 +7,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import CategoryItemCard from "@/components/CategoryItemCard";
 
@@ -17,7 +18,7 @@ import {
 
 import {
   ProductType,
-  useCatalogStore,
+  CatalogApiResponse,
 } from "@/store/catalog.store";
 
 type CategorySlug =
@@ -33,6 +34,9 @@ type CategorySlug =
 type CategoryCatalogProps = {
   category: CategorySlug;
   productType: ProductType;
+  initialData?: CatalogApiResponse;
+  initialLocale?: Locale;
+  initialPage?: number;
 };
 
 const API_URL =
@@ -134,13 +138,13 @@ function HorizontalSectionSkeleton() {
 
 export default function CategoryCatalog({
   category,
-  productType,
+  productType, initialData, initialLocale, initialPage,
 }: CategoryCatalogProps) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const locale = getLocaleFromPath(pathname);
+  const locale = initialLocale || getLocaleFromPath(pathname);
   const dictionary = getDictionary(locale);
 
   const categoryContent = getCategoryText(
@@ -163,20 +167,19 @@ export default function CategoryCatalog({
     return value;
   }, [searchParams]);
 
-  const {
-    items,
-    page,
-    total,
-    totalPages,
-
-    loading,
-    hasLoaded,
-    error,
-
-    startLoading,
-    setError,
-    setCatalogData,
-  } = useCatalogStore();
+  const [catalogState, setCatalogState] = useState(() => ({
+    items: initialData?.items ?? [], page: initialData?.page ?? 1,
+    total: initialData?.total ?? 0, totalPages: initialData?.totalPages ?? 1,
+    loading: false, hasLoaded: Boolean(initialData), error: null as string | null,
+  }));
+  const { items, page, total, totalPages, loading, hasLoaded, error } = catalogState;
+  const startLoading = useCallback((_type: ProductType, _language: string) => {
+    setCatalogState({ items: [], page: 1, total: 0, totalPages: 1, loading: true, hasLoaded: false, error: null });
+  }, []);
+  const setError = useCallback((message: string) => setCatalogState(previous => ({ ...previous, items: [], loading: false, hasLoaded: true, error: message })), []);
+  const setCatalogData = useCallback((data: CatalogApiResponse, _type: ProductType, _language: string) => {
+    setCatalogState({ items: data.items, page: data.page, total: data.total, totalPages: data.totalPages, loading: false, hasLoaded: true, error: null });
+  }, []);
 
   const localizedCategoryPath =
     getLocalizedCategoryPath(
@@ -185,6 +188,10 @@ export default function CategoryCatalog({
     );
 
   useEffect(() => {
+    if (initialData && currentPage === initialPage) {
+      if (initialData.totalPages > 0 && currentPage > initialData.totalPages) router.replace(`${localizedCategoryPath}?page=${initialData.totalPages}`);
+      return;
+    }
     const controller = new AbortController();
 
     async function loadProducts() {
@@ -273,7 +280,7 @@ export default function CategoryCatalog({
       controller.abort();
     };
   }, [
-    currentPage,
+    currentPage, initialData, initialPage,
     locale,
     localizedCategoryPath,
     productType,

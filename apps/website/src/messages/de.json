@@ -133,7 +133,7 @@
   "contactSection": {
     "eyebrow": "Benötigen Sie einen individuellen Aufenthalt?",
     "title": "Teilen Sie uns Ihre Reisedaten, Gruppengröße und gewünschte Erfahrung mit.",
-    "description": "Diese erste Version ist nur frontendseitig. Später werden Nachrichten und Buchungen mit Ihrer API und Ihrem Verwaltungssystem verbunden.",
+    "description": "Teilen Sie unserem Concierge Ihre Wünsche mit. Wir helfen Ihnen, die passende Villa zu finden, private Transfers zu organisieren und Erlebnisse für Ihren Aufenthalt in Marrakesch auszuwählen.",
     "contactForm": "Kontaktformular",
     "openChat": "Chat öffnen"
   },
