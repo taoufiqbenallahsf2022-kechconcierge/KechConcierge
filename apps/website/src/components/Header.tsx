@@ -15,6 +15,8 @@ import { TripHeaderButton } from "./TripExperience";
 import { getCategoryTranslations } from "@/lib/category-translations";
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
+import { publicCategories, featuredThumbnail } from "@/lib/public-catalog";
+
 import { useAuthStore } from "@/store/auth.store";
 
 type HeaderUser = {
@@ -190,16 +192,40 @@ export default function Header() {
   ];
 
   const { labels: categoryNames } = getCategoryTranslations(t);
-  const mobileCategories = [
-    { href: "/villas", label: categoryNames.villas, image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=82&w=520" },
-    { href: "/beachclubs", label: "Beach Clubs", image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=82&w=520" },
-    { href: "/restaurants", label: categoryNames.restaurants, image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=82&w=520" },
-    { href: "/experiences", label: categoryNames.experiences, image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&q=82&w=520" },
-    { href: "/transportation", label: categoryNames.transportation, image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=82&w=520" },
-    { href: "/nightclubs", label: categoryNames.nightclubs, image: "/brand/nightclub-atmosphere.webp" },
-    { href: "/spa", label: categoryNames.spa, image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=82&w=520" },
-    { href: "/packs", label: categoryNames.packs, image: "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&q=82&w=520" },
-  ];
+  const [menuImages, setMenuImages] = useState<Record<string, string | null>>({});
+  const mobileCategories = publicCategories.map(item => ({
+    href: `/${item.category}`,
+    label: item.category === "beachclubs" ? "Beach Clubs" : categoryNames[item.category],
+    image: menuImages[item.category],
+  }));
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const controller = new AbortController();
+    const api = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+    async function loadMenuImages() {
+      let featured: Record<string, Array<{ thumbnail?: string | null }>> = {};
+      try {
+        const response = await fetch(`${api}/api/products/home?lang=${locale.toUpperCase()}`, { signal: controller.signal });
+        if (response.ok) featured = await response.json();
+      } catch { if (controller.signal.aborted) return; }
+      const initial = Object.fromEntries(publicCategories.map(item => [item.category, featuredThumbnail(featured[item.homeKey])]));
+      if (!controller.signal.aborted) setMenuImages(initial);
+      // Homepage-highlighted products take precedence. If none is configured,
+      // use a real category product rather than a stock photograph.
+      await Promise.all(publicCategories.filter(item => !initial[item.category]).map(async item => {
+        try {
+          const response = await fetch(`${api}/api/products/${item.type}?page=1&lang=${locale.toUpperCase()}`, { signal: controller.signal });
+          if (!response.ok) return;
+          const result = await response.json();
+          const image = featuredThumbnail(result.items);
+          if (!controller.signal.aborted) setMenuImages(previous => ({ ...previous, [item.category]: image }));
+        } catch { /* A failed image request must not block navigation. */ }
+      }));
+    }
+    void loadMenuImages();
+    return () => controller.abort();
+  }, [menuOpen, locale]);
   const mobileNavItems = navItems;
 
   const currentLocale = getCurrentLocale(pathname);
@@ -672,7 +698,7 @@ export default function Header() {
                 {mobileCategories.map((item) => {
                   const targetPath = buildLocalizedPath(item.href, currentLocale);
                   return <button data-track-target={`navigate.${item.href}`} data-track-view={`category.${item.href}`} key={item.href} type="button" onClick={() => navigateTo(targetPath)} disabled={Boolean(pendingPath)} className="w-40 shrink-0 snap-start overflow-hidden rounded-2xl border border-black/5 bg-white text-left shadow-sm transition active:scale-[.98]">
-                    <span className="relative block h-20 overflow-hidden bg-[#eee8e3]"><Image src={item.image} alt="" fill sizes="160px" className="object-cover transition duration-500 hover:scale-105" /></span>
+                    <span className="relative block h-20 overflow-hidden bg-[#eee8e3]">{item.image && <Image src={item.image} alt="" fill sizes="160px" className="object-cover transition duration-500 hover:scale-105" />}</span>
                     <span className="flex min-h-12 items-center justify-between gap-1.5 px-3 py-2.5 text-xs font-black text-zinc-950"><span>{item.label}</span><ChevronRight size={15} className="shrink-0 text-orange-600" /></span>
                   </button>;
                 })}

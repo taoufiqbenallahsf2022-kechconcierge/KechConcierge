@@ -1,4 +1,5 @@
 "use client";
+import { publicCategories } from "@/lib/public-catalog";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,7 +28,7 @@ type ServiceTranslationKey =
 const categories =
   Object.keys(
     categoryLabels
-  ).filter((category) => category !== "spa" && category !== "packs") as Category[];
+  ).filter(category => publicCategories.some(item => item.category === category)) as Category[];
 
 const CATEGORY_TRANSLATION_KEYS: Partial<Record<
   Category,

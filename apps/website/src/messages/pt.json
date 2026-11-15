@@ -133,7 +133,7 @@
   "contactSection": {
     "eyebrow": "Precisa de uma estadia personalizada?",
     "title": "Diga-nos as suas datas, o tamanho do grupo e a experiência desejada.",
-    "description": "Esta primeira versão é apenas frontend. Mais tarde, as mensagens e reservas serão ligadas à sua API e sistema de administração.",
+    "description": "Partilhe os seus planos com a nossa equipa. Ajudamos a encontrar a villa ideal, organizar os transfers privados e escolher experiências para a sua estadia em Marraquexe.",
     "contactForm": "Formulário de contacto",
     "openChat": "Abrir chat"
   },

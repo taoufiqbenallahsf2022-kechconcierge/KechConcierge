@@ -133,7 +133,7 @@
   "contactSection": {
     "eyebrow": "Need a custom stay?",
     "title": "Tell us your dates, group size, and preferred experience.",
-    "description": "This first version is frontend-only. Later, messages and bookings will be connected to your API and admin system.",
+    "description": "Share your plans with our concierge. We’ll help you find the right villa, arrange private transport and choose experiences for your stay in Marrakech.",
     "contactForm": "Contact form",
     "openChat": "Open chat"
   },

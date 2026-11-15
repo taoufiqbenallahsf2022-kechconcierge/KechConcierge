@@ -17,7 +17,7 @@ export type HomeProduct = {
   address: string;
 };
 
-type HomeProductsResponse = {
+export type HomeProductsResponse = {
   villa?: HomeProduct[];
   swimmingpool?: HomeProduct[];
   nightclub?: HomeProduct[];

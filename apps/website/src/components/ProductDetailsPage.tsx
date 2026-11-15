@@ -1,0 +1,858 @@
+"use client";
+import type { Locale } from "@/lib/i18n";
+
+import Link from "next/link";
+import { ChevronLeft, ChevronRight, Images } from "lucide-react";
+import { usePathname } from "next/navigation";
+import {
+  TouchEvent,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+
+import {
+  getDictionary,
+  getLocaleFromPath,
+} from "@/lib/i18n";
+
+import {
+  ProductDetails,
+  ProductDisplayDetail,
+  ProductType,
+
+} from "@/store/product-details.store";
+import ProductBookingPanel from "@/components/ProductBookingPanel";
+import ProductImageLightbox from "@/components/ProductImageLightbox";
+import ProductPlansModal from "@/components/ProductPlansModal";
+import ProgressiveImage from "@/components/ProgressiveImage";
+import AddToTripButton from "@/components/AddToTripButton";
+import { getProductOptionCopy } from "@/lib/product-option-copy";
+import { productCta, useProductCtaContent } from "@/store/product-cta.store";
+
+type CategorySlug =
+  | "villas"
+  | "transportation"
+  | "beachclubs"
+  | "nightclubs"
+  | "packs"
+  | "experiences"
+  | "restaurants"
+  | "spa";
+
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:3001";
+
+const galleryCopy = {
+  en: "View gallery", fr: "Voir la galerie", de: "Galerie ansehen",
+  it: "Vedi galleria", pt: "Ver galeria", es: "Ver galería",
+} as const;
+
+
+function getProductType(
+  category: string
+): ProductType | null {
+  switch (category.toLowerCase()) {
+    case "villa":
+    case "villas":
+      return "VILLA";
+
+    case "transportation":
+    case "transportations":
+      return "TRANSPORTATION";
+
+    case "swimmingpool":
+    case "swimmingpools":
+    case "beachclub":
+    case "beachclubs":
+      return "SWIMMINGPOOL";
+
+    case "nightclub":
+    case "nightclubs":
+      return "NIGHTCLUB";
+
+    case "pack":
+    case "packs":
+      return "PACK";
+
+    case "activity":
+    case "activities":
+    case "experience":
+    case "experiences":
+      return "ACTIVITY";
+
+    case "restaurant":
+    case "restaurants":
+      return "RESTAURANT";
+
+    case "spa":
+      return "SPA";
+
+    default:
+      return null;
+  }
+}
+
+function getCanonicalCategory(
+  productType: ProductType
+): CategorySlug {
+  switch (productType) {
+    case "VILLA":
+      return "villas";
+
+    case "TRANSPORTATION":
+      return "transportation";
+
+    case "SWIMMINGPOOL":
+      return "beachclubs";
+
+    case "NIGHTCLUB":
+      return "nightclubs";
+
+    case "PACK":
+      return "packs";
+
+    case "ACTIVITY":
+      return "experiences";
+
+    case "RESTAURANT":
+      return "restaurants";
+
+    case "SPA":
+      return "spa";
+  }
+}
+
+function getLocalizedPath(
+  locale: string,
+  path: string
+) {
+  return locale === "en"
+    ? path
+    : `/${locale}${path}`;
+}
+
+function getCategoryLabel(
+  dictionary: ReturnType<typeof getDictionary>,
+  category: CategorySlug
+) {
+  switch (category) {
+    case "villas":
+      return dictionary.categories.villasLabel;
+
+    case "transportation":
+      return dictionary.categories.transportationLabel;
+
+    case "beachclubs":
+      return dictionary.categories.swimmingPoolsLabel;
+
+    case "nightclubs":
+      return "Night Clubs";
+
+    case "packs":
+      return "Packs";
+
+    case "experiences":
+      return dictionary.categories.activitiesLabel;
+
+    case "restaurants":
+      return dictionary.categories.restaurantsLabel;
+
+    case "spa":
+      return dictionary.categories.spaLabel;
+  }
+}
+
+function isDisplayDetail(
+  detail: unknown
+): detail is ProductDisplayDetail {
+  if (
+    typeof detail !== "object" ||
+    detail === null
+  ) {
+    return false;
+  }
+
+  const candidate = detail as {
+    label?: unknown;
+    value?: unknown;
+  };
+
+  return (
+    typeof candidate.label === "string" &&
+    candidate.label.trim().length > 0 &&
+    typeof candidate.value === "string" &&
+    candidate.value.trim().length > 0
+  );
+}
+
+function extractImages(
+  product: ProductDetails
+): { url: string; alt: string }[] {
+  const images: { url: string; alt: string }[] = [];
+
+  for (let index = 1; index <= 50; index += 1) {
+    const imageKey =
+      `image${index}` as keyof ProductDetails;
+
+    const image = product[imageKey];
+
+    if (
+      typeof image === "string" &&
+      image.trim().length > 0
+    ) {
+      images.push({
+        url: image,
+        alt: product.imageAlts?.[`image${index}`] || product.title,
+      });
+    }
+  }
+
+  if (
+    images.length === 0 &&
+    product.thumbnail
+  ) {
+    images.push({ url: product.thumbnail, alt: product.thumbnailAlt || product.title });
+  }
+
+  return images;
+}
+
+function WhatsAppIcon({
+  size = 22,
+}: {
+  size?: number;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M16.04 3C8.86 3 3.02 8.8 3.02 15.94c0 2.5.72 4.94 2.08 7.02L3 29l6.24-2.05a13.06 13.06 0 0 0 6.79 1.9h.01c7.17 0 13.01-5.81 13.01-12.95C29.05 8.8 23.21 3 16.04 3Zm0 23.66h-.01a10.83 10.83 0 0 1-5.52-1.51l-.4-.24-3.7 1.22 1.24-3.59-.26-.41a10.68 10.68 0 0 1-1.66-5.73c0-5.9 4.83-10.7 10.77-10.7 5.94 0 10.77 4.8 10.77 10.7 0 5.9-4.83 10.7-10.77 10.7Zm5.91-8.03c-.32-.16-1.91-.94-2.21-1.05-.3-.11-.52-.16-.74.16-.22.32-.85 1.05-1.04 1.27-.19.21-.38.24-.7.08-.32-.16-1.37-.5-2.61-1.59-.97-.86-1.62-1.92-1.81-2.24-.19-.32-.02-.5.14-.65.15-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.74-1.78-1.01-2.44-.27-.64-.54-.55-.74-.56h-.63c-.22 0-.57.08-.87.4-.3.32-1.14 1.11-1.14 2.71 0 1.59 1.17 3.13 1.33 3.34.16.21 2.3 3.5 5.57 4.91.78.34 1.39.54 1.87.69.79.25 1.5.21 2.07.13.63-.09 1.91-.78 2.18-1.53.27-.75.27-1.4.19-1.53-.08-.13-.3-.21-.62-.37Z" />
+    </svg>
+  );
+}
+
+function ProductDetailsSkeleton() {
+  
+  return (
+    <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
+      <div className="h-5 w-40 animate-pulse rounded-full bg-zinc-200" />
+
+      <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+        <div className="min-w-0">
+          <div className="h-[520px] w-full animate-pulse rounded-[2rem] bg-zinc-200" />
+
+          <div className="mt-4 flex w-full gap-3 overflow-hidden">
+            {Array.from({ length: 4 }).map(
+              (_, index) => (
+                <div
+                  key={index}
+                  className="h-24 w-32 shrink-0 animate-pulse rounded-2xl bg-zinc-200"
+                />
+              )
+            )}
+          </div>
+        </div>
+
+        <div className="min-w-0">
+          <div className="h-4 w-32 animate-pulse rounded-full bg-zinc-200" />
+          <div className="mt-4 h-12 w-3/4 animate-pulse rounded-full bg-zinc-200" />
+          <div className="mt-4 h-5 w-40 animate-pulse rounded-full bg-zinc-200" />
+          <div className="mt-5 h-8 w-32 animate-pulse rounded-full bg-zinc-200" />
+
+          <div className="mt-8 space-y-3">
+            <div className="h-4 w-full animate-pulse rounded-full bg-zinc-200" />
+            <div className="h-4 w-full animate-pulse rounded-full bg-zinc-200" />
+            <div className="h-4 w-4/5 animate-pulse rounded-full bg-zinc-200" />
+          </div>
+
+          <div className="mt-8 flex gap-3">
+            {Array.from({ length: 3 }).map(
+              (_, index) => (
+                <div
+                  key={index}
+                  className="h-9 w-28 animate-pulse rounded-full bg-zinc-200"
+                />
+              )
+            )}
+          </div>
+
+          <div className="mt-8 h-52 animate-pulse rounded-3xl bg-zinc-200" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function ProductDetailsPage({ categoryParameter, uniqueCode, initialLocale, initialProduct }: {
+  categoryParameter: string; uniqueCode: string; initialLocale: Locale; initialProduct?: ProductDetails;
+}) {
+  const pathname = usePathname();
+  const locale = initialLocale;
+  const t = getDictionary(locale);
+
+  const productType =
+    getProductType(categoryParameter);
+
+  const [productState, setProductState] = useState(() => ({ product: initialProduct ?? null, loading: false, hasLoaded: Boolean(initialProduct), error: null as string | null }));
+  const { product, loading, hasLoaded, error } = productState;
+  const startLoading = useCallback((_code: string, _language: string) => setProductState({ product: null, loading: true, hasLoaded: false, error: null }), []);
+  const setProduct = useCallback((product: ProductDetails, _language: string) => setProductState({ product, loading: false, hasLoaded: true, error: null }), []);
+  const setError = useCallback((error: string) => setProductState({ product: null, loading: false, hasLoaded: true, error }), []);
+
+  const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
+  "212613859834";
+
+  const [selectedImage, setSelectedImage] =
+    useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const ctaContent = useProductCtaContent();
+  const [showStickyBooking, setShowStickyBooking] = useState(false);
+  const [plansOpen, setPlansOpen] = useState(false);
+  const [plansAttentionDismissed, setPlansAttentionDismissed] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [bookingPlanId, setBookingPlanId] = useState<string | null>(null);
+  const bookingAnchorRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      root.style.scrollBehavior = previousScrollBehavior;
+    });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      root.style.scrollBehavior = previousScrollBehavior;
+    };
+  }, [categoryParameter, uniqueCode]);
+
+  const touchStartX = useRef<number | null>(
+    null
+  );
+
+  const touchEndX = useRef<number | null>(
+    null
+  );
+
+  useEffect(() => {
+    if (initialProduct || !productType || !uniqueCode) {
+      return;
+    }
+
+    const controller = new AbortController();
+
+    async function loadProduct() {
+      startLoading(
+        uniqueCode,
+        locale.toUpperCase()
+      );
+
+      setSelectedImage(0);
+
+      try {
+        const url = new URL(
+          `/api/products/details/${uniqueCode}`,
+          API_URL
+        );
+
+        url.searchParams.set(
+          "lang",
+          locale.toUpperCase()
+        );
+        url.searchParams.set("type", productType!);
+
+        const response = await fetch(
+          url.toString(),
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+            },
+            signal: controller.signal,
+          }
+        );
+
+        const data =
+          (await response.json()) as
+            | ProductDetails
+            | {
+                code?: string;
+                message?: string;
+              };
+
+        if (!response.ok) {
+          const errorData = data as {
+            code?: string;
+            message?: string;
+          };
+
+          throw new Error(
+            errorData.message ||
+              errorData.code ||
+              "Unable to load product details."
+          );
+        }
+
+        const loadedProduct =
+          data as ProductDetails;
+
+        if (
+          loadedProduct.type !== productType
+        ) {
+          throw new Error(
+            "The product does not match this category."
+          );
+        }
+
+        setProduct(
+          loadedProduct,
+          locale.toUpperCase()
+        );
+      } catch (requestError) {
+        if (
+          requestError instanceof DOMException &&
+          requestError.name === "AbortError"
+        ) {
+          return;
+        }
+
+        console.error(
+          "Unable to load product details:",
+          requestError
+        );
+
+        setError(
+          requestError instanceof Error
+            ? requestError.message
+            : "Unable to load product details."
+        );
+      }
+    }
+
+    loadProduct();
+
+    return () => {
+      controller.abort();
+    };
+  }, [
+    locale, initialProduct,
+    productType,
+    setError,
+    setProduct,
+    startLoading,
+    uniqueCode,
+  ]);
+
+  useEffect(() => {
+    const anchor = bookingAnchorRef.current;
+    if (!anchor) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyBooking(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(anchor);
+    return () => observer.disconnect();
+  }, [product?.id]);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("moorish-product-booking-bar", { detail: { visible: showStickyBooking } }));
+    return () => {
+      window.dispatchEvent(new CustomEvent("moorish-product-booking-bar", { detail: { visible: false } }));
+    };
+  }, [showStickyBooking]);
+
+  const images = useMemo(() => {
+    if (!product) {
+      return [];
+    }
+
+    return extractImages(product);
+  }, [product]);
+
+  const visibleDetails = useMemo(() => {
+    if (
+      !product ||
+      !Array.isArray(product.details)
+    ) {
+      return [];
+    }
+
+    return product.details.filter(
+      isDisplayDetail
+    );
+  }, [product]);
+
+  function showPreviousImage() {
+    if (images.length <= 1) {
+      return;
+    }
+
+    setSelectedImage((current) =>
+      current === 0
+        ? images.length - 1
+        : current - 1
+    );
+  }
+
+  function showNextImage() {
+    if (images.length <= 1) {
+      return;
+    }
+
+    setSelectedImage((current) =>
+      current === images.length - 1
+        ? 0
+        : current + 1
+    );
+  }
+
+  function handleTouchStart(
+    event: TouchEvent<HTMLDivElement>
+  ) {
+    touchStartX.current =
+      event.targetTouches[0].clientX;
+
+    touchEndX.current = null;
+  }
+
+  function handleTouchMove(
+    event: TouchEvent<HTMLDivElement>
+  ) {
+    touchEndX.current =
+      event.targetTouches[0].clientX;
+  }
+
+  function handleTouchEnd() {
+    if (
+      touchStartX.current === null ||
+      touchEndX.current === null
+    ) {
+      return;
+    }
+
+    const distance =
+      touchStartX.current -
+      touchEndX.current;
+
+    const minimumSwipeDistance = 50;
+
+    if (distance > minimumSwipeDistance) {
+      showNextImage();
+    }
+
+    if (distance < -minimumSwipeDistance) {
+      showPreviousImage();
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  }
+
+  if (!productType) {
+    return (
+      <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
+        <div className="rounded-3xl bg-red-50 p-8 text-center font-bold text-red-700">
+          {t.productDetails.invalidCategory}
+        </div>
+      </section>
+    );
+  }
+
+  if (!hasLoaded || loading) {
+    return <ProductDetailsSkeleton />;
+  }
+
+  if (error || !product) {
+    return (
+      <section className="mx-auto max-w-[1380px] px-5 py-20 xl:px-8">
+        <div className="rounded-3xl bg-red-50 p-8 text-center text-red-700">
+          <p className="text-xl font-black">
+            Unable to load this product.
+          </p>
+
+          {error && (
+            <p className="mt-3 text-sm font-semibold">
+              {error}
+            </p>
+          )}
+        </div>
+      </section>
+    );
+  }
+
+  const canonicalCategory =
+    getCanonicalCategory(product.type);
+
+  const categoryLabel = getCategoryLabel(
+    t,
+    canonicalCategory
+  );
+  const productOptionCopy = getProductOptionCopy(locale, product.type, productCta(ctaContent, product.type, locale));
+
+  const categoryPath = getLocalizedPath(
+    locale,
+    `/${canonicalCategory}`
+  );
+
+  const contactPath = getLocalizedPath(
+    locale,
+    "/contact"
+  );
+
+  const chatPath = getLocalizedPath(
+    locale,
+    "/chat"
+  );
+
+  const activeImage =
+    images[selectedImage] ||
+    { url: product.thumbnail, alt: product.thumbnailAlt || product.title };
+
+  const FRONTEND_URL =
+  process.env.NEXT_PUBLIC_API_URL;
+
+  const productUrl =
+  `${FRONTEND_URL}${pathname}`;
+  
+  const whatsappMessage = encodeURIComponent(
+    `Hello,
+
+    I am interested in ${product.title}.
+
+    ${productUrl}`
+    );
+
+  const whatsappUrl =
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+  return (
+    <section data-track-component="product" data-product-id={product.id} data-product-type={product.type} className="mx-auto max-w-[1380px] overflow-x-clip px-5 pb-32 pt-20 xl:px-8">
+      <Link
+        href={categoryPath}
+        className="font-black text-orange-700 transition hover:text-orange-800"
+      >
+        ← {t.productDetails.backTo} {categoryLabel}
+      </Link>
+
+      <div className="mt-8 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+        <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
+          <div
+            className="group relative h-[520px] w-full max-w-full touch-pan-y cursor-pointer overflow-hidden rounded-[2rem] card-shadow"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            data-track-target="open-gallery" data-track-view="main-image" data-image-index={selectedImage} data-track-state={String(selectedImage)} data-track-state-name="image" onClick={() => setLightboxOpen(true)}
+          >
+            <ProgressiveImage
+              key={`${selectedImage}-${activeImage.url}`}
+              src={activeImage.url}
+              alt={activeImage.alt}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+            />
+
+            {images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={(event) => { event.stopPropagation(); showPreviousImage(); }}
+                  aria-label="{t.productDetails.previousImage}"
+                  className="nightclub-carousel-arrow absolute left-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-lg backdrop-blur transition hover:bg-white"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={(event) => { event.stopPropagation(); showNextImage(); }}
+                  aria-label="{t.productDetails.nextImage}"
+                  className="nightclub-carousel-arrow absolute right-4 top-1/2 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-zinc-950 shadow-lg backdrop-blur transition hover:bg-white"
+                >
+                  <ChevronRight size={24} />
+                </button>
+
+              </>
+            )}
+
+            <div className="pointer-events-none absolute bottom-4 right-4 flex items-center gap-2 rounded-full border border-white/30 bg-zinc-950/75 px-4 py-2.5 text-sm font-black text-white shadow-lg backdrop-blur-md transition group-hover:bg-zinc-950/90">
+              <Images size={18} />
+              <span>{galleryCopy[locale]}</span>
+              {images.length > 1 && <span className="text-white/70">· {selectedImage + 1}/{images.length}</span>}
+            </div>
+          </div>
+
+          {images.length > 1 && (
+            <div className="no-scrollbar mt-4 flex w-full max-w-full gap-3 overflow-x-auto overscroll-x-contain pb-2">
+              {images.map(
+                (image, index) => (
+                  <button
+                    key={`${index}-${image.url}`}
+                    type="button"
+                    onClick={() =>
+                      setSelectedImage(index)
+                    }
+                    aria-label={`Display image ${
+                      index + 1
+                    }`}
+                    className={`relative h-24 w-32 min-w-32 shrink-0 overflow-hidden rounded-2xl border-4 transition ${
+                      selectedImage === index
+                        ? "border-orange-600"
+                        : "border-transparent hover:border-orange-200"
+                    }`}
+                  >
+                    <ProgressiveImage
+                      src={image.url}
+                      alt={image.alt}
+                      fill
+                      sizes="128px"
+                      className="object-cover"
+                    />
+                  </button>
+                )
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="min-w-0">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-orange-700">
+            {categoryLabel}
+          </p>
+
+          <h1 className="mt-3 break-words text-5xl font-black text-zinc-950">
+            {product.title}
+          </h1>
+
+          <p className="mt-3 break-words text-lg font-bold text-zinc-500">
+            {product.address}
+          </p>
+
+          {product.priceEuro != null && <div data-track-view="product-price" className="mt-5"><p className="text-sm font-bold text-zinc-500">{product.priceTitle || t.hero.startingFrom}</p><div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1"><p className="text-3xl font-black text-orange-700">{product.priceEuro} {product.currency ?? "EUR"}</p>{product.type === "VILLA" && product.priceWithDriverEuro != null && <p data-track-view="driver-inclusive-price" className="flex flex-wrap items-baseline gap-x-3 text-zinc-700"><span aria-hidden="true" className="text-2xl font-light text-zinc-400">|</span><span className="text-2xl font-black text-orange-700 sm:text-3xl">{product.priceWithDriverEuro} {product.currency ?? "EUR"}</span><span className="text-base font-semibold">{product.priceWithDriverLabel || ({ en: "with driver", fr: "avec chauffeur", de: "mit Fahrer", it: "con autista", pt: "com motorista", es: "con conductor" })[locale]}</span></p>}</div></div>}
+
+          {!!product.plans?.length && product.type === "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-x-3 sm:grid-cols-2"><ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} className="mt-5" /><button type="button" data-track-target="open-plans" data-track-view="plans-cta" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-3 rounded-full border-2 px-7 py-4 text-lg font-black transition sm:col-span-2`}>{productOptionCopy.trigger}</button></div>}
+
+          {!!product.plans?.length && product.type !== "TRANSPORTATION" && <div ref={bookingAnchorRef} className="mt-8 grid gap-3 sm:grid-cols-2"><ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} plans={product.plans} sticky={false} /><button type="button" data-track-target="open-plans" data-track-view="plans-cta" onClick={() => { setPlansAttentionDismissed(true); setPlansOpen(true); }} className={`available-plans-button ${plansAttentionDismissed ? "" : "plan-quick-attention"} mt-5 rounded-full border-2 px-7 py-4 text-lg font-black transition`}>{productOptionCopy.trigger}</button></div>}
+
+          {!product.plans?.length && <div ref={bookingAnchorRef}><ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} sticky={false} /></div>}
+
+          {(product.type !== "TRANSPORTATION" || !product.plans?.length) && <AddToTripButton locale={locale} productId={product.id} productType={product.type} productName={product.title} category={categoryLabel} image={product.thumbnail} plans={product.plans} />}
+
+          {product.subtitle && (
+            <p className="mt-5 break-words text-lg font-bold leading-8 text-zinc-600">
+              {product.subtitle}
+            </p>
+          )}
+
+          <div className="mt-6 break-words text-lg leading-8 text-zinc-700">
+            {product.description.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => (
+              <p key={index} data-track-view={`description.${index}`} data-track-hover="description" className={`${index ? "mt-5" : ""} whitespace-pre-line`}>
+                {paragraph.trim()}
+              </p>
+            ))}
+          </div>
+
+          {product.tags.length > 0 && (
+            <div className="mt-8">
+              <p className="text-xl font-black text-zinc-950">
+                {t.productDetails.highlights}
+              </p>
+
+              <div className="mt-4 flex flex-wrap gap-3">
+                {product.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="max-w-full break-words rounded-full bg-orange-50 px-4 py-2 text-sm font-bold text-orange-800"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {visibleDetails.length > 0 && (
+            <div className="mt-8 rounded-3xl bg-white p-6 card-shadow">
+              <p className="text-xl font-black text-zinc-950">
+                {t.productDetails.details}
+              </p>
+
+              <div className="mt-5 grid gap-5 sm:grid-cols-2">
+                {visibleDetails.map(
+                  (detail, index) => (
+                    <div
+                      key={`${detail.label}-${index}`} data-track-view={`detail.${index}`} data-track-hover="detail"
+                      className="min-w-0"
+                    >
+                      <p className="break-words text-sm font-bold text-zinc-500">
+                        {detail.label}
+                      </p>
+
+                      <p className="mt-1 break-words font-black text-zinc-950">
+                        {detail.value}
+                      </p>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="mt-8 grid grid-cols-1 gap-3 lg:grid-cols-2">
+            <Link
+              href={contactPath}
+              className="flex min-h-16 w-full items-center justify-center rounded-full bg-orange-600 px-6 py-4 text-center font-black leading-snug text-white transition hover:bg-orange-700"
+            >
+              {t.productDetails.contactUs}
+            </Link>
+
+            <Link
+              href={chatPath}
+              className="flex min-h-16 w-full items-center justify-center rounded-full bg-zinc-950 px-6 py-4 text-center font-black leading-snug text-white transition hover:bg-orange-700"
+            >
+              {t.productDetails.openChat}
+            </Link>
+
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-16 w-full items-center justify-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-center font-black leading-snug text-white shadow-sm transition hover:bg-[#1ebe5d] hover:shadow-md lg:col-span-2"
+            >
+              <WhatsAppIcon size={18} />
+
+              {t.productDetails.whatsapp}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {showStickyBooking && !product.plans?.length && (
+        <div className="fixed inset-x-0 bottom-0 z-40 animate-[booking-rise_.35s_ease-out] bg-white/95 backdrop-blur-xl">
+          <ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} sticky />
+        </div>
+      )}
+
+      {!!product.plans?.length && <ProductPlansModal productId={product.id} open={plansOpen} locale={locale} productType={product.type} plans={product.plans} onClose={() => setPlansOpen(false)} onBook={(planId) => { setPlansOpen(false); setBookingPlanId(planId); setBookingOpen(true); }} />}
+
+      {!!product.plans?.length && <ProductBookingPanel productId={product.id} locale={locale} productType={product.type} productName={product.title} plans={product.plans} selectedPlanId={bookingPlanId} open={bookingOpen} onOpenChange={setBookingOpen} hideTrigger sticky={false} />}
+
+      {lightboxOpen && (
+        <ProductImageLightbox productId={product.id} images={images} selected={selectedImage} onSelect={setSelectedImage} onClose={() => setLightboxOpen(false)} />
+      )}
+    </section>
+  );
+}

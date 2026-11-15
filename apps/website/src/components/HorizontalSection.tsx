@@ -1,4 +1,5 @@
 "use client";
+import type { Locale } from "@/lib/i18n";
 
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -6,7 +7,7 @@ import { useCallback, useEffect, useRef, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import ItemCard from "./ItemCard";
 import { Category } from "@/types/catalog";
-import { useHomeProductsStore } from "@/store/home-products.store";
+import { useHomeProductsStore, type HomeProductsResponse } from "@/store/home-products.store";
 import { getCategoryTranslations } from "@/lib/category-translations";
 import { getDictionary, getLocaleFromPath } from "@/lib/i18n";
 
@@ -42,14 +43,14 @@ function HorizontalSectionSkeleton() {
   );
 }
 
-export default function HorizontalSection({ category }: { category: Category }) {
+export default function HorizontalSection({ category, initialProducts, initialLocale }: { category: Category; initialProducts?: HomeProductsResponse; initialLocale?: Locale }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const pathname = usePathname();
 
   const lang = useMemo(() => {
-    const firstSegment = pathname.split("/")[1];
+    const firstSegment = initialLocale || pathname.split("/")[1];
     const langMap: Record<string,string> = {
       en: 'EN',
       fr: 'FR',
@@ -60,22 +61,26 @@ export default function HorizontalSection({ category }: { category: Category }) 
     } 
 
     return langMap[firstSegment] || 'EN'
-  }, [pathname])
+  }, [pathname, initialLocale])
 
-  const locale = getLocaleFromPath(pathname);
+  const locale = initialLocale || getLocaleFromPath(pathname);
   const t = getDictionary(locale);
   const { labels, descriptions } = getCategoryTranslations(t);
 
-  const products = useHomeProductsStore((state) => state.products);
-  const loading = useHomeProductsStore((state) => state.loading);
-  const error = useHomeProductsStore((state) => state.error);
+  const storedProducts = useHomeProductsStore((state) => state.products);
+  const storedLanguage = useHomeProductsStore((state) => state.currentLanguage);
+  const products = initialProducts ?? (storedLanguage === lang ? storedProducts : null);
+  const storedLoading = useHomeProductsStore((state) => state.loading);
+  const loading = !initialProducts && storedLoading;
+  const storedError = useHomeProductsStore((state) => state.error);
+  const error = initialProducts ? null : storedError;
   const fetchHomeProducts = useHomeProductsStore(
     (state) => state.fetchHomeProducts
   );
 
   useEffect(() => {
-    fetchHomeProducts(lang);
-  }, [fetchHomeProducts]);
+    if (!initialProducts) void fetchHomeProducts(lang);
+  }, [fetchHomeProducts, lang, initialProducts]);
 
   const apiKey = categoryToApiKey[category];
   const items = apiKey && products ? products[apiKey as keyof typeof products] || [] : [];
