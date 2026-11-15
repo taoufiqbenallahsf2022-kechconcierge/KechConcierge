@@ -133,7 +133,7 @@
   "contactSection": {
     "eyebrow": "Hai bisogno di un soggiorno personalizzato?",
     "title": "Indicaci le tue date, la dimensione del gruppo e l’esperienza desiderata.",
-    "description": "Questa prima versione è solo frontend. In seguito, messaggi e prenotazioni saranno collegati alla tua API e al sistema di amministrazione.",
+    "description": "Raccontaci i tuoi progetti. Il nostro concierge ti aiuterà a trovare la villa ideale, organizzare i trasferimenti privati e scegliere le esperienze per il tuo soggiorno a Marrakech.",
     "contactForm": "Modulo di contatto",
     "openChat": "Apri chat"
   },

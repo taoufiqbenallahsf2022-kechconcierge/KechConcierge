@@ -1,3 +1,7 @@
+import { isPublicProductType } from "./public-catalog";
+import { apiBaseUrl, getProductContent } from "./public-content.server";
+import { getCategoryType } from "./catalog-api";
+export { apiBaseUrl };
 export const productTypeByCategory = {
   villas: "VILLA", transportation: "TRANSPORTATION", beachclubs: "SWIMMINGPOOL", nightclubs: "NIGHTCLUB",
   packs: "PACK", experiences: "ACTIVITY", restaurants: "RESTAURANT", spa: "SPA",
@@ -12,18 +16,11 @@ export type SeoProduct = {
   address?: string | null; thumbnail?: string | null; thumbnailAlt?: string | null; priceEuro?: number | null; currency?: string | null;
 };
 
-export function apiBaseUrl() {
-  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
-}
-
 export async function getSeoProduct(category: string, slug: string, locale: string) {
-  const type = productTypeByCategory[category as keyof typeof productTypeByCategory];
-  if (!type) return null;
-  try {
-    const response = await fetch(`${apiBaseUrl()}/api/products/details/${encodeURIComponent(slug)}?lang=${locale}&type=${type}`, { next: { revalidate: 300 } });
-    if (!response.ok) return null;
-    return (await response.json()) as SeoProduct;
-  } catch { return null; }
+  const type = getCategoryType(category);
+  if (!type || !isPublicProductType(type)) return null;
+  const result = await getProductContent(type, slug, locale);
+  return result.status === "ok" ? result.data : null;
 }
 
 export function seoDescription(product: SeoProduct) {

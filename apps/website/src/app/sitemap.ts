@@ -1,7 +1,8 @@
+import { isPublicProductType } from "@/lib/public-catalog";
 import type { MetadataRoute } from "next";
 import { apiBaseUrl, categoryByProductType } from "@/lib/product-seo";
 
-const routes = ["", "/about", "/services", "/contact", "/villas", "/transportation", "/beachclubs", "/nightclubs", "/experiences", "/packs", "/restaurants", "/spa", "/terms"];
+const routes = ["", "/about", "/services", "/contact", "/villas", "/transportation", "/beachclubs", "/nightclubs", "/experiences", "/restaurants", "/terms"];
 const languages = ["en", "fr", "de", "it", "pt", "es"] as const;
 type SeoIndexProduct = { type: string; uniqueCode: string; updatedAt: string };
 
@@ -31,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const products = (await response.json()) as SeoIndexProduct[];
     const productPages: MetadataRoute.Sitemap = products.flatMap((product) => {
       const category = categoryByProductType[product.type];
-      if (!category) return [];
+      if (!category || !isPublicProductType(product.type)) return [];
       return languages.map((language) => ({
         url: new URL(localizedPath(language, `/${category}/${product.uniqueCode}`), siteUrl).toString(),
         alternates: { languages: languageAlternates(siteUrl, `/${category}/${product.uniqueCode}`) },

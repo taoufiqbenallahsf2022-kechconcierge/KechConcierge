@@ -1,6 +1,7 @@
 "use client";
 
 import ProgressiveImage from "./ProgressiveImage";
+import Link from "next/link";
 
 import {
   ArrowRight,
@@ -91,17 +92,13 @@ export default function CategoryItemCard({
       item
     );
 
-  function openProduct() {
+  function openProduct(event: { preventDefault: () => void }) {
     if (loading) {
+      event.preventDefault();
       return;
     }
 
     setLoading(true);
-
-    router.push(
-      productPath,
-      { scroll: true }
-    );
   }
 
   function prefetchProduct() {
@@ -120,16 +117,19 @@ export default function CategoryItemCard({
           : "hover:-translate-y-1 hover:shadow-lg"
       }`}
     >
-      <button
-        type="button" data-track-component="catalog-product-card" data-track-view={`product-card.${item.id}`} data-track-target="open-product" data-product-id={item.id}
-        onClick={openProduct}
+      <Link
+        href={productPath}
+        prefetch={false}
+        scroll={true}
+        data-track-component="catalog-product-card" data-track-view={`product-card.${item.id}`} data-track-target="open-product" data-product-id={item.id}
+        onNavigate={openProduct}
         onMouseEnter={
           prefetchProduct
         }
         onFocus={prefetchProduct}
-        disabled={loading}
+        aria-disabled={loading}
         aria-busy={loading}
-        className="flex h-full w-full flex-col text-left disabled:cursor-wait"
+        className="flex h-full w-full flex-col text-left aria-disabled:cursor-wait"
       >
         <div className="relative h-64 w-full shrink-0 overflow-hidden">
           <ProgressiveImage
@@ -227,7 +227,7 @@ export default function CategoryItemCard({
             )}
           </div>
         </div>
-      </button>
+      </Link>
     </article>
   );
 }

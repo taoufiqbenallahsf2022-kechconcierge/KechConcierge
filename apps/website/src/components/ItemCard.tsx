@@ -1,6 +1,7 @@
 "use client";
 
 import ProgressiveImage from "./ProgressiveImage";
+import Link from "next/link";
 import { MapPin, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -91,14 +92,13 @@ export default function ItemCard({
       `/${category}/${slug}`
     );
 
-  function openProduct() {
+  function openProduct(event: { preventDefault: () => void }) {
     if (loading) {
+      event.preventDefault();
       return;
     }
 
     setLoading(true);
-
-    router.push(productPath, { scroll: true });
   }
 
   function prefetchProduct() {
@@ -110,16 +110,19 @@ export default function ItemCard({
   }
 
   return (
-    <button
-      type="button" data-track-component="home-product-card" data-track-view={`product-card.${item.id}`} data-track-target="open-product" data-product-id={item.id} data-product-type={item.type || item.category}
-      onClick={openProduct}
+    <Link
+      href={productPath}
+      prefetch={false}
+      scroll={true}
+      data-track-component="home-product-card" data-track-view={`product-card.${item.id}`} data-track-target="open-product" data-product-id={item.id} data-product-type={item.type || item.category}
+      onNavigate={openProduct}
       onMouseEnter={
         prefetchProduct
       }
       onFocus={prefetchProduct}
-      disabled={loading}
+      aria-disabled={loading}
       aria-busy={loading}
-      className="group relative block min-w-[300px] max-w-[300px] overflow-hidden rounded-3xl bg-white text-left card-shadow transition disabled:cursor-wait"
+      className="group relative block min-w-[300px] max-w-[300px] overflow-hidden rounded-3xl bg-white text-left card-shadow transition aria-disabled:cursor-wait"
     >
       <div className="relative h-56 overflow-hidden">
         <ProgressiveImage
@@ -201,6 +204,6 @@ export default function ItemCard({
           </p>
         )}
       </div>
-    </button>
+    </Link>
   );
 }

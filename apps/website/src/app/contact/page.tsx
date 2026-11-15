@@ -314,7 +314,7 @@ export default function ContactPage() {
           </p>
 
           <p className="text-zinc-300">
-            {t.contactPage.emailLabel}: contact@kechconcierge.local
+            {t.contactPage.emailLabel}: contact@moorishconcierge.com
           </p>
         </div>
       </div>

@@ -133,7 +133,7 @@
   "contactSection": {
     "eyebrow": "¿Necesitas una estancia personalizada?",
     "title": "Cuéntanos tus fechas, el tamaño de tu grupo y la experiencia que buscas.",
-    "description": "Esta primera versión es solo frontend. Más adelante, los mensajes y reservas estarán conectados a tu API y sistema de administración.",
+    "description": "Cuéntanos tus planes. Nuestro equipo te ayudará a encontrar la villa ideal, organizar tus traslados privados y elegir experiencias para tu estancia en Marrakech.",
     "contactForm": "Formulario de contacto",
     "openChat": "Abrir chat"
   },
