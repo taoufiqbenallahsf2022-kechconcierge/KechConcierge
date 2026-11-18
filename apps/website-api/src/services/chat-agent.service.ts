@@ -3,7 +3,7 @@ import { Resend } from "resend";
 import { prisma } from "../config/prisma";
 import { getProductDetails, searchAgentProducts } from "./product.service";
 import { notifyAdminsOfChatMessage } from "./admin-push.service";
-import { AGENT_SENDER_ID, ASMAA_EMAIL, DEV_HANDOFF_EMAIL, contactPath, decideChatTurn, chatAgentEnabled, type AgentContext, type AgentDecision, type CatalogProduct } from "./chat-agent.policy";
+import { AGENT_SENDER_ID, ASMAA_EMAIL, handoffRecipient, contactPath, decideChatTurn, chatAgentEnabled, type AgentContext, type AgentDecision, type CatalogProduct } from "./chat-agent.policy";
 import { approveAdvisorTransfer } from "./chat-agent.transfer-consent";
 import { respondWithChatAgent } from "./chat-agent.openai";
 
@@ -121,7 +121,7 @@ export async function completeChatAgentTask(task: any, context: AgentContext, de
         requesterStage: chat.participantStage, createdBy: AGENT_SENDER_ID,
       } });
       const outbox = await tx.chatAgentHandoff.create({ data: { chatId: chat.id, contactRequestId: request.id, reason: h.reason,
-        recipient: DEV_HANDOFF_EMAIL, emailBody: emailText(chat, context, decision, request.id) } });
+        recipient: handoffRecipient(), emailBody: emailText(chat, context, decision, request.id) } });
       handoffId = outbox.id;
     }
     const reply = await tx.chatMessage.create({ data: { chatId: chat.id, senderType: "AI", senderId: AGENT_SENDER_ID, message: decision.message, ...(decision.recommendations?.length ? { recommendations: decision.recommendations } : {}) } });
@@ -166,11 +166,14 @@ export async function processChatAgentTask(id: string, dependencies: WorkerDepen
     return false;
   }
 }
-export async function sendHandoffEmail(job: any) {
+export async function sendHandoffEmail(job: any, delivery?: { send: (payload: any, options: any) => Promise<any> }) {
   if (!chatAgentEnabled()) throw new Error("The chat agent is disabled in this environment");
-  if (job.recipient !== DEV_HANDOFF_EMAIL) throw new Error("Development and preproduction handoffs can only email the authorized test recipient");
-  const result = await new Resend(process.env.RESEND_API_KEY).emails.send({ from: process.env.RESEND_FROM_EMAIL || "Moorish Concierge <contact@moorishconcierge.com>",
-    to: [DEV_HANDOFF_EMAIL], subject: `${process.env.NODE_ENV === "test" ? "[TEST]" : "[DEV]"} Concierge chat: ${job.reason === "availability" ? "availability request" : "pricing discussion"} for Asmaa`, text: job.emailBody,
+  const recipient = handoffRecipient();
+  if (job.recipient !== recipient) throw new Error("Chat handoffs can only email the authorized recipient for this environment");
+  const prefix = process.env.NODE_ENV === "production" ? "" : process.env.NODE_ENV === "test" ? "[TEST] " : "[DEV] ";
+  const sender = delivery || new Resend(process.env.RESEND_API_KEY).emails;
+  const result = await sender.send({ from: process.env.RESEND_FROM_EMAIL || "Moorish Concierge <contact@moorishconcierge.com>",
+    to: [recipient], subject: `${prefix}Concierge chat: ${job.reason === "availability" ? "availability request" : "pricing discussion"} for Asmaa`, text: job.emailBody,
   }, { idempotencyKey: `chat-agent-handoff/${job.id}` });
   if (result.error || !result.data?.id) throw new Error(result.error?.message || "Email was not accepted");
   return result.data.id;
@@ -214,5 +217,5 @@ export function startChatAgentWorker() {
   }
   const tick = () => void runChatAgentWorker().catch(error => console.error("Chat agent worker failed", error.message));
   const timer = setInterval(tick, 2500); timer.unref(); tick();
-  console.log("Chat agent enabled for local/development/preproduction; handoff emails go to the authorized test address.");
+  console.log("Cécile chat agent enabled; notifications use the configured environment recipient.");
 }

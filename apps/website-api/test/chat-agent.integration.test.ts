@@ -103,16 +103,16 @@ test("chat agent persistence, ownership, retries and HTTP identity boundaries", 
       assert.match(message.message, /\/fr\/contact/); assert.equal(await prisma.chatAgentHandoff.count({ where: { chatId: chat.id } }), 0);
     });
     await t.test("the real email sender refuses Asmaa's address during development", async () => {
-      await assert.rejects(sendHandoffEmail({ recipient: ASMAA_EMAIL }), /authorized test recipient/);
+      await assert.rejects(sendHandoffEmail({ recipient: ASMAA_EMAIL }), /authorized.*recipient/);
     });
-    await t.test("production keeps the original manual conversation path", async () => {
+    await t.test("production creates an AI-owned conversation and queues the first agent turn", async () => {
       process.env.NODE_ENV = "production";
       try {
         const response = await fetch(url, { method: "POST", headers, body: JSON.stringify({ message: "Hello" }) });
         assert.equal(response.status, 201, await response.clone().text());
         const { chat } = await response.json(); chats.push(chat.id);
-        assert.equal(chat.managedBy, "MANUAL"); assert.equal(chat.advisorId, advisor.id);
-        assert.equal(await prisma.chatAgentTask.count({ where: { chatId: chat.id } }), 0);
+        assert.equal(chat.managedBy, "AI"); assert.equal(chat.advisorId, null);
+        assert.equal(await prisma.chatAgentTask.count({ where: { chatId: chat.id } }), 1);
       } finally { process.env.NODE_ENV = "local"; }
     });
   } finally {

@@ -1,8 +1,8 @@
-# Development and preproduction chat concierge
+# Cécile website chat concierge
 
-New website/mobile conversations are owned by Cécile in local development and preproduction (`NODE_ENV=test`). She introduces herself once as Cécile, the AI Assistant, and then stays focused on the request without repeating that introduction. Existing conversations already assigned to a person remain manual. The existing OpenAI and Resend keys in `apps/website-api/.env` are reused; no new environment variables are required.
+New website/mobile conversations are owned by Cécile in local development, preproduction (`NODE_ENV=test`) and production (`NODE_ENV=production`). She introduces herself once as Cécile, the AI Assistant, and then stays focused on the request without repeating that introduction. Existing conversations already assigned to a person remain manual. The existing OpenAI and Resend keys in `apps/website-api/.env` are reused; no new environment variables are required.
 
-The feature requires an existing `OPENAI_API_KEY` and a valid PostgreSQL `DATABASE_URL`. Local/development mode additionally requires a loopback database hostname. The existing preproduction mode, `NODE_ENV=test`, allows a remote PostgreSQL database. Production keeps the manual chat behavior. No new environment variables are introduced.
+The feature requires an existing `OPENAI_API_KEY` and a valid PostgreSQL `DATABASE_URL`. Local/development mode additionally requires a loopback database hostname. The existing preproduction mode, `NODE_ENV=test`, allows a remote PostgreSQL database. Production (`NODE_ENV=production`) also supports remote PostgreSQL and enables Cécile. No new environment variables are introduced.
 
 The agent uses `gpt-6-sol` through the Responses API. Intent is determined by the model and its tools, not a keyword-routing tree. Translation and Query Agent model settings are unchanged.
 
@@ -88,4 +88,8 @@ When a client already agreed to transfer and then supplies requested missing con
 
 ## Preproduction deployment
 
-Deploy the updated website-api with the existing NODE_ENV=test, OPENAI_API_KEY and remote DATABASE_URL. Testing handoff notifications still go only to the authorized test address; test subjects use [TEST]. Existing manually assigned conversations remain manual. Start a new conversation to test Cécile after redeployment. Production remains disabled.
+Deploy the updated website-api with the existing NODE_ENV=test, OPENAI_API_KEY and remote DATABASE_URL. Testing handoff notifications still go only to the authorized test address; test subjects use [TEST]. Existing manually assigned conversations remain manual. Start a new conversation to test Cécile after redeployment. Production is enabled using NODE_ENV=production; production handoff notifications go to Asmaa.
+
+## Production deployment
+
+The existing NODE_ENV=production, OPENAI_API_KEY and PostgreSQL DATABASE_URL enable Cécile on website-api. No additional flag is required. Production handoff notifications are sent to Asmaa (mounadi0711@gmail.com); local and preproduction notifications still go to the test address. The sender rejects a recipient that does not match the current environment, and production subjects have no test prefix. Existing manual conversations remain with their assigned advisor; start a new conversation to exercise the agent after redeployment. No database migration is added by this enablement fix.
