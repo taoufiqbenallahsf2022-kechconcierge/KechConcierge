@@ -442,6 +442,8 @@ export const ModelName = {
   TripCart: 'TripCart',
   TripCartItem: 'TripCartItem',
   Chat: 'Chat',
+  ChatAgentTask: 'ChatAgentTask',
+  ChatAgentHandoff: 'ChatAgentHandoff',
   VisitorJourney: 'VisitorJourney',
   ChatMessage: 'ChatMessage',
   User: 'User',
@@ -461,7 +463,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "emailMessage" | "emailEvent" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "visitor" | "visitorIdentity" | "interaction" | "agentQuery" | "agentQueryExecution" | "contactRequest" | "conciergeOrder" | "conciergeOrderItem" | "conciergeOrderPayment" | "tripCart" | "tripCartItem" | "chat" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
+    modelProps: "websiteConfiguration" | "emailVerificationToken" | "segment" | "senderEmail" | "emailTemplate" | "audienceAutomation" | "automationRun" | "emailMessage" | "emailEvent" | "recordFlow" | "recordFlowVersion" | "recordFlowRun" | "recordFlowActivityRun" | "product" | "villa" | "villaImage" | "restaurant" | "restaurantImage" | "beachClub" | "beachClubImage" | "beachClubPlan" | "beachClubPlanOption" | "nightClub" | "nightClubImage" | "nightClubPlan" | "nightClubPlanOption" | "pack" | "packImage" | "packPlan" | "packPlanOption" | "activity" | "activityImage" | "activityPlan" | "activityPlanOption" | "transportation" | "transportationImage" | "transportationPlan" | "transportationPlanOption" | "whatsAppConversation" | "whatsAppMessage" | "individual" | "lead" | "prospect" | "account" | "consent" | "pageVisit" | "visitor" | "visitorIdentity" | "interaction" | "agentQuery" | "agentQueryExecution" | "contactRequest" | "conciergeOrder" | "conciergeOrderItem" | "conciergeOrderPayment" | "tripCart" | "tripCartItem" | "chat" | "chatAgentTask" | "chatAgentHandoff" | "visitorJourney" | "chatMessage" | "user" | "adminPushSubscription"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4757,6 +4759,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ChatAgentTask: {
+      payload: Prisma.$ChatAgentTaskPayload<ExtArgs>
+      fields: Prisma.ChatAgentTaskFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChatAgentTaskFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChatAgentTaskFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>
+        }
+        findFirst: {
+          args: Prisma.ChatAgentTaskFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChatAgentTaskFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>
+        }
+        findMany: {
+          args: Prisma.ChatAgentTaskFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>[]
+        }
+        create: {
+          args: Prisma.ChatAgentTaskCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>
+        }
+        createMany: {
+          args: Prisma.ChatAgentTaskCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChatAgentTaskCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>[]
+        }
+        delete: {
+          args: Prisma.ChatAgentTaskDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>
+        }
+        update: {
+          args: Prisma.ChatAgentTaskUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChatAgentTaskDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChatAgentTaskUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChatAgentTaskUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChatAgentTaskUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentTaskPayload>
+        }
+        aggregate: {
+          args: Prisma.ChatAgentTaskAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChatAgentTask>
+        }
+        groupBy: {
+          args: Prisma.ChatAgentTaskGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatAgentTaskGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChatAgentTaskCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatAgentTaskCountAggregateOutputType> | number
+        }
+      }
+    }
+    ChatAgentHandoff: {
+      payload: Prisma.$ChatAgentHandoffPayload<ExtArgs>
+      fields: Prisma.ChatAgentHandoffFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChatAgentHandoffFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChatAgentHandoffFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>
+        }
+        findFirst: {
+          args: Prisma.ChatAgentHandoffFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChatAgentHandoffFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>
+        }
+        findMany: {
+          args: Prisma.ChatAgentHandoffFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>[]
+        }
+        create: {
+          args: Prisma.ChatAgentHandoffCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>
+        }
+        createMany: {
+          args: Prisma.ChatAgentHandoffCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChatAgentHandoffCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>[]
+        }
+        delete: {
+          args: Prisma.ChatAgentHandoffDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>
+        }
+        update: {
+          args: Prisma.ChatAgentHandoffUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>
+        }
+        deleteMany: {
+          args: Prisma.ChatAgentHandoffDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChatAgentHandoffUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChatAgentHandoffUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>[]
+        }
+        upsert: {
+          args: Prisma.ChatAgentHandoffUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatAgentHandoffPayload>
+        }
+        aggregate: {
+          args: Prisma.ChatAgentHandoffAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChatAgentHandoff>
+        }
+        groupBy: {
+          args: Prisma.ChatAgentHandoffGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatAgentHandoffGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChatAgentHandoffCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatAgentHandoffCountAggregateOutputType> | number
+        }
+      }
+    }
     VisitorJourney: {
       payload: Prisma.$VisitorJourneyPayload<ExtArgs>
       fields: Prisma.VisitorJourneyFieldRefs
@@ -6505,6 +6655,42 @@ export const ChatScalarFieldEnum = {
 export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]
 
 
+export const ChatAgentTaskScalarFieldEnum = {
+  id: 'id',
+  chatId: 'chatId',
+  inputMessageId: 'inputMessageId',
+  responseMessageId: 'responseMessageId',
+  status: 'status',
+  attempts: 'attempts',
+  lockedAt: 'lockedAt',
+  completedAt: 'completedAt',
+  lastError: 'lastError',
+  createdAt: 'createdAt'
+} as const
+
+export type ChatAgentTaskScalarFieldEnum = (typeof ChatAgentTaskScalarFieldEnum)[keyof typeof ChatAgentTaskScalarFieldEnum]
+
+
+export const ChatAgentHandoffScalarFieldEnum = {
+  id: 'id',
+  chatId: 'chatId',
+  contactRequestId: 'contactRequestId',
+  reason: 'reason',
+  recipient: 'recipient',
+  emailBody: 'emailBody',
+  status: 'status',
+  attempts: 'attempts',
+  lockedAt: 'lockedAt',
+  nextAttemptAt: 'nextAttemptAt',
+  sentAt: 'sentAt',
+  resendEmailId: 'resendEmailId',
+  lastError: 'lastError',
+  createdAt: 'createdAt'
+} as const
+
+export type ChatAgentHandoffScalarFieldEnum = (typeof ChatAgentHandoffScalarFieldEnum)[keyof typeof ChatAgentHandoffScalarFieldEnum]
+
+
 export const VisitorJourneyScalarFieldEnum = {
   id: 'id',
   visitorId: 'visitorId',
@@ -6524,6 +6710,7 @@ export const ChatMessageScalarFieldEnum = {
   senderType: 'senderType',
   senderId: 'senderId',
   message: 'message',
+  recommendations: 'recommendations',
   sendTime: 'sendTime',
   isRead: 'isRead'
 } as const
@@ -7268,6 +7455,8 @@ export type GlobalOmitConfig = {
   tripCart?: Prisma.TripCartOmit
   tripCartItem?: Prisma.TripCartItemOmit
   chat?: Prisma.ChatOmit
+  chatAgentTask?: Prisma.ChatAgentTaskOmit
+  chatAgentHandoff?: Prisma.ChatAgentHandoffOmit
   visitorJourney?: Prisma.VisitorJourneyOmit
   chatMessage?: Prisma.ChatMessageOmit
   user?: Prisma.UserOmit

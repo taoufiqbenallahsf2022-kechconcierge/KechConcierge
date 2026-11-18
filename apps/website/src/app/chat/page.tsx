@@ -2,11 +2,14 @@
 import { interactionHeaders, trackInteraction } from "@/lib/interactions";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Bot, MessageSquarePlus, Send } from "lucide-react";
+import { Bot, History, MessageSquarePlus, Send, X } from "lucide-react";
+import { CecileAvatar } from "@/components/chat/CecileAvatar";
 import { usePathname, useRouter } from "next/navigation";
 import { getLocaleFromPath, type Locale } from "@/lib/i18n";
 import { useAuthStore } from "@/store/auth.store";
 import { getVisitorId, getVisitorJourneyId } from "@/lib/visitor";
+import { ChatMessageText } from "@/components/chat/ChatMessageText";
+import { ChatProductRecommendations, type ChatProductRecommendation } from "@/components/chat/ChatProductRecommendations";
 
 type ChatMessage = {
   id: string;
@@ -14,6 +17,7 @@ type ChatMessage = {
   message: string;
   sendTime: string;
   isRead: boolean;
+  recommendations?: ChatProductRecommendation[] | null;
 };
 
 type Chat = {
@@ -21,6 +25,7 @@ type Chat = {
   title: string;
   language: string;
   status: string;
+  managedBy?: string;
   unread: boolean;
   advisorTyping: boolean;
   updatedDate: string;
@@ -28,12 +33,12 @@ type Chat = {
 };
 
 const copy: Record<Locale, Record<string, string>> = {
-  en: { greeting: "Hello 👋 Welcome to Moorish Concierge. How can we help you today?", conversations: "Your conversations", assistant: "Concierge Assistant", online: "Online Assistant", placeholder: "Write your message…", newChat: "New conversation", visitor: "Visitor", typing: "Your advisor is typing…", sent: "Sent", seen: "Seen", empty: "Start a new conversation with our concierge team." },
-  fr: { greeting: "Bonjour 👋 Bienvenue chez Moorish Concierge. Comment pouvons-nous vous aider aujourd’hui ?", conversations: "Vos conversations", assistant: "Assistant Concierge", online: "Assistant en ligne", placeholder: "Écrivez votre message…", newChat: "Nouvelle conversation", visitor: "Visiteur", typing: "Votre conseiller écrit…", sent: "Envoyé", seen: "Vu", empty: "Commencez une nouvelle conversation avec notre équipe de conciergerie." },
-  es: { greeting: "Hola 👋 Bienvenido a Moorish Concierge. ¿Cómo podemos ayudarte hoy?", conversations: "Tus conversaciones", assistant: "Asistente de Concierge", online: "Asistente en línea", placeholder: "Escribe tu mensaje…", newChat: "Nueva conversación", visitor: "Visitante", typing: "Tu asesor está escribiendo…", sent: "Enviado", seen: "Visto", empty: "Inicia una nueva conversación con nuestro equipo de conserjería." },
-  pt: { greeting: "Olá 👋 Bem-vindo ao Moorish Concierge. Como podemos ajudar hoje?", conversations: "As suas conversas", assistant: "Assistente de Concierge", online: "Assistente online", placeholder: "Escreva a sua mensagem…", newChat: "Nova conversa", visitor: "Visitante", typing: "O seu consultor está a escrever…", sent: "Enviado", seen: "Visto", empty: "Inicie uma nova conversa com a nossa equipa de concierge." },
-  it: { greeting: "Ciao 👋 Benvenuto su Moorish Concierge. Come possiamo aiutarti oggi?", conversations: "Le tue conversazioni", assistant: "Assistente Concierge", online: "Assistente online", placeholder: "Scrivi il tuo messaggio…", newChat: "Nuova conversazione", visitor: "Visitatore", typing: "Il tuo consulente sta scrivendo…", sent: "Inviato", seen: "Visto", empty: "Inizia una nuova conversazione con il nostro team concierge." },
-  de: { greeting: "Hallo 👋 Willkommen bei Moorish Concierge. Wie können wir Ihnen heute helfen?", conversations: "Ihre Unterhaltungen", assistant: "Concierge-Assistent", online: "Online-Assistent", placeholder: "Schreiben Sie Ihre Nachricht…", newChat: "Neue Unterhaltung", visitor: "Besucher", typing: "Ihr Berater schreibt gerade…", sent: "Gesendet", seen: "Gesehen", empty: "Starten Sie eine neue Unterhaltung mit unserem Concierge-Team." },
+  en: { greeting: "Hi, I’m Cécile, your AI assistant at Moorish Concierge 😊 A dream villa, a night out or a Marrakech adventure? Tell me what you have in mind!", conversations: "Your conversations", assistant: "Your AI concierge", online: "Online Assistant", placeholder: "Write your message…", newChat: "New conversation", visitor: "Visitor", typing: "{name} is typing…", sent: "Sent", seen: "Seen", empty: "Your conversation with Cécile starts here." },
+  fr: { greeting: "Bonjour, moi c’est Cécile, votre assistante IA chez Moorish Concierge 😊 Une villa de rêve, une sortie ou une escapade à Marrakech ? Dites-moi ce qui vous fait envie !", conversations: "Vos conversations", assistant: "Votre assistante IA", online: "Assistant en ligne", placeholder: "Écrivez votre message…", newChat: "Nouvelle conversation", visitor: "Visiteur", typing: "{name} écrit…", sent: "Envoyé", seen: "Vu", empty: "Votre conversation avec Cécile commence ici." },
+  es: { greeting: "Hola, soy Cécile, tu asistente de IA en Moorish Concierge 😊 ¿Una villa de ensueño, una noche especial o una aventura en Marrakech? ¡Cuéntame qué te apetece!", conversations: "Tus conversaciones", assistant: "Tu concierge de IA", online: "Asistente en línea", placeholder: "Escribe tu mensaje…", newChat: "Nueva conversación", visitor: "Visitante", typing: "{name} está escribiendo…", sent: "Enviado", seen: "Visto", empty: "Tu conversación con Cécile empieza aquí." },
+  pt: { greeting: "Olá, sou a Cécile, a sua assistente de IA na Moorish Concierge 😊 Uma villa de sonho, uma noite especial ou uma aventura em Marraquexe? Diga-me o que lhe apetece!", conversations: "As suas conversas", assistant: "A sua concierge IA", online: "Assistente online", placeholder: "Escreva a sua mensagem…", newChat: "Nova conversa", visitor: "Visitante", typing: "{name} está a escrever…", sent: "Enviado", seen: "Visto", empty: "A sua conversa com Cécile começa aqui." },
+  it: { greeting: "Ciao, sono Cécile, la tua assistente IA di Moorish Concierge 😊 Una villa da sogno, una serata speciale o un’avventura a Marrakech? Raccontami cosa ti va!", conversations: "Le tue conversazioni", assistant: "La tua concierge IA", online: "Assistente online", placeholder: "Scrivi il tuo messaggio…", newChat: "Nuova conversazione", visitor: "Visitatore", typing: "{name} sta scrivendo…", sent: "Inviato", seen: "Visto", empty: "La tua conversazione con Cécile inizia qui." },
+  de: { greeting: "Hallo, ich bin Cécile, Ihre KI-Assistentin bei Moorish Concierge 😊 Eine Traumvilla, ein besonderer Abend oder ein Abenteuer in Marrakesch? Erzählen Sie mir, worauf Sie Lust haben!", conversations: "Ihre Unterhaltungen", assistant: "Ihre KI-Concierge", online: "Online-Assistent", placeholder: "Schreiben Sie Ihre Nachricht…", newChat: "Neue Unterhaltung", visitor: "Besucher", typing: "{name} schreibt gerade…", sent: "Gesendet", seen: "Gesehen", empty: "Ihr Gespräch mit Cécile beginnt hier." },
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -56,9 +61,28 @@ export default function ChatPage() {
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const historyDialog = useRef<HTMLDialogElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesScrollRef = useRef<HTMLDivElement>(null);
   const typingSentAt = useRef(0);
+
+  useEffect(() => {
+    const sheet = historyDialog.current;
+    if (historyOpen) sheet?.showModal();
+    else sheet?.close();
+  }, [historyOpen]);
+
+  useEffect(() => {
+    setHistoryOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeHistory = () => { if (desktop.matches) setHistoryOpen(false); };
+    desktop.addEventListener("change", closeHistory);
+    return () => desktop.removeEventListener("change", closeHistory);
+  }, []);
 
   useEffect(() => {
     if (!hasRestoredAuth) restoreAuth();
@@ -215,43 +239,50 @@ export default function ChatPage() {
     activeChat?.messages?.length
       ? activeChat.messages
       : [{ id: "welcome", senderType: "AI", message: t.greeting, sendTime: new Date().toISOString(), isRead: true }];
-  const activeTitle = activeChat?.title ?? "Moorish Concierge";
+  const activeTitle = !routeChatId ? "Cécile" : activeChat?.title ?? "Moorish Concierge";
+  const closeLabel = { en: "Close conversations", fr: "Fermer les conversations", es: "Cerrar conversaciones", it: "Chiudi conversazioni", de: "Unterhaltungen schließen", pt: "Fechar conversas" }[locale];
+  const historyLabel = { en: "Chats", fr: "Discussions", es: "Chats", it: "Chat", de: "Chats", pt: "Conversas" }[locale];
+  const conversationNavigation = <>
+    <div className="border-b border-orange-100 p-5">
+      <h2 className="hidden text-xl font-black text-zinc-900 lg:block">Moorish Concierge</h2>
+      <p className="mt-1 hidden text-sm text-zinc-500 lg:block">{t.conversations}</p>
+      <button onClick={() => { setHistoryOpen(false); router.push(localizedChatPath()); }} className="flex w-full items-center justify-center gap-2 rounded-xl border border-orange-200 px-3 py-2 text-sm font-bold text-orange-700 hover:bg-orange-50 lg:mt-4">
+        <MessageSquarePlus size={16} /> {t.newChat}
+      </button>
+    </div>
+    <div className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain p-3">
+      {!chats.length && <p className="p-4 text-sm leading-6 text-zinc-400">{t.empty}</p>}
+      {chats.map((chat) => (
+        <button key={chat.id} onClick={() => { setHistoryOpen(false); router.push(localizedChatPath(chat.id)); }} aria-current={chat.id === routeChatId ? "page" : undefined} className={`w-full rounded-2xl p-4 text-left transition ${chat.id === routeChatId ? "bg-orange-50" : "hover:bg-zinc-50"}`}>
+          <div className="flex items-center gap-3">
+            {chat.managedBy === "AI" ? <CecileAvatar size={44} /> : <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-orange-600 text-white"><Bot size={19} /></div>}
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center justify-between gap-2"><p className={`truncate text-zinc-900 ${chat.unread ? "font-black" : "font-semibold"}`}>{chat.title}</p><time dateTime={chat.updatedDate} className="shrink-0 text-[11px] text-zinc-500">{new Date(chat.updatedDate).toLocaleDateString(locale, { month: "short", day: "numeric" })}</time></div>
+              <p className={`truncate text-sm text-zinc-500 ${chat.unread ? "font-bold" : ""}`}>{chat.messages?.[0]?.message ?? t.assistant}</p>
+            </div>
+            {chat.unread && <span className="h-2 w-2 shrink-0 rounded-full bg-orange-600" />}
+          </div>
+        </button>
+      ))}
+    </div>
+  </>;
 
   return (
     <div className="fixed inset-x-0 top-0 h-[var(--chat-viewport-height,100dvh)] overflow-hidden overscroll-none bg-[#fffaf7]">
       <div className="flex h-full">
         <aside className="hidden w-[340px] border-r border-orange-100 bg-white lg:flex lg:flex-col">
-          <div className="border-b border-orange-100 p-5">
-            <h2 className="text-xl font-black text-zinc-900">Moorish Concierge</h2>
-            <p className="mt-1 text-sm text-zinc-500">{t.conversations}</p>
-            <button onClick={() => router.push(localizedChatPath())} className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-orange-200 px-3 py-2 text-sm font-bold text-orange-700 hover:bg-orange-50">
-              <MessageSquarePlus size={16} /> {t.newChat}
-            </button>
-          </div>
-          <div className="flex-1 space-y-2 overflow-y-auto p-3">
-            {!chats.length && <p className="p-4 text-sm leading-6 text-zinc-400">{t.empty}</p>}
-            {chats.map((chat) => (
-              <button key={chat.id} onClick={() => router.push(localizedChatPath(chat.id))} className={`w-full rounded-2xl p-4 text-left transition ${chat.id === routeChatId ? "bg-orange-50" : "hover:bg-zinc-50"}`}>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-orange-600 text-white"><Bot size={19} /></div>
-                  <div className="min-w-0">
-                    <p className={`truncate text-zinc-900 ${chat.unread ? "font-black" : "font-semibold"}`}>{chat.title}</p>
-                    <p className={`truncate text-sm text-zinc-500 ${chat.unread ? "font-bold" : ""}`}>{chat.messages?.[0]?.message ?? t.assistant}</p>
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
+          {conversationNavigation}
         </aside>
 
         <section data-track-component="chat" className="flex min-w-0 flex-1 flex-col">
           <div className="shrink-0 border-b border-orange-100 bg-white px-4 py-3 sm:px-5 sm:py-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-600 text-white"><Bot size={20} /></div>
-              <div>
-                <h1 className="font-black text-zinc-900">{activeTitle}</h1>
+              {!routeChatId || activeChat?.managedBy === "AI" ? <CecileAvatar /> : <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-orange-600 text-white"><Bot size={20} /></div>}
+              <div className="min-w-0 flex-1">
+                <h1 className="truncate font-black text-zinc-900">{activeTitle}</h1>
                 <p className="text-sm text-zinc-500">{activeChat ? t.online : t.assistant}</p>
               </div>
+              <button type="button" onClick={() => { void loadChats().catch((reason) => setError(reason.message)); setHistoryOpen(true); }} aria-label={t.conversations} aria-haspopup="dialog" aria-controls="mobile-chat-history" aria-expanded={historyOpen} className="flex min-h-11 shrink-0 items-center gap-2 rounded-xl border border-orange-100 px-3 text-xs font-semibold text-zinc-800 lg:hidden"><History size={19} /><span>{historyLabel}</span></button>
             </div>
           </div>
 
@@ -262,8 +293,9 @@ export default function ChatPage() {
                 const mine = ["VISITOR", "INDIVIDUAL", "LEAD", "PROSPECT", "ACCOUNT"].includes(msg.senderType);
                 return (
                   <div key={msg.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
-                    <div className={`max-w-[85%] rounded-3xl px-5 py-3 shadow-sm ${mine ? "bg-orange-600 text-white" : "bg-white text-zinc-900"}`}>
-                      <p className="whitespace-pre-wrap">{msg.message}</p>
+                    <div className={`${!mine && msg.recommendations?.length ? "w-full min-w-0 max-w-[38rem] px-3 sm:px-4" : "max-w-[85%] px-5"} rounded-3xl py-3 shadow-sm ${mine ? "bg-orange-600 text-white" : "bg-white text-zinc-900"}`}>
+                      <p className="whitespace-pre-wrap">{mine ? msg.message : <ChatMessageText message={msg.message} />}</p>
+                      {!mine && msg.recommendations?.length ? <ChatProductRecommendations products={msg.recommendations} locale={locale} /> : null}
                       <div className={`mt-2 flex justify-end gap-2 text-xs ${mine ? "text-orange-100" : "text-zinc-400"}`}>
                         <span>{new Date(msg.sendTime).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}</span>
                         {mine && <span>{msg.isRead ? t.seen : t.sent}</span>}
@@ -274,7 +306,7 @@ export default function ChatPage() {
               })}
               {activeChat?.advisorTyping && <div className="chat-typing" role="status" aria-live="polite">
                 <span className="chat-typing-dots" aria-hidden="true"><i /><i /><i /></span>
-                <span>{t.typing}</span>
+                <span>{t.typing.replace("{name}", activeTitle)}</span>
               </div>}
               <div ref={messagesEndRef} />
             </div>
@@ -288,6 +320,12 @@ export default function ChatPage() {
           </div>
         </section>
       </div>
+      <dialog ref={historyDialog} id="mobile-chat-history" aria-label={t.conversations} onClose={() => setHistoryOpen(false)} onClick={(event) => { if (event.target === event.currentTarget) setHistoryOpen(false); }} className="fixed inset-x-0 bottom-0 top-auto m-0 w-full max-w-none rounded-t-3xl border-0 bg-white p-0 pb-[env(safe-area-inset-bottom)] text-zinc-900 shadow-2xl backdrop:bg-black/45">
+        <div className="flex max-h-[85dvh] flex-col">
+          <div className="flex shrink-0 items-center justify-between border-b border-orange-100 px-5 py-2"><h2 className="font-bold">{t.conversations}</h2><button type="button" autoFocus aria-label={closeLabel} onClick={() => setHistoryOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full text-zinc-600"><X size={20} /></button></div>
+          {conversationNavigation}
+        </div>
+      </dialog>
     </div>
   );
 }

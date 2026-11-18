@@ -9,6 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import FloatingContact from "./FloatingContact";
 import PreferredLanguagePrompt from "./PreferredLanguagePrompt";
+import ChatInvitation from "./chat/ChatInvitation";
 
 export default function LayoutContent({
   children,
@@ -102,6 +103,7 @@ export default function LayoutContent({
       {!isChatPage && (
         <PreferredLanguagePrompt />
       )}
+      <ChatInvitation />
     </>
   );
 }

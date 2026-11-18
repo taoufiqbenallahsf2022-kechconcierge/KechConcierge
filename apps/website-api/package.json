@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
-    "generate:vapid": "web-push generate-vapid-keys"
+    "generate:vapid": "web-push generate-vapid-keys",
+    "seed:chat-catalog": "tsx src/scripts/seedChatAgentCatalog.ts --apply",
+    "enrich:local-catalog": "tsx src/scripts/enrichLocalCatalog.ts --apply",
+    "expand:marrakech-catalog": "tsx src/scripts/expandMarrakechCatalog.ts --apply"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

@@ -308,6 +308,16 @@ export type TripCartItem = Prisma.TripCartItemModel
  */
 export type Chat = Prisma.ChatModel
 /**
+ * Model ChatAgentTask
+ * 
+ */
+export type ChatAgentTask = Prisma.ChatAgentTaskModel
+/**
+ * Model ChatAgentHandoff
+ * 
+ */
+export type ChatAgentHandoff = Prisma.ChatAgentHandoffModel
+/**
  * Model VisitorJourney
  * 
  */

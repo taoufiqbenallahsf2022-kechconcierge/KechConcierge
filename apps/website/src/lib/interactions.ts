@@ -1,6 +1,7 @@
 "use client";
 import { useAuthStore } from "@/store/auth.store";
 import { getVisitorId, getVisitorJourneyId, getVisitorSessionId } from "./visitor";
+import { createBrowserUUID } from "./browser-id";
 
 export type InteractionContext = {
   pageInstanceId: string; pageUrl: string; pageType: string; pageVisitId?: string;
@@ -32,7 +33,7 @@ export function interactionPage(input = window.location.href) {
   if (!current || current.pageUrl !== pageUrl || current.journeyId !== journeyId || current.sessionId !== sessionId) {
     const normalized = pageUrl.replace(/^\/(fr|de|it|es|pt)(?=\/|$)/, "") || "/";
     const parts = normalized.split("?")[0].split("/").filter(Boolean);
-    current = { pageInstanceId: crypto.randomUUID(), pageUrl, pageType: parts.length > 1 && ["villas", "transportation", "beachclubs", "nightclubs", "packs", "experiences", "restaurants", "spa"].includes(parts[0]) ? "product" : parts[0] || "home", started: performance.now(), sequence: 0, visitorId, journeyId, sessionId, token: useAuthStore.getState().accessToken };
+    current = { pageInstanceId: createBrowserUUID(), pageUrl, pageType: parts.length > 1 && ["villas", "transportation", "beachclubs", "nightclubs", "packs", "experiences", "restaurants", "spa"].includes(parts[0]) ? "product" : parts[0] || "home", started: performance.now(), sequence: 0, visitorId, journeyId, sessionId, token: useAuthStore.getState().accessToken };
   }
   current.token = useAuthStore.getState().accessToken;
   return current;
@@ -51,7 +52,7 @@ export function trackInteraction(eventType: string, details: InteractionDetails 
     const page = context || interactionPage();
     const source = sessionStorage.getItem("moorish_source");
     queue.push({ token: page.token, visitorId: page.visitorId, journeyId: page.journeyId, sessionId: page.sessionId, event: {
-      id: eventType === "page_enter" ? `${page.pageInstanceId}-enter` : crypto.randomUUID(), eventType, pageInstanceId: page.pageInstanceId, pageVisitId: page.pageVisitId,
+      id: eventType === "page_enter" ? `${page.pageInstanceId}-enter` : createBrowserUUID(), eventType, pageInstanceId: page.pageInstanceId, pageVisitId: page.pageVisitId,
       pageUrl: page.pageUrl, pageType: page.pageType, occurredAt: new Date().toISOString(), sequence: ++page.sequence,
       elapsedMs: Math.round(performance.now() - page.started), source,
       viewportWidth: window.innerWidth, viewportHeight: window.innerHeight,

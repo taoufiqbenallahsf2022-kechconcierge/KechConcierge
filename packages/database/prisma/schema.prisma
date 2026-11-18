@@ -1346,6 +1346,7 @@ model ContactRequest {
   lead           Lead?                 @relation(fields: [leadId], references: [id])
   prospect       Prospect?             @relation(fields: [prospectId], references: [id])
   orders         ConciergeOrder[]
+  chatAgentHandoff ChatAgentHandoff?
 
   @@index([visitorId])
 }
@@ -1495,6 +1496,8 @@ model Chat {
   lead               Lead?                @relation(fields: [leadId], references: [id])
   prospect           Prospect?            @relation(fields: [prospectId], references: [id])
   messages           ChatMessage[]
+  agentTasks         ChatAgentTask[]
+  agentHandoff       ChatAgentHandoff?
   journey            VisitorJourney?      @relation(fields: [journeyId], references: [id], onDelete: SetNull)
 
   @@index([visitorId])
@@ -1502,6 +1505,44 @@ model Chat {
   @@index([individualId])
   @@index([advisorId])
   @@index([updatedDate])
+}
+
+model ChatAgentTask {
+  id               String @id @default(cuid())
+  chatId           String
+  inputMessageId   String @unique
+  responseMessageId String?
+  status           String @default("QUEUED")
+  attempts         Int @default(0)
+  lockedAt         DateTime?
+  completedAt      DateTime?
+  lastError        String?
+  createdAt        DateTime @default(now())
+  chat             Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([chatId, status])
+}
+
+model ChatAgentHandoff {
+  id               String @id @default(cuid())
+  chatId           String @unique
+  contactRequestId String? @unique
+  reason           String
+  recipient        String
+  emailBody        String @db.Text
+  status           String @default("PENDING")
+  attempts         Int @default(0)
+  lockedAt         DateTime?
+  nextAttemptAt    DateTime @default(now())
+  sentAt           DateTime?
+  resendEmailId    String?
+  lastError        String?
+  createdAt        DateTime @default(now())
+  chat             Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  contactRequest   ContactRequest? @relation(fields: [contactRequestId], references: [id], onDelete: SetNull)
+
+  @@index([status, nextAttemptAt])
 }
 
 model VisitorJourney {
@@ -1528,6 +1569,7 @@ model ChatMessage {
   senderType ChatSenderType
   senderId   String?
   message    String
+  recommendations Json?
   sendTime   DateTime       @default(now())
   isRead     Boolean        @default(false)
   chat       Chat           @relation(fields: [chatId], references: [id], onDelete: Cascade)

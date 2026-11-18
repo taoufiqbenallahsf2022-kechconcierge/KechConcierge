@@ -46,22 +46,24 @@ api.post("/chats/:id/messages", async (req, res, next) => {
     const { message } = req.body;
     if (!message?.trim())
       return res.status(400).json({ message: "message is required" });
-    const row = await prisma.chatMessage.create({
-      data: {
-        chatId: req.params.id,
-        senderType: "ADVISOR",
-        senderId: req.adminUser!.id,
-        message,
-      },
-    });
-    await prisma.chat.update({
-      where: { id: req.params.id },
-      data: {
-        managedBy: "MANUAL",
-        status: "WAITING_FOR_VISITOR",
-        advisorId: req.adminUser!.id,
-        advisorTypingUntil: null,
-      },
+    const row = await prisma.$transaction(async tx => {
+      await tx.chat.update({
+        where: { id: req.params.id },
+        data: {
+          managedBy: "MANUAL",
+          status: "WAITING_FOR_VISITOR",
+          advisorId: req.adminUser!.id,
+          advisorTypingUntil: null,
+        },
+      });
+      return tx.chatMessage.create({
+        data: {
+          chatId: req.params.id,
+          senderType: "ADVISOR",
+          senderId: req.adminUser!.id,
+          message,
+        },
+      });
     });
     res.status(201).json(row);
   } catch (e) {
