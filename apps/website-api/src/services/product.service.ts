@@ -121,3 +121,27 @@ export async function getProductSeoIndex() {
   const spas = await prisma.product.findMany({ where: { type: "SPA", isActive: true }, select: { uniqueCode: true, updatedAt: true } });
   return [...rows.flat(), ...spas.map((product) => ({ type: "SPA" as const, uniqueCode: product.uniqueCode, updatedAt: product.updatedAt }))];
 }
+
+// Agent retrieval reuses the same public mapping as the website. Internal costs
+// and unpublished records never enter model context.
+export async function searchAgentProducts(query: string, type: string | null, lang: string, excluded: Array<{ type: string; uniqueCode: string }> = []) {
+  const language = normalizeLang(lang);
+  const allowed: IndependentType[] = ["VILLA", "TRANSPORTATION", "SWIMMINGPOOL", "NIGHTCLUB", "ACTIVITY", "RESTAURANT"];
+  const types = type ? allowed.filter(value => value === type) : allowed;
+  const search = query.trim().slice(0, 160);
+  const terms = [...new Set(search.split(/[\s,;()[\]{}"“”]+/u).filter(Boolean))].slice(0, 10);
+  const fields = ["uniqueCode", ...languages.flatMap(code => [`title${code}`, `subtitle${code}`, `description${code}`])];
+  const groups = await Promise.all(types.map(async productType => {
+    const rows = await (prisma as any)[delegateByType[productType]].findMany({
+      // Match terms across public fields, e.g. "Villa Azur villa-azur" matches
+      // its title AND code instead of requiring that whole phrase in one field.
+      where: { isActive: true,
+        ...(excluded.length ? { uniqueCode: { notIn: excluded.filter(p => p.type === productType).map(p => p.uniqueCode) } } : {}),
+        ...(terms.length ? { AND: terms.map(term => ({ OR: fields.map(field => ({ [field]: { contains: term, mode: "insensitive" } })) })) } : {}) },
+      include: independentInclude(productType), take: type ? 12 : 4,
+      orderBy: [{ order: { sort: "asc", nulls: "last" } }, { createdAt: "desc" }],
+    });
+    return rows.map((row: any) => mapIndependent(row, productType, language));
+  }));
+  return groups.flat();
+}

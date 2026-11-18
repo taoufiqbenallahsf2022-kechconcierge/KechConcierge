@@ -7,6 +7,8 @@ import {
   ensureVisitorJourney,
 } from "../services/visitor-journey.service";
 import { notifyAdminsOfChatMessage } from "../services/admin-push.service";
+import { developmentAgentEnabled, queueChatAgentTurn } from "../services/chat-agent.service";
+import { AGENT_NAME } from "../services/chat-agent.policy";
 
 const router = Router();
 const ADVISOR_EMAIL = "mounadi0711@gmail.com";
@@ -98,7 +100,7 @@ function publicChat(chat: any) {
   return {
     ...chat,
     messages: visibleMessages,
-    title: advisorName || "Moorish Concierge",
+    title: advisorName || (chat.managedBy === "AI" && developmentAgentEnabled() ? AGENT_NAME : "Moorish Concierge"),
     unread:
       typeof chat._count?.messages === "number"
         ? chat._count.messages > 0
@@ -188,14 +190,15 @@ router.post("/", async (req, res, next) => {
         owner.individualId,
       );
 
-    const advisor = await prisma.user.findFirst({
+    const useAgent = developmentAgentEnabled();
+    const advisor = useAgent ? null : await prisma.user.findFirst({
       where: {
         email: { equals: ADVISOR_EMAIL, mode: "insensitive" },
         isActive: true,
       },
       select: { id: true },
     });
-    if (!advisor) {
+    if (!useAgent && !advisor) {
       throw Object.assign(new Error("The configured advisor is unavailable"), {
         status: 503,
       });
@@ -203,49 +206,53 @@ router.post("/", async (req, res, next) => {
 
     const now = new Date();
     const automaticReplyAt = new Date(now.getTime() + AUTOMATIC_REPLY_DELAY_MS);
-    const chat = await prisma.chat.create({
-      data: {
-        advisorId: advisor.id,
-        language,
-        managedBy: "MANUAL",
-        status: "WAITING_FOR_ADVISOR",
-        advisorTypingUntil: automaticReplyAt,
-        participantStage:
-          owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
-        individualId:
-          owner.kind === "individual" ? owner.individualId : undefined,
-        visitorId: owner.visitorId,
-        journeyId: owner.journeyId,
-        messages: {
-          create: [{
-            senderType: owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
-            senderId:
-              owner.kind === "individual"
-                ? owner.individualId
-                : owner.visitorId,
-            message,
-            sendTime: now,
-          }, {
-            senderType: "AI",
-            senderId: advisor.id,
-            message: FIRST_MESSAGE_ACKNOWLEDGEMENT[language] ?? FIRST_MESSAGE_ACKNOWLEDGEMENT.en,
-            sendTime: automaticReplyAt,
-          }],
+    const chat = await prisma.$transaction(async tx => {
+      const createdChat = await tx.chat.create({
+        data: {
+          advisorId: advisor?.id ?? null,
+          language,
+          managedBy: useAgent ? "AI" : "MANUAL",
+          status: "WAITING_FOR_ADVISOR",
+          advisorTypingUntil: useAgent ? new Date(now.getTime() + 180000) : automaticReplyAt,
+          participantStage:
+            owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
+          individualId:
+            owner.kind === "individual" ? owner.individualId : undefined,
+          visitorId: owner.visitorId,
+          journeyId: owner.journeyId,
+          messages: {
+            create: [{
+              senderType: owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
+              senderId:
+                owner.kind === "individual"
+                  ? owner.individualId
+                  : owner.visitorId,
+              message,
+              sendTime: now,
+            }, ...(!useAgent ? [{
+              senderType: "AI",
+              senderId: advisor!.id,
+              message: FIRST_MESSAGE_ACKNOWLEDGEMENT[language] ?? FIRST_MESSAGE_ACKNOWLEDGEMENT.en,
+              sendTime: automaticReplyAt,
+            }] : [])],
+          },
+        } as any,
+        include: {
+          individual: { select: { firstName: true, lastName: true } },
+          advisor: { select: { firstName: true, lastName: true } },
+          messages: {
+            where: { sendTime: { lte: now } },
+            orderBy: { sendTime: "asc" },
+          },
         },
-      } as any,
-      include: {
-        individual: { select: { firstName: true, lastName: true } },
-        advisor: { select: { firstName: true, lastName: true } },
-        messages: {
-          where: { sendTime: { lte: now } },
-          orderBy: { sendTime: "asc" },
-        },
-      },
+      });
+      if (useAgent) await queueChatAgentTurn(tx, createdChat.id, createdChat.messages[0].id);
+      return createdChat;
     });
     const participantName = chat.individual
       ? `${chat.individual.firstName} ${chat.individual.lastName}`.trim()
       : "Website visitor";
-    void notifyAdminsOfChatMessage({ chatId: chat.id, participantName, message }).catch((error) =>
+    if (!useAgent) void notifyAdminsOfChatMessage({ chatId: chat.id, participantName, message }).catch((error) =>
       console.error("Unable to prepare admin chat notification", error),
     );
     void recordInteractionOutcome(req, "chat_created", chat.id, "chat");
@@ -296,8 +303,16 @@ router.post("/:id/messages", async (req, res, next) => {
     if (message.length > 5000)
       return res.status(400).json({ message: "Message is too long" });
 
-    const [created] = await prisma.$transaction([
-      prisma.chatMessage.create({
+    let useAgent = false;
+    const created = await prisma.$transaction(async tx => {
+      // Lock/update the conversation before adding its message, just as human
+      // replies do. The worker rechecks ownership before publishing a reply.
+      const currentChat = await tx.chat.update({
+        where: { id: req.params.id },
+        data: { status: "WAITING_FOR_ADVISOR", endUserTypingUntil: null },
+      });
+      useAgent = developmentAgentEnabled() && currentChat.managedBy === "AI";
+      const incoming = await tx.chatMessage.create({
         data: {
           chatId: req.params.id,
           senderType: owner.kind === "individual" ? "INDIVIDUAL" : "VISITOR",
@@ -305,19 +320,17 @@ router.post("/:id/messages", async (req, res, next) => {
             owner.kind === "individual" ? owner.individualId : owner.visitorId,
           message,
         } as any,
-      }),
-      prisma.chat.update({
-        where: { id: req.params.id },
-        data: {
-          status: "WAITING_FOR_ADVISOR",
-          endUserTypingUntil: null,
-        } as any,
-      }),
-    ]);
+      });
+      if (useAgent) {
+        await queueChatAgentTurn(tx, currentChat.id, incoming.id);
+        await tx.chat.update({ where: { id: currentChat.id }, data: { advisorTypingUntil: new Date(Date.now() + 180000) } });
+      }
+      return incoming;
+    });
     const participantName = chat.individual
       ? `${chat.individual.firstName} ${chat.individual.lastName}`.trim()
       : "Website visitor";
-    void notifyAdminsOfChatMessage({ chatId: chat.id, participantName, message }).catch((error) =>
+    if (!useAgent) void notifyAdminsOfChatMessage({ chatId: chat.id, participantName, message }).catch((error) =>
       console.error("Unable to prepare admin chat notification", error),
     );
     void recordInteractionOutcome(req, "message_sent", created.id, "chat");
