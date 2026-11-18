@@ -4,11 +4,11 @@
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { prisma } from "../src/config/prisma";
-import { DEV_HANDOFF_EMAIL, developmentAgentEnabled } from "../src/services/chat-agent.policy";
+import { DEV_HANDOFF_EMAIL, chatAgentEnabled } from "../src/services/chat-agent.policy";
 import { searchAgentProducts } from "../src/services/product.service";
 
 if (process.env.RUN_CHAT_AGENT_EMAIL_SMOKE !== "1") throw new Error("Set RUN_CHAT_AGENT_EMAIL_SMOKE=1 to explicitly enable the real test email");
-assert.ok(developmentAgentEnabled());
+assert.ok(chatAgentEnabled());
 const visitorId = `qa_chat_agent_${randomUUID()}`, journeyId = randomUUID();
 const headers = { "Content-Type": "application/json", "x-visitor-id": visitorId, "x-journey-id": journeyId };
 async function waitFor<T>(read: () => Promise<T>, ready: (value: T) => boolean, milliseconds = 60000) {

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { decideChatTurn, developmentAgentEnabled, instructions, type AgentContext, type AgentDependencies } from "../src/services/chat-agent.policy";
+import { decideChatTurn, chatAgentEnabled, instructions, type AgentContext, type AgentDependencies } from "../src/services/chat-agent.policy";
 
 const villa = { id: "villa-id", type: "VILLA", uniqueCode: "villa-eden", title: "Villa Eden", priceEuro: 600, priceWithDriverEuro: 700, url: "/villas/villa-eden" };
 const context = (message = "Tell me about Villa Eden", language = "en"): AgentContext => ({ language, profile: {}, history: [{ role: "user", content: message }] });
@@ -12,12 +12,15 @@ function dependencies(outputs: any[]): AgentDependencies {
 const search = () => call("search_products", { query: "Eden", product_type: "VILLA" });
 const handoff = (reason = "availability", details = {}) => call("handoff_to_advisor", { reason, summary: "Availability for Villa Eden on 20 November", products: [{ product_type: "VILLA", unique_code: villa.uniqueCode }], first_name: null, last_name: null, email: null, phone: null, ...details });
 
-test("agent is development-only, requires an existing key and a local database", () => {
+test("agent supports existing preproduction test environment while production remains disabled", () => {
   const env = { NODE_ENV: "local", OPENAI_API_KEY: "test-key", DATABASE_URL: "postgres://user@localhost/db" };
-  assert.equal(developmentAgentEnabled(env), true);
-  assert.equal(developmentAgentEnabled({ ...env, NODE_ENV: "production" }), false);
-  assert.equal(developmentAgentEnabled({ ...env, NODE_ENV: "test", DATABASE_URL: "postgres://user@staging.example/db" }), false);
-  assert.equal(developmentAgentEnabled({ ...env, OPENAI_API_KEY: "" }), false);
+  assert.equal(chatAgentEnabled(env), true);
+  assert.equal(chatAgentEnabled({ ...env, NODE_ENV: "production" }), false);
+  assert.equal(chatAgentEnabled({ ...env, NODE_ENV: "test", DATABASE_URL: "postgres://user@staging.example/db" }), true);
+  assert.equal(chatAgentEnabled({ ...env, NODE_ENV: "development", DATABASE_URL: "postgres://user@staging.example/db" }), false);
+  assert.equal(chatAgentEnabled({ ...env, NODE_ENV: "test", DATABASE_URL: "not-a-url" }), false);
+  assert.equal(chatAgentEnabled({ ...env, NODE_ENV: "test", OPENAI_API_KEY: "" }), false);
+  assert.equal(chatAgentEnabled({ ...env, OPENAI_API_KEY: "" }), false);
 });
 test("catalog prices are grounded; an invented discount is rejected and corrected", async () => {
   const outputs = [search(), reply("The price is 500 EUR", [{ source_id: villa.id, amount_eur: 500 }]), reply("The price is 600 EUR", [{ source_id: villa.id, amount_eur: 600 }])];

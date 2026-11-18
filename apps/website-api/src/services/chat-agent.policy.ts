@@ -7,9 +7,16 @@ export const DEV_HANDOFF_EMAIL = "taoufiq.benallah@gmail.com";
 export const AGENT_SENDER_ID = "moorish-concierge-agent";
 export const AGENT_NAME = "Cécile";
 export const PUBLIC_CHAT_TYPES = ["VILLA", "TRANSPORTATION", "SWIMMINGPOOL", "NIGHTCLUB", "ACTIVITY", "RESTAURANT"];
-export function developmentAgentEnabled(env: NodeJS.ProcessEnv = process.env) {
-  if (!["local", "development", "test"].includes(env.NODE_ENV || "local") || !env.OPENAI_API_KEY) return false;
-  try { return ["localhost", "127.0.0.1", "[::1]"].includes(new URL(env.DATABASE_URL || "").hostname); } catch { return false; }
+export function chatAgentEnabled(env: NodeJS.ProcessEnv = process.env) {
+  const environment = env.NODE_ENV || "local";
+  if (!["local", "development", "test"].includes(environment) || !env.OPENAI_API_KEY) return false;
+  try {
+    const database = new URL(env.DATABASE_URL || "");
+    if (!["postgres:", "postgresql:"].includes(database.protocol) || !database.hostname) return false;
+    // The existing website API configuration uses NODE_ENV=test for preproduction.
+    if (environment === "test") return true;
+    return ["localhost", "127.0.0.1", "[::1]"].includes(database.hostname);
+  } catch { return false; }
 }
 export const contactPath = (language: string) => `${["fr", "de", "es", "it", "pt"].includes(language) ? `/${language}` : ""}/contact`;
 const object = (properties: Record<string, unknown>) => ({ type: "object", properties, required: Object.keys(properties), additionalProperties: false });

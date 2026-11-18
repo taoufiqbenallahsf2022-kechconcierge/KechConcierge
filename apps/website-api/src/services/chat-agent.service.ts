@@ -3,11 +3,11 @@ import { Resend } from "resend";
 import { prisma } from "../config/prisma";
 import { getProductDetails, searchAgentProducts } from "./product.service";
 import { notifyAdminsOfChatMessage } from "./admin-push.service";
-import { AGENT_SENDER_ID, ASMAA_EMAIL, DEV_HANDOFF_EMAIL, contactPath, decideChatTurn, developmentAgentEnabled, type AgentContext, type AgentDecision, type CatalogProduct } from "./chat-agent.policy";
+import { AGENT_SENDER_ID, ASMAA_EMAIL, DEV_HANDOFF_EMAIL, contactPath, decideChatTurn, chatAgentEnabled, type AgentContext, type AgentDecision, type CatalogProduct } from "./chat-agent.policy";
 import { approveAdvisorTransfer } from "./chat-agent.transfer-consent";
 import { respondWithChatAgent } from "./chat-agent.openai";
 
-export { developmentAgentEnabled } from "./chat-agent.policy";
+export { chatAgentEnabled } from "./chat-agent.policy";
 const category: Record<string, string> = { VILLA: "villas", TRANSPORTATION: "transportation", SWIMMINGPOOL: "beachclubs", NIGHTCLUB: "nightclubs", ACTIVITY: "experiences", RESTAURANT: "restaurants" };
 export type WorkerDependencies = { authorizeTransfer?: typeof approveAdvisorTransfer; respond?: typeof respondWithChatAgent; sendEmail?: (job: any) => Promise<string> };
 export function recommendationMemory(rows: Array<{ recommendations: unknown }>) {
@@ -130,7 +130,7 @@ export async function completeChatAgentTask(task: any, context: AgentContext, de
   });
 }
 export async function processChatAgentTask(id: string, dependencies: WorkerDependencies = {}) {
-  if (!developmentAgentEnabled()) return false;
+  if (!chatAgentEnabled()) return false;
   const task = await claimTask(id); if (!task) return false;
   try {
     const { chat, context } = await contextForTask(task);
@@ -167,10 +167,10 @@ export async function processChatAgentTask(id: string, dependencies: WorkerDepen
   }
 }
 export async function sendHandoffEmail(job: any) {
-  if (!developmentAgentEnabled()) throw new Error("The development chat agent is disabled in this environment");
-  if (job.recipient !== DEV_HANDOFF_EMAIL) throw new Error("Development handoffs can only email the authorized test recipient");
+  if (!chatAgentEnabled()) throw new Error("The chat agent is disabled in this environment");
+  if (job.recipient !== DEV_HANDOFF_EMAIL) throw new Error("Development and preproduction handoffs can only email the authorized test recipient");
   const result = await new Resend(process.env.RESEND_API_KEY).emails.send({ from: process.env.RESEND_FROM_EMAIL || "Moorish Concierge <contact@moorishconcierge.com>",
-    to: [DEV_HANDOFF_EMAIL], subject: `[DEV] Concierge chat: ${job.reason === "availability" ? "availability request" : "pricing discussion"} for Asmaa`, text: job.emailBody,
+    to: [DEV_HANDOFF_EMAIL], subject: `${process.env.NODE_ENV === "test" ? "[TEST]" : "[DEV]"} Concierge chat: ${job.reason === "availability" ? "availability request" : "pricing discussion"} for Asmaa`, text: job.emailBody,
   }, { idempotencyKey: `chat-agent-handoff/${job.id}` });
   if (result.error || !result.data?.id) throw new Error(result.error?.message || "Email was not accepted");
   return result.data.id;
@@ -191,7 +191,7 @@ export async function sendPendingHandoff(id: string, sender = sendHandoffEmail) 
 }
 let workerBusy = false;
 export async function runChatAgentWorker() {
-  if (!developmentAgentEnabled() || workerBusy) return;
+  if (!chatAgentEnabled() || workerBusy) return;
   workerBusy = true;
   try {
     const expired = new Date(Date.now() - 360000);
@@ -207,8 +207,12 @@ export async function runChatAgentWorker() {
   } finally { workerBusy = false; }
 }
 export function startChatAgentWorker() {
-  if (!developmentAgentEnabled()) return;
+  if (!chatAgentEnabled()) {
+    if (!process.env.OPENAI_API_KEY) console.warn("Cécile is disabled: OPENAI_API_KEY is missing from website-api configuration.");
+    else console.info("Cécile is disabled for this environment/database configuration; manual advisor chats remain enabled.", { environment: process.env.NODE_ENV || "local" });
+    return;
+  }
   const tick = () => void runChatAgentWorker().catch(error => console.error("Chat agent worker failed", error.message));
   const timer = setInterval(tick, 2500); timer.unref(); tick();
-  console.log("Development chat agent enabled; handoff emails go to the authorized test address.");
+  console.log("Chat agent enabled for local/development/preproduction; handoff emails go to the authorized test address.");
 }
