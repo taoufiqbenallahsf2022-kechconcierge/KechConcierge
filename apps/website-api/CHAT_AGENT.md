@@ -1,8 +1,8 @@
-# Development chat concierge
+# Cécile website chat concierge
 
-New website/mobile conversations are owned by Cécile in the local development environment. She introduces herself once as Cécile, the AI Assistant, and then stays focused on the request without repeating that introduction. Existing conversations already assigned to a person remain manual. The existing OpenAI and Resend keys in `apps/website-api/.env` are reused; no new environment variables are required.
+New website/mobile conversations are owned by Cécile in local development, preproduction (`NODE_ENV=test`) and production (`NODE_ENV=production`). She introduces herself once as Cécile, the AI Assistant, and then stays focused on the request without repeating that introduction. Existing conversations already assigned to a person remain manual. The existing OpenAI and Resend keys in `apps/website-api/.env` are reused; no new environment variables are required.
 
-The feature is enabled only with `NODE_ENV=local`, `development` or `test`, a localhost database, and an existing `OPENAI_API_KEY`. A remote staging database or production environment keeps the previous manual chat behavior. Do not remove these guards to enable production without reviewing that separate rollout.
+The feature requires an existing `OPENAI_API_KEY` and a valid PostgreSQL `DATABASE_URL`. Local/development mode additionally requires a loopback database hostname. The existing preproduction mode, `NODE_ENV=test`, allows a remote PostgreSQL database. Production (`NODE_ENV=production`) also supports remote PostgreSQL and enables Cécile. No new environment variables are introduced.
 
 The agent uses `gpt-6-sol` through the Responses API. Intent is determined by the model and its tools, not a keyword-routing tree. Translation and Query Agent model settings are unchanged.
 
@@ -13,7 +13,7 @@ Cécile uses a warm, cheerful, smiling and friendly tone, with an occasional nat
 - Public product tools retrieve active villas, transportation, beach clubs, nightlife, experiences and restaurants. Product details and active plans use the same public data mapping as the website; internal supplier costs and unpublished records are excluded.
 - Prices must match retrieved product/plan prices. The agent cannot authorize discounts or confirm availability/reservations.
 - Cécile never initiates availability discussion or asks for stay dates. When the client raises availability/reservations or persistent price concerns, she explains Asmaa’s role and asks permission to transfer the chat. Product follow-ups and refusals keep Cécile assigned. Only explicit agreement creates a related Product Request, queues an email notification and assigns the chat to the active Asmaa Mounadi user (`mounadi0711@gmail.com`).
-- During development, the email recipient is fixed to **taoufiq.benallah@gmail.com**. The real sender refuses other recipients. The email includes the request summary, products, supplied dates/details, known client identity, recent conversation and administration chat link.
+- During development and preproduction, the email recipient is fixed to **taoufiq.benallah@gmail.com**. The real sender refuses other recipients. The email includes the request summary, products, supplied dates/details, known client identity, recent conversation and administration chat link.
 - Before any transfer, require a full name (first and last name) and at least one valid contact method: email OR phone. Reuse details already supplied or in the known profile. Explain that Asmaa needs a way to reach the visitor if they leave the website. Both the policy/tool layer and final commit enforce this requirement. These details are saved on the related Contact Request and included in Asmaa’s notification. An email-only or phone-only visitor is supported; never require both.
 - Partnership, support, complaint and other non-product requests get a clickable localized Contact link. These do not transfer ownership or create an availability notification.
 - After human takeover the agent stops. The ownership check is repeated inside the transaction that publishes the response, preventing late model responses after an advisor replies.
@@ -85,3 +85,11 @@ A separate, narrowly scoped semantic check uses the same model and existing Open
 A final commit-time check also refuses an otherwise approved handoff if a newer client message has arrived while generation was running. The newer question/cancellation is handled by its queued turn, without publishing a false transfer confirmation. The local persistence test covers this race without creating an email job.
 
 When a client already agreed to transfer and then supplies requested missing contact details, the consent check recognizes the earlier agreement. It does not ask for agreement again unless they withdrew/deferred it or switched back to product questions. A client supplying only contact details without any prior consent still cannot be transferred. No new database fields or environment variables were added.
+
+## Preproduction deployment
+
+Deploy the updated website-api with the existing NODE_ENV=test, OPENAI_API_KEY and remote DATABASE_URL. Testing handoff notifications still go only to the authorized test address; test subjects use [TEST]. Existing manually assigned conversations remain manual. Start a new conversation to test Cécile after redeployment. Production is enabled using NODE_ENV=production; production handoff notifications go to Asmaa.
+
+## Production deployment
+
+The existing NODE_ENV=production, OPENAI_API_KEY and PostgreSQL DATABASE_URL enable Cécile on website-api. No additional flag is required. Production handoff notifications are sent to Asmaa (mounadi0711@gmail.com); local and preproduction notifications still go to the test address. The sender rejects a recipient that does not match the current environment, and production subjects have no test prefix. Existing manual conversations remain with their assigned advisor; start a new conversation to exercise the agent after redeployment. No database migration is added by this enablement fix.
