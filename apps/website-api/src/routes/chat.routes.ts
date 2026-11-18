@@ -7,7 +7,7 @@ import {
   ensureVisitorJourney,
 } from "../services/visitor-journey.service";
 import { notifyAdminsOfChatMessage } from "../services/admin-push.service";
-import { developmentAgentEnabled, queueChatAgentTurn } from "../services/chat-agent.service";
+import { chatAgentEnabled, queueChatAgentTurn } from "../services/chat-agent.service";
 import { AGENT_NAME } from "../services/chat-agent.policy";
 
 const router = Router();
@@ -100,7 +100,7 @@ function publicChat(chat: any) {
   return {
     ...chat,
     messages: visibleMessages,
-    title: advisorName || (chat.managedBy === "AI" && developmentAgentEnabled() ? AGENT_NAME : "Moorish Concierge"),
+    title: advisorName || (chat.managedBy === "AI" && chatAgentEnabled() ? AGENT_NAME : "Moorish Concierge"),
     unread:
       typeof chat._count?.messages === "number"
         ? chat._count.messages > 0
@@ -190,7 +190,7 @@ router.post("/", async (req, res, next) => {
         owner.individualId,
       );
 
-    const useAgent = developmentAgentEnabled();
+    const useAgent = chatAgentEnabled();
     const advisor = useAgent ? null : await prisma.user.findFirst({
       where: {
         email: { equals: ADVISOR_EMAIL, mode: "insensitive" },
@@ -311,7 +311,7 @@ router.post("/:id/messages", async (req, res, next) => {
         where: { id: req.params.id },
         data: { status: "WAITING_FOR_ADVISOR", endUserTypingUntil: null },
       });
-      useAgent = developmentAgentEnabled() && currentChat.managedBy === "AI";
+      useAgent = chatAgentEnabled() && currentChat.managedBy === "AI";
       const incoming = await tx.chatMessage.create({
         data: {
           chatId: req.params.id,
