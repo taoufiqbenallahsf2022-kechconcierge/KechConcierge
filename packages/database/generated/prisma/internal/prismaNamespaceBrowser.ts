@@ -109,6 +109,8 @@ export const ModelName = {
   TripCart: 'TripCart',
   TripCartItem: 'TripCartItem',
   Chat: 'Chat',
+  ChatAgentTask: 'ChatAgentTask',
+  ChatAgentHandoff: 'ChatAgentHandoff',
   VisitorJourney: 'VisitorJourney',
   ChatMessage: 'ChatMessage',
   User: 'User',
@@ -1544,6 +1546,42 @@ export const ChatScalarFieldEnum = {
 export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]
 
 
+export const ChatAgentTaskScalarFieldEnum = {
+  id: 'id',
+  chatId: 'chatId',
+  inputMessageId: 'inputMessageId',
+  responseMessageId: 'responseMessageId',
+  status: 'status',
+  attempts: 'attempts',
+  lockedAt: 'lockedAt',
+  completedAt: 'completedAt',
+  lastError: 'lastError',
+  createdAt: 'createdAt'
+} as const
+
+export type ChatAgentTaskScalarFieldEnum = (typeof ChatAgentTaskScalarFieldEnum)[keyof typeof ChatAgentTaskScalarFieldEnum]
+
+
+export const ChatAgentHandoffScalarFieldEnum = {
+  id: 'id',
+  chatId: 'chatId',
+  contactRequestId: 'contactRequestId',
+  reason: 'reason',
+  recipient: 'recipient',
+  emailBody: 'emailBody',
+  status: 'status',
+  attempts: 'attempts',
+  lockedAt: 'lockedAt',
+  nextAttemptAt: 'nextAttemptAt',
+  sentAt: 'sentAt',
+  resendEmailId: 'resendEmailId',
+  lastError: 'lastError',
+  createdAt: 'createdAt'
+} as const
+
+export type ChatAgentHandoffScalarFieldEnum = (typeof ChatAgentHandoffScalarFieldEnum)[keyof typeof ChatAgentHandoffScalarFieldEnum]
+
+
 export const VisitorJourneyScalarFieldEnum = {
   id: 'id',
   visitorId: 'visitorId',
@@ -1563,6 +1601,7 @@ export const ChatMessageScalarFieldEnum = {
   senderType: 'senderType',
   senderId: 'senderId',
   message: 'message',
+  recommendations: 'recommendations',
   sendTime: 'sendTime',
   isRead: 'isRead'
 } as const

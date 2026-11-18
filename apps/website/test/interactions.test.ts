@@ -4,9 +4,14 @@ import { interactionPage, interactionPath, trackInteraction, flushInteractions }
 import { useAuthStore } from "../src/store/auth.store";
 
 test("client batches retain the original visitor/journey/auth context across identity changes", async () => {
+  const cryptoDescriptor = Object.getOwnPropertyDescriptor(globalThis, "crypto");
+  const randomValues = globalThis.crypto.getRandomValues.bind(globalThis.crypto);
+  // Reproduce plain HTTP Wi-Fi access: randomUUID is absent but secure random
+  // bytes remain available. This previously crashed the page-visit tracker.
+  Object.defineProperty(globalThis, "crypto", { configurable: true, value: { getRandomValues: randomValues } });
   const storage = () => { const data = new Map<string, string>(); return { getItem: (key: string) => data.get(key) || null, setItem: (key: string, value: string) => data.set(key, value), removeItem: (key: string) => data.delete(key) }; };
   Object.assign(globalThis, {
-    window: { location: { origin: "https://example.invalid", href: "https://example.invalid/villas/qa" }, innerWidth: 390, innerHeight: 844 },
+    window: { location: { origin: "http://192.168.100.7:3000", href: "http://192.168.100.7:3000/villas/qa" }, innerWidth: 390, innerHeight: 844 },
     document: { documentElement: { lang: "en" }, body: { classList: { contains: () => false } } },
     localStorage: storage(), sessionStorage: storage(), matchMedia: () => ({ matches: false }),
   });
@@ -15,6 +20,7 @@ test("client batches retain the original visitor/journey/auth context across ide
   try {
     useAuthStore.setState({ accessToken: null });
     const first = interactionPage();
+    assert.match(first.pageInstanceId, /^[0-9a-f-]{36}$/);
     trackInteraction("click", { target: "open-plans" });
     localStorage.setItem("moorish_journey_id", "journey_second_person_test");
     useAuthStore.setState({ accessToken: "test-second-person-token" });
@@ -30,5 +36,9 @@ test("client batches retain the original visitor/journey/auth context across ide
     assert.equal(requests[0].body.events[0].target, "open-plans");
     assert.equal(interactionPath("/pay/private-token?email=private&token=private"), "/pay/:token");
     assert.equal(interactionPath("/account?section=preferences&token=private"), "/account?section=preferences");
-  } finally { globalThis.fetch = original; useAuthStore.setState({ accessToken: null }); }
+  } finally {
+    globalThis.fetch = original; useAuthStore.setState({ accessToken: null });
+    if (cryptoDescriptor) Object.defineProperty(globalThis, "crypto", cryptoDescriptor);
+    else Reflect.deleteProperty(globalThis, "crypto");
+  }
 });

@@ -291,6 +291,7 @@ export type ContactRequestWhereInput = {
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   prospect?: Prisma.XOR<Prisma.ProspectNullableScalarRelationFilter, Prisma.ProspectWhereInput> | null
   orders?: Prisma.ConciergeOrderListRelationFilter
+  chatAgentHandoff?: Prisma.XOR<Prisma.ChatAgentHandoffNullableScalarRelationFilter, Prisma.ChatAgentHandoffWhereInput> | null
 }
 
 export type ContactRequestOrderByWithRelationInput = {
@@ -317,6 +318,7 @@ export type ContactRequestOrderByWithRelationInput = {
   lead?: Prisma.LeadOrderByWithRelationInput
   prospect?: Prisma.ProspectOrderByWithRelationInput
   orders?: Prisma.ConciergeOrderOrderByRelationAggregateInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffOrderByWithRelationInput
 }
 
 export type ContactRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -346,6 +348,7 @@ export type ContactRequestWhereUniqueInput = Prisma.AtLeast<{
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   prospect?: Prisma.XOR<Prisma.ProspectNullableScalarRelationFilter, Prisma.ProspectWhereInput> | null
   orders?: Prisma.ConciergeOrderListRelationFilter
+  chatAgentHandoff?: Prisma.XOR<Prisma.ChatAgentHandoffNullableScalarRelationFilter, Prisma.ChatAgentHandoffWhereInput> | null
 }, "id">
 
 export type ContactRequestOrderByWithAggregationInput = {
@@ -416,6 +419,7 @@ export type ContactRequestCreateInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutContactRequestsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutContactRequestsInput
   orders?: Prisma.ConciergeOrderCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestUncheckedCreateInput = {
@@ -438,6 +442,7 @@ export type ContactRequestUncheckedCreateInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   orders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestUpdateInput = {
@@ -460,6 +465,7 @@ export type ContactRequestUpdateInput = {
   lead?: Prisma.LeadUpdateOneWithoutContactRequestsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutContactRequestsNestedInput
   orders?: Prisma.ConciergeOrderUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateInput = {
@@ -482,6 +488,7 @@ export type ContactRequestUncheckedUpdateInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestCreateManyInput = {
@@ -813,6 +820,22 @@ export type ContactRequestUpdateOneWithoutOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactRequestUpdateToOneWithWhereWithoutOrdersInput, Prisma.ContactRequestUpdateWithoutOrdersInput>, Prisma.ContactRequestUncheckedUpdateWithoutOrdersInput>
 }
 
+export type ContactRequestCreateNestedOneWithoutChatAgentHandoffInput = {
+  create?: Prisma.XOR<Prisma.ContactRequestCreateWithoutChatAgentHandoffInput, Prisma.ContactRequestUncheckedCreateWithoutChatAgentHandoffInput>
+  connectOrCreate?: Prisma.ContactRequestCreateOrConnectWithoutChatAgentHandoffInput
+  connect?: Prisma.ContactRequestWhereUniqueInput
+}
+
+export type ContactRequestUpdateOneWithoutChatAgentHandoffNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactRequestCreateWithoutChatAgentHandoffInput, Prisma.ContactRequestUncheckedCreateWithoutChatAgentHandoffInput>
+  connectOrCreate?: Prisma.ContactRequestCreateOrConnectWithoutChatAgentHandoffInput
+  upsert?: Prisma.ContactRequestUpsertWithoutChatAgentHandoffInput
+  disconnect?: Prisma.ContactRequestWhereInput | boolean
+  delete?: Prisma.ContactRequestWhereInput | boolean
+  connect?: Prisma.ContactRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactRequestUpdateToOneWithWhereWithoutChatAgentHandoffInput, Prisma.ContactRequestUpdateWithoutChatAgentHandoffInput>, Prisma.ContactRequestUncheckedUpdateWithoutChatAgentHandoffInput>
+}
+
 export type ContactRequestCreateWithoutIndividualInput = {
   id?: string
   firstName: string
@@ -832,6 +855,7 @@ export type ContactRequestCreateWithoutIndividualInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutContactRequestsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutContactRequestsInput
   orders?: Prisma.ConciergeOrderCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestUncheckedCreateWithoutIndividualInput = {
@@ -853,6 +877,7 @@ export type ContactRequestUncheckedCreateWithoutIndividualInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   orders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestCreateOrConnectWithoutIndividualInput = {
@@ -924,6 +949,7 @@ export type ContactRequestCreateWithoutLeadInput = {
   individual?: Prisma.IndividualCreateNestedOneWithoutContactRequestsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutContactRequestsInput
   orders?: Prisma.ConciergeOrderCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestUncheckedCreateWithoutLeadInput = {
@@ -945,6 +971,7 @@ export type ContactRequestUncheckedCreateWithoutLeadInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   orders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestCreateOrConnectWithoutLeadInput = {
@@ -992,6 +1019,7 @@ export type ContactRequestCreateWithoutProspectInput = {
   individual?: Prisma.IndividualCreateNestedOneWithoutContactRequestsInput
   lead?: Prisma.LeadCreateNestedOneWithoutContactRequestsInput
   orders?: Prisma.ConciergeOrderCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestUncheckedCreateWithoutProspectInput = {
@@ -1013,6 +1041,7 @@ export type ContactRequestUncheckedCreateWithoutProspectInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   orders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestCreateOrConnectWithoutProspectInput = {
@@ -1060,6 +1089,7 @@ export type ContactRequestCreateWithoutAccountInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutContactRequestsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutContactRequestsInput
   orders?: Prisma.ConciergeOrderCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestUncheckedCreateWithoutAccountInput = {
@@ -1081,6 +1111,7 @@ export type ContactRequestUncheckedCreateWithoutAccountInput = {
   updatedDate?: Date | string
   updatedBy?: string | null
   orders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutContactRequestInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestCreateOrConnectWithoutAccountInput = {
@@ -1128,6 +1159,7 @@ export type ContactRequestCreateWithoutOrdersInput = {
   individual?: Prisma.IndividualCreateNestedOneWithoutContactRequestsInput
   lead?: Prisma.LeadCreateNestedOneWithoutContactRequestsInput
   prospect?: Prisma.ProspectCreateNestedOneWithoutContactRequestsInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestUncheckedCreateWithoutOrdersInput = {
@@ -1149,6 +1181,7 @@ export type ContactRequestUncheckedCreateWithoutOrdersInput = {
   createdBy?: string | null
   updatedDate?: Date | string
   updatedBy?: string | null
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedCreateNestedOneWithoutContactRequestInput
 }
 
 export type ContactRequestCreateOrConnectWithoutOrdersInput = {
@@ -1186,6 +1219,7 @@ export type ContactRequestUpdateWithoutOrdersInput = {
   individual?: Prisma.IndividualUpdateOneWithoutContactRequestsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutContactRequestsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutContactRequestsNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateWithoutOrdersInput = {
@@ -1207,6 +1241,111 @@ export type ContactRequestUncheckedUpdateWithoutOrdersInput = {
   createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedUpdateOneWithoutContactRequestNestedInput
+}
+
+export type ContactRequestCreateWithoutChatAgentHandoffInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  mobilePhone?: string | null
+  requestType: $Enums.RequestType
+  subject?: string | null
+  comment: string
+  requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  account?: Prisma.AccountCreateNestedOneWithoutContactRequestsInput
+  individual?: Prisma.IndividualCreateNestedOneWithoutContactRequestsInput
+  lead?: Prisma.LeadCreateNestedOneWithoutContactRequestsInput
+  prospect?: Prisma.ProspectCreateNestedOneWithoutContactRequestsInput
+  orders?: Prisma.ConciergeOrderCreateNestedManyWithoutContactRequestInput
+}
+
+export type ContactRequestUncheckedCreateWithoutChatAgentHandoffInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  mobilePhone?: string | null
+  requestType: $Enums.RequestType
+  subject?: string | null
+  comment: string
+  requesterStage?: $Enums.ContactRequesterStage
+  visitorId?: string | null
+  individualId?: string | null
+  leadId?: string | null
+  prospectId?: string | null
+  accountId?: string | null
+  createdDate?: Date | string
+  createdBy?: string | null
+  updatedDate?: Date | string
+  updatedBy?: string | null
+  orders?: Prisma.ConciergeOrderUncheckedCreateNestedManyWithoutContactRequestInput
+}
+
+export type ContactRequestCreateOrConnectWithoutChatAgentHandoffInput = {
+  where: Prisma.ContactRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactRequestCreateWithoutChatAgentHandoffInput, Prisma.ContactRequestUncheckedCreateWithoutChatAgentHandoffInput>
+}
+
+export type ContactRequestUpsertWithoutChatAgentHandoffInput = {
+  update: Prisma.XOR<Prisma.ContactRequestUpdateWithoutChatAgentHandoffInput, Prisma.ContactRequestUncheckedUpdateWithoutChatAgentHandoffInput>
+  create: Prisma.XOR<Prisma.ContactRequestCreateWithoutChatAgentHandoffInput, Prisma.ContactRequestUncheckedCreateWithoutChatAgentHandoffInput>
+  where?: Prisma.ContactRequestWhereInput
+}
+
+export type ContactRequestUpdateToOneWithWhereWithoutChatAgentHandoffInput = {
+  where?: Prisma.ContactRequestWhereInput
+  data: Prisma.XOR<Prisma.ContactRequestUpdateWithoutChatAgentHandoffInput, Prisma.ContactRequestUncheckedUpdateWithoutChatAgentHandoffInput>
+}
+
+export type ContactRequestUpdateWithoutChatAgentHandoffInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comment?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  account?: Prisma.AccountUpdateOneWithoutContactRequestsNestedInput
+  individual?: Prisma.IndividualUpdateOneWithoutContactRequestsNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutContactRequestsNestedInput
+  prospect?: Prisma.ProspectUpdateOneWithoutContactRequestsNestedInput
+  orders?: Prisma.ConciergeOrderUpdateManyWithoutContactRequestNestedInput
+}
+
+export type ContactRequestUncheckedUpdateWithoutChatAgentHandoffInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobilePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestType?: Prisma.EnumRequestTypeFieldUpdateOperationsInput | $Enums.RequestType
+  subject?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comment?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterStage?: Prisma.EnumContactRequesterStageFieldUpdateOperationsInput | $Enums.ContactRequesterStage
+  visitorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  individualId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prospectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutContactRequestNestedInput
 }
 
 export type ContactRequestCreateManyIndividualInput = {
@@ -1248,6 +1387,7 @@ export type ContactRequestUpdateWithoutIndividualInput = {
   lead?: Prisma.LeadUpdateOneWithoutContactRequestsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutContactRequestsNestedInput
   orders?: Prisma.ConciergeOrderUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateWithoutIndividualInput = {
@@ -1269,6 +1409,7 @@ export type ContactRequestUncheckedUpdateWithoutIndividualInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateManyWithoutIndividualInput = {
@@ -1330,6 +1471,7 @@ export type ContactRequestUpdateWithoutLeadInput = {
   individual?: Prisma.IndividualUpdateOneWithoutContactRequestsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutContactRequestsNestedInput
   orders?: Prisma.ConciergeOrderUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateWithoutLeadInput = {
@@ -1351,6 +1493,7 @@ export type ContactRequestUncheckedUpdateWithoutLeadInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateManyWithoutLeadInput = {
@@ -1412,6 +1555,7 @@ export type ContactRequestUpdateWithoutProspectInput = {
   individual?: Prisma.IndividualUpdateOneWithoutContactRequestsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutContactRequestsNestedInput
   orders?: Prisma.ConciergeOrderUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateWithoutProspectInput = {
@@ -1433,6 +1577,7 @@ export type ContactRequestUncheckedUpdateWithoutProspectInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateManyWithoutProspectInput = {
@@ -1494,6 +1639,7 @@ export type ContactRequestUpdateWithoutAccountInput = {
   lead?: Prisma.LeadUpdateOneWithoutContactRequestsNestedInput
   prospect?: Prisma.ProspectUpdateOneWithoutContactRequestsNestedInput
   orders?: Prisma.ConciergeOrderUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateWithoutAccountInput = {
@@ -1515,6 +1661,7 @@ export type ContactRequestUncheckedUpdateWithoutAccountInput = {
   updatedDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orders?: Prisma.ConciergeOrderUncheckedUpdateManyWithoutContactRequestNestedInput
+  chatAgentHandoff?: Prisma.ChatAgentHandoffUncheckedUpdateOneWithoutContactRequestNestedInput
 }
 
 export type ContactRequestUncheckedUpdateManyWithoutAccountInput = {
@@ -1592,6 +1739,7 @@ export type ContactRequestSelect<ExtArgs extends runtime.Types.Extensions.Intern
   lead?: boolean | Prisma.ContactRequest$leadArgs<ExtArgs>
   prospect?: boolean | Prisma.ContactRequest$prospectArgs<ExtArgs>
   orders?: boolean | Prisma.ContactRequest$ordersArgs<ExtArgs>
+  chatAgentHandoff?: boolean | Prisma.ContactRequest$chatAgentHandoffArgs<ExtArgs>
   _count?: boolean | Prisma.ContactRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contactRequest"]>
 
@@ -1673,6 +1821,7 @@ export type ContactRequestInclude<ExtArgs extends runtime.Types.Extensions.Inter
   lead?: boolean | Prisma.ContactRequest$leadArgs<ExtArgs>
   prospect?: boolean | Prisma.ContactRequest$prospectArgs<ExtArgs>
   orders?: boolean | Prisma.ContactRequest$ordersArgs<ExtArgs>
+  chatAgentHandoff?: boolean | Prisma.ContactRequest$chatAgentHandoffArgs<ExtArgs>
   _count?: boolean | Prisma.ContactRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ContactRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1696,6 +1845,7 @@ export type $ContactRequestPayload<ExtArgs extends runtime.Types.Extensions.Inte
     lead: Prisma.$LeadPayload<ExtArgs> | null
     prospect: Prisma.$ProspectPayload<ExtArgs> | null
     orders: Prisma.$ConciergeOrderPayload<ExtArgs>[]
+    chatAgentHandoff: Prisma.$ChatAgentHandoffPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2115,6 +2265,7 @@ export interface Prisma__ContactRequestClient<T, Null = never, ExtArgs extends r
   lead<T extends Prisma.ContactRequest$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactRequest$leadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   prospect<T extends Prisma.ContactRequest$prospectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactRequest$prospectArgs<ExtArgs>>): Prisma.Prisma__ProspectClient<runtime.Types.Result.GetResult<Prisma.$ProspectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   orders<T extends Prisma.ContactRequest$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactRequest$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConciergeOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chatAgentHandoff<T extends Prisma.ContactRequest$chatAgentHandoffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactRequest$chatAgentHandoffArgs<ExtArgs>>): Prisma.Prisma__ChatAgentHandoffClient<runtime.Types.Result.GetResult<Prisma.$ChatAgentHandoffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2660,6 +2811,25 @@ export type ContactRequest$ordersArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.ConciergeOrderScalarFieldEnum | Prisma.ConciergeOrderScalarFieldEnum[]
+}
+
+/**
+ * ContactRequest.chatAgentHandoff
+ */
+export type ContactRequest$chatAgentHandoffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatAgentHandoff
+   */
+  select?: Prisma.ChatAgentHandoffSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatAgentHandoff
+   */
+  omit?: Prisma.ChatAgentHandoffOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatAgentHandoffInclude<ExtArgs> | null
+  where?: Prisma.ChatAgentHandoffWhereInput
 }
 
 /**
